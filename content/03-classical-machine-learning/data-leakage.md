@@ -1,53 +1,69 @@
 ---
 title: Data Leakage
 slug: classical-machine-learning/data-leakage
-description: Concise guide to Data Leakage in Classical Machine Learning.
+description: "Validation contamination caused by target, time, group, or preprocessing information crossing split boundaries."
 area: classical-machine-learning
 topics:
   - data-leakage
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - feature-engineering.md
+  - model-selection.md
+  - evaluation-metrics.md
+  - supervised-learning.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Data Leakage
 
-## Summary
+Data leakage occurs when training or validation uses information that would not be available at prediction time. It is not a minor hygiene issue; it changes the estimand of [supervised learning](supervised-learning.md) and makes [evaluation metrics](evaluation-metrics.md) optimistic.
 
-Data Leakage belongs to classical machine learning. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining math
 
-## Core idea
+The intended validation estimate is $\hat R_{val}=|V|^{-1}\sum_{i\in V}L(y_i,\hat f_T(x_i))$, where $\hat f_T$ is fit only on training data $T$. Leakage means the fitted pipeline depends on validation labels or future information: $\hat f=A(T,V,y_V)$ instead of $\hat f=A(T)$.
 
-- Define the inputs, outputs, and boundaries for Data Leakage.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+## Intuition
+
+Leakage gives the model an answer key or a proxy for it. The model may look excellent in [model selection](model-selection.md) while learning a production-impossible shortcut.
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Data Leakage. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+import numpy as np
+from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import StratifiedKFold, cross_val_score
 
-## Practical checklist
+X, y = make_classification(n_samples=240, n_features=6, n_informative=3,
+                           flip_y=.2, random_state=15)
+leaky = y.reshape(-1, 1) + np.random.default_rng(15).normal(0, .01, size=(len(y), 1))
+X_leaky = np.c_[X, leaky]
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=15)
+clean = cross_val_score(LogisticRegression(max_iter=1000), X, y, cv=cv).mean()
+leak = cross_val_score(LogisticRegression(max_iter=1000), X_leaky, y, cv=cv).mean()
+print("clean_cv_accuracy", round(clean, 3))
+print("with_target_leak_accuracy", round(leak, 3))
+```
 
-- Define exactly what Data Leakage predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+Observed output:
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+```text
+clean_cv_accuracy 0.667
+with_target_leak_accuracy 1.0
+```
 
-## Common failure modes
+The leaked feature is a noisy copy of the label, so cross-validation becomes perfect. Real leakage is often less obvious but follows the same pattern.
 
-- Using Data Leakage with a split strategy that leaks labels, time, users, or target-derived features.
-- Optimizing a convenient metric instead of the operational cost of false positives, false negatives, or ranking errors.
-- Trusting Data Leakage globally while important classes, cohorts, or edge cases fail.
+## Caveats
 
-- Optimizing a metric that does not match the operational decision.
-- Trusting aggregate performance while important classes or slices fail.
+Leakage often enters through [feature engineering](feature-engineering.md): aggregates computed over the full dataset, encodings using target means, or text fields created after outcome review. Time-aware and group-aware splitting should be chosen before looking at model performance.
+
+## References
+
+- [scikit-learn User Guide: Common pitfalls and recommended practices](https://scikit-learn.org/stable/common_pitfalls.html)
+- [scikit-learn User Guide: Pipelines and composite estimators](https://scikit-learn.org/stable/modules/compose.html)

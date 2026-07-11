@@ -1,53 +1,74 @@
 ---
 title: Bias-Variance Trade-Off
 slug: classical-machine-learning/bias-variance-trade-off
-description: Concise guide to the bias-variance trade-off in classical machine learning.
+description: "A decomposition of prediction error into systematic misspecification and sample sensitivity."
 area: classical-machine-learning
 topics:
   - bias-variance-trade-off
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - regularization.md
+  - model-selection.md
+  - random-forests.md
+  - decision-trees.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Bias-Variance Trade-Off
 
-## Summary
+The bias-variance trade-off explains why a model can fail by being too rigid or too sensitive. High-bias models underfit because the function class misses real structure; high-variance models overfit because small changes in the training data change the fitted function. [Regularization](regularization.md), [model selection](model-selection.md), and ensembling all manipulate this trade-off.
 
-The bias-variance trade-off describes two sources of generalization error: systematic underfitting from overly simple assumptions and sensitivity to training data from overly flexible models.
+## Defining math
 
-## Core idea
+For squared-error regression with training set $D$ and noise variance $\sigma^2$, expected prediction error at $x$ decomposes as
 
-- High bias means the model cannot represent the true pattern well.
-- High variance means the model changes too much across training samples.
-- Regularization, more data, simpler models, and ensembling change this trade-off.
+$$
+\mathbb E_D[(Y-\hat f_D(x))^2] = (\mathbb E_D[\hat f_D(x)]-f(x))^2 + \mathbb E_D[(\hat f_D(x)-\mathbb E_D[\hat f_D(x)])^2] + \sigma^2.
+$$
+
+The three terms are squared bias, variance, and irreducible noise. A single deep [decision tree](decision-trees.md) can have low bias and high variance; [random forests](random-forests.md) reduce variance by averaging many decorrelated trees.
+
+## Intuition
+
+Bias is being consistently wrong. Variance is being differently wrong depending on which sample you happened to collect. Training error mainly reveals fit to the observed sample; validation error reveals whether that fit survives new data.
 
 ## Worked example
 
-Fit a shallow decision tree and a deep decision tree on the same dataset. The shallow tree may miss real structure; the deep tree may memorize noise. Compare train and validation errors to see which failure dominates.
+```python
+from sklearn.datasets import make_regression
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeRegressor
 
-## Practical checklist
+X, y = make_regression(n_samples=160, n_features=1, noise=35, random_state=2)
+Xtr, Xte, ytr, yte = train_test_split(X, y, random_state=2)
+for depth in [1, None]:
+    tree = DecisionTreeRegressor(max_depth=depth, random_state=2).fit(Xtr, ytr)
+    label = "unlimited" if depth is None else depth
+    print("max_depth", label,
+          "train_rmse", round(mean_squared_error(ytr, tree.predict(Xtr)) ** 0.5, 1),
+          "test_rmse", round(mean_squared_error(yte, tree.predict(Xte)) ** 0.5, 1))
+```
 
-- Define exactly what Bias-Variance Trade-Off predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+Observed output:
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+```text
+max_depth 1 train_rmse 32.6 test_rmse 34.8
+max_depth unlimited train_rmse 0.0 test_rmse 48.6
+```
 
-## Common failure modes
+The unlimited tree memorizes the training set exactly but generalizes worse. The stump has more bias but lower variance on this sample.
 
-- Using Bias-Variance Trade-Off with a split strategy that leaks labels, time, users, or target-derived features.
-- Optimizing a convenient metric instead of the operational cost of false positives, false negatives, or ranking errors.
-- Trusting Bias-Variance Trade-Off globally while important classes, cohorts, or edge cases fail.
+## Caveats
 
-- Optimizing a metric that does not match the operational decision.
-- Trusting aggregate performance while important classes or slices fail.
+The decomposition above is exact for squared-error regression, but classification losses do not decompose as cleanly. Also, validation error is itself noisy; choosing among many models on one small validation split can overfit the validation set.
+
+## References
+
+- [An Introduction to Statistical Learning](https://www.statlearning.com/)
+- [scikit-learn User Guide: validation curves](https://scikit-learn.org/stable/modules/learning_curve.html#validation-curve)

@@ -1,7 +1,7 @@
 ---
 title: Calibration
 slug: classical-machine-learning/calibration
-description: Concise guide to Calibration in Classical Machine Learning.
+description: "Checking and correcting whether predicted probabilities match observed frequencies."
 area: classical-machine-learning
 topics:
   - calibration
@@ -12,50 +12,64 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - logistic-regression.md
+  - evaluation-metrics.md
+  - class-imbalance.md
+  - classification.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Calibration
 
-## Summary
+Calibration asks whether predicted probabilities mean what they say. Among examples assigned probability 0.8, roughly 80 percent should be positive. This is different from discrimination: a [classification](classification.md) model can rank cases well and still give overconfident probabilities. The same predictions should be judged with [evaluation metrics](evaluation-metrics.md), and imbalance can make reliability look different across classes as described in [class imbalance](class-imbalance.md).
 
-Calibration measures whether predicted probabilities match observed frequencies. If a model assigns 0.8 probability to many examples, about 80 percent of those examples should be positive for the model to be well calibrated.
+## Defining math
 
-## Canonical relationship
+Perfect binary calibration means $P(Y=1\mid \hat p(X)=p)=p$. The Brier score is $BS=n^{-1}\sum_i(\hat p_i-y_i)^2$, and log loss is
 
-This is the canonical page for probability calibration in classical machine learning. The evaluation-area page [Calibration](../16-experimentation-and-evaluation/calibration.md) covers how calibration is reported and used in evaluation workflows.
+$$
+-\frac{1}{n}\sum_i \left[y_i\log \hat p_i+(1-y_i)\log(1-\hat p_i)\right].
+$$
 
-## Core idea
+Platt scaling fits a sigmoid on validation scores; isotonic regression fits a monotone calibration curve. [Logistic regression](logistic-regression.md) is often reasonably calibrated under correct specification, but imbalance and misspecification can distort probabilities.
 
-- Accuracy asks whether the predicted class is correct.
-- Calibration asks whether the predicted confidence is trustworthy.
-- Threshold decisions, expected costs, and human review policies depend on calibrated probabilities.
+## Intuition
+
+Calibration is required when a probability drives a threshold, price, triage rule, or expected-cost calculation. A model that says 0.9 too often will overload review teams and misstate risk even if its ranking is strong.
 
 ## Worked example
 
-Suppose a churn model gives 1,000 customers scores near 0.7. If about 700 of them actually churn, that score band is calibrated. If only 400 churn, the model is overconfident. A reliability curve groups predictions into bins and compares predicted probability with observed frequency.
+```python
+from sklearn.calibration import CalibratedClassifierCV
+from sklearn.datasets import make_classification
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import brier_score_loss, log_loss
+from sklearn.model_selection import train_test_split
 
-## Common methods
+X, y = make_classification(n_samples=500, n_features=10, n_informative=4,
+                           flip_y=.08, random_state=13)
+Xtr, Xte, ytr, yte = train_test_split(X, y, stratify=y, random_state=13)
+base = RandomForestClassifier(n_estimators=80, random_state=13)
+cal = CalibratedClassifierCV(base, method="sigmoid", cv=3).fit(Xtr, ytr)
+proba = cal.predict_proba(Xte)[:, 1]
+print("brier", round(brier_score_loss(yte, proba), 3), "log_loss", round(log_loss(yte, proba), 3))
+print("mean_predicted_positive_rate", round(proba.mean(), 3), "observed_rate", round(yte.mean(), 3))
+```
 
-- Platt scaling fits a logistic calibration layer on validation predictions.
-- Isotonic regression fits a monotonic calibration curve with fewer shape assumptions.
-- Temperature scaling is common for neural classifiers.
-- Calibration should be learned on validation data, not on the final test set.
+Observed output:
 
-## Practical checklist
+```text
+brier 0.086 log_loss 0.304
+mean_predicted_positive_rate 0.453 observed_rate 0.488
+```
 
-- Define exactly what Calibration predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+The average predicted positive rate is near, but not equal to, the observed rate. Calibration should also be checked by bins, not only by the mean.
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+## Caveats
 
-## Common failure modes
+Fit calibration on held-out data or cross-validation, never on the final test set. Calibration can differ by subgroup even when global reliability is acceptable. Recalibration after drift can mask a deteriorating feature distribution.
 
-- A model can be accurate but poorly calibrated.
-- Calibration can differ by subgroup even when global calibration looks good.
-- Recalibrating after data drift without checking labels can hide deeper model degradation.
+## References
+
+- [scikit-learn User Guide: Probability calibration](https://scikit-learn.org/stable/modules/calibration.html)
+- [scikit-learn User Guide: Brier score loss](https://scikit-learn.org/stable/modules/model_evaluation.html#brier-score-loss)

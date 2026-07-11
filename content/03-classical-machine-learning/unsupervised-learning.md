@@ -1,53 +1,66 @@
 ---
 title: Unsupervised Learning
 slug: classical-machine-learning/unsupervised-learning
-description: Concise guide to Unsupervised Learning in Classical Machine Learning.
+description: "Learning structure from features without target labels."
 area: classical-machine-learning
 topics:
   - unsupervised-learning
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - clustering.md
+  - pca.md
+  - dimensionality-reduction.md
+  - anomaly-detection.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Unsupervised Learning
 
-## Summary
+Unsupervised learning fits structure from $X$ without observed target labels. The output may be clusters, components, density estimates, embeddings, or anomaly scores. Because there is no direct $y$, validation depends more heavily on assumptions and downstream utility than in [supervised learning](supervised-learning.md).
 
-Unsupervised Learning belongs to classical machine learning. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining math
 
-## Core idea
+Many unsupervised methods optimize a reconstruction, partition, or likelihood objective. [Clustering](clustering.md) with k-means solves $\min_{C_1,
+\dots,C_K}\sum_k\sum_{x_i\in C_k}\lVert x_i-\mu_k\rVert_2^2$. [PCA](pca.md) solves $\max_{W^\top W=I}\operatorname{tr}(W^\top X^\top XW)$. Anomaly methods learn a score $s(x)$ and flag points crossing a threshold.
 
-- Define the inputs, outputs, and boundaries for Unsupervised Learning.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+## Intuition
+
+Without labels, the method's definition of "structure" is the whole game. Variance, Euclidean distance, density, and neighborhood preservation can all disagree. [Dimensionality reduction](dimensionality-reduction.md) that helps visualization may discard information needed for a later classifier.
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Unsupervised Learning. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+from sklearn.cluster import KMeans
+from sklearn.datasets import load_iris
+from sklearn.metrics import adjusted_rand_score, silhouette_score
+from sklearn.preprocessing import StandardScaler
 
-## Practical checklist
+X, y = load_iris(return_X_y=True)
+X2 = StandardScaler().fit_transform(X)
+labels = KMeans(n_clusters=3, random_state=19, n_init=10).fit_predict(X2)
+print("silhouette", round(silhouette_score(X2, labels), 3))
+print("adjusted_rand_vs_species", round(adjusted_rand_score(y, labels), 3))
+```
 
-- Define exactly what Unsupervised Learning predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+Observed output:
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+```text
+silhouette 0.46
+adjusted_rand_vs_species 0.62
+```
 
-## Common failure modes
+The silhouette score uses only geometry. Adjusted Rand uses species labels after the fact, showing that geometric clusters partially but imperfectly align with botanical classes.
 
-- Using Unsupervised Learning with a split strategy that leaks labels, time, users, or target-derived features.
-- Optimizing a convenient metric instead of the operational cost of false positives, false negatives, or ranking errors.
-- Trusting Unsupervised Learning globally while important classes, cohorts, or edge cases fail.
+## Caveats
 
-- Optimizing a metric that does not match the operational decision.
-- Trusting aggregate performance while important classes or slices fail.
+Scaling can dominate unsupervised results. Internal metrics can reward artificial structure even when clusters are not actionable. If labels are later used to choose the unsupervised representation, that choice becomes supervised [model selection](model-selection.md).
+
+## References
+
+- [scikit-learn User Guide: Unsupervised learning](https://scikit-learn.org/stable/unsupervised_learning.html)
+- [scikit-learn User Guide: Clustering](https://scikit-learn.org/stable/modules/clustering.html)

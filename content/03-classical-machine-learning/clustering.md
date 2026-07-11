@@ -1,53 +1,68 @@
 ---
 title: Clustering
 slug: classical-machine-learning/clustering
-description: Concise guide to Clustering in Classical Machine Learning.
+description: "Grouping observations by geometry, density, or model-based similarity without labels."
 area: classical-machine-learning
 topics:
   - clustering
 level: foundational
-status: draft
-page_type: concept
+status: review
+page_type: algorithm
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - unsupervised-learning.md
+  - anomaly-detection.md
+  - pca.md
+  - dimensionality-reduction.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Clustering
 
-## Summary
+Clustering assigns examples to groups using features alone. The result is not a discovered truth by default; it is the partition implied by a chosen similarity definition. K-means uses Euclidean distance, DBSCAN uses density connectivity, and mixture models use likelihood.
 
-Clustering belongs to classical machine learning. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining math
 
-## Core idea
+K-means solves $\min_{C_1,\dots,C_K}\sum_k\sum_{x_i\in C_k}\lVert x_i-\mu_k\rVert_2^2$, with centroid update $\mu_k=|C_k|^{-1}\sum_{x_i\in C_k}x_i$. The silhouette score for point $i$ is $s_i=(b_i-a_i)/\max(a_i,b_i)$, where $a_i$ is within-cluster distance and $b_i$ is the best average distance to another cluster.
 
-- Define the inputs, outputs, and boundaries for Clustering.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+## Intuition
+
+K-means looks for compact spherical groups around centroids. If the real structure is elongated, nested, density-based, or categorical, a different [unsupervised learning](unsupervised-learning.md) assumption may be more honest. [PCA](pca.md) is often used before visualization, but it can change cluster geometry.
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Clustering. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+from sklearn.cluster import KMeans
+from sklearn.datasets import load_iris
+from sklearn.metrics import silhouette_score
+from sklearn.preprocessing import StandardScaler
+import numpy as np
 
-## Practical checklist
+X, y = load_iris(return_X_y=True)
+Xz = StandardScaler().fit_transform(X)
+km = KMeans(n_clusters=3, random_state=21, n_init=10).fit(Xz)
+print("inertia", round(km.inertia_, 1))
+print("silhouette", round(silhouette_score(Xz, km.labels_), 3))
+print("cluster_sizes", np.bincount(km.labels_))
+```
 
-- Define exactly what Clustering predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+Observed output:
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+```text
+inertia 139.8
+silhouette 0.46
+cluster_sizes [47 50 53]
+```
 
-## Common failure modes
+The cluster sizes are balanced, and the silhouette is moderate. The inertia value is only comparable for the same scaled dataset and number of clusters.
 
-- Using Clustering with a split strategy that leaks labels, time, users, or target-derived features.
-- Optimizing a convenient metric instead of the operational cost of false positives, false negatives, or ranking errors.
-- Trusting Clustering globally while important classes, cohorts, or edge cases fail.
+## Caveats
 
-- Optimizing a metric that does not match the operational decision.
-- Trusting aggregate performance while important classes or slices fail.
+K-means requires choosing $K$ and is sensitive to scaling and initialization. Internal cluster scores can improve for partitions that are not useful. If anomalies are the goal, [anomaly detection](anomaly-detection.md) methods may be more direct than forcing every point into a cluster.
+
+## References
+
+- [scikit-learn User Guide: Clustering](https://scikit-learn.org/stable/modules/clustering.html)
+- [scikit-learn User Guide: K-means](https://scikit-learn.org/stable/modules/clustering.html#k-means)

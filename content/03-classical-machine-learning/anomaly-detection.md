@@ -1,53 +1,68 @@
 ---
 title: Anomaly Detection
 slug: classical-machine-learning/anomaly-detection
-description: Concise guide to Anomaly Detection in Classical Machine Learning.
+description: "Scoring observations that are unusual under a fitted notion of normality."
 area: classical-machine-learning
 topics:
   - anomaly-detection
 level: foundational
-status: draft
-page_type: concept
+status: review
+page_type: algorithm
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - clustering.md
+  - unsupervised-learning.md
+  - evaluation-metrics.md
+  - class-imbalance.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Anomaly Detection
 
-## Summary
+Anomaly detection ranks or flags observations that look unusual relative to a reference distribution. It is often [unsupervised learning](unsupervised-learning.md), but evaluation usually becomes supervised once analysts label true incidents. Compared with [clustering](clustering.md), the goal is not to assign every point to a group; compared with [class imbalance](class-imbalance.md), the rare class may not be labeled at training time.
 
-Anomaly Detection belongs to classical machine learning. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining math
 
-## Core idea
+Many methods learn a score $s(x)$ where larger or smaller means more anomalous, then flag $\hat y=\mathbf 1\{s(x)\ge\tau\}$ or the corresponding lower-tail rule. Density methods flag low estimated density, $\hat y=\mathbf 1\{\hat p(x)<\tau\}$. Isolation Forest isolates points by random partitioning; anomalies tend to have shorter average path lengths.
 
-- Define the inputs, outputs, and boundaries for Anomaly Detection.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+## Intuition
+
+An anomaly is not just a rare point. It is rare under the model of normal behavior and relevant to the operational question. A new legitimate customer segment can look anomalous, while a common failure pattern may stop looking unusual after enough incidents accumulate.
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Anomaly Detection. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+import numpy as np
+from sklearn.ensemble import IsolationForest
 
-## Practical checklist
+rng = np.random.default_rng(22)
+normal = rng.normal(0, 1, size=(120, 2))
+outliers = rng.normal(6, .5, size=(6, 2))
+X = np.vstack([normal, outliers])
+iso = IsolationForest(contamination=6/126, random_state=22).fit(X)
+pred = iso.predict(X)
+print("flagged_total", int((pred == -1).sum()))
+print("outliers_flagged", int((pred[-6:] == -1).sum()), "of", len(outliers))
+print("normal_flagged", int((pred[:-6] == -1).sum()), "of", len(normal))
+```
 
-- Define exactly what Anomaly Detection predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+Observed output:
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+```text
+flagged_total 6
+outliers_flagged 6 of 6
+normal_flagged 0 of 120
+```
 
-## Common failure modes
+The synthetic outliers are far from the normal cloud, so the fitted contamination threshold flags exactly those six points.
 
-- Using Anomaly Detection with a split strategy that leaks labels, time, users, or target-derived features.
-- Optimizing a convenient metric instead of the operational cost of false positives, false negatives, or ranking errors.
-- Trusting Anomaly Detection globally while important classes, cohorts, or edge cases fail.
+## Caveats
 
-- Optimizing a metric that does not match the operational decision.
-- Trusting aggregate performance while important classes or slices fail.
+The contamination parameter bakes in an expected alert rate. High-dimensional distance concentration can make "far away" less meaningful. Concept drift changes normality, so anomaly systems need monitoring and analyst feedback loops.
+
+## References
+
+- [scikit-learn User Guide: Novelty and Outlier Detection](https://scikit-learn.org/stable/modules/outlier_detection.html)
+- [scikit-learn User Guide: Isolation Forest](https://scikit-learn.org/stable/modules/outlier_detection.html#isolation-forest)

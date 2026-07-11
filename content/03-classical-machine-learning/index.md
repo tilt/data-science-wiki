@@ -1,65 +1,61 @@
 ---
 title: Classical Machine Learning
-slug: 03-classical-machine-learning
-description: Index and learning map for Classical Machine Learning.
+slug: classical-machine-learning
+description: "Reference notes on classical supervised, unsupervised, and evaluation methods."
 area: classical-machine-learning
 topics:
-  - "supervised-learning"
-  - "regression"
-  - "classification"
-  - "logistic-regression"
-  - "linear-models"
-  - "support-vector-machines"
-  - "decision-trees"
-  - "random-forests"
-  - "gradient-boosting"
-  - "feature-engineering"
-  - "unsupervised-learning"
-  - "clustering"
+  - classical-machine-learning
 level: foundational
-status: draft
-page_type: area-index
-aliases:
-  - "Classical Machine Learning"
-prerequisites:
-  - "01-mathematical-foundations/index.md"
-  - "02-probability-and-statistics/index.md"
+status: review
+page_type: index
+aliases: []
+prerequisites: []
 related:
-  - "05-time-series-and-forecasting/machine-learning-forecasting.md"
-  - "05-time-series-and-forecasting/feature-engineering-for-forecasting.md"
-  - "13-ml-engineering-and-mlops/index.md"
-  - "16-experimentation-and-evaluation/index.md"
+  - supervised-learning.md
+  - unsupervised-learning.md
+  - model-selection.md
+  - evaluation-metrics.md
 historical_context: false
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 ---
 # Classical Machine Learning
 
-## Summary
+Classical machine learning is the part of statistical learning where the model class, loss, validation protocol, and diagnostic quantities are usually explicit. This section is organized around the questions a practitioner actually has to answer: what is being predicted or discovered, what objective is optimized, how the model fails, and how the result should be measured.
 
-Classical Machine Learning is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+## Supervised prediction
 
-## Subtopics
+- [Supervised learning](supervised-learning.md): the empirical-risk framing for learning a map from features $X$ to labels or targets $y$.
+- [Regression](regression.md): continuous-target prediction, usually optimized with squared, absolute, or likelihood-based losses.
+- [Classification](classification.md): discrete-label prediction, where scores become class decisions through argmax or thresholds.
+- [Linear models](linear-models.md): weighted sums of features, including ordinary least squares and generalized linear decision rules.
+- [Logistic regression](logistic-regression.md): a linear log-odds model for class probabilities and cross-entropy training.
+- [Support vector machines](support-vector-machines.md): maximum-margin classification with hinge loss and optional kernels.
 
-- [Supervised Learning](supervised-learning.md)
-- [Regression](regression.md)
-- [Classification](classification.md)
-- [Logistic Regression](logistic-regression.md)
-- [Linear Models](linear-models.md)
-- [Support Vector Machines](support-vector-machines.md)
-- [Decision Trees](decision-trees.md)
-- [Random Forests](random-forests.md)
-- [Gradient Boosting](gradient-boosting.md)
-- [Feature Engineering](feature-engineering.md)
-- [Unsupervised Learning](unsupervised-learning.md)
-- [Clustering](clustering.md)
-- [Dimensionality Reduction](dimensionality-reduction.md)
-- [PCA](pca.md)
-- [Anomaly Detection](anomaly-detection.md)
-- [Model Selection](model-selection.md)
-- [Bias-Variance Trade-Off](bias-variance-trade-off.md)
-- [Regularization](regularization.md)
-- [Calibration](calibration.md)
-- [Interpretability](interpretability.md)
-- [Evaluation Metrics](evaluation-metrics.md)
-- [Data Leakage](data-leakage.md)
-- [Class Imbalance](class-imbalance.md)
+## Complexity control and selection
+
+- [Regularization](regularization.md): penalties and constraints that shrink unstable fits toward simpler functions.
+- [Bias-variance trade-off](bias-variance-trade-off.md): the decomposition that explains underfitting versus sensitivity to the training sample.
+- [Model selection](model-selection.md): choosing model families and hyperparameters without spending the test set.
+- [Data leakage](data-leakage.md): target, time, group, and preprocessing contamination that makes validation estimates unrealistically good.
+- [Feature engineering](feature-engineering.md): changing the representation so simple models can express the right structure.
+
+## Trees and ensembles
+
+- [Decision trees](decision-trees.md): recursive partitions with impurity or variance-reduction split criteria.
+- [Random forests](random-forests.md): bagged, feature-randomized trees that reduce variance by averaging decorrelated predictors.
+- [Gradient boosting](gradient-boosting.md): additive trees fit stage by stage to negative gradients of a chosen loss.
+- [Interpretability](interpretability.md): local and global tools for connecting model behavior back to features and examples.
+
+## Unsupervised structure
+
+- [Unsupervised learning](unsupervised-learning.md): learning structure from $X$ without target labels.
+- [Dimensionality reduction](dimensionality-reduction.md): lower-dimensional representations for compression, visualization, and denoising.
+- [PCA](pca.md): the linear projection that maximizes retained variance through eigenvectors or SVD.
+- [Clustering](clustering.md): partitioning examples into groups using distance, density, or probabilistic structure.
+- [Anomaly detection](anomaly-detection.md): ranking or flagging observations that are unlikely under the fitted notion of normality.
+
+## Evaluation and decisions
+
+- [Evaluation metrics](evaluation-metrics.md): task-specific functions that turn predictions into comparable numbers.
+- [Calibration](calibration.md): whether predicted probabilities match observed frequencies.
+- [Class imbalance](class-imbalance.md): rare-class settings where accuracy and default thresholds can be actively misleading.

@@ -1,62 +1,75 @@
 ---
 title: Gradient Boosting
 slug: classical-machine-learning/gradient-boosting
-description: Concise guide to Gradient Boosting in Classical Machine Learning.
+description: "Stagewise additive models that fit weak learners to negative loss gradients."
 area: classical-machine-learning
 topics:
   - gradient-boosting
-level: foundational
+level: intermediate
 status: review
 page_type: algorithm
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
-  - ../05-time-series-and-forecasting/machine-learning-forecasting.md
+  - decision-trees.md
+  - random-forests.md
+  - regularization.md
+  - model-selection.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Gradient Boosting
 
-## Summary
+Gradient boosting builds an additive model by fitting each new learner to the direction that most reduces the current loss. In tabular classical ML, the weak learner is usually a small [decision tree](decision-trees.md), giving a sequence of trees rather than the parallel averaging used by [random forests](random-forests.md).
 
-Gradient boosting builds an additive model by fitting each new weak learner to the current model's errors. In tabular machine learning, boosted decision trees are often strong baselines because they capture nonlinear interactions with limited preprocessing.
+## Defining math
 
-## Core idea
+Initialize $F_0=\arg\min_\gamma\sum_i L(y_i,\gamma)$. At step $m$, compute pseudo-residuals
 
-- Start with a simple prediction, such as the mean target or class log-odds.
-- Compute residuals or gradients of the loss with respect to current predictions.
-- Fit a small tree to those gradients.
-- Add the tree to the ensemble with a learning-rate shrinkage factor.
-- Repeat until validation performance stops improving.
+$$
+r_{im}=-\left[\frac{\partial L(y_i,F(x_i))}{\partial F(x_i)}\right]_{F=F_{m-1}},
+$$
+
+fit $h_m$ to $r_{im}$, choose $\gamma_m=\arg\min_\gamma\sum_i L(y_i,F_{m-1}(x_i)+\gamma h_m(x_i))$, and update $F_m(x)=F_{m-1}(x)+\nu\gamma_mh_m(x)$.
+
+## Intuition
+
+Boosting is functional gradient descent. Instead of changing a coefficient vector directly, it changes the prediction function by adding a small tree that points downhill for the loss. This is powerful but needs [regularization](regularization.md): shallow trees, shrinkage, subsampling, and early stopping keep the stagewise corrections from chasing noise.
 
 ## Worked example
 
-For credit-risk classification, begin with a logistic-regression baseline. Train a gradient-boosted tree model with shallow trees, tune learning rate and number of estimators, and use early stopping on a validation set. Inspect false positives and false negatives by customer segment before choosing a threshold.
+```python
+from sklearn.datasets import make_classification
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
 
-## Important parameters
+X, y = make_classification(n_samples=300, n_features=8, n_informative=4, random_state=8)
+Xtr, Xte, ytr, yte = train_test_split(X, y, stratify=y, random_state=8)
+gb = GradientBoostingClassifier(n_estimators=60, learning_rate=0.1,
+                                max_depth=2, random_state=8).fit(Xtr, ytr)
+staged = [accuracy_score(yte, p) for p in gb.staged_predict(Xte)]
+print("test_acc", round(gb.score(Xte, yte), 3))
+print("staged_first3", [round(s, 3) for s in staged[:3]])
+print("staged_last", round(staged[-1], 3))
+```
 
-- Number of trees controls ensemble capacity.
-- Learning rate controls how much each tree changes the model.
-- Tree depth controls interaction complexity.
-- Subsampling and column sampling reduce overfitting.
-- Regularization and early stopping are critical on noisy tabular data.
+Observed output:
 
-## Practical checklist
+```text
+test_acc 0.853
+staged_first3 [0.813, 0.827, 0.827]
+staged_last 0.853
+```
 
-- Define exactly what Gradient Boosting predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+The staged scores show the additive process. More trees are not automatically better; validation curves decide when the sequence should stop.
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+## Caveats
 
-## Common failure modes
+Boosting can overfit mislabeled examples because later stages focus on hard residuals. Low learning rates usually require more trees. The best hyperparameters are coupled, so tune depth, learning rate, number of estimators, and subsampling together through [model selection](model-selection.md).
 
-- Overfitting through too many trees or deep trees.
-- Leakage from target-derived features, especially in time-dependent data.
-- Treating feature importance as causal explanation.
-- Ignoring calibration when probabilities drive decisions.
+## References
+
+- [Friedman, 2001, Greedy Function Approximation: A Gradient Boosting Machine](https://doi.org/10.1214/aos/1013203451)
+- [scikit-learn User Guide: Gradient Tree Boosting](https://scikit-learn.org/stable/modules/ensemble.html#gradient-tree-boosting)

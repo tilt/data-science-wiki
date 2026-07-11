@@ -1,53 +1,71 @@
 ---
 title: Classification
 slug: classical-machine-learning/classification
-description: Concise guide to Classification in Classical Machine Learning.
+description: "Predicting discrete labels from features, usually through scores, probabilities, and thresholds."
 area: classical-machine-learning
 topics:
   - classification
-level: intermediate
-status: draft
+level: foundational
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - logistic-regression.md
+  - support-vector-machines.md
+  - evaluation-metrics.md
+  - class-imbalance.md
+  - calibration.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Classification
 
-## Summary
+Classification predicts a discrete label $y\in\{1,\dots,K\}$. Some classifiers estimate probabilities, as [logistic regression](logistic-regression.md) does; others produce scores or margins, as [support vector machines](support-vector-machines.md) do.
 
-Classification belongs to classical machine learning. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining math
 
-## Core idea
+A probabilistic classifier estimates $\hat p_k(x)=P(Y=k\mid X=x)$ and predicts $\hat y=\arg\max_k\hat p_k(x)$. Binary classifiers often expose $\hat y(t)=\mathbf 1\{s(x)\ge t\}$. The threshold $t$ is part of the decision system, not the model alone. Changing it moves precision, recall, false-positive rate, and false-negative rate, so [evaluation metrics](evaluation-metrics.md) and [class imbalance](class-imbalance.md) are central.
 
-- Define the inputs, outputs, and boundaries for Classification.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+## Intuition
+
+Classification turns a continuous score into an action. The model ranking may be good even if the default threshold is wrong, and high accuracy can be worthless when one class dominates. Probability estimates also need [calibration](calibration.md) before they are used as risks or expected costs.
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Classification. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+from sklearn.datasets import make_classification
+from sklearn.dummy import DummyClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+from sklearn.model_selection import train_test_split
 
-## Practical checklist
+X, y = make_classification(n_samples=220, n_features=5, n_informative=3,
+                           weights=[0.7, 0.3], random_state=10)
+Xtr, Xte, ytr, yte = train_test_split(X, y, stratify=y, random_state=10)
+for name, est in [("dummy", DummyClassifier(strategy="most_frequent")),
+                  ("logistic", LogisticRegression(max_iter=1000, random_state=10))]:
+    est.fit(Xtr, ytr)
+    pred = est.predict(Xte)
+    recall = precision_recall_fscore_support(yte, pred, zero_division=0)[1][1]
+    print(name, "accuracy", round(accuracy_score(yte, pred), 3), "recall_pos", round(recall, 3))
+```
 
-- Define exactly what Classification predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+Observed output:
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+```text
+dummy accuracy 0.691 recall_pos 0.0
+logistic accuracy 0.945 recall_pos 0.882
+```
 
-## Common failure modes
+The dummy classifier looks decent by accuracy because the majority class is common, but it finds none of the positive class.
 
-- Using Classification with a split strategy that leaks labels, time, users, or target-derived features.
-- Optimizing a convenient metric instead of the operational cost of false positives, false negatives, or ranking errors.
-- Trusting Classification globally while important classes, cohorts, or edge cases fail.
+## Caveats
 
-- Optimizing a metric that does not match the operational decision.
-- Trusting aggregate performance while important classes or slices fail.
+Do not report only accuracy when class priors are skewed or costs are asymmetric. Multiclass labels may have hierarchy or ordinal structure that ordinary argmax ignores. Train-test splits must preserve deployment boundaries; otherwise [data leakage](data-leakage.md) can inflate every metric.
+
+## References
+
+- [scikit-learn User Guide: Classification metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)
+- [An Introduction to Statistical Learning](https://www.statlearning.com/)

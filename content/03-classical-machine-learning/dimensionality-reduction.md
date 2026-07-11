@@ -1,7 +1,7 @@
 ---
 title: Dimensionality Reduction
 slug: classical-machine-learning/dimensionality-reduction
-description: Concise guide to Dimensionality Reduction in Classical Machine Learning.
+description: "Representing data with fewer variables while preserving a chosen form of structure."
 area: classical-machine-learning
 topics:
   - dimensionality-reduction
@@ -12,26 +12,61 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - pca.md
+  - unsupervised-learning.md
+  - clustering.md
+  - feature-engineering.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Dimensionality Reduction
 
-Dimensionality reduction represents high-dimensional data with fewer variables while preserving useful structure. It can improve visualization, compression, denoising, retrieval, and downstream modelling.
+Dimensionality reduction maps $x\in\mathbb R^p$ to $z\in\mathbb R^d$ with $d<p$. The preserved structure depends on the method: [PCA](pca.md) preserves variance in a linear subspace, manifold methods preserve neighborhoods, and supervised reductions preserve label-relevant directions.
 
-## Core idea
+## Defining math
 
-High-dimensional data often contains redundancy. Dimensionality reduction seeks a lower-dimensional representation that keeps important distances, variance, neighborhoods, labels, or latent factors. The definition of "important" depends on the method and task.
+A generic encoder is $z_i=g(x_i)$. Linear projection writes $Z=XW$ with $W\in\mathbb R^{p\times d}$. PCA chooses $W$ to maximize retained variance:
 
-## Method families
+$$
+\max_{W^\top W=I_d}\operatorname{tr}(W^\top X_c^\top X_c W).
+$$
 
-Linear methods such as PCA and truncated SVD preserve variance in linear subspaces. Manifold methods try to preserve local neighborhoods. Supervised methods use labels to preserve task-relevant structure. Neural autoencoders learn nonlinear compressed representations.
+Reconstruction error for linear PCA is $\lVert X_c-X_cWW^\top\rVert_F^2$. The same transformation can be preprocessing for [clustering](clustering.md), visualization, denoising, or [feature engineering](feature-engineering.md). In [unsupervised learning](unsupervised-learning.md), the reduction objective often becomes the implicit definition of what structure is worth preserving.
 
-## Example
+## Intuition
 
-A document-term matrix may have 50,000 columns. Truncated SVD can map each document to 200 latent dimensions that capture broad topic structure. A classifier trained on those dimensions may be faster and less noisy, but rare terms can be lost.
+High-dimensional data often contains redundancy. A good lower-dimensional representation keeps the variation that matters and discards noise, but "matters" must be defined. Variance is not the same as predictive value.
 
-## Failure modes
+## Worked example
 
-Dimensionality reduction can erase minority patterns, distort distances, leak information if fit before train-test splitting, or create components that are hard to interpret. Always fit transformations on training data only.
+```python
+from sklearn.datasets import load_iris
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import numpy as np
+
+X, y = load_iris(return_X_y=True)
+Xz = StandardScaler().fit_transform(X)
+pca = PCA(n_components=2, random_state=20).fit(Xz)
+Z = pca.transform(Xz)
+print("explained_variance_ratio", np.round(pca.explained_variance_ratio_, 3))
+print("transformed_shape", Z.shape)
+```
+
+Observed output:
+
+```text
+explained_variance_ratio [0.73  0.229]
+transformed_shape (150, 2)
+```
+
+Two components retain about 95.9 percent of standardized Iris variance. That says nothing by itself about downstream classification or causal meaning.
+
+## Caveats
+
+Dimensionality reduction can erase rare but important directions. Distances after projection may be distorted. Fitting PCA or scaling before a train-test split leaks distributional information from validation into training.
+
+## References
+
+- [scikit-learn User Guide: Decomposition](https://scikit-learn.org/stable/modules/decomposition.html)
+- [scikit-learn User Guide: Unsupervised dimensionality reduction](https://scikit-learn.org/stable/modules/unsupervised_reduction.html)

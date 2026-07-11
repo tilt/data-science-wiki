@@ -1,53 +1,76 @@
 ---
 title: Model Selection
 slug: classical-machine-learning/model-selection
-description: Concise guide to Model Selection in Classical Machine Learning.
+description: "Choosing model families and hyperparameters using validation without spending the test set."
 area: classical-machine-learning
 topics:
   - model-selection
 level: foundational
-status: draft
+status: review
 page_type: model
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - bias-variance-trade-off.md
+  - regularization.md
+  - evaluation-metrics.md
+  - data-leakage.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Model Selection
 
-## Summary
+Model selection chooses the model class, preprocessing, hyperparameters, and sometimes thresholds. It is where [regularization](regularization.md), the [bias-variance trade-off](bias-variance-trade-off.md), and [evaluation metrics](evaluation-metrics.md) meet.
 
-Model Selection belongs to classical machine learning. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining math
 
-## Core idea
+Given candidate configurations $\lambda\in\Lambda$, validation selects $\hat\lambda=\arg\min_{\lambda\in\Lambda}\hat R_{val}(\hat f_\lambda)$. K-fold cross-validation estimates risk by
 
-- Define the inputs, outputs, and boundaries for Model Selection.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+$$
+CV(\lambda)=\frac{1}{K}\sum_{k=1}^K \frac{1}{|V_k|}\sum_{i\in V_k} L(y_i, \hat f_{\lambda}^{(-k)}(x_i)).
+$$
+
+The final test set estimates performance after selection. It must not influence candidate generation, preprocessing, or threshold decisions, or [data leakage](data-leakage.md) has occurred.
+
+## Intuition
+
+Training loss asks "can this model fit the sample?" Validation asks "which modelling choice survives new examples?" Test loss asks "after all choices are frozen, what performance estimate should we believe?" Mixing those roles creates optimistic estimates.
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Model Selection. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GridSearchCV
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+import numpy as np
 
-## Practical checklist
+X, y = make_classification(n_samples=240, n_features=12, n_informative=5, random_state=14)
+pipe = make_pipeline(StandardScaler(), LogisticRegression(max_iter=1000, random_state=14))
+grid = GridSearchCV(pipe, {"logisticregression__C": [0.01, 0.1, 1, 10]},
+                    cv=5, scoring="roc_auc").fit(X, y)
+print("best_C", grid.best_params_["logisticregression__C"])
+print("best_cv_auc", round(grid.best_score_, 3))
+print("mean_scores", np.round(grid.cv_results_["mean_test_score"], 3))
+```
 
-- Define exactly what Model Selection predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+Observed output:
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+```text
+best_C 10
+best_cv_auc 0.771
+mean_scores [0.755 0.77  0.77  0.771]
+```
 
-## Common failure modes
+The best regularization setting is only slightly ahead. That small margin should be treated as uncertain unless repeated validation or domain cost supports the choice.
 
-- Using Model Selection with a split strategy that leaks labels, time, users, or target-derived features.
-- Optimizing a convenient metric instead of the operational cost of false positives, false negatives, or ranking errors.
-- Trusting Model Selection globally while important classes, cohorts, or edge cases fail.
+## Caveats
 
-- Optimizing a metric that does not match the operational decision.
-- Trusting aggregate performance while important classes or slices fail.
+Searching many configurations overfits validation data. Nested cross-validation is the clean estimate when the selection process itself is complex. Pipelines matter: scalers, imputers, encoders, PCA, and feature selection must be fit inside each training fold.
+
+## References
+
+- [scikit-learn User Guide: Cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html)
+- [scikit-learn User Guide: Tuning hyperparameters](https://scikit-learn.org/stable/modules/grid_search.html)

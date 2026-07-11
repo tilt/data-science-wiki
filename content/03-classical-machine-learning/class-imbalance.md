@@ -1,53 +1,76 @@
 ---
 title: Class Imbalance
 slug: classical-machine-learning/class-imbalance
-description: Concise guide to Class Imbalance in Classical Machine Learning.
+description: "Classification settings where rare classes make default metrics and thresholds misleading."
 area: classical-machine-learning
 topics:
   - class-imbalance
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - evaluation-metrics.md
+  - classification.md
+  - calibration.md
+  - logistic-regression.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Class Imbalance
 
-## Summary
+Class imbalance means the class prior $P(Y=k)$ is highly uneven. The problem is not rarity by itself; it is that default training objectives, thresholds, and [evaluation metrics](evaluation-metrics.md) may optimize the majority class while missing the decision that matters.
 
-Class Imbalance belongs to classical machine learning. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining math
 
-## Core idea
+For binary prevalence $\pi=P(Y=1)$, thresholding predicts $\hat y=\mathbf 1\{s(x)\ge t\}$. Minority-class precision and recall are
 
-- Define the inputs, outputs, and boundaries for Class Imbalance.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+$$
+precision=\frac{TP}{TP+FP}, \qquad recall=\frac{TP}{TP+FN}.
+$$
+
+Class weighting changes empirical risk to $\min_f\sum_i w_{y_i}L(y_i,f(x_i))$, where $w_k$ is larger for rare or costly classes.
+
+## Intuition
+
+If fraud is 1 percent of transactions, predicting "not fraud" gets 99 percent accuracy and zero business value. [Classification](classification.md) under imbalance is a ranking and decision-cost problem: how many cases can be reviewed, and what is the cost of missing a positive?
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Class Imbalance. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+from sklearn.datasets import make_classification
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+from sklearn.model_selection import train_test_split
 
-## Practical checklist
+X, y = make_classification(n_samples=500, n_features=6, n_informative=3,
+                           weights=[0.95, 0.05], random_state=11)
+Xtr, Xte, ytr, yte = train_test_split(X, y, stratify=y, random_state=11)
+for name, est in [("plain", LogisticRegression(max_iter=1000, random_state=11)),
+                  ("balanced", LogisticRegression(max_iter=1000, class_weight="balanced", random_state=11))]:
+    est.fit(Xtr, ytr)
+    pred = est.predict(Xte)
+    p, r, _, _ = precision_recall_fscore_support(yte, pred, zero_division=0)
+    print(name, "accuracy", round(accuracy_score(yte, pred), 3),
+          "minority_precision", round(p[1], 3), "minority_recall", round(r[1], 3))
+```
 
-- Define exactly what Class Imbalance predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+Observed output:
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+```text
+plain accuracy 0.952 minority_precision 1.0 minority_recall 0.143
+balanced accuracy 0.776 minority_precision 0.08 minority_recall 0.286
+```
 
-## Common failure modes
+The balanced model catches more minority examples but creates many more false positives. Whether that is better depends on intervention cost.
 
-- Using Class Imbalance with a split strategy that leaks labels, time, users, or target-derived features.
-- Optimizing a convenient metric instead of the operational cost of false positives, false negatives, or ranking errors.
-- Trusting Class Imbalance globally while important classes, cohorts, or edge cases fail.
+## Caveats
 
-- Optimizing a metric that does not match the operational decision.
-- Trusting aggregate performance while important classes or slices fail.
+Resampling before splitting leaks duplicates or synthetic information across folds. PR-AUC is usually more informative than ROC-AUC under extreme rarity, but it still does not choose an operating threshold. Reweighting can hurt [calibration](calibration.md), so check probability reliability separately.
+
+## References
+
+- [scikit-learn User Guide: classification metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)
+- [scikit-learn User Guide: unbalanced problems](https://scikit-learn.org/stable/modules/svm.html#unbalanced-problems)

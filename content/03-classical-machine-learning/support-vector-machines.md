@@ -1,53 +1,74 @@
 ---
 title: Support Vector Machines
 slug: classical-machine-learning/support-vector-machines
-description: Concise guide to Support Vector Machines in Classical Machine Learning.
+description: "Maximum-margin classifiers trained with hinge loss and optional kernel feature maps."
 area: classical-machine-learning
 topics:
   - support-vector-machines
-level: foundational
-status: draft
-page_type: concept
+level: intermediate
+status: review
+page_type: algorithm
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - logistic-regression.md
+  - regularization.md
+  - classification.md
+  - linear-models.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Support Vector Machines
 
-## Summary
+Support vector machines learn a decision boundary with a large margin. Unlike [logistic regression](logistic-regression.md), an SVM is not primarily a probability model; it optimizes margin violations through hinge loss. Kernels make the boundary nonlinear while preserving a linear separator in an implicit feature space.
 
-Support vector machines learn a decision boundary that maximizes the margin between classes. Kernels let the model build nonlinear boundaries without explicitly constructing all transformed features.
+## Defining math
 
-## Core idea
+For labels $y_i\in\{-1,1\}$ and score $f(x)=w^\top x+b$, the soft-margin primal objective is
 
-- Only support vectors near the decision boundary determine the fitted boundary.
-- The regularization parameter trades margin width against classification errors.
-- Kernel choice controls the geometry of the feature space.
+$$
+\min_{w,b,\xi}\frac{1}{2}\lVert w\rVert_2^2 + C\sum_i \xi_i
+$$
+
+subject to $y_i(w^\top x_i+b)\ge 1-\xi_i$ and $\xi_i\ge0$. Equivalently, minimize $\frac12\lVert w\rVert_2^2+C\sum_i\max(0,1-y_if(x_i))$. $C$ is inverse [regularization](regularization.md): large $C$ penalizes violations strongly.
+
+## Intuition
+
+The classifier tries to put the boundary as far as possible from the nearest difficult points. That margin can generalize well in high-dimensional sparse data, but the decision scores need calibration before they are treated as probabilities.
 
 ## Worked example
 
-For a small text-classification dataset, represent documents with TF-IDF, train a linear SVM, tune regularization, and inspect errors near the margin.
+```python
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import LinearSVC
+import numpy as np
 
-## Practical checklist
+X, y = make_classification(n_samples=180, n_features=4, n_informative=2,
+                           n_redundant=0, class_sep=1.2, random_state=18)
+Xtr, Xte, ytr, yte = train_test_split(X, y, stratify=y, random_state=18)
+svm = make_pipeline(StandardScaler(), LinearSVC(C=1.0, random_state=18, max_iter=10000)).fit(Xtr, ytr)
+print("accuracy", round(svm.score(Xte, yte), 3))
+print("decision_first5", np.round(svm.decision_function(Xte[:5]), 3))
+```
 
-- Define exactly what Support Vector Machines predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+Observed output:
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+```text
+accuracy 0.956
+decision_first5 [-1.973 -0.781  1.463  0.301 -0.661]
+```
 
-## Common failure modes
+The sign of each decision score gives the class; the magnitude is distance-like confidence, not a calibrated probability.
 
-- Using Support Vector Machines with a split strategy that leaks labels, time, users, or target-derived features.
-- Optimizing a convenient metric instead of the operational cost of false positives, false negatives, or ranking errors.
-- Trusting Support Vector Machines globally while important classes, cohorts, or edge cases fail.
+## Caveats
 
-- Optimizing a metric that does not match the operational decision.
-- Trusting aggregate performance while important classes or slices fail.
+Feature scaling is essential because the margin is geometric. Kernel SVMs can be expensive on large datasets. Probability estimates from SVMs are post-hoc calibrated and should be validated with [calibration](calibration.md) metrics.
+
+## References
+
+- [Cortes and Vapnik, 1995, Support-vector networks](https://doi.org/10.1007/BF00994018)
+- [scikit-learn User Guide: Support Vector Machines](https://scikit-learn.org/stable/modules/svm.html)

@@ -1,7 +1,7 @@
 ---
 title: PCA
 slug: classical-machine-learning/pca
-description: Concise guide to PCA in Classical Machine Learning.
+description: "Principal component analysis: orthogonal linear projections that maximize retained variance."
 area: classical-machine-learning
 topics:
   - pca
@@ -12,30 +12,59 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - dimensionality-reduction.md
+  - unsupervised-learning.md
+  - clustering.md
+  - linear-models.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# PCA
 
-Principal component analysis finds orthogonal directions of maximum variance in numeric data. It is a linear dimensionality-reduction method used for visualization, denoising, compression, and feature analysis.
+Principal component analysis finds orthogonal directions of maximum variance in centered numeric data. It is a specific [dimensionality reduction](dimensionality-reduction.md) method, not a generic feature-selection algorithm. It is usually used inside [unsupervised learning](unsupervised-learning.md) workflows, but its linear projection geometry is closest in spirit to [linear models](linear-models.md).
 
-## Core idea
+## Defining math
 
-PCA centers the data and finds directions where the projected data varies most. The first principal component captures the most variance; the second captures the most remaining variance subject to being orthogonal to the first.
+Let $X_c$ be centered. The first component solves $w_1=\arg\max_{\lVert w\rVert_2=1}w^\top X_c^\top X_cw$. Subsequent components solve the same problem subject to orthogonality. Equivalently, PCA uses the eigendecomposition $(n-1)^{-1}X_c^\top X_c=V\Lambda V^\top$ or SVD $X_c=U\Sigma V^\top$. Scores are $Z=X_cV_d$, and explained variance ratios are $\lambda_j/\sum_k\lambda_k$.
 
-## Step-by-step example
+## Intuition
 
-For a dataset with height and weight, the first component may represent overall body size because both variables increase together. The second component may represent deviations from that pattern. Instead of two correlated variables, PCA gives uncorrelated component coordinates.
+PCA rotates the coordinate system so the first axis captures the largest spread, the second captures the largest remaining orthogonal spread, and so on. For [clustering](clustering.md), this can remove noise or make plots readable; it can also hide low-variance structure that matters.
 
-## Practical workflow
+## Worked example
 
-1. Choose numeric features and handle missing values.
-2. Standardize features when scales differ.
-3. Fit PCA on training data only.
-4. Inspect explained variance and component loadings.
-5. Transform validation, test, and production data with the fitted transformation.
+```python
+from sklearn.datasets import load_iris
+from sklearn.decomposition import PCA
+from sklearn.preprocessing import StandardScaler
+import numpy as np
 
-## Failure modes
+X, y = load_iris(return_X_y=True)
+Xz = StandardScaler().fit_transform(X)
+pca = PCA(n_components=2).fit(Xz)
+print("components")
+print(np.round(pca.components_, 3))
+print("explained_variance_ratio", np.round(pca.explained_variance_ratio_, 3))
+print("first_row_scores", np.round(pca.transform(Xz[:1]), 3))
+```
 
-PCA preserves variance, not predictive usefulness or causal meaning. It can be dominated by scale, outliers, and high-variance noise. Components can also be unstable when eigenvalues are close.
+Observed output:
+
+```text
+components
+[[ 0.521 -0.269  0.58   0.565]
+ [ 0.377  0.923  0.024  0.067]]
+explained_variance_ratio [0.73  0.229]
+first_row_scores [[-2.265  0.48 ]]
+```
+
+The first component loads positively on three standardized Iris features and negatively on the second. Component signs are arbitrary; flipping all signs gives the same subspace.
+
+## Caveats
+
+PCA is scale-sensitive, so standardize features when units differ. Outliers can dominate variance. Components are not causal factors, and they can be unstable when eigenvalues are close.
+
+## References
+
+- [scikit-learn User Guide: PCA](https://scikit-learn.org/stable/modules/decomposition.html#pca)
+- [An Introduction to Statistical Learning](https://www.statlearning.com/)

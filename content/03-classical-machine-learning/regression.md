@@ -1,53 +1,89 @@
 ---
 title: Regression
 slug: classical-machine-learning/regression
-description: Concise guide to Regression in Classical Machine Learning.
+description: "Continuous-target prediction, including ordinary least squares and residual diagnostics."
 area: classical-machine-learning
 topics:
   - regression
 level: intermediate
-status: draft
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - linear-models.md
+  - logistic-regression.md
+  - regularization.md
+  - evaluation-metrics.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Regression
 
-## Summary
+Regression estimates a numeric target $y \in \mathbb R$ from features $x$. In the standard linear case, [linear models](linear-models.md) estimate the conditional mean $\mathbb E[Y\mid X=x]$ by minimizing residual error; [logistic regression](logistic-regression.md) uses a similar linear score but changes the target from a continuous value to a class probability and changes the loss from squared error to cross-entropy.
 
-Regression belongs to classical machine learning. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining math
 
-## Core idea
+Ordinary least squares writes predictions as
 
-- Define the inputs, outputs, and boundaries for Regression.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+$$
+\hat y = x^\top \beta,
+$$
+
+and solves
+
+$$
+\hat\beta = \arg\min_\beta \lVert y - X\beta\rVert_2^2.
+$$
+
+When $X^\top X$ is invertible, the closed-form estimator is
+
+$$
+\hat\beta = (X^\top X)^{-1}X^\top y.
+$$
+
+Residuals $e_i = y_i - \hat y_i$ are not just errors; their pattern is a diagnostic. Curvature suggests missing [feature engineering](feature-engineering.md), changing variance suggests heteroscedasticity, and large leverage points can dominate the fitted line. Penalized versions such as ridge replace the objective with $\lVert y-X\beta\rVert_2^2 + \lambda\lVert\beta\rVert_2^2$, connecting regression directly to [regularization](regularization.md).
+
+## Intuition
+
+OLS projects the target vector onto the column space of the design matrix. The fitted values are the closest points, in Euclidean distance, that the model class can express. If the true signal is mostly linear in the chosen features, this is efficient and transparent; if the signal is nonlinear, OLS gives the best linear shadow, not the underlying mechanism.
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Regression. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+from sklearn.datasets import load_diabetes
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+from sklearn.model_selection import train_test_split
+import numpy as np
 
-## Practical checklist
+X, y = load_diabetes(return_X_y=True)
+Xtr, Xte, ytr, yte = train_test_split(X[:, [2]], y, random_state=0)
+reg = LinearRegression().fit(Xtr, ytr)
+pred = reg.predict(Xte[:5])
+print("slope", round(reg.coef_[0], 2), "intercept", round(reg.intercept_, 2))
+print("rmse", round(mean_squared_error(yte, reg.predict(Xte)) ** 0.5, 2))
+print("first5_pred", np.round(pred, 1))
+print("first5_true", yte[:5].astype(int))
+```
 
-- Define exactly what Regression predicts or estimates and what baseline it must beat.
-- Choose splits and metrics that match the deployment decision, including leakage and imbalance checks.
-- Inspect representative errors before tuning model complexity, thresholds, or explanations.
+Observed output:
 
-- Check leakage, class imbalance, calibration, and threshold choice.
-- Compare train, validation, and test behavior to diagnose underfitting or overfitting.
-- Inspect errors by segment and by example.
-- Choose metrics that match the deployment decision.
+```text
+slope 1016.92 intercept 153.23
+rmse 64.66
+first5_pred [259.8 214.9 162.3 129.4 199.5]
+first5_true [321 215 127  64 175]
+```
 
-## Common failure modes
+With only one feature, the model captures a broad trend but individual errors remain large. The RMSE is in target units, so it can be compared with operational tolerance rather than only with $R^2$.
 
-- Using Regression with a split strategy that leaks labels, time, users, or target-derived features.
-- Optimizing a convenient metric instead of the operational cost of false positives, false negatives, or ranking errors.
-- Trusting Regression globally while important classes, cohorts, or edge cases fail.
+## Caveats
 
-- Optimizing a metric that does not match the operational decision.
-- Trusting aggregate performance while important classes or slices fail.
+OLS coefficients become unstable when features are nearly collinear because $X^\top X$ is close to singular. Outliers affect squared error strongly. Extrapolation is linear forever, so a plausible fit inside the training range can produce impossible predictions outside it. Report regression with [evaluation metrics](evaluation-metrics.md) that match the decision: RMSE punishes large misses, MAE is more robust, and residual plots often reveal failures that aggregate scores hide.
+
+## References
+
+- [scikit-learn User Guide: Ordinary Least Squares](https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares)
+- [An Introduction to Statistical Learning](https://www.statlearning.com/)
