@@ -1,7 +1,7 @@
 ---
 title: Neural Network Fundamentals
 slug: deep-learning/neural-network-fundamentals
-description: Concise guide to Neural Network Fundamentals in Deep Learning.
+description: "Layers, nonlinearities, losses, and gradient-based training as one parameterized function."
 area: deep-learning
 topics:
   - neural-network-fundamentals
@@ -12,40 +12,71 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - backpropagation.md
+  - activation-functions.md
+  - loss-functions.md
+  - optimizers.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Neural Network Fundamentals
 
-A neural network is a parameterized function built from layers, nonlinearities, and learned weights. Training adjusts the weights so the network maps inputs to useful outputs.
-
-## Core idea
-
-A simple layer computes
+A neural network is a differentiable function assembled from affine maps and nonlinearities. The simplest dense layer computes
 
 $$
-h = \phi(Wx + b),
+h=\phi(xW+b),
 $$
 
-where $W$ is a weight matrix, $b$ is a bias vector, and $\phi$ is a nonlinear activation. Stacking layers lets the model compose simple transformations into richer representations.
+and a stack composes those maps:
 
-## Training loop
+$$
+f_\theta(x)=f_L(f_{L-1}(\cdots f_1(x))).
+$$
 
-1. Pass inputs forward through the network.
-2. Compare predictions with targets using a loss function.
-3. Use backpropagation to compute gradients.
-4. Update weights with an optimizer.
-5. Validate on held-out data to detect overfitting.
+The nonlinearity is what makes the model more than a linear projection; without [activation functions](activation-functions.md), any stack of dense layers collapses to one affine layer. Training chooses parameters $\theta$ by minimizing a [loss function](loss-functions.md), usually with gradients from [backpropagation](backpropagation.md) and updates from an [optimizer](optimizers.md).
 
-## Example
+## Intuition
 
-For image classification, early layers may detect edges and textures, middle layers combine them into parts, and later layers produce class scores. These representations are learned from data rather than manually specified.
+Hidden layers learn intermediate coordinates that make the target easier to predict. In vision those coordinates may resemble edges or parts; in tabular data they may be interactions that were not manually encoded. The same mechanism also creates the usual risks: a high-capacity network can memorize small data, and a bad loss or initialization can make the optimization problem look harder than the prediction problem really is.
 
-## Practical considerations
+## Worked example
 
-Architecture, data quality, loss choice, initialization, normalization, regularization, and optimization all interact. Larger networks are not automatically better; they need enough data, compute, and validation discipline.
+```python
+import torch
+import torch.nn.functional as F
 
-## Failure modes
+torch.manual_seed(1)
+X = torch.tensor([[0., 0.], [0., 1.], [1., 0.], [1., 1.]])
+y = torch.tensor([[0.], [1.], [1.], [0.]])
+net = torch.nn.Sequential(torch.nn.Linear(2, 4), torch.nn.Tanh(), torch.nn.Linear(4, 1))
+opt = torch.optim.SGD(net.parameters(), lr=0.5)
+loss0 = F.binary_cross_entropy_with_logits(net(X), y).item()
+for _ in range(400):
+    opt.zero_grad()
+    loss = F.binary_cross_entropy_with_logits(net(X), y)
+    loss.backward()
+    opt.step()
+probs = torch.sigmoid(net(X)).detach().flatten()
+print("loss_before", round(loss0, 4), "loss_after", round(loss.item(), 4))
+print("probabilities", torch.round(probs, decimals=3).tolist())
+print("predictions", (probs > 0.5).int().tolist())
+```
 
-Neural networks can overfit, learn spurious correlations, become poorly calibrated, and fail silently under distribution shift. Debug with baselines, ablations, learning curves, and error analysis.
+Observed output:
+
+```text
+loss_before 0.6955 loss_after 0.0267
+probabilities [0.017000000923871994, 0.9679999947547913, 0.9739999771118164, 0.029999999329447746]
+predictions [0, 1, 1, 0]
+```
+
+The hidden tanh layer lets the network represent XOR, which a purely linear classifier cannot separate in the original two coordinates.
+
+## Caveats
+
+Depth and width are capacity, not quality. The training loop only optimizes the chosen objective; it does not guarantee calibration, robustness, or causal structure. Debug from the pieces: inspect the loss, gradients, activation ranges, and validation errors before changing architecture.
+
+## References
+
+- [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 8: Optimization for Training Deep Models](https://www.deeplearningbook.org/contents/optimization.html)
+- [PyTorch documentation: Autograd mechanics](https://docs.pytorch.org/docs/2.7/notes/autograd.html)

@@ -1,44 +1,88 @@
 ---
 title: Representation Learning
 slug: deep-learning/representation-learning
-description: Concise guide to Representation Learning in Deep Learning.
+description: "Learning feature spaces that make downstream prediction or reconstruction easier."
 area: deep-learning
 topics:
   - representation-learning
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - self-supervised-learning.md
+  - contrastive-learning.md
+  - transfer-learning.md
+  - neural-network-fundamentals.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Representation Learning
 
-## Summary
+Representation learning is the practice of learning features instead of hand-designing them. A network maps raw input $x$ to a latent vector $z=f_\theta(x)$ that should make reconstruction, classification, retrieval, or [transfer learning](transfer-learning.md) easier. It is the shared substrate behind [self-supervised learning](self-supervised-learning.md) and [contrastive learning](contrastive-learning.md).
 
-Representation Learning belongs to deep learning. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining math
 
-## Core idea
+For an encoder $f_\theta$ and downstream head $g_\psi$,
 
-- Define the inputs, outputs, and boundaries for Representation Learning.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+$$
+z=f_\theta(x), \qquad \hat y=g_\psi(z).
+$$
+
+A supervised representation minimizes
+
+$$
+\min_{\theta,\psi}\frac{1}{n}\sum_i L(g_\psi(f_\theta(x_i)),y_i).
+$$
+
+An autoencoder instead learns by reconstruction:
+
+$$
+z=f_\theta(x),\qquad \hat x=d_\phi(z),\qquad
+L=\lVert x-\hat x\rVert_2^2.
+$$
+
+The useful representation is not necessarily the one that preserves every bit of input; it is the one that preserves factors needed by the next task.
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Representation Learning. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+import torch
+import torch.nn.functional as F
 
-## Practical checklist
+torch.manual_seed(8)
+X = torch.randn(80, 3)
+X[:, 2] = X[:, 0] * 0.5 - X[:, 1] * 0.2
+enc = torch.nn.Linear(3, 2)
+dec = torch.nn.Linear(2, 3)
+opt = torch.optim.Adam(list(enc.parameters()) + list(dec.parameters()), lr=0.05)
+start = F.mse_loss(dec(enc(X)), X).item()
+for _ in range(200):
+    opt.zero_grad()
+    loss = F.mse_loss(dec(enc(X)), X)
+    loss.backward()
+    opt.step()
+z0 = enc(X[:1]).detach()
+print("recon_loss_before", round(start, 4), "after", round(loss.item(), 4))
+print("first_latent", torch.round(z0, decimals=3).tolist())
+```
 
-- Start Representation Learning from a simple or pretrained baseline when available.
-- Track training curves, validation slices, memory use, and inference latency together.
-- Run an ablation that isolates whether Representation Learning improved the result or only changed capacity.
+Observed output:
 
-- Track data splits, objective, architecture, optimizer, seed, and hardware.
-- Monitor training curves for instability, overfitting, or underfitting.
-- Evaluate on slices that expose the intended inductive bias.
-- Record serving cost, latency, memory, and rollback implications.
+```text
+recon_loss_before 1.102 after 0.0
+first_latent [[1.6230000257492065, 0.7910000085830688]]
+```
+
+The third feature is a linear combination of the first two, so a two-dimensional latent code can reconstruct the data essentially perfectly.
+
+## Caveats
+
+Good reconstruction is not the same as semantic usefulness: an autoencoder can preserve nuisance details that hurt a classifier. Conversely, a contrastive or supervised representation can discard information that later tasks need. Evaluate representations with the downstream task, not only with the pretraining loss.
+
+## References
+
+- [Bengio, Courville, and Vincent, 2012, Representation Learning: A Review and New Perspectives](https://arxiv.org/abs/1206.5538)
+- [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 15: Representation Learning](https://www.deeplearningbook.org/contents/representation.html)

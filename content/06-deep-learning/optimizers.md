@@ -1,7 +1,7 @@
 ---
 title: Optimizers
 slug: deep-learning/optimizers
-description: Concise guide to Optimizers in Deep Learning.
+description: "Gradient update rules that turn backpropagated derivatives into parameter changes."
 area: deep-learning
 topics:
   - optimizers
@@ -12,25 +12,80 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - backpropagation.md
+  - mixed-precision.md
+  - loss-functions.md
+  - ../01-mathematical-foundations/gradient-descent.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Optimizers
 
-## Summary
+An optimizer consumes gradients from [backpropagation](backpropagation.md) and changes parameters. Plain SGD follows the local slope; momentum accumulates a velocity; Adam rescales updates with running first and second moments. These rules are usually more consequential than small architecture changes when the [loss](loss-functions.md) is noisy or sparse.
 
-Optimizers update model parameters from gradients. They determine how step size, momentum, adaptivity, and regularization shape training.
+## Defining math
 
-## Step-by-step example
+SGD updates
 
-Adam adapts learning rates per parameter using moving averages of gradients, while SGD with momentum accumulates velocity in consistent descent directions.
+$$
+\theta_{t+1}=\theta_t-\eta g_t.
+$$
 
-## Common failure modes
+Momentum keeps a velocity:
 
-- Changing Optimizers before checking data quality, baseline performance, and whether the added capacity or constraint is needed.
-- Reading only aggregate validation scores instead of inspecting learning curves, slices, and representative errors.
-- Ignoring how Optimizers affects memory, numerical stability, reproducibility, or inference latency.
+$$
+v_t=\mu v_{t-1}+g_t,\qquad \theta_{t+1}=\theta_t-\eta v_t.
+$$
 
-- Reading aggregate metrics without inspecting slice-level and example-level failures.
-- Ignoring compute, memory, latency, and reproducibility constraints.
+Adam uses bias-corrected moments:
+
+$$
+m_t=\beta_1m_{t-1}+(1-\beta_1)g_t,\quad
+v_t=\beta_2v_{t-1}+(1-\beta_2)g_t^2,
+$$
+
+$$
+\theta_{t+1}=\theta_t-\eta\frac{\hat m_t}{\sqrt{\hat v_t}+\epsilon}.
+$$
+
+[Mixed precision](mixed-precision.md) often changes the optimizer implementation because master weights, scaling, and fused kernels affect numerical behavior.
+
+## Worked example
+
+```python
+import torch
+
+grads = [torch.tensor(0.8), torch.tensor(-0.2), torch.tensor(0.4)]
+theta_sgd = theta_mom = theta_adam = torch.tensor(1.0)
+v = m = s = torch.tensor(0.0)
+for t, g in enumerate(grads, 1):
+    theta_sgd = theta_sgd - 0.1 * g
+    v = 0.9 * v + g
+    theta_mom = theta_mom - 0.1 * v
+    m = 0.9 * m + 0.1 * g
+    s = 0.999 * s + 0.001 * g * g
+    theta_adam = theta_adam - 0.1 * (m / (1 - 0.9 ** t)) / ((s / (1 - 0.999 ** t)).sqrt() + 1e-8)
+print("theta_sgd", round(theta_sgd.item(), 4))
+print("theta_momentum", round(theta_mom.item(), 4))
+print("theta_adam", round(theta_adam.item(), 4))
+```
+
+Observed output:
+
+```text
+theta_sgd 0.9
+theta_momentum 0.7812
+theta_adam 0.7925
+```
+
+The same gradient sequence gives different final parameters because momentum carries history and Adam normalizes by recent squared gradients.
+
+## Caveats
+
+Adam's adaptivity is useful for sparse or poorly scaled gradients, but weight decay should usually be decoupled when the intended penalty is true L2-style shrinkage. Learning-rate schedules, warmup, batch size, and gradient clipping are part of the optimizer design, not afterthoughts.
+
+## References
+
+- [Kingma and Ba, 2014, Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980)
+- [PyTorch documentation: Adam](https://docs.pytorch.org/docs/2.7/generated/torch.optim.Adam.html)
+- [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 8](https://www.deeplearningbook.org/contents/optimization.html)

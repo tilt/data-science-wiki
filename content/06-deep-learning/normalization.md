@@ -1,7 +1,7 @@
 ---
 title: Normalization
 slug: deep-learning/normalization
-description: Concise guide to Normalization in Deep Learning.
+description: "Trainable standardization layers that stabilize activation scale."
 area: deep-learning
 topics:
   - normalization
@@ -12,36 +12,62 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - initialization.md
+  - transformers.md
+  - convolutional-neural-networks.md
+  - backpropagation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Normalization
 
-## Summary
+Normalization layers standardize intermediate activations and then apply trainable scale and shift. They reduce sensitivity to [initialization](initialization.md) and learning rate, but the axis being normalized matters: batch norm couples examples in a minibatch, while layer norm normalizes features within each example and is therefore natural in [transformers](transformers.md).
 
-Normalization layers stabilize training by controlling the scale and distribution of intermediate activations. Batch normalization, layer normalization, and related methods use different statistics.
+## Defining math
 
-## Mechanism
-
-Most normalization layers compute a mean and variance over a chosen set of axes, standardize activations, then learn a scale and shift:
+For a set of activations $x$, normalization computes
 
 $$
-\hat{x}=\frac{x-\mu}{\sqrt{\sigma^2+\epsilon}},
+\mu=\frac{1}{m}\sum_i x_i,\qquad
+\sigma^2=\frac{1}{m}\sum_i(x_i-\mu)^2,
 $$
 
+then returns
+
 $$
-y=\gamma \hat{x}+\beta.
+y_i=\gamma\frac{x_i-\mu}{\sqrt{\sigma^2+\epsilon}}+\beta.
 $$
 
-Batch normalization usually computes statistics across the batch and spatial positions for each channel. Layer normalization computes statistics within each example across features. That difference matters: batch normalization depends on batch composition and running statistics, while layer normalization works naturally for variable-length sequence models and small batches.
+Batch normalization usually estimates $\mu,\sigma^2$ across the minibatch and spatial positions, common in [convolutional networks](convolutional-neural-networks.md). Layer normalization estimates them across a single example's feature dimension, so train and inference use the same statistics.
 
-## Step-by-step example
+## Worked example
 
-Layer normalization is common in transformers because it normalizes within each example and does not depend on batch statistics.
+```python
+import torch
 
-## Common failure modes
+x = torch.tensor([[1., 2., 7.], [3., 4., 9.]])
+batch = (x - x.mean(0)) / torch.sqrt(x.var(0, unbiased=False) + 1e-5)
+layer = (x - x.mean(1, keepdim=True)) / torch.sqrt(x.var(1, unbiased=False, keepdim=True) + 1e-5)
+print("batch_norm_means", torch.round(batch.mean(0), decimals=4).tolist())
+print("batch_norm_vars", torch.round(batch.var(0, unbiased=False), decimals=4).tolist())
+print("layer_norm_row0", torch.round(layer[0], decimals=4).tolist())
+```
 
-- Using batch normalization with tiny or non-representative batches and trusting unstable batch statistics.
-- Forgetting to switch batch-normalized models between training and evaluation behavior.
-- Treating normalization as interchangeable across CNNs, transformers, and recurrent models.
+Observed output:
+
+```text
+batch_norm_means [0.0, 0.0, 0.0]
+batch_norm_vars [1.0, 1.0, 1.0]
+layer_norm_row0 [-0.8889999985694885, -0.5080000162124634, 1.3969999551773071]
+```
+
+Batch normalization makes each feature column zero-mean and unit-variance across the two examples. Layer normalization instead standardizes the first row across its three features.
+
+## Caveats
+
+Batch norm's train/eval split is a real failure mode: stale running statistics can break inference after distribution shift or very small batches. Layer norm avoids batch coupling but does not preserve feature scale information unless the learned affine parameters recover it. Normalization also changes the effective optimization geometry, so it is not merely preprocessing.
+
+## References
+
+- [Ioffe and Szegedy, 2015, Batch Normalization](https://arxiv.org/abs/1502.03167)
+- [Ba, Kiros, and Hinton, 2016, Layer Normalization](https://arxiv.org/abs/1607.06450)

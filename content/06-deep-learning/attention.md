@@ -1,7 +1,7 @@
 ---
 title: Attention
 slug: deep-learning/attention
-description: Concise guide to Attention in Deep Learning.
+description: "Content-based weighted routing between sequence positions or modalities."
 area: deep-learning
 topics:
   - attention
@@ -12,40 +12,66 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - transformers.md
+  - recurrent-neural-networks.md
+  - multimodal-learning.md
+  - ../10-generative-ai/language-model-architecture.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Attention
 
-## Summary
+Attention computes a context-dependent weighted average of value vectors. A query asks what it needs, keys decide which positions match, and values provide the information to mix. This is the central mechanism in [transformers](transformers.md), a bridge away from [recurrent networks](recurrent-neural-networks.md), and a common alignment mechanism in [multimodal learning](multimodal-learning.md).
 
-Attention lets a model compute context-dependent weighted combinations of representations. It is the mechanism that allows tokens, patches, or frames to selectively use information from other positions.
+## Defining math
 
-## Mechanism
-
-Scaled dot-product attention starts with three learned projections of the input representations: queries $Q$, keys $K$, and values $V$. For one attention head,
+Scaled dot-product attention is
 
 $$
 \operatorname{Attention}(Q,K,V)=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.
 $$
 
-The matrix $QK^\top$ scores how strongly each query position should use each key position. Dividing by $\sqrt{d_k}$ keeps logits from growing too large as the key dimension increases. The softmax turns scores into weights, and multiplying by $V$ forms the weighted context vectors.
-
-Multi-head attention runs several attention heads in parallel:
+For multi-head attention,
 
 $$
-\operatorname{head}_i=\operatorname{Attention}(QW_i^Q,KW_i^K,VW_i^V).
+\operatorname{head}_i=\operatorname{Attention}(QW_i^Q,KW_i^K,VW_i^V),
 $$
 
-The heads are concatenated and projected so different heads can specialize in different relationships, such as local syntax, long-range references, or modality alignment.
+$$
+\operatorname{MHA}(Q,K,V)=\operatorname{Concat}(\operatorname{head}_1,\ldots,\operatorname{head}_h)W^O.
+$$
 
-## Step-by-step example
+The $\sqrt{d_k}$ divisor keeps dot-product logits from growing with key dimension. Masks can forbid future tokens or padded positions, which is essential in [language-model architectures](../10-generative-ai/language-model-architecture.md).
 
-In a sentence, the token "it" can attend strongly to the noun it refers to, making the representation depend on context rather than position alone.
+## Worked example
 
-## Common failure modes
+```python
+import math, torch
 
-- Treating attention weights as complete explanations; they show routing of representation, not necessarily causal importance.
-- Extending context length without testing whether the model uses distant evidence correctly.
-- Ignoring quadratic memory and latency costs in long-sequence workloads.
+Q = torch.tensor([[1., 0.], [0., 1.]])
+K = torch.tensor([[1., 0.], [1., 1.], [0., 1.]])
+V = torch.tensor([[10., 0.], [0., 5.], [0., 1.]])
+scores = Q @ K.T / math.sqrt(2)
+weights = scores.softmax(dim=-1)
+context = weights @ V
+print("weights", torch.round(weights, decimals=3).tolist())
+print("context", torch.round(context, decimals=3).tolist())
+```
+
+Observed output:
+
+```text
+weights [[0.4009999930858612, 0.4009999930858612, 0.1979999989271164], [0.1979999989271164, 0.4009999930858612, 0.4009999930858612]]
+context [[4.011000156402588, 2.203000068664551], [1.9780000448226929, 2.4070000648498535]]
+```
+
+The first query attends most to the first two keys, while the second attends most to the last two. The output vectors are weighted mixtures of the values, not selected tokens.
+
+## Caveats
+
+Attention weights are routing weights, not full explanations of a model decision. Full self-attention is $O(n^2)$ in sequence length for its score matrix, so long contexts stress memory and latency. A mask bug changes what information can flow and can silently invalidate evaluation.
+
+## References
+
+- [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+- [PyTorch documentation: MultiheadAttention](https://docs.pytorch.org/docs/2.7/generated/torch.nn.MultiheadAttention.html)
