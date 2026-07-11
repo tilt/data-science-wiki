@@ -1,0 +1,16 @@
+# Makefile Reference
+
+Run `make help` for the current target list.
+
+Important targets:
+
+- `make doctor`: non-mutating environment checks.
+- `make setup`: install dependencies.
+- `make preview`: serve Quartz locally with watching.
+- `make build`: build `public/`.
+- `make validate`: run content, link, and portability checks.
+- `make check-content`: validate page metadata, top-level reachability, orphan warnings, repository hygiene, and bibliography keys.
+- `make ci`: run validation and build.
+- `make deploy-info`: print inferred GitHub Pages URL information.
+- `make generate-subtopics`: create concise pages for missing subtopics and link area index subtopic lists.
+- `make improve-generated-content`: rewrite generated topic pages with concise topic-specific explanations and examples.

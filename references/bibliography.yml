@@ -1,0 +1,175 @@
+golub-van-loan-matrix-computations:
+  type: book
+  title: Matrix Computations
+  authors:
+    - Gene H. Golub
+    - Charles F. Van Loan
+  year: 2013
+  publisher: Johns Hopkins University Press
+  url: https://jhupbooks.press.jhu.edu/title/matrix-computations
+  primary: true
+
+eckart-young-1936-low-rank:
+  type: paper
+  title: The approximation of one matrix by another of lower rank
+  authors:
+    - Carl Eckart
+    - Gale Young
+  year: 1936
+  venue: Psychometrika
+  doi: 10.1007/BF02288367
+  primary: true
+
+koren-bell-volinsky-2009-matrix-factorization:
+  type: paper
+  title: Matrix Factorization Techniques for Recommender Systems
+  authors:
+    - Yehuda Koren
+    - Robert Bell
+    - Chris Volinsky
+  year: 2009
+  venue: Computer
+  doi: 10.1109/MC.2009.263
+  primary: true
+
+hu-koren-volinsky-2008-implicit-feedback:
+  type: paper
+  title: Collaborative Filtering for Implicit Feedback Datasets
+  authors:
+    - Yifan Hu
+    - Yehuda Koren
+    - Chris Volinsky
+  year: 2008
+  venue: IEEE International Conference on Data Mining
+  doi: 10.1109/ICDM.2008.22
+  primary: true
+
+box-jenkins-reinsel-ljung-2015-time-series:
+  type: book
+  title: Time Series Analysis
+  authors:
+    - George E. P. Box
+    - Gwilym M. Jenkins
+    - Gregory C. Reinsel
+    - Greta M. Ljung
+  year: 2015
+  publisher: Wiley
+  url: https://www.wiley.com/en-us/Time+Series+Analysis%3A+Forecasting+and+Control%2C+5th+Edition-p-9781118675021
+  primary: true
+
+openai-function-calling-docs:
+  type: official-docs
+  title: Function calling
+  authors:
+    - OpenAI
+  year: 2026
+  url: https://platform.openai.com/docs/guides/function-calling
+  accessed: 2026-07-11
+  primary: true
+
+openai-text-generation-docs:
+  type: official-docs
+  title: Text generation
+  authors:
+    - OpenAI
+  year: 2026
+  url: https://platform.openai.com/docs/guides/text
+  accessed: 2026-07-11
+  primary: true
+
+openai-structured-outputs-docs:
+  type: official-docs
+  title: Structured model outputs
+  authors:
+    - OpenAI
+  year: 2026
+  url: https://platform.openai.com/docs/guides/structured-outputs
+  accessed: 2026-07-11
+  primary: true
+
+assran-2025-vjepa2:
+  type: paper
+  title: "V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning"
+  authors:
+    - Mahmoud Assran
+    - Quentin Garrido
+    - and coauthors
+  year: 2025
+  venue: arXiv
+  arxiv: 2506.09985
+  url: https://arxiv.org/abs/2506.09985
+  primary: true
+
+bardes-2024-vjepa:
+  type: paper
+  title: Revisiting Feature Prediction for Learning Visual Representations from Video
+  authors:
+    - Adrien Bardes
+    - Quentin Garrido
+    - and coauthors
+  year: 2024
+  venue: arXiv
+  arxiv: 2404.08471
+  url: https://arxiv.org/abs/2404.08471
+  primary: true
+
+lecun-2022-autonomous-machine-intelligence:
+  type: manuscript
+  title: A Path Towards Autonomous Machine Intelligence
+  authors:
+    - Yann LeCun
+  year: 2022
+  url: https://openreview.net/forum?id=BZ5a1r-kVsf
+  primary: true
+
+dawid-lecun-2023-lvebm:
+  type: paper
+  title: Introduction to Latent Variable Energy-Based Models
+  authors:
+    - Anna Dawid
+    - Yann LeCun
+  year: 2023
+  venue: arXiv
+  arxiv: 2306.02572
+  url: https://arxiv.org/abs/2306.02572
+  primary: true
+
+nist-ai-rmf-2023:
+  type: standard
+  title: Artificial Intelligence Risk Management Framework
+  authors:
+    - National Institute of Standards and Technology
+  year: 2023
+  url: https://www.nist.gov/itl/ai-risk-management-framework
+  primary: true
+
+kohavi-tang-xu-2020-trustworthy-online-experiments:
+  type: book
+  title: Trustworthy Online Controlled Experiments
+  authors:
+    - Ron Kohavi
+    - Diane Tang
+    - Ya Xu
+  year: 2020
+  publisher: Cambridge University Press
+  url: https://www.cambridge.org/core/books/trustworthy-online-controlled-experiments/3C92822277D3E4E98B2F1B9E6D2C9A12
+  primary: true
+
+martin-2017-clean-architecture:
+  type: book
+  title: Clean Architecture
+  authors:
+    - Robert C. Martin
+  year: 2017
+  publisher: Prentice Hall
+  url: https://www.pearson.com/en-us/subject-catalog/p/clean-architecture-a-craftsmans-guide-to-software-structure-and-design/P200000009528
+  primary: false
+
+iso-25010-2011:
+  type: standard
+  title: Systems and software Quality Requirements and Evaluation
+  authors:
+    - International Organization for Standardization
+  year: 2011
+  url: https://iso25000.com/index.php/en/iso-25000-standards/iso-25010
+  primary: true

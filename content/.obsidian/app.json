@@ -1,0 +1,10 @@
+{
+  "alwaysUpdateLinks": true,
+  "newLinkFormat": "relative",
+  "attachmentFolderPath": "assets",
+  "useMarkdownLinks": true,
+  "promptDelete": false,
+  "readableLineLength": true,
+  "showLineNumber": false,
+  "livePreview": true
+}

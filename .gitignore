@@ -1,0 +1,20 @@
+node_modules/
+public/
+.quartz/
+.cache/
+.DS_Store
+.env
+.env.*
+!.env.example
+npm-debug.log*
+tsconfig.tsbuildinfo
+
+# Obsidian state that causes noisy or private diffs
+content/.obsidian/workspace*
+content/.obsidian/workspaces.json
+content/.obsidian/cache
+content/.obsidian/plugins/
+content/.obsidian/snippets/
+
+# Generated exports
+.generated/

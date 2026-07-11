@@ -1,0 +1,9 @@
+{
+  "title": "Data Science, Machine Learning & AI Wiki",
+  "quartzVersion": "5.0.0",
+  "nodeVersion": "22.13.0",
+  "npmVersion": "10.9.2",
+  "defaultBaseUrl": "example.github.io/data-science-wiki",
+  "contentDirectory": "content",
+  "buildDirectory": "public"
+}

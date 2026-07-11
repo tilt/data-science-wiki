@@ -1,0 +1,40 @@
+{
+  "name": "related-links",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./components": {
+      "import": "./dist/components/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "quartz": {
+    "name": "related-links",
+    "displayName": "Related Links",
+    "description": "Renders related frontmatter and adds it to Quartz link data.",
+    "category": [
+      "transformer",
+      "component"
+    ],
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "defaultOrder": 55,
+    "defaultEnabled": true,
+    "defaultOptions": {
+      "field": "related",
+      "title": "Related"
+    },
+    "components": {
+      "RelatedLinks": {
+        "displayName": "Related Links",
+        "description": "Displays links from a page's related frontmatter field.",
+        "defaultPosition": "afterBody",
+        "defaultPriority": 40
+      }
+    }
+  }
+}

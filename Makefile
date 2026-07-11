@@ -1,0 +1,74 @@
+.PHONY: help doctor setup install preview build clean validate lint test check-links check-content portability-check format ci deploy-info new-page new-topic generate-subtopics improve-generated-content export-mkdocs serve-build list-stubs list-drafts
+
+PORT ?= 8080
+WS_PORT ?= 3001
+
+help: ## Show available targets.
+	@awk 'BEGIN {FS = ":.*##"} /^[a-zA-Z0-9_-]+:.*##/ {printf "%-22s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
+
+doctor: ## Check local runtime and repository shape without mutating files.
+	@node scripts/doctor.mjs
+
+setup: install ## Safe first-time setup.
+
+install: ## Install locked dependencies reproducibly.
+	npm ci
+	npx quartz plugin install
+
+preview: ## Start Quartz local preview with watching.
+	@echo "Preview URL: http://localhost:$(PORT)"
+	npx quartz build --serve --port $(PORT) --wsPort $(WS_PORT)
+
+build: ## Build the static site into public/.
+	npx quartz build
+
+clean: ## Remove generated build artifacts only.
+	rm -rf public .generated
+
+validate: check-content check-links portability-check ## Run all repository validations.
+
+lint: ## Check formatting, TypeScript, YAML, and Markdown structure.
+	npm run check
+
+test: ## Run automated tests.
+	npm test
+
+check-links: ## Detect broken internal Markdown links and missing assets.
+	node scripts/check-links.mjs
+
+check-content: ## Validate front matter, indexes, duplicate slugs, aliases, and hygiene.
+	node scripts/validate-content.mjs
+
+portability-check: ## Detect known non-portable Markdown constructs.
+	node scripts/portability-check.mjs
+
+format: ## Apply safe formatting.
+	npx prettier . --write
+
+ci: validate lint test build ## Run the CI-equivalent sequence.
+
+deploy-info: ## Print GitHub Pages deployment information.
+	@node -e 'const cp=require("child_process"); let url=""; try{url=cp.execSync("git config --get remote.origin.url",{encoding:"utf8"}).trim()}catch{}; const repo=url.match(/[:/]([^/]+)\/([^/.]+)(?:\.git)?$$/); if(repo){console.log("Expected project Pages URL: https://"+repo[1]+".github.io/"+repo[2]+"/")} else {console.log("No origin remote found. Project URL will be https://<owner>.github.io/<repository>/")} console.log("Set GitHub Pages source to GitHub Actions.")'
+
+new-page: ## Create a new page. Usage: make new-page TYPE=concept PATH=dir/page.md TITLE='Title'
+	node scripts/new-page.mjs --type=$(TYPE) --path=$(PATH) --title="$(TITLE)"
+
+new-topic: new-page ## Alias for new-page.
+
+generate-subtopics: ## Create missing subtopic pages and link area index subtopic lists.
+	node scripts/generate-subtopic-pages.mjs
+
+improve-generated-content: ## Replace generated placeholder prose with concise topic-specific explanations.
+	node scripts/improve-placeholder-pages.mjs --refine-generated
+
+export-mkdocs: portability-check ## Generate an MkDocs-compatible staging directory.
+	node scripts/export-mkdocs.mjs
+
+serve-build: build ## Serve the built public directory for inspection.
+	npx serve public
+
+list-stubs: ## List stub pages.
+	node scripts/list-content.mjs stubs
+
+list-drafts: ## List draft pages.
+	node scripts/list-content.mjs drafts

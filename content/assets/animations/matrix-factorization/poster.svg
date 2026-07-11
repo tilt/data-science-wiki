@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Matrix factorization animation poster</title>
+  <desc id="desc">A static fallback showing a ratings matrix approximated by user and item factor matrices.</desc>
+  <rect width="640" height="360" fill="#151719"/>
+  <text x="42" y="60" fill="#f5f1e8" font-family="Arial" font-size="28">R approx P Q^T</text>
+  <g fill="#59b7b4">
+    <rect x="70" y="110" width="110" height="110" rx="4"/>
+    <rect x="260" y="130" width="70" height="90" rx="4"/>
+    <rect x="420" y="110" width="120" height="70" rx="4"/>
+  </g>
+  <g fill="#f5f1e8" font-family="Arial" font-size="36">
+    <text x="208" y="178">=</text>
+    <text x="360" y="178">x</text>
+  </g>
+</svg>

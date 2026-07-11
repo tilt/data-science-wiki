@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180" role="img" aria-labelledby="title desc">
+  <title id="title">Simple ML pipeline</title>
+  <desc id="desc">Boxes for data, training, evaluation, and deployment connected by arrows.</desc>
+  <rect width="720" height="180" fill="#f8f7f4"/>
+  <g font-family="Arial, sans-serif" font-size="18" fill="#1f2933">
+    <rect x="30" y="60" width="130" height="60" rx="6" fill="#d9efe9" stroke="#0f6b6e"/>
+    <text x="68" y="96">Data</text>
+    <rect x="210" y="60" width="130" height="60" rx="6" fill="#f2e2cf" stroke="#a85822"/>
+    <text x="244" y="96">Train</text>
+    <rect x="390" y="60" width="130" height="60" rx="6" fill="#e7e4dc" stroke="#666"/>
+    <text x="414" y="96">Evaluate</text>
+    <rect x="560" y="60" width="130" height="60" rx="6" fill="#dbe5f1" stroke="#315d8a"/>
+    <text x="590" y="96">Deploy</text>
+    <path d="M160 90 H210 M340 90 H390 M520 90 H560" stroke="#1f2933" stroke-width="2" marker-end="url(#arrow)"/>
+  </g>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#1f2933"/>
+    </marker>
+  </defs>
+</svg>
