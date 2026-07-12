@@ -62,3 +62,5 @@ Lifecycle diagrams fail when no gate can block release. Another failure is indef
 
 - [Google Cloud: MLOps continuous delivery and automation pipelines](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+
+> **Learning path — Production ML:** [path overview](../00-home-and-navigation/learning-paths.md#production-ml) · [Training Pipelines](training-pipelines.md) →

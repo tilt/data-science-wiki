@@ -59,3 +59,5 @@ Classical machine learning is the part of statistical learning where the model c
 - [Evaluation metrics](evaluation-metrics.md): task-specific functions that turn predictions into comparable numbers.
 - [Calibration](calibration.md): whether predicted probabilities match observed frequencies.
 - [Class imbalance](class-imbalance.md): rare-class settings where accuracy and default thresholds can be actively misleading.
+
+> **Learning path — Foundations:** ← [Probability and Statistics](../02-probability-and-statistics/index.md) · [path overview](../00-home-and-navigation/learning-paths.md#foundations)

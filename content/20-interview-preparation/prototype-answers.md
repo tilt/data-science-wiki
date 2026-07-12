@@ -51,3 +51,5 @@ If the page teaches a concept, keep it in the canonical subject area. If it teac
 ## References
 
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+
+> **Learning path — Interview preparation:** ← [Answer Patterns](answer-patterns.md) · [path overview](../00-home-and-navigation/learning-paths.md#interview-preparation) · [Interview Examples](interview-examples.md) →

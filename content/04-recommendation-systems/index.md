@@ -69,3 +69,5 @@ Recommendation Systems and Personalization is a major knowledge area in this wik
 - [Matchmaking Systems](matchmaking-systems.md)
 - [Image Based Recommendation](image-based-recommendation.md)
 - [Content-Based Image Retrieval](content-based-image-retrieval.md)
+
+> **Learning path — Recommender systems:** [path overview](../00-home-and-navigation/learning-paths.md#recommender-systems) · [Collaborative Filtering](collaborative-filtering.md) →

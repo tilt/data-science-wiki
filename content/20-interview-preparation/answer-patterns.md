@@ -50,3 +50,5 @@ For "What is calibration?", do not only define it. Say: "A model is calibrated w
 ## References
 
 - [scikit-learn User Guide: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
+
+> **Learning path — Interview preparation:** [path overview](../00-home-and-navigation/learning-paths.md#interview-preparation) · [Prototype Answers](prototype-answers.md) →

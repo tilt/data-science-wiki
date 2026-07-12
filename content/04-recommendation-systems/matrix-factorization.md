@@ -92,3 +92,5 @@ The loss only sees logged data, so exposure bias, position bias, and popularity 
 
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
 - [Hu, Koren, and Volinsky, 2008, Collaborative Filtering for Implicit Feedback Datasets](https://doi.org/10.1109/ICDM.2008.22)
+
+> **Learning path — Recommender systems:** ← [Collaborative Filtering](collaborative-filtering.md) · [path overview](../00-home-and-navigation/learning-paths.md#recommender-systems) · [SVD versus Matrix Factorization](svd-versus-matrix-factorization.md) →

@@ -63,3 +63,5 @@ For example: "We compared a rules baseline, a classifier, and a RAG assistant fo
 ## References
 
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+
+> **Learning path — Interview preparation:** ← [Prototype Answers](prototype-answers.md) · [path overview](../00-home-and-navigation/learning-paths.md#interview-preparation) · [Recommendation Systems](recommendation-systems.md) →

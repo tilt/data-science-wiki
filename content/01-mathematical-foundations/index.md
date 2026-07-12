@@ -62,3 +62,5 @@ Mathematical Foundations is a major knowledge area in this wiki. The index is de
 - [Cross Entropy](cross-entropy.md)
 - [KL Divergence](kl-divergence.md)
 - [Mutual Information](mutual-information.md)
+
+> **Learning path — Foundations:** [path overview](../00-home-and-navigation/learning-paths.md#foundations) · [Probability and Statistics](../02-probability-and-statistics/index.md) →

@@ -52,3 +52,5 @@ For "Design a marketplace recommender," use a layered answer: candidate generati
 
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
 - [Herlocker et al., 2004, Evaluating Collaborative Filtering Recommender Systems](https://doi.org/10.1145/963770.963772)
+
+> **Learning path — Interview preparation:** ← [Interview Examples](interview-examples.md) · [path overview](../00-home-and-navigation/learning-paths.md#interview-preparation) · [Generative AI](generative-ai.md) →

@@ -61,3 +61,5 @@ Side-effecting tools need confirmation and idempotency keys. Tool results are un
 - [OpenAI API documentation: Function calling](https://platform.openai.com/docs/guides/function-calling)
 - [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
 - [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
+
+> **Learning path — Generative AI systems:** ← [Generative AI](index.md) · [path overview](../00-home-and-navigation/learning-paths.md#generative-ai-systems) · [RAG Evaluation](rag-evaluation.md) →

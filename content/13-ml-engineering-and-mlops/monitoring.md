@@ -60,3 +60,5 @@ Monitoring fails when thresholds are copied across models, labels are missing fr
 - [Prometheus alerting rules](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)
 - [OpenTelemetry Signals](https://opentelemetry.io/docs/concepts/signals/)
 - [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
+
+> **Learning path — Production ML:** ← [Model Serving](model-serving.md) · [path overview](../00-home-and-navigation/learning-paths.md#production-ml) · [Production Incident Response](production-incident-response.md) →

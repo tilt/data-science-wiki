@@ -66,3 +66,5 @@ A single aggregate score hides the failing stage. Keep per-stage traces from [re
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
 - [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)
 - [Anthropic Claude docs: Reduce hallucinations](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
+
+> **Learning path — Generative AI systems:** ← [Tool Use and Function Calling](tool-use-and-function-calling.md) · [path overview](../00-home-and-navigation/learning-paths.md#generative-ai-systems) · [Responsible AI](../17-responsible-ai-safety-and-governance/index.md) →

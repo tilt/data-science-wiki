@@ -103,3 +103,5 @@ Time-Series Forecasting is a major knowledge area in this wiki. The index is des
 - [Demand Forecasting](demand-forecasting.md)
 - [Energy Consumption Forecasting](energy-consumption-forecasting.md)
 - [Predictive Maintenance](predictive-maintenance.md)
+
+> **Learning path — Forecasting:** [path overview](../00-home-and-navigation/learning-paths.md#forecasting) · [ARIMA](arima.md) →

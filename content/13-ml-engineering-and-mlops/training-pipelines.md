@@ -62,3 +62,5 @@ Pipelines fail semantically when point-in-time joins leak future data, when rand
 
 - [TensorFlow Extended User Guide](https://www.tensorflow.org/tfx/guide)
 - [Apache Airflow DAGs documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html)
+
+> **Learning path — Production ML:** ← [ML System Lifecycle](ml-system-lifecycle.md) · [path overview](../00-home-and-navigation/learning-paths.md#production-ml) · [Model Serving](model-serving.md) →

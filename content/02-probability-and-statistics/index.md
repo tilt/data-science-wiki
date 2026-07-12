@@ -63,3 +63,5 @@ This section links the mathematical language of uncertainty to statistical infer
 - [Hypothesis Testing](hypothesis-testing.md) compares observed statistics with a null model.
 - [Statistical Modelling](statistical-modelling.md) specifies stochastic structure, parameters, and assumptions.
 - [Experimental Design](experimental-design.md) plans assignment and measurement so inference targets the intended question.
+
+> **Learning path — Foundations:** ← [Mathematical Foundations](../01-mathematical-foundations/index.md) · [path overview](../00-home-and-navigation/learning-paths.md#foundations) · [Classical Machine Learning](../03-classical-machine-learning/index.md) →

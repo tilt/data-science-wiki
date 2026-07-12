@@ -62,3 +62,5 @@ This section covers the controls that make AI behavior testable, reviewable, and
 - [Auditability](auditability.md)
 - [Human Oversight](human-oversight.md)
 - [Governance of Model and Knowledge Base Changes](governance-of-model-and-knowledge-base-changes.md)
+
+> **Learning path — Generative AI systems:** ← [RAG Evaluation](../10-generative-ai/rag-evaluation.md) · [path overview](../00-home-and-navigation/learning-paths.md#generative-ai-systems)

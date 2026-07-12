@@ -55,3 +55,5 @@ For a support assistant, answer with a logged pipeline, not "use an LLM": user q
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
 - [OpenAI API documentation: Structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
 - [OpenAI API documentation: Function calling](https://developers.openai.com/api/docs/guides/function-calling)
+
+> **Learning path — Interview preparation:** ← [Recommendation Systems](recommendation-systems.md) · [path overview](../00-home-and-navigation/learning-paths.md#interview-preparation) · [Evaluation](evaluation.md) →

@@ -63,3 +63,5 @@ Serving fails when artifacts are mutable, schemas are informal, or clients infer
 - [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
 - [TensorFlow Serving RESTful API](https://www.tensorflow.org/tfx/serving/api_rest)
 - [MLflow Models documentation](https://mlflow.org/docs/latest/ml/model/)
+
+> **Learning path — Production ML:** ← [Training Pipelines](training-pipelines.md) · [path overview](../00-home-and-navigation/learning-paths.md#production-ml) · [Monitoring](monitoring.md) →

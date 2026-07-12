@@ -88,3 +88,5 @@ Generative AI and Agentic Systems is a major knowledge area in this wiki. The in
 - [Data Privacy](data-privacy.md)
 - [PII Protection](pii-protection.md)
 - [Cost and Latency Optimization](cost-and-latency-optimization.md)
+
+> **Learning path — Generative AI systems:** [path overview](../00-home-and-navigation/learning-paths.md#generative-ai-systems) · [Tool Use and Function Calling](tool-use-and-function-calling.md) →

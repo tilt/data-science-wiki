@@ -53,3 +53,5 @@ For a RAG support bot, give this launch gate: "Ship only if the golden set passe
 
 - [scikit-learn User Guide: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+
+> **Learning path — Interview preparation:** ← [Generative AI](generative-ai.md) · [path overview](../00-home-and-navigation/learning-paths.md#interview-preparation)

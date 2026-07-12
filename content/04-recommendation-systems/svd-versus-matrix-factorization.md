@@ -76,3 +76,5 @@ SVD is excellent linear algebra; the mistake is applying it to a matrix whose en
 
 - [scikit-learn documentation: TruncatedSVD](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html)
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
+
+> **Learning path — Recommender systems:** ← [Matrix Factorization](matrix-factorization.md) · [path overview](../00-home-and-navigation/learning-paths.md#recommender-systems)
