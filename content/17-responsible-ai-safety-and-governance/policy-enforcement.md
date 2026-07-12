@@ -29,10 +29,18 @@ Policy enforcement turns rules about allowed behavior into runtime controls. In 
 
 A layered enforcement path for an email-sending agent:
 
-```text
-request -> authentication -> user/data authorization -> model/tool planning
-        -> policy decision -> human approval if high impact -> send action
-        -> audit log
+```mermaid
+flowchart TD
+  Request[Request] --> Auth[Authentication]
+  Auth --> Authorization[User and data authorization]
+  Authorization --> Planning[Model and tool planning]
+  Planning --> Policy{Policy decision}
+  Policy -->|approved low risk| Send[Send action]
+  Policy -->|high impact| Approval[Human approval]
+  Approval --> Send
+  Policy -->|deny| Block[Block]
+  Send --> Audit[Audit log]
+  Block --> Audit
 ```
 
 The policy must be versioned and testable. For example, a Rego-style rule can deny customer-email actions that lack approval for sensitive content:

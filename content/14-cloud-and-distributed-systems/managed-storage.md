@@ -30,8 +30,13 @@ Managed storage is selected by access pattern: object storage for immutable blob
 
 Object stores such as S3 and Cloud Storage expose buckets, object keys, metadata, IAM, lifecycle rules, and storage classes. They are excellent for [cloud storage](../12-data-engineering/cloud-storage.md), model artifacts, and [distributed data processing](distributed-data-processing.md) inputs. They are not low-latency mutable filesystems. A practical storage contract should state:
 
-```text
-data shape -> read/write pattern -> consistency need -> retention -> recovery target -> storage class
+```mermaid
+flowchart LR
+  Shape[Data shape] --> Pattern[Read and write pattern]
+  Pattern --> Consistency[Consistency need]
+  Consistency --> Retention[Retention]
+  Retention --> Recovery[Recovery target]
+  Recovery --> Class[Storage class]
 ```
 
 Lifecycle policy is part of the mechanism, not cleanup afterthought. For example, training checkpoints might stay in frequent-access storage for 14 days, transition to cold storage for 90 days, then expire after model governance requirements are met.

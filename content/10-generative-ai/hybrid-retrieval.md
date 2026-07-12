@@ -16,7 +16,9 @@ related:
   - retrieval-pipelines.md
   - reranking.md
   - vector-databases.md
+  - rag-architecture-comparison.md
   - ../11-information-retrieval-and-search/bm25.md
+  - ../11-information-retrieval-and-search/hybrid-search.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -32,7 +34,7 @@ $$
 s(d,q)=\lambda z(s_{lex})+(1-\lambda)z(s_{dense}).
 $$
 
-Lexical scores may come from BM25; dense scores from vector search in [vector databases](vector-databases.md). Reciprocal rank fusion is another robust option when scores are not comparable.
+Lexical scores may come from BM25; dense scores from vector search in [vector databases](vector-databases.md). [Reciprocal rank fusion](../11-information-retrieval-and-search/hybrid-search.md) is another robust option when scores are not comparable, and this fusion step is the core of the indexed design in [RAG architecture comparison](rag-architecture-comparison.md).
 
 ## Executed artifact
 

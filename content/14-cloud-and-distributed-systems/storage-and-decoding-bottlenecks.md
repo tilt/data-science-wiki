@@ -30,8 +30,14 @@ Storage and decoding bottlenecks happen when data reaches the model slower than 
 
 The input path is a pipeline:
 
-```text
-list -> read bytes -> decompress/decode -> parse/tokenize -> batch/collate -> host-to-device copy -> kernel
+```mermaid
+flowchart LR
+  List[List objects] --> Read[Read bytes]
+  Read --> Decode[Decompress or decode]
+  Decode --> Parse[Parse or tokenize]
+  Parse --> Batch[Batch or collate]
+  Batch --> Copy[Host-to-device copy]
+  Copy --> Kernel[Accelerator kernel]
 ```
 
 Throughput is bounded by the slowest stage. Adding more [distributed model training](distributed-model-training.md) workers can make the problem worse if every worker lists the same [managed storage](managed-storage.md) prefix or decodes on the same small CPU pool. [Distributed data processing](distributed-data-processing.md) can reduce the problem by compacting files and precomputing expensive transforms.

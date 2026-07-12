@@ -33,14 +33,17 @@ Software architecture is the set of structural decisions that make a system easi
 
 The C4-style view is a useful contract: system context, containers, components, and code. For a document-answering product, the container view might be:
 
-```text
-Browser
-  -> Web backend: auth, request validation, streaming response
-  -> Ingestion worker: OCR, chunking, index writes
-  -> Retrieval service: permission-filtered candidate passages
-  -> Model service: prompt assembly, generation, structured validation
-  -> Review queue: human correction and audit trail
-  -> Metadata store: document version, model version, prompt version, trace id
+```mermaid
+flowchart TD
+  Browser[Browser] --> Backend[Web backend: auth, validation, streaming response]
+  Backend --> Retrieval[Retrieval service: permission-filtered candidate passages]
+  Retrieval --> Model[Model service: prompt assembly, generation, validation]
+  Model --> Review[Review queue: human correction and audit trail]
+  Ingestion[Ingestion worker: OCR, chunking, index writes] --> Retrieval
+  Backend --> Metadata[Metadata store: document, model, prompt, and trace versions]
+  Ingestion --> Metadata
+  Model --> Metadata
+  Review --> Metadata
 ```
 
 This artifact is not executable, but it is concrete: each arrow implies an [API design](api-design.md) contract, an owner, and a failure mode. A [technical decision record](technical-decision-records.md) should capture why retrieval is a separate service instead of a module inside the backend, especially if it creates a [microservices](../13-ml-engineering-and-mlops/microservices.md) boundary.

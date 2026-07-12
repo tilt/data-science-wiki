@@ -17,6 +17,7 @@ related:
   - tool-use-and-function-calling.md
   - memory.md
   - agent-evaluation.md
+  - rag-architecture-comparison.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -28,9 +29,17 @@ An agent loop repeatedly observes state, chooses an action, receives an observat
 
 A useful loop is a state machine, not an unconstrained conversation:
 
-```text
-state -> model_decision -> {final_answer | tool_call | ask_user | blocked}
-tool_call -> schema_check -> permission_check -> execute -> append_observation -> state
+```mermaid
+flowchart TD
+  State[State] --> Decision{Model decision}
+  Decision --> Final["Final<br/>answer"]
+  Decision --> Ask["Ask<br/>user"]
+  Decision --> Blocked[Blocked]
+  Decision --> Schema["Schema<br/>check"]
+  Schema --> Permission["Permission<br/>check"]
+  Permission --> Execute["Execute<br/>tool"]
+  Execute --> Observation["Append<br/>observation"]
+  Observation --> State
 ```
 
 The application owns the loop invariants: maximum steps, available tools, retry policy, side-effect confirmation, budget limits, and what counts as completion. The model proposes actions inside those constraints. This separation matters because the same model output can be valid in one state and invalid in another.

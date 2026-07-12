@@ -17,6 +17,7 @@ related:
   - citations.md
   - grounding.md
   - llm-as-judge.md
+  - rag-benchmark-design.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---

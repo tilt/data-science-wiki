@@ -17,6 +17,7 @@ related:
   - reranking.md
   - sparse-retrieval.md
   - ../10-generative-ai/hybrid-retrieval.md
+  - ../10-generative-ai/rag-architecture-comparison.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---

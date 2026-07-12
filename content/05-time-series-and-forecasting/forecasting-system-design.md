@@ -33,41 +33,22 @@ last_reviewed: 2026-07-11
 
 A forecasting system should separate data validation, enrichment, feature generation, model training, prediction, backtesting, ensemble fitting, evaluation, artifacts, and monitoring. This keeps modeling choices inspectable and makes production behavior closer to offline evaluation.
 
-```text
-Raw time-series data
-        |
-        v
-Validation and alignment
-        |
-        v
-Data enrichment
-        |
-        v
-Feature and target transformations
-        |
-        +-----------------------------+
-        |             |               |
-        v             v               v
-Statistical       Tabular ML       Neural models
-pipelines         pipelines        pipelines
-        |             |               |
-        +-------------+---------------+
-                      |
-                      v
-              Rolling backtesting
-                      |
-                      v
-             Model selection or ensemble
-                      |
-          +-----------+-----------+
-          |                       |
-          v                       v
-Backtest evaluation          Live forecasting
-          |                       |
-          +-----------+-----------+
-                      |
-                      v
-             Metrics and artifacts
+```mermaid
+flowchart TD
+  Raw[Raw time-series data] --> Validation[Validation and alignment]
+  Validation --> Enrichment[Data enrichment]
+  Enrichment --> Features[Feature and target transformations]
+  Features --> Statistical[Statistical pipelines]
+  Features --> Tabular[Tabular ML pipelines]
+  Features --> Neural[Neural model pipelines]
+  Statistical --> Backtesting[Rolling backtesting]
+  Tabular --> Backtesting
+  Neural --> Backtesting
+  Backtesting --> Selection[Model selection or ensemble]
+  Selection --> Evaluation[Backtest evaluation]
+  Selection --> Live[Live forecasting]
+  Evaluation --> Artifacts[Metrics and artifacts]
+  Live --> Artifacts
 ```
 
 ## Pipeline lifecycle

@@ -30,8 +30,12 @@ For language models, the base objective is often next-token prediction: maximize
 
 ## Concrete artifact
 
-```text
-base_model -> instruction_tuning -> safety_policy -> tool/retrieval wrapper -> product task
+```mermaid
+flowchart LR
+  Base[Base model] --> Instruction[Instruction tuning]
+  Instruction --> Safety[Safety policy]
+  Safety --> Wrapper[Tool and retrieval wrapper]
+  Wrapper --> Product[Product task]
 ```
 
 The artifact shows why application behavior should not be attributed only to the base weights.

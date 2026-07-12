@@ -30,8 +30,12 @@ Distributed data processing splits a dataset into partitions, runs tasks near th
 
 A Spark-style batch job is a DAG:
 
-```text
-read partitions -> narrow map/filter -> wide shuffle by key -> reduce/join -> write partitions
+```mermaid
+flowchart LR
+  Read[Read partitions] --> Narrow[Narrow map or filter]
+  Narrow --> Shuffle[Wide shuffle by key]
+  Shuffle --> Reduce[Reduce or join]
+  Reduce --> Write[Write partitions]
 ```
 
 Narrow stages keep each record in its original partition. Wide stages, such as `groupByKey`, joins, and global sorts, repartition records across workers and create network, disk, and skew risk. [Managed storage](managed-storage.md) matters because object stores are good at large immutable objects but poor at millions of tiny files. [Reliability](reliability.md) comes from deterministic recomputation and idempotent writes, not from assuming tasks will run once.

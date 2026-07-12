@@ -30,8 +30,12 @@ Managed compute is the set of cloud services that run code while the provider op
 
 Use the workload contract:
 
-```text
-request/job shape -> runtime + state + hardware -> scaling signal -> deployment unit -> failure behavior
+```mermaid
+flowchart LR
+  Shape[Request or job shape] --> Runtime[Runtime, state, and hardware]
+  Runtime --> Scaling[Scaling signal]
+  Scaling --> Deployment[Deployment unit]
+  Deployment --> Failure[Failure behavior]
 ```
 
 Functions fit short event handlers. Cloud Run-style containers fit stateless HTTP services with configurable concurrency. Kubernetes fits teams that need custom scheduling, sidecars, or portability. Batch services fit finite jobs. GPU instances or managed ML jobs fit [GPU systems](gpu-systems.md). The choice feeds [cost management](cost-management.md): high concurrency can reduce instances, but only if application code is actually safe and efficient under parallel requests.

@@ -17,6 +17,7 @@ related:
   - planning.md
   - guardrails.md
   - agent-evaluation.md
+  - rag-architecture-comparison.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -28,8 +29,14 @@ An agentic system gives a model conditional control over a workflow. The model m
 
 The core design split is model judgement versus deterministic control. A practical architecture is:
 
-```text
-user goal -> policy/context builder -> model decision -> validator -> tool/runtime -> observation log -> model decision
+```mermaid
+flowchart LR
+  Goal[User goal] --> Builder[Policy and context builder]
+  Builder --> Decision[Model decision]
+  Decision --> Validator[Validator]
+  Validator --> Runtime[Tool or runtime]
+  Runtime --> Log[Observation log]
+  Log --> Decision
 ```
 
 [Planning](planning.md) can be a private scratch step, a visible task graph, or no separate step at all. The important contract is that actions are typed and observations are appended as data, not silently merged into hidden state.

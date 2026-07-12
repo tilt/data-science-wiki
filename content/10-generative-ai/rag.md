@@ -17,12 +17,13 @@ related:
   - embeddings.md
   - context-construction.md
   - citations.md
+  - rag-architecture-comparison.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # RAG
 
-Retrieval-augmented generation retrieves external evidence and places it into the model request before generation. It is the pattern connecting [chunking](chunking.md), [embeddings](embeddings.md), [retrieval pipelines](retrieval-pipelines.md), [context construction](context-construction.md), and [citations](citations.md).
+Retrieval-augmented generation retrieves external evidence and places it into the model request before generation. It is the pattern connecting [chunking](chunking.md), [embeddings](embeddings.md), [retrieval pipelines](retrieval-pipelines.md), [context construction](context-construction.md), and [citations](citations.md). The same pattern can be built as several designs — a tool-based loop, an indexed hybrid retriever, or a two-phase curation agent — compared in [RAG architecture comparison](rag-architecture-comparison.md).
 
 ## Mechanism
 
@@ -36,13 +37,13 @@ That notation hides the engineering risk: $d$ is not guaranteed to contain the a
 
 ## Concrete artifact
 
-```text
-question
-  -> rewritten query: "enterprise refund threshold policy 2026"
-  -> retrieved chunks: [refunds-007, approvals-014, stale-refunds-002]
-  -> reranked context: [refunds-007, approvals-014]
-  -> answer with source IDs
-  -> citation validator checks each factual sentence against selected chunks
+```mermaid
+flowchart TD
+  Question[Question] --> Rewrite["Rewritten query: enterprise refund threshold policy 2026"]
+  Rewrite --> Retrieved["Retrieved chunks: refunds-007, approvals-014, stale-refunds-002"]
+  Retrieved --> Reranked["Reranked context: refunds-007, approvals-014"]
+  Reranked --> Answer[Answer with source IDs]
+  Answer --> Validator[Citation validator checks factual claims]
 ```
 
 This trace is useful because each stage can be evaluated separately with [rag evaluation](rag-evaluation.md). If the answer is wrong, the team can inspect whether retrieval missed the right document, reranking chose stale evidence, context packing dropped the key sentence, or generation ignored the source.
