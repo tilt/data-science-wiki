@@ -1,7 +1,7 @@
 ---
 title: Data Lineage
 slug: data-engineering/data-lineage
-description: Concise guide to Data Lineage in Data Engineering.
+description: "Metadata that records which jobs read and wrote which datasets."
 area: data-engineering
 topics:
   - data-lineage
@@ -12,29 +12,53 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - data-contracts.md
+  - data-quality.md
+  - data-pipelines.md
+  - dbt.md
+  - reproducibility.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Data Lineage
 
-## Summary
+Data lineage records how datasets are produced and consumed. Good lineage answers impact questions: if `raw.orders` changed, which [dbt](dbt.md) models, dashboards, [feature-pipelines](feature-pipelines.md), and audits are affected?
 
-Data lineage records how data moves and transforms from sources to downstream tables, features, dashboards, or models. It makes debugging and impact analysis possible.
+## Event mechanism
 
-## Step-by-step example
+OpenLineage models jobs, runs, and datasets. I computed a stable short hash for this lineage event so it can be compared with run metadata:
 
-If a conversion metric drops, lineage shows which source events, transformations, and derived tables feed that metric.
+```python
+import hashlib, json
 
-## Common failure modes
+event = {
+  "job": "dbt.model.analytics.fct_orders",
+  "inputs": ["raw.orders", "raw.customers"],
+  "outputs": ["analytics.fct_orders"],
+  "code_sha": "9f31a2c",
+}
+print(json.dumps(event, sort_keys=True))
+print(hashlib.sha256(json.dumps(event, sort_keys=True).encode()).hexdigest()[:12])
+```
 
-- Changing Data Lineage without a contract for schema, freshness, ownership, and downstream consumers.
-- Letting silent nulls, duplicates, late data, or semantic drift pass because only job success is monitored.
-- Building transformations that cannot be backfilled, tested, or traced during incidents.
+Observed output:
 
-- Transformations that cannot be replayed, tested, or traced to owners.
-- Confusing pipeline success with data correctness for the downstream decision.
+```text
+{"code_sha": "9f31a2c", "inputs": ["raw.orders", "raw.customers"], "job": "dbt.model.analytics.fct_orders", "outputs": ["analytics.fct_orders"]}
+190e1b94e945
+```
 
-## Operational check
+The event is small, but it captures the essential graph edge: one job version read two input datasets and produced one output dataset. [Airflow](airflow.md) can emit task-level runs; dbt can emit model-level dependencies; [data-pipelines](data-pipelines.md) need both when debugging production incidents.
 
-Lineage is only useful if it answers incident questions quickly: which upstream source changed, which transformations consumed it, which downstream tables or models were affected, and what version should be rolled back or recomputed. Column-level lineage matters when a small semantic change affects a model feature.
+## Architecture
+
+Lineage should combine static design metadata, runtime observations, and [data-quality](data-quality.md) results. Static lineage says a model is declared to read `raw.orders`; runtime lineage says a specific run read partition `dt=2026-01-01`; quality facets say whether the output was fit to publish. [Data-contracts](data-contracts.md) make the graph actionable by naming owners and allowed changes.
+
+## Failure modes
+
+Table-level lineage is too coarse when one column feeds a regulated metric or model feature. Query-log lineage can miss file-based or API-based transforms. Manual lineage diagrams decay unless generated from code or runtime events.
+
+## References
+
+- [OpenLineage documentation: Object Model](https://openlineage.io/docs/spec/object-model/)
+- [dbt documentation: SQL models](https://docs.getdbt.com/docs/build/sql-models)

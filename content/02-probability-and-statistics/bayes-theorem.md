@@ -1,46 +1,56 @@
 ---
 title: Bayes Theorem
 slug: probability-and-statistics/bayes-theorem
-description: Concise guide to Bayes Theorem in Probability and Statistics.
+description: "The rule that turns likelihoods and priors into posterior probabilities."
 area: probability-and-statistics
 topics:
   - bayes-theorem
 level: foundational
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - Bayes' Theorem
 prerequisites:
   - index.md
 related:
-  - index.md
+  - conditional-probability.md
+  - bayesian-statistics.md
+  - maximum-a-posteriori-estimation.md
+  - statistical-estimation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Bayes Theorem
 
-## Summary
+Bayes' theorem is conditional probability rearranged so evidence can update belief. For events $H$ and $E$ with $P(E)>0$,
 
-Bayes' theorem updates a prior belief after observing evidence. It is the basic rule for moving from $P(evidence\mid hypothesis)$ to $P(hypothesis\mid evidence)$.
+$$
+P(H\mid E)=\frac{P(E\mid H)P(H)}{P(E)}.
+$$
 
-## Core idea
+For a partition $\{H_i\}$, the denominator expands to
 
-- The formula is $P(H\mid E)=P(E\mid H)P(H)/P(E)$.
-- The prior $P(H)$ matters when the event is rare.
-- The denominator $P(E)$ normalizes over all ways the evidence could occur.
+$$
+P(E)=\sum_i P(E\mid H_i)P(H_i).
+$$
 
-## Worked example
+That normalization is what prevents a high likelihood from overwhelming a low base rate. The theorem is the algebra behind [Bayesian statistics](bayesian-statistics.md), [MAP estimation](maximum-a-posteriori-estimation.md), and many diagnostic calculations built from [conditional probability](conditional-probability.md).
 
-If a disease affects 1% of people and a test is 99% sensitive but 95% specific, a positive test is not automatically a 99% disease probability. Compute the posterior using the base rate and false-positive rate.
+## Worked scenario
 
-## Numerical check
+Suppose 1 percent of a screening population has a disease. The test is highly sensitive, $P(+\mid disease)=0.99$, but it also has a 5 percent false-positive rate, $P(+\mid healthy)=0.05$. Among 10,000 comparable people, about 100 are diseased and 9,900 are healthy. A positive result is expected for about $99$ diseased people and about $495$ healthy people, so
 
-- Separate the estimand, estimator, estimate, and uncertainty statement.
-- Check independence, sampling, stationarity, and missing-data assumptions.
-- Use a small numeric example to verify the direction of the result.
-- Report uncertainty and practical significance, not only a point estimate.
+$$
+P(disease\mid +)=\frac{99}{99+495}\approx 0.1667.
+$$
+
+A positive test therefore moves the disease probability from 1 percent to about 16.7 percent, not 99 percent. The false-positive term is applied to the much larger healthy majority, which is what keeps the posterior low; for a sampling simulation of the same base-rate effect, see [conditional probability](conditional-probability.md).
 
 ## Caveats
 
-- Do not confuse $P(E\mid H)$ with $P(H\mid E)$; the prior and base rate can dominate the posterior.
-- The denominator $P(E)$ must include all mutually exclusive ways the evidence can occur.
-- A posterior is conditional on the model assumptions. Biased sampling, changing prevalence, or dependent evidence can make the update misleading.
+Bayes' theorem is exact only relative to its model: the prior, sensitivity, specificity, and partition must describe the population being analyzed. Dependent pieces of evidence cannot be multiplied as if they were independent.
+
+## References
+
+- [Bayes' theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem)
+- [ProbabilityCourse: Conditional Probability](https://www.probabilitycourse.com/chapter1/1_4_0_conditional_probability.php)

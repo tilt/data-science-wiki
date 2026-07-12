@@ -1,7 +1,7 @@
 ---
 title: ARIMA
 slug: time-series-and-forecasting/arima
-description: ARIMA overview and practical notes.
+description: Autoregressive integrated moving-average models for nonseasonal univariate forecasting.
 area: time-series-and-forecasting
 topics:
   - "arima"
@@ -12,7 +12,14 @@ page_type: model
 aliases:
   - "ARIVA"
 prerequisites: []
-related: []
+related:
+  - arma.md
+  - autoregressive-models.md
+  - moving-average-models.md
+  - stationarity.md
+  - autocorrelation-and-partial-autocorrelation.md
+  - sarima.md
+  - backtesting.md
 historical_context: false
 last_reviewed: 2026-07-10
 references:
@@ -20,34 +27,31 @@ references:
 ---
 # ARIMA
 
-## Summary
+ARIMA means autoregressive integrated moving average. It takes a nonseasonal univariate series, differences it until the remaining process is approximately stationary, then models that differenced process with [autoregressive models](autoregressive-models.md) and [moving-average models](moving-average-models.md). That is the main distinction from [ARMA](arma.md): ARMA assumes the modeled series is already stationary, while ARIMA includes the differencing operator that turns a drifting level series into changes.
 
-ARIMA stands for autoregressive integrated moving average. It is a classical univariate forecasting model that combines differencing for non-stationarity with autoregressive and moving-average components. The corrected term is ARIMA, not ARIVA.
+For an ARIMA$(p,d,q)$ model, define the backshift operator $B y_t = y_{t-1}$. After $d$ differences, $w_t = (1-B)^d y_t$ is modeled as
 
-## Notation
+$$
+w_t = c + \phi_1 w_{t-1} + \cdots + \phi_p w_{t-p} + \varepsilon_t + \theta_1 \varepsilon_{t-1} + \cdots + \theta_q \varepsilon_{t-q}.
+$$
 
-An ARIMA$(p,d,q)$ model applies $d$ differences and then models the differenced series with $p$ autoregressive lags and $q$ moving-average error lags.
+Equivalently, using lag polynomials,
 
-- $p$: how many previous values of the transformed series are used.
-- $d$: how many times the series is differenced to reduce trend or non-stationarity.
-- $q$: how many previous forecast errors are used.
+$$
+\phi(B)(1-B)^d y_t = c + \theta(B)\varepsilon_t.
+$$
 
-## Modelling workflow
+The $p$ terms describe persistence in the differenced series, the $q$ terms describe short-run correction after shocks, and $d$ controls the transformation from level to stationary increments. ARIMA is useful when autocorrelation is the dominant structure and external regressors are absent or secondary. It is less natural for strong multiple seasonalities, changing calendars, or causal drivers such as price and promotions, where [forecasting data and covariates](forecasting-data-and-covariates.md) or global models may matter more.
 
-1. Plot the series and compare against a naive or seasonal naive baseline.
-2. Check trend, seasonality, missing periods, outliers, and regime changes.
-3. Difference the series only as much as needed for approximate stationarity.
-4. Use autocorrelation diagnostics and validation performance to choose candidate orders.
-5. Backtest with rolling cutoffs so every forecast uses only information available at the time.
-6. Inspect residuals for remaining autocorrelation, heteroskedasticity, and calendar effects.
+Order selection is not a mechanical ACF/PACF ritual. Differencing should be minimal: too little differencing leaves trend in residuals, while too much can create negative autocorrelation and unstable long-horizon behavior. Candidate $p$ and $q$ values are usually narrowed with [autocorrelation and partial autocorrelation](autocorrelation-and-partial-autocorrelation.md), then judged with information criteria, residual diagnostics, and [backtesting](backtesting.md). A fitted ARIMA model should leave residuals that look close to white noise; otherwise the model has not captured the temporal dependence it was built to model.
 
-## Worked example
+ARIMA forecasts are recursive. A one-step forecast uses the latest observed values and estimated residuals. Multi-step forecasts then roll the dynamics forward, with uncertainty widening because future shocks are unknown. If the same pattern repeats at a known seasonal period, [SARIMA](sarima.md) extends the same lag-polynomial idea with seasonal AR, differencing, and MA terms.
 
-For monthly demand with a gradual upward trend, first fit a seasonal naive baseline. Difference once to remove the trend, inspect autocorrelation, and try a small grid of ARIMA orders. At each historical cutoff, train on months up to $t$ and forecast month $t+1$. If errors spike around holidays or promotions, ARIMA alone is probably missing external drivers.
+## Connections
 
-## Related topics
+[Stationarity](stationarity.md) explains why differencing exists, [ARMA](arma.md) explains the stationary core, and [SARIMA](sarima.md) adds seasonal lag structure. ARIMA is usually compared with [exponential smoothing](exponential-smoothing.md) inside [statistical forecasting](statistical-forecasting.md), then evaluated with [forecast error metrics](forecast-error-metrics.md) over realistic historical cutoffs.
 
-- [Stationarity](stationarity.md)
-- [Autocorrelation and Partial Autocorrelation](autocorrelation-and-partial-autocorrelation.md)
-- [SARIMA](sarima.md)
-- [Backtesting](backtesting.md)
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: ARIMA models](https://otexts.com/fpp3/arima.html)
+- [statsmodels ARIMA API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima.model.ARIMA.html)

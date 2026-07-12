@@ -1,7 +1,7 @@
 ---
 title: MRI Segmentation
 slug: computer-vision/mri-segmentation
-description: Concise guide to MRI Segmentation in Computer Vision and Medical Imaging.
+description: "Voxel-level delineation of anatomical or pathological structures in MRI volumes."
 area: computer-vision
 topics:
   - mri-segmentation
@@ -12,26 +12,61 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - medical-image-analysis.md
+  - mri-classification.md
+  - semantic-segmentation.md
+  - detection-and-segmentation-metrics.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# MRI Segmentation
 
-MRI segmentation assigns anatomical or pathological labels to voxels or pixels in MRI scans. It is used for measurement, diagnosis support, treatment planning, and longitudinal monitoring.
+MRI segmentation assigns labels to voxels or pixels for anatomy, lesions, tumor regions, edema, or organs. It is a volumetric specialization of [semantic segmentation](semantic-segmentation.md), and it often supplies measurements for [medical image analysis](medical-image-analysis.md) rather than just pictures.
 
-## Core idea
+## Defining math
 
-The model predicts masks for structures such as organs, tissues, lesions, or tumors. Many tasks use 3D context and multiple MRI sequences because boundaries may be ambiguous in a single slice.
+For a volume $X\in\mathbb R^{C\times D\times H\times W}$, the model predicts a mask $\hat M\in\{0,1,\ldots,K\}^{D\times H\times W}$. Dice overlap for one structure is
 
-## Example
+$$
+\mathrm{Dice}=\frac{2|M\cap \hat M|}{|M|+|\hat M|}.
+$$
 
-A brain MRI model segments tumor core and edema. The output may support volume measurement, but clinicians still need boundary review because small mask changes can affect treatment interpretation.
+Physical volume uses voxel spacing:
 
-## Evaluation
+$$
+V_{\mathrm{ml}}=|M|\cdot s_xs_ys_z/1000,
+$$
 
-Use overlap metrics, boundary metrics, lesion-level analysis, and expert review. Split data by patient and evaluate across scanner protocols when possible.
+when spacings are in millimeters.
 
-## Failure modes
+## Worked example
 
-Failures include poor boundary alignment, missed small lesions, sensitivity to acquisition protocol, and leakage from slice-level rather than patient-level splitting.
+```python
+import numpy as np
+
+gt = np.zeros((4,4,4), bool); gt[1:3,1:3,1:3] = 1
+pred = gt.copy(); pred[1,1,1] = 0; pred[3,2,2] = 1
+inter = np.logical_and(gt, pred).sum()
+dice = 2 * inter / (gt.sum() + pred.sum())
+voxel_ml = .8 * .8 * 2 / 1000
+print("gt_voxels", int(gt.sum()), "pred_voxels", int(pred.sum()))
+print("dice", round(dice, 3), "volume_ml_gt", round(gt.sum()*voxel_ml, 4), "volume_ml_pred", round(pred.sum()*voxel_ml, 4))
+```
+
+Observed output:
+
+```text
+gt_voxels 8 pred_voxels 8
+dice 0.875 volume_ml_gt 0.0102 volume_ml_pred 0.0102
+```
+
+The volumes match, but Dice exposes that one voxel was missed and one false voxel was added. Boundary metrics from [detection and segmentation metrics](detection-and-segmentation-metrics.md) may be needed when millimeter-level contour accuracy matters.
+
+## Caveats
+
+Slice-level splits leak patient anatomy. Resampling can change small lesions. Dice can look high on large organs while clinically important boundaries are wrong. Multi-sequence MRI requires consistent registration and missing-sequence handling before any [mri classification](mri-classification.md) or segmentation claim is credible.
+
+## References
+
+- [U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/abs/1505.04597)
+- [Automated Design of Deep Learning Methods for Biomedical Image Segmentation](https://arxiv.org/abs/1904.08128)

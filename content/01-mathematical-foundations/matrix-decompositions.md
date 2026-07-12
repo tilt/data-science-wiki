@@ -1,46 +1,74 @@
 ---
 title: Matrix Decompositions
 slug: mathematical-foundations/matrix-decompositions
-description: Concise guide to Matrix Decompositions in Mathematical Foundations.
+description: "Factorizations that reveal structure or make matrix computations easier."
 area: mathematical-foundations
 topics:
+  - linear-algebra
   - matrix-decompositions
 level: intermediate
 status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - linear-algebra.md
 related:
-  - index.md
+  - singular-value-decomposition.md
+  - eigenvalues-and-eigenvectors.md
+  - orthogonality.md
+  - numerical-stability.md
+  - ../03-classical-machine-learning/pca.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Matrix Decompositions
 
-Matrix decompositions factor a matrix into simpler matrices that expose geometry, rank, variance, or computational structure. They are core tools for PCA, least squares, recommender systems, numerical stability, and compression.
+A matrix decomposition rewrites a matrix as a product of simpler matrices. The point is not cosmetic: the factors can expose [rank](rank.md), [orthogonality](orthogonality.md), curvature, covariance axes, or a computational path that is more stable than operating on the original matrix directly.
 
-## Core idea
+## Defining math
 
-A decomposition rewrites a matrix without changing the underlying linear transformation. The new form can make certain operations easier: solving systems, finding principal directions, measuring rank, or approximating the matrix with fewer components.
-
-## Common decompositions
-
-- LU and QR help solve linear systems.
-- Eigen decomposition exposes invariant directions of square matrices.
-- Singular value decomposition works for rectangular matrices and orders directions by singular value.
-- Cholesky decomposition factors positive-definite matrices and is common in Gaussian models.
-
-## Example
-
-The singular value decomposition writes
+Common decompositions emphasize different structure:
 
 $$
-A = U \Sigma V^T.
+A=QR,\qquad A=LL^\top,\qquad A=Q\Lambda Q^\top,\qquad A=U\Sigma V^\top.
 $$
 
-Large singular values capture dominant structure. Keeping only the top components gives a low-rank approximation used in PCA and compression.
+QR uses orthonormal columns for least squares; Cholesky $A=LL^\top$ applies to symmetric positive definite matrices; eigendecomposition describes square maps with eigenvectors; [singular value decomposition](singular-value-decomposition.md) applies broadly and drives [PCA](../03-classical-machine-learning/pca.md) and [low-rank approximation](low-rank-approximation.md).
+
+## Executed demo
+
+```python
+import numpy as np
+
+A = np.array([[4., 2.], [2., 3.]])
+L = np.linalg.cholesky(A)
+Q, R = np.linalg.qr(np.array([[1., 1.], [1., 0.], [0., 1.]]))
+print("cholesky_L")
+print(np.round(L, 4))
+print("cholesky_recon_error", round(np.linalg.norm(A - L @ L.T), 12))
+print("qr_QtQ")
+print(np.round(Q.T @ Q, 4))
+```
+
+Observed output:
+
+```text
+cholesky_L
+[[2.     0.    ]
+ [1.     1.4142]]
+cholesky_recon_error 0.0
+qr_QtQ
+[[1. 0.]
+ [0. 1.]]
+```
+
+The Cholesky factor reconstructs the positive definite matrix exactly to displayed precision, and the QR factor produces an orthonormal basis. Both replace a matrix with factors whose properties are easier to reason about.
 
 ## Caveats
 
-Decompositions are sensitive to scaling, missing values, and numerical conditioning. A mathematically valid factorization may not have a meaningful interpretation unless the data representation is appropriate.
+Each decomposition has preconditions. Cholesky fails outside positive definite matrices; eigendecomposition can be ill-conditioned for non-normal matrices; forming $A^\top A$ may square the condition number, which is a [numerical stability](numerical-stability.md) issue.
+
+## References
+
+- [NumPy documentation: `numpy.linalg.cholesky`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.cholesky.html)
+- [NumPy documentation: `numpy.linalg.qr`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html)

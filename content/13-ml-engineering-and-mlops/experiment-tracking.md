@@ -1,7 +1,7 @@
 ---
 title: Experiment Tracking
 slug: ml-engineering-and-mlops/experiment-tracking
-description: Concise guide to Experiment Tracking in ML Engineering and MLOps.
+description: "Capturing the code, data, configuration, metrics, and artifacts behind model runs."
 area: ml-engineering-and-mlops
 topics:
   - experiment-tracking
@@ -12,26 +12,50 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - dataset-versioning.md
+  - model-versioning.md
+  - training-pipelines.md
+  - ci-cd-for-ml.md
+  - evaluation-datasets.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Experiment Tracking
 
-Experiment tracking records the code, data, configuration, metrics, artifacts, and notes associated with model experiments. It prevents teams from losing the evidence behind a promising result.
+Experiment tracking records the evidence behind training and evaluation runs: code commit, [dataset versioning](dataset-versioning.md), parameters, metrics, artifacts, environment, notes, and promotion status. It prevents "best model" from meaning "the notebook output someone remembers."
 
-## What to track
+## Mechanism
 
-Track dataset versions, feature pipeline versions, code commit, hyperparameters, random seeds, environment, metrics, plots, model artifacts, and evaluation slices. For generative systems, also track prompts, retrieval configuration, judge versions, and sampled outputs.
+Each serious run should create an immutable run record. The record should link input datasets, feature pipeline version, random seed, hyperparameters, metrics by slice, produced artifact, and reviewer notes. A promoted [model-versioning](model-versioning.md) entry should point back to the run that created it.
 
-## Example
+## Artifact: Run Record
 
-Two training runs differ only in learning rate and input features. Without tracking, the better score is hard to reproduce. With tracking, the team can compare configuration, dataset version, validation split, model artifact, and error analysis side by side.
+```yaml
+run:
+  tracking_uri: "mlflow://experiments/fraud-scorer"
+  run_id: "6f4a9d2"
+  code_commit: "9b51c0e"
+  dataset: "fraud_training:2026-07-11.v3"
+  params:
+    model: xgboost
+    max_depth: 6
+    learning_rate: 0.04
+  metrics:
+    validation_auc: 0.913
+    new_account_recall: 0.742
+    p95_latency_ms: 84
+  artifacts:
+    model_uri: "registry://fraud-scorer/candidate-6f4a9d2"
+    eval_report: "s3://ml-reports/fraud/6f4a9d2.html"
+```
 
-## Practical workflow
+[Training pipelines](training-pipelines.md) should log this automatically, and [ci-cd-for-ml](ci-cd-for-ml.md) should consume it for promotion gates.
 
-Log every serious run automatically, name experiments by question rather than by timestamp, record failed runs, and connect promoted models to the exact experiment that produced them. Human notes should explain why the run was attempted and what was learned.
+## Failure Modes
 
-## Failure modes
+Tracking fails when it stores metrics without data versions, when failed runs are discarded, or when manual notebook steps are not captured. For generative systems, prompts, retrieval indexes, judge versions, and sampled outputs are part of the experiment.
 
-Experiment tracking fails when it stores metrics without data versions, when notebooks contain untracked manual steps, or when teams keep only successful runs and lose negative evidence.
+## References
+
+- [MLflow Tracking documentation](https://mlflow.org/docs/latest/ml/tracking/)
+- [Google Cloud: MLOps continuous delivery and automation pipelines](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)

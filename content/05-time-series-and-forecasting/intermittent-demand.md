@@ -16,9 +16,11 @@ aliases:
 prerequisites:
   - statistical-forecasting.md
 related:
-  - forecast-error-metrics.md
-  - cold-start-forecasting.md
   - demand-forecasting.md
+  - cold-start-forecasting.md
+  - forecast-error-metrics.md
+  - statistical-forecasting.md
+  - business-cost-aware-forecasting-losses.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -68,3 +70,12 @@ Intermittent demand often requires WAPE, MASE, aggregated errors, range-normaliz
 - Using pointwise percentage metrics with zero actuals.
 - Ignoring stockout censoring.
 - Evaluating only high-volume items and missing sparse-series behavior.
+
+## Connections
+
+Intermittent demand is a special case of [demand forecasting](demand-forecasting.md) where zeros are structural. It often needs [statistical forecasting](statistical-forecasting.md) methods designed for sparse counts, [cold-start forecasting](cold-start-forecasting.md) fallbacks, and metrics from [forecast-error metrics](forecast-error-metrics.md).
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Time series of counts](https://otexts.com/fpp3/counts.html)
+- [Nixtla StatsForecast intermittent-demand model index](https://nixtlaverse.nixtla.io/statsforecast/index.html)

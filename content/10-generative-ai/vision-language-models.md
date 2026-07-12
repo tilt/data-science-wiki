@@ -1,51 +1,52 @@
 ---
 title: Vision-Language Models
 slug: generative-ai/vision-language-models
-description: Vision-Language Models overview and practical notes.
+description: "Multimodal models that condition language behavior on images, documents, or video frames."
 area: generative-ai
 topics:
-  - "vision-language-models"
-  - "multimodal-models"
+  - vision-language-models
+  - multimodal-models
 level: intermediate
 status: review
 page_type: model
 aliases:
   - "VLMs"
-prerequisites: []
-related: []
+prerequisites:
+  - index.md
+related:
+  - multimodal-models.md
+  - structured-output.md
+  - grounding.md
+  - ../08-computer-vision/vision-transformers.md
+  - ../09-video-understanding/v-jepa-2-versus-vision-language-models.md
 historical_context: false
-last_reviewed: 2026-07-10
-references:
-  - "assran-2025-vjepa2"
+last_reviewed: 2026-07-11
 ---
 # Vision-Language Models
 
-## Summary
+Vision-language models condition text generation or scoring on visual input. They are a [multimodal models](multimodal-models.md) subtype used for image QA, captioning, screenshot understanding, document extraction, and visual grounding.
 
-Vision-language models align visual inputs with language so a system can answer questions, follow instructions, generate captions, extract document fields, or ground text in image regions. They combine a visual encoder with a language model or a joint multimodal architecture.
+## Mechanism
 
-## Core capabilities
+A VLM usually encodes an image into visual tokens or features, aligns them with a language model, and generates text conditioned on both visual and textual tokens. Some systems use contrastive image-text encoders; others use cross-attention or projected visual tokens inside a generative decoder. [Structured output](structured-output.md) turns visual perception into usable fields.
 
-- Image or video captioning: describe visual content in natural language.
-- Visual question answering: answer questions conditioned on an image, document, chart, or frame sequence.
-- Document understanding: read layout, text, tables, handwriting, stamps, and screenshots.
-- Visual grounding: connect words to regions, boxes, or detected objects.
-- Multimodal tool use: call OCR, detection, retrieval, or structured extraction tools when the model alone is not reliable.
+## Concrete artifact
 
-## Step-by-step example
+```json
+{
+  "task": "invoice_extraction",
+  "visual_input": "scan.png",
+  "required_evidence": ["supplier region", "total amount region"],
+  "output": {"supplier": "string", "total": "number", "currency": "string"}
+}
+```
 
-For invoice extraction, the system receives a scanned invoice and a schema. A VLM reads the image, identifies fields such as supplier, date, total, and line items, and returns structured output. A production workflow then validates arithmetic, checks required fields, compares extracted values against OCR spans, and routes low-confidence cases to human review.
+## Caveats
 
-## Evaluation
+A VLM can hallucinate unreadable text, miss small visual details, or confuse layout. Evaluate perception separately from language formatting and [grounding](grounding.md).
 
-Evaluation should separate perception errors from language errors. A wrong answer can come from unreadable source text, missed visual evidence, ambiguous instructions, hallucinated reasoning, or invalid structured output. Useful tests include field-level accuracy, citation or span support, refusal on unreadable images, latency, and performance by document type or image quality.
+## References
 
-## Contrast with V-JEPA 2
-
-A VLM is defined by language alignment and language-conditioned behavior. V-JEPA 2 is primarily a self-supervised visual representation and world-modeling line; language alignment can be added for video question answering, but it is not the core training objective.
-
-## Related topics
-
-- [Multimodal models](multimodal-models.md)
-- [Structured output](structured-output.md)
-- [V-JEPA 2 versus Vision-Language Models](../09-video-understanding/v-jepa-2-versus-vision-language-models.md)
+- [Radford et al., 2021, CLIP](https://arxiv.org/abs/2103.00020)
+- [Alayrac et al., 2022, Flamingo](https://arxiv.org/abs/2204.14198)
+- [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)

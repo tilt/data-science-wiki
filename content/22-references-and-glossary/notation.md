@@ -1,7 +1,7 @@
 ---
 title: Notation
 slug: references-and-glossary/notation
-description: Concise guide to Notation in References and Glossary.
+description: "Shared mathematical and evaluation symbols used across the wiki."
 area: references-and-glossary
 topics:
   - notation
@@ -13,6 +13,9 @@ prerequisites:
   - index.md
 related:
   - index.md
+  - acronyms.md
+  - glossary.md
+  - references.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -20,7 +23,7 @@ last_reviewed: 2026-07-11
 
 ## Summary
 
-Notation keeps formulas readable across mathematical foundations, probability, machine learning, forecasting, and evaluation. Pages may introduce local symbols, but these conventions are the default.
+Notation keeps formulas readable across mathematical foundations, probability, machine learning, forecasting, and evaluation. Pages may introduce local symbols, but these conventions are the default. Use [acronyms](acronyms.md) for short names and [glossary](glossary.md) for prose definitions.
 
 ## Common symbols
 
@@ -43,4 +46,4 @@ Vectors are usually lowercase bold or plain lowercase depending on page style. M
 
 ## Evaluation notation
 
-Use $k$ for a cutoff in ranked retrieval, $n$ for sample size, and $t$ for time index. When a metric has a specialized definition, link to the metric page instead of redefining it inline.
+Use $k$ for a cutoff in ranked retrieval, $n$ for sample size, and $t$ for time index. When a metric has a specialized definition, link to the metric page or [references](references.md) instead of redefining it inline.

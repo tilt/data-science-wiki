@@ -16,9 +16,11 @@ aliases:
 prerequisites:
   - forecasting-problem-formulation.md
 related:
-  - feature-engineering-for-forecasting.md
-  - intermittent-demand.md
-  - forecast-ensembling.md
+  - forecast-evaluation.md
+  - backtesting.md
+  - rolling-origin-validation.md
+  - forecast-error-metrics.md
+  - concept-drift-in-forecasting.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -121,3 +123,12 @@ The result is a weighted average. The seasonal baseline contributes stability, t
 - Include a baseline in every worked example.
 - Show metric denominator behavior when sparse or zero demand is present.
 - Treat examples as validation cases for documentation and implementation.
+
+## Connections
+
+Most forecasting pitfalls are failures of [backtesting](backtesting.md), [rolling-origin validation](rolling-origin-validation.md), or [forecast error metrics](forecast-error-metrics.md). Drift-related examples connect directly to [concept drift in forecasting](concept-drift-in-forecasting.md) and [forecast monitoring](forecast-monitoring.md).
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Evaluating point forecast accuracy](https://otexts.com/fpp3/accuracy.html)
+- [Hyndman & Athanasopoulos, FPP3: Time series cross-validation](https://otexts.com/fpp3/tscv.html)

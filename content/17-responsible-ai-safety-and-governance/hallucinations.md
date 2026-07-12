@@ -1,7 +1,7 @@
 ---
 title: Hallucinations
 slug: responsible-ai-safety-and-governance/hallucinations
-description: Concise guide to Hallucinations in Responsible AI, Safety, and Governance.
+description: "Unsupported generated content and controls that reduce it."
 area: responsible-ai-safety-and-governance
 topics:
   - hallucinations
@@ -12,23 +12,77 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - factual-correctness.md
+  - prompt-injection.md
+  - error-taxonomies.md
+  - adversarial-evaluation.md
+  - ../10-generative-ai/hallucination-mitigation.md
+  - ../10-generative-ai/grounding.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Hallucinations
 
-## Summary
+Hallucinations are generated statements that are unsupported, fabricated, or misleading relative to the task evidence. The governance problem is not that a model "sounds creative"; it is that users may treat fluent unsupported text as fact. The control surface overlaps with [factual correctness](factual-correctness.md), [prompt injection](prompt-injection.md), and [hallucination mitigation](../10-generative-ai/hallucination-mitigation.md).
 
-Hallucinations are generated claims that are unsupported, fabricated, or misleading relative to the available evidence and task. The risk depends on domain and user reliance.
+## Mechanism
 
-## Step-by-step example
+A hallucination review should classify each unsupported output by where the failure entered:
 
-A support assistant may invent a refund policy that sounds plausible but is absent from the official policy documents.
+| Failure point | Example | Likely fix |
+| --- | --- | --- |
+| Retrieval miss | Correct document absent from context | Improve [grounding](../10-generative-ai/grounding.md) and retrieval tests |
+| Context misuse | Evidence present but ignored | Prompt and decoding regression tests |
+| Unsupported synthesis | Model combines facts into an unstated conclusion | Claim-level citation checks |
+| Knowledge boundary failure | Model answers when source is silent | Abstention policy |
+| Attack-induced claim | Retrieved text instructs model to lie | [Adversarial evaluation](adversarial-evaluation.md) |
 
-## Common failure modes
+This is why "use RAG" is not a complete hallucination control. Retrieval can reduce uncertainty, but the answer still needs claim-level support and an abstention path.
 
-- Evaluating fluency instead of factual support against available evidence.
-- Treating retrieval as a complete fix when the model can still ignore, distort, or overgeneralize retrieved context.
-- Missing domain-specific severity: a fabricated citation, medical instruction, or policy exception has different risk.
-- Failing to log source documents and prompts, making unsupported claims hard to reproduce.
+## Executed abstention comparison
+
+I ran a four-question toy evaluation comparing a baseline answer policy with an abstention policy:
+
+```python
+from collections import defaultdict
+
+outputs = [
+    ("baseline", "Refunds are available for 30 days.", True),
+    ("baseline", "Dental surgery is covered.", False),
+    ("baseline", "You can cancel by fax.", False),
+    ("baseline", "Admins must use MFA.", True),
+    ("abstain_policy", "Refunds are available for 30 days.", True),
+    ("abstain_policy", "I cannot determine dental surgery coverage from the supplied document.", True),
+    ("abstain_policy", "I cannot determine fax cancellation from the supplied document.", True),
+    ("abstain_policy", "Admins must use MFA.", True),
+]
+
+by_policy = defaultdict(list)
+for policy, _text, supported in outputs:
+    by_policy[policy].append(supported)
+
+print("HALLUCINATIONS")
+for policy, vals in by_policy.items():
+    unsupported_claim_rate = 1 - sum(vals) / len(vals)
+    print(policy, "unsupported_claim_rate", round(unsupported_claim_rate, 2), "n", len(vals))
+```
+
+Observed output:
+
+```text
+HALLUCINATIONS
+baseline unsupported_claim_rate 0.5 n 4
+abstain_policy unsupported_claim_rate 0.0 n 4
+```
+
+The abstention policy removed unsupported claims in this small set by replacing two guesses with "I cannot determine..." responses. That improves factuality but may reduce apparent helpfulness, so the metric should be reported beside coverage and user escalation rates in the [error taxonomy](error-taxonomies.md).
+
+## Caveats
+
+Unsupported claim rate depends on the evidence standard. A legal assistant, support bot, and brainstorming tool should not share one threshold. Also watch for citation laundering: a model can attach a real citation to a claim the source does not support. Store prompts, retrieved passages, output, and reviewer labels so [auditability](auditability.md) can reproduce the failure.
+
+## References
+
+- [NIST AI 600-1: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
+- [Ji et al., Survey of Hallucination in Natural Language Generation](https://arxiv.org/abs/2202.03629)
+- [OWASP LLM09:2025 Misinformation](https://genai.owasp.org/llmrisk/llm092025-misinformation/)

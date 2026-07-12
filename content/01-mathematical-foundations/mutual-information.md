@@ -1,43 +1,64 @@
 ---
 title: Mutual Information
 slug: mathematical-foundations/mutual-information
-description: Concise guide to Mutual Information in Mathematical Foundations.
+description: "Information shared between variables, expressed as a KL divergence from independence."
 area: mathematical-foundations
 topics:
+  - information-theory
   - mutual-information
 level: foundational
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - MI
 prerequisites:
-  - index.md
+  - entropy.md
 related:
-  - index.md
+  - information-theory.md
+  - entropy.md
+  - kl-divergence.md
+  - cross-entropy.md
+  - ../02-probability-and-statistics/conditional-probability.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Mutual Information
 
-Mutual information measures how much knowing one variable reduces uncertainty about another. It captures dependence beyond simple linear correlation.
+Mutual information measures how much knowing one variable reduces uncertainty about another. It is zero exactly when the variables are independent, and positive when their joint distribution carries structure beyond separate marginals in the sense of [conditional probability](../02-probability-and-statistics/conditional-probability.md).
 
-## Definition
+## Defining math
 
-For variables $X$ and $Y$,
+For discrete variables,
 
 $$
-I(X;Y)=D_{KL}(p(x,y)\|p(x)p(y)).
+I(X;Y)=\sum_{x,y}p(x,y)\log_2\frac{p(x,y)}{p(x)p(y)}.
 $$
 
-If $X$ and $Y$ are independent, their joint distribution equals the product of marginals and mutual information is zero.
+Equivalently, using [entropy](entropy.md),
 
-## Example
+$$
+I(X;Y)=H(X)-H(X\mid Y)=H(Y)-H(Y\mid X).
+$$
 
-A user's country may contain information about preferred language. Knowing the country reduces uncertainty about language, so mutual information is positive. The relationship need not be linear.
+The first formula shows mutual information as a [KL divergence](kl-divergence.md):
 
-## ML use
+$$
+I(X;Y)=D_{\mathrm{KL}}(p(x,y)\Vert p(x)p(y)).
+$$
 
-Mutual information is used in feature selection, representation learning, information bottleneck methods, and analysis of dependence between labels and features. It can help detect useful predictors that correlation misses.
+That connection ties MI to [information theory](information-theory.md), feature selection, representation learning, and diagnostics for dependence beyond linear correlation. It is related to [cross-entropy](cross-entropy.md) through the same expected-log-probability algebra, but it compares dependence rather than predictive code length.
+
+## Worked scenario
+
+Consider two binary variables whose joint table puts probability $0.4$ on matching outcomes $(0,0)$ and $(1,1)$, and probability $0.1$ on mismatches $(0,1)$ and $(1,0)$. Each marginal is still balanced at $0.5/0.5$, so independence would assign $0.25$ to every cell. The matching cells are therefore more likely than independence predicts, and the mismatch cells are less likely.
+
+Plugging those four cells into $\sum p(x,y)\log_2[p(x,y)/(p(x)p(y))]$ gives about $0.2781$ bits of shared information. If the joint table were exactly the product of its marginals, every ratio inside the log would be $1$, every log term would be $0$, and the mutual information would be $0$ because knowing $X$ would not change the probabilities for $Y$.
 
 ## Caveats
 
-Estimating mutual information from finite data is hard, especially for continuous or high-dimensional variables. Biased estimators can make weak relationships look stronger than they are.
+Mutual information is hard to estimate from finite continuous data without modeling or binning choices. It detects dependence but not direction or causality, and high-cardinality variables can produce biased empirical estimates.
+
+## References
+
+- [MacKay, Information Theory, Inference, and Learning Algorithms](https://www.inference.org.uk/itprnn/book.pdf)
+- [SciPy documentation: `scipy.special.rel_entr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.rel_entr.html)

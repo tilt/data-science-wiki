@@ -1,12 +1,12 @@
 ---
 title: Risk-Weighted Error Taxonomies
 slug: experimentation-and-evaluation/risk-weighted-error-taxonomies
-description: A method for classifying model errors by type, severity, and operational risk.
+description: "Classifying failures by type and severity so average metrics do not hide harmful errors."
 area: experimentation-and-evaluation
 topics:
-  - "risk-weighted-error-taxonomies"
-  - "responsible-ai"
-  - "evaluation"
+  - risk-weighted-error-taxonomies
+  - responsible-ai
+  - evaluation
 level: intermediate
 status: review
 page_type: concept
@@ -14,47 +14,60 @@ aliases:
   - "Error taxonomy"
   - "Risk-weighted evaluation"
 prerequisites:
-  - "golden-datasets.md"
+  - golden-datasets.md
 related:
-  - "../17-responsible-ai-safety-and-governance/index.md"
-  - "comparing-generative-ai-and-classical-ml-systems.md"
+  - golden-datasets.md
+  - human-evaluation.md
+  - abstention.md
+  - comparing-generative-ai-and-classical-ml-systems.md
+  - ../17-responsible-ai-safety-and-governance/index.md
 historical_context: false
 last_reviewed: 2026-07-11
-references:
-  - "nist-ai-rmf-2023"
 ---
 # Risk-Weighted Error Taxonomies
 
-## Summary
+A risk-weighted error taxonomy classifies what went wrong and how much it matters. It prevents harmless formatting issues from being averaged together with unsupported medical, legal, financial, privacy, or safety-critical claims. The taxonomy should be part of the [golden dataset](golden-datasets.md) schema and the [human evaluation](human-evaluation.md) rubric.
 
-A risk-weighted error taxonomy classifies failures by what went wrong and how much it matters. It prevents low-risk formatting errors from being treated the same as unsupported medical, legal, financial, or safety-critical claims.
+## Defining mechanism
 
-## Dimensions
+Each error receives a type and severity. A simple risk-weighted score is
 
-- Error type: factual, retrieval, reasoning, formatting, tool-call, privacy, security, fairness, or refusal.
-- Severity: nuisance, recoverable, harmful, critical.
-- Detectability: obvious to user, detectable by system, silent.
-- Exposure: internal, limited beta, production, regulated workflow.
-- Remediation: automatic retry, human review, rollback, incident response.
+$$
+R=\sum_i w_{\operatorname{severity}(i)}\mathbf 1(\text{error}_i),
+$$
 
-## Use in evaluation
+with weights chosen before evaluation. A production gate might allow minor formatting failures but require zero critical unsupported claims, regardless of average quality. [Abstention](abstention.md) is then evaluated as a mitigation: did the system avoid high-severity action when evidence was insufficient?
 
-Score systems not only by average correctness but by severe-error rate. A model with slightly lower average score can be preferable if it has fewer high-severity failures and better abstention behavior.
+## Worked calculation
 
-## Step-by-step example
+```python
+import numpy as np
 
-For a medical-document assistant, classify each bad answer by type and severity. A typo in a harmless summary may be low severity. A wrong medication dosage, unsupported diagnosis, or privacy leak is high severity even if most answers are correct. Report the severe-error rate separately and require human review or abstention for high-risk classes.
+sev = np.array(["minor","major","critical","minor","ok","major","ok","critical","minor","ok"])
+weights = {"ok": 0, "minor": 1, "major": 5, "critical": 20}
+weighted = np.array([weights[s] for s in sev])
+print(f"raw_error_rate {(sev != 'ok').mean():.2f}")
+print(f"severe_error_rate {np.isin(sev, ['major','critical']).mean():.2f}")
+print(f"risk_weighted_errors {weighted.sum()}")
+print("by_severity", {k: int((sev == k).sum()) for k in ["ok","minor","major","critical"]})
+```
 
-## Designing the taxonomy
+Observed output:
 
-- Keep labels mutually understandable for reviewers.
-- Include examples of each severity level.
-- Record whether the system could have detected or prevented the error.
-- Review disagreements and revise ambiguous categories.
-- Track risk by slice, source, user task, and model version.
+```text
+raw_error_rate 0.70
+severe_error_rate 0.40
+risk_weighted_errors 53
+by_severity {'ok': 3, 'minor': 3, 'major': 2, 'critical': 2}
+```
 
-## Related topics
+The raw error rate is bad, but the more important signal is the two critical failures. A system with lower average score but zero critical errors may be preferable in the comparison frame for [generative AI and classical ML systems](comparing-generative-ai-and-classical-ml-systems.md).
 
-- [Golden Datasets](golden-datasets.md)
-- [Human Evaluation](human-evaluation.md)
-- [Responsible AI](../17-responsible-ai-safety-and-governance/index.md)
+## Caveats
+
+Weights are governance choices, not statistical facts. Keep examples for every severity level, adjudicate reviewer disagreements, and report severe-error slices separately. If the taxonomy changes, version it and rerun historical comparisons rather than mixing old and new labels.
+
+## References
+
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+- [scikit-learn documentation: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)

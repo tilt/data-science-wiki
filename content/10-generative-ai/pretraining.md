@@ -1,7 +1,7 @@
 ---
 title: Pretraining
 slug: generative-ai/pretraining
-description: Concise guide to Pretraining in Generative AI and Agentic Systems.
+description: "Large-scale self-supervised training that builds the base model distribution."
 area: generative-ai
 topics:
   - pretraining
@@ -12,25 +12,63 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - foundation-models.md
+  - language-model-architecture.md
+  - instruction-tuning.md
+  - tokenization.md
+  - ../01-mathematical-foundations/cross-entropy.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Pretraining
 
-## Summary
+Pretraining is the large-scale self-supervised stage that gives [foundation models](foundation-models.md) broad linguistic or multimodal capability. For decoder language models, it trains the [language model architecture](language-model-architecture.md) to predict the next token from previous [tokenization](tokenization.md) outputs.
 
-Pretraining is the broad initial training phase where a model learns general representations from large-scale data before task-specific adaptation. For language models, this is commonly next-token prediction.
+## Defining math
 
-## Step-by-step example
+For sequence $x_1,\ldots,x_T$, next-token pretraining minimizes
 
-A model may learn Python syntax from pretraining, but a reliable coding assistant still needs instructions, tools, tests, sandboxing, and task evaluation.
+$$
+L(\theta)=-\sum_{t=1}^{T}\log p_\theta(x_t\mid x_{<t}).
+$$
 
-## Common failure modes
+This is cross-entropy over the vocabulary at each position.
 
-- Changing Pretraining without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Pretraining.
-- Shipping Pretraining without rollback, monitoring, and examples for known hard cases.
+## Executed artifact
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+```python
+import numpy as np
+
+logits = np.array([[2.0, 0.5, -0.5], [0.2, 1.4, 0.0]])
+targets = np.array([0, 2])
+exp_logits = np.exp(logits - logits.max(axis=1, keepdims=True))
+probs = exp_logits / exp_logits.sum(axis=1, keepdims=True)
+token_losses = -np.log(probs[np.arange(len(targets)), targets])
+print("PRETRAINING")
+print(
+    "token_losses",
+    np.round(token_losses, 3).tolist(),
+    "mean",
+    round(float(token_losses.mean()), 3),
+    "ppl",
+    round(float(np.exp(token_losses.mean())), 3),
+)
+```
+
+Observed output:
+
+```text
+PRETRAINING
+token_losses [0.266, 1.837] mean 1.052 ppl 2.862
+```
+
+The second token has higher loss because the toy logits assigned lower probability to the target. Perplexity is the exponential of mean token loss.
+
+## Caveats
+
+Pretraining data quality, deduplication, and contamination matter. Better pretraining loss does not automatically imply safer or more useful assistant behavior.
+
+## References
+
+- [Kaplan et al., 2020, Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361)
+- [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)

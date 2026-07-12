@@ -1,55 +1,83 @@
 ---
 title: Paired Evaluation
 slug: experimentation-and-evaluation/paired-evaluation
-description: Evaluation design that compares systems on the same examples to reduce variance.
+description: "Comparing systems on the same examples so each example acts as its own control."
 area: experimentation-and-evaluation
 topics:
-  - "paired-evaluation"
-  - "statistical-significance"
-  - "evaluation"
+  - paired-evaluation
+  - statistical-significance
+  - evaluation
 level: intermediate
 status: review
 page_type: concept
 aliases:
   - "Paired comparisons"
 prerequisites:
-  - "golden-datasets.md"
+  - golden-datasets.md
 related:
-  - "comparing-generative-ai-and-classical-ml-systems.md"
-  - "online-experiments.md"
+  - statistical-significance.md
+  - repeated-sampling.md
+  - human-evaluation.md
+  - llm-as-judge.md
+  - comparing-generative-ai-and-classical-ml-systems.md
 historical_context: false
 last_reviewed: 2026-07-11
-references:
-  - "kohavi-tang-xu-2020-trustworthy-online-experiments"
 ---
 # Paired Evaluation
 
-## Summary
+Paired evaluation compares systems on the same examples. It is stronger than comparing two unrelated averages because hard examples, ambiguous labels, and domain mix affect both systems. The pattern is useful for model-score comparisons, [human evaluation](human-evaluation.md), and [LLM-as-judge](llm-as-judge.md) preference tests.
 
-Paired evaluation compares two systems on the same examples. This reduces variance because each example acts as its own control.
+## Defining statistics
 
-## Why it matters
+For numeric scores, compute one difference per example:
 
-In ML and generative-AI evaluation, example difficulty varies heavily. A paired design prevents one system from appearing better merely because it saw easier examples.
+$$
+d_i=s_{B,i}-s_{A,i}, \qquad \bar d=\frac{1}{n}\sum_i d_i.
+$$
 
-## Procedure
+A paired t-test uses
 
-1. Freeze an evaluation set.
-2. Run each candidate system on every example.
-3. Score outputs with the same rubric.
-4. Compare per-example deltas.
-5. Report aggregate differences and uncertainty.
+$$
+t=\frac{\bar d}{s_d/\sqrt n},
+$$
 
-## Worked example
+where $s_d$ is the sample standard deviation of the differences. For win/loss/tie labels, ignore ties and use a sign test or bootstrap over examples. This is often the offline counterpart to [statistical significance](statistical-significance.md) in live experiments.
 
-Suppose two RAG systems answer the same 200 support questions. For each question, grade both answers against the same source evidence. Record a delta: system B better, system A better, tie, or both unacceptable. A paired analysis is stronger than comparing two separate averages because hard questions affect both systems rather than only one sample.
+## Worked calculation
 
-## Statistical view
+```python
+import numpy as np
+from scipy import stats
 
-For numeric scores, compute the difference per example and estimate the mean difference with a confidence interval or bootstrap. For win/loss/tie labels, use a sign test or bootstrap over examples. The important object is the paired difference, not each system's score in isolation.
+old = np.array([3,4,2,5,3,4,2,3,4,3,5,2])
+new = np.array([4,4,3,5,4,5,2,4,4,4,5,3])
+d = new - old
+tres = stats.ttest_rel(new, old)
+ci = tres.confidence_interval()
+wins, losses, ties = (d > 0).sum(), (d < 0).sum(), (d == 0).sum()
+bt = stats.binomtest(wins, wins + losses, p=0.5, alternative="greater")
+print(f"mean_delta {d.mean():.3f}")
+print(f"paired_t {tres.statistic:.3f} p_value {tres.pvalue:.4f}")
+print(f"95pct_ci [{ci.low:.3f}, {ci.high:.3f}]")
+print(f"wins_losses_ties {wins}/{losses}/{ties} sign_p {bt.pvalue:.4f}")
+```
 
-## Related topics
+Observed output:
 
-- [Golden Datasets](golden-datasets.md)
-- [Repeated Sampling](repeated-sampling.md)
-- [Statistical Significance](statistical-significance.md)
+```text
+mean_delta 0.583
+paired_t 3.924 p_value 0.0024
+95pct_ci [0.256, 0.911]
+wins_losses_ties 7/0/5 sign_p 0.0078
+```
+
+The new system improves average score by 0.58 points on the same twelve examples, and every non-tie preference favors it. A [repeated sampling](repeated-sampling.md) bootstrap would be a good robustness check if the score distribution is skewed.
+
+## Caveats
+
+Pairing does not fix a stale or overfit [golden dataset](golden-datasets.md). If reviewers see system identities or output order, position and familiarity bias can dominate the measured delta. For generative systems, keep prompts, retrieved context, decoding settings, and rubric versions fixed across both systems.
+
+## References
+
+- [SciPy documentation: scipy.stats.ttest_rel](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_rel.html)
+- [SciPy documentation: scipy.stats.binomtest](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binomtest.html)

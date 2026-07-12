@@ -1,7 +1,7 @@
 ---
 title: Trend Seasonality Cycles Noise
 slug: time-series-and-forecasting/trend-seasonality-cycles-noise
-description: Concise guide to Trend Seasonality Cycles Noise in Time-Series Forecasting.
+description: Interpreting the recurring and nonrecurring components of a time series.
 area: time-series-and-forecasting
 topics:
   - trend-seasonality-cycles-noise
@@ -12,25 +12,31 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - time-series-fundamentals.md
+  - stationarity.md
+  - autocorrelation-and-partial-autocorrelation.md
+  - sarima.md
+  - exponential-smoothing.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Trend Seasonality Cycles Noise
 
-## Summary
+Trend, seasonality, cycles, and noise are a vocabulary for separating different kinds of temporal structure. A common additive view is
 
-Trend, seasonality, cycles, and noise are conceptual components used to reason about time-series structure. Separating them helps choose baselines, transformations, and model families.
+$$
+y_t = T_t + S_t + C_t + R_t,
+$$
 
-## Step-by-step example
+where $T_t$ is long-run movement, $S_t$ is regular calendar repetition, $C_t$ is slower irregular cyclic behavior, and $R_t$ is residual variation. Multiplicative decompositions use products instead of sums when seasonal amplitude grows with the level.
 
-Retail sales may have an upward trend, weekly seasonality, business-cycle effects, holiday spikes, and random noise. Plotting these separately clarifies the forecast problem.
+Trend is directional movement over a period relevant to the decision. It may be deterministic, such as a planned rollout, or stochastic, such as a random walk-like level. Seasonality is tied to a known period: hour of day, day of week, month of year. Cycles are recurrent but not fixed to a precise calendar period, such as business-cycle demand. Noise is the part left after the modeled structure, but "noise" can still reveal missing drivers, outliers, or regime changes.
 
-## Common failure modes
+These components affect model choice. [SARIMA](sarima.md) is appropriate when seasonal dependence is regular and captured by seasonal lags. [Exponential smoothing](exponential-smoothing.md) handles level, trend, and seasonal states directly. [Feature engineering for forecasting](feature-engineering-for-forecasting.md) can encode holidays, events, and multiple seasonalities when a pure univariate model is too restrictive.
 
-- Evaluating Trend Seasonality Cycles Noise with random splits that leak future information into training.
-- Reporting one average error while hiding horizon, season, segment, or peak-period failures.
-- Ignoring calendar effects, data revisions, missing timestamps, or operational constraints on when forecasts are available.
+Decomposition is descriptive unless it improves forecasting or diagnosis. A visually pleasing trend line can leak future data if computed over the full sample before validation. Seasonal plots can hide changing seasonal strength. Residual plots should be checked with [autocorrelation and partial autocorrelation](autocorrelation-and-partial-autocorrelation.md), and any modeling choice should be validated with [forecast evaluation](forecast-evaluation.md).
 
-- Ignoring horizon-specific error, calendar effects, missing periods, or regime changes.
-- Reporting point accuracy without checking uncertainty, slices, and operational cost.
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Time series decomposition](https://otexts.com/fpp3/decomposition.html)
+- [Hyndman & Athanasopoulos, FPP3: Time series patterns](https://otexts.com/fpp3/graphics.html)

@@ -15,42 +15,66 @@ aliases:
 prerequisites:
   - "software-architecture.md"
 related:
+  - "web-backends.md"
+  - "production-integration.md"
+  - "software-architecture.md"
+  - "testing.md"
   - "../10-generative-ai/tool-use-and-function-calling.md"
+  - "../10-generative-ai/structured-output.md"
   - "../13-ml-engineering-and-mlops/model-serving.md"
 historical_context: false
 last_reviewed: 2026-07-11
-references:
-  - "openai-function-calling-docs"
 ---
 # API Design
 
-## Summary
+API design is the discipline of making a software boundary explicit enough that clients can depend on it. In AI systems the boundary may be an HTTP endpoint, a Python package function, a model-serving request, or a tool schema used by [tool use and function calling](../10-generative-ai/tool-use-and-function-calling.md). A good API says what fields mean, what errors are stable, which operations are idempotent, and which changes require a version.
 
-API design defines how software components communicate. In AI systems, APIs often expose model serving, retrieval, evaluation, feature access, and tool execution.
+## Contract Mechanism
 
-## Design principles
+The contract has four layers: resource model, request schema, response schema, and error model. HTTP APIs usually express this through OpenAPI paths, methods, status codes, media types, and JSON schemas. Internal Python APIs can use typed dataclasses or Pydantic models, but the same rule applies: invalid input should fail at the boundary, before it reaches business logic or [model serving](../13-ml-engineering-and-mlops/model-serving.md).
 
-- Make inputs and outputs explicit.
-- Version contracts that downstream systems depend on.
-- Use typed schemas for model tools and service requests.
-- Validate arguments outside the model.
-- Return structured errors that support retries and incident diagnosis.
-- Separate user-facing language from machine-facing contracts.
+## Executed Artifact
 
-## Step-by-step example
+```python
+from typing import Literal
+from pydantic import BaseModel, ConfigDict, ValidationError
 
-For an extraction service, define a request with document ID, task type, allowed fields, and trace ID. Define a response with extracted values, confidence, source spans, validation errors, and model version. Reject unknown fields, validate enum values, and return typed errors such as `invalid_request`, `source_unavailable`, or `schema_validation_failed`.
+class TicketTriageRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    ticket_id: str
+    language: Literal["en", "de", "fr"]
+    priority: Literal["low", "normal", "urgent"] = "normal"
+    trace_id: str
 
-## Versioning and compatibility
+valid = TicketTriageRequest.model_validate(
+    {"ticket_id": "T-1042", "language": "de", "trace_id": "tr-7"}
+)
+print(valid.model_dump())
+print(TicketTriageRequest.model_json_schema()["required"])
+try:
+    TicketTriageRequest.model_validate(
+        {"ticket_id": "T-1042", "language": "es", "trace_id": "tr-7", "debug": True}
+    )
+except ValidationError as exc:
+    print([(err["loc"], err["type"]) for err in exc.errors()])
+```
 
-Version an API when clients depend on field names, semantics, error codes, or latency expectations. Additive fields are usually safer than changing existing meanings. For ML services, include model or prompt version in metadata so downstream teams can debug regressions after rollout.
+Observed output:
 
-## AI-specific concerns
+```text
+{'ticket_id': 'T-1042', 'language': 'de', 'priority': 'normal', 'trace_id': 'tr-7'}
+['ticket_id', 'language', 'trace_id']
+[(('language',), 'literal_error'), (('debug',), 'extra_forbidden')]
+```
 
-For LLM tools, the schema is part of the prompt and the runtime contract. The model may propose a call, but the application must enforce permissions, validate arguments, execute the tool, and decide whether to retry or escalate.
+This tiny contract gives [web backends](web-backends.md) a concrete request boundary, gives [testing](testing.md) stable failure cases, and gives [production integration](production-integration.md) trace IDs for incident correlation. The `extra="forbid"` choice is deliberate: accepting unknown fields can hide client bugs and make versioning ambiguous.
 
-## Related topics
+## Versioning And Errors
 
-- [Tool Use and Function Calling](../10-generative-ai/tool-use-and-function-calling.md)
-- [Structured Output](../10-generative-ai/structured-output.md)
-- [Model Serving](../13-ml-engineering-and-mlops/model-serving.md)
+Additive response fields are usually compatible; changing meanings, removing fields, or changing error codes is not. Prefer typed errors such as `invalid_request`, `not_authorized`, `schema_validation_failed`, and `upstream_timeout` over plain strings. HTTP problem details, OpenAPI schemas, and [structured output](../10-generative-ai/structured-output.md) all serve the same practical goal: make machine-facing contracts parseable instead of relying on prose.
+
+## References
+
+- [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [RFC 9110: HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html)
+- [Pydantic documentation: JSON Schema](https://pydantic.dev/docs/validation/latest/concepts/json_schema/)

@@ -1,7 +1,7 @@
 ---
 title: Video Representation
 slug: video-understanding/video-representation
-description: Concise guide to Video Representation in Video Understanding.
+description: "The tensor, token, track, or embedding form used to carry video evidence into downstream models."
 area: video-understanding
 topics:
   - video-representation
@@ -12,25 +12,56 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - spatial-and-temporal-modelling.md
+  - self-supervised-video-representation-learning.md
+  - video-transformers.md
+  - person-tracking-and-track-aggregation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Video Representation
 
-## Summary
+A video representation is the form in which a system stores evidence from frames over time: raw clips, [optical-flow](optical-flow.md) fields, tubelet tokens, per-frame embeddings, object tracks, or pooled clip vectors. It determines what information is easy to use later. A representation built from frame means may support retrieval, while a track-level representation is better for [person tracking and track aggregation](person-tracking-and-track-aggregation.md).
 
-Video representation defines how a model encodes frames, motion, tracks, audio, text, or clip-level context. The representation determines what downstream tasks can use.
+## Defining mechanism
 
-## Step-by-step example
+For frame embeddings $e_1,\ldots,e_T$, a simple clip representation can concatenate appearance and motion summaries:
 
-A representation may be a sequence of frame embeddings, tubelet tokens, optical-flow maps, object tracks, or a pooled clip vector.
+$$
+r = \left[\frac{1}{T}\sum_{t=1}^T e_t,\; e_T-e_1\right].
+$$
 
-## Common failure modes
+This is not a universal best representation; it shows the contract. The first term carries average visual content, and the second carries coarse temporal change. [Video transformers](video-transformers.md) keep many tokens instead of reducing early, while [self-supervised video representation learning](self-supervised-video-representation-learning.md) trains the encoder that produces the embeddings.
 
-- Evaluating Video Representation only with clip labels while temporal boundaries, identity continuity, or streaming latency fail.
-- Sampling frames in a way that misses short actions, occlusion, fast motion, or camera changes.
-- Reporting aggregate accuracy without reviewing false triggers and missed events on real videos.
+## Worked example
 
-- Sampling frames in a way that misses short actions or delays streaming decisions.
-- Reporting aggregate accuracy without inspecting occlusion, viewpoint, speed, and crowded-scene failures.
+```python
+import torch
+
+emb = torch.tensor([[1.0,0.0],[0.8,0.2],[0.2,0.9],[-0.1,1.0]])
+clip_mean = emb.mean(0)
+delta = emb[-1] - emb[0]
+rep = torch.cat([clip_mean, delta])
+print("clip_mean", torch.round(clip_mean, decimals=3).tolist())
+print("temporal_delta", torch.round(delta, decimals=3).tolist())
+print("representation", torch.round(rep, decimals=3).tolist())
+```
+
+Observed output:
+
+```text
+clip_mean [0.4749999940395355, 0.5249999761581421]
+temporal_delta [-1.100000023841858, 1.0]
+representation [0.4749999940395355, 0.5249999761581421, -1.100000023841858, 1.0]
+```
+
+The pooled part says the clip contains both embedding directions; the delta says it moved from the first toward the second.
+
+## Caveats
+
+Pooling too early erases order and boundaries, which hurts [temporal localization](temporal-localization.md). Dense tokens preserve detail but increase memory. Track and object representations can be robust to camera motion, but they depend on detector and association quality.
+
+## References
+
+- [Carreira and Zisserman, 2017, Quo Vadis, Action Recognition?](https://arxiv.org/abs/1705.07750)
+- [Tong et al., 2022, VideoMAE](https://arxiv.org/abs/2203.12602)

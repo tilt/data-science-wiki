@@ -16,9 +16,11 @@ aliases:
 prerequisites:
   - concept-drift-in-forecasting.md
 related:
+  - concept-drift-in-forecasting.md
   - forecast-monitoring.md
+  - machine-learning-forecasting.md
   - backtesting.md
-  - ../13-ml-engineering-and-mlops/model-degradation.md
+  - ../13-ml-engineering-and-mlops/batch-and-online-inference.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -67,3 +69,12 @@ Online learning should be evaluated with prequential or rolling-origin protocols
 - Backtesting with labels earlier than they would be available.
 - Losing reproducibility because model state changes continuously without versioning.
 - Overreacting to sparse series with noisy recent observations.
+
+## Connections
+
+Online learning is a response to [concept drift in forecasting](concept-drift-in-forecasting.md) surfaced by [forecast monitoring](forecast-monitoring.md). It changes the evaluation contract because [backtesting](backtesting.md) must simulate update timing, not just model predictions.
+
+## References
+
+- [Gibbs and Candes, Adaptive Conformal Inference Under Distribution Shift](https://arxiv.org/abs/2106.00170)
+- [scikit-learn TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)

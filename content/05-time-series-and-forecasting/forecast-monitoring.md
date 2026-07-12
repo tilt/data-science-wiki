@@ -17,6 +17,8 @@ prerequisites:
   - forecasting-system-design.md
 related:
   - concept-drift-in-forecasting.md
+  - online-learning-for-forecasting.md
+  - forecast-error-metrics.md
   - forecast-calibration.md
   - ../13-ml-engineering-and-mlops/monitoring.md
 historical_context: false
@@ -70,3 +72,12 @@ Dashboards can be broad. Alerts should be reserved for conditions with a clear o
 - Alerting on noisy low-volume slices without aggregation rules.
 - Missing calibration degradation because only point metrics are tracked.
 - Treating fallback predictions as normal model predictions in dashboards.
+
+## Connections
+
+Monitoring turns [forecast evaluation](forecast-evaluation.md) into an ongoing process. Track [forecast error metrics](forecast-error-metrics.md), [forecast calibration](forecast-calibration.md), and [concept drift in forecasting](concept-drift-in-forecasting.md), then decide whether [online learning for forecasting](online-learning-for-forecasting.md) or retraining is needed.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Residual diagnostics](https://otexts.com/fpp3/toolbox.html)
+- [Gibbs and Candes, Adaptive Conformal Inference Under Distribution Shift](https://arxiv.org/abs/2106.00170)

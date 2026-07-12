@@ -1,36 +1,49 @@
 ---
-title: RNN and Lstm Forecasting
+title: RNN and LSTM Forecasting
 slug: time-series-and-forecasting/rnn-and-lstm-forecasting
-description: Concise guide to RNN and Lstm Forecasting in Time-Series Forecasting.
+description: Recurrent sequence models for forecasting from ordered windows and covariates.
 area: time-series-and-forecasting
 topics:
   - rnn-and-lstm-forecasting
 level: intermediate
 status: review
 page_type: model
-aliases: []
+aliases:
+  - "RNN and Lstm Forecasting"
 prerequisites:
   - index.md
 related:
-  - index.md
+  - deep-learning-forecasting.md
+  - temporal-convolutional-networks.md
+  - transformer-based-forecasting.md
+  - machine-learning-forecasting.md
+  - ../06-deep-learning/recurrent-neural-networks.md
+  - ../06-deep-learning/lstm-and-gru.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# RNN and Lstm Forecasting
+# RNN and LSTM Forecasting
 
-## Summary
+RNN forecasters process a sequence one time step at a time while carrying a hidden state. For a simple recurrent model,
 
-RNN and LSTM forecasting models process time series sequentially with hidden state. They can learn nonlinear temporal dependencies from windows or full sequences.
+$$
+h_t = f(W_x x_t + W_h h_{t-1} + b), \qquad \hat{y}_{t+h}=g(h_t).
+$$
 
-## Step-by-step example
+The input $x_t$ can include the target history, observed covariates, entity embeddings, and calendar features. The hidden state is the learned summary of the past that the forecast head uses for one or more future horizons.
 
-An LSTM can read daily demand with promotions and update hidden state as it moves through the sequence before forecasting the next week.
+LSTMs and GRUs modify the recurrent update with gates that control what to keep, forget, and expose. This helps with longer dependencies compared with a plain RNN, where gradients can vanish or explode through many repeated updates. In forecasting, the practical distinction is not just "long memory"; it is whether the model can learn useful state transitions from enough leakage-free historical windows.
 
-## Common failure modes
+There are several output designs. A recursive model predicts one step and feeds that prediction back for later horizons. A direct multi-horizon model emits the full horizon at once. Encoder-decoder models read a history window and decode future steps, often with known future covariates such as holidays or planned prices. DeepAR-style models use recurrent state to parameterize a predictive distribution rather than only a point forecast, connecting recurrent forecasting to [probabilistic forecasting](probabilistic-forecasting.md).
 
-- Evaluating RNN and Lstm Forecasting with random splits that leak future information into training.
-- Reporting one average error while hiding horizon, season, segment, or peak-period failures.
-- Ignoring calendar effects, data revisions, missing timestamps, or operational constraints on when forecasts are available.
+RNNs and LSTMs can underperform simpler [feature engineering for forecasting](feature-engineering-for-forecasting.md) when series are short, seasonality is easy to encode, or covariate leakage is present. Their strongest use case is usually global learning across many related sequences where a shared recurrent representation can transfer behavior between entities.
 
-- Ignoring horizon-specific error, calendar effects, missing periods, or regime changes.
-- Reporting point accuracy without checking uncertainty, slices, and operational cost.
+## Connections
+
+RNN/LSTM forecasters are one branch of [deep learning forecasting](deep-learning-forecasting.md). They share sequence-modeling concerns with [temporal convolutional networks](temporal-convolutional-networks.md), [transformer-based forecasting](transformer-based-forecasting.md), and the deep-learning pages on [recurrent neural networks](../06-deep-learning/recurrent-neural-networks.md) and [LSTM and GRU](../06-deep-learning/lstm-and-gru.md).
+
+## References
+
+- [Salinas, Flunkert, and Gasthaus, DeepAR](https://arxiv.org/abs/1704.04110)
+- [PyTorch LSTM documentation](https://pytorch.org/docs/stable/generated/torch.nn.LSTM.html)
+- [Nixtla NeuralForecast documentation](https://nixtlaverse.nixtla.io/neuralforecast/docs/getting-started/introduction.html)

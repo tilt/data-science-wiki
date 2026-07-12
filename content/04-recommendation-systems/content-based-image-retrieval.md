@@ -1,8 +1,7 @@
 ---
 title: Content-Based Image Retrieval
 slug: recommendation-systems/content-based-image-retrieval
-description: Concise guide to content-based image retrieval in recommendation
-  Systems and Personalization.
+description: "Nearest-neighbor retrieval over visual feature vectors or image embeddings."
 area: recommendation-systems
 topics:
   - content-based-image-retrieval
@@ -11,28 +10,56 @@ status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - content-based-recommendation.md
 related:
-  - index.md
+  - image-based-recommendation.md
+  - content-based-recommendation.md
+  - candidate-generation.md
+  - ../11-information-retrieval-and-search/vector-indexes.md
+  - ../11-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Content-Based Image Retrieval
 
-Content-based image retrieval recommends or retrieves images using visual content rather than only user behavior. It is useful for visually similar products, artwork, medical examples, or catalogue exploration.
+Content-based image retrieval represents images as feature vectors and returns nearby vectors for a query image. In recommendation systems, it is often a retrieval source for visually similar products, artworks, recipes, or media thumbnails before [ranking](ranking.md) applies personalization and constraints.
 
-## Core idea
+## Defining math
 
-Images are encoded into feature vectors or embeddings. Retrieval returns images with nearby vectors, optionally filtered by metadata, availability, safety, or personalization constraints.
+Given an image encoder $f(\cdot)$ and query image $q$, retrieve items by
 
-## Example
+$$
+s(q,i)=\frac{f(q)^\top f(i)}{\lVert f(q)\rVert\lVert f(i)\rVert}.
+$$
 
-A fashion app lets a user tap a shoe photo and see visually similar items. The image encoder captures shape, color, texture, and style; the recommender then filters by size, stock, price, and user preferences.
+At scale the vectors are stored in [vector indexes](../11-information-retrieval-and-search/vector-indexes.md), similar to [dense retrieval](../11-information-retrieval-and-search/dense-retrieval.md).
 
-## Recommendation-specific concerns
+## Worked example
 
-Visual similarity is not always purchase intent. A user may want substitutes, complements, or diversity. Combine image retrieval with business rules and feedback signals when ranking final recommendations.
+```python
+import numpy as np
+from sklearn.metrics.pairwise import cosine_similarity
+emb = np.array([[.9,.1,.1], [.85,.05,.2], [.1,.9,.2], [.2,.1,.95]])
+q = np.array([[.88,.08,.12]])
+sim = cosine_similarity(q, emb)[0]
+print("similarities", np.round(sim, 3).tolist())
+print("nearest_image", int(np.argmax(sim)))
+```
 
-## Failure modes
+Observed output:
 
-Embeddings can overemphasize background, color, or photography style, and may retrieve near-duplicates instead of useful alternatives.
+```text
+similarities [0.999, 0.995, 0.223, 0.342]
+nearest_image 0
+```
+
+The query retrieves the nearest visual vector. [Image-based recommendation](image-based-recommendation.md) adds user preference or collaborative scores so the result is not merely a near-duplicate search.
+
+## Caveats
+
+Visual similarity can overemphasize color, background, camera angle, or brand presentation. A user may want complements rather than substitutes. Safety filters, inventory constraints, and deduplication belong in the downstream [retrieval and ranking architecture](retrieval-and-ranking-architectures.md).
+
+## References
+
+- [He and McAuley, 2015, VBPR: Visual Bayesian Personalized Ranking from Implicit Feedback](https://arxiv.org/abs/1510.01784)
+- [scikit-learn documentation: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)

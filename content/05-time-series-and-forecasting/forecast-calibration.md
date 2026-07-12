@@ -16,8 +16,11 @@ aliases:
 prerequisites:
   - probabilistic-forecasting.md
 related:
+  - probabilistic-forecasting.md
   - prediction-intervals.md
   - quantile-loss.md
+  - conformal-prediction-for-forecasting.md
+  - forecast-evaluation.md
   - ../16-experimentation-and-evaluation/calibration.md
 historical_context: false
 last_reviewed: 2026-07-11
@@ -72,3 +75,12 @@ Recalibration data must be separate from the final evaluation period. Otherwise 
 - Treating attention weights or feature importance as evidence of calibration.
 - Recalibrating on the same period used for final reporting.
 - Ignoring delayed labels when monitoring live calibration.
+
+## Connections
+
+Calibration is the reliability check for [probabilistic forecasting](probabilistic-forecasting.md). It complements [prediction intervals](prediction-intervals.md), [quantile loss](quantile-loss.md), [conformal prediction for forecasting](conformal-prediction-for-forecasting.md), and the broader evaluation notion of [calibration](../16-experimentation-and-evaluation/calibration.md).
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Distributional forecasts and prediction intervals](https://otexts.com/fpp3/prediction-intervals.html)
+- [Romano, Patterson, and Candes, Conformalized Quantile Regression](https://arxiv.org/abs/1905.03222)

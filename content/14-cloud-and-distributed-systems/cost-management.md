@@ -1,7 +1,7 @@
 ---
 title: Cost Management
 slug: cloud-and-distributed-systems/cost-management
-description: Concise guide to Cost Management in Cloud and Distributed Systems.
+description: "Attributing, forecasting, and controlling cloud spend without hiding system trade-offs."
 area: cloud-and-distributed-systems
 topics:
   - cost-management
@@ -12,26 +12,63 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - aws-fundamentals.md
+  - google-cloud-fundamentals.md
+  - managed-compute.md
+  - managed-storage.md
+  - gpu-systems.md
+  - scalability.md
+  - ../10-generative-ai/cost-and-latency-optimization.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Cost Management
 
-Cost management controls cloud and model-inference spending without hiding the true cost of reliability, latency, and iteration. AI workloads need cost visibility because training, GPUs, storage, retrieval, and hosted model calls can scale quickly.
+Cost management is the feedback loop that connects architecture choices to spend. It is not just "make it cheaper": an SLO, a [reliability](reliability.md) target, a [GPU systems](gpu-systems.md) memory requirement, and a [scalability](scalability.md) target can all be valid reasons to pay more. The important mechanism is attribution: every material cost should have an owner, workload, environment, and unit driver.
 
-## Cost drivers
+## Mechanism
 
-Major drivers include compute hours, accelerator usage, storage volume, data transfer, managed database queries, logging volume, vector-index size, batch frequency, and per-token or per-request model pricing. Cost should be attributed to products, environments, teams, and workloads.
+Cloud cost is usually:
 
-## Example
+$$
+\text{monthly cost}=\sum_i \text{usage}_i \times \text{rate}_i + \text{commitment waste} + \text{retry/rework cost}.
+$$
 
-A RAG application may spend money on document ingestion, embedding generation, vector storage, retrieval queries, reranking, generation tokens, traces, and evaluation runs. Optimizing only generation tokens may miss a larger indexing or logging cost.
+For systems work, the practical unit is more useful than the bill total: dollars per training run, dollars per million requests, dollars per TB retained, dollars per successful document ingestion, or dollars per evaluated model. [Managed storage](managed-storage.md) and [managed compute](managed-compute.md) need separate tags because storage retention and compute bursts scale differently. Generative systems should also track token, retrieval, reranking, and evaluation traffic separately, as in [cost and latency optimization](../10-generative-ai/cost-and-latency-optimization.md).
 
-## Practical controls
+## Executed cost check
 
-Use budgets, alerts, quotas, tagging, autoscaling, right-sized instances, caching, batching, lifecycle policies, and explicit environment shutdown. For generative systems, track input tokens, output tokens, retries, tool calls, and evaluation traffic separately from user traffic.
+Using AWS-published S3 example rates for inter-region transfer, Multi-Region Access Point routing, and internet egress:
 
-## Failure modes
+```python
+rates = {"inter_region_s3_gb": 0.02, "mrap_route_gb": 0.0033, "internet_egress_gb": 0.09}
+usage = {"replicate_gb": 2000, "route_gb": 500, "egress_gb": 20}
+rep = usage["replicate_gb"] * rates["inter_region_s3_gb"]
+route = usage["route_gb"] * rates["mrap_route_gb"]
+eg = usage["egress_gb"] * rates["internet_egress_gb"]
+print(f"s3_cross_region_replication_2000gb_usd {rep:.2f}")
+print(f"multi_region_access_point_routing_500gb_usd {route:.2f}")
+print(f"s3_internet_egress_20gb_usd {eg:.2f}")
+print(f"total_usd {rep+route+eg:.2f}")
+```
 
-Cost management fails when teams discover spend only through monthly bills, use shared untagged projects, or cut observability and evaluation so aggressively that reliability suffers.
+Observed output:
+
+```text
+s3_cross_region_replication_2000gb_usd 40.00
+multi_region_access_point_routing_500gb_usd 1.65
+s3_internet_egress_20gb_usd 1.80
+total_usd 43.45
+```
+
+The small routing line is not the point; the 2 TB replication line is. Cost review should follow data movement and retention, not only instance size. A `CostCenter=search`, `Environment=prod`, `Workload=rag-ingestion` tag set is only useful if budgets and Cost Explorer reports group by those labels.
+
+## Caveats
+
+Cutting observability, backups, or evaluation can make the bill smaller while increasing recovery time and defect cost. Committed-use discounts and reserved instances reduce unit price but introduce utilization risk. Autoscaling without request caps can turn a dependency failure into a retry-driven bill spike.
+
+## References
+
+- [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)
+- [AWS Cost Explorer](https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html)
+- [AWS Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)

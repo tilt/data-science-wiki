@@ -1,34 +1,80 @@
 ---
 title: Rotated Object Detection
 slug: computer-vision/rotated-object-detection
-description: Concise guide to Rotated Object Detection in Computer Vision and
-  Medical Imaging.
+description: "Object detection with oriented boxes for aerial imagery, text, industrial parts, and elongated objects."
 area: computer-vision
 topics:
   - rotated-object-detection
 level: foundational
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - oriented object detection
 prerequisites:
   - index.md
 related:
-  - index.md
+  - object-detection.md
+  - detection-and-segmentation-metrics.md
+  - ocr-pipelines.md
+  - synthetic-data.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Rotated Object Detection
 
-Rotated object detection predicts oriented bounding boxes rather than axis-aligned boxes. It is useful when object angle carries important spatial information or axis-aligned boxes include too much background.
+Rotated object detection predicts oriented boxes instead of axis-aligned boxes. It matters when angle is part of localization: aerial ships, text lines, shelves, industrial parts, and long objects where ordinary [object detection](object-detection.md) boxes include too much background.
 
-## Core idea
+## Defining math
 
-A rotated box adds an angle parameter to location, width, and height. This better fits objects such as text lines, ships, aerial-view vehicles, shelves, or long industrial parts.
+An oriented rectangle can be parameterized as
 
-## Example
+$$
+b=(c_x,c_y,w,h,\theta),
+$$
 
-In aerial imagery, ships may appear at arbitrary angles. A rotated detector can tightly localize each ship, while an axis-aligned box may overlap nearby objects or water area.
+or by four corner points. Evaluation uses the same matching as [detection and segmentation metrics](detection-and-segmentation-metrics.md), but IoU is polygon overlap rather than axis-aligned rectangle overlap:
 
-## Failure modes
+$$
+\mathrm{IoU}_{rot}(A,B)=\frac{\mathrm{area}(A\cap B)}{\mathrm{area}(A\cup B)}.
+$$
 
-Rotated detectors can suffer from angle discontinuities, inconsistent labels for symmetric objects, and poor transfer from standard detection datasets.
+Angle conventions matter because $\theta$, $\theta+\pi$, and swapped width/height can describe the same physical box.
+
+## Worked example
+
+```python
+import numpy as np
+
+def rect_mask(cx, cy, w, h, theta, grid=80):
+    yy, xx = np.mgrid[0:grid, 0:grid] + 0.5
+    x = (xx / grid * 6) - 3
+    y = (yy / grid * 6) - 3
+    c, s = np.cos(theta), np.sin(theta)
+    xr = c * (x - cx) + s * (y - cy)
+    yr = -s * (x - cx) + c * (y - cy)
+    return (np.abs(xr) <= w/2) & (np.abs(yr) <= h/2)
+
+m0 = rect_mask(0, 0, 3, 1, 0)
+m1 = rect_mask(0, 0, 3, 1, np.deg2rad(30))
+m2 = rect_mask(.2, 0, 3, 1, np.deg2rad(30))
+print("axis_vs_30deg_iou", round(np.logical_and(m0,m1).sum() / np.logical_or(m0,m1).sum(), 3))
+print("aligned_shifted_iou", round(np.logical_and(m1,m2).sum() / np.logical_or(m1,m2).sum(), 3))
+```
+
+Observed output:
+
+```text
+axis_vs_30deg_iou 0.481
+aligned_shifted_iou 0.739
+```
+
+The same elongated box at 0 and 30 degrees has IoU 0.481, below common 0.5 matching thresholds. Two boxes with the same 30-degree orientation but a small center shift still reach 0.739 IoU, so angle error can matter more than modest translation error for elongated objects.
+
+## Caveats
+
+Angle discontinuities near the convention boundary can destabilize training. Symmetric objects may have ambiguous orientation labels. For text, [OCR pipelines](ocr-pipelines.md) may care more about line reading order than box IoU alone.
+
+## References
+
+- [DOTA: A Large-scale Dataset for Object Detection in Aerial Images](https://arxiv.org/abs/1711.10398)
+- [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/abs/1506.01497)

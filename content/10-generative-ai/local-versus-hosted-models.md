@@ -1,37 +1,51 @@
 ---
 title: Local Versus Hosted Models
 slug: generative-ai/local-versus-hosted-models
-description: Concise guide to Local Versus Hosted Models in Generative AI and
-  Agentic Systems.
+description: "Trade-offs between self-run model deployments and provider-hosted APIs."
 area: generative-ai
 topics:
   - local-versus-hosted-models
 level: intermediate
 status: review
-page_type: concept
+page_type: comparison
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - model-serving.md
+  - quantization.md
+  - cost-and-latency-optimization.md
+  - data-privacy.md
+  - determinism-and-reproducibility.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Local Versus Hosted Models
 
-## Summary
+Local models run in infrastructure you control; hosted models run behind a provider API. The choice affects [model serving](model-serving.md), [data privacy](data-privacy.md), observability, upgrade cadence, and [cost and latency optimization](cost-and-latency-optimization.md).
 
-Choosing local versus hosted models is an architecture decision about control, cost, latency, privacy, reliability, and operational burden. It is not only a quality comparison.
+## Decision mechanism
 
-## Step-by-step example
+Compare the full workload: input/output volume, latency target, privacy class, reliability, context length, required tools, and operator skill. Local serving may need [quantization](quantization.md), batching, GPU memory management, and model lifecycle work. Hosted serving may simplify operations but requires provider contracts and drift monitoring for [determinism and reproducibility](determinism-and-reproducibility.md).
 
-A legal assistant may prototype with a hosted model, then benchmark a local model on the same golden set if privacy rules require local processing.
+## Concrete artifact
 
-## Common failure modes
+```yaml
+route:
+  pii_heavy_batch_extraction: local_model
+  public_chat_with_web_search: hosted_model
+checks:
+  - latency_p95
+  - quality_regression
+  - data_retention_policy
+```
 
-- Changing Local Versus Hosted Models without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Local Versus Hosted Models.
-- Shipping Local Versus Hosted Models without rollback, monitoring, and examples for known hard cases.
+## Caveats
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+Local is not automatically private if logs, prompts, or vector indexes are mishandled. Hosted is not automatically expensive if caching and routing avoid unnecessary large-model calls.
+
+## References
+
+- [OpenAI platform documentation: Data controls](https://platform.openai.com/docs/guides/your-data)
+- [OpenAI API documentation: Latency optimization](https://platform.openai.com/docs/guides/latency-optimization)
+- [OpenAI API documentation: Cost optimization](https://platform.openai.com/docs/guides/cost-optimization)

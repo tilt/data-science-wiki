@@ -1,7 +1,7 @@
 ---
 title: Markov Chains
 slug: probability-and-statistics/markov-chains
-description: Concise guide to Markov Chains in Probability and Statistics.
+description: "Discrete-state stochastic processes where the next-state distribution depends only on the current state."
 area: probability-and-statistics
 topics:
   - markov-chains
@@ -12,26 +12,60 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - random-walks.md
+  - renewal-theory.md
+  - markov-renewal-processes.md
+  - conditional-probability.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Markov Chains
 
-A Markov chain models a process that moves between states where the next-state distribution depends only on the current state. It is a compact model for sequential systems with limited memory.
+A Markov chain is a sequence of states whose future depends on the present state, not the full past. For a time-homogeneous discrete chain,
 
-## Core idea
+$$
+P(X_{t+1}=j\mid X_t=i,X_{t-1},\ldots,X_0)=P(X_{t+1}=j\mid X_t=i)=P_{ij}.
+$$
 
-The Markov property says the future is conditionally independent of the past given the present state. A transition matrix stores the probability of moving from each state to each other state.
+The transition matrix $P$ contains rows that sum to one, so each row is a [conditional probability](conditional-probability.md) distribution over the next state. A stationary distribution $\pi$ satisfies
 
-## Example
+$$
+\pi=\pi P.
+$$
 
-A customer can be in states `new`, `active`, `at risk`, or `churned`. A Markov chain estimates the probability of moving from active to at risk next month, or from at risk back to active after an intervention.
+[Random walks](random-walks.md) are a special case on integer or graph states. [Markov renewal processes](markov-renewal-processes.md) extend this structure by attaching random holding times to transitions.
 
-## Practical use
+## Worked computation
 
-Markov chains appear in queueing, reliability, ranking algorithms, customer lifecycle modelling, reinforcement learning foundations, and simulation. They are useful when states are interpretable and transition probabilities can be estimated.
+```python
+import numpy as np
 
-## Failure modes
+P = np.array([[.85, .15, 0.0], [.2, .65, .15], [.05, .35, .60]])
+w, v = np.linalg.eig(P.T)
+pi = np.real(v[:, np.argmin(np.abs(w - 1))])
+pi = pi / pi.sum()
+dist = np.array([1., 0., 0.])
+for k in [1, 5, 20]:
+    print(f"dist_after_{k}", np.round(dist @ np.linalg.matrix_power(P, k), 4).tolist())
+print("stationary", np.round(pi, 4).tolist(), "check", np.round(pi @ P, 4).tolist())
+```
 
-The memoryless assumption can be too strong. If transition probabilities depend on how long a user has been in a state or on earlier history, a simple Markov chain may mislead.
+Observed output:
+
+```text
+dist_after_1 [0.85, 0.15, 0.0]
+dist_after_5 [0.6049, 0.3102, 0.085]
+dist_after_20 [0.5155, 0.3526, 0.1319]
+stationary [0.5147, 0.3529, 0.1324] check [0.5147, 0.3529, 0.1324]
+```
+
+Starting in state 0, repeated multiplication moves the distribution close to the stationary distribution.
+
+## Caveats
+
+The memoryless assumption can be too strong when dwell time or earlier history matters. Rare transitions are hard to estimate, and nonstationary systems need time-varying transition probabilities.
+
+## References
+
+- [Markov chain](https://en.wikipedia.org/wiki/Markov_chain)
+- [SciPy statistics reference](https://docs.scipy.org/doc/scipy/reference/stats.html)

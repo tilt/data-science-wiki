@@ -1,37 +1,72 @@
 ---
 title: News Recommendation
 slug: domain-applications/news-recommendation
-description: Concise guide to News Recommendation in Domain Applications.
+description: "Ranking fresh articles under personalization, editorial, diversity, and feedback-loop constraints."
 area: domain-applications
 topics:
   - news-recommendation
-level: foundational
+level: intermediate
 status: review
-page_type: concept
+page_type: case-study
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - ../04-recommendation-systems/retrieval-and-ranking-architectures.md
+  - ../04-recommendation-systems/candidate-generation.md
+  - ../04-recommendation-systems/ranking.md
+  - ../04-recommendation-systems/evaluation-of-recommenders.md
+  - ../04-recommendation-systems/feedback-loops.md
+  - ../16-experimentation-and-evaluation/online-experiments.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# News Recommendation
 
-News recommendation ranks articles for readers under freshness, personalization, editorial, and diversity constraints. It differs from many product recommenders because item value decays quickly and public-interest considerations may matter.
+News recommendation ranks articles for readers under freshness, personalization, editorial, source-diversity, and public-interest constraints. Inputs include article text, section, entities, source, publish time, geography, reading history, subscriptions, device, and session context. Targets may be click, dwell, save, complaint, subscription retention, or editorially defined exposure.
 
-## Core signals
+## Framing
 
-Useful signals include article topic, recency, source, geography, device, reading history, collaborative patterns, editorial priorities, and session context. Candidate generation must include fresh content before enough interaction data exists.
+Most systems use [retrieval and ranking architectures](../04-recommendation-systems/retrieval-and-ranking-architectures.md): [candidate generation](../04-recommendation-systems/candidate-generation.md) pulls breaking, subscribed, similar, and collaborative candidates; [ranking](../04-recommendation-systems/ranking.md) scores them; a final policy enforces freshness and diversity. Offline [evaluation of recommenders](../04-recommendation-systems/evaluation-of-recommenders.md) can use historical impressions, but the live system changes what feedback exists, so [online experiments](../16-experimentation-and-evaluation/online-experiments.md) need guardrails for latency, complaints, source concentration, and important-topic exposure.
 
-## Example pipeline
+MIND is a canonical public news recommendation artifact. The project page says it contains about 160,000 English news articles and more than 15 million impression logs from 1 million users, with article text, categories, entities, clicks, non-clicks, and histories.
 
-A news app may generate candidates from breaking-news feeds, topic subscriptions, collaborative signals, and similar-article retrieval. A ranker scores relevance and engagement, then a final layer enforces diversity across topics and avoids showing too many articles from one source.
+## Executed Artifact
 
-## Evaluation
+This executed toy ranking computed nDCG and source coverage for five candidate articles.
 
-Offline evaluation can test historical clicks and dwell time, but online experiments are needed because ranking changes affect what users see and therefore what feedback is collected. Guardrails should include latency, complaint rate, source diversity, and exposure of important editorial categories.
+```python
+import numpy as np
 
-## Failure modes
+gains = np.array([3, 2, 0, 1, 2])
+order = np.array([0, 4, 1, 3, 2])
+sources = np.array(["local", "wire", "wire", "opinion", "local"])[order]
 
-News recommenders can create feedback loops, over-personalize, bury important stories, or chase sensational clicks. Freshness and editorial constraints should be explicit rather than patched on after ranking.
+def dcg(values):
+    return sum((2 ** value - 1) / np.log2(rank + 2) for rank, value in enumerate(values))
+
+ndcg = dcg(gains[order]) / dcg(sorted(gains, reverse=True))
+
+print("ndcg_at_5", round(ndcg, 3))
+print("unique_sources_at_5", len(set(sources)))
+print("top5_sources", sources.tolist())
+```
+
+Observed output:
+
+```text
+ndcg_at_5 1.0
+unique_sources_at_5 3
+top5_sources ['local', 'local', 'wire', 'opinion', 'wire']
+```
+
+The relevance ranking is perfect on the toy labels, but two sources appear twice. That is acceptable only if the editorial policy allows it; a real news ranker should report diversity and coverage beside relevance.
+
+## Failure Modes
+
+Fresh articles suffer cold start, sensational items can create [feedback loops](../04-recommendation-systems/feedback-loops.md), and narrow personalization can bury major public-interest stories. Click labels can also encode position bias and headline style rather than reader value. Keep an editorial override path and measure exposure by source, section, geography, and recency.
+
+## References
+
+- [MIND: MIcrosoft News Dataset](https://msnews.github.io/)
+- [Wu et al., MIND: A Large-scale Dataset for News Recommendation](https://aclanthology.org/2020.acl-main.331/)

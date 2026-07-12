@@ -26718,6 +26718,27 @@ var init_quartz = __esm({
   async "quartz.ts"() {
     "use strict";
     init_config_loader();
+    init_plugins();
+    Explorer({
+      sortFn: /* @__PURE__ */ __name((a, b) => {
+        const aMatch = (a.slugSegment ?? "").match(/^(\d+)-/);
+        const bMatch = (b.slugSegment ?? "").match(/^(\d+)-/);
+        const aSection = aMatch ? Number.parseInt(aMatch[1], 10) : void 0;
+        const bSection = bMatch ? Number.parseInt(bMatch[1], 10) : void 0;
+        if (aSection !== void 0 || bSection !== void 0) {
+          if (aSection === void 0) return 1;
+          if (bSection === void 0) return -1;
+          if (aSection !== bSection) return aSection - bSection;
+        }
+        if (!a.isFolder && !b.isFolder || a.isFolder && b.isFolder) {
+          return (a.displayName ?? "").localeCompare(b.displayName ?? "", void 0, {
+            numeric: true,
+            sensitivity: "base"
+          });
+        }
+        return a.isFolder ? -1 : 1;
+      }, "sortFn")
+    });
     inferredBaseUrl = process.env.QUARTZ_BASE_URL?.replace(/^https?:\/\//, "").replace(/\/$/, "");
     config = await loadQuartzConfig(inferredBaseUrl ? { baseUrl: inferredBaseUrl } : void 0);
     quartz_default = config;

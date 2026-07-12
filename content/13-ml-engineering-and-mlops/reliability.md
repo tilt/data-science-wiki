@@ -1,7 +1,7 @@
 ---
 title: Reliability
 slug: ml-engineering-and-mlops/reliability
-description: Concise guide to Reliability in ML Engineering and MLOps.
+description: "The ability of model-backed systems to keep acceptable behavior under failure."
 area: ml-engineering-and-mlops
 topics:
   - reliability
@@ -12,26 +12,47 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - service-level-objectives.md
+  - monitoring.md
+  - observability.md
+  - production-incident-response.md
+  - ../14-cloud-and-distributed-systems/reliability.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Reliability
 
-Reliability in MLOps means model-backed systems continue to deliver acceptable behavior despite code bugs, data delays, dependency failures, traffic spikes, and model degradation. It extends software reliability with data and model-specific failure modes.
+Reliability is the ability of a model-backed system to keep delivering acceptable behavior despite code bugs, data delays, dependency failures, traffic spikes, and model drift. It extends cloud reliability with data and decision correctness: a service can return `200 OK` while serving stale or harmful predictions.
 
-## Reliability targets
+## Mechanism
 
-Define reliability in terms users and operators can observe: uptime, latency, freshness, error rate, prediction availability, fallback quality, and decision correctness within acceptable bounds. A model service can be technically up while serving stale or invalid predictions.
+Reliability is specified through [service-level objectives](service-level-objectives.md), tested through failure drills, and operated through [monitoring](monitoring.md), [observability](observability.md), runbooks, and [production incident response](production-incident-response.md). For ML, the contract must include prediction availability, feature freshness, fallback quality, and delayed outcome quality, not only uptime.
 
-## Example
+## Artifact: Reliability Control Matrix
 
-A demand-forecasting pipeline may have a 99 percent job-success rate, but if failures happen during holiday periods the business impact is high. Reliability targets should include forecast freshness by planning deadline and alert when upstream data is late.
+```yaml
+failure_mode_controls:
+  feature_store_timeout:
+    detect: "feature_fetch_error_rate > 0.5% for 10m"
+    mitigate: "serve last known safe batch score for low-risk accounts"
+    test: "monthly dependency-failure game day"
+  stale_training_data:
+    detect: "training_snapshot_age_hours > 30"
+    mitigate: "block model registration"
+    test: "pipeline fixture with late upstream partition"
+  bad_model_release:
+    detect: "canary guardrail or delayed-label degradation"
+    mitigate: "rollback to registry://fraud-scorer/41"
+    test: "staging rollback exercise before launch"
+```
 
-## Controls
+The parallel cloud page on [reliability](../14-cloud-and-distributed-systems/reliability.md) covers general distributed-systems patterns. This page's ML-specific addition is that the correctness target depends on data semantics and model versions.
 
-Use health checks, retries with limits, idempotent jobs, data validation, versioned artifacts, canaries, fallbacks, monitoring, runbooks, and rollback plans. Test failure modes deliberately rather than waiting for production incidents.
+## Failure Modes
 
-## Failure modes
+Reliability efforts fail when fallbacks exist only on paper, when retraining jobs are treated as reliable because they finish, or when teams page on every noisy drift metric. Reliable systems practice the recovery path before a real incident.
 
-Reliability fails when teams monitor only infrastructure, ignore data freshness, or build fallback paths that have never been exercised.
+## References
+
+- [Google SRE Book: Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)
+- [Google SRE Book: Managing Incidents](https://sre.google/sre-book/managing-incidents/)

@@ -1,7 +1,7 @@
 ---
 title: Documentation
 slug: software-engineering/documentation
-description: Concise guide to Documentation in Software Engineering.
+description: Durable engineering records for contracts, operations, and decisions.
 area: software-engineering
 topics:
   - documentation
@@ -12,35 +12,53 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - "api-design.md"
+  - "technical-decision-records.md"
+  - "requirements-engineering.md"
+  - "testing.md"
+  - "code-review.md"
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Documentation
 
-Documentation preserves decisions, operating knowledge, and system boundaries. Good documentation helps a future reader decide what to do; it is not a transcript of everything the code already says.
+Documentation is a product interface for future maintainers. It should preserve contracts, operating knowledge, and decisions that code alone cannot explain. The best format depends on the job: tutorials teach a path, how-to guides solve a task, reference docs define complete contracts, and explanations preserve the model behind a system.
 
-## Types of documentation
+## Contract Mechanism
 
-Different documents serve different jobs:
+Useful engineering documentation has an owner, a source of truth, and a freshness rule. API docs should live near [API design](api-design.md) schemas. Runbooks should name alerts, dashboards, rollback commands, and escalation paths for [production integration](production-integration.md). Decision records should link to [technical decision records](technical-decision-records.md), not duplicate their reasoning. Requirements docs should carry acceptance criteria from [requirements engineering](requirements-engineering.md).
 
-- concept docs explain terms and mental models;
-- API docs describe contracts, inputs, outputs, and errors;
-- runbooks explain operational response;
-- decision records explain why a design was chosen;
-- tutorials teach a workflow through a concrete path;
-- reference docs give complete lookup information.
+## Executed Artifact
 
-ML projects also need dataset cards, model cards, evaluation reports, and experiment notes. These should name training data, known limitations, intended use, metric definitions, and release constraints.
+```python
+feature_doc = {
+    "owner": "search-platform",
+    "source_table": "events.ticket_views",
+    "refresh": "hourly at minute 10",
+    "null_semantics": "missing user_id -> no personalized features",
+    "backfill": "recompute by event_date, max 31 days",
+    "consumers": ["ticket-triage-v2", "agent-assist-v1"],
+}
+required = ["owner", "source_table", "refresh", "null_semantics", "backfill", "consumers"]
+missing = [field for field in required if not feature_doc.get(field)]
+print("missing_required_fields", missing)
+print("consumer_count", len(feature_doc["consumers"]))
+```
 
-## Example
+Observed output:
 
-For a feature pipeline, useful documentation states the feature owner, refresh cadence, source tables, null semantics, backfill process, downstream consumers, and known failure modes. A weak document says only "computes engagement features" and leaves readers to reverse-engineer meaning from SQL.
+```text
+missing_required_fields []
+consumer_count 2
+```
 
-## Maintenance rules
+This is a documentation contract, not just prose. A reviewer can check whether a feature doc names ownership, source data, null semantics, backfill behavior, and consumers before a change merges. The same idea supports [testing](testing.md): a fixture can assert that a contract file contains required fields.
 
-Keep docs close to the thing they describe, link to canonical pages instead of duplicating explanations, and update docs in the same change that modifies behavior. Prefer short durable explanations over long prose that becomes stale.
+## Failure Modes
 
-## Failure modes
+Documentation fails when it copies code, lacks an owner, or mixes current behavior with future intent. Stale docs should be fixed or deleted; preserving misleading prose is worse than having no doc. Repeated [code review](code-review.md) questions are strong candidates for a short checklist or reference page.
 
-Documentation fails when it has no owner, mixes design intent with outdated behavior, or duplicates source-of-truth definitions. Treat stale docs as defects: mark them, fix them, or remove them.
+## References
+
+- [Diataxis documentation framework](https://diataxis.fr/)
+- [Google developer documentation style guide](https://developers.google.com/style)

@@ -1,7 +1,7 @@
 ---
 title: Acronyms
 slug: references-and-glossary/acronyms
-description: Concise guide to Acronyms in References and Glossary.
+description: "Common acronyms used across the wiki, linked back to their canonical concept pages."
 area: references-and-glossary
 topics:
   - acronyms
@@ -13,6 +13,9 @@ prerequisites:
   - index.md
 related:
   - index.md
+  - glossary.md
+  - notation.md
+  - references.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -43,4 +46,5 @@ The retrieval metrics [mean reciprocal rank](../11-information-retrieval-and-sea
 
 - Expand an acronym on first use in long-form pages.
 - Prefer the canonical concept title in headings.
+- Link to [glossary](glossary.md), [notation](notation.md), or the canonical concept page when the short form alone is ambiguous.
 - Avoid inventing project-specific acronyms unless the page defines them.

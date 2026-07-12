@@ -1,68 +1,94 @@
 ---
 title: Matrix Factorization for Recommender Systems
 slug: recommendation-systems/matrix-factorization
-description: Matrix Factorization for Recommender Systems overview and practical notes.
+description: "Low-rank user and item factors learned from sparse observed ratings or interactions."
 area: recommendation-systems
 topics:
-  - "matrix-factorization"
-  - "latent-factor-models"
+  - matrix-factorization
+  - latent-factor-models
 level: intermediate
 status: review
 page_type: model
 aliases:
   - "Latent factor models"
   - "Funk SVD"
-prerequisites: []
-related: []
+prerequisites:
+  - utility-and-interaction-matrices.md
+related:
+  - alternating-least-squares.md
+  - funk-svd.md
+  - latent-factor-models.md
+  - sparse-utility-matrices-and-svd.md
+  - svd-versus-matrix-factorization.md
+  - weighted-matrix-factorization.md
+  - ../01-mathematical-foundations/singular-value-decomposition.md
 historical_context: false
-last_reviewed: 2026-07-10
-references:
-  - "koren-bell-volinsky-2009-matrix-factorization"
+last_reviewed: 2026-07-11
 ---
 # Matrix Factorization for Recommender Systems
 
-## Summary
+Matrix factorization represents each user and item with learned vectors, then scores a pair by their dot product. In [collaborative filtering](collaborative-filtering.md), this turns a sparse [utility matrix](utility-and-interaction-matrices.md) into dense latent coordinates: two users can look similar because their factors point toward the same item factors, even if they have rated few identical items.
 
-Recommender matrix factorization learns a vector for each user and a vector for each item. The predicted preference is usually a dot product $p_u^\top q_i$ plus optional bias terms. The vectors are latent factors: they are learned from behavior rather than hand-labelled as genres, price sensitivity, or expertise.
+## Defining math
 
-## Mathematical formulation
-
-For explicit feedback over observed pairs $\Omega$:
+For explicit ratings observed on $\Omega$, the basic objective is
 
 $$
-\min_{P,Q}
-\sum_{(u,i)\in\Omega}
-(r_{ui} - p_u^\top q_i)^2
-+
-\lambda
-\left(
-\lVert p_u\rVert_2^2 +
-\lVert q_i\rVert_2^2
-\right)
+\min_{P,Q}\sum_{(u,i)\in\Omega}(r_{ui}-p_u^\top q_i)^2+\lambda(\lVert p_u\rVert_2^2+\lVert q_i\rVert_2^2).
 $$
+
+Some production variants add biases, $\hat r_{ui}=\mu+b_u+b_i+p_u^\top q_i$, while [weighted matrix factorization](weighted-matrix-factorization.md) changes the loss for [implicit feedback](implicit-feedback.md). Unlike [classical SVD](classical-svd.md), the optimization is over observed or weighted entries; missing cells are not silently treated as zeros, which is the core issue in [sparse utility matrices and SVD](sparse-utility-matrices-and-svd.md).
 
 ## Intuition
 
-The model does not need to fill every missing cell in the utility matrix. It optimizes the cells that were observed, or treats unobserved cells as low-confidence examples in implicit-feedback variants. Regularization keeps sparse users and rare items from receiving extreme factors.
+The model compresses repeated co-preference patterns. If users who like quiet documentaries also like long-form interviews, the two item factors can land near the same direction, and a user factor aligned with that direction will score both highly. The factor dimensions are not guaranteed to be interpretable, but they are useful because they share statistical strength across sparse rows and columns.
 
 ## Worked example
 
-Suppose the latent dimension is two. A user factor might become high on "technical depth" and low on "short casual content." An item factor for a detailed machine-learning article may point in the same direction, creating a high dot product. The model never names those dimensions; the interpretation comes from inspecting high-scoring users and items.
+```python
+import numpy as np
+rng = np.random.default_rng(7)
+R = np.array([[5., 4., np.nan, 1.],
+              [4., np.nan, 1., 1.],
+              [1., 1., 5., 4.],
+              [np.nan, 1., 4., 5.]])
+obs = np.argwhere(~np.isnan(R))
+P = 0.1 * rng.normal(size=(4, 2))
+Q = 0.1 * rng.normal(size=(4, 2))
+for _ in range(2500):
+    rng.shuffle(obs)
+    for u, i in obs:
+        err = R[u, i] - P[u] @ Q[i]
+        pu = P[u].copy()
+        P[u] += 0.035 * (err * Q[i] - 0.03 * P[u])
+        Q[i] += 0.035 * (err * pu - 0.03 * Q[i])
+pred = P @ Q.T
+rmse = np.sqrt(np.mean([(R[u, i] - pred[u, i]) ** 2 for u, i in obs]))
+print("observed_rmse", round(float(rmse), 3))
+print("rounded_prediction_matrix")
+print(np.round(pred, 2))
+print("user0_unseen_scores", np.round(pred[0, [2]], 2).tolist())
+```
 
-Training usually follows these steps:
+Observed output:
 
-1. Build the interaction matrix and choose explicit or implicit feedback.
-2. Choose latent dimension, regularization, and loss.
-3. Train with SGD, [ALS](alternating-least-squares.md), or a pairwise ranking objective.
-4. Evaluate ranked recommendations for held-out interactions.
-5. Add serving-time rules for freshness, diversity, eligibility, and safety.
+```text
+observed_rmse 0.279
+rounded_prediction_matrix
+[[4.96 3.94 1.01 1.01]
+ [3.93 3.13 1.01 1.01]
+ [1.01 0.99 4.48 4.47]
+ [1.01 1.   4.5  4.49]]
+user0_unseen_scores [1.01]
+```
 
-## SVD versus recommender factorization
+The two-dimensional factors reconstruct the observed ratings and infer that user 0 probably dislikes item 2. [Alternating least squares](alternating-least-squares.md) solves a related objective by ridge-regression subproblems; [Funk SVD](funk-svd.md) popularized simple SGD updates for the same low-rank idea.
 
-Classical [singular value decomposition](../01-mathematical-foundations/singular-value-decomposition.md) factorizes a complete matrix with orthogonality constraints. Recommender matrix factorization is usually an optimization problem over sparse observations. Missing user-item pairs are unknown, not zeros, which is why ordinary SVD on a zero-filled matrix often gives misleading factors.
+## Caveats
 
-## Related methods
+The loss only sees logged data, so exposure bias, position bias, and popularity feedback can become factor geometry. Sparse users and rare items need regularization or [cold-start](cold-start-problem.md) fallbacks. Optimizing rating RMSE does not guarantee good top-k [ranking](ranking.md), so matrix factorization is usually evaluated as part of a retrieval or ranking pipeline.
 
-- [Singular Value Decomposition](../01-mathematical-foundations/singular-value-decomposition.md)
-- [Alternating Least Squares](alternating-least-squares.md)
-- [Implicit Feedback](implicit-feedback.md)
+## References
+
+- [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
+- [Hu, Koren, and Volinsky, 2008, Collaborative Filtering for Implicit Feedback Datasets](https://doi.org/10.1109/ICDM.2008.22)

@@ -1,87 +1,89 @@
 ---
 title: Ranking and Retrieval Metrics
 slug: information-retrieval-and-search/ranking-and-retrieval-metrics
-description: Concise explanations of precision@k, recall@k, MRR, NDCG, MAP, and source coverage.
+description: "Precision@k, recall@k, MAP, MRR, NDCG, and related measures for ranked retrieval."
 area: information-retrieval-and-search
 topics:
-  - "search-evaluation"
-  - "retrieval-metrics"
-  - "ranking-metrics"
+  - search-evaluation
+  - retrieval-metrics
+  - ranking-metrics
 level: intermediate
-status: draft
+status: review
 page_type: reference
 aliases:
-  - "Retrieval metrics"
-  - "Ranking metrics"
-  - "Precision recall MAP MRR NDCG"
+  - Retrieval metrics
+  - Ranking metrics
+  - Precision recall MAP MRR NDCG
 prerequisites:
-  - "search-evaluation.md"
+  - search-evaluation.md
 related:
-  - "../10-generative-ai/rag-evaluation.md"
-  - "precision-recall-map-mrr-ndcg.md"
+  - precision-recall-map-mrr-ndcg.md
+  - search-evaluation.md
+  - reranking.md
+  - hybrid-search.md
+  - ../10-generative-ai/rag-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
-references: []
 ---
 # Ranking and Retrieval Metrics
 
-## Summary
+Ranking metrics measure whether useful results appear early enough. They are the feedback loop for [BM25](bm25.md), [hybrid search](hybrid-search.md), [reranking](reranking.md), and RAG retrieval. The right metric depends on the task: one good result, many relevant results, or graded evidence quality.
 
-Ranking and retrieval metrics measure whether a search or retrieval system returns useful items near the top of the result list. They are central for search, recommender candidate generation, and RAG pipelines.
+## Defining math
 
-## Precision at k
-
-Precision at k measures the fraction of the top $k$ results that are relevant:
+For binary relevance in the top $k$:
 
 $$
-\mathrm{Precision@k} = \frac{\text{relevant results in top } k}{k}
+\operatorname{Precision@k}=\frac{\#\text{ relevant in top }k}{k},
+\qquad
+\operatorname{Recall@k}=\frac{\#\text{ relevant in top }k}{\#\text{ relevant in corpus}}.
 $$
 
-Use it when top-result quality matters and each false positive has a cost.
-
-## Recall at k
-
-Recall at k measures the fraction of all relevant items that appear in the top $k$:
+Average precision for one query averages precision at ranks where a relevant item appears:
 
 $$
-\mathrm{Recall@k} = \frac{\text{relevant results in top } k}{\text{all relevant results}}
+\operatorname{AP}=\frac{1}{R}\sum_{i=1}^n \operatorname{Precision@i}\,\mathbf 1\{\operatorname{rel}_i=1\}.
 $$
 
-Use it when missing relevant evidence is costly, as in RAG retrieval or legal/document search.
-
-## Mean reciprocal rank
-
-MRR focuses on the rank of the first relevant result:
+MRR uses the first relevant rank. NDCG handles graded labels:
 
 $$
-\mathrm{RR} = \frac{1}{\text{rank of first relevant result}}
+\operatorname{DCG@k}=\sum_{i=1}^k\frac{\operatorname{rel}_i}{\log_2(i+1)},
+\qquad
+\operatorname{NDCG@k}=\frac{\operatorname{DCG@k}}{\operatorname{IDCG@k}}.
 $$
 
-MRR averages reciprocal rank across queries. It is useful when one good result is enough.
+## Worked example
 
-## Normalized discounted cumulative gain
+```python
+import numpy as np
+from sklearn.metrics import ndcg_score
 
-NDCG supports graded relevance. It rewards relevant results near the top and discounts lower ranks:
+rel = np.array([3, 0, 2, 1, 0])
+binary = rel > 0
+k = 3
+precision = binary[:k].sum() / k
+recall = binary[:k].sum() / binary.sum()
+ap = np.mean([binary[:i + 1].sum() / (i + 1) for i, b in enumerate(binary) if b])
+rr = 1 / (np.argmax(binary) + 1)
+ndcg = ndcg_score([rel], [np.arange(len(rel), 0, -1)], k=5)
+print("p3", round(float(precision), 3), "r3", round(float(recall), 3),
+      "AP", round(float(ap), 3), "RR", round(float(rr), 3), "NDCG5", round(float(ndcg), 3))
+```
 
-$$
-\mathrm{DCG@k} = \sum_{i=1}^{k} \frac{rel_i}{\log_2(i+1)}
-$$
+Observed output:
 
-NDCG divides DCG by the ideal DCG for the same query, producing a normalized score.
+```text
+p3 0.667 r3 0.667 AP 0.806 RR 1.0 NDCG5 0.93
+```
 
-## Mean average precision
+The first result is relevant, so reciprocal rank is perfect. Recall@3 is not perfect because one relevant item is still below rank 3.
 
-MAP averages precision at each rank where a relevant item appears, then averages across queries. It rewards systems that retrieve many relevant items and rank them early.
+## Choosing metrics
 
-## Source coverage
+Use MRR when one answer is enough, precision@k when the visible page must be clean, recall@k when missing evidence is costly, MAP when many relevant documents should be found, and NDCG when labels are graded. For RAG, pair these with source coverage and answer-level [RAG evaluation](../10-generative-ai/rag-evaluation.md).
 
-Source coverage measures whether retrieval spans the sources needed to answer a query. In RAG, this may mean retrieving all required documents, all required sections, or at least one source from each required evidence category.
+## References
 
-## Choosing a metric
-
-- Use precision@k when users inspect only a few results.
-- Use recall@k when missing evidence is the main risk.
-- Use MRR when the first relevant hit matters.
-- Use NDCG when relevance is graded.
-- Use MAP when many relevant documents should be found and ranked well.
-- Use source coverage when answers require evidence from multiple sources.
+- [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Evaluation](https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-in-information-retrieval-1.html)
+- [scikit-learn API: ndcg_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html)

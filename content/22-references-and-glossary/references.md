@@ -1,7 +1,7 @@
 ---
 title: References
 slug: references-and-glossary/references
-description: Concise guide to References in References and Glossary.
+description: "Source policy for citations, page references, bibliography keys, and verifiable technical claims."
 area: references-and-glossary
 topics:
   - references
@@ -13,6 +13,9 @@ prerequisites:
   - index.md
 related:
   - index.md
+  - bibliography.md
+  - further-reading.md
+  - glossary.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -20,7 +23,7 @@ last_reviewed: 2026-07-11
 
 ## Summary
 
-References connect topic pages to source material. The wiki uses human-readable reference sections in pages and machine-readable bibliography keys in front matter for validation.
+References connect topic pages to source material. The wiki uses human-readable reference sections in pages and machine-readable bibliography keys in front matter for validation. [Further reading](further-reading.md) is for route recommendations; this page is for source policy.
 
 ## Reference policy
 
@@ -31,7 +34,7 @@ References connect topic pages to source material. The wiki uses human-readable 
 
 ## Page-level references
 
-When a page relies on a source, add a short `## References` section explaining the source in prose. If the source is in `references/bibliography.yml`, also add its key to the front matter under `references`.
+When a page relies on a source, add a short `## References` section with enough information to verify the claim. If the source is in the central [bibliography](bibliography.md), also add its key to the front matter under `references`.
 
 ## Common mistakes
 

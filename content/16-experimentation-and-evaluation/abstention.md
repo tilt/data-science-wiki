@@ -1,40 +1,80 @@
 ---
 title: Abstention
 slug: experimentation-and-evaluation/abstention
-description: Concise guide to Abstention in Experimentation and Evaluation.
+description: "Evaluating no-answer decisions as a trade-off between coverage and error severity."
 area: experimentation-and-evaluation
 topics:
   - abstention
+  - coverage
+  - confidence-thresholds
 level: intermediate
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - "Selective prediction"
+  - "Refusal evaluation"
 prerequisites:
-  - index.md
+  - calibration.md
 related:
-  - index.md
+  - calibration.md
+  - coverage.md
+  - risk-weighted-error-taxonomies.md
+  - llm-as-judge.md
+  - comparing-generative-ai-and-classical-ml-systems.md
+  - ../10-generative-ai/guardrails.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Abstention
 
-## Summary
+Abstention is the decision not to answer, classify, retrieve, or take an action when evidence or confidence is insufficient. It is a first-class outcome, not a fallback message. In generative systems it overlaps with refusals and [guardrails](../10-generative-ai/guardrails.md); in classifiers it is selective prediction based on score thresholds.
 
-Abstention is the decision not to answer, classify, or act when confidence or evidence is insufficient. It is a safety and quality mechanism, not only a fallback.
+## Defining statistics
 
-## Step-by-step example
+For threshold $\tau$, answer only when confidence $c_i\ge\tau$. The two basic evaluation quantities are
 
-A medical assistant should abstain when retrieved evidence does not support a specific answer, even if the model can produce plausible text.
+$$
+\text{coverage}(\tau)=\frac{1}{n}\sum_i \mathbf 1(c_i\ge\tau),
+$$
 
-## Common failure modes
+and answered error rate,
 
-- Choosing Abstention metrics that do not match the decision, risk, or user-visible failure.
-- Ignoring uncertainty, multiple comparisons, label quality, or segment-level disagreement.
-- Treating evaluation output as final truth without inspecting examples and domain-review conflicts.
+$$
+\text{error}(\tau)=\frac{\sum_i \mathbf 1(c_i\ge\tau)\mathbf 1(\hat y_i\ne y_i)}{\sum_i \mathbf 1(c_i\ge\tau)}.
+$$
 
-- Averaging away severe failures, minority slices, or uncertainty.
-- Treating a benchmark result as production readiness without reviewing examples.
+The threshold should be chosen with [calibration](calibration.md), [coverage](coverage.md), and [risk-weighted error taxonomies](risk-weighted-error-taxonomies.md), not accuracy alone.
 
-## Mechanism
+## Worked calculation
 
-Abstention introduces a decision threshold: answer only when confidence, evidence support, or policy conditions are sufficient. The system then has at least three outcomes: correct answer, incorrect answer, and no-answer. Evaluation must measure both error reduction and coverage loss.
+```python
+import numpy as np
+
+conf = np.array([.98,.91,.84,.79,.73,.68,.61,.55,.49,.42])
+correct = np.array([1,1,1,0,1,0,0,1,0,0])
+for thresh in [.5,.7,.8,.9]:
+    ans = conf >= thresh
+    coverage = ans.mean()
+    error = 1 - correct[ans].mean() if ans.any() else np.nan
+    print(f"threshold {thresh:.1f} coverage {coverage:.2f} answered_error {error:.2f} abstained {len(conf)-ans.sum()}")
+```
+
+Observed output:
+
+```text
+threshold 0.5 coverage 0.80 answered_error 0.38 abstained 2
+threshold 0.7 coverage 0.50 answered_error 0.20 abstained 5
+threshold 0.8 coverage 0.30 answered_error 0.00 abstained 7
+threshold 0.9 coverage 0.20 answered_error 0.00 abstained 8
+```
+
+Raising the threshold removes errors here but answers far fewer cases. If the unanswered cases are support tickets, the cost is human queue load; if they are medical questions, the cost may be preferable to unsupported advice.
+
+## Caveats
+
+Abstention can hide poor performance if reports only show answered accuracy. Refusal quality must be evaluated too: the system should explain limits, route to a safer workflow, or ask for missing evidence. For LLM systems, an [LLM-as-judge](llm-as-judge.md) rubric should score both unsafe answers and unnecessary refusals.
+
+## References
+
+- [scikit-learn documentation: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)

@@ -1,7 +1,7 @@
 ---
 title: Data Privacy
 slug: generative-ai/data-privacy
-description: Concise guide to Data Privacy in Generative AI and Agentic Systems.
+description: "Controls for what data enters prompts, retrieval, memory, logs, tools, and generated outputs."
 area: generative-ai
 topics:
   - data-privacy
@@ -12,25 +12,51 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - pii-protection.md
+  - prompt-injection.md
+  - guardrails.md
+  - memory.md
+  - tool-use-and-function-calling.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Data Privacy
 
-## Summary
+Data privacy in generative systems is a boundary problem. Sensitive data can leak through prompts, [memory](memory.md), retrieval indexes, [tool use](tool-use-and-function-calling.md), logs, citations, or generated outputs. [PII protection](pii-protection.md) is one control, not the whole privacy program.
 
-Data privacy controls what information is collected, sent to models, stored in logs, retrieved into context, and shown in outputs. Privacy failures often happen at system boundaries.
+## Mechanism
 
-## Step-by-step example
+A privacy contract should define data classes, allowed processors, retention windows, access filters, redaction rules, and logging policy before model calls. Retrieval should apply permissions before ranking. Tools should fetch private records only after user authorization. Prompt and response logs should store the minimum needed for debugging and evaluation.
 
-For an HR assistant, restrict retrieval by employee permissions, avoid logging raw sensitive messages, and fetch salary records only through audited tools when necessary.
+[Prompt injection](prompt-injection.md) matters because retrieved text can ask the model to reveal hidden data. Privacy controls should therefore be enforced outside the model: access checks, field-level filtering, redaction, audit logs, and deletion workflows.
 
-## Common failure modes
+## Concrete artifact
 
-- Changing Data Privacy without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Data Privacy.
-- Shipping Data Privacy without rollback, monitoring, and examples for known hard cases.
+```yaml
+fields:
+  employee_salary:
+    send_to_model: false
+    retrieval_filter: manager_only
+  support_ticket_text:
+    send_to_model: true
+    redact: [email, phone, card]
+  account_id:
+    send_to_model: true
+    transform: stable_hash
+logs:
+  store_raw_prompts: false
+  retention_days: 30
+  access: security_and_eval_team
+```
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+This policy is enforceable outside the model and testable with fixtures. A model instruction that says "do not reveal salaries" is not enough if salary fields are still retrieved and placed in context.
+
+## Caveats
+
+Summaries can still contain personal data. Synthetic examples copied from production tickets are production data unless de-identified. Redaction can break downstream retrieval or citation if identifiers are removed inconsistently, so privacy controls should be tested with realistic workflows.
+
+## References
+
+- [OpenAI platform documentation: Data controls](https://platform.openai.com/docs/guides/your-data)
+- [NIST AI Risk Management Framework 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
+- [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)

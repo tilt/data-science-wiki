@@ -1,53 +1,69 @@
 ---
-title: IN Context Learning
+title: In-Context Learning
 slug: generative-ai/in-context-learning
-description: Concise guide to IN Context Learning in Generative AI and Agentic Systems.
+description: "Task adaptation from examples placed in the prompt rather than from weight updates."
 area: generative-ai
 topics:
   - in-context-learning
-level: foundational
-status: draft
+level: intermediate
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - prompting.md
+  - foundation-models.md
+  - fine-tuning-versus-rag.md
+  - context-construction.md
+  - temperature-and-determinism.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# IN Context Learning
+# In-Context Learning
 
-## Summary
+In-context learning is the model's ability to infer a task pattern from examples in the prompt. It is a [prompting](prompting.md) technique, not weight training. Compared with [fine tuning versus RAG](fine-tuning-versus-rag.md), it is fast to change but limited by [context construction](context-construction.md).
 
-IN Context Learning belongs to generative AI systems. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Mechanism
 
-## Core idea
+A prompt supplies examples $(x_i,y_i)$ followed by a new input $x_*$. The model conditions on the whole sequence and estimates $p(y_*\mid x_1,y_1,\ldots,x_*)$. Example order, label balance, and decoding settings from [temperature and determinism](temperature-and-determinism.md) can change the result.
 
-- Define the inputs, outputs, and boundaries for IN Context Learning.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+## Executed artifact
 
-## Worked example
+```python
+import numpy as np
 
-Compare a simple baseline with an approach that uses IN Context Learning. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+examples = [("invoice overdue", "billing"), ("refund status", "support"), ("rain tomorrow", "weather")]
+query = "refund invoice"
+vocab = sorted(set(" ".join([text for text, _ in examples] + [query]).split()))
 
-## Practical checklist
+def bow(text):
+    return np.array([text.split().count(word) for word in vocab], dtype=float)
 
-- Define the system contract for IN Context Learning: inputs, outputs, evidence, tools, and refusal behavior.
-- Version prompts, models, retrieval indexes, tool schemas, and evaluation examples affected by IN Context Learning.
-- Review traces and hard cases before promoting IN Context Learning to production.
+def cosine(a, b):
+    denom = np.linalg.norm(a) * np.linalg.norm(b)
+    return 0.0 if denom == 0 else float(a @ b / denom)
 
-- Separate retrieval, context construction, model generation, validation, and post-processing.
-- Evaluate with golden examples, citations, groundedness, latency, and cost.
-- Add deterministic checks for schemas, permissions, and safety constraints.
-- Review failures by severity rather than treating all bad answers equally.
+query_vec = bow(query)
+scores = [(label, round(cosine(query_vec, bow(text)), 3)) for text, label in examples]
+print("IN_CONTEXT")
+print(sorted(scores, key=lambda item: -item[1]))
+```
 
-## Common failure modes
+Observed output:
 
-- Relying on model behavior for IN Context Learning when deterministic validation, permissions, or tool constraints are needed.
-- Judging IN Context Learning from fluent examples instead of traces, evidence use, schema validity, and hard negative cases.
-- Changing IN Context Learning without versioned prompts, models, indexes, and rollback evidence.
+```text
+IN_CONTEXT
+[('billing', 0.5), ('support', 0.5), ('weather', 0.0)]
+```
 
-- Mixing retrieval, reasoning, and formatting failures into one undiagnosed score.
-- Accepting fluent answers without evidence, citations, or schema validation.
+A toy bag-of-words nearest-example classifier ties between billing and support for `refund invoice`, illustrating why ambiguous demonstrations need clearer examples or a fallback question.
+
+## Caveats
+
+Examples can teach the wrong pattern, leak sensitive labels, or crowd out retrieved evidence. Regression tests should pin the exact prompt.
+
+## References
+
+- [Brown et al., 2020, Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)
+- [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)

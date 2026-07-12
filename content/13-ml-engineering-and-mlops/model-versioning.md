@@ -1,7 +1,7 @@
 ---
 title: Model Versioning
 slug: ml-engineering-and-mlops/model-versioning
-description: Concise guide to Model Versioning in ML Engineering and MLOps.
+description: "Immutable records of model behavior, lineage, evaluation evidence, and deployment state."
 area: ml-engineering-and-mlops
 topics:
   - model-versioning
@@ -12,26 +12,47 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - dataset-versioning.md
+  - experiment-tracking.md
+  - model-serving.md
+  - rollbacks.md
+  - ci-cd-for-ml.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Model Versioning
 
-Model versioning records the model artifact, code, data, configuration, and evaluation evidence associated with a release. It makes promotion, rollback, audit, and comparison possible.
+Model versioning records the complete behavior that may be served or audited: artifact, code, data, preprocessing, thresholds, environment, evaluation evidence, approval status, and deployment target. Versioning only the weight file is not enough for [rollbacks](rollbacks.md).
 
-## What a model version contains
+## Mechanism
 
-A useful model version should identify the artifact hash or registry ID, training code commit, dataset versions, feature definitions, hyperparameters, dependency environment, evaluation report, approval status, and intended deployment target. The version should be immutable once released.
+A candidate model is registered after training, compared against baselines, approved or rejected, and promoted through environments. The registry entry should point back to [experiment tracking](experiment-tracking.md) and [dataset versioning](dataset-versioning.md) records, then forward to [model-serving](model-serving.md) deployments.
 
-## Example
+## Artifact: Registry Entry
 
-A fraud model version might include model artifact `fraud-xgb-2026-07-10`, feature pipeline `features:v42`, training dataset `chargebacks_2026w27`, threshold `0.82`, and an evaluation report by country and payment type. If a rollback is needed, operators know exactly what behavior they are restoring.
+```yaml
+model_version:
+  name: fraud-scorer
+  version: 42
+  artifact_uri: "s3://ml-artifacts/fraud/42/model.pkl"
+  artifact_sha256: "2c8f..."
+  code_commit: "9b51c0e"
+  dataset: "fraud_training:2026-07-11.v3"
+  feature_pipeline: "features:v19"
+  threshold_config: "thresholds:v8"
+  eval_report: "s3://ml-reports/fraud/42.html"
+  approval:
+    status: approved_for_canary
+    approver: risk-ml-lead
+```
 
-## Lifecycle
+The version is immutable once approved. If a threshold changes, create a new behavior version or a separately versioned threshold config that the serving contract records.
 
-Register candidates after training, compare them against baselines, promote approved versions to staging, deploy with a rollout strategy, and retire versions only after no production traffic or audit requirement depends on them.
+## Failure Modes
 
-## Failure modes
+Versioning fails when models are overwritten in place, when preprocessing lives only in code, or when labels and thresholds are excluded from lineage. In regulated or high-risk systems, missing version links turn an incident into an audit problem.
 
-Versioning fails when the artifact is versioned but thresholds, preprocessing, prompts, retrieval indexes, or label definitions are not. Version the behavior, not only the serialized weights.
+## References
+
+- [MLflow Models documentation](https://mlflow.org/docs/latest/ml/model/)
+- [DVC: Versioning Data and Models](https://dvc.org/doc/use-cases/versioning-data-and-models)

@@ -1,7 +1,7 @@
 ---
 title: Reranking
 slug: information-retrieval-and-search/reranking
-description: Concise guide to Reranking in Information Retrieval and Search.
+description: "A second-stage ranking step that reorders retrieved candidates with richer features or models."
 area: information-retrieval-and-search
 topics:
   - reranking
@@ -12,38 +12,59 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - hybrid-search.md
+  - dense-retrieval.md
+  - bm25.md
+  - ranking-and-retrieval-metrics.md
+  - ../10-generative-ai/reranking.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Reranking
 
-Reranking reorders a smaller candidate set after an initial retrieval step. It lets a system use richer and more expensive signals only where they matter most.
+Reranking reorders a small candidate set after first-stage retrieval. [BM25](bm25.md), [dense retrieval](dense-retrieval.md), or [hybrid search](hybrid-search.md) tries to avoid missing plausible candidates; the reranker spends more compute to improve the final order shown to the user or passed to a RAG context builder.
 
-## Core idea
+## Defining mechanism
 
-Retrieval optimizes for broad candidate coverage under latency constraints. Reranking optimizes final ordering using features such as semantic similarity, freshness, authority, personalization, diversity, business rules, or cross-encoder scores.
-
-## Scoring formulation
-
-A reranker computes a score for each query-document pair after candidate generation:
+A reranker scores each candidate conditioned on the full query-document pair:
 
 $$
-s_i = f(q, d_i, x_i),
+s_i=f(q,d_i,x_i),
+\qquad
+\pi=\operatorname{argsort}_i(-s_i).
 $$
 
-where $q$ is the query, $d_i$ is a candidate document, and $x_i$ contains optional features such as freshness, source quality, or user context. The final ranking sorts candidates by $s_i$, often after filters or diversity constraints.
+The feature vector $x_i$ may include first-stage scores, exact-match indicators, freshness, authority, personalization, or policy features. A cross-encoder reranker folds $q$ and $d_i$ into one model input, which captures token interactions that dual-encoder [vector indexes](vector-indexes.md) cannot precompute.
 
-Cross-encoder rerankers jointly encode query and document text, which improves interaction modelling but costs more than comparing precomputed embeddings.
+## Worked example
 
-## Step-by-step example
+```python
+import numpy as np
 
-A search system retrieves 1,000 documents with BM25 and dense retrieval. A reranker scores the top 100 using the full query-document text, document freshness, source quality, and user context. The final page shows the top 10 after applying policy filters and diversity constraints.
+candidates = ["docA", "docB", "docC"]
+first_stage = np.array([0.91, 0.88, 0.82])
+freshness = np.array([0.1, 0.9, 0.3])
+exact_match = np.array([1, 0, 1])
+score = 0.65 * first_stage + 0.25 * exact_match + 0.10 * freshness
+print("first_stage", list(zip(candidates, first_stage.tolist())))
+print("reranked", [(candidates[i], round(float(score[i]), 3)) for i in np.argsort(score)[::-1]])
+```
 
-## Model choices
+Observed output:
 
-Lightweight rerankers can use gradient-boosted trees or linear models over engineered features. Neural rerankers, especially cross-encoders, can be more accurate but are slower because they jointly encode the query and each candidate.
+```text
+first_stage [('docA', 0.91), ('docB', 0.88), ('docC', 0.82)]
+reranked [('docA', 0.852), ('docC', 0.813), ('docB', 0.662)]
+```
 
-## Failure modes
+`docB` was strong in the first stage, but the reranker demotes it because it lacks exact-match evidence. This is the kind of trade-off that should be checked with [ranking metrics](ranking-and-retrieval-metrics.md) by query class.
 
-Rerankers fail when first-stage retrieval misses the right candidates, when training labels reflect position bias, or when expensive reranking causes unacceptable latency. Evaluate the full retrieval-and-reranking pipeline, not only the reranker in isolation.
+## Caveats
+
+Reranking cannot recover documents absent from the candidate set, so first-stage recall is a hard ceiling. Cross-encoders are latency-sensitive because they score each query-document pair separately. Training labels can also inherit position bias from an older ranker; offline gains should be verified against [online experiments](../16-experimentation-and-evaluation/online-experiments.md) when user traffic is available.
+
+## References
+
+- [Nogueira and Cho, Passage Re-ranking with BERT](https://arxiv.org/abs/1901.04085)
+- [Khattab and Zaharia, ColBERT](https://arxiv.org/abs/2004.12832)
+- [Elasticsearch Reference: Reciprocal rank fusion](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion)

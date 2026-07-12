@@ -18,7 +18,10 @@ prerequisites:
 related:
   - rolling-origin-validation.md
   - forecast-error-metrics.md
+  - forecast-evaluation.md
   - forecast-ensembling.md
+  - forecasting-pitfalls-and-worked-examples.md
+  - ../16-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -99,3 +102,12 @@ Metrics should be inspected per timestamp, per horizon, per item, across all ite
 - Computing preprocessing on the full dataset before fold creation.
 - Reporting only aggregate metrics.
 - Ignoring the computational cost of realistic retraining.
+
+## Connections
+
+Backtesting operationalizes [forecast evaluation](forecast-evaluation.md): folds define the evidence, while [forecast error metrics](forecast-error-metrics.md) define the score. [Rolling-origin validation](rolling-origin-validation.md) is the usual fold design, and [forecast ensembling](forecast-ensembling.md) must keep ensemble-fitting data separate from final evaluation.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Time series cross-validation](https://otexts.com/fpp3/tscv.html)
+- [scikit-learn TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)

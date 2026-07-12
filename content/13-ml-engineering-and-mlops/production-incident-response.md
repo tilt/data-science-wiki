@@ -1,7 +1,7 @@
 ---
 title: Production Incident Response
 slug: ml-engineering-and-mlops/production-incident-response
-description: Concise guide to Production Incident Response in ML Engineering and MLOps.
+description: "Coordinated mitigation and learning when a live ML system causes harm or risk."
 area: ml-engineering-and-mlops
 topics:
   - production-incident-response
@@ -12,26 +12,53 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - monitoring.md
+  - observability.md
+  - rollbacks.md
+  - reliability.md
+  - human-in-the-loop-systems.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Production Incident Response
 
-Production incident response coordinates detection, triage, mitigation, communication, and learning when a live system behaves badly. ML incidents may involve degraded model behavior even when infrastructure is healthy.
+Production incident response coordinates detection, triage, mitigation, communication, and learning when a live ML system behaves unsafely or unreliably. ML incidents include ordinary outages, but also wrong model behavior with green infrastructure metrics.
 
-## Incident workflow
+## Mechanism
 
-A practical workflow is: declare the incident, assign an incident lead, stabilize the system, preserve evidence, communicate status, identify root causes after mitigation, and record follow-up actions. During the incident, mitigation matters more than perfect explanation.
+The response loop is declare, assign roles, stabilize, preserve evidence, communicate, mitigate, and run a blameless review after recovery. During the incident, restoring acceptable behavior matters more than proving the root cause. Mitigation may mean [rollbacks](rollbacks.md), disabling automation, routing to [human-in-the-loop systems](human-in-the-loop-systems.md), freezing retraining, or lowering traffic.
 
-## ML-specific examples
+## Artifact: Incident Runbook Contract
 
-A recommender may start showing irrelevant items after a feature backfill. A moderation model may under-block a new abuse pattern. A forecasting job may publish stale demand estimates because an upstream feed stopped. Each case needs service signals, model metadata, data lineage, and rollback options.
+```yaml
+incident_type: model_behavior_degradation
+severity: SEV2
+declare_when:
+  - "primary decision SLO violated for 15m"
+  - "manual review queue exceeds 2x normal volume"
+roles:
+  incident_lead: ml-platform-oncall
+  comms: product-ops
+  data_owner: risk-data-eng
+first_15_minutes:
+  - freeze canary ramps
+  - snapshot model, feature, and threshold versions
+  - compare affected traffic by model_version and segment
+  - choose rollback or manual-review fallback
+evidence_to_preserve:
+  - prediction events
+  - feature freshness metrics
+  - model registry entry
+  - deployment revision
+```
 
-## Runbook contents
+This contract depends on [monitoring](monitoring.md) for detection and [observability](observability.md) for diagnosis. If those signals were not emitted before launch, responders will spend the incident reconstructing state.
 
-A runbook should name owners, dashboards, alert meanings, rollback commands, feature flags, dependency contacts, data freshness checks, and customer-impact communication paths. It should also state when to disable automation or switch to a conservative fallback.
+## Failure Modes
 
-## Failure modes
+Common failures are unclear authority, delayed customer communication, overwritten logs, and postmortems that stop at "bad model" instead of tracing data, code, review, and rollout controls. Reliability work is complete only when follow-up actions are owned and tracked.
 
-Incident response fails when ownership is unclear, evidence is overwritten, communications are delayed, or postmortems blame individuals instead of fixing systems.
+## References
+
+- [Google SRE Book: Managing Incidents](https://sre.google/sre-book/managing-incidents/)
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)

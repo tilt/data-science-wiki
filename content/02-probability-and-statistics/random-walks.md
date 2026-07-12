@@ -1,7 +1,7 @@
 ---
 title: Random Walks
 slug: probability-and-statistics/random-walks
-description: Concise guide to Random Walks in Probability and Statistics.
+description: "Processes built by accumulating random increments, producing paths whose variance grows over time."
 area: probability-and-statistics
 topics:
   - random-walks
@@ -12,26 +12,58 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - markov-chains.md
+  - law-of-large-numbers.md
+  - central-limit-theorem.md
+  - ../05-time-series-and-forecasting/autoregressive-models.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Random Walks
 
-A random walk is a process formed by accumulating random steps. It is a simple model for paths, diffusion, financial price intuition, and stochastic movement through state spaces.
+A random walk accumulates random steps. In one dimension,
 
-## Core idea
+$$
+S_n=S_0+\sum_{i=1}^n X_i,
+$$
 
-At each time step, the process moves by a random increment. In one dimension, a simple symmetric random walk moves plus one or minus one with equal probability. The current value is the sum of previous steps.
+where the increments $X_i$ are often iid with mean $\mu$ and variance $\sigma^2$. Then
 
-## Example
+$$
+\mathbb E[S_n]=S_0+n\mu, \qquad \operatorname{Var}(S_n)=n\sigma^2.
+$$
 
-If a score starts at zero and each event adds +1 for success or -1 for failure, the score follows a random-walk-like path. Individual paths can wander far even when the expected step is zero.
+A simple symmetric random walk has $X_i\in\{-1,1\}$ with equal probability. It is also a [Markov chain](markov-chains.md), because the next position depends on the current position and one new step.
 
-## Practical use
+## Worked simulation
 
-Random walks help explain variance growth over time, hitting times, diffusion, Markov chains, and some baseline time-series models. They also appear in graph algorithms through random walks over nodes.
+```python
+import numpy as np
 
-## Failure modes
+rng = np.random.default_rng(20260711)
+steps = rng.choice([-1, 1], size=(20000, 200))
+walk = steps.cumsum(axis=1)
+final = walk[:, -1]
+print("final_mean", round(final.mean(), 3),
+      "final_var", round(final.var(ddof=1), 3),
+      "theory_var", 200)
+print("P(hit_20_by_200)", round((walk.max(axis=1) >= 20).mean(), 4))
+```
 
-A random walk is not a good forecasting model for every drifting series. Real systems may have mean reversion, seasonality, structural breaks, or bounded states.
+Observed output:
+
+```text
+final_mean -0.02 final_var 201.079 theory_var 200
+P(hit_20_by_200) 0.1608
+```
+
+The mean final position is near zero, but variance grows linearly with time. Individual paths can hit high levels even when the expected step is zero.
+
+## Connections and caveats
+
+The [law of large numbers](law-of-large-numbers.md) says average step size converges; the [central limit theorem](central-limit-theorem.md) explains why $S_n/\sqrt n$ is approximately normal. Random walk baselines appear in time series, but real series can have mean reversion, seasonality, bounded states, and structural breaks.
+
+## References
+
+- [Random walk](https://en.wikipedia.org/wiki/Random_walk)
+- [OpenStax Introductory Statistics 2e, Chapter 7 introduction](https://openstax.org/books/introductory-statistics-2e/pages/7-introduction)

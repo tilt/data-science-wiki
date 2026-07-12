@@ -1,7 +1,7 @@
 ---
 title: Vector Databases
 slug: generative-ai/vector-databases
-description: Concise guide to Vector Databases in Generative AI and Agentic Systems.
+description: "Embedding indexes with metadata, filtering, and nearest-neighbor search for retrieval systems."
 area: generative-ai
 topics:
   - vector-databases
@@ -12,25 +12,53 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - embeddings.md
+  - retrieval-pipelines.md
+  - hybrid-retrieval.md
+  - reranking.md
+  - rag.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Vector Databases
 
-## Summary
+Vector databases store [embeddings](embeddings.md) together with document metadata so a query embedding can retrieve semantically nearby records. In [RAG](rag.md), the vector store is not the whole retrieval system; it is one stage between ingestion, filtering, [hybrid retrieval](hybrid-retrieval.md), [reranking](reranking.md), and context packing.
 
-Vector databases store embeddings and support nearest-neighbor search. In generative-AI systems they retrieve semantically similar chunks, documents, images, users, or items.
+## Defining mechanism
 
-## Step-by-step example
+Given normalized corpus vectors $x_i \in \mathbb{R}^d$ and a normalized query vector $q$, cosine search is equivalent to maximizing the dot product:
 
-For policy RAG, store each chunk vector with document ID, section, date, and permissions; filter by permissions and version before generation.
+$$
+\operatorname{score}(q,x_i)=q^\top x_i.
+$$
 
-## Common failure modes
+Exact search computes that score for every vector. Production systems usually use approximate nearest-neighbor indexes such as HNSW or IVF-style partitioning to trade recall for latency and memory. The query path should apply authorization and freshness filters before unsafe chunks can reach [context construction](context-construction.md); filtering after retrieval can silently drop all useful evidence or expose records before policy checks.
 
-- Changing Vector Databases without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Vector Databases.
-- Shipping Vector Databases without rollback, monitoring, and examples for known hard cases.
+## Concrete artifact
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+```json
+{
+  "id": "policy:refunds:chunk-007",
+  "embedding_model": "text-embedding-3-large",
+  "embedding_version": "2026-07-10",
+  "text_sha256": "7b6f1f...",
+  "metadata": {
+    "document": "refund_policy",
+    "policy_version": "2026-07",
+    "acl": ["support", "billing"],
+    "valid_from": "2026-07-01"
+  }
+}
+```
+
+This record is useful because it ties the vector to the chunk text, model version, permissions, and policy version. When the corpus is re-embedded, thresholds, cached neighbors, and evaluation baselines should be treated as index-version-specific.
+
+## Caveats
+
+Nearest neighbor is not the same as answer relevance. Dense retrieval can miss exact identifiers, dates, and rare terms; lexical retrieval can miss paraphrases. Approximate indexes can miss true neighbors, and metadata filters can dominate quality. Evaluate recall before [reranking](reranking.md), after reranking, and after final context packing.
+
+## References
+
+- [Faiss documentation](https://faiss.ai/)
+- [OpenAI API documentation: Embeddings](https://platform.openai.com/docs/guides/embeddings)
+- [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)

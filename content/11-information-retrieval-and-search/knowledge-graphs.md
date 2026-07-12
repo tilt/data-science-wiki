@@ -1,36 +1,73 @@
 ---
 title: Knowledge Graphs
 slug: information-retrieval-and-search/knowledge-graphs
-description: Concise guide to Knowledge Graphs in Information Retrieval and Search.
+description: "Entity-relation graphs that support structured retrieval, joins, and explainable navigation."
 area: information-retrieval-and-search
 topics:
   - knowledge-graphs
 level: advanced
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - knowledge graph
 prerequisites:
   - index.md
 related:
-  - index.md
+  - graph-based-retrieval.md
+  - literature-management-search-systems.md
+  - elasticsearch.md
+  - hybrid-search.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Knowledge Graphs
 
-## Summary
+A knowledge graph stores entities and typed relations as a graph. In search, it supplies structure that text alone cannot: aliases, entity disambiguation, typed filters, relation traversal, and explanations. It is a natural partner for [graph-based retrieval](graph-based-retrieval.md) and [hybrid search](hybrid-search.md).
 
-Knowledge graphs represent entities and relationships as structured nodes and edges. They support retrieval, reasoning, data integration, and explainable navigation.
+## Defining mechanism
 
-## Step-by-step example
+RDF-style knowledge graphs use triples:
 
-A museum graph can connect artists, works, periods, places, and exhibitions so search can traverse relationships rather than only text.
+$$
+(s,p,o) = (\text{subject},\text{predicate},\text{object}).
+$$
 
-## Common failure modes
+A SPARQL-like graph pattern retrieves subjects that satisfy joins over triples. For example, "papers that use BM25 and are evaluated on MS MARCO" is a two-edge conjunction over the same subject.
 
-- Optimizing Knowledge Graphs on aggregate relevance while missing important query classes and hard negatives.
-- Evaluating retrieval components separately when the user sees the combined retrieval, reranking, filtering, and presentation pipeline.
-- Ignoring index freshness, permissions, latency, and failure behavior under empty or ambiguous queries.
+## Worked example
 
-- Confusing retrieval quality with downstream answer quality.
-- Ignoring freshness, permissions, metadata filters, and operational latency.
+```python
+triples = [
+    ("paperA", "uses", "bm25"),
+    ("paperA", "evaluated_on", "msmarco"),
+    ("paperB", "uses", "dense_retrieval"),
+    ("paperB", "evaluated_on", "msmarco"),
+]
+answers = sorted(
+    s for s, p, o in triples
+    if p == "evaluated_on" and o == "msmarco"
+    and any(s == s2 and p2 == "uses" and o2 == "bm25" for s2, p2, o2 in triples)
+)
+print("triples", len(triples), "query_result", answers)
+```
+
+Observed output:
+
+```text
+triples 4 query_result ['paperA']
+```
+
+Lexical search could find both papers for `MS MARCO`, but the graph query enforces the relation pattern: the same paper must both use BM25 and be evaluated on the dataset.
+
+## Where it fits
+
+Knowledge graphs help [literature-management search systems](literature-management-search-systems.md) connect papers, methods, datasets, authors, and notes. They also help [Elasticsearch](elasticsearch.md)-style systems with entity enrichment: a document mentioning `Robertson` can link to the intended researcher, not just the surface string.
+
+## Caveats
+
+Schema design is the hard part. Overly rigid ontologies slow ingestion; overly loose predicates become unqueryable. Entity resolution errors are costly because one wrong merge contaminates every downstream traversal. Keep provenance on edges so users can inspect why a relationship exists.
+
+## References
+
+- [W3C Recommendation: RDF 1.1 Concepts and Abstract Syntax](https://www.w3.org/TR/rdf11-concepts/)
+- [W3C Recommendation: SPARQL 1.1 Query Language](https://www.w3.org/TR/sparql11-query/)

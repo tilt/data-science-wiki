@@ -1,7 +1,7 @@
 ---
 title: Predictive Maintenance
 slug: time-series-and-forecasting/predictive-maintenance
-description: Concise guide to Predictive Maintenance in Time-Series Forecasting.
+description: Forecasting failure risk, degradation, or remaining useful life from equipment time series.
 area: time-series-and-forecasting
 topics:
   - predictive-maintenance
@@ -12,25 +12,31 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - forecast-monitoring.md
+  - concept-drift-in-forecasting.md
+  - energy-consumption-forecasting.md
+  - prediction-intervals.md
+  - ../18-domain-applications/predictive-maintenance.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Predictive Maintenance
 
-## Summary
+Predictive maintenance uses time-series signals to forecast failure risk, degradation state, or remaining useful life. The forecast is valuable only if it creates enough lead time for an action: inspection, part replacement, load reduction, or planned shutdown.
 
-Predictive maintenance forecasts failures, degradation, or remaining useful life so maintenance can be scheduled before costly breakdowns. It combines time-series signals with operational decision costs.
+There are several target formulations. A binary risk model estimates whether failure will occur within a future window. A remaining-useful-life model estimates time until failure. A degradation model forecasts a continuous health indicator such as vibration, temperature, pressure, or error rate. These targets have different censoring problems. If a machine is repaired preventively, the true failure time is not observed; if an alarm policy already controls maintenance, labels partly reflect the old policy.
 
-## Step-by-step example
+The time-series design must align sensor history, operating context, maintenance events, and failure definitions. Rolling windows can summarize vibration spectra or temperature trends. [Kalman filters](kalman-filters.md) and [state-space models](state-space-models.md) can track latent health states when measurements are noisy. [Prediction intervals](prediction-intervals.md) help separate normal variation from unusual degradation.
 
-A vibration sensor model may estimate rising failure risk over the next week and trigger inspection only when risk exceeds a cost-based threshold.
+Cost asymmetry is severe. False positives waste technician time and parts; false negatives cause downtime or safety risk. Lead-time constraints mean a model with excellent same-hour failure detection may be operationally useless. Evaluation should measure alarm precision, recall, lead time, downtime avoided, and segment performance by asset type and operating regime.
 
-## Common failure modes
+Production maintenance models need drift checks because sensors are recalibrated, parts are replaced, operating loads change, and failure modes evolve. Those concerns tie predictive maintenance directly to [forecast monitoring](forecast-monitoring.md) and [concept drift in forecasting](concept-drift-in-forecasting.md).
 
-- Evaluating Predictive Maintenance with random splits that leak future information into training.
-- Reporting one average error while hiding horizon, season, segment, or peak-period failures.
-- Ignoring calendar effects, data revisions, missing timestamps, or operational constraints on when forecasts are available.
+## Connections
 
-- Ignoring horizon-specific error, calendar effects, missing periods, or regime changes.
-- Reporting point accuracy without checking uncertainty, slices, and operational cost.
+Predictive maintenance turns sensor histories into forecasts of failure risk or remaining useful life. The broader domain workflow is covered in [predictive maintenance](../18-domain-applications/predictive-maintenance.md), while forecast uncertainty and monitoring connect back to [prediction intervals](prediction-intervals.md) and [forecast monitoring](forecast-monitoring.md).
+
+## References
+
+- [NASA Prognostics Center of Excellence Data Repository](https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository)
+- [Saxena et al., On Applying the Prognostic Performance Metrics](https://papers.phmsociety.org/index.php/phmconf/article/view/1621)

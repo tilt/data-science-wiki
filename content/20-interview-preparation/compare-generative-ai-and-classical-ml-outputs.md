@@ -15,6 +15,12 @@ prerequisites:
   - "../16-experimentation-and-evaluation/golden-datasets.md"
 related:
   - "../16-experimentation-and-evaluation/comparing-generative-ai-and-classical-ml-systems.md"
+  - "../16-experimentation-and-evaluation/golden-datasets.md"
+  - "../16-experimentation-and-evaluation/paired-evaluation.md"
+  - "../10-generative-ai/rag-evaluation.md"
+  - "../03-classical-machine-learning/evaluation-metrics.md"
+  - evaluation.md
+  - generative-ai.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -22,26 +28,31 @@ last_reviewed: 2026-07-11
 
 ## Answer
 
-Decompose the task, compare shared outcomes such as correctness, cost, latency, calibration, coverage, and business utility, then add generative-specific measures such as factuality, citation correctness, groundedness, instruction following, and tool-call validity.
+Compare systems by the workflow decision and risk, not by whether the output is fluent text or a fixed label. Use shared measures such as correctness, cost, latency, calibration, coverage, and user impact, then add generative-specific checks for groundedness, citation support, instruction following, schema validity, refusal quality, and unsafe tool behavior.
 
 ## What a strong answer adds
 
-1. Define the decision the system supports.
-2. Identify shared metrics: accuracy, precision, recall, calibration, cost, latency, and user impact.
-3. Add output-specific criteria for generative systems: groundedness, citation support, schema validity, refusal quality, and severe-error rate.
-4. Use the same examples for both systems where possible.
-5. Compare failures by severity rather than only by average score.
+1. Start with the decision: triage, search, recommendation, forecast, support response, or action.
+2. Use the same examples where possible through [golden datasets](../16-experimentation-and-evaluation/golden-datasets.md) or [paired evaluation](../16-experimentation-and-evaluation/paired-evaluation.md).
+3. Keep shared [evaluation metrics](../03-classical-machine-learning/evaluation-metrics.md) when outputs overlap: accuracy, precision, recall, calibration, ranking quality, latency, and cost.
+4. Add generative checks: factual support, citation correctness, groundedness, schema validity, refusal behavior, and severe-error rate.
+5. Compare failures by severity and recoverability, not only by average score.
 
-## Worked example
+## Interview artifact
 
-For document triage, a classical classifier may output a label and probability. A generative system may output a label, explanation, extracted fields, and citations. Compare the label accuracy for both. Then separately score the generative explanation for factual support and whether cited spans actually justify the claim.
+For document triage, a classical model might output `{label: "legal", probability: 0.82}`. A generative system might output a label, rationale, extracted fields, citations, and a suggested next action. Compare label accuracy for both systems, then separately score the generative rationale for support in cited spans, field validity, and whether the suggested action is allowed. This is the interview version of [Comparing Generative AI and Classical ML Systems](../16-experimentation-and-evaluation/comparing-generative-ai-and-classical-ml-systems.md).
 
 ## Common follow-ups
 
-- Generative systems often need human or rubric-based evaluation in addition to exact metrics.
-- Classical systems may be easier to calibrate and monitor when outputs are fixed labels.
-- The better choice depends on the workflow, not on whether the output is more fluent.
+- **"Which system is better?"** The one with lower risk-adjusted error and better workflow utility under cost, latency, and maintenance constraints.
+- **"Can LLM-as-judge replace labels?"** It can help grade semantic qualities, but high-risk claims still need human review, deterministic checks, or source-grounded rubrics.
+- **"What would block launch?"** Unsupported claims, malformed outputs feeding downstream systems, poor refusal behavior, degraded calibration, or unacceptable errors in high-risk slices.
 
-## Canonical concept
+## Canonical links
 
-Read the topic page: [Comparing Generative AI and Classical ML Systems](../16-experimentation-and-evaluation/comparing-generative-ai-and-classical-ml-systems.md).
+Use [Evaluation](evaluation.md) for the interview evaluation map, [Generative AI](generative-ai.md) for the system-design map, and [RAG Evaluation](../10-generative-ai/rag-evaluation.md) for grounded answer checks.
+
+## References
+
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+- [scikit-learn User Guide: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)

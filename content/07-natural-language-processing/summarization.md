@@ -1,7 +1,7 @@
 ---
 title: Summarization
 slug: natural-language-processing/summarization
-description: Concise guide to Summarization in Natural Language Processing.
+description: "Condensing text while preserving the information required for a reader or downstream task."
 area: natural-language-processing
 topics:
   - summarization
@@ -12,25 +12,70 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - language-modelling.md
+  - decoder-only-transformers.md
+  - semantic-textual-similarity.md
+  - text-classification.md
+  - evaluation-of-nlp-systems.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Summarization
 
-## Summary
+Summarization condenses one or more texts for a purpose: incident handoff, meeting recap, article abstract, legal brief, or search-result snippet. Extractive summarization selects source spans; abstractive summarization uses [language modelling](language-modelling.md) to generate new text. [Decoder-only transformers](decoder-only-transformers.md) are common generators, while [semantic textual similarity](semantic-textual-similarity.md) helps detect redundancy.
 
-Summarization condenses one or more texts while preserving the information needed by a target audience. It can be extractive, abstractive, query-focused, or structured.
+## Defining mechanism
 
-## Step-by-step example
+An extractive centroid baseline scores each sentence by similarity to the document centroid:
 
-A support-ticket summary may include issue, product, attempted fixes, current status, and next action rather than a generic paragraph.
+$$
+c=\frac{1}{m}\sum_{j=1}^m x_j,\qquad \operatorname{score}(s_i)=x_i^\top c.
+$$
 
-## Common failure modes
+Abstractive systems instead model
 
-- Training Summarization on ambiguous labels or annotation rules that annotators apply inconsistently.
-- Evaluating only clean examples while long, multilingual, noisy, or domain-specific text fails.
-- Ignoring entity, span, or document-level errors because the aggregate metric looks acceptable.
+$$
+P(y_{1:T}\mid x)=\prod_t P(y_t\mid y_{<t},x),
+$$
 
-- Domain shift in vocabulary, style, language, or document structure.
-- Evaluating surface form while missing semantic correctness or downstream utility.
+then decode a summary sequence. The key evaluation question is whether the output preserves decision-critical facts, not whether it is merely fluent.
+
+## Worked example
+
+```python
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+np.random.seed(7)
+sents = [
+    "The database migration finished at 09:00 with no failed checks.",
+    "Checkout latency rose after the deployment and triggered alerts.",
+    "Support tickets mention slow payments and duplicate retries.",
+    "Engineers rolled back the payment service and latency returned to normal.",
+]
+X = TfidfVectorizer(stop_words="english").fit_transform(sents)
+centroid = np.asarray(X.mean(axis=0)).ravel()
+scores = np.asarray(X @ centroid).ravel()
+order = np.argsort(scores)[::-1][:2]
+print("scores", [round(float(s), 3) for s in scores])
+print("selected", [sents[i] for i in sorted(order)])
+```
+
+Observed output:
+
+```text
+scores [0.25, 0.275, 0.25, 0.275]
+selected ['Checkout latency rose after the deployment and triggered alerts.', 'Engineers rolled back the payment service and latency returned to normal.']
+```
+
+The selected sentences capture the incident and resolution, but omit the support-ticket evidence. That omission may be fine for a status update and wrong for a customer-support handoff.
+
+## Caveats
+
+Reference-overlap metrics can miss factual errors, omissions, and unsupported claims. Abstractive systems can invent details; extractive systems can preserve irrelevant boilerplate. Define the summary schema and audience before evaluating, and include factual checks in [evaluation of NLP systems](evaluation-of-nlp-systems.md).
+
+## References
+
+- [Mihalcea and Tarau, TextRank: Bringing Order into Text](https://aclanthology.org/W04-3252/)
+- [Lewis et al., BART: Denoising Sequence-to-Sequence Pre-training](https://arxiv.org/abs/1910.13461)
+- [Papineni et al., BLEU: a Method for Automatic Evaluation of Machine Translation](https://aclanthology.org/P02-1040/)

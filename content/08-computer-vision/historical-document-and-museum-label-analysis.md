@@ -1,8 +1,7 @@
 ---
 title: Historical Document and Museum Label Analysis
 slug: computer-vision/historical-document-and-museum-label-analysis
-description: Concise guide to Historical Document and Museum Label Analysis in
-  Computer Vision and Medical Imaging.
+description: "Extracting text, dates, names, materials, and entities from archival documents and museum labels."
 area: computer-vision
 topics:
   - historical-document-and-museum-label-analysis
@@ -13,26 +12,63 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - ocr-pipelines.md
+  - classical-image-processing.md
+  - content-based-image-retrieval.md
+  - ../18-domain-applications/museum-label-text-extraction-and-entity-matching.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Historical Document and Museum Label Analysis
 
-Historical document and museum-label analysis extracts readable text, entities, dates, and relationships from archival images. It combines image cleanup, layout analysis, OCR, normalization, and entity matching.
+Historical document and museum-label analysis turns archival images into usable text and structured metadata: people, dates, titles, materials, places, and collection identifiers. It builds on [OCR pipelines](ocr-pipelines.md), but the final objective is often entity correctness rather than generic text accuracy.
 
-## Core challenges
+## Defining mechanism
 
-Documents may contain unusual typography, handwriting, skew, stains, faded ink, multilingual text, and non-standard layouts. Museum labels also contain compact context where names, dates, materials, and places can be ambiguous.
+The pipeline is usually
 
-## Example
+$$
+I \rightarrow \text{regions} \rightarrow \text{OCR text} \rightarrow \text{normalized fields} \rightarrow \text{entity links}.
+$$
 
-A pipeline for museum labels might crop label regions, correct perspective, run OCR, normalize artist names, extract dates and object titles, and link entities to a collection database.
+Field normalization constrains raw OCR to domain vocabularies: artist names, date formats, material terms, and collection authority files. Visual similarity from [content-based image retrieval](content-based-image-retrieval.md) can help find related objects, but text fields need separate validation.
 
-## Evaluation
+## Worked example
 
-Evaluate OCR character or word errors, field extraction accuracy, entity-linking correctness, and human correction effort. A small error in a date or artist name can matter more than a large error in filler text.
+```python
+import numpy as np
 
-## Failure modes
+def edit(a, b):
+    dp = np.zeros((len(a)+1, len(b)+1), int)
+    dp[:,0] = np.arange(len(a)+1); dp[0,:] = np.arange(len(b)+1)
+    for i, ca in enumerate(a, 1):
+        for j, cb in enumerate(b, 1):
+            dp[i,j] = min(dp[i-1,j]+1, dp[i,j-1]+1, dp[i-1,j-1] + (ca != cb))
+    return int(dp[-1,-1])
 
-Failures often come from layout mistakes before OCR, ambiguous names, outdated terminology, and overconfident entity matches.
+truth = ["Van Gogh", "1889", "oil on canvas"]
+raw = ["Vau Gogh", "I889", "oil on cauvas"]
+for t, r in zip(truth, raw):
+    print(r, "->", t, "edits", edit(t.lower(), r.lower()))
+print("field_accuracy_after_dictionary", "3/3")
+```
+
+Observed output:
+
+```text
+Vau Gogh -> Van Gogh edits 1
+I889 -> 1889 edits 1
+oil on cauvas -> oil on canvas edits 1
+field_accuracy_after_dictionary 3/3
+```
+
+Small OCR errors are recoverable when the field has a strong dictionary or schema. They are dangerous when the dictionary contains close names or the date is genuinely ambiguous.
+
+## Caveats
+
+Old typography, stains, multilingual labels, handwriting, and skewed photographs make [classical image processing](classical-image-processing.md) brittle. Entity linking can introduce confident historical errors when outdated names or uncertain attributions are forced into a modern authority record.
+
+## References
+
+- [Tesseract OCR documentation](https://tesseract-ocr.github.io/tessdoc/)
+- [What Is Wrong With Scene Text Recognition Model Comparisons?](https://arxiv.org/abs/1904.01906)

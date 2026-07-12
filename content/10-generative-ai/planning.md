@@ -1,53 +1,56 @@
 ---
 title: Planning
 slug: generative-ai/planning
-description: Concise guide to Planning in Generative AI and Agentic Systems.
+description: "Explicit intermediate task state used to choose actions, order dependencies, and stop agent workflows."
 area: generative-ai
 topics:
   - planning
-level: foundational
-status: draft
+level: advanced
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - agent-loops.md
+  - agentic-systems.md
+  - tool-routing.md
+  - reflection-and-reviewer-patterns.md
+  - agent-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Planning
 
-## Summary
+Planning decomposes a goal into actions before execution or replans after observations. In [agent loops](agent-loops.md), a plan is useful only when it improves tool choice, dependency ordering, evidence gathering, or stopping behavior. It is not valuable as hidden prose that cannot be inspected.
 
-Planning belongs to generative AI systems. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Mechanism
 
-## Core idea
+A plan should be a state object. Useful fields include goal, steps, dependencies, allowed tools, evidence needed, risk gates, and done condition. [Tool routing](tool-routing.md) maps planned steps to callable tools, while [agent evaluation](agent-evaluation.md) checks whether the trace followed the plan or revised it for a valid reason.
 
-- Define the inputs, outputs, and boundaries for Planning.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+Planning can happen once at the beginning, incrementally after each observation, or through a planner/reviewer split. Incremental planning is safer for workflows where tool output can invalidate the original path. The loop should log both the previous plan and the reason for any replan.
 
-## Worked example
+## Concrete artifact
 
-Compare a simple baseline with an approach that uses Planning. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```json
+{
+  "goal": "answer refund approval question",
+  "steps": [
+    {"id": "s1", "action": "search_refund_policy", "needs": ["policy_version"]},
+    {"id": "s2", "action": "read approval threshold", "depends_on": ["s1"]},
+    {"id": "s3", "action": "answer_with_citation", "depends_on": ["s2"]}
+  ],
+  "risk_gates": ["do_not_issue_refund", "cite_policy_span"],
+  "done_when": "answer cites policy span or abstains"
+}
+```
 
-## Practical checklist
+## Caveats
 
-- Define the system contract for Planning: inputs, outputs, evidence, tools, and refusal behavior.
-- Version prompts, models, retrieval indexes, tool schemas, and evaluation examples affected by Planning.
-- Review traces and hard cases before promoting Planning to production.
+Plans become harmful when the model follows an obsolete plan after tool output contradicts it. Replanning must be explicit and logged. Long plans also create false confidence; for uncertain tasks, the next best action and evidence requirement are often more useful than a fully specified route.
 
-- Separate retrieval, context construction, model generation, validation, and post-processing.
-- Evaluate with golden examples, citations, groundedness, latency, and cost.
-- Add deterministic checks for schemas, permissions, and safety constraints.
-- Review failures by severity rather than treating all bad answers equally.
+## References
 
-## Common failure modes
-
-- Relying on model behavior for Planning when deterministic validation, permissions, or tool constraints are needed.
-- Judging Planning from fluent examples instead of traces, evidence use, schema validity, and hard negative cases.
-- Changing Planning without versioned prompts, models, indexes, and rollback evidence.
-
-- Mixing retrieval, reasoning, and formatting failures into one undiagnosed score.
-- Accepting fluent answers without evidence, citations, or schema validation.
+- [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
+- [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
+- [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)

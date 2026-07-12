@@ -1,7 +1,7 @@
 ---
 title: Calculus
 slug: mathematical-foundations/calculus
-description: Concise guide to Calculus in Mathematical Foundations.
+description: "Local change, accumulation, and approximation for functions used in learning systems."
 area: mathematical-foundations
 topics:
   - calculus
@@ -12,36 +12,64 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - gradients.md
+  - jacobians-and-hessians.md
+  - gradient-descent.md
+  - optimization.md
+  - ../06-deep-learning/backpropagation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Calculus
 
-Calculus studies change and accumulation. In machine learning it explains slopes, gradients, optimization, loss minimization, backpropagation, and continuous probability densities.
+Calculus turns functions into local rates of change and accumulated quantities. In machine learning, the most common use is differential: approximate how a loss changes when inputs, weights, or logits move a small amount.
 
-## Core ideas
+## Defining math
 
-A derivative measures local rate of change. For a scalar function $f(x)$, the derivative $f'(x)$ tells how much $f$ changes for a small change in $x$. An integral accumulates quantities over an interval, such as probability density over a range.
-
-For multivariable functions, partial derivatives measure change with respect to one input while holding others fixed. The gradient stacks those partial derivatives into the direction of steepest local increase.
-
-## Step-by-step example
-
-For squared error
+For a scalar function $f$, the derivative at $x$ is
 
 $$
-L(w) = (wx - y)^2,
+f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}.
 $$
 
-the derivative with respect to $w$ is
+The first-order Taylor approximation is
 
 $$
-\frac{dL}{dw} = 2(wx-y)x.
+f(x+\Delta x)\approx f(x)+f'(x)\Delta x.
 $$
 
-If the prediction $wx$ is too high, the term $(wx-y)$ is positive, so gradient descent decreases $w$ when $x$ is positive. This is the basic mechanism behind many learning algorithms.
+Multivariable calculus replaces $f'(x)$ with [gradients](gradients.md), [Jacobians and Hessians](jacobians-and-hessians.md), and directional derivatives. The same chain rule is what lets [backpropagation](../06-deep-learning/backpropagation.md) compose local derivatives through a computational graph.
 
-## Practical intuition
+## Executed demo
 
-Calculus-based ML methods assume the objective is smooth enough locally for derivatives to be informative. When objectives are discontinuous, noisy, or flat, gradients may be unstable or unhelpful.
+```python
+import numpy as np
+
+h = 1e-5
+f = lambda x: np.sin(x) * np.exp(-0.2*x)
+x = 0.7
+fd = (f(x+h) - f(x-h)) / (2*h)
+true = np.exp(-0.2*x) * (np.cos(x) - 0.2*np.sin(x))
+print("central_diff", round(fd, 8))
+print("analytic", round(true, 8))
+print("abs_error", f"{abs(fd-true):.2e}")
+```
+
+Observed output:
+
+```text
+central_diff 0.55291066
+analytic 0.55291066
+abs_error 7.01e-12
+```
+
+The centered finite difference matches the analytic derivative for this smooth function. That local slope is exactly the kind of signal [gradient descent](gradient-descent.md) uses when minimizing a loss.
+
+## Caveats
+
+Numerical derivatives depend on step size: too large gives truncation error, too small magnifies floating-point cancellation. Non-smooth points can have subgradients or one-sided derivatives rather than a single ordinary derivative.
+
+## References
+
+- [MIT OpenCourseWare: 18.01SC Single Variable Calculus](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/)
+- [MIT OpenCourseWare: 18.02SC Multivariable Calculus](https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/)

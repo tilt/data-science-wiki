@@ -1,37 +1,71 @@
 ---
 title: Offline Versus Online Evaluation
 slug: recommendation-systems/offline-versus-online-evaluation
-description: Concise guide to Offline Versus Online Evaluation in Recommendation
-  Systems and Personalization.
+description: "Why historical recommender metrics and live experiments answer different questions."
 area: recommendation-systems
 topics:
   - offline-versus-online-evaluation
 level: intermediate
 status: review
-page_type: concept
+page_type: comparison
 aliases: []
 prerequisites:
-  - index.md
+  - evaluation-of-recommenders.md
 related:
-  - index.md
+  - evaluation-of-recommenders.md
+  - bandit-algorithms.md
+  - contextual-bandits.md
+  - feedback-loops.md
+  - ../16-experimentation-and-evaluation/online-experiments.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Offline Versus Online Evaluation
 
-## Summary
+Offline evaluation replays or splits historical data. Online evaluation measures behavior under actual exposure, usually through experiments. Recommenders need both because recommendations change what users see and therefore change future labels.
 
-Offline evaluation tests recommender changes on historical data; online evaluation measures behavior under real exposure. Both are needed because recommendations change what users see.
+## Defining math
 
-## Step-by-step example
+For randomized logged bandit data, replay keeps only events where the new policy matches the logged action:
 
-A model may improve held-out click prediction but reduce satisfaction online by recommending repetitive or clickbait items.
+$$
+\hat V(\pi)=\frac{1}{\lvert M\rvert}\sum_{t\in M}r_t,\qquad M=\{t:\pi(x_t)=a_t\}.
+$$
 
-## Common failure modes
+With known propensities $p_t$, inverse propensity scoring uses
 
-- Optimizing Offline Versus Online Evaluation on historical interactions without correcting for exposure and position bias.
-- Treating missing interactions as negative feedback when they may mean the user never saw the item.
-- Improving average ranking metrics while harming cold-start users, long-tail items, diversity, or business guardrails.
+$$
+\hat V_{\text{IPS}}(\pi)=\frac{1}{T}\sum_t \frac{\mathbf 1\{\pi(x_t)=a_t\}r_t}{p_t}.
+$$
 
-- Optimizing a single offline metric while ignoring exposure, freshness, diversity, or cold start.
-- Failing to log enough context to reproduce why an item was recommended.
+This is different from ordinary [evaluation of recommenders](evaluation-of-recommenders.md) on held-out items.
+
+## Worked example
+
+```python
+import numpy as np
+logged_actions = np.array([0, 1, 0, 2, 1, 2])
+rewards = np.array([1, 0, 0, 1, 1, 0])
+policy_actions = np.array([0, 0, 0, 2, 2, 2])
+keep = logged_actions == policy_actions
+print("matched_events", int(keep.sum()))
+print("replay_ctr", round(float(rewards[keep].mean()), 3))
+```
+
+Observed output:
+
+```text
+matched_events 4
+replay_ctr 0.5
+```
+
+Only four events can be replayed because rewards for unshown actions are missing. [Bandit algorithms](bandit-algorithms.md) require this partial-feedback discipline.
+
+## Caveats
+
+Offline ranking metrics are cheap and reproducible but can overfit historical exposure. Online tests measure real behavior but are slower, riskier, and sensitive to interference. Use offline gates to reject bad candidates, then confirm important changes with [online experiments](../16-experimentation-and-evaluation/online-experiments.md).
+
+## References
+
+- [Li et al., 2010, Unbiased Offline Evaluation of Contextual-bandit-based News Article Recommendation Algorithms](https://arxiv.org/abs/1003.5956)
+- [Herlocker et al., 2004, Evaluating Collaborative Filtering Recommender Systems](https://doi.org/10.1145/963770.963772)

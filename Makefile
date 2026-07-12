@@ -1,7 +1,7 @@
 .PHONY: help doctor setup install preview build clean validate lint test check-links check-content portability-check format ci deploy-info new-page new-topic generate-subtopics improve-generated-content export-mkdocs serve-build list-stubs list-drafts
 
 PORT ?= 8080
-WS_PORT ?= 3001
+WS_PORT ?= $(shell expr $(PORT) + 1)
 
 help: ## Show available targets.
 	@awk 'BEGIN {FS = ":.*##"} /^[a-zA-Z0-9_-]+:.*##/ {printf "%-22s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -17,10 +17,10 @@ install: ## Install locked dependencies reproducibly.
 
 preview: ## Start Quartz local preview with watching.
 	@echo "Preview URL: http://localhost:$(PORT)"
-	npx quartz build --serve --port $(PORT) --wsPort $(WS_PORT)
+	npm run quartz -- build --serve --port $(PORT) --wsPort $(WS_PORT)
 
 build: ## Build the static site into public/.
-	npx quartz build
+	npm run quartz -- build
 
 clean: ## Remove generated build artifacts only.
 	rm -rf public .generated

@@ -16,9 +16,11 @@ aliases:
 prerequisites:
   - hierarchical-forecasting.md
 related:
+  - hierarchical-forecasting.md
   - temporal-reconciliation.md
   - forecast-error-metrics.md
-  - forecasting-system-design.md
+  - backtesting.md
+  - probabilistic-forecasting.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -53,7 +55,7 @@ Middle-out reconciliation starts at an intermediate level, sums upward, and allo
 
 Optimal-combination methods start from base forecasts at all levels and adjust them jointly. MinT-style methods use an estimate of forecast error covariance to reduce reconciliation error, subject to coherence constraints.
 
-## Step-by-step example
+## Coherence example
 
 Suppose base forecasts are:
 
@@ -84,3 +86,12 @@ Evaluate base and reconciled forecasts at every planning level. Reconciliation c
 - Ignoring covariance estimation error in small backtests.
 - Reporting only total-level gains.
 - Reconciling forecasts produced from inconsistent training cutoffs.
+
+## Connections
+
+Reconciliation adjusts base forecasts from [hierarchical forecasting](hierarchical-forecasting.md) so they satisfy aggregation constraints. The same coherence logic appears in [temporal reconciliation](temporal-reconciliation.md), and the result still needs [backtesting](backtesting.md) with appropriate [forecast error metrics](forecast-error-metrics.md).
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Forecast reconciliation](https://otexts.com/fpp3/reconciliation.html)
+- [Nixtla HierarchicalForecast documentation](https://nixtlaverse.nixtla.io/hierarchicalforecast/index.html)

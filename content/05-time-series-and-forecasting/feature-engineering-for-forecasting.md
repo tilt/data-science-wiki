@@ -17,10 +17,11 @@ aliases:
 prerequisites:
   - forecasting-data-and-covariates.md
 related:
+  - forecasting-data-and-covariates.md
   - machine-learning-forecasting.md
-  - forecasting-problem-formulation.md
-  - forecast-error-metrics.md
-  - ../03-classical-machine-learning/feature-engineering.md
+  - autoregressive-models.md
+  - rolling-origin-validation.md
+  - concept-drift-in-forecasting.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -149,3 +150,12 @@ Predictions must be inverse-transformed before evaluation in the original unit. 
 - Incorrect season length, such as using 30 for monthly annual seasonality instead of 12.
 - Treating padded zeros as real observations for new products.
 - Forgetting to inverse-transform predictions before computing metrics.
+
+## Connections
+
+Forecast features translate [forecasting data and covariates](forecasting-data-and-covariates.md) into tabular inputs for [machine learning forecasting](machine-learning-forecasting.md). Lag features echo [autoregressive models](autoregressive-models.md), and every feature must be built inside [rolling-origin validation](rolling-origin-validation.md) to avoid leakage.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Time series features](https://otexts.com/fpp3/features.html)
+- [Nixtla StatsForecast exogenous regressors guide index](https://nixtlaverse.nixtla.io/statsforecast/index.html)

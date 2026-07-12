@@ -1,7 +1,7 @@
 ---
 title: Markov Renewal Processes
 slug: probability-and-statistics/markov-renewal-processes
-description: Concise guide to Markov Renewal Processes in Probability and Statistics.
+description: "State-transition processes that model both the next state and the waiting time until that transition."
 area: probability-and-statistics
 topics:
   - markov-renewal-processes
@@ -12,26 +12,63 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - markov-chains.md
+  - renewal-theory.md
+  - random-walks.md
+  - conditional-probability.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Markov Renewal Processes
 
-A Markov renewal process extends a Markov chain by modelling both the next state and the time until the transition. It is useful when waiting times matter as much as state changes.
+A Markov renewal process extends a [Markov chain](markov-chains.md) by attaching a holding time to each state transition. With states $X_n$ and jump times $T_n$, the kernel is a [conditional probability](conditional-probability.md) distribution over both destination and elapsed time:
 
-## Core idea
+$$
+Q_{ij}(t)=P(X_{n+1}=j,\ T_{n+1}-T_n\le t\mid X_n=i).
+$$
 
-A Markov chain records which state comes next. A Markov renewal process also records the distribution of holding times between transitions. This separates transition structure from event timing.
+The embedded transition matrix is
 
-## Example
+$$
+P_{ij}=Q_{ij}(\infty).
+$$
 
-In predictive maintenance, a machine may move from healthy to degraded to failed. The time spent in each state is critical: two machines may follow the same state order but have very different failure risk depending on how long they remain degraded.
+If holding times do not depend on states, the timing resembles [renewal theory](renewal-theory.md); if holding times are exponential and state dependent, the model approaches a continuous-time Markov chain. Unlike a simple [random walk](random-walks.md), both path and duration matter.
 
-## Practical use
+## Worked simulation
 
-These processes appear in reliability engineering, survival-style event modelling, healthcare pathways, queueing systems, and customer lifecycle modelling. They are useful when the system has discrete states but irregular transition times.
+```python
+import numpy as np
 
-## Failure modes
+P = np.array([[.75, .25], [.4, .6]])
+means = np.array([[2.0, 6.0], [3.0, 8.0]])
+state, t = 0, 0.0
+visits = []
+rng = np.random.default_rng(44)
+for _ in range(12):
+    nxt = rng.choice([0, 1], p=P[state])
+    hold = rng.exponential(means[state, nxt])
+    t += hold
+    visits.append((int(state), int(nxt), round(hold, 2), round(t, 2)))
+    state = nxt
+print("first_transitions", visits[:6])
+print("time_after_12", round(t, 2), "final_state", int(state))
+```
 
-The model becomes harder to estimate when states are rare, holding times are censored, or the chosen state definition hides important covariates.
+Observed output:
+
+```text
+first_transitions [(0, 0, 0.97, 0.97), (0, 0, 2.15, 3.12), (0, 0, 0.18, 3.3), (0, 0, 3.76, 7.07), (0, 0, 3.46, 10.53), (0, 0, 1.42, 11.95)]
+time_after_12 38.09 final_state 1
+```
+
+The state path alone hides elapsed time: several self-transitions consume very different durations before the process reaches state 1.
+
+## Caveats
+
+Estimation is data-hungry because each origin-destination pair can have its own holding-time distribution. Censoring, rare states, and omitted covariates can distort both transition probabilities and waiting-time tails.
+
+## References
+
+- [Markov renewal process](https://en.wikipedia.org/wiki/Markov_renewal_process)
+- [Renewal theory](https://en.wikipedia.org/wiki/Renewal_theory)

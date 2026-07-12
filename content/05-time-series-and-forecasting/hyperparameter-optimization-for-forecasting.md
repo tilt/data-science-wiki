@@ -18,10 +18,11 @@ prerequisites:
   - backtesting.md
   - forecast-error-metrics.md
 related:
-  - machine-learning-forecasting.md
-  - deep-learning-forecasting.md
+  - backtesting.md
+  - rolling-origin-validation.md
   - forecast-ensembling.md
-  - forecasting-system-design.md
+  - machine-learning-forecasting.md
+  - forecast-error-metrics.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -91,3 +92,12 @@ For large panels, tune global hyperparameters on representative partitions rathe
 - Comparing trials that used different forecast origins.
 - Optimizing one metric and deploying for another cost function.
 - Running many expensive trials without checking whether naive baselines are already competitive.
+
+## Connections
+
+Forecast hyperparameter search must sit inside [backtesting](backtesting.md) or [rolling-origin validation](rolling-origin-validation.md). It affects [machine learning forecasting](machine-learning-forecasting.md), [forecast ensembling](forecast-ensembling.md), and the final [forecast error metrics](forecast-error-metrics.md).
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Time series cross-validation](https://otexts.com/fpp3/tscv.html)
+- [scikit-learn TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)

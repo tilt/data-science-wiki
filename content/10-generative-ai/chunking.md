@@ -1,7 +1,7 @@
 ---
 title: Chunking
 slug: generative-ai/chunking
-description: Concise guide to Chunking in Generative AI and Agentic Systems.
+description: "Splitting documents into retrievable units for RAG, citations, and context construction."
 area: generative-ai
 topics:
   - chunking
@@ -12,25 +12,56 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - rag.md
+  - retrieval-pipelines.md
+  - context-construction.md
+  - citations.md
+  - vector-databases.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Chunking
 
-## Summary
+Chunking decides the unit that [retrieval pipelines](retrieval-pipelines.md) can find and [context construction](context-construction.md) can pass to a model. In [RAG](rag.md), chunk boundaries often determine whether [citations](citations.md) support the generated claim.
 
-Chunking splits documents into retrieval units for RAG. The chunk is what the search system can find and what the model can read, so boundaries strongly affect answer quality.
+## Mechanism
 
-## Step-by-step example
+A chunker maps a document $D$ into ordered spans $(c_i, m_i)$, where $m_i$ stores source, heading, permissions, and version. Fixed token windows are simple, but heading-aware spans preserve local meaning. Overlap helps boundary cases but increases duplicate retrieval.
 
-For a policy manual, split by section headings, keep bullet lists with their heading, and attach metadata such as policy version and effective date.
+## Executed artifact
 
-## Common failure modes
+```python
+doc = """# Refunds
+Refunds require receipt. Manager approval is required above 500 EUR.
+# Shipping
+Standard shipping is five days."""
+chunks = []
+current = []
+for line in doc.splitlines():
+    if line.startswith("# ") and current:
+        chunks.append(" ".join(current))
+        current = [line]
+    else:
+        current.append(line)
+chunks.append(" ".join(current))
+print("CHUNKING")
+print(chunks)
+```
 
-- Changing Chunking without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Chunking.
-- Shipping Chunking without rollback, monitoring, and examples for known hard cases.
+Observed output:
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+```text
+CHUNKING
+['# Refunds Refunds require receipt. Manager approval is required above 500 EUR.', '# Shipping Standard shipping is five days.']
+```
+
+The executed splitter kept each heading with its paragraph, so a later answer can cite the refund rule without mixing it with shipping.
+
+## Caveats
+
+Tiny chunks lose context; huge chunks bury the answer and waste tokens. Rechunking changes vector IDs and can invalidate cached evaluations.
+
+## References
+
+- [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
+- [OpenAI API documentation: Embeddings](https://platform.openai.com/docs/guides/embeddings)

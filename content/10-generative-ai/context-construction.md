@@ -1,7 +1,7 @@
 ---
 title: Context Construction
 slug: generative-ai/context-construction
-description: Concise guide to Context Construction in Generative AI and Agentic Systems.
+description: "Selecting and packing instructions, history, retrieved evidence, and tool schemas into the model request."
 area: generative-ai
 topics:
   - context-construction
@@ -12,29 +12,57 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - chunking.md
+  - retrieval-pipelines.md
+  - structured-output.md
+  - tool-schemas.md
+  - determinism-and-reproducibility.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Context Construction
 
-## Summary
-
-Context construction decides what information is placed into the model prompt for a request. It sits between retrieval and generation and often determines whether the model can answer accurately.
-
-## Step-by-step example
-
-For support, include product version, relevant troubleshooting steps, known limitations, and source titles. Label user text separately from trusted documentation.
-
-## Common failure modes
-
-- Changing Context Construction without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Context Construction.
-- Shipping Context Construction without rollback, monitoring, and examples for known hard cases.
-
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+Context construction is the packing layer between retrieval and generation. It decides which instructions, [tool schemas](tool-schemas.md), conversation turns, [chunking](chunking.md) outputs, and formatting constraints reach the model.
 
 ## Mechanism
 
-Context construction is a constrained packing problem. If the model context limit is $B$ tokens, the system must allocate budget across instructions, conversation history, retrieved evidence, tool schemas, and the expected answer. Better context is not simply more context; irrelevant or conflicting evidence can reduce answer quality.
+With a token budget $B$, each candidate item has cost $c_i$ and estimated utility $u_i$. The system chooses a subset with $\sum c_i\le B$, while reserving room for the answer and preserving instruction precedence. This is why [retrieval pipelines](retrieval-pipelines.md) should return ranked, source-labeled chunks rather than raw documents.
+
+## Executed artifact
+
+```python
+items = [
+    ("system", 80, 10),
+    ("schema", 120, 9),
+    ("chat_history", 160, 5),
+    ("retrieved_A", 140, 8),
+    ("retrieved_B", 110, 6),
+]
+budget = 420
+chosen = []
+used = 0
+for name, tokens, value in sorted(items, key=lambda item: -item[2] / item[1]):
+    if used + tokens <= budget:
+        chosen.append(name)
+        used += tokens
+print("CONTEXT_PACKING")
+print({"chosen": chosen, "tokens_used": used, "budget": budget})
+```
+
+Observed output:
+
+```text
+CONTEXT_PACKING
+{'chosen': ['system', 'schema', 'retrieved_A'], 'tokens_used': 340, 'budget': 420}
+```
+
+The greedy packer kept high-utility instructions and evidence but dropped chat history. That trade-off should be visible in [determinism and reproducibility](determinism-and-reproducibility.md) traces.
+
+## Caveats
+
+More context can hurt when it includes conflicting passages or untrusted user text. Label trusted documentation separately from user-provided content.
+
+## References
+
+- [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
+- [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)

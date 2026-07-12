@@ -1,40 +1,70 @@
 ---
 title: Human Evaluation
 slug: experimentation-and-evaluation/human-evaluation
-description: Concise guide to Human Evaluation in Experimentation and Evaluation.
+description: "Reviewer-based evaluation for outputs where automatic labels or metrics are insufficient."
 area: experimentation-and-evaluation
 topics:
   - human-evaluation
+  - inter-rater-agreement
+  - rubrics
 level: intermediate
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - "Human review"
 prerequisites:
-  - index.md
+  - golden-datasets.md
 related:
-  - index.md
+  - llm-as-judge.md
+  - paired-evaluation.md
+  - golden-datasets.md
+  - risk-weighted-error-taxonomies.md
+  - ../13-ml-engineering-and-mlops/human-in-the-loop-systems.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Human Evaluation
 
-## Summary
+Human evaluation uses trained reviewers when the target behavior is open-ended, subjective, safety-sensitive, or not fully captured by automatic labels. It is central for summaries, support answers, refusal quality, and severity labels in [risk-weighted error taxonomies](risk-weighted-error-taxonomies.md). It also provides the audit sample for [LLM-as-judge](llm-as-judge.md).
 
-Human evaluation uses reviewers to judge outputs when automatic labels or metrics are insufficient. It is essential for open-ended generation, severity assessment, and subjective utility.
+## Defining statistic
 
-## Step-by-step example
+Raw agreement is not enough because reviewers can agree by chance. Cohen's kappa adjusts observed agreement $p_o$ by expected agreement $p_e$:
 
-Reviewers can grade support-ticket answers for correctness, empathy, policy compliance, and whether the cited source supports the response.
+$$
+\kappa=\frac{p_o-p_e}{1-p_e}.
+$$
 
-## Common failure modes
+The rubric should define observable criteria, examples, tie-breaking rules, and escalation for ambiguous cases. When two systems are compared, use [paired evaluation](paired-evaluation.md) so reviewers judge outputs for the same inputs.
 
-- Choosing Human Evaluation metrics that do not match the decision, risk, or user-visible failure.
-- Ignoring uncertainty, multiple comparisons, label quality, or segment-level disagreement.
-- Treating evaluation output as final truth without inspecting examples and domain-review conflicts.
+## Worked calculation
 
-- Averaging away severe failures, minority slices, or uncertainty.
-- Treating a benchmark result as production readiness without reviewing examples.
+```python
+import numpy as np
+from sklearn.metrics import cohen_kappa_score
 
-## Design check
+r1 = np.array(["pass","pass","fail","pass","fail","fail","pass","pass","fail","pass","fail","pass"])
+r2 = np.array(["pass","fail","fail","pass","fail","pass","pass","pass","fail","pass","fail","fail"])
+print(f"agreement {(r1 == r2).mean():.3f}")
+print(f"cohen_kappa {cohen_kappa_score(r1, r2):.3f}")
+print(f"disagreements {np.where(r1 != r2)[0].tolist()}")
+```
 
-Human evaluation needs a rubric, examples, reviewer training, disagreement handling, and sampling plan. Without those controls, reviewer preference, fatigue, and ambiguity can dominate the measured system difference.
+Observed output:
+
+```text
+agreement 0.750
+cohen_kappa 0.500
+disagreements [1, 5, 11]
+```
+
+The reviewers agree on 75 percent of examples, but kappa is only 0.50 after chance agreement. The disagreement indices should be reviewed against the rubric before treating the labels as a stable [golden dataset](golden-datasets.md).
+
+## Caveats
+
+Reviewer fatigue, order effects, unclear rubrics, and hidden system identity can dominate measured quality. Domain experts may be required for legal, medical, financial, or safety labels. Report reviewer counts, sampling rules, adjudication process, and agreement, not only the final average score.
+
+## References
+
+- [scikit-learn documentation: cohen_kappa_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html)
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)

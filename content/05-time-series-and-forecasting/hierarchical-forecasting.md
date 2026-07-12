@@ -17,7 +17,9 @@ prerequisites:
 related:
   - hierarchical-reconciliation.md
   - temporal-reconciliation.md
+  - demand-forecasting.md
   - forecast-error-metrics.md
+  - forecasting-system-design.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -79,3 +81,12 @@ Evaluate at every level that matters: bottom-level items, categories, regions, a
 - Using unstable historical proportions for top-down allocation.
 - Ignoring sparse or cold-start bottom-level series.
 - Comparing reconciled and unreconciled forecasts on different folds.
+
+## Connections
+
+Hierarchical forecasting defines the aggregation structure; [hierarchical reconciliation](hierarchical-reconciliation.md) makes forecasts coherent across it. [Temporal reconciliation](temporal-reconciliation.md) applies a related idea across time buckets, and [demand forecasting](demand-forecasting.md) is a common use case.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Hierarchical and grouped time series](https://otexts.com/fpp3/hierarchical.html)
+- [Nixtla HierarchicalForecast documentation](https://nixtlaverse.nixtla.io/hierarchicalforecast/index.html)

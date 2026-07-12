@@ -1,7 +1,7 @@
 ---
 title: Grounding
 slug: generative-ai/grounding
-description: Concise guide to Grounding in Generative AI and Agentic Systems.
+description: "Constraining generated answers to retrieved evidence, tools, or observable state."
 area: generative-ai
 topics:
   - grounding
@@ -12,25 +12,40 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - rag.md
+  - citations.md
+  - hallucination-mitigation.md
+  - context-construction.md
+  - retrieval-pipelines.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Grounding
 
-## Summary
+Grounding ties generation to external evidence. In [RAG](rag.md), that evidence is retrieved text; in agents it may be tool output or environment state. [Citations](citations.md) are the visible surface of grounding, while [hallucination mitigation](hallucination-mitigation.md) tests unsupported claims.
 
-Grounding ties a model answer to specified evidence, data, tools, or observations. A grounded answer is traceable to what the system was allowed to know for that request.
+## Mechanism
 
-## Step-by-step example
+A grounded answer contract has three parts: source selection, claim generation, and support checking. Each factual claim should be derivable from a source span or tool observation included by [context construction](context-construction.md). If no source supports the answer, the model should say so rather than fill gaps from parametric memory.
 
-For warranty coverage, retrieve the policy, answer only from the relevant clause, and refuse when evidence for the product is missing.
+## Concrete artifact
 
-## Common failure modes
+```json
+{
+  "claim": "Manager approval is required above 500 EUR.",
+  "source_id": "policy-7",
+  "span": "Manager approval is required above 500 EUR.",
+  "support": "entailed"
+}
+```
 
-- Changing Grounding without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Grounding.
-- Shipping Grounding without rollback, monitoring, and examples for known hard cases.
+This source-level artifact gives [rag evaluation](rag-evaluation.md) something concrete to score.
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+## Caveats
+
+Grounding can fail when retrieval misses the right passage, when sources conflict, or when the answer overgeneralizes beyond the span.
+
+## References
+
+- [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
+- [Anthropic Claude docs: Reduce hallucinations](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)

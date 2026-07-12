@@ -1,7 +1,7 @@
 ---
 title: Software Architecture
 slug: software-engineering/software-architecture
-description: Core architectural concerns for maintainable data, ML, and AI systems.
+description: Structural decisions that shape change, failure, scale, and integration.
 area: software-engineering
 topics:
   - "software-architecture"
@@ -13,48 +13,48 @@ page_type: concept
 aliases:
   - "Architecture"
 prerequisites:
-  - "api-design.md"
+  - "requirements-engineering.md"
 related:
-  - "../13-ml-engineering-and-mlops/index.md"
+  - "api-design.md"
+  - "production-integration.md"
+  - "technical-decision-records.md"
+  - "design-patterns.md"
+  - "web-backends.md"
+  - "../13-ml-engineering-and-mlops/microservices.md"
   - "../14-cloud-and-distributed-systems/index.md"
 historical_context: false
 last_reviewed: 2026-07-11
-references:
-  - "martin-2017-clean-architecture"
-  - "iso-25010-2011"
 ---
 # Software Architecture
 
-## Summary
+Software architecture is the set of structural decisions that make a system easier or harder to change, operate, secure, and scale. It is not the diagram itself; it is the set of boundaries and trade-offs the diagram records. In ML and AI systems, architecture must include data contracts, model versions, evaluation gates, [production integration](production-integration.md), observability, privacy, and rollback.
 
-Software architecture is the set of structural decisions that shape how a system changes, fails, scales, and integrates. In ML and AI systems, architecture must account for data contracts, model versioning, evaluation, observability, privacy, and rollback paths.
+## Architecture Mechanism
 
-## Why it matters
+The C4-style view is a useful contract: system context, containers, components, and code. For a document-answering product, the container view might be:
 
-Model quality is rarely enough. Production systems fail at boundaries: data ingestion, schema drift, service contracts, hidden coupling, operational ownership, cost, and unclear failure handling.
+```text
+Browser
+  -> Web backend: auth, request validation, streaming response
+  -> Ingestion worker: OCR, chunking, index writes
+  -> Retrieval service: permission-filtered candidate passages
+  -> Model service: prompt assembly, generation, structured validation
+  -> Review queue: human correction and audit trail
+  -> Metadata store: document version, model version, prompt version, trace id
+```
 
-## Architectural views
+This artifact is not executable, but it is concrete: each arrow implies an [API design](api-design.md) contract, an owner, and a failure mode. A [technical decision record](technical-decision-records.md) should capture why retrieval is a separate service instead of a module inside the backend, especially if it creates a [microservices](../13-ml-engineering-and-mlops/microservices.md) boundary.
 
-- Data view: sources, transformations, contracts, lineage, retention, and access control.
-- Model view: training, evaluation, registry, serving, rollback, and monitoring.
-- Runtime view: APIs, queues, batch jobs, caches, dependencies, and failure isolation.
-- Governance view: ownership, audit trails, privacy boundaries, and approval paths.
+## Intuition
 
-## Useful questions
+Architecture works by making expensive decisions explicit while they can still be discussed. If latency is dominated by model calls, [web backends](web-backends.md) need streaming and cancellation. If privacy is the primary constraint, retrieval and model-serving boundaries must enforce permission checks before context construction. If operational risk is high, the architecture must reserve a rollback path before launch.
 
-- What are the system boundaries?
-- Which decisions are hard to reverse?
-- How does data flow through training, evaluation, and serving?
-- Where can the system fail safely?
-- What must be observable for incident response?
-- Which interfaces must remain stable?
+## Failure Modes
 
-## Step-by-step example
+Architecture fails when diagrams omit runtime behavior, data ownership, or deployment order. A box labeled "AI service" is not enough: name the schema, timeout, retry rule, observability fields, and degradation path. Do not introduce [design patterns](design-patterns.md) or service boundaries unless they reduce a real coupling problem.
 
-For a document-understanding product, separate ingestion, OCR, retrieval, model inference, validation, and review queues. Define contracts between each stage. Store model version, prompt version, source document version, and output schema version with every prediction. Add rollback paths for both service code and model behavior.
+## References
 
-## Related topics
-
-- [API Design](api-design.md)
-- [Production Integration](production-integration.md)
-- [ML System Lifecycle](../13-ml-engineering-and-mlops/ml-system-lifecycle.md)
+- [C4 model](https://c4model.com/)
+- [arc42 Template Overview](https://arc42.org/overview)
+- [RFC 9110: HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html)

@@ -16,9 +16,11 @@ aliases:
 prerequisites:
   - hierarchical-forecasting.md
 related:
+  - hierarchical-forecasting.md
   - hierarchical-reconciliation.md
-  - backtesting.md
   - forecast-error-metrics.md
+  - backtesting.md
+  - demand-forecasting.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -71,3 +73,12 @@ A model forecasts daily demand for a week as 10, 12, 9, 11, 15, 18, and 20 units
 - Assuming high-frequency noise disappears without checking aggregate bias.
 - Allocating monthly forecasts to days using stale seasonal profiles.
 - Ignoring holidays and variable month lengths.
+
+## Connections
+
+Temporal reconciliation is the time-aggregation analogue of [hierarchical reconciliation](hierarchical-reconciliation.md). It is useful in [demand forecasting](demand-forecasting.md) when daily, weekly, and monthly decisions coexist, and it must be evaluated with [forecast error metrics](forecast-error-metrics.md) at every consumed frequency.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Forecast reconciliation](https://otexts.com/fpp3/reconciliation.html)
+- [Nixtla HierarchicalForecast documentation](https://nixtlaverse.nixtla.io/hierarchicalforecast/index.html)

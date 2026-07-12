@@ -1,7 +1,7 @@
 ---
 title: CNN Architectures
 slug: computer-vision/cnn-architectures
-description: Concise guide to CNN Architectures in Computer Vision and Medical Imaging.
+description: "Convolutional backbones built from local filters, downsampling, normalization, and residual blocks."
 area: computer-vision
 topics:
   - cnn-architectures
@@ -12,22 +12,68 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - vision-transformers.md
+  - image-classification.md
+  - object-detection.md
+  - ../06-deep-learning/convolutional-neural-networks.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # CNN Architectures
 
-## Summary
+CNN architectures organize convolution, nonlinearities, normalization, pooling or strided convolution, residual paths, and task heads. They are the standard backbone for [image classification](image-classification.md), [object detection](object-detection.md), and many segmentation models, and are the vision-specific case of [convolutional neural networks](../06-deep-learning/convolutional-neural-networks.md).
 
-CNN architectures organize convolutional layers, pooling, normalization, residual connections, and heads for visual tasks. Their design controls receptive field, compute, and feature hierarchy.
+## Defining math
 
-## Step-by-step example
+For input $X$ and kernel $W$, a 2D convolutional layer computes
 
-A ResNet block learns a residual correction around an identity path, making very deep CNNs easier to optimize than plain stacks.
+$$
+Y_{o,u,v}=b_o+\sum_c\sum_i\sum_j W_{o,c,i,j}X_{c,u+i,v+j}.
+$$
 
-## Common failure modes
+The output spatial size for one dimension is
 
-- Assuming convolutional locality is enough for long-range structure without checking receptive field and feature-map resolution.
-- Comparing architectures at different training budgets, augmentation policies, or input resolutions.
-- Ignoring compute, memory, latency, and reproducibility constraints when choosing depth, width, and normalization.
+$$
+\left\lfloor \frac{L+2p-d(k-1)-1}{s}+1 \right\rfloor,
+$$
+
+with input size $L$, padding $p$, dilation $d$, kernel size $k$, and stride $s$. Residual blocks learn $y=x+F(x)$, making deep stacks easier to optimize.
+
+## Worked example
+
+```python
+import torch
+
+torch.manual_seed(8)
+x = torch.arange(1*1*8*8, dtype=torch.float32).reshape(1,1,8,8)
+conv = torch.nn.Conv2d(1, 2, kernel_size=3, stride=2, padding=1, bias=False)
+with torch.no_grad():
+    conv.weight.fill_(1/9)
+y = conv(x)
+rf, jump = 1, 1
+for k, s in [(3, 2), (3, 2)]:
+    rf += (k - 1) * jump
+    jump *= s
+print("output_shape", tuple(y.shape))
+print("top_left_channel0", round(float(y[0,0,0,0]), 3), "center_channel0", round(float(y[0,0,2,2]), 3))
+print("two_layer_receptive_field", rf, "effective_stride", jump)
+```
+
+Observed output:
+
+```text
+output_shape (1, 2, 4, 4)
+top_left_channel0 2.0 center_channel0 36.0
+two_layer_receptive_field 7 effective_stride 4
+```
+
+Stride halves the spatial resolution, while the receptive field grows. That is useful for semantics but risky for small objects and fine [detection and segmentation metrics](detection-and-segmentation-metrics.md).
+
+## Caveats
+
+Architecture comparisons are not meaningful unless resolution, augmentation, training length, and compute budget are matched. CNN locality is efficient, but long-range interactions may require larger receptive fields, attention, or a [vision transformer](vision-transformers.md).
+
+## References
+
+- [PyTorch documentation: `torch.nn.Conv2d`](https://docs.pytorch.org/docs/stable/generated/torch.nn.Conv2d.html)
+- [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)

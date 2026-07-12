@@ -1,7 +1,7 @@
 ---
 title: Refactoring
 slug: software-engineering/refactoring
-description: Concise guide to Refactoring in Software Engineering.
+description: Behavior-preserving structural change backed by characterization checks.
 area: software-engineering
 topics:
   - refactoring
@@ -10,36 +10,69 @@ status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - testing.md
 related:
-  - index.md
+  - "testing.md"
+  - "code-review.md"
+  - "design-patterns.md"
+  - "documentation.md"
+  - "python.md"
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Refactoring
 
-Refactoring changes internal structure without intentionally changing external behavior. It is how teams reduce accidental complexity while keeping delivery safe.
+Refactoring changes internal structure without intentionally changing external behavior. It is not cleanup as a side quest; it is a controlled change with a behavior contract. The usual loop is capture current behavior, make one small structural move, run checks, then continue. [Code review](code-review.md) should reject refactors that smuggle in product changes without tests.
 
-## Core idea
+## Mechanism
 
-Refactoring should be small, behavior-preserving, and backed by tests or characterization checks. The aim is to make future changes easier: isolate side effects, name concepts, remove duplication, simplify conditionals, or separate responsibilities.
+Characterization tests are the safety net when the existing code has unclear intent. They record what the system currently does on representative inputs. Once the checks exist, common moves include extract function, replace conditional with polymorphism, introduce parameter object, or split side effects from pure logic. Those moves often reveal when a [design pattern](design-patterns.md) is useful rather than decorative.
 
-A safe refactoring workflow:
+## Executed Artifact
 
-1. Capture current behavior with tests, examples, logs, or golden outputs.
-2. Make one structural change at a time.
-3. Run checks after each meaningful step.
-4. Keep behavior changes in a separate commit or pull request.
-5. Delete obsolete code only after callers have moved.
+```python
+def legacy_total(order):
+    total = 0
+    for item in order["items"]:
+        total += item["cents"] * item["qty"]
+    if order.get("vip"):
+        total = round(total * 0.9)
+    return total
 
-## Example
+def line_total(item):
+    return item["cents"] * item["qty"]
 
-A ranking service contains one long function that fetches candidates, computes features, scores items, filters policy violations, and formats responses. Refactor by extracting candidate retrieval and policy filtering behind explicit functions first. Only after behavior is stable should the team change ranking logic.
+def apply_customer_discount(total, order):
+    return round(total * 0.9) if order.get("vip") else total
 
-## ML-specific concerns
+def refactored_total(order):
+    return apply_customer_discount(sum(line_total(i) for i in order["items"]), order)
 
-For ML systems, "same behavior" may mean same schema, same score distribution within tolerance, same selected model version, or same evaluation output. Golden datasets and snapshot comparisons are useful because exact floating-point equality may be too strict.
+golden = [
+    {"items": [{"cents": 500, "qty": 2}], "vip": False},
+    {"items": [{"cents": 999, "qty": 1}], "vip": True},
+    {"items": [], "vip": True},
+]
+print([legacy_total(o) for o in golden])
+print([refactored_total(o) for o in golden])
+print("same_behavior", all(legacy_total(o) == refactored_total(o) for o in golden))
+```
 
-## Failure modes
+Observed output:
 
-Refactors fail when they mix cleanup with feature changes, expand scope opportunistically, or rely on manual inspection for behavior that could be checked automatically.
+```text
+[1000, 899, 0]
+[1000, 899, 0]
+same_behavior True
+```
+
+The refactor made pricing rules easier to name without changing results on the golden cases. Add or update [documentation](documentation.md) if the extracted names become part of the team vocabulary, and add [testing](testing.md) around edge cases before changing the discount rule itself.
+
+## Failure Modes
+
+Refactors fail when they mix behavior changes with structure changes, expand scope opportunistically, or rely on manual inspection for behavior that can be checked. For ML code, "same behavior" may mean same schema, same selected model version, or score distribution within tolerance rather than byte-for-byte equality.
+
+## References
+
+- [Martin Fowler: Refactoring, second edition](https://martinfowler.com/books/refactoring.html)
+- [pytest documentation: assertions](https://docs.pytest.org/en/stable/how-to/assert.html)

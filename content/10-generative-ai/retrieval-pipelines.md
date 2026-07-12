@@ -1,7 +1,7 @@
 ---
 title: Retrieval Pipelines
 slug: generative-ai/retrieval-pipelines
-description: Concise guide to Retrieval Pipelines in Generative AI and Agentic Systems.
+description: "Ingestion, indexing, querying, reranking, and context handoff for generative systems."
 area: generative-ai
 topics:
   - retrieval-pipelines
@@ -12,25 +12,50 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - rag.md
+  - chunking.md
+  - embeddings.md
+  - hybrid-retrieval.md
+  - reranking.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Retrieval Pipelines
 
-## Summary
+A retrieval pipeline turns a changing corpus into ranked evidence for a model. In [RAG](rag.md), it spans ingestion, [chunking](chunking.md), embedding, lexical indexing, metadata filters, query rewriting, [hybrid retrieval](hybrid-retrieval.md), [reranking](reranking.md), context packing, and citation validation.
 
-A retrieval pipeline prepares, indexes, searches, filters, and reranks content so a generative system can access relevant evidence. It is the information-access layer of RAG.
+## Mechanism
 
-## Step-by-step example
+The pipeline has two contracts. The offline contract builds searchable records: source document, chunk boundaries, text hash, permissions, embedding model, index version, and deletion state. The online contract turns a user request into evidence: normalized query, filters, first-stage candidates, scores, reranker output, selected chunks, and the final context handed to the model.
 
-For product docs, preserve headings and version metadata, chunk pages, build lexical and vector indexes, filter by product version, rerank, and pass source-labeled chunks to the model.
+Those logs make failures diagnosable. A bad answer can come from missing ingestion, stale permissions, poor chunk boundaries, a query rewrite that removed the key term, a dense index that missed an exact identifier, a reranker that preferred fluent but irrelevant text, or context packing that dropped the decisive passage.
 
-## Common failure modes
+## Concrete artifact
 
-- Changing Retrieval Pipelines without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Retrieval Pipelines.
-- Shipping Retrieval Pipelines without rollback, monitoring, and examples for known hard cases.
+```json
+{
+  "trace_id": "ret-2026-07-12-1842",
+  "query": "refund approval threshold for enterprise accounts",
+  "filters": {"acl": "support", "policy_version": "2026-07"},
+  "candidate_sets": {
+    "bm25": [{"chunk_id": "refunds-007", "score": 13.8}],
+    "dense": [{"chunk_id": "refunds-011", "score": 0.78}]
+  },
+  "reranked": [
+    {"chunk_id": "refunds-007", "rank": 1, "score": 0.92}
+  ],
+  "selected_for_context": ["refunds-007"]
+}
+```
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+This is a retrieval artifact, not a generation artifact. It should be evaluated against retrieval labels or hard negatives before judging final answer quality with [rag evaluation](rag-evaluation.md).
+
+## Caveats
+
+Do not tune retrieval only through final answer fluency. A model can answer from prior knowledge even when retrieval failed, or produce a plausible answer from irrelevant chunks. Keep retrieval-specific metrics such as recall@k, nDCG, filter correctness, and citation support separate from answer style.
+
+## References
+
+- [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
+- [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)
+- [Faiss documentation](https://faiss.ai/)

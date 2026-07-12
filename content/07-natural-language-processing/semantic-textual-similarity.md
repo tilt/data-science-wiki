@@ -1,7 +1,7 @@
 ---
 title: Semantic Textual Similarity
 slug: natural-language-processing/semantic-textual-similarity
-description: Concise guide to Semantic Textual Similarity in Natural Language Processing.
+description: "Scoring whether two text units express the same or related meaning."
 area: natural-language-processing
 topics:
   - semantic-textual-similarity
@@ -12,35 +12,60 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - embeddings.md
+  - tokenization.md
+  - text-preprocessing.md
+  - entity-linking-and-matching.md
+  - ../11-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Semantic Textual Similarity
 
-## Summary
+Semantic textual similarity (STS) scores whether two pieces of text mean the same thing or are useful substitutes in a task. It is broader than lexical overlap: "terminate my subscription" and "cancel my plan" should be close even with different words. STS often uses [embeddings](embeddings.md), while [entity linking and matching](entity-linking-and-matching.md) adds canonical identifiers when names must resolve to records.
 
-Semantic textual similarity measures whether two text units mean the same or similar things, even if they use different words. It is often implemented with embeddings or cross-encoders.
+## Defining mechanism
 
-## Step-by-step example
-
-"Cancel my plan" and "terminate my subscription" should be close for support search even though only one word overlaps.
-
-## Common failure modes
-
-- Training Semantic Textual Similarity on ambiguous labels or annotation rules that annotators apply inconsistently.
-- Evaluating only clean examples while long, multilingual, noisy, or domain-specific text fails.
-- Ignoring entity, span, or document-level errors because the aggregate metric looks acceptable.
-
-- Domain shift in vocabulary, style, language, or document structure.
-- Evaluating surface form while missing semantic correctness or downstream utility.
-
-## Mechanism
-
-A common baseline embeds two texts as vectors $u$ and $v$ and compares cosine similarity:
+A bi-encoder embeds two texts independently and compares vectors:
 
 $$
-\operatorname{cos}(u,v)=\frac{u^\top v}{\lVert u\rVert \lVert v\rVert}.
+s(a,b)=\operatorname{cos}(f_\theta(a),f_\theta(b)).
 $$
 
-Cross-encoders can model richer pairwise interactions, but they are slower because they score each text pair jointly.
+A cross-encoder instead scores a concatenated pair, $s(a,b)=g_\theta([a;b])$, which can model richer token interactions but must run once per pair. The bi-encoder is faster for retrieval because vectors can be indexed; the cross-encoder is often better for reranking.
+
+## Worked example
+
+```python
+import numpy as np
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+np.random.seed(7)
+texts = ["cancel my subscription", "terminate my plan",
+         "where is my invoice", "delete the account"]
+X = TfidfVectorizer().fit_transform(texts)
+S = (X @ X.T).toarray()
+print("sim_cancel_terminate", round(S[0, 1], 3))
+print("sim_cancel_invoice", round(S[0, 2], 3))
+print("nearest_to_cancel", texts[int(np.argsort(S[0])[-2])])
+```
+
+Observed output:
+
+```text
+sim_cancel_terminate 0.169
+sim_cancel_invoice 0.142
+nearest_to_cancel terminate my plan
+```
+
+This TF-IDF baseline barely separates the paraphrase from the invoice query because it has only the word `my` in common. Stronger sentence embeddings are designed to fix exactly that weakness.
+
+## Caveats
+
+STS scores are not truth labels. Two sentences can be semantically similar but have opposite business actions, different entities, or different time constraints. [Text preprocessing](text-preprocessing.md) can remove crucial negation or identifiers, and [tokenization](tokenization.md) can fragment names. Evaluate STS with examples that match the downstream use: deduplication, search, clustering, or support-ticket routing.
+
+## References
+
+- [Reimers and Gurevych, Sentence-BERT](https://aclanthology.org/D19-1410/)
+- [Manning, Raghavan, and Schutze, Introduction to Information Retrieval: The vector space model](https://nlp.stanford.edu/IR-book/html/htmledition/the-vector-space-model-for-scoring-1.html)
+- [scikit-learn API: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)

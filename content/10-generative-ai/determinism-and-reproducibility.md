@@ -1,8 +1,7 @@
 ---
 title: Determinism and Reproducibility
 slug: generative-ai/determinism-and-reproducibility
-description: Concise guide to Determinism and Reproducibility in Generative AI
-  and Agentic Systems.
+description: "Tracing prompts, retrieval, tools, model versions, and decoding settings so outputs can be debugged."
 area: generative-ai
 topics:
   - determinism-and-reproducibility
@@ -13,46 +12,41 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - sampling-and-decoding.md
+  - temperature-and-determinism.md
+  - context-construction.md
+  - model-serving.md
+  - agent-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Determinism and Reproducibility
 
-## Summary
+Determinism means identical inputs and execution conditions produce identical outputs. Reproducibility means a run can be reconstructed closely enough to debug drift. In generative systems, this spans [sampling and decoding](sampling-and-decoding.md), [context construction](context-construction.md), retrieval, tools, serving, and validators.
 
-Determinism means the same inputs and execution conditions produce the same output. Reproducibility means another run can be traced and repeated closely enough to debug or compare behavior. In generative AI systems, reproducibility depends on more than model temperature.
+## Mechanism
 
-## Canonical relationship
+A run record should include model identifier, prompt messages, decoding parameters, seed if exposed, retrieved chunk IDs, tool schemas, tool outputs, validator versions, and post-processing code. Temperature zero narrows sampling but does not freeze hosted infrastructure or retrieval state; see [temperature and determinism](temperature-and-determinism.md).
 
-For decoding-specific details, use [Temperature and Determinism](temperature-and-determinism.md). This page is the broader production checklist for prompts, retrieval, tools, model versions, seeds, and post-processing.
+## Concrete artifact
 
-## Core idea
+```json
+{
+  "model": "provider-model-version",
+  "decoding": {"temperature": 0, "top_p": 1},
+  "retrieved_chunk_ids": ["policy-7", "policy-9"],
+  "tool_schema_hash": "sha256:...",
+  "validator": "citation_support_v3"
+}
+```
 
-- Record model name and version, prompt, system instructions, decoding parameters, and seed when available.
-- Record retrieval inputs, retrieved documents, tool schemas, tool outputs, and validation code.
-- Treat hosted model changes, safety layers, batching, and numeric kernels as possible sources of output drift.
+This is the minimum trace needed for [agent evaluation](agent-evaluation.md).
 
-## Worked example
+## Caveats
 
-For a RAG regression test, save the user question, rewritten query, retrieved chunk IDs, prompt, model version, decoding parameters, generated answer, citations, and validator result. If the answer changes later, this record helps determine whether retrieval, prompting, model behavior, or post-processing changed.
+Caching can mask nondeterminism. Changing chunking, reranking, or safety filters can change outputs even when prompt text is unchanged.
 
-## Practical checklist
+## References
 
-- Define the system contract for Determinism and Reproducibility: inputs, outputs, evidence, tools, and refusal behavior.
-- Version prompts, models, retrieval indexes, tool schemas, and evaluation examples affected by Determinism and Reproducibility.
-- Review traces and hard cases before promoting Determinism and Reproducibility to production.
-
-- Separate retrieval, context construction, model generation, validation, and post-processing.
-- Evaluate with golden examples, citations, groundedness, latency, and cost.
-- Add deterministic checks for schemas, permissions, and safety constraints.
-- Review failures by severity rather than treating all bad answers equally.
-
-## Common failure modes
-
-- Relying on model behavior for Determinism and Reproducibility when deterministic validation, permissions, or tool constraints are needed.
-- Judging Determinism and Reproducibility from fluent examples instead of traces, evidence use, schema validity, and hard negative cases.
-- Changing Determinism and Reproducibility without versioned prompts, models, indexes, and rollback evidence.
-
-- Mixing retrieval, reasoning, and formatting failures into one undiagnosed score.
-- Accepting fluent answers without evidence, citations, or schema validation.
+- [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
+- [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)

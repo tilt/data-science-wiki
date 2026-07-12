@@ -1,7 +1,7 @@
 ---
 title: Quantization
 slug: generative-ai/quantization
-description: Concise guide to Quantization in Generative AI and Agentic Systems.
+description: "Representing model weights or activations with fewer bits to reduce memory and sometimes latency."
 area: generative-ai
 topics:
   - quantization
@@ -12,38 +12,54 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - model-serving.md
+  - local-versus-hosted-models.md
+  - cost-and-latency-optimization.md
+  - vector-databases.md
+  - ../01-mathematical-foundations/numerical-stability.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Quantization
 
-## Summary
+Quantization stores model values in lower precision, commonly int8 or 4-bit formats, to reduce memory bandwidth and serving cost. It matters most for [model serving](model-serving.md) of local models, [cost and latency optimization](cost-and-latency-optimization.md), and [local versus hosted models](local-versus-hosted-models.md) decisions.
 
-Quantization reduces model memory and compute by representing weights or activations with lower-precision numbers. It trades precision for size, speed, or hardware fit.
+## Defining math
 
-## Mechanism
+Uniform symmetric int8 quantization can use scale $s=\max |x|/127$, quantized value $q=\operatorname{round}(x/s)$, and reconstruction $\hat x=sq$. The error $x-\hat x$ affects logits, attention, and sometimes tool-routing reliability.
 
-A simple uniform quantizer maps a floating-point value $x$ to an integer value $q$ with scale $s$ and zero point $z$:
+## Executed artifact
 
-$$
-q = \operatorname{round}\left(\frac{x}{s}\right) + z.
-$$
+```python
+import numpy as np
 
-Approximate dequantization recovers
+x = np.array([-1.25, -0.1, 0.0, 0.8, 1.7])
+scale = max(abs(x)) / 127
+q = np.round(x / scale).astype(np.int8)
+reconstructed = q.astype(float) * scale
+print("QUANTIZATION")
+print("scale", round(scale, 5))
+print("int8", q.tolist())
+print("max_abs_error", round(float(np.max(np.abs(x - reconstructed))), 5))
+```
 
-$$
-\hat{x}=s(q-z).
-$$
+Observed output:
 
-Lower bit width reduces memory and bandwidth, but the approximation error can change logits, attention behavior, tool-call formatting, and rare-token behavior. Weight-only quantization, activation quantization, post-training quantization, and quantization-aware training have different quality and deployment tradeoffs.
+```text
+QUANTIZATION
+scale 0.01339
+int8 [-93, -7, 0, 60, 127]
+max_abs_error 0.0063
+```
 
-## Step-by-step example
+This toy vector reconstructs closely: the largest absolute reconstruction error is 0.0063 after mapping values into int8 with scale 0.01339. The endpoint 1.7 maps exactly to 127 by construction, while intermediate values absorb rounding error, which is why real models need layer-wise evaluation after quantization.
 
-A team serving a local assistant tests a 4-bit model because the full model exceeds GPU memory, then compares quality and structured-output validity on the same golden set.
+## Caveats
 
-## Common failure modes
+Quantization can degrade rare-token behavior, arithmetic, multilingual quality, or long-context stability before aggregate benchmarks show large drops.
 
-- Benchmarking only average chat quality and missing degradation in structured output, long-context retrieval, code, or minority languages.
-- Assuming lower bit width always improves latency; some hardware and kernels are bandwidth-, memory-, or batching-limited.
-- Quantizing without a rollback path to the original model and without task-specific regression tests.
+## References
+
+- [PyTorch documentation: Quantization](https://pytorch.org/docs/stable/quantization.html)
+- [OpenAI API documentation: Latency optimization](https://platform.openai.com/docs/guides/latency-optimization)
+- [OpenAI API documentation: Cost optimization](https://platform.openai.com/docs/guides/cost-optimization)

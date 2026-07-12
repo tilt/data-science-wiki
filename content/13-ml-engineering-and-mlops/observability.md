@@ -1,7 +1,7 @@
 ---
 title: Observability
 slug: ml-engineering-and-mlops/observability
-description: Concise guide to Observability in ML Engineering and MLOps.
+description: "Diagnostic evidence for explaining model-backed system behavior."
 area: ml-engineering-and-mlops
 topics:
   - observability
@@ -12,26 +12,47 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - monitoring.md
+  - microservices.md
+  - model-serving.md
+  - production-incident-response.md
+  - reliability.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Observability
 
-Observability is the ability to understand system behavior from emitted signals. While monitoring answers whether known conditions are healthy, observability helps diagnose unknown failures.
+Observability is the ability to explain what happened inside a system from emitted evidence. [Monitoring](monitoring.md) asks whether known conditions are healthy; observability lets an engineer diagnose why a specific decision, latency spike, or data anomaly occurred.
 
-## Core signals
+## Mechanism
 
-The standard signals are logs, metrics, traces, and events. ML systems should add prediction metadata: model version, feature version, request context, retrieval configuration, prompt or policy version where relevant, output scores, fallback path, and user feedback identifiers.
+The core signals are metrics, logs, traces, and events. ML systems need prediction metadata on top: request ID, model version, feature version, dataset or prompt version, score, threshold, fallback path, latency, and policy decision. In a [microservices](microservices.md) path, trace context must cross the application, feature service, [model-serving](model-serving.md) service, and downstream workflow.
 
-## Example
+## Artifact: Prediction Event
 
-When a support-routing model starts sending too many tickets to billing, observability should let an engineer trace an affected request from API entry, through feature retrieval, model version, threshold decision, and final workflow action. Without that trace, the team may know the metric moved but not why.
+```json
+{
+  "event": "prediction_served",
+  "request_id": "req-7f31",
+  "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+  "model_name": "fraud-scorer",
+  "model_version": "42",
+  "feature_version": "features:v19",
+  "score": 0.873,
+  "threshold": 0.82,
+  "decision": "manual_review",
+  "latency_ms": 87,
+  "fallback_reason": null
+}
+```
 
-## Design principles
+This event supports [production incident response](production-incident-response.md): responders can filter all decisions made by version `42`, find high-latency traces, and compare decisions against later labels. Sensitive raw inputs should not be logged unless the governance and retention controls are explicit.
 
-Emit structured events at boundaries, use correlation IDs, avoid logging sensitive raw inputs unnecessarily, and sample high-volume traces without losing rare error classes. Observability should be designed before launch, not after the first incident.
+## Failure Modes
 
-## Failure modes
+High-volume logs are not observability if they cannot answer operational questions. Missing correlation IDs, sampled-away rare failures, and free-text logs make diagnosis slow. Over-logging personal data creates reliability and governance risk even when debugging improves.
 
-Teams often collect large logs that cannot answer operational questions. Another failure is logging sensitive data to make debugging easier, then creating governance and privacy risk.
+## References
+
+- [OpenTelemetry Signals](https://opentelemetry.io/docs/concepts/signals/)
+- [Google SRE Book: Managing Incidents](https://sre.google/sre-book/managing-incidents/)

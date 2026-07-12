@@ -1,8 +1,7 @@
 ---
-title: Development OF Tool Using Language Models and Agents
+title: Development of Tool-Using Language Models and Agents
 slug: history-of-ai-and-machine-learning/development-of-tool-using-language-models-and-agents
-description: Concise guide to Development OF Tool Using Language Models and
-  Agents in History of AI and Machine Learning.
+description: "How language models moved from direct text completion toward tool calls, action loops, and agentic systems."
 area: history-of-ai-and-machine-learning
 topics:
   - development-of-tool-using-language-models-and-agents
@@ -13,23 +12,38 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - ../10-generative-ai/tool-use-and-function-calling.md
+  - ../10-generative-ai/tool-schemas.md
+  - ../10-generative-ai/tool-routing.md
+  - ../10-generative-ai/agent-loops.md
+  - ../10-generative-ai/planning.md
+  - ../10-generative-ai/agent-evaluation.md
 historical_context: true
 last_reviewed: 2026-07-11
 ---
 # Development of Tool-Using Language Models and Agents
 
-## Summary
+Tool use developed because fluent language models still failed at tasks that ordinary software handles cleanly: arithmetic, search, database lookup, code execution, and transactions. The historical move was from asking a model to answer directly toward wrapping it in [tool schemas](../10-generative-ai/tool-schemas.md), execution policies, and [agent loops](../10-generative-ai/agent-loops.md).
 
-Tool-using language models developed from prompting models to call external functions, retrieve information, execute code, and coordinate multi-step workflows. This shifted language models from text generators toward system components.
+## Verified chronology
 
-## Timeline
+| Year | Milestone | Why it followed |
+|---|---|---|
+| 2022 | Karpas and coauthors described MRKL systems: modular language-model systems connected to external knowledge and reasoning modules. | The paper framed tool use as a systems architecture problem, not a single-model capability. |
+| 2022 | Yao and coauthors introduced ReAct, prompting language models to interleave reasoning traces with actions. | Chain-of-thought helped planning, but actions let the model inspect environments or retrieve facts before continuing. |
+| 2023 | Schick and coauthors introduced Toolformer, training a model to decide which API calls to insert and how to use results. | Tool calls moved from hand-written demonstrations toward self-supervised data creation for API use. |
+| 2020s | Application stacks standardized structured calls, permission checks, retrieval tools, code tools, and stopping rules. | The hard part became [tool routing](../10-generative-ai/tool-routing.md): selecting the right action, validating arguments, and deciding when the task is done. |
 
-- Early language-model applications answered directly from prompt context and model parameters.
-- Retrieval and calculator-style augmentation showed that external systems could compensate for model limitations.
-- Function-calling interfaces made tool requests structured enough for applications to validate and execute.
-- Agent loops added planning, tool execution, observation, revision, and stopping policies around the model.
+## Historical mechanism
 
-## Historical lesson
+The early pattern was "model as assistant": prompt in, text out. Tool use changed the contract to "model as controller inside a bounded system." A model may propose an API call, but software owns schema validation, credentials, rate limits, retries, logging, and side-effect control. This is why [tool-use and function-calling](../10-generative-ai/tool-use-and-function-calling.md) pages are systems pages as much as modeling pages.
 
-The important change was not that the model became a trustworthy actor by itself. The system around the model became responsible for schemas, permissions, execution, retries, audit logs, and rollback.
+Agents added temporal structure. A typical loop observes the state, reasons or plans, selects a tool, executes it, reads the result, and either revises the plan or stops. That made [planning](../10-generative-ai/planning.md) and [agent evaluation](../10-generative-ai/agent-evaluation.md) central: a tool-using model can fail by calling the wrong tool, calling the right tool with unsafe arguments, ignoring the observation, or continuing after the correct answer is already available.
+
+The historical lesson is that tool use increased capability by narrowing trust. The model became more useful when it was no longer expected to internalize every capability. The surrounding system had to become stricter.
+
+## References
+
+- [Karpas et al., 2022, MRKL Systems](https://arxiv.org/abs/2205.00445)
+- [Yao et al., 2022, ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
+- [Schick et al., 2023, Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761)

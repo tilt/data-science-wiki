@@ -1,7 +1,7 @@
 ---
 title: Hypothesis Testing
 slug: probability-and-statistics/hypothesis-testing
-description: Concise guide to Hypothesis Testing in Probability and Statistics.
+description: "A null-model calculation of how surprising an observed statistic would be under specified assumptions."
 area: probability-and-statistics
 topics:
   - hypothesis-testing
@@ -12,26 +12,52 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - confidence-intervals.md
+  - experimental-design.md
+  - statistical-estimation.md
+  - ../16-experimentation-and-evaluation/statistical-significance.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Hypothesis Testing
 
-Hypothesis testing evaluates whether observed data is surprising under a specified null hypothesis. It is a decision aid, not a substitute for effect-size reasoning or study design.
+Hypothesis testing compares data with a null model. A test defines $H_0$, $H_1$, a statistic $T(X)$, and a reference distribution under $H_0$. The p-value is
 
-## Core idea
+$$
+p=P_{H_0}\left(T(X)\ge T(x_{\mathrm{obs}})\right)
+$$
 
-A test defines a null hypothesis, an alternative, a test statistic, and a rejection rule. The p-value is the probability, under the null, of seeing a result at least as extreme as the observed result.
+for a one-sided upper-tail test, with analogous two-sided forms. This is a probability of data extremeness under the null, not the probability that the null is true. [Confidence intervals](confidence-intervals.md) often invert families of tests, and [experimental design](experimental-design.md) determines whether the test answers the intended question.
 
-## Example
+## Worked computation
 
-An A/B test asks whether a new ranking model changes conversion. The null hypothesis may be no difference in conversion rate. A small p-value suggests the observed difference would be unlikely if the null were true, but it does not measure practical importance.
+```python
+import numpy as np
+from scipy import stats
 
-## Practical workflow
+rng = np.random.default_rng(20260711)
+a = rng.normal(0.0, 1.0, size=40)
+b = rng.normal(0.55, 1.0, size=42)
+res = stats.ttest_ind(b, a, equal_var=False)
+effect = b.mean() - a.mean()
+print("mean_diff", round(effect, 4),
+      "t_stat", round(res.statistic, 4),
+      "p_value", round(res.pvalue, 4))
+```
 
-Define the hypothesis before looking at results, choose the unit of analysis, check assumptions, report effect sizes and uncertainty, and account for multiple comparisons when many metrics or segments are tested.
+Observed output:
 
-## Failure modes
+```text
+mean_diff 0.5646 t_stat 2.4319 p_value 0.0173
+```
 
-Common mistakes include treating p-values as the probability the null is true, stopping when results become significant, ignoring small but unimportant effects, and testing many slices without correction.
+The Welch t-test reports a small p-value for this simulated difference, but the decision should still consider effect size, cost, and [statistical significance](../16-experimentation-and-evaluation/statistical-significance.md) in context.
+
+## Caveats
+
+Optional stopping, multiple comparisons, peeking at segments, and using the wrong unit of analysis can make p-values anti-conservative. A non-significant result is not evidence of no effect unless the test had enough power for a meaningful effect size.
+
+## References
+
+- [OpenStax Introductory Statistics 2e, Chapter 9 introduction](https://openstax.org/books/introductory-statistics-2e/pages/9-introduction)
+- [SciPy `ttest_ind` reference](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html)

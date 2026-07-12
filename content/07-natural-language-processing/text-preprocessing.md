@@ -1,53 +1,78 @@
 ---
 title: Text Preprocessing
 slug: natural-language-processing/text-preprocessing
-description: Concise guide to Text Preprocessing in Natural Language Processing.
+description: "Normalizing raw text before tokenization, feature extraction, and modelling."
 area: natural-language-processing
 topics:
   - text-preprocessing
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - tokenization.md
+  - text-classification.md
+  - embeddings.md
+  - information-extraction.md
+  - evaluation-of-nlp-systems.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Text Preprocessing
 
-## Summary
+Text preprocessing is the contract that turns messy strings into the representation a model will actually see. It can include Unicode normalization, casing, punctuation handling, redaction, de-duplication, and domain-specific replacement such as mapping dollar amounts to `MONEY`. It sits before [tokenization](tokenization.md), changes the feature space used by [text classification](text-classification.md), and can either preserve or destroy evidence needed by [information extraction](information-extraction.md).
 
-Text Preprocessing belongs to natural language processing. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining mechanism
 
-## Core idea
+For a document $d$, preprocessing applies a deterministic transformation before vectorization:
 
-- Define the inputs, outputs, and boundaries for Text Preprocessing.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+$$
+\tilde d = g(d), \qquad x_j = c(t_j,\tilde d),
+$$
+
+where $g$ is the normalization policy, $t_j$ is a token type, and $c$ counts or weights the token. The important property is consistency: train, validation, retrieval index, and live inference must apply the same $g$. A mismatch creates features the model never learned or hides features it expects.
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Text Preprocessing. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+import numpy as np, re
+from sklearn.feature_extraction.text import CountVectorizer
 
-## Practical checklist
+np.random.seed(7)
+docs = ["Café prices: $5.00!!!", "Cafe price is 5 dollars", "CAFÉ pricing? five dollars."]
 
-- Define the text unit, label or output policy, language coverage, and annotation edge cases for Text Preprocessing.
-- Create examples for ambiguity, long text, rare entities, and domain-specific vocabulary.
-- Evaluate by slice and inspect outputs, not only aggregate text metrics.
+def normalize(s):
+    s = s.lower().replace("é", "e")
+    s = re.sub(r"\$\d+(?:\.\d+)?", " MONEY ", s)
+    s = re.sub(r"[^a-z\s]", " ", s)
+    return re.sub(r"\s+", " ", s).strip()
 
-- Inspect tokenization and truncation on real examples.
-- Separate classification, extraction, linking, retrieval, and generation objectives.
-- Evaluate exact fields and semantic usefulness separately.
-- Review errors for ambiguity, domain shift, and annotation disagreement.
+raw = CountVectorizer().fit_transform(docs)
+norm_docs = [normalize(d) for d in docs]
+vec = CountVectorizer(stop_words=["is"]).fit(norm_docs)
+norm = vec.transform(norm_docs)
+print("normalized", norm_docs)
+print("raw_vocab_size", raw.shape[1], "normalized_vocab_size", norm.shape[1])
+print("normalized_features", vec.get_feature_names_out().tolist())
+```
 
-## Common failure modes
+Observed output:
 
-- Training Text Preprocessing on ambiguous labels or annotation rules that annotators apply inconsistently.
-- Evaluating only clean examples while long, multilingual, noisy, or domain-specific text fails.
-- Ignoring entity, span, or document-level errors because the aggregate metric looks acceptable.
+```text
+normalized ['cafe prices', 'cafe price is dollars', 'cafe pricing five dollars']
+raw_vocab_size 9 normalized_vocab_size 6
+normalized_features ['cafe', 'dollars', 'five', 'price', 'prices', 'pricing']
+```
 
-- Letting truncation remove the evidence needed for the prediction.
-- Evaluating generated or extracted text with a metric that misses semantic errors.
+The accent and case policy collapses `Café`, `Cafe`, and `CAFÉ`, while punctuation removal and stop-word handling shrink the vocabulary. That helps this toy corpus, but the same policy would be harmful if capitalization or exact currency symbols were labels.
+
+## Caveats
+
+Preprocessing is not harmless cleanup. Lowercasing can erase product names, regex redaction can remove the only entity to link, and aggressive stop-word removal can break phrase meaning. Keep raw text for audit, version the preprocessing function with the model, and inspect slice errors in [evaluation of NLP systems](evaluation-of-nlp-systems.md), especially after changing [embeddings](embeddings.md) or tokenizer settings.
+
+## References
+
+- [Manning, Raghavan, and Schutze, Introduction to Information Retrieval: Tokenization](https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html)
+- [scikit-learn User Guide: Text feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction)

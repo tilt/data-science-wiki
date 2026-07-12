@@ -1,7 +1,7 @@
 ---
 title: Citations
 slug: generative-ai/citations
-description: Concise guide to Citations in Generative AI and Agentic Systems.
+description: "Links from generated claims to the exact retrieved evidence that supports them."
 area: generative-ai
 topics:
   - citations
@@ -12,25 +12,58 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - grounding.md
+  - rag.md
+  - rag-evaluation.md
+  - context-construction.md
+  - hallucination-mitigation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Citations
 
-## Summary
+Citations are evidence pointers, not decorations. A cited source must support the specific claim made by the answer. They are strongest when [grounding](grounding.md), [context construction](context-construction.md), and [RAG evaluation](rag-evaluation.md) all operate on stable passage IDs.
 
-Citations connect generated claims to source evidence. They are useful only when the cited passage supports the specific claim being made.
+## Mechanism
 
-## Step-by-step example
+A citation contract can require each factual claim to carry `{claim, source_id, span}`. A validator then checks that the source was retrieved, the span exists, and the claim is semantically supported. [Hallucination mitigation](hallucination-mitigation.md) should treat uncited factual claims as defects, not as style issues.
 
-A policy answer about manager approval should cite the exact policy section stating that condition, not only the general HR handbook.
+## Executed artifact
 
-## Common failure modes
+```python
+import re
 
-- Changing Citations without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Citations.
-- Shipping Citations without rollback, monitoring, and examples for known hard cases.
+claims = {
+    "manager approval required above 500 EUR": "policy-7",
+    "shipping is two days": "policy-9",
+}
+sources = {
+    "policy-7": "Manager approval is required above 500 EUR.",
+    "policy-9": "Standard shipping is five days.",
+}
+print("CITATION_SUPPORT")
+for claim, source_id in claims.items():
+    claim_terms = set(re.findall(r"[a-z0-9]+", claim.lower()))
+    source_terms = set(re.findall(r"[a-z0-9]+", sources[source_id].lower()))
+    overlap = len(claim_terms & source_terms) / len(claim_terms)
+    print(claim, "overlap", round(overlap, 2))
+```
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+Observed output:
+
+```text
+CITATION_SUPPORT
+manager approval required above 500 EUR overlap 1.0
+shipping is two days overlap 0.75
+```
+
+The first claim matches its cited policy. The second has high lexical overlap but contradicts the source, showing why lexical checks are only a triage artifact.
+
+## Caveats
+
+Page-level links are too coarse for dense manuals. Citations can also be copied from retrieved context even when the generated sentence says something stronger than the passage.
+
+## References
+
+- [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
+- [Anthropic Claude docs: Reduce hallucinations](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)

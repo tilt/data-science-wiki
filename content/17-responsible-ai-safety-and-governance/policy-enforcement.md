@@ -1,7 +1,7 @@
 ---
 title: Policy Enforcement
 slug: responsible-ai-safety-and-governance/policy-enforcement
-description: Concise guide to Policy Enforcement in Responsible AI, Safety, and Governance.
+description: "Turning AI behavior rules into testable controls outside and inside the model path."
 area: responsible-ai-safety-and-governance
 topics:
   - policy-enforcement
@@ -12,26 +12,75 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - prompt-injection.md
+  - security.md
+  - human-oversight.md
+  - auditability.md
+  - compliance.md
+  - ../10-generative-ai/guardrails.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Policy Enforcement
 
-Policy enforcement turns rules about allowed behavior into system controls. In AI systems, enforcement may occur before input, during retrieval or generation, before tool execution, or after output.
+Policy enforcement turns rules about allowed behavior into runtime controls. In AI systems, policies can be checked before input, during retrieval, before tool execution, after generation, and during [human oversight](human-oversight.md). A prompt instruction is not an enforcement boundary; high-risk decisions should be mediated by code, permissions, or a policy engine.
 
-## Core idea
+## Mechanism
 
-A policy should be explicit enough to test. Enforcement can use deterministic rules, classifiers, permission checks, allowlists, blocklists, retrieval filters, constrained decoding, tool schemas, human review, or post-generation validation. High-risk actions often need layered controls rather than a single model judgment.
+A layered enforcement path for an email-sending agent:
 
-## Example
+```text
+request -> authentication -> user/data authorization -> model/tool planning
+        -> policy decision -> human approval if high impact -> send action
+        -> audit log
+```
 
-An agent that can send customer emails should enforce policy at multiple points: authenticate the user, restrict which customer records can be accessed, require a valid template or approval for sensitive messages, block unsupported claims, and log the final action.
+The policy must be versioned and testable. For example, a Rego-style rule can deny customer-email actions that lack approval for sensitive content:
 
-## Practical checks
+```rego
+package ai.email
 
-Separate policy text from enforcement code, version both, test allowed and disallowed examples, and monitor bypass attempts. For generative systems, include indirect prompt-injection and tool misuse cases in evaluation.
+default allow := false
 
-## Failure modes
+allow if {
+  input.action == "send_customer_email"
+  input.user_role in {"support_agent", "manager"}
+  input.customer_id in input.authorized_customers
+  not input.contains_sensitive_claim
+}
 
-Policy enforcement fails when rules are vague, only checked in the prompt, or bypassed through a tool path the policy did not cover.
+allow if {
+  input.action == "send_customer_email"
+  input.user_role == "manager"
+  input.customer_id in input.authorized_customers
+  input.contains_sensitive_claim
+  input.human_approval == true
+}
+```
+
+OPA's documentation describes Rego as a declarative policy language for structured inputs such as API requests and configuration data. The important AI design point is that the model proposes an action; enforcement code decides whether that action is allowed.
+
+## Sourced artifact
+
+```yaml
+policy_test:
+  id: email_sensitive_claim_requires_approval
+  inputs:
+    action: send_customer_email
+    user_role: support_agent
+    contains_sensitive_claim: true
+    human_approval: false
+  expected: deny
+linked_risks:
+  - prompt_injection
+  - pii_leakage
+  - excessive_agency
+```
+
+That test belongs in [adversarial evaluation](adversarial-evaluation.md) and release governance. If a tool path bypasses it, [security](security.md) owns the failure even if the model followed its prompt.
+
+## References
+
+- [Open Policy Agent documentation: Policy Language](https://www.openpolicyagent.org/docs/policy-language)
+- [OWASP LLM06:2025 Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/)
+- [NIST AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)

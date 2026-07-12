@@ -1,7 +1,7 @@
 ---
 title: Pose Estimation
 slug: computer-vision/pose-estimation
-description: Concise guide to Pose Estimation in Computer Vision and Medical Imaging.
+description: "Predicting visible keypoints, skeleton structure, and localization quality for people or objects."
 area: computer-vision
 topics:
   - pose-estimation
@@ -12,29 +12,60 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - object-detection.md
+  - synthetic-data.md
+  - detection-and-segmentation-metrics.md
+  - ../09-video-understanding/gesture-recognition.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Pose Estimation
 
-## Summary
+Pose estimation predicts keypoints such as joints, hands, faces, animal landmarks, or object parts. It often follows [object detection](object-detection.md) because the person or object crop constrains the keypoint search, and it feeds downstream video tasks such as [gesture recognition](../09-video-understanding/gesture-recognition.md).
 
-Pose estimation predicts keypoints such as joints, body landmarks, or object parts. The output is spatial structure rather than only a label or box.
+## Defining mechanism
 
-## Core idea
+Top-down pose systems detect instances, then predict keypoint heatmaps $H_k(u,v)$ for each landmark $k$. A coordinate estimate can be the heatmap argmax,
 
-- Keypoint visibility and annotation consistency strongly affect quality.
-- Temporal smoothing can help video pose estimates but may hide fast motion.
-- Evaluation should separate localization error from missed keypoints.
+$$
+(\hat u_k,\hat v_k)=\arg\max_{u,v} H_k(u,v),
+$$
+
+or a soft-argmax. Evaluation commonly normalizes Euclidean error by a body or box scale and reports PCK:
+
+$$
+\mathrm{PCK}_\alpha=\frac{1}{K}\sum_k \mathbf 1\left[\frac{\lVert \hat p_k-p_k\rVert_2}{s}\le \alpha\right].
+$$
 
 ## Worked example
 
-For pedestrian pose detection, label visible joints, train a keypoint model, inspect crowded scenes, and evaluate whether downstream action recognition still works when some joints are occluded.
+```python
+import numpy as np
 
-## Practical checks
+true = np.array([[10,10],[20,10],[20,25],[np.nan,np.nan]])
+pred = np.array([[11,10],[23,12],[18,30],[15,15]], float)
+visible = ~np.isnan(true[:,0])
+d = np.linalg.norm(pred[visible] - true[visible], axis=1)
+torso = 20
+pck = (d / torso <= .2).mean()
+print("normalized_errors", np.round(d / torso, 3).tolist())
+print("pck_at_0.2", round(float(pck), 3), "visible_keypoints", int(visible.sum()))
+```
 
-- Define the keypoint set, visibility rules, coordinate frame, and whether occluded joints should be labelled.
-- Split data by person, scene, camera, or time when leakage is possible.
-- Report localization metrics with visual examples of occlusion, truncation, unusual poses, and crowded scenes.
-- Check robustness to lighting, viewpoint, resolution, motion blur, and detector cropping errors.
+Observed output:
+
+```text
+normalized_errors [0.05, 0.18, 0.269]
+pck_at_0.2 0.667 visible_keypoints 3
+```
+
+Two visible keypoints fall within the 0.2 normalized-error threshold. The occluded keypoint is excluded, which must match the annotation policy.
+
+## Caveats
+
+Crowding, truncation, and occlusion create association errors, not just localization errors. [Synthetic data](synthetic-data.md) can provide exact landmarks, but unrealistic body shapes or camera geometry can hurt transfer. Report missed keypoints separately from localization quality.
+
+## References
+
+- [OpenPose: Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields](https://arxiv.org/abs/1812.08008)
+- [Microsoft COCO: Common Objects in Context](https://arxiv.org/abs/1405.0312)

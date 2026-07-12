@@ -1,7 +1,7 @@
 ---
 title: Active Learning
 slug: ml-engineering-and-mlops/active-learning
-description: Concise guide to Active Learning in ML Engineering and MLOps.
+description: "Selecting the next examples to label when annotation is expensive."
 area: ml-engineering-and-mlops
 topics:
   - active-learning
@@ -12,22 +12,55 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - human-in-the-loop-systems.md
+  - evaluation-datasets.md
+  - model-degradation.md
+  - dataset-versioning.md
+  - ../03-classical-machine-learning/classification.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Active Learning
 
-Active learning selects the most useful unlabeled examples for human annotation. It is valuable when labels are expensive and the model can identify cases where new labels are likely to improve the decision boundary.
+Active learning selects unlabeled examples for annotation because the model expects those labels to improve learning more than random labels would. It is an ML operations loop: model scores a pool, a selection policy creates a labeling batch, [human-in-the-loop systems](human-in-the-loop-systems.md) collect labels, and a fixed [evaluation dataset](evaluation-datasets.md) checks whether the loop actually helped.
 
-## Core idea
+## Mechanism
 
-Instead of labeling data uniformly at random, active learning runs a loop: train a model, score unlabeled examples, choose uncertain or strategically diverse examples, obtain labels, retrain, and evaluate on a fixed holdout set. The selection rule should match the problem. Uncertainty sampling finds examples near the boundary; diversity sampling prevents a batch of near-duplicates; error-driven sampling focuses on known weak segments.
+Uncertainty sampling selects examples with small margin between the top two predicted classes. Diversity and stratification are usually added so the batch is not full of duplicates or low-value edge cases.
 
-## Step-by-step example
+## Executed Selection
 
-For document classification, start with 500 random labels. Train a baseline classifier, then select 200 unlabeled documents where the top two class probabilities are close. Remove duplicates, balance by source, label the batch, and retrain. Compare against the same validation set before requesting the next batch.
+```python
+import numpy as np
 
-## Failure modes
+proba = np.array([
+    [0.52, 0.48, 0.00],
+    [0.91, 0.09, 0.00],
+    [0.34, 0.33, 0.33],
+    [0.65, 0.25, 0.10],
+    [0.41, 0.39, 0.20],
+])
+sorted_p = np.sort(proba, axis=1)[:, ::-1]
+margin = sorted_p[:, 0] - sorted_p[:, 1]
+selected = np.argsort(margin)[:3]
+print("active_margins", np.round(margin, 3).tolist())
+print("active_selected_ids", selected.tolist())
+```
 
-Active learning can over-sample ambiguous or low-value cases, amplify annotator bias, and make evaluation look better only on the queried distribution. Keep a random audit sample, track label quality, and avoid using the active-learning pool itself as the only benchmark.
+Observed output:
+
+```text
+active_margins [0.04, 0.82, 0.01, 0.4, 0.02]
+active_selected_ids [2, 4, 0]
+```
+
+Examples 2, 4, and 0 are most uncertain. The batch should still be deduplicated, source-balanced, and recorded through [dataset versioning](dataset-versioning.md), otherwise later [model degradation](model-degradation.md) analysis cannot tell which labels came from the active-learning policy.
+
+## Failure Modes
+
+Active learning can over-sample ambiguous cases, amplify annotator bias, and make evaluation optimistic if the queried pool becomes the benchmark. Keep a random audit sample and freeze the validation set between labeling rounds.
+
+## References
+
+- [Settles, Active Learning Literature Survey](https://burrsettles.com/pub/settles.activelearning.pdf)
+- [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)

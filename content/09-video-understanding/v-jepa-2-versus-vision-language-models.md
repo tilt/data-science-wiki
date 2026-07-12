@@ -1,47 +1,78 @@
 ---
 title: V-JEPA 2 versus Vision-Language Models
 slug: video-understanding/v-jepa-2-versus-vision-language-models
-description: Comparison between V-JEPA 2 and vision-language models by objective, modality, and downstream use.
+description: "Comparison of latent predictive video models and language-facing multimodal models."
 area: video-understanding
 topics:
-  - "v-jepa-2"
-  - "vision-language-models"
-  - "world-models"
+  - v-jepa-2
+  - vision-language-models
+  - world-models
 level: intermediate
 status: review
 page_type: comparison
 aliases:
-  - "V-JEPA 2 versus VLM"
-  - "VJEPA 2 versus vision-language model"
+  - V-JEPA 2 versus VLM
+  - VJEPA 2 versus vision-language model
 prerequisites:
-  - "v-jepa-2.md"
-  - "../10-generative-ai/vision-language-models.md"
+  - v-jepa-2.md
+  - ../10-generative-ai/vision-language-models.md
 related:
-  - "world-models-and-jepa.md"
-  - "../10-generative-ai/vision-language-models.md"
+  - v-jepa-2.md
+  - video-language-models.md
+  - world-models-and-jepa.md
+  - ../10-generative-ai/vision-language-models.md
 historical_context: false
 last_reviewed: 2026-07-11
-references:
-  - "assran-2025-vjepa2"
-  - "bardes-2024-vjepa"
 ---
 # V-JEPA 2 versus Vision-Language Models
 
-V-JEPA 2 is a self-supervised video representation and world-modeling architecture. A vision-language model is defined by alignment between visual inputs and language inputs or outputs. The comparison is about training objective and interface, not which one is universally better.
+[V-JEPA 2](v-jepa-2.md) and [video-language models](video-language-models.md) answer different engineering questions. V-JEPA 2 asks whether latent video prediction can produce reusable visual dynamics and planning-oriented features. A vision-language model asks whether visual tokens can be aligned with language for captioning, question answering, retrieval, or chat. The comparison is objective and interface, not a universal ranking.
 
-| Axis | V-JEPA 2 | Vision-language model |
-| ---- | -------- | --------------------- |
-| Primary objective | Predict visual representations in latent space | Align visual content with language |
-| Main supervision | Self-supervised video/image learning | Image-text, video-text, instruction, or preference data |
-| Typical input | Video and images | Images/video plus text |
-| Typical output | Representations, predictions, downstream heads | Text, captions, answers, structured outputs, tool calls |
-| Strength | Learning visual dynamics and reusable video features | Language-facing reasoning, explanation, and interaction |
-| Evaluation | Transfer, prediction, planning, video understanding | VQA, captioning, grounding, instruction following |
-| Limitation | Not inherently a conversational language interface | May describe video without learning robust dynamics |
+## Defining distinction
 
-Pick V-JEPA-style representations when the task needs predictive visual features, anticipation, or planning-oriented video understanding. Pick a VLM when the product interface is language-grounded: question answering, captioning, document understanding, or multimodal chat. The interview version is [V-JEPA 2 versus VLM](../20-interview-preparation/v-jepa-2-versus-vision-language-model.md).
+V-JEPA-style training minimizes a latent prediction loss:
+
+$$
+\mathcal L_{JEPA}=\lVert p_\phi(f_\theta(x_c))-f_{\bar\theta}(x_m)\rVert_2^2.
+$$
+
+A language-facing VLM optimizes text or alignment losses, for example
+
+$$
+\mathcal L_{text}=-\sum_t \log p_\theta(w_t\mid w_{<t}, v_{1:T}).
+$$
+
+The first produces predictive visual representations; the second produces language-conditioned outputs. [World models and JEPA](world-models-and-jepa.md) explains why representation-space prediction is treated as a world-modeling route.
+
+## Worked example
+
+```python
+import torch
+
+future_latent = torch.tensor([1.0, 0.3])
+caption_logits = torch.tensor([0.2, 1.1, -0.4])
+latent_pred = torch.tensor([0.95, 0.25])
+latent_loss = ((latent_pred - future_latent) ** 2).mean()
+caption_prob = caption_logits.softmax(0)
+print("latent_prediction_mse", round(latent_loss.item(), 4))
+print("caption_probs", torch.round(caption_prob, decimals=3).tolist(), "text_answer_class", int(caption_prob.argmax()))
+```
+
+Observed output:
+
+```text
+latent_prediction_mse 0.0025
+caption_probs [0.24899999797344208, 0.6140000224113464, 0.13699999451637268] text_answer_class 1
+```
+
+The latent objective grades prediction accuracy in representation space; the language objective grades a text-facing answer distribution. A product may need both.
+
+## Practical choice
+
+Use V-JEPA-style representations when the task is anticipation, planning, motion-sensitive transfer, or visual dynamics. Use a VLM when the user interaction is language-first. For many systems, the best design is hybrid: a strong video encoder, temporal retrieval or localization, and a language model for explanation.
 
 ## References
 
-- Primary: Assran et al., "V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning."
-- Primary: Bardes et al., "Revisiting Feature Prediction for Learning Visual Representations from Video."
+- [Assran et al., 2025, V-JEPA 2](https://arxiv.org/abs/2506.09985)
+- [Lin et al., 2023, Video-LLaVA](https://arxiv.org/abs/2311.10122)
+- [Alayrac et al., 2022, Flamingo](https://arxiv.org/abs/2204.14198)

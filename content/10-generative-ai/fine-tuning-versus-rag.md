@@ -1,7 +1,7 @@
 ---
 title: Fine Tuning Versus RAG
 slug: generative-ai/fine-tuning-versus-rag
-description: Concise guide to Fine Tuning Versus RAG in Generative AI and Agentic Systems.
+description: "When to change model behavior through training versus supplying external evidence at runtime."
 area: generative-ai
 topics:
   - fine-tuning-versus-rag
@@ -12,22 +12,37 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - rag.md
+  - instruction-tuning.md
+  - pretraining.md
+  - embeddings.md
+  - retrieval-pipelines.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# Fine-Tuning versus RAG
+# Fine Tuning Versus RAG
 
-Fine-tuning changes model behavior through training. Retrieval-augmented generation changes the information available at runtime. They are often complementary: fine-tuning can teach style or task behavior, while RAG supplies current or private evidence.
+Fine-tuning changes model behavior or parameters. [RAG](rag.md) changes the evidence available at request time. They are complementary: [instruction tuning](instruction-tuning.md) can teach format and domain behavior, while [retrieval pipelines](retrieval-pipelines.md) supply current or private facts.
 
-| Axis | Fine-tuning | RAG |
-| ---- | ----------- | --- |
-| Changes | Model weights or adapters | Runtime context and retrieval pipeline |
-| Best for | Style, format, domain behavior, task adaptation | Current facts, private documents, citations |
-| Update path | Train and deploy a new model artifact | Update corpus, index, retriever, or reranker |
-| Evidence visibility | Knowledge may be implicit in weights | Evidence can be shown and cited |
-| Main risk | Overfitting, regression, stale training data | Retrieval misses, stale indexes, bad context packing |
-| Evaluation | Task outputs before/after training | Retrieval, context, answer, citation support |
-| Rollback | Restore prior model or adapter | Restore prior index/corpus/prompt/retriever |
+## Decision mechanism
 
-Pick fine-tuning when the model consistently performs the task in the wrong style or format despite good evidence. Pick RAG when the model needs access to changing, proprietary, or auditable knowledge. Use both when the system needs a domain-specific response pattern and source-grounded evidence.
+Use fine-tuning when the failure is stable behavior: style, output shape, classification policy, or repeated task procedure. Use RAG when the failure is missing knowledge, stale knowledge, or auditable citation. A compact rule is: train behavior, retrieve facts. [Embeddings](embeddings.md) and rerankers make the retrieval side testable without changing the base model.
+
+## Concrete artifact
+
+| Symptom | Better first lever |
+| --- | --- |
+| Wrong JSON shape despite clear evidence | Fine-tune or structured output |
+| Missing latest policy clause | RAG/index update |
+| Needs citations | RAG |
+| Refuses domain-specific phrasing | Fine-tune/instruction data |
+
+## Caveats
+
+Fine-tuning can memorize stale or sensitive data. RAG can retrieve the wrong passage. Both require before/after evaluation, rollback, and regression cases.
+
+## References
+
+- [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
+- [Hu et al., 2021, LoRA](https://arxiv.org/abs/2106.09685)
+- [Ouyang et al., 2022, Training language models to follow instructions](https://arxiv.org/abs/2203.02155)

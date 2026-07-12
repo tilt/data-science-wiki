@@ -17,11 +17,12 @@ prerequisites:
   - forecasting-problem-formulation.md
   - backtesting.md
 related:
-  - forecast-ensembling.md
-  - hyperparameter-optimization-for-forecasting.md
+  - forecasting-problem-formulation.md
+  - forecasting-data-and-covariates.md
   - forecast-monitoring.md
-  - concept-drift-in-forecasting.md
-  - ../13-ml-engineering-and-mlops/training-pipelines.md
+  - cold-start-forecasting.md
+  - backtesting.md
+  - ../13-ml-engineering-and-mlops/model-serving.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -134,3 +135,12 @@ Useful tables include training rows, forecast rows, backtest forecasts, componen
 - Uncontrolled fallback behavior.
 - Over-parallelization that increases runtime or memory failures.
 - Artifacts that cannot explain which model produced a forecast.
+
+## Connections
+
+System design connects [forecasting problem formulation](forecasting-problem-formulation.md), [forecasting data and covariates](forecasting-data-and-covariates.md), and production [forecast monitoring](forecast-monitoring.md). It must also encode [cold-start forecasting](cold-start-forecasting.md) and the same serving constraints covered by MLOps [model serving](../13-ml-engineering-and-mlops/model-serving.md).
+
+## References
+
+- [Nixtla StatsForecast documentation](https://nixtlaverse.nixtla.io/statsforecast/index.html)
+- [sktime forecasting tutorial](https://www.sktime.net/docs/examples/forecasting/)

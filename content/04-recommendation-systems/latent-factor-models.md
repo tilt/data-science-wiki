@@ -1,8 +1,7 @@
 ---
 title: Latent Factor Models
 slug: recommendation-systems/latent-factor-models
-description: Concise guide to Latent Factor Models in Recommendation Systems and
-  Personalization.
+description: "Recommenders that score users and items through learned hidden dimensions."
 area: recommendation-systems
 topics:
   - latent-factor-models
@@ -11,27 +10,61 @@ status: review
 page_type: model
 aliases: []
 prerequisites:
-  - index.md
+  - matrix-factorization.md
 related:
-  - index.md
+  - matrix-factorization.md
+  - funk-svd.md
+  - hybrid-recommenders.md
+  - content-based-recommendation.md
+  - cold-start-problem.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Latent Factor Models
 
-## Summary
+A latent factor model maps users and items to hidden coordinates and scores compatibility from those coordinates. In recommender systems, [matrix factorization](matrix-factorization.md) is the canonical example, but factor models can also include side features, biases, context, or neural encoders.
 
-Latent factor models represent users and items with learned vectors whose dimensions capture hidden preference structure. The dimensions are not manually named but can reflect genres, price sensitivity, or style.
+## Defining math
 
-## Step-by-step example
+The core scoring contract is
 
-In a movie recommender, a user vector and item vector may align on latent action or comedy factors. Their dot product estimates preference.
+$$
+s(u,i)=p_u^\top q_i,
+$$
 
-## Common failure modes
+or with biases,
 
-- Optimizing Latent Factor Models on historical interactions without correcting for exposure and position bias.
-- Treating missing interactions as negative feedback when they may mean the user never saw the item.
-- Improving average ranking metrics while harming cold-start users, long-tail items, diversity, or business guardrails.
+$$
+s(u,i)=\mu+b_u+b_i+p_u^\top q_i.
+$$
 
-- Optimizing a single offline metric while ignoring exposure, freshness, diversity, or cold start.
-- Failing to log enough context to reproduce why an item was recommended.
+The factors are "latent" because no column is pre-labeled as genre, price sensitivity, or expertise. Their meaning comes from the training objective and data. [Content-based recommendation](content-based-recommendation.md) starts from observed item features; latent factor models infer features from interaction patterns.
+
+## Worked example
+
+```python
+import numpy as np
+user = np.array([1.2, -0.4])
+items = np.array([[1.0, -0.2], [-0.3, 1.1], [0.8, -0.5]])
+scores = items @ user
+print("scores", np.round(scores, 3).tolist())
+print("top_item", int(np.argmax(scores)))
+```
+
+Observed output:
+
+```text
+scores [1.28, -0.8, 1.16]
+top_item 0
+```
+
+Item 0 and item 2 align with the user vector; item 1 points in the opposite direction. [Hybrid recommenders](hybrid-recommenders.md) often combine these latent scores with content features to reduce [cold-start](cold-start-problem.md) damage.
+
+## Caveats
+
+Latent dimensions are useful but not guaranteed to be stable or interpretable across retrains. They reflect exposure and feedback loops in the logs, not pure preference. When a product needs explanation, constraints, or editorial control, latent factors usually feed a broader [retrieval and ranking architecture](retrieval-and-ranking-architectures.md) rather than serving alone.
+
+## References
+
+- [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
+- [Rendle, 2012, BPR: Bayesian Personalized Ranking from Implicit Feedback](https://arxiv.org/abs/1205.2618)

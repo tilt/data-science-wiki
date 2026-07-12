@@ -1,7 +1,7 @@
 ---
 title: Hybrid Retrieval
 slug: generative-ai/hybrid-retrieval
-description: Concise guide to Hybrid Retrieval in Generative AI and Agentic Systems.
+description: "Combining lexical and vector retrieval signals before generation."
 area: generative-ai
 topics:
   - hybrid-retrieval
@@ -12,25 +12,59 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - embeddings.md
+  - retrieval-pipelines.md
+  - reranking.md
+  - vector-databases.md
+  - ../11-information-retrieval-and-search/bm25.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Hybrid Retrieval
 
-## Summary
+Hybrid retrieval combines lexical matching with dense [embeddings](embeddings.md). It is useful in [retrieval pipelines](retrieval-pipelines.md) because exact names, numbers, and codes often matter while semantic similarity still recovers paraphrases. [Reranking](reranking.md) can then read the merged candidates more carefully.
 
-Hybrid retrieval combines lexical search and dense vector retrieval. It is common in RAG because exact terms and semantic similarity catch different relevant documents.
+## Mechanism
 
-## Step-by-step example
+A simple fusion normalizes each score and combines them:
 
-For "pause billing," dense retrieval may find subscription-suspension pages while lexical search finds the exact FAQ phrase. Hybrid retrieval can include both.
+$$
+s(d,q)=\lambda z(s_{lex})+(1-\lambda)z(s_{dense}).
+$$
 
-## Common failure modes
+Lexical scores may come from BM25; dense scores from vector search in [vector databases](vector-databases.md). Reciprocal rank fusion is another robust option when scores are not comparable.
 
-- Changing Hybrid Retrieval without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Hybrid Retrieval.
-- Shipping Hybrid Retrieval without rollback, monitoring, and examples for known hard cases.
+## Executed artifact
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+```python
+import numpy as np
+
+lexical = np.array([2.0, 0.3, 1.1])
+dense = np.array([0.62, 0.91, 0.55])
+
+def zscore(x):
+    return (x - x.mean()) / x.std()
+
+score = 0.55 * zscore(lexical) + 0.45 * zscore(dense)
+print("HYBRID_FIXED")
+print([(int(i), round(float(score[i]), 3)) for i in np.argsort(-score)])
+```
+
+Observed output:
+
+```text
+HYBRID_FIXED
+[(0, 0.475), (1, -0.034), (2, -0.44)]
+```
+
+Document 0 wins after fusion with a score of 0.475 because its lexical score is strongest and its dense score is not weak enough to offset that advantage. Document 1 has the best dense score but only reaches -0.034 after its low lexical match is included, illustrating why hybrid retrieval can favor exact evidence over pure semantic similarity.
+
+## Caveats
+
+Fusion weights are corpus-specific. Evaluate exact-match queries separately from broad semantic questions.
+
+## References
+
+- [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)
+- [Faiss documentation](https://faiss.ai/)
+- [OpenAI API documentation: Embeddings](https://platform.openai.com/docs/guides/embeddings)

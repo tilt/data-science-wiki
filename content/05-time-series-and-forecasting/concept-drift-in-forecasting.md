@@ -18,6 +18,8 @@ prerequisites:
 related:
   - forecast-monitoring.md
   - online-learning-for-forecasting.md
+  - backtesting.md
+  - forecasting-pitfalls-and-worked-examples.md
   - ../13-ml-engineering-and-mlops/concept-drift.md
 historical_context: false
 last_reviewed: 2026-07-11
@@ -60,3 +62,12 @@ Responses include retraining, shortening training windows, adding recent-weighte
 - Ignoring bias because aggregate MAE looks stable.
 - Missing drift in low-volume but high-risk series.
 - Letting stale event calendars create apparent model drift.
+
+## Connections
+
+Forecast drift is visible through [forecast monitoring](forecast-monitoring.md), tested through fresh [backtesting](backtesting.md), and sometimes handled with [online learning for forecasting](online-learning-for-forecasting.md). It is the forecasting-specific form of MLOps [concept drift](../13-ml-engineering-and-mlops/concept-drift.md).
+
+## References
+
+- [Gibbs and Candes, Adaptive Conformal Inference Under Distribution Shift](https://arxiv.org/abs/2106.00170)
+- [scikit-learn TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)

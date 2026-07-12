@@ -1,7 +1,7 @@
 ---
 title: Exponential Smoothing
 slug: time-series-and-forecasting/exponential-smoothing
-description: Concise guide to Exponential Smoothing in Time-Series Forecasting.
+description: Recursive level, trend, and seasonal smoothing for statistical forecasting.
 area: time-series-and-forecasting
 topics:
   - exponential-smoothing
@@ -12,25 +12,56 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - statistical-forecasting.md
+  - trend-seasonality-cycles-noise.md
+  - state-space-models.md
+  - arima.md
+  - forecast-error-metrics.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Exponential Smoothing
 
-## Summary
+Exponential smoothing forecasts by maintaining a small set of states - usually level, optionally trend and seasonality - and updating them recursively when each new observation arrives. It is not just a smoothing trick for plots. ETS models turn those recursions into a statistical forecasting family with error, trend, and seasonal components.
 
-Exponential smoothing forecasts by recursively updating level, trend, and optionally seasonality with more weight on recent observations. It is a strong classical baseline for many business series.
+Simple exponential smoothing keeps only a level state:
 
-## Step-by-step example
+$$
+\ell_t = \alpha y_t + (1-\alpha)\ell_{t-1}, \qquad \hat{y}_{t+1|t} = \ell_t.
+$$
 
-For monthly sales, Holt-Winters smoothing maintains a level, slope, and month-specific seasonal component, then extrapolates them into the forecast horizon.
+The smoothing parameter $\alpha$ controls adaptation. A high $\alpha$ tracks new observations quickly but follows noise; a low $\alpha$ is stable but slow after level shifts. Holt's linear method adds a trend state, and Holt-Winters methods add seasonal states. Damped-trend variants reduce the risk of extrapolating a trend forever.
 
-## Common failure modes
+The intuition is state updating. Each observation is partly signal and partly noise. Exponential smoothing moves the latent state toward the observation by an amount determined by the estimated smoothing parameter, then forecasts from that state. This is why the family connects naturally to [state-space models](state-space-models.md): many ETS methods can be written as innovations state-space models with observation error feeding the state update.
 
-- Evaluating Exponential Smoothing with random splits that leak future information into training.
-- Reporting one average error while hiding horizon, season, segment, or peak-period failures.
-- Ignoring calendar effects, data revisions, missing timestamps, or operational constraints on when forecasts are available.
+## Executed example
 
-- Ignoring horizon-specific error, calendar effects, missing periods, or regime changes.
-- Reporting point accuracy without checking uncertainty, slices, and operational cost.
+```python
+import numpy as np
+
+y = np.array([20, 21, 19, 22, 24, 23, 25, 26], dtype=float)
+alpha = 0.4
+level = y[0]
+levels = [level]
+for obs in y[1:]:
+    level = alpha * obs + (1 - alpha) * level
+    levels.append(level)
+print("smoothed_levels", np.round(levels, 2).tolist())
+print("next_forecast", round(float(levels[-1]), 2))
+```
+
+Observed output:
+
+```text
+smoothed_levels [20.0, 20.4, 19.84, 20.7, 22.02, 22.41, 23.45, 24.47]
+next_forecast 24.47
+```
+
+With $\alpha=0.4$, the level moves toward new observations without jumping all the way to them. The one-step forecast from simple exponential smoothing is the latest level.
+
+Exponential smoothing is often a strong baseline for business series with stable [trend, seasonality, cycles, and noise](trend-seasonality-cycles-noise.md). It can lag abrupt regime shifts, so compare it against [ARIMA](arima.md), seasonal naive baselines, and machine-learning models using [forecast error metrics](forecast-error-metrics.md) over realistic cutoffs.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Exponential smoothing](https://otexts.com/fpp3/expsmooth.html)
+- [statsmodels ExponentialSmoothing API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.holtwinters.ExponentialSmoothing.html)

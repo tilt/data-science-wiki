@@ -17,6 +17,12 @@ prerequisites:
   - "../09-video-understanding/world-models-and-jepa.md"
 related:
   - "../09-video-understanding/world-models-and-jepa.md"
+  - "../09-video-understanding/world-models.md"
+  - "../09-video-understanding/v-jepa.md"
+  - "../09-video-understanding/v-jepa-2.md"
+  - "../19-history-of-ai-and-machine-learning/world-models-and-jepa-background.md"
+  - world-models.md
+  - v-jepa-2-versus-vision-language-model.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -24,25 +30,32 @@ last_reviewed: 2026-07-11
 
 ## Answer
 
-LeCun argues that intelligent systems need abstract world representations that support prediction, planning, action, and uncertainty handling. JEPA-style systems predict in representation space rather than reconstructing every pixel or token.
+The motivation is efficient abstraction for prediction and planning. LeCun's JEPA line argues that intelligent systems should learn compact representations of how the world evolves, predict in representation space, and use those predictions for downstream reasoning or action rather than spending capacity reconstructing every low-level detail.
 
 ## What a strong answer adds
 
-1. Many current models learn from text or pixels but do not necessarily build compact predictive models of the world.
-2. World-model approaches aim to represent state, dynamics, uncertainty, and consequences of actions.
-3. JEPA predicts missing or future representations rather than raw observations.
-4. Predicting in representation space can focus learning on semantically important structure instead of low-level detail.
+1. [World models](../09-video-understanding/world-models.md) aim to represent state, dynamics, uncertainty, and consequences of actions.
+2. [JEPA](../09-video-understanding/world-models-and-jepa.md) predicts missing or future latent representations, not raw pixels or tokens.
+3. Latent prediction can focus learning on semantically useful structure while ignoring unpredictable details.
+4. This is especially relevant for video, robotics, planning, and agents because these tasks depend on how state changes over time.
+5. The claim should stay empirical: promise depends on transfer, robustness, prediction, and planning results, not on rhetoric.
 
-## Prototype answer
+## Interview artifact
 
-Say: "The motivation is efficient abstraction for prediction and planning." Then contrast it with generative reconstruction: "Instead of spending capacity reproducing every pixel, a JEPA-style model can learn representations that preserve what matters for future state and action." Finish with a limitation: "The research direction is promising, but downstream evidence and scalable evaluation still matter."
+Use this answer: "A generative pixel model can spend effort reproducing texture and lighting. A JEPA-style model is trained to make the future representation predictable from context, so the supervision is closer to 'what matters for the next state'. That is why the research direction is attractive for [V-JEPA](../09-video-understanding/v-jepa.md), [V-JEPA 2](../09-video-understanding/v-jepa-2.md), and planning-oriented world models."
 
 ## Common follow-ups
 
-- World models are especially relevant for agents, robotics, video, and planning.
-- Language may still be useful, but it is not the only training signal.
-- The key question is whether the learned representation improves prediction, control, or transfer.
+- **"Does this make language irrelevant?"** No. Language is useful for communication and supervision, but it is not the only signal for learning world structure.
+- **"What is the weakness?"** A latent objective only preserves what the representation encodes; it may miss causal variables, uncertainty, or rare safety-relevant details.
+- **"How do you evaluate the claim?"** Use motion-sensitive transfer, action anticipation, counterfactual prediction, robustness, and planning success, not just qualitative demos.
 
-## Canonical concept
+## Canonical links
 
-Read the topic page: [World Models and JEPA](../09-video-understanding/world-models-and-jepa.md).
+Read [World Models and JEPA](../09-video-understanding/world-models-and-jepa.md), [World Models](world-models.md), and [V-JEPA 2 versus Vision-Language Models](v-jepa-2-versus-vision-language-model.md). Historical context lives in [World Models and JEPA Background](../19-history-of-ai-and-machine-learning/world-models-and-jepa-background.md).
+
+## References
+
+- [Bardes et al., 2024, Revisiting Feature Prediction for Learning Visual Representations from Video](https://arxiv.org/abs/2404.08471)
+- [Assran et al., 2025, V-JEPA 2](https://arxiv.org/abs/2506.09985)
+- [Ha and Schmidhuber, 2018, World Models](https://arxiv.org/abs/1803.10122)

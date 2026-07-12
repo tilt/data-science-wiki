@@ -1,7 +1,7 @@
 ---
 title: MRI Classification
 slug: computer-vision/mri-classification
-description: Concise guide to MRI Classification in Computer Vision and Medical Imaging.
+description: "Scan-, patient-, slice-, or region-level classification of MRI studies with leakage-aware validation."
 area: computer-vision
 topics:
   - mri-classification
@@ -12,22 +12,70 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - medical-image-analysis.md
+  - mri-segmentation.md
+  - image-classification.md
+  - domain-shift.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# MRI Classification
 
-MRI classification assigns scan-level or region-level labels to MRI data. It is used for triage, diagnosis support, disease subtype prediction, or quality control.
+MRI classification assigns labels to slices, series, regions, scans, or patients. That label level must be explicit: a slice-level tear label, a scan-level abnormality label, and a patient-level outcome label have different leakage risks. The task is a medical specialization of [image classification](image-classification.md), with stricter validation requirements from [medical image analysis](medical-image-analysis.md).
 
-## Core idea
+## Defining mechanism
 
-The model receives slices, volumes, or derived regions and predicts a class. The task must define whether labels apply to a slice, lesion, scan, or patient, because those levels have different leakage risks.
+For a study with slices $x_1,\ldots,x_T$, a model may aggregate slice embeddings:
 
-## Example
+$$
+h_t=\phi(x_t),\qquad
+\hat p=\sigma\left(w^\top \mathrm{pool}(h_1,\ldots,h_T)+b\right).
+$$
 
-A knee MRI classifier may predict whether a tear is present. If slices from the same patient appear in both training and test sets, performance will be inflated because patient-specific information leaks across splits.
+Pooling may be mean, max, attention, or sequence modeling. The split must group by patient or study:
 
-## Failure modes
+$$
+\mathrm{patient}(i)\notin \mathrm{patients}_{train}\quad\text{for all test examples }i.
+$$
 
-MRI classifiers can learn scanner artifacts, text overlays, sequence availability, or patient-position shortcuts rather than pathology.
+## Worked example
+
+```python
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import GroupShuffleSplit, train_test_split
+
+rng = np.random.default_rng(8)
+n_pat = 80
+groups = np.repeat(np.arange(n_pat), 2)
+y = rng.integers(0, 2, n_pat).repeat(2)
+onehot = np.eye(n_pat)[groups]
+weak = (y * 0.2 + rng.normal(0, 1.0, len(y))).reshape(-1, 1)
+X = np.c_[onehot, weak]
+
+Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=.35, random_state=8, stratify=y)
+acc_rand = LogisticRegression(max_iter=1000, C=10).fit(Xtr, ytr).score(Xte, yte)
+gss = GroupShuffleSplit(test_size=.35, n_splits=1, random_state=8)
+tr, te = next(gss.split(X, y, groups))
+acc_group = LogisticRegression(max_iter=1000, C=10).fit(X[tr], y[tr]).score(X[te], y[te])
+print("random_slice_split_acc", round(acc_rand, 3))
+print("patient_group_split_acc", round(acc_group, 3), "test_patients", len(set(groups[te])))
+```
+
+Observed output:
+
+```text
+random_slice_split_acc 0.875
+patient_group_split_acc 0.714 test_patients 28
+```
+
+The random slice split is inflated because patient identity appears in both train and test. Grouping by patient gives a more honest estimate.
+
+## Caveats
+
+MRI sequence availability, scanner vendor, coil, site, and reconstruction protocol can act as shortcuts. [Domain shift](domain-shift.md) across sites is normal, so report site-level and protocol-level performance. If classification depends on localization, pair it with [MRI segmentation](mri-segmentation.md) or saliency review.
+
+## References
+
+- [A Comparative Study of Existing and New Deep Learning Methods for Detecting Knee Injuries using the MRNet Dataset](https://arxiv.org/abs/2010.01947)
+- [WILDS: A Benchmark of in-the-Wild Distribution Shifts](https://arxiv.org/abs/2012.07421)

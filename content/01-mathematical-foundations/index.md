@@ -46,7 +46,7 @@ Mathematical Foundations is a major knowledge area in this wiki. The index is de
 - [Eigenvalues and Eigenvectors](eigenvalues-and-eigenvectors.md)
 - [Matrix Decompositions](matrix-decompositions.md)
 - [Singular Value Decomposition](singular-value-decomposition.md)
-- [LOW Rank Approximation](low-rank-approximation.md)
+- [Low-Rank Approximation](low-rank-approximation.md)
 - [Norms and Distances](norms-and-distances.md)
 - [Calculus](calculus.md)
 - [Gradients](gradients.md)

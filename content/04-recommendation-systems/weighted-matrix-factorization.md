@@ -1,8 +1,7 @@
 ---
 title: Weighted Matrix Factorization
 slug: recommendation-systems/weighted-matrix-factorization
-description: Concise guide to Weighted Matrix Factorization in Recommendation
-  Systems and Personalization.
+description: "Implicit-feedback factorization with separate preference and confidence."
 area: recommendation-systems
 topics:
   - weighted-matrix-factorization
@@ -11,27 +10,64 @@ status: review
 page_type: model
 aliases: []
 prerequisites:
-  - index.md
+  - implicit-feedback.md
+  - matrix-factorization.md
 related:
-  - index.md
+  - implicit-feedback.md
+  - alternating-least-squares.md
+  - matrix-factorization.md
+  - explicit-versus-implicit-feedback.md
+  - bayesian-personalized-ranking.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Weighted Matrix Factorization
 
-## Summary
+Weighted matrix factorization is the standard [implicit feedback](implicit-feedback.md) adaptation of factor models: an interaction says "some preference evidence exists," while its count or strength says how confident the system should be. It avoids treating every missing pair as a strong negative.
 
-Weighted matrix factorization learns user and item factors while giving different confidence to different observations. It is especially useful for implicit feedback.
+## Defining math
 
-## Step-by-step example
+Hu, Koren, and Volinsky separate binary preference $p_{ui}$ from confidence $c_{ui}$:
 
-A purchase can receive higher confidence than a page view, while an unobserved user-item pair receives low confidence rather than being treated as a strong negative.
+$$
+p_{ui}=\mathbf 1\{r_{ui}>0\},\qquad c_{ui}=1+\alpha r_{ui}.
+$$
 
-## Common failure modes
+The objective is
 
-- Optimizing Weighted Matrix Factorization on historical interactions without correcting for exposure and position bias.
-- Treating missing interactions as negative feedback when they may mean the user never saw the item.
-- Improving average ranking metrics while harming cold-start users, long-tail items, diversity, or business guardrails.
+$$
+\min_{X,Y}\sum_{u,i}c_{ui}(p_{ui}-x_u^\top y_i)^2+\lambda(\lVert x_u\rVert^2+\lVert y_i\rVert^2).
+$$
 
-- Optimizing a single offline metric while ignoring exposure, freshness, diversity, or cold start.
-- Failing to log enough context to reproduce why an item was recommended.
+For fixed item factors, each user update is a weighted ridge solve, closely related to [ALS](alternating-least-squares.md).
+
+## Worked example
+
+```python
+import numpy as np
+r = np.array([3., 0., 1.])
+C = np.diag(1 + 4 * r)
+Y = np.array([[.8, .1], [.2, .7], [.6, .3]])
+p = (r > 0).astype(float)
+x = np.linalg.solve(Y.T @ C @ Y + 0.1*np.eye(2), Y.T @ C @ p)
+print("user_factor", np.round(x, 3).tolist())
+print("scores", np.round(Y @ x, 3).tolist())
+```
+
+Observed output:
+
+```text
+user_factor [1.283, 0.111]
+scores [1.038, 0.335, 0.804]
+```
+
+The item with three interactions has higher confidence and pulls the user factor most strongly. [Bayesian personalized ranking](bayesian-personalized-ranking.md) instead trains pairwise orderings from positive and sampled negative items.
+
+## Caveats
+
+The confidence formula is a modeling choice, not a fact about preference. Counts can reflect exposure, autoplay, bots, or interface placement. Tune $\alpha$, regularization, and negative treatment against top-k [evaluation](evaluation-of-recommenders.md), and inspect long-tail coverage so popularity does not dominate every factor.
+
+## References
+
+- [Hu, Koren, and Volinsky, 2008, Collaborative Filtering for Implicit Feedback Datasets](https://doi.org/10.1109/ICDM.2008.22)
+- [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)

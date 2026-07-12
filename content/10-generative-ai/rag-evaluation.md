@@ -1,54 +1,67 @@
 ---
 title: RAG Evaluation
 slug: generative-ai/rag-evaluation
-description: RAG Evaluation overview and practical notes.
+description: "Measuring retrieval, context use, answer support, citation quality, and abstention in RAG systems."
 area: generative-ai
 topics:
-  - "rag"
-  - "evaluation"
-  - "retrieval"
+  - rag-evaluation
 level: intermediate
 status: review
 page_type: concept
 aliases: []
-prerequisites: []
-related: []
+prerequisites:
+  - index.md
+related:
+  - rag.md
+  - retrieval-pipelines.md
+  - citations.md
+  - grounding.md
+  - llm-as-judge.md
 historical_context: false
-last_reviewed: 2026-07-10
-references:
-  - "nist-ai-rmf-2023"
+last_reviewed: 2026-07-11
 ---
 # RAG Evaluation
 
-## Summary
+RAG evaluation separates retrieval quality from generation quality. A good final answer can hide weak retrieval, and a bad answer can occur despite perfect retrieved evidence. Evaluate [retrieval pipelines](retrieval-pipelines.md), [grounding](grounding.md), [citations](citations.md), and abstention separately.
 
-RAG evaluation should separate retrieval quality, context construction, generation quality, citation correctness, and final task utility. A single answer score is not enough because the same bad answer can come from different failures: the retriever missed the source, the context builder dropped it, or the model ignored it.
+## Mechanism
 
-## Evaluation layers
+Useful retrieval metrics include context recall, precision@k, nDCG, and filter correctness. Useful generation metrics include answer support, citation precision, citation coverage, abstention quality, and task success. [LLM-as-judge](llm-as-judge.md) can grade semantic support, but source IDs, retrieved chunk membership, and citation presence should be deterministic checks.
 
-1. Query understanding: did rewriting, routing, or filtering preserve the user's intent?
-2. Retrieval: did the system retrieve the evidence needed to answer?
-3. Context construction: did the prompt include the right passages without burying them in noise?
-4. Generation: did the model answer correctly, completely, and with appropriate uncertainty?
-5. Attribution: do citations support the exact claims being made?
-6. Product utility: did the answer help the user complete the task at acceptable cost and latency?
+The evaluation set should include answerable questions, unanswerable questions, stale-source cases, conflicting-source cases, and adversarial retrieved text. Without those slices, a RAG system can look strong by answering easy questions while failing the exact cases that retrieval was meant to solve.
 
-## Metrics
+## Executed artifact
 
-- Retrieval: [recall at k](../11-information-retrieval-and-search/ranking-and-retrieval-metrics.md#recall-at-k), [precision at k](../11-information-retrieval-and-search/ranking-and-retrieval-metrics.md#precision-at-k), [MRR](../11-information-retrieval-and-search/ranking-and-retrieval-metrics.md#mean-reciprocal-rank), [NDCG](../11-information-retrieval-and-search/ranking-and-retrieval-metrics.md#normalized-discounted-cumulative-gain), [source coverage](../11-information-retrieval-and-search/ranking-and-retrieval-metrics.md#source-coverage).
-- Generation: groundedness, factuality, completeness, refusal quality, style adherence.
-- System: latency, cost, cache hit rate, abstention, error severity, and human acceptance.
+```python
+gold = {"leave-eligibility", "manager-approval"}
+retrieved = ["leave-eligibility", "parking", "manager-approval"]
+cited = {"leave-eligibility"}
+answer_claims = 3
+supported_claims = 2
 
-## Worked example
+print("RAG_EVAL")
+print("context_recall", len(gold & set(retrieved)) / len(gold))
+print("citation_precision", len(cited & gold) / len(cited))
+print("claim_support_rate", supported_claims / answer_claims)
+```
 
-For a policy assistant, create a golden set of questions with expected source documents and acceptable answer criteria. First evaluate whether the source appears in the top retrieved passages. Then inspect whether the selected chunks contain the exact relevant paragraph. Finally grade the generated answer for correctness, citation support, and whether it refuses when policy evidence is absent.
+Observed output:
 
-## Failure modes
+```text
+RAG_EVAL
+context_recall 1.0
+citation_precision 1.0
+claim_support_rate 0.6666666666666666
+```
 
-Common failures include missing the right source, retrieving the right source but not placing it in context, ignoring context, citing unsupported text, and answering confidently when evidence is insufficient. Track severe errors separately from minor formatting issues so average quality does not hide risky behavior.
+The retriever found both gold chunks and the citation points to a gold source, but only two of three answer claims were supported.
 
-## Related topics
+## Caveats
 
-- [RAG](rag.md)
-- [Search evaluation](../11-information-retrieval-and-search/search-evaluation.md)
-- [Risk-weighted error taxonomies](../16-experimentation-and-evaluation/risk-weighted-error-taxonomies.md)
+A single aggregate score hides the failing stage. Keep per-stage traces from [retrieval pipelines](retrieval-pipelines.md), and report metrics by query type, source freshness, permission scope, and answerability.
+
+## References
+
+- [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
+- [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)
+- [Anthropic Claude docs: Reduce hallucinations](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)

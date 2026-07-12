@@ -17,9 +17,11 @@ aliases:
 prerequisites:
   - forecasting-problem-formulation.md
 related:
+  - forecasting-problem-formulation.md
   - feature-engineering-for-forecasting.md
+  - machine-learning-forecasting.md
+  - forecasting-system-design.md
   - cold-start-forecasting.md
-  - ../03-classical-machine-learning/data-leakage.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -101,3 +103,12 @@ Low exposure creates unstable rates, and zero exposure makes division undefined.
 - Dividing by very small exposure and creating extreme rate targets.
 - Mixing global covariates with region-specific calendars incorrectly.
 - Training on entities that should be excluded by the forecast mask.
+
+## Connections
+
+Data design starts from [forecasting problem formulation](forecasting-problem-formulation.md) and feeds [feature engineering for forecasting](feature-engineering-for-forecasting.md). Future-known covariates are central to [machine learning forecasting](machine-learning-forecasting.md), [cold-start forecasting](cold-start-forecasting.md), and [forecasting system design](forecasting-system-design.md).
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Forecasting with regression](https://otexts.com/fpp3/forecasting.html)
+- [Hyndman & Athanasopoulos, FPP3: Dealing with outliers and missing values](https://otexts.com/fpp3/missing-outliers.html)

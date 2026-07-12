@@ -1,7 +1,7 @@
 ---
 title: Image Representation
 slug: computer-vision/image-representation
-description: Concise guide to Image Representation in Computer Vision and Medical Imaging.
+description: "Pixels, channels, tensors, patches, and embeddings as the input contracts for vision systems."
 area: computer-vision
 topics:
   - image-representation
@@ -12,22 +12,57 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - classical-image-processing.md
+  - feature-extraction.md
+  - vision-transformers.md
+  - image-classification.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Image Representation
 
-Image representation defines how visual data is stored and interpreted: pixels, channels, color spaces, tensors, patches, features, or embeddings. The representation shapes what algorithms can learn.
+Image representation defines the contract between visual data and algorithms: pixel grid, channel semantics, dtype, scale, metadata, patches, feature maps, or embeddings. Most failures in [image classification](image-classification.md), [classical image processing](classical-image-processing.md), and [vision transformers](vision-transformers.md) become harder to debug when this contract is implicit.
 
-## Core forms
+## Defining mechanism
 
-Raw images are arrays with height, width, and channels. Preprocessing may change resolution, normalize values, convert color spaces, or divide images into patches. Learned systems may represent images as feature maps or embedding vectors.
+A common tensor representation is $X\in\mathbb R^{C\times H\times W}$ or batched $X\in\mathbb R^{N\times C\times H\times W}$. Normalization maps integer pixels into numeric ranges suitable for optimization:
 
-## Example
+$$
+x'_{c,u,v}=\frac{x_{c,u,v}/255-\mu_c}{\sigma_c}.
+$$
 
-A grayscale medical scan, RGB street image, and multispectral satellite image have different channel semantics. Treating them as interchangeable three-channel pictures can destroy important information.
+Patch-based models reshape an image into $P$ flattened patches $X_p\in\mathbb R^{P\times(Cp_hp_w)}$ before projection into tokens.
 
-## Failure modes
+## Worked example
 
-Representation mistakes include wrong channel order, inconsistent normalization, aspect-ratio distortion, lossy resizing, and ignoring metadata such as spacing in medical images.
+```python
+import numpy as np
+
+rgb = np.arange(3 * 4 * 4, dtype=np.uint8).reshape(3, 4, 4)
+chw = rgb.astype("float32") / 255.0
+patches = chw.reshape(3, 2, 2, 2, 2).transpose(1, 3, 0, 2, 4).reshape(4, -1)
+print("tensor_shape", tuple(chw.shape), "dtype", str(chw.dtype), "range", (round(float(chw.min()),3), round(float(chw.max()),3)))
+print("patch_matrix_shape", patches.shape)
+print("channel_means", np.round(chw.mean(axis=(1,2)), 3).tolist())
+print("first_patch_sum", round(float(patches[0].sum()), 3))
+```
+
+Observed output:
+
+```text
+tensor_shape (3, 4, 4) dtype float32 range (0.0, 0.184)
+patch_matrix_shape (4, 12)
+channel_means [0.028999999165534973, 0.09200000017881393, 0.1550000011920929]
+first_patch_sum 0.871
+```
+
+The same 4-by-4 image becomes four 12-value patch vectors. That representation is natural for a [vision transformer](vision-transformers.md), while a [CNN architecture](cnn-architectures.md) would preserve local spatial neighborhoods through convolution.
+
+## Caveats
+
+RGB/BGR swaps, missing alpha handling, lossy resizing, and wrong dtype ranges can silently poison a pipeline. Medical images add spacing, orientation, windowing, and sequence metadata; treating a voxel volume as an ordinary PNG stack can invalidate [MRI segmentation](mri-segmentation.md).
+
+## References
+
+- [Torchvision transforms documentation](https://docs.pytorch.org/vision/stable/transforms.html)
+- [Computer Vision: Algorithms and Applications, 2nd ed.](https://szeliski.org/Book/)

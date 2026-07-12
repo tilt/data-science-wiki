@@ -1,7 +1,7 @@
 ---
-title: Decoder Only Transformers
+title: Decoder-Only Transformers
 slug: natural-language-processing/decoder-only-transformers
-description: Concise guide to Decoder Only Transformers in Natural Language Processing.
+description: "Autoregressive transformer stacks that predict each next token from previous tokens."
 area: natural-language-processing
 topics:
   - decoder-only-transformers
@@ -12,23 +12,68 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - language-modelling.md
+  - tokenization.md
+  - bert-style-encoders.md
+  - summarization.md
+  - ../06-deep-learning/transformers.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# Decoder Only Transformers
+# Decoder-Only Transformers
 
-## Summary
+Decoder-only transformers are causal sequence models: at position $i$, the hidden state may use tokens $1,\ldots,i$ but not future tokens. That makes them natural for [language modelling](language-modelling.md), completion, chat, and generative [summarization](summarization.md). They share attention machinery with [bert-style encoders](bert-style-encoders.md), but the mask changes what information can flow.
 
-Decoder-only transformers generate text autoregressively: each token is predicted from previous tokens. This architecture underlies many chat and completion models.
+## Defining mechanism
 
-## Step-by-step example
+Causal self-attention applies a triangular mask before softmax:
 
-Given a prompt, the model repeatedly predicts the next token, appends it to the context, and continues until a stop condition.
+$$
+\operatorname{Attention}(Q,K,V)=\operatorname{softmax}\left(\frac{QK^\top+M}{\sqrt{d_k}}\right)V,
+$$
 
-## Common failure modes
+where $M_{ij}=0$ if $j\le i$ and $M_{ij}=-\infty$ if $j>i$. The model is trained with next-token cross-entropy:
 
-- Treating the model as bidirectional; a decoder-only model can condition only on previous tokens in the sequence.
-- Comparing outputs without fixing prompt format, tokenizer, sampling parameters, and stop conditions.
-- Ignoring context-window limits, position handling, and KV-cache memory during long generations.
-- Evaluating only final answers while missing error accumulation across generated tokens.
+$$
+\mathcal L=-\sum_i \log P_\theta(t_i\mid t_{<i}).
+$$
+
+[Tokenization](tokenization.md) fixes the sequence being predicted, so both perplexity and latency depend on tokenizer choice.
+
+## Worked example
+
+```python
+import math, torch
+
+torch.manual_seed(7)
+X = torch.randn(4, 3)
+Wq, Wk, Wv = torch.randn(3, 3), torch.randn(3, 3), torch.randn(3, 2)
+Q, K, V = X @ Wq, X @ Wk, X @ Wv
+scores = Q @ K.T / math.sqrt(3)
+mask = torch.triu(torch.ones(4, 4, dtype=torch.bool), diagonal=1)
+weights = torch.softmax(scores.masked_fill(mask, float("-inf")), dim=-1)
+context = weights @ V
+print("attention_weights", torch.round(weights, decimals=3).tolist())
+print("future_weight_sum", round(float(weights[0,1:].sum() + weights[1,2:].sum() + weights[2,3:].sum()), 6))
+print("context_last", torch.round(context[-1], decimals=3).tolist())
+```
+
+Observed output:
+
+```text
+attention_weights [[1.0, 0.0, 0.0, 0.0], [0.9010000228881836, 0.0989999994635582, 0.0, 0.0], [0.796999990940094, 0.04899999871850014, 0.15399999916553497, 0.0], [0.0820000022649765, 0.25, 0.13099999725818634, 0.5370000004768372]]
+future_weight_sum 0.0
+context_last [-0.27000001072883606, -0.9359999895095825]
+```
+
+The first position can attend only to itself; the sum of all illegal future attention weights is exactly zero in this run.
+
+## Caveats
+
+A missing or misaligned causal mask leaks answers during training or evaluation. Long contexts stress memory through the attention matrix and the key-value cache. Decoding settings change outputs, so compare systems with fixed prompt format, tokenizer, stop rules, and sampling parameters.
+
+## References
+
+- [Vaswani et al., Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+- [PyTorch documentation: MultiheadAttention](https://docs.pytorch.org/docs/2.7/generated/torch.nn.MultiheadAttention.html)
+- [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)

@@ -1,7 +1,7 @@
 ---
 title: Requirements Engineering
 slug: software-engineering/requirements-engineering
-description: Concise guide to Requirements Engineering in Software Engineering.
+description: Turning needs and constraints into testable software requirements.
 area: software-engineering
 topics:
   - requirements-engineering
@@ -12,30 +12,60 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - "behaviour-driven-development.md"
+  - "software-architecture.md"
+  - "technical-decision-records.md"
+  - "testing.md"
+  - "documentation.md"
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Requirements Engineering
 
-Requirements engineering turns needs, constraints, and risks into a shared description of what should be built. For data products, requirements must include data availability, acceptable error, user workflow, latency, compliance, and evaluation criteria.
+Requirements engineering turns stakeholder needs, constraints, and risks into a testable description of what should be built. A goal says why the work matters; a requirement says what behavior, quality, interface, or constraint the system must satisfy. For data products, requirements must include data availability, workflow fit, acceptable error, latency, privacy, and auditability before [software architecture](software-architecture.md) is chosen.
 
-## Core idea
+## Requirement Mechanism
 
-A requirement is useful when it is testable enough to guide design. "Use AI to improve support" is a goal, not a requirement. "Classify incoming support tickets into billing, technical, and account categories with human override and audit logging" is closer to something engineers can design and evaluate.
+A useful requirement has an actor, condition, system response, fit criterion, owner, and non-goal. "Use AI to improve support" is a goal. "Auto-route German billing tickets only when precision is at least 0.94 on `golden_de_billing_v3`, with human override visible on every routed ticket" is testable. The examples can become [behaviour-driven development](behaviour-driven-development.md) scenarios or [testing](testing.md) fixtures.
 
-Good requirements name:
+## Executed Artifact
 
-- users and decisions supported;
-- inputs, outputs, and ownership;
-- success metrics and guardrails;
-- constraints such as privacy, latency, cost, and explainability;
-- edge cases and explicit non-goals.
+```python
+requirements = [
+    {
+        "id": "REQ-1",
+        "statement": "Route German billing tickets automatically",
+        "fit": "precision >= 0.94 on golden_de_billing_v3",
+        "owner": "support-ops",
+    },
+    {
+        "id": "REQ-2",
+        "statement": "Human override is always available",
+        "fit": "override button visible for 100% of auto-routed tickets",
+        "owner": "product",
+    },
+]
+for req in requirements:
+    testable = all(req.get(k) for k in ["id", "statement", "fit", "owner"]) and any(
+        op in req["fit"] for op in [">=", "<=", "100%"]
+    )
+    print(req["id"], "testable", testable)
+```
 
-## Example
+Observed output:
 
-For an automated triage model, gather examples of real tickets, define category taxonomy, decide what confidence threshold triggers auto-routing, specify when humans review, and state what happens for unsupported languages. This prevents the team from optimizing only model accuracy while ignoring workflow fit.
+```text
+REQ-1 testable True
+REQ-2 testable True
+```
 
-## Failure modes
+The artifact is intentionally small: it distinguishes requirements from aspirations. Once a requirement carries a fit criterion, [code review](code-review.md) can ask whether the implementation and [documentation](documentation.md) updated the same contract.
 
-Weak requirements overfit to a proposed solution, omit operational constraints, or hide disagreement behind broad words such as "accurate", "real-time", or "scalable". Clarify these terms before architecture work begins.
+## Failure Modes
+
+Weak requirements overfit to a proposed solution, omit operational constraints, or hide disagreement behind words such as "accurate", "real-time", or "scalable." If a term cannot be tested, measured, or reviewed, clarify it before writing a [technical decision record](technical-decision-records.md).
+
+## References
+
+- [ISO/IEC/IEEE 29148:2018 Requirements Engineering](https://www.iso.org/standard/72089.html)
+- [Scrum Guide: Product Backlog and Product Goal](https://scrumguides.org/scrum-guide.html)

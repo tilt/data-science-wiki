@@ -1,37 +1,68 @@
 ---
 title: Technical Decision Records
 slug: software-engineering/technical-decision-records
-description: Concise guide to Technical Decision Records in Software Engineering.
+description: Short records of important engineering choices and accepted consequences.
 area: software-engineering
 topics:
   - technical-decision-records
 level: foundational
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - ADR
+  - Architecture decision records
 prerequisites:
-  - index.md
+  - software-architecture.md
 related:
-  - index.md
+  - "software-architecture.md"
+  - "requirements-engineering.md"
+  - "documentation.md"
+  - "api-design.md"
+  - "production-integration.md"
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Technical Decision Records
 
-Technical decision records document important engineering choices, the context behind them, and the consequences the team accepted. They are most valuable when a future reader needs to understand why the system is the way it is.
+Technical decision records preserve why a choice was made, not just what the code now does. They are most valuable when the decision is expensive to reverse, changes operational risk, affects multiple teams, or sets a precedent for future [software architecture](software-architecture.md).
 
-## Core idea
+## Record Mechanism
 
-A decision record should be short and durable. It usually includes status, context, options considered, decision, consequences, and links to evidence. The point is not to win an argument after the fact; it is to preserve the reasoning that would otherwise disappear into chat or memory.
+A small ADR usually has status, context, decision, alternatives, consequences, and links to evidence. The status is part of the contract: proposed, accepted, deprecated, or superseded. Keep the record near the code or docs it governs so [documentation](documentation.md) and implementation drift are visible.
 
-## Example
+## Authentic Artifact
 
-A team chooses hosted embeddings over self-hosted embeddings for the first release. The record should mention expected traffic, latency target, privacy review, cost estimate, fallback plan, and the condition under which self-hosting will be reconsidered. That is more useful than a vague note saying hosted embeddings are "simpler".
+```markdown
+# ADR-004: Use Hosted Embeddings For First Release
 
-## Step-by-step use
+Status: Accepted, 2026-07-11
 
-Write a record when a choice is expensive to reverse, affects multiple teams, changes operational risk, or sets a precedent. Mark it proposed while discussing, accepted when implemented, superseded when replaced, and link the replacement record.
+Context:
+- Expected launch traffic: 20 requests/minute, p95 retrieval budget 350 ms.
+- Privacy review allows provider processing for support-ticket text with PII masking.
+- The team has no GPU serving owner before launch.
 
-## Failure modes
+Decision:
+- Use the hosted embedding API behind the retrieval service interface.
+- Store embedding_model, embedding_version, document_version, and trace_id with each indexed chunk.
 
-Decision records fail when they are too long, written only for approvals, or never updated after reality contradicts assumptions. Keep them connected to code, runbooks, and evaluation reports.
+Alternatives:
+- Self-host small embedding model: lower provider dependency, higher operations burden.
+- Delay semantic retrieval: lower risk, worse answer quality for paraphrased questions.
+
+Consequences:
+- Add provider timeout and fallback to keyword search in production integration.
+- Reconsider self-hosting when traffic exceeds 200 requests/minute for four consecutive weeks.
+```
+
+This artifact is not runnable because an ADR is a governance object, but it is concrete enough for [requirements engineering](requirements-engineering.md), [api design](api-design.md), and [production integration](production-integration.md) to inspect. It names traffic, latency, privacy, owner, fallback, and a reconsideration trigger.
+
+## Failure Modes
+
+Decision records fail when they are written only for approvals, omit alternatives, or never get superseded after reality changes. A vague note saying "hosted is simpler" is not an ADR; it does not tell a future engineer which constraint mattered or when to revisit the choice.
+
+## References
+
+- [Architectural Decision Records](https://adr.github.io/)
+- [MADR: Markdown Architectural Decision Records](https://adr.github.io/madr/)
+- [arc42 Template Overview](https://arc42.org/overview)

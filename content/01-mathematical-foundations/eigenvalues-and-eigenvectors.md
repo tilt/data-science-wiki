@@ -1,43 +1,74 @@
 ---
 title: Eigenvalues and Eigenvectors
 slug: mathematical-foundations/eigenvalues-and-eigenvectors
-description: Concise guide to Eigenvalues and Eigenvectors in Mathematical Foundations.
+description: "Directions that a square linear map only scales, with the corresponding scale factors."
 area: mathematical-foundations
 topics:
-  - eigenvalues-and-eigenvectors
+  - linear-algebra
+  - eigenvalues
 level: foundational
 status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - linear-algebra.md
 related:
-  - index.md
+  - linear-algebra.md
+  - matrix-decompositions.md
+  - singular-value-decomposition.md
+  - orthogonality.md
+  - ../03-classical-machine-learning/pca.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Eigenvalues and Eigenvectors
 
-Eigenvectors are directions that a linear transformation only stretches or shrinks. Eigenvalues are the corresponding stretch factors. They reveal the natural axes of a matrix.
+An eigenvector is a direction that a square matrix stretches or shrinks without rotating away from itself. The eigenvalue is that stretch factor. They expose natural axes of transformations, covariance matrices, graph Laplacians, and stability dynamics.
 
-## Definition
+## Defining math
 
-For a square matrix $A$, a nonzero vector $v$ is an eigenvector if
+For $A\in\mathbb R^{n\times n}$, a nonzero vector $v$ is an eigenvector when
 
 $$
-Av = \lambda v,
+Av=\lambda v.
 $$
 
-where $\lambda$ is the eigenvalue. Multiplying by $A$ changes the scale of $v$ but not its direction.
+The scalar $\lambda$ is an eigenvalue, found from
 
-## Example
+$$
+\det(A-\lambda I)=0.
+$$
 
-If a matrix doubles every vector on the x-axis and halves every vector on the y-axis, then the x-axis and y-axis directions are eigenvectors with eigenvalues 2 and 0.5. More complex matrices can rotate and shear most vectors, but eigenvectors identify directions that remain aligned.
+If $A$ is symmetric, its eigenvectors can be chosen [orthogonal](orthogonality.md), giving $A=Q\Lambda Q^\top$. This special structure is why covariance eigendecomposition and [PCA](../03-classical-machine-learning/pca.md) are stable for symmetric matrices. [SVD](singular-value-decomposition.md) extends related geometry to rectangular or non-normal matrices by using eigenvectors of $A^\top A$.
 
-## ML use
+## Executed demo
 
-Eigenvectors appear in PCA, spectral clustering, graph algorithms, stability analysis, covariance matrices, and low-rank approximations. Large eigenvalues often correspond to directions with strong variance or influence.
+```python
+import numpy as np
+
+B = np.array([[2., 1.], [1., 2.]])
+w, v = np.linalg.eig(B)
+idx = np.argsort(w)[::-1]
+w, v = w[idx], v[:, idx]
+print("eigenvalues", np.round(w, 4))
+print("Av_minus_lambda_v_norms",
+      np.round([np.linalg.norm(B @ v[:, i] - w[i] * v[:, i]) for i in range(2)], 12))
+```
+
+Observed output:
+
+```text
+eigenvalues [3. 1.]
+Av_minus_lambda_v_norms [0. 0.]
+```
+
+Both residual norms are zero to displayed precision, confirming $Bv=\lambda v$. The larger eigenvalue corresponds to the direction where the matrix amplifies most strongly.
 
 ## Caveats
 
-Eigenvectors are defined only up to scale, and repeated or nearly equal eigenvalues can make directions unstable. Not every matrix has a full set of real eigenvectors.
+Eigenvectors are scale-ambiguous: $v$ and $-v$ represent the same direction. Non-symmetric matrices may have complex eigenvalues or too few independent eigenvectors, so do not use eigendecomposition where [matrix decompositions](matrix-decompositions.md) such as SVD are the safer tool.
+
+## References
+
+- [NumPy documentation: `numpy.linalg.eig`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html)
+- [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)

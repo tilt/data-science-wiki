@@ -1,8 +1,7 @@
 ---
 title: Recommendation System Overview
 slug: recommendation-systems/recommendation-system-overview
-description: Concise guide to Recommendation System Overview in Recommendation
-  Systems and Personalization.
+description: "A sparse-feedback pipeline for selecting useful items from a catalog."
 area: recommendation-systems
 topics:
   - recommendation-system-overview
@@ -13,25 +12,58 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - utility-and-interaction-matrices.md
+  - candidate-generation.md
+  - ranking.md
+  - evaluation-of-recommenders.md
+  - feedback-loops.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Recommendation System Overview
 
-## Summary
+A recommendation system chooses items for users from a catalog under sparse feedback, changing inventory, eligibility rules, and product objectives. The usual production shape is a pipeline: log interactions, build features, retrieve candidates, rank them, apply constraints, expose results, and evaluate the consequences.
 
-A recommendation system selects items for users from a catalogue under sparse feedback, changing inventory, and product constraints. Modern systems are usually pipelines, not single models.
+## Defining mechanism
 
-## Step-by-step example
+Most systems separate retrieval from ranking:
 
-A typical system collects events, builds features, retrieves candidates, ranks them, applies filters, logs exposure, and evaluates online impact.
+$$
+C_u=\operatorname{retrieve}(u,\mathcal I),\qquad L_u=\operatorname{rank}(u,C_u),
+$$
 
-## Common failure modes
+where $C_u$ is a small candidate set drawn from the full item catalog $\mathcal I$. [Candidate generation](candidate-generation.md) optimizes coverage and speed; [ranking](ranking.md) optimizes ordering among plausible items.
 
-- Optimizing Recommendation System Overview on historical interactions without correcting for exposure and position bias.
-- Treating missing interactions as negative feedback when they may mean the user never saw the item.
-- Improving average ranking metrics while harming cold-start users, long-tail items, diversity, or business guardrails.
+## Worked example
 
-- Optimizing a single offline metric while ignoring exposure, freshness, diversity, or cold start.
-- Failing to log enough context to reproduce why an item was recommended.
+```python
+import numpy as np
+logs = np.array([[0,0,1], [0,1,1], [1,2,1], [2,3,1], [2,1,1]])
+R = np.zeros((3, 4), dtype=int)
+R[logs[:, 0], logs[:, 1]] = logs[:, 2]
+pop = R.sum(axis=0)
+unseen = np.where(R[0] == 0)[0]
+rec = unseen[np.argsort(-pop[unseen])]
+print("matrix_shape", R.shape)
+print("item_popularity", pop.tolist())
+print("user0_candidates", rec.tolist())
+```
+
+Observed output:
+
+```text
+matrix_shape (3, 4)
+item_popularity [1, 2, 1, 1]
+user0_candidates [2, 3]
+```
+
+This toy pipeline builds a [utility matrix](utility-and-interaction-matrices.md), removes seen items, and returns popularity candidates. Real systems add [collaborative filtering](collaborative-filtering.md), content, diversity, and online logging.
+
+## Caveats
+
+Recommendations change the data they later train on, so [feedback loops](feedback-loops.md) are not a side issue. Offline metrics can improve while user satisfaction or inventory health worsens. Keep exposure logs, eligibility decisions, and experiment assignments available for [evaluation](evaluation-of-recommenders.md).
+
+## References
+
+- [Adomavicius and Tuzhilin, 2005, Toward the Next Generation of Recommender Systems](https://doi.org/10.1109/TKDE.2005.99)
+- [Herlocker et al., 2004, Evaluating Collaborative Filtering Recommender Systems](https://doi.org/10.1145/963770.963772)

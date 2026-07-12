@@ -18,9 +18,10 @@ prerequisites:
   - forecast-error-metrics.md
   - backtesting.md
 related:
-  - machine-learning-forecasting.md
   - statistical-forecasting.md
-  - deep-learning-forecasting.md
+  - machine-learning-forecasting.md
+  - backtesting.md
+  - forecast-error-metrics.md
   - hyperparameter-optimization-for-forecasting.md
 historical_context: false
 last_reviewed: 2026-07-11
@@ -217,3 +218,12 @@ Important edge cases include all component predictions missing, one component pr
 - Reusing the same backtest forecasts for both weight fitting and final evaluation.
 - Allowing missing component predictions to change the effective weight scale silently.
 - Treating bias correction as universally beneficial.
+
+## Connections
+
+Forecast ensembling combines candidates from [statistical forecasting](statistical-forecasting.md), [machine learning forecasting](machine-learning-forecasting.md), and neural models. Use [backtesting](backtesting.md) to learn weights, then score with [forecast error metrics](forecast-error-metrics.md) on a separate period.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Forecast combinations](https://otexts.com/fpp3/combinations.html)
+- [Nixtla StatsForecast documentation](https://nixtlaverse.nixtla.io/statsforecast/index.html)

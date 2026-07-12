@@ -19,7 +19,10 @@ prerequisites:
 related:
   - quantile-loss.md
   - probabilistic-forecasting.md
+  - prediction-intervals.md
+  - forecast-error-metrics.md
   - forecast-evaluation.md
+  - ../16-experimentation-and-evaluation/risk-weighted-error-taxonomies.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -52,7 +55,7 @@ $$
 
 where $\tau$ is the target service quantile.
 
-## Step-by-step example
+## Decision quantile
 
 Suppose underforecasting one unit costs 4 and overforecasting one unit costs 1. Then:
 
@@ -89,3 +92,12 @@ where $w_i$ is a nonnegative business weight. Weights should be documented becau
 - Treating cost parameters as precise when they are rough estimates.
 - Ignoring bias after switching to an asymmetric objective.
 - Comparing cost-aware scores across datasets with different weight definitions.
+
+## Connections
+
+Cost-aware losses connect [forecast error metrics](forecast-error-metrics.md) to decisions. Asymmetric stockout and overstock costs often imply [quantile loss](quantile-loss.md), [prediction intervals](prediction-intervals.md), or full [probabilistic forecasting](probabilistic-forecasting.md) rather than a single unbiased point forecast.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Distributional forecast accuracy](https://otexts.com/fpp3/prediction-intervals.html)
+- [Romano, Patterson, and Candes, Conformalized Quantile Regression](https://arxiv.org/abs/1905.03222)

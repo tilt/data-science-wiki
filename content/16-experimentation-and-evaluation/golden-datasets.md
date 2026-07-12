@@ -1,12 +1,12 @@
 ---
 title: Golden Datasets
 slug: experimentation-and-evaluation/golden-datasets
-description: Curated evaluation datasets used as stable acceptance references for ML and generative-AI systems.
+description: "Curated, versioned evaluation examples used as stable acceptance references."
 area: experimentation-and-evaluation
 topics:
-  - "golden-datasets"
-  - "evaluation-datasets"
-  - "quality-control"
+  - golden-datasets
+  - evaluation-datasets
+  - quality-control
 level: foundational
 status: review
 page_type: concept
@@ -14,51 +14,69 @@ aliases:
   - "Gold datasets"
   - "Reference evaluation sets"
 prerequisites:
-  - "../02-probability-and-statistics/index.md"
+  - index.md
 related:
-  - "comparing-generative-ai-and-classical-ml-systems.md"
-  - "paired-evaluation.md"
+  - offline-evaluation.md
+  - coverage.md
+  - paired-evaluation.md
+  - risk-weighted-error-taxonomies.md
+  - ../13-ml-engineering-and-mlops/evaluation-datasets.md
 historical_context: false
 last_reviewed: 2026-07-11
-references:
-  - "nist-ai-rmf-2023"
 ---
 # Golden Datasets
 
-## Summary
+A golden dataset is a trusted, versioned set of inputs, expected behavior, labels, evidence, and risk metadata. It is not necessarily large; its value is that teams can rerun [offline evaluation](offline-evaluation.md) on the same decision cases and know what changed. The MLOps duplicate should usually point here for evaluation design, while [evaluation datasets](../13-ml-engineering-and-mlops/evaluation-datasets.md) covers storage and pipeline ownership.
 
-A golden dataset is a curated set of examples, labels, evidence, expected behavior, and risk annotations used to evaluate a system repeatedly. It is not necessarily large; it is trusted, versioned, and representative of important behavior.
+## Defining artifact
 
-## Why it matters
+For a support assistant, one row should identify the user query, source document ID, acceptable-answer criteria, refusal rule, slice tags, severity, reviewer owner, and version. A minimal acceptance contract is:
 
-Golden datasets make evaluation reproducible. They help prevent regressions, compare model versions, calibrate human review, and define what "good enough" means for a specific product workflow.
+| field | example |
+| --- | --- |
+| `case_id` | `SUP-legal-0042` |
+| `input` | "Can I export customer data to a vendor spreadsheet?" |
+| `evidence_id` | `policy/privacy/export-controls#2026-03` |
+| `expected_behavior` | refuse unsafe export; cite approved workflow |
+| `risk` | `critical` |
+| `slice` | `legal/privacy` |
 
-## What to include
+The dataset should deliberately include common cases, rare cases, regressions, and high-severity failures from [risk-weighted error taxonomies](risk-weighted-error-taxonomies.md).
 
-- Inputs and expected outputs or acceptable-output criteria.
-- Source evidence for factual tasks.
-- Risk and severity labels.
-- Known hard cases and counterexamples.
-- Metadata for slices such as language, domain, customer segment, time period, or source system.
-- Ownership, review date, and change history.
+## Worked inventory
 
-## Step-by-step example
+```python
+from collections import Counter
 
-For a support chatbot, select real but anonymized questions from common, rare, ambiguous, and high-risk cases. Attach the approved source article for each question. Define acceptable answer criteria, required citations, and refusal criteria when the source is insufficient. Version the dataset and run it before every prompt, retrieval, or model change.
+records = [
+    ("billing","common","low"), ("billing","rare","medium"),
+    ("account","common","low"), ("account","rare","high"),
+    ("security","rare","critical"), ("security","common","high"),
+    ("returns","common","low"), ("returns","rare","medium"),
+    ("legal","rare","critical"), ("legal","common","high"),
+]
+by_domain = Counter(r[0] for r in records)
+by_risk = Counter(r[2] for r in records)
+print("domain_counts", dict(sorted(by_domain.items())))
+print("risk_counts", dict(sorted(by_risk.items())))
+print(f"critical_share {by_risk['critical']/len(records):.2f}")
+```
 
-## Maintenance rules
+Observed output:
 
-- Add incident-derived examples after production failures.
-- Keep a blind holdout set to detect overfitting to the public golden set.
-- Retire or update examples when policies, products, or source documents change.
-- Review labels with domain experts when the task has material user impact.
+```text
+domain_counts {'account': 2, 'billing': 2, 'legal': 2, 'returns': 2, 'security': 2}
+risk_counts {'critical': 2, 'high': 3, 'low': 3, 'medium': 2}
+critical_share 0.20
+```
 
-## Failure modes
+This tiny set is balanced by domain and intentionally has 20 percent critical cases. That would be wrong for population accuracy but right for a regression gate that must exercise rare dangerous behavior.
 
-Golden datasets can become stale, overfit, too easy, or unrepresentative. They should be complemented by fresh blind sets, online monitoring, and incident-derived test cases.
+## Caveats
 
-## Related topics
+Golden sets become stale when policies, products, source documents, or user behavior change. Keep a blind holdout so teams do not tune directly to the public examples. Use [coverage](coverage.md) reports to show what the set does and does not claim to represent.
 
-- [Paired Evaluation](paired-evaluation.md)
-- [Offline Evaluation](offline-evaluation.md)
-- [Risk-Weighted Error Taxonomies](risk-weighted-error-taxonomies.md)
+## References
+
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+- [scikit-learn documentation: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)

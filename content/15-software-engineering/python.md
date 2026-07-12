@@ -1,7 +1,7 @@
 ---
 title: Python
 slug: software-engineering/python
-description: Concise guide to Python in Software Engineering.
+description: Python engineering practices for maintainable data, ML, and backend systems.
 area: software-engineering
 topics:
   - python
@@ -10,32 +10,63 @@ status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - testing.md
 related:
-  - index.md
+  - "testing.md"
+  - "api-design.md"
+  - "sql.md"
+  - "javascript-application-architecture.md"
+  - "refactoring.md"
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Python
 
-Python is the dominant language for data science and ML because its ecosystem connects numerical computing, modelling, orchestration, and service development. Production Python needs more discipline than exploratory notebooks: clear packaging, typing, tests, and dependency control.
+Python is the dominant language in data science because it connects numerical libraries, notebooks, orchestration, and service code. Production Python needs stronger boundaries than exploratory work: isolated environments, typed interfaces, deterministic functions, explicit configuration, and [testing](testing.md) around data and service contracts.
 
-## Core practices
+## Engineering Contract
 
-Use virtual environments, lock dependencies, keep notebooks out of core library code, and make data transformations testable as functions. Type hints are especially useful at service boundaries, configuration objects, dataset records, and model inputs. They do not prove numerical correctness, but they catch many integration mistakes.
+Keep notebook exploration outside importable library code. Put reusable transformations in modules, expose training and backfill workflows through CLIs, keep configuration in typed objects, and make database access explicit through [sql](sql.md) adapters. Type hints do not prove correctness, but they make [API design](api-design.md) reviewable at module boundaries.
 
-A maintainable Python ML project usually separates:
+## Executed Artifact
 
-- library code for reusable transformations and model logic;
-- scripts or CLIs for training, evaluation, and backfills;
-- configuration for paths, feature flags, and hyperparameters;
-- tests for deterministic logic and representative data fixtures;
-- notebooks for exploration and communication only.
+```python
+from dataclasses import dataclass
 
-## Example
+@dataclass(frozen=True)
+class FeatureConfig:
+    name: str
+    window_minutes: int
+    default: float = 0.0
 
-A feature calculation first appears in a notebook. Before production use, move it into a module, add tests for nulls and edge cases, expose it through a pipeline step, and keep the notebook as an experiment report that imports the library function.
+def parse_config(raw: dict) -> FeatureConfig:
+    cfg = FeatureConfig(**raw)
+    if cfg.window_minutes <= 0:
+        raise ValueError("window_minutes must be positive")
+    return cfg
 
-## Failure modes
+print(parse_config({"name": "tickets_last_60m", "window_minutes": 60}))
+try:
+    parse_config({"name": "bad", "window_minutes": 0})
+except ValueError as exc:
+    print(type(exc).__name__, str(exc))
+```
 
-Common Python failures include hidden global state, unpinned dependencies, circular imports, mutable default arguments, and code paths that depend on the current working directory. In ML projects, also watch for silent dtype changes and train-serving skew.
+Observed output:
+
+```text
+FeatureConfig(name='tickets_last_60m', window_minutes=60, default=0.0)
+ValueError window_minutes must be positive
+```
+
+The dataclass gives a small immutable configuration contract. In a service, this object can be tested without reading environment variables or starting a framework. In a mixed stack, keep this boundary as explicit as the state boundary in [javascript application architecture](javascript-application-architecture.md).
+
+## Failure Modes
+
+Common failures are hidden global state, unpinned dependencies, imports that depend on the current working directory, mutable default values, and code paths that silently change dtype or timezone semantics. During [refactoring](refactoring.md), protect behavior with golden examples before moving notebook logic into modules.
+
+## References
+
+- [Python tutorial: Virtual Environments and Packages](https://docs.python.org/3/tutorial/venv.html)
+- [Python documentation: dataclasses](https://docs.python.org/3/library/dataclasses.html)
+- [Python documentation: typing](https://docs.python.org/3/library/typing.html)

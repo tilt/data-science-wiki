@@ -15,6 +15,12 @@ prerequisites:
   - "../04-recommendation-systems/matrix-factorization.md"
 related:
   - "../04-recommendation-systems/sparse-utility-matrices-and-svd.md"
+  - "../04-recommendation-systems/utility-and-interaction-matrices.md"
+  - "../04-recommendation-systems/implicit-feedback.md"
+  - "../04-recommendation-systems/matrix-factorization.md"
+  - "../04-recommendation-systems/evaluation-of-recommenders.md"
+  - svd-versus-matrix-factorization.md
+  - recommendation-systems.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -22,26 +28,31 @@ last_reviewed: 2026-07-11
 
 ## Answer
 
-Ordinary SVD expects a complete matrix. A recommender utility matrix is sparse because most user-item pairs are unobserved, not because the true value is zero. Zero filling changes the problem, so recommender factorization usually optimizes over observed interactions or uses implicit-feedback confidence weights.
+Ordinary SVD assumes a complete numeric matrix. A recommender utility matrix is sparse because most user-item pairs are unobserved, not because their true value is zero. Zero filling changes missing exposure into negative preference, so recommender factorization usually optimizes over observed entries or uses implicit-feedback confidence weights.
 
 ## What a strong answer adds
 
-1. A utility matrix has users as rows and items as columns.
-2. Most cells are missing because users interact with only a tiny fraction of the catalogue.
-3. Missing means unknown, not negative.
-4. Ordinary SVD requires a numeric value in every cell.
-5. Filling missing cells with zeros makes non-exposure look like dislike and can dominate the factorization.
+1. A [utility and interaction matrix](../04-recommendation-systems/utility-and-interaction-matrices.md) has users as rows and items as columns.
+2. Missing cells are often missing because the user never saw the item, not because the user disliked it.
+3. Ordinary [SVD](../04-recommendation-systems/classical-svd.md) needs every cell to have a value; sparse storage alone does not solve the semantics.
+4. Zero-filled SVD can let the artificial zero pattern dominate the decomposition.
+5. [Matrix factorization](../04-recommendation-systems/matrix-factorization.md) and [implicit-feedback](../04-recommendation-systems/implicit-feedback.md) models state the missing-data assumption in the loss.
 
-## Worked example
+## Interview artifact
 
-Imagine 1,000 users and 10,000 items. If each user has interacted with 20 items, then 99.8 percent of cells are missing. Zero filling creates millions of artificial zeros. The decomposition mostly learns the pattern "users did not interact" rather than useful taste structure. Recommender matrix factorization instead optimizes only observed entries or uses confidence weights for unobserved pairs.
+Use the arithmetic because it lands quickly: "With 1,000 users and 10,000 items, if each user has 20 interactions, only 20,000 of 10,000,000 cells are observed. That is 0.2 percent observed and 99.8 percent missing. Zero filling would create 9,980,000 artificial zeros." Then say why it matters: the model may learn non-exposure and item popularity more than taste.
 
 ## Common follow-ups
 
-- Sparse linear algebra can compute SVD efficiently, but it does not solve the missing-value semantics.
-- Imputation is possible, but the imputation model then becomes part of the recommender.
-- Implicit-feedback models treat unobserved pairs as weak evidence, not hard negative ratings.
+- **"Can sparse SVD algorithms run on sparse matrices?"** Yes, but efficient computation does not fix the meaning of missing values.
+- **"Are unobserved interactions always neutral?"** No. In implicit feedback they may be weak evidence, often weighted by confidence rather than treated as hard negatives.
+- **"How do you evaluate the fix?"** Use [evaluation of recommenders](../04-recommendation-systems/evaluation-of-recommenders.md): ranking metrics, time-aware splits, coverage, cold-start slices, and online guardrails.
 
-## Canonical concept
+## Canonical links
 
-Read the topic page: [Sparse Utility Matrices and Ordinary SVD](../04-recommendation-systems/sparse-utility-matrices-and-svd.md).
+Read [Sparse Utility Matrices and Ordinary SVD](../04-recommendation-systems/sparse-utility-matrices-and-svd.md), the related prompt on [SVD versus Matrix Factorization](svd-versus-matrix-factorization.md), and the interview map for [Recommendation Systems](recommendation-systems.md).
+
+## References
+
+- [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
+- [Hu, Koren, and Volinsky, 2008, Collaborative Filtering for Implicit Feedback Datasets](https://doi.org/10.1109/ICDM.2008.22)

@@ -1,43 +1,66 @@
 ---
 title: Truncated SVD
 slug: recommendation-systems/truncated-svd
-description: Concise guide to Truncated SVD in Recommendation Systems and Personalization.
+description: "Keeping only leading singular components for compact matrix representations."
 area: recommendation-systems
 topics:
   - truncated-svd
+  - singular-value-decomposition
 level: foundational
 status: review
 page_type: algorithm
 aliases: []
 prerequisites:
-  - index.md
+  - classical-svd.md
 related:
-  - index.md
+  - classical-svd.md
+  - svd-versus-matrix-factorization.md
+  - sparse-utility-matrices-and-svd.md
+  - ../11-information-retrieval-and-search/tf-idf.md
+  - ../01-mathematical-foundations/low-rank-approximation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Truncated SVD
 
-Truncated SVD keeps only the largest singular components of a matrix. It is used for compression and latent representations, including document retrieval and some recommender workflows.
+Truncated SVD computes only the largest singular components of a matrix. It is useful for compression, latent semantic indexing, and baseline recommender representations, but it inherits the input-matrix assumptions of [classical SVD](classical-svd.md).
 
-## Core idea
+## Defining math
 
-Full SVD can be expensive and may preserve noise. Truncated SVD computes or keeps only the top $k$ components:
+The rank-$k$ approximation is
 
 $$
-A \approx U_k \Sigma_k V_k^T.
+A\approx U_k\Sigma_kV_k^\top,
 $$
 
-The value of $k$ controls the tradeoff between compression and reconstruction detail.
+where $k\ll\min(m,n)$. In information retrieval, this can compress a [TF-IDF](../11-information-retrieval-and-search/tf-idf.md) matrix. In recommenders, it can compress a deliberately prepared item or interaction matrix, but [sparse utility matrices](sparse-utility-matrices-and-svd.md) still require careful missing-value semantics.
 
-## Recommendation use
+## Worked example
 
-For recommenders, truncated SVD can reveal latent structure in a suitably prepared user-item matrix, but missing-value semantics still matter. It is often more appropriate for transformed matrices or as a baseline than as a complete implicit-feedback recommender.
+```python
+import numpy as np
+from sklearn.decomposition import TruncatedSVD
+X = np.array([[1, 1, 0, 0], [1, 0, 1, 0],
+              [0, 0, 1, 1], [0, 1, 0, 1]], dtype=float)
+svd = TruncatedSVD(n_components=2, random_state=3).fit(X)
+Z = svd.transform(X)
+print("explained_variance_ratio", np.round(svd.explained_variance_ratio_, 3).tolist())
+print("row0_embedding", np.round(Z[0], 3).tolist())
+```
 
-## Example
+Observed output:
 
-A document-item interaction matrix can be reduced to 100 latent dimensions for fast similarity search. The representation may capture broad topics, but rare specialized interests may be blurred.
+```text
+explained_variance_ratio [0.0, 0.5]
+row0_embedding [1.0, 0.707]
+```
 
-## Failure modes
+The two-dimensional embedding is a compact representation of row co-occurrence. A recommender would still need [ranking](ranking.md), filters, and evaluation around this representation.
 
-Choosing too few components underfits; too many components preserve noise. Directly applying truncated SVD to zero-filled sparse feedback can confuse unknown items with negative feedback.
+## Caveats
+
+The choice of $k$ controls underfitting versus noise retention. Randomized truncated SVD is approximate, so set `random_state` when results must be reproducible. Directly applying it to zero-filled feedback is the same missing-data problem described in [SVD versus matrix factorization](svd-versus-matrix-factorization.md).
+
+## References
+
+- [scikit-learn documentation: TruncatedSVD](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html)

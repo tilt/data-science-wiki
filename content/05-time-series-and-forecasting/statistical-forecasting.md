@@ -17,8 +17,10 @@ prerequisites:
   - forecasting-problem-formulation.md
 related:
   - arima.md
+  - sarima.md
   - exponential-smoothing.md
   - intermittent-demand.md
+  - forecast-ensembling.md
   - machine-learning-forecasting.md
 historical_context: false
 last_reviewed: 2026-07-11
@@ -130,3 +132,12 @@ Aggregate-disaggregate approaches such as ADIDA aggregate the sparse series to a
 - Applying MAPE to intermittent demand with many zeros.
 - Assuming a trend should extrapolate indefinitely.
 - Comparing complex models only against weak baselines.
+
+## Connections
+
+Statistical forecasting collects [ARIMA](arima.md), [SARIMA](sarima.md), [exponential smoothing](exponential-smoothing.md), and [intermittent demand](intermittent-demand.md) methods. It supplies baselines for [machine learning forecasting](machine-learning-forecasting.md) and candidates for [forecast ensembling](forecast-ensembling.md).
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: The forecaster toolbox](https://otexts.com/fpp3/toolbox.html)
+- [Nixtla StatsForecast documentation](https://nixtlaverse.nixtla.io/statsforecast/index.html)

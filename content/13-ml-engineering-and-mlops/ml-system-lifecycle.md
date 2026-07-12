@@ -1,53 +1,64 @@
 ---
 title: ML System Lifecycle
 slug: ml-engineering-and-mlops/ml-system-lifecycle
-description: Concise guide to ML System Lifecycle in ML Engineering and MLOps.
+description: "The end-to-end path from problem framing to retirement of a model-backed system."
 area: ml-engineering-and-mlops
 topics:
   - ml-system-lifecycle
 level: foundational
-status: draft
+status: review
 page_type: system-design
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - training-pipelines.md
+  - ci-cd-for-ml.md
+  - model-versioning.md
+  - monitoring.md
+  - production-incident-response.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # ML System Lifecycle
 
-## Summary
+The ML system lifecycle is the controlled path from problem framing to data creation, training, evaluation, deployment, monitoring, incident response, retraining, and retirement. It is broader than model development because production behavior depends on data, code, infrastructure, policies, and humans.
 
-ML System Lifecycle belongs to ML engineering. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Mechanism
 
-## Core idea
+Each stage should produce an artifact that the next stage consumes: a decision brief, dataset manifest, training run, evaluation report, model version, serving contract, rollout record, monitoring dashboard, and retirement note. The lifecycle is circular only when [monitoring](monitoring.md) or incidents create new evidence that justifies another training or policy cycle.
 
-- Define the inputs, outputs, and boundaries for ML System Lifecycle.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+## Artifact: Lifecycle Gates
 
-## Worked example
+```yaml
+lifecycle:
+  frame:
+    artifact: decision_brief.md
+    gate: owner and harm model approved
+  build_data:
+    artifact: dataset_manifest.yaml
+    gate: schema and label policy reviewed
+  train:
+    artifact: tracked_run
+    gate: reproducible run in experiment tracker
+  evaluate:
+    artifact: release_eval_report.html
+    gate: all slice gates pass
+  deploy:
+    artifact: model_version + serving_contract
+    gate: rollback target and SLOs defined
+  operate:
+    artifact: monitoring + incident runbook
+    gate: alerts routed to an owner
+```
 
-Compare a simple baseline with an approach that uses ML System Lifecycle. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+[Training pipelines](training-pipelines.md), [ci-cd-for-ml](ci-cd-for-ml.md), and [model-versioning](model-versioning.md) automate pieces of this lifecycle, but they do not replace ownership decisions.
 
-## Practical checklist
+## Failure Modes
 
-- Version the code, data, model artifacts, configuration, and evaluation evidence touched by ML System Lifecycle.
-- Define the owner, rollout path, observability signals, and rollback procedure.
-- Test failure behavior with stale data, missing dependencies, and incompatible versions.
+Lifecycle diagrams fail when no gate can block release. Another failure is indefinite operation: models need retirement criteria when the product changes, labels disappear, or the maintenance cost exceeds value.
 
-- Separate training quality, serving reliability, and business impact.
-- Define promotion, rollback, monitoring, and incident-response criteria.
-- Test batch and online paths with representative fixtures.
-- Keep human review paths explicit where automated decisions are risky.
+## References
 
-## Common failure modes
-
-- Deploying ML System Lifecycle without reproducible lineage for data, code, artifacts, configuration, and evaluation.
-- Monitoring infrastructure health while missing data freshness, model behavior, or user-impact degradation.
-- Making ML System Lifecycle hard to roll back because schemas, state, or dependencies changed silently.
-
-- Monitoring service health but not model behavior.
-- Lacking rollback criteria when live performance degrades.
+- [Google Cloud: MLOps continuous delivery and automation pipelines](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)

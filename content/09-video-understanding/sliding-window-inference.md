@@ -1,7 +1,7 @@
 ---
 title: Sliding Window Inference
 slug: video-understanding/sliding-window-inference
-description: Concise guide to Sliding Window Inference in Video Understanding.
+description: "Applying a fixed-input video model across overlapping windows of a longer stream."
 area: video-understanding
 topics:
   - sliding-window-inference
@@ -12,25 +12,57 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - real-time-video-understanding.md
+  - temporal-localization.md
+  - trigger-point-prediction.md
+  - temporal-action-recognition.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Sliding Window Inference
 
-## Summary
+Sliding-window inference runs a fixed-size clip model over a long video by choosing window length and stride. It is the practical glue between clip-trained [temporal action recognition](temporal-action-recognition.md) models and untrimmed streams. The same windows can feed [temporal localization](temporal-localization.md), [trigger-point prediction](trigger-point-prediction.md), or offline indexing.
 
-Sliding-window inference applies a model to overlapping temporal windows so long videos can be processed with fixed-size inputs. It is common for action recognition and event detection.
+## Defining mechanism
 
-## Step-by-step example
+For video length $T$, window size $w$, and stride $s$, windows are
 
-A 10-minute video can be split into 2-second windows every 0.5 seconds; predictions are then smoothed or aggregated across overlapping windows.
+$$
+W_k = [ks, \min(ks+w, T)).
+$$
 
-## Common failure modes
+Overlap improves coverage and boundary recall but increases compute. Predictions are then pooled, smoothed, non-max suppressed, or converted into trigger rules depending on the task.
 
-- Evaluating Sliding Window Inference only with clip labels while temporal boundaries, identity continuity, or streaming latency fail.
-- Sampling frames in a way that misses short actions, occlusion, fast motion, or camera changes.
-- Reporting aggregate accuracy without reviewing false triggers and missed events on real videos.
+## Worked example
 
-- Sampling frames in a way that misses short actions or delays streaming decisions.
-- Reporting aggregate accuracy without inspecting occlusion, viewpoint, speed, and crowded-scene failures.
+```python
+import numpy as np
+
+T, win, stride = 20, 6, 4
+windows = [(s, min(s+win, T)) for s in range(0, T-win+1, stride)]
+coverage = np.zeros(T, dtype=int)
+for s, e in windows:
+    coverage[s:e] += 1
+print("windows", windows)
+print("coverage", coverage.tolist())
+print("min_max_coverage", [int(coverage.min()), int(coverage.max())])
+```
+
+Observed output:
+
+```text
+windows [(0, 6), (4, 10), (8, 14), (12, 18)]
+coverage [1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 0, 0]
+min_max_coverage [0, 2]
+```
+
+The final two frames are uncovered because the simple range stops at the last full window. Production code usually adds a final padded or shifted window.
+
+## Caveats
+
+Stride determines both cost and worst-case detection delay. Windows split actions at boundaries, so smoothing and non-max suppression must be tuned with tIoU metrics. For [real-time video understanding](real-time-video-understanding.md), buffering a full window can dominate latency.
+
+## References
+
+- [Wang et al., 2016, Temporal Segment Networks](https://arxiv.org/abs/1608.00859)
+- [Wu et al., 2021, Towards High-Quality Temporal Action Detection with Sparse Proposals](https://arxiv.org/abs/2109.08847)

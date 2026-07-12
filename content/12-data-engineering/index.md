@@ -1,55 +1,66 @@
 ---
 title: Data Engineering
 slug: 12-data-engineering
-description: Index and learning map for Data Engineering.
+description: "Learning map for reliable analytical data systems, warehouses, pipelines, and contracts."
 area: data-engineering
 topics:
-  - "relational-modelling"
-  - "sql"
-  - "data-warehouses"
-  - "dimensional-modelling"
-  - "etl-and-elt"
-  - "batch-versus-streaming"
-  - "data-pipelines"
-  - "data-quality"
-  - "data-contracts"
-  - "dbt"
-  - "airflow"
-  - "bigquery"
+  - relational-modelling
+  - sql
+  - data-warehouses
+  - dimensional-modelling
+  - etl-and-elt
+  - batch-versus-streaming
+  - data-pipelines
+  - data-quality
+  - data-contracts
+  - dbt
+  - airflow
+  - bigquery
+  - cloud-storage
+  - data-lineage
+  - reproducibility
+  - feature-pipelines
 level: foundational
-status: draft
+status: review
 page_type: area-index
 aliases:
-  - "Data Engineering"
+  - Data Engineering
 prerequisites:
-  - "15-software-engineering/index.md"
+  - ../15-software-engineering/index.md
 related:
-  - "13-ml-engineering-and-mlops/index.md"
-  - "14-cloud-and-distributed-systems/index.md"
+  - ../13-ml-engineering-and-mlops/index.md
+  - ../14-cloud-and-distributed-systems/index.md
 historical_context: false
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 ---
 # Data Engineering
 
-## Summary
+Data engineering builds reliable paths from source events and operational records to analytical tables, features, and governed datasets. The useful through-line is contract first: what is the grain, who owns it, how is it tested, and can it be rebuilt?
 
-Data Engineering is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+## Modelling and SQL
 
-## Subtopics
+- [Relational Modelling](relational-modelling.md): keys, constraints, and table relationships that protect integrity.
+- [SQL](sql.md): joins, aggregation, and window functions as the core analytical transformation language.
+- [Dimensional Modelling](dimensional-modelling.md): facts, dimensions, grain, and slowly changing business context.
+- [Data Warehouses](data-warehouses.md): curated analytical stores for shared metrics and historical querying.
+- [BigQuery](bigquery.md): managed warehouse design with partitioning, clustering, and GoogleSQL.
 
-- [Relational Modelling](relational-modelling.md)
-- [SQL](sql.md)
-- [Data Warehouses](data-warehouses.md)
-- [Dimensional Modelling](dimensional-modelling.md)
-- [ETL and ELT](etl-and-elt.md)
-- [Batch Versus Streaming](batch-versus-streaming.md)
-- [Data Pipelines](data-pipelines.md)
-- [Data Quality](data-quality.md)
-- [Data Contracts](data-contracts.md)
-- [DBT](dbt.md)
-- [Airflow](airflow.md)
-- [Bigquery](bigquery.md)
-- [Cloud Storage](cloud-storage.md)
-- [Data Lineage](data-lineage.md)
-- [Reproducibility](reproducibility.md)
-- [Feature Pipelines](feature-pipelines.md)
+## Pipelines and Transforms
+
+- [ETL and ELT](etl-and-elt.md): where extraction, loading, and transformation happen.
+- [Data Pipelines](data-pipelines.md): production dataflows with sources, transforms, targets, and watermarks.
+- [Airflow](airflow.md): orchestration for scheduled, observable task graphs.
+- [dbt](dbt.md): versioned SQL models, tests, and warehouse dependency graphs.
+- [Batch Versus Streaming](batch-versus-streaming.md): bounded and unbounded processing tradeoffs.
+
+## Governance and Reproducibility
+
+- [Data Contracts](data-contracts.md): producer-consumer agreements for schema, semantics, quality, and ownership.
+- [Data Quality](data-quality.md): executable checks that block or warn on invalid data.
+- [Data Lineage](data-lineage.md): job and dataset graph metadata for impact analysis.
+- [Reproducibility](reproducibility.md): pinned inputs, code, parameters, and output snapshots.
+
+## Storage and ML Interfaces
+
+- [Cloud Storage](cloud-storage.md): object layout for raw, staged, curated, and versioned data assets.
+- [Feature Pipelines](feature-pipelines.md): point-in-time model features for training and serving.

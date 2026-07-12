@@ -25,8 +25,8 @@ prerequisites:
   - "06-deep-learning/index.md"
   - "11-information-retrieval-and-search/index.md"
 related:
-  - "17-responsible-ai-safety-and-governance/index.md"
-  - "13-ml-engineering-and-mlops/index.md"
+  - "../17-responsible-ai-safety-and-governance/index.md"
+  - "../13-ml-engineering-and-mlops/index.md"
 historical_context: false
 last_reviewed: 2026-07-10
 ---

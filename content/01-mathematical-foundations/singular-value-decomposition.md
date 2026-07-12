@@ -1,63 +1,86 @@
 ---
 title: Singular Value Decomposition
 slug: mathematical-foundations/singular-value-decomposition
-description: Singular Value Decomposition overview and practical notes.
+description: "A universal matrix factorization that exposes orthogonal directions, singular values, rank, and best low-rank approximations."
 area: mathematical-foundations
 topics:
-  - "linear-algebra"
-  - "matrix-decompositions"
-  - "svd"
+  - linear-algebra
+  - matrix-decompositions
+  - svd
 level: intermediate
-status: draft
+status: review
 page_type: algorithm
 aliases:
-  - "SVD"
-  - "Singular Value Composition"
-prerequisites: []
-related: []
+  - SVD
+prerequisites:
+  - linear-algebra.md
+  - orthogonality.md
+related:
+  - low-rank-approximation.md
+  - eigenvalues-and-eigenvectors.md
+  - matrix-decompositions.md
+  - rank.md
+  - norms-and-distances.md
+  - ../03-classical-machine-learning/pca.md
+  - ../04-recommendation-systems/matrix-factorization.md
 historical_context: false
-last_reviewed: 2026-07-10
-references:
-  - "golub-van-loan-matrix-computations"
-  - "eckart-young-1936-low-rank"
+last_reviewed: 2026-07-11
 ---
 # Singular Value Decomposition
 
-## Summary
+Singular value decomposition writes any real matrix as orthogonal input directions, nonnegative gains, and orthogonal output directions. Unlike [eigenvalues and eigenvectors](eigenvalues-and-eigenvectors.md), it applies to rectangular matrices and does not require the matrix to preserve a single space.
 
-Singular value decomposition factorizes a real matrix $A \in \mathbb{R}^{m \times n}$ as:
+## Defining math
 
-$$
-A = U \Sigma V^\top
-$$
-
-where $U$ and $V$ have orthonormal columns and $\Sigma$ contains non-negative singular values ordered by importance.
-
-## Why it matters
-
-SVD is a canonical matrix decomposition for geometry, dimensionality reduction, low-rank approximation, numerical linear algebra, PCA, information retrieval, and recommender-system baselines.
-
-## Mathematical formulation
-
-For rank $r$, the compact SVD is:
+For $A\in\mathbb R^{m\times n}$, the compact SVD is
 
 $$
-A = \sum_{k=1}^{r} \sigma_k u_k v_k^\top
+A=U_r\Sigma_rV_r^\top
+=\sum_{i=1}^r \sigma_i u_i v_i^\top,
 $$
 
-The best rank-$k$ approximation in Frobenius norm is obtained by keeping the largest $k$ singular values.
+where $r=\operatorname{rank}(A)$, $U_r^\top U_r=I$, $V_r^\top V_r=I$, and $\sigma_1\ge \cdots \ge \sigma_r>0$. The right singular vectors $v_i$ are [orthogonal](orthogonality.md) input directions; $A v_i=\sigma_i u_i$ sends them to orthogonal output directions. The nonzero $\sigma_i^2$ are eigenvalues of $A^\top A$, which is why SVD connects directly to [matrix decompositions](matrix-decompositions.md) and [PCA](../03-classical-machine-learning/pca.md).
 
-## Implementation considerations
+The truncated SVD
 
-Dense SVD assumes a fully specified matrix. Sparse numerical SVD can exploit sparse storage, but the mathematical object is still a matrix whose missing values are not semantically unknown unless the modelling setup says so.
+$$
+A_k=\sum_{i=1}^k \sigma_i u_i v_i^\top
+$$
 
-## Common misconceptions
+is the best [low-rank approximation](low-rank-approximation.md) in Frobenius norm:
 
-- SVD is not the same thing as all matrix factorization.
-- Recommender "Funk SVD" is not classical SVD; it is a learned latent-factor model optimized over observed interactions.
-- Missing ratings are not zeros.
+$$
+\lVert A-A_k\rVert_F=\sqrt{\sum_{i=k+1}^r\sigma_i^2}.
+$$
+
+This Eckart-Young result is the reason SVD is a clean mathematical baseline for compression, denoising, latent semantic analysis, and the distinction between classical SVD and learned recommender [matrix factorization](../04-recommendation-systems/matrix-factorization.md).
+
+## Executed demo
+
+```python
+import numpy as np
+
+A = np.array([[3., 1., 1.], [-1., 3., 1.], [0., 2., 4.], [2., 0., 2.]])
+U, s, Vt = np.linalg.svd(A, full_matrices=False)
+Ahat1 = (U[:, :1] * s[:1]) @ Vt[:1]
+print("singular_values", np.round(s, 4))
+print("reconstruction_error", round(np.linalg.norm(A - (U*s)@Vt), 12))
+print("rank1_fro_error", round(np.linalg.norm(A - Ahat1, "fro"), 4))
+print("tail_singular_fro", round(np.sqrt(np.sum(s[1:]**2)), 4))
+```
+
+Observed output:
+
+```text
+singular_values [5.6569 3.7417 2.    ]
+reconstruction_error 0.0
+rank1_fro_error 4.2426
+tail_singular_fro 4.2426
+```
+
+The exact reconstruction error is numerically zero, and the rank-1 truncation error equals the Frobenius norm of the discarded singular values. Numerically tiny singular values should be interpreted relative to scale, as in [rank](rank.md), not by exact equality to zero.
 
 ## References
 
-- Primary: Golub, G. H. and Van Loan, C. F. _Matrix Computations_. Johns Hopkins University Press.
-- Primary: Eckart, C. and Young, G. The approximation of one matrix by another of lower rank. _Psychometrika_, 1936.
+- [NumPy documentation: `numpy.linalg.svd`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html)
+- [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)

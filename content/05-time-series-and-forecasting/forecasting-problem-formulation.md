@@ -18,8 +18,10 @@ prerequisites:
   - index.md
 related:
   - forecasting-data-and-covariates.md
+  - forecasting-system-design.md
+  - time-series-fundamentals.md
+  - forecast-evaluation.md
   - backtesting.md
-  - machine-learning-forecasting.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -123,3 +125,12 @@ Time-respecting splits simulate production: train on what would have been known,
 - Comparing models that forecast different horizons or use different cutoffs.
 - Optimizing one global metric while ignoring poor performance for sparse or high-value series.
 - Using a recursive strategy without measuring horizon-specific error accumulation.
+
+## Connections
+
+Problem formulation defines the target, horizon, cadence, and availability contract for [forecasting data and covariates](forecasting-data-and-covariates.md). Those choices constrain [forecasting system design](forecasting-system-design.md), [backtesting](backtesting.md), and [forecast evaluation](forecast-evaluation.md).
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Determining what to forecast](https://otexts.com/fpp3/intro.html)
+- [sktime forecasting tutorial](https://www.sktime.net/docs/examples/forecasting/)

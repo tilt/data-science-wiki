@@ -17,10 +17,13 @@ prerequisites:
   - forecasting-problem-formulation.md
   - ../06-deep-learning/neural-network-fundamentals.md
 related:
-  - n-beats-and-nhits.md
-  - transformer-based-forecasting.md
   - machine-learning-forecasting.md
-  - forecast-error-metrics.md
+  - rnn-and-lstm-forecasting.md
+  - temporal-convolutional-networks.md
+  - transformer-based-forecasting.md
+  - n-beats-and-nhits.md
+  - probabilistic-forecasting.md
+  - ../06-deep-learning/neural-network-fundamentals.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -74,3 +77,12 @@ Auto-tuned variants search over architecture, learning rate, batch size, dropout
 - Reporting only global accuracy and missing poor performance on sparse series.
 - Overinterpreting attention weights.
 - Tuning architecture on the final backtest period.
+
+## Connections
+
+Deep learning forecasting usually follows [machine learning forecasting](machine-learning-forecasting.md) but replaces hand-built lags with learned sequence representations. The main local variants are [RNN and LSTM forecasting](rnn-and-lstm-forecasting.md), [temporal convolutional networks](temporal-convolutional-networks.md), [transformer-based forecasting](transformer-based-forecasting.md), and [N-BEATS and N-HiTS](n-beats-and-nhits.md).
+
+## References
+
+- [Salinas, Flunkert, and Gasthaus, DeepAR](https://arxiv.org/abs/1704.04110)
+- [Nixtla NeuralForecast documentation](https://nixtlaverse.nixtla.io/neuralforecast/docs/getting-started/introduction.html)

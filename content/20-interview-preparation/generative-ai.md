@@ -1,38 +1,57 @@
 ---
 title: Generative AI
 slug: interview-preparation/generative-ai
-description: Concise guide to Generative AI in Interview Preparation.
+description: Interview map for generative-AI prompts, system-design questions, and evaluation tradeoffs.
 area: interview-preparation
 topics:
   - generative-ai
+  - interview-question-map
 level: foundational
 status: review
-page_type: concept
+page_type: topic-index
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - how-model-knows-which-tool-to-use.md
+  - llm-determinism-and-temperature.md
+  - compare-generative-ai-and-classical-ml-outputs.md
+  - "../10-generative-ai/rag.md"
+  - "../10-generative-ai/structured-output.md"
+  - "../10-generative-ai/tool-routing.md"
+  - "../10-generative-ai/hallucination-mitigation.md"
+  - evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Generative AI
 
-## Answer
+## Map answer
 
-For interview purposes, generative AI refers to systems that produce open-ended outputs such as text, images, code, structured objects, plans, or tool calls. A strong answer should separate model capability from the surrounding system: prompting, retrieval, tools, evaluation, safety, latency, and cost all matter.
+For interview purposes, define generative AI as systems that produce open-ended text, code, images, structured objects, plans, or tool calls. A strong answer separates the model from the product system: prompting, [RAG](../10-generative-ai/rag.md), [structured output](../10-generative-ai/structured-output.md), tools, safety controls, latency, cost, and evaluation are all part of the answer.
 
-## What a strong answer adds
+## Question map
 
-- Define the task: generation, extraction, summarization, RAG, agentic tool use, or multimodal reasoning.
-- Name the control surface: prompt, model choice, retrieval, schema, tool permissions, decoding, and evaluation set.
-- Discuss risks: hallucination, unsupported claims, prompt injection, privacy leakage, nondeterminism, cost, and monitoring.
-- Compare to a simpler baseline such as search, classification, rules, or a template workflow.
+| Prompt type | Strong answer should mention | Canonical page |
+| --- | --- | --- |
+| "Design a document assistant." | Ingestion, chunking, retrieval, context packing, citation validation, abstention, and rollback. | [RAG](../10-generative-ai/rag.md) |
+| "How do models call tools?" | Tool schemas, routing, validation, authorization, execution, retries, and audit logs. | [Tool Use and Function Calling](../10-generative-ai/tool-use-and-function-calling.md) |
+| "How do you make output machine-readable?" | JSON schema, constrained generation, parsing, validation, and semantic checks. | [Structured Output](../10-generative-ai/structured-output.md) |
+| "Why did the answer hallucinate?" | Missing evidence, weak grounding, stale retrieval, unsupported claims, and citation checks. | [Hallucination Mitigation](../10-generative-ai/hallucination-mitigation.md) |
+| "Are LLM outputs reproducible?" | Decoding settings, temperature, model versions, retrieval state, tool outputs, and traces. | [Temperature and Determinism](../10-generative-ai/temperature-and-determinism.md) |
 
-## Example prompt
+## Interview artifact
 
-If asked to design a document assistant, do not answer only "use an LLM." Describe ingestion, chunking, retrieval, context construction, answer generation, citations, abstention, evaluation, and rollback of bad knowledge-base updates.
+For a support assistant, answer with a logged pipeline, not "use an LLM": user question -> query rewrite -> retrieved policy chunks -> context construction -> answer with citations -> schema validator -> refusal or escalation if evidence is insufficient. That artifact connects to the tool-use prompt [How does a model know which tool to use?](how-model-knows-which-tool-to-use.md), the decoding prompt [Are LLMs deterministic?](llm-determinism-and-temperature.md), and the comparison prompt [How can generative-AI outputs be compared with classical ML outputs?](compare-generative-ai-and-classical-ml-outputs.md).
 
-## Canonical concepts
+## Common follow-ups
 
-Use [RAG](../10-generative-ai/rag.md), [structured output](../10-generative-ai/structured-output.md), [tool routing](../10-generative-ai/tool-routing.md), and [hallucination mitigation](../10-generative-ai/hallucination-mitigation.md) for the deeper wiki explanations.
+- **Baseline:** compare against search, rules, templates, a classifier, or a human workflow before claiming an LLM is necessary.
+- **Evaluation:** break failures into retrieval, grounding, answer quality, citation correctness, schema validity, tool-call safety, and user outcome.
+- **Operations:** log prompts, retrieved IDs, tool schemas, model version, decoding settings, latency, cost, refusal rate, and severe incidents.
+
+## References
+
+- [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
+- [OpenAI API documentation: Structured outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
+- [OpenAI API documentation: Function calling](https://developers.openai.com/api/docs/guides/function-calling)

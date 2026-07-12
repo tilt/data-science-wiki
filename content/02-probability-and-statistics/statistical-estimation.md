@@ -1,7 +1,7 @@
 ---
 title: Statistical Estimation
 slug: probability-and-statistics/statistical-estimation
-description: Concise guide to Statistical Estimation in Probability and Statistics.
+description: "Using sample data and estimators to infer unknown population or model quantities with uncertainty."
 area: probability-and-statistics
 topics:
   - statistical-estimation
@@ -12,26 +12,57 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - maximum-likelihood.md
+  - confidence-intervals.md
+  - expectation-and-variance.md
+  - statistical-modelling.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Statistical Estimation
 
-Statistical estimation uses sample data to infer unknown quantities about a population or data-generating process. It connects observed data to parameters, uncertainty, and decisions.
+Statistical estimation turns sampled data into claims about a target quantity. The estimand is the quantity of interest, the estimator is the rule, and the estimate is the realized number. For example, the sample mean estimates $\mu=\mathbb E[X]$ with
 
-## Core idea
+$$
+\hat\mu=\bar X=\frac{1}{n}\sum_{i=1}^n X_i.
+$$
 
-An estimator is a rule that maps data to an estimate. The sample mean estimates a population mean; a fitted regression coefficient estimates an association; a model metric estimates future performance. Good estimators are judged by bias, variance, consistency, robustness, and relevance to the target decision.
+Estimator quality is described by bias and variance:
 
-## Example
+$$
+\operatorname{Bias}(\hat\theta)=\mathbb E[\hat\theta]-\theta, \qquad
+\operatorname{MSE}(\hat\theta)=\operatorname{Var}(\hat\theta)+\operatorname{Bias}(\hat\theta)^2.
+$$
 
-To estimate average delivery time, compute the mean from sampled deliveries. The estimate is only meaningful if the sample reflects the deliveries you care about: geography, time period, service type, and outlier handling all affect the target.
+[Maximum likelihood](maximum-likelihood.md), [confidence intervals](confidence-intervals.md), and [statistical modelling](statistical-modelling.md) are different layers of this same problem.
 
-## Practical workflow
+## Worked computation
 
-Define the estimand first, choose the sampling process, compute the estimate, quantify uncertainty, and check sensitivity to assumptions. In ML evaluation, the estimand might be future error rate on a specific deployment population.
+```python
+import numpy as np
 
-## Failure modes
+rng = np.random.default_rng(20260711)
+reps = 20000
+means = rng.exponential(scale=2.0, size=(reps, 25)).mean(axis=1)
+print("estimator_mean", round(means.mean(), 4),
+      "bias", round(means.mean() - 2.0, 4),
+      "estimator_var", round(means.var(ddof=1), 4),
+      "theory_var", round(4 / 25, 4))
+```
 
-Estimation fails when the target is vague, sampling is biased, data is dependent, measurement changes over time, or uncertainty is omitted from reporting.
+Observed output:
+
+```text
+estimator_mean 2.0 bias 0.0 estimator_var 0.162 theory_var 0.16
+```
+
+For exponential data with mean 2 and variance 4, the sample mean is unbiased and its variance is $\sigma^2/n=4/25$.
+
+## Caveats
+
+More data reduces sampling variance but does not fix a wrong estimand, biased sampling, leakage, dependence, or measurement changes. Reporting only a point estimate often hides the part that matters for decisions.
+
+## References
+
+- [OpenStax Introductory Statistics 2e, Chapter 8 introduction](https://openstax.org/books/introductory-statistics-2e/pages/8-introduction)
+- [SciPy statistics reference](https://docs.scipy.org/doc/scipy/reference/stats.html)

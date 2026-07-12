@@ -1,53 +1,76 @@
 ---
 title: Service Level Objectives
 slug: ml-engineering-and-mlops/service-level-objectives
-description: Concise guide to Service Level Objectives in ML Engineering and MLOps.
+description: "Measurable reliability targets and error budgets for model-backed services."
 area: ml-engineering-and-mlops
 topics:
   - service-level-objectives
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - reliability.md
+  - monitoring.md
+  - canary-deployment.md
+  - model-serving.md
+  - production-incident-response.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Service Level Objectives
 
-## Summary
+A service level objective is a measurable target for user-visible reliability. In ML systems, SLOs should cover both service delivery and decision usefulness: latency, availability, feature freshness, prediction coverage, fallback rate, and delayed label quality where labels exist.
 
-Service Level Objectives belongs to ML engineering. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Mechanism
 
-## Core idea
+An SLO is defined over a service level indicator and a window. The error budget is the allowed badness: for a 99.9% monthly availability SLO, 0.1% of the window may be bad. The budget should govern [canary deployment](canary-deployment.md), release freezes, and [production incident response](production-incident-response.md).
 
-- Define the inputs, outputs, and boundaries for Service Level Objectives.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+## Executed Budget Calculation
 
-## Worked example
+```python
+window_minutes = 30 * 24 * 60
+slo = 0.999
+budget_minutes = window_minutes * (1 - slo)
+incident_minutes = 9.5
+print("slo_budget_minutes_30d", round(budget_minutes, 2))
+print("slo_incident_burn_pct", round(incident_minutes / budget_minutes * 100, 1))
+```
 
-Compare a simple baseline with an approach that uses Service Level Objectives. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+Observed output:
 
-## Practical checklist
+```text
+slo_budget_minutes_30d 43.2
+slo_incident_burn_pct 22.0
+```
 
-- Version the code, data, model artifacts, configuration, and evaluation evidence touched by Service Level Objectives.
-- Define the owner, rollout path, observability signals, and rollback procedure.
-- Test failure behavior with stale data, missing dependencies, and incompatible versions.
+A 9.5-minute incident consumes 22.0% of the 30-day budget. That is the operational reason to stop a rollout even if a candidate model looks promising offline.
 
-- Separate training quality, serving reliability, and business impact.
-- Define promotion, rollback, monitoring, and incident-response criteria.
-- Test batch and online paths with representative fixtures.
-- Keep human review paths explicit where automated decisions are risky.
+## Artifact: ML SLO Definition
 
-## Common failure modes
+```yaml
+slo:
+  service: fraud-scorer
+  window: 30d
+  objectives:
+    availability: "99.9% valid 2xx score responses"
+    latency: "99% under 120ms"
+    feature_freshness: "99% account_state features under 60s old"
+    fallback_rate: "99.5% non-fallback predictions"
+  burn_alerts:
+    page: "2% budget consumed in 1h"
+    ticket: "10% budget consumed in 3d"
+```
 
-- Deploying Service Level Objectives without reproducible lineage for data, code, artifacts, configuration, and evaluation.
-- Monitoring infrastructure health while missing data freshness, model behavior, or user-impact degradation.
-- Making Service Level Objectives hard to roll back because schemas, state, or dependencies changed silently.
+These indicators connect [model-serving](model-serving.md) behavior to [monitoring](monitoring.md). Accuracy can be an SLO only when labels arrive fast and reliably enough to act within the window.
 
-- Monitoring service health but not model behavior.
-- Lacking rollback criteria when live performance degrades.
+## Failure Modes
+
+SLOs fail when they measure what is easy rather than what users experience. A 99.99% HTTP availability SLO is misleading if stale features produce bad decisions. Too many objectives also dilute action; choose the few that decide release and incident behavior.
+
+## References
+
+- [Google SRE Workbook: Implementing SLOs](https://sre.google/workbook/implementing-slos/)
+- [Google SRE Workbook: Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/)

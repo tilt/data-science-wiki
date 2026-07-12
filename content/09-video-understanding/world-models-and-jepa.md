@@ -1,66 +1,73 @@
 ---
 title: World Models and JEPA
 slug: video-understanding/world-models-and-jepa
-description: World Models and JEPA overview and practical notes.
+description: "How JEPA-style latent prediction relates to world-model learning from video."
 area: video-understanding
 topics:
-  - "world-models"
-  - "jepa"
-  - "self-supervised-learning"
+  - world-models
+  - jepa
+  - self-supervised-learning
 level: intermediate
-status: draft
+status: review
 page_type: concept
 aliases: []
-prerequisites: []
-related: []
+prerequisites:
+  - world-models.md
+  - v-jepa.md
+related:
+  - world-models.md
+  - v-jepa.md
+  - v-jepa-2.md
+  - self-supervised-video-representation-learning.md
 historical_context: false
-last_reviewed: 2026-07-10
-references:
-  - "lecun-2022-autonomous-machine-intelligence"
-  - "dawid-lecun-2023-lvebm"
-  - "assran-2025-vjepa2"
+last_reviewed: 2026-07-11
 ---
 # World Models and JEPA
 
-## Summary
+JEPA connects to [world models](world-models.md) through prediction in representation space. A pixel-prediction model tries to generate future sensory detail; a JEPA-style model tries to predict the latent features that matter for understanding or planning. This makes [V-JEPA](v-jepa.md) and [V-JEPA 2](v-jepa-2.md) natural examples in video understanding.
 
-A world model learns representations that support prediction of future or missing states. In JEPA-style systems, prediction occurs in representation space rather than by reconstructing every pixel or token.
+## Defining mechanism
 
-## LeCun's stated motivation
+An energy view scores whether a predicted latent matches the target latent:
 
-LeCun argues that intelligence requires learning abstract world representations, predicting consequences, planning actions, and handling uncertainty. His critique of pure autoregressive token prediction is that it learns to imitate sequences rather than directly learning a compact model of the physical world.
+$$
+E(\hat z, z)=\lVert \hat z-z\rVert_2^2.
+$$
 
-## Predicting in representation space
+Training lowers energy for the true target and keeps alternatives higher, either directly through regression or with contrastive/regularized variants. The world-model interpretation appears when the predicted latent represents a missing or future state rather than a random augmentation.
 
-JEPA-style systems avoid reconstructing every pixel or token. They learn an encoder that maps inputs into latent representations and train a predictor to estimate missing or future representations. The intended benefit is to focus on semantically meaningful structure while ignoring unpredictable low-level detail.
+## Worked example
 
-## Handling uncertainty
+```python
+import numpy as np
+import torch
 
-Raw-pixel prediction can be inefficient because many futures are plausible. A representation-space objective can avoid modelling every irrelevant detail, but it must still represent uncertainty well enough for planning and action.
+context = torch.tensor([1.0, 0.5])
+target = torch.tensor([1.2, 0.55])
+negatives = torch.tensor([[0.2,1.4],[1.8,-0.3]])
+pred = torch.tensor([1.1, 0.6])
+def energy(a, b):
+    return ((a - b) ** 2).sum().item()
+energies = [energy(pred, target)] + [energy(pred, n) for n in negatives]
+print("energies_target_then_negatives", [round(e, 3) for e in energies])
+print("target_rank", int(np.argsort(energies).tolist().index(0) + 1))
+```
 
-## Perception, prediction, reasoning, and planning
+Observed output:
 
-LeCun's broader architecture separates several roles:
+```text
+energies_target_then_negatives [0.013, 1.45, 1.3]
+target_rank 1
+```
 
-- perception builds representations from sensory input,
-- prediction estimates future or missing state,
-- cost modules represent goals or constraints,
-- reasoning searches over possible latent states,
-- planning chooses actions.
+The true target has the lowest energy, so the latent prediction is closer to the actual future than to the two alternatives.
 
-This separation is a research program, not a solved engineering recipe.
+## Caveats
 
-## Open questions
-
-It remains unsettled how far representation-space prediction can scale, how to evaluate world models reliably, how to handle multimodal uncertainty, and how to connect perception to robust planning and action.
-
-## Major criticisms and alternatives
-
-Alternative viewpoints argue that autoregressive language models already learn useful abstractions, that generative video models may support simulation, or that hybrid systems combining LLMs, retrieval, model predictive control, and learned perception may be more practical than a pure JEPA-style route.
-
-The author assessment in this wiki: JEPA and world models are important research directions, but current evidence does not yet establish them as a complete replacement for language-model-centric or hybrid AI systems.
+Representation-space prediction can ignore unpredictable pixel detail, which is useful, but it also means the representation defines what the model can care about. A low latent loss does not guarantee causal understanding, calibrated uncertainty, or reliable planning. Treat JEPA as a world-modeling research route, not a complete recipe.
 
 ## References
 
-- Primary: Yann LeCun. A Path Towards Autonomous Machine Intelligence, version 0.9.2, 2022.
-- Primary: Dawid and LeCun. Introduction to Latent Variable Energy-Based Models: A Path Towards Autonomous Machine Intelligence. arXiv:2306.02572, 2023.
+- [Bardes et al., 2024, Revisiting Feature Prediction for Learning Visual Representations from Video](https://arxiv.org/abs/2404.08471)
+- [Ha and Schmidhuber, 2018, World Models](https://arxiv.org/abs/1803.10122)
+- [Assran et al., 2025, V-JEPA 2](https://arxiv.org/abs/2506.09985)

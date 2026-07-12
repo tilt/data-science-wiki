@@ -1,38 +1,50 @@
 ---
-title: World Models and Jepa Background
+title: World Models and JEPA Background
 slug: history-of-ai-and-machine-learning/world-models-and-jepa-background
-description: Concise guide to World Models and Jepa Background in History of AI
-  and Machine Learning.
+description: "How predictive world models and joint-embedding predictive architectures connect model-based agents, self-supervision, and video representation learning."
 area: history-of-ai-and-machine-learning
 topics:
   - world-models-and-jepa-background
 level: advanced
 status: review
-page_type: model
+page_type: history
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - ../09-video-understanding/world-models-and-jepa.md
+  - ../09-video-understanding/world-models.md
+  - ../09-video-understanding/v-jepa.md
+  - ../09-video-understanding/v-jepa-2.md
+  - ../09-video-understanding/self-supervised-video-representation-learning.md
+  - ../06-deep-learning/self-supervised-learning.md
 historical_context: true
 last_reviewed: 2026-07-11
 ---
-## Summary
+# World Models and JEPA Background
 
-World-model and JEPA-style research reflects a long-running goal in AI: learn predictive internal representations of the environment without requiring dense human labels for every task.
+World-model research asks whether an agent can learn an internal predictive model of its environment and use that model for planning, representation, or control. JEPA-style work narrows the prediction target: predict latent representations of missing or future observations rather than reconstructing every pixel.
 
-## Historical thread
+## Verified chronology
 
-Early model-based reinforcement learning tried to learn transition models for planning. Representation learning later showed that predicting missing, future, or transformed observations could produce useful features. Modern world-model work connects these ideas to large-scale self-supervised learning.
+| Year | Milestone | Why it followed |
+|---|---|---|
+| 2018 | Ha and Schmidhuber published "World Models," training agents with compressed visual and temporal models of reinforcement-learning environments. | Model-based agents needed a learned simulator-like representation so policies could be trained or evaluated beyond direct environment interaction. |
+| 2022 | Yann LeCun's "A Path Towards Autonomous Machine Intelligence" argued for predictive world models and joint-embedding predictive architectures. | Purely reactive pattern recognition was not enough for planning; agents needed abstract predictions about the world. |
+| 2023 | Assran and coauthors introduced I-JEPA for self-supervised image representation learning. | Predicting representations of masked image regions tested whether latent prediction could learn semantics without pixel reconstruction or hand-crafted augmentations. |
+| 2024 | Bardes and coauthors introduced V-JEPA for video feature prediction. | Video supplied the temporal structure needed for [self-supervised video representation learning](../09-video-understanding/self-supervised-video-representation-learning.md) and predictive world-model evaluation. |
 
-## JEPA motivation
+## Historical mechanism
 
-Joint-embedding predictive architectures predict representations of missing or future parts rather than reconstructing every pixel. The motivation is to learn semantic structure and dynamics while avoiding the cost of modelling irrelevant low-level detail.
+The older world-model idea is agent-centric: compress observations, predict future states, and use the model to choose actions. The JEPA idea is representation-centric: encode visible context and predict the embedding of hidden or future targets. That distinction matters. Pixel reconstruction spends capacity on texture and low-level detail; latent prediction can focus on semantic structure if the target representation and masking policy are well chosen.
 
-## Example
+This page is the historical background for the canonical [world models and JEPA](../09-video-understanding/world-models-and-jepa.md) concept page. In video, [V-JEPA](../09-video-understanding/v-jepa.md) and later [V-JEPA 2](../09-video-understanding/v-jepa-2.md) sit between [world models](../09-video-understanding/world-models.md) and [self-supervised learning](../06-deep-learning/self-supervised-learning.md): they learn from unlabeled observations, but the motivating question is whether the learned representation supports prediction, physical reasoning, or downstream action.
 
-For video, a system may observe early frames and predict the representation of a future frame region. If the representation captures object permanence and motion, it can support downstream tasks such as action recognition or planning.
+The historical caveat is that "world model" is used broadly. Some systems predict pixels, some predict latent states, some condition on actions, and some are representation learners without explicit planning. The date and source of each claim matter because the term covers several related research programs.
 
-## Historical lesson
+## References
 
-The central question is what should be predicted: pixels, tokens, latent states, rewards, or abstractions. Different choices lead to different capabilities and failure modes.
+- [Ha and Schmidhuber, 2018, World Models](https://arxiv.org/abs/1803.10122)
+- [LeCun, 2022, A Path Towards Autonomous Machine Intelligence](https://openreview.net/forum?id=BZ5a1r-kVsf)
+- [Assran et al., 2023, Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture](https://arxiv.org/abs/2301.08243)
+- [Bardes et al., 2024, Revisiting Feature Prediction for Learning Visual Representations from Video](https://arxiv.org/abs/2404.08471)

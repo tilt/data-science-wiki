@@ -1,7 +1,7 @@
 ---
-title: Evaluation OF NLP Systems
+title: Evaluation of NLP Systems
 slug: natural-language-processing/evaluation-of-nlp-systems
-description: Concise guide to Evaluation OF NLP Systems in Natural Language Processing.
+description: "Measuring text systems with task-specific metrics, slices, uncertainty, and example review."
 area: natural-language-processing
 topics:
   - evaluation-of-nlp-systems
@@ -12,29 +12,67 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - text-classification.md
+  - sequence-labelling.md
+  - named-entity-recognition.md
+  - summarization.md
+  - urgency-classification.md
+  - ../16-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# Evaluation OF NLP Systems
+# Evaluation of NLP Systems
 
-## Summary
+NLP evaluation asks whether a text system does the task correctly under the ambiguity, noise, and cost structure of its use case. A [text classification](text-classification.md) router, [sequence labelling](sequence-labelling.md) tagger, [named entity recognition](named-entity-recognition.md) model, [summarization](summarization.md) system, and [urgency classification](urgency-classification.md) policy need different metrics and examples.
 
-NLP evaluation measures whether text systems classify, extract, retrieve, link, or generate language correctly for the intended use. It must handle ambiguity and annotation disagreement.
+## Defining mechanism
 
-## Step-by-step example
+For classification, precision, recall, and F1 for class $k$ are
 
-For named-entity recognition, evaluate exact span matches, entity type, partial matches, and downstream linking usefulness.
+$$
+\operatorname{precision}_k=\frac{TP_k}{TP_k+FP_k},\quad
+\operatorname{recall}_k=\frac{TP_k}{TP_k+FN_k},\quad
+F1_k=\frac{2PR}{P+R}.
+$$
 
-## Common failure modes
+Macro-F1 averages classes equally; micro-F1 aggregates counts. For NLP, also separate span correctness, label correctness, factual correctness, latency, abstention, and downstream utility. Bootstrap intervals communicate how unstable a small evaluation set is.
 
-- Training Evaluation OF NLP Systems on ambiguous labels or annotation rules that annotators apply inconsistently.
-- Evaluating only clean examples while long, multilingual, noisy, or domain-specific text fails.
-- Ignoring entity, span, or document-level errors because the aggregate metric looks acceptable.
+## Worked example
 
-- Averaging away severe failures, minority slices, or uncertainty.
-- Treating a benchmark result as production readiness without reviewing examples.
+```python
+import numpy as np
+from sklearn.metrics import f1_score
 
-## Evaluation check
+np.random.seed(7)
+y_true = np.array(["urgent", "normal", "urgent", "low", "normal", "urgent", "low", "normal"])
+y_pred = np.array(["urgent", "normal", "normal", "low", "urgent", "urgent", "low", "normal"])
+rng = np.random.default_rng(7)
+boots = []
+for _ in range(1000):
+    idx = rng.integers(0, len(y_true), len(y_true))
+    boots.append(f1_score(y_true[idx], y_pred[idx], average="macro"))
+lo, hi = np.percentile(boots, [2.5, 97.5])
+print("macro_f1", round(f1_score(y_true, y_pred, average="macro"), 3))
+print("bootstrap_95_ci", (round(float(lo), 3), round(float(hi), 3)))
+print("per_label", {label: round(float(score), 3) for label, score in zip(["low", "normal", "urgent"], f1_score(y_true, y_pred, labels=["low", "normal", "urgent"], average=None))})
+```
 
-NLP evaluation should separate span correctness, label correctness, factual correctness, and user-task success when those differ. For example, an extraction system can find the right text span but link it to the wrong entity, while a summarizer can be fluent but omit the decision-critical fact.
+Observed output:
+
+```text
+macro_f1 0.778
+bootstrap_95_ci (0.444, 1.0)
+per_label {'low': 1.0, 'normal': 0.667, 'urgent': 0.667}
+```
+
+The point estimate looks respectable, but the confidence interval is wide because there are only eight examples. That is a signal to collect more labelled cases before making production claims.
+
+## Caveats
+
+Aggregate metrics can hide minority-language failures, rare entity misses, or costly false negatives. Generated text needs factuality and citation checks, not only overlap metrics. Evaluation sets must freeze annotation rules, preprocessing, prompts, and thresholds; otherwise a score change may reflect the harness rather than the NLP model.
+
+## References
+
+- [scikit-learn documentation: classification metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)
+- [scikit-learn API: f1_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html)
+- [Papineni et al., BLEU: a Method for Automatic Evaluation of Machine Translation](https://aclanthology.org/P02-1040/)

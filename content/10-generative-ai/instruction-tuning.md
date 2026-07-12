@@ -1,7 +1,7 @@
 ---
 title: Instruction Tuning
 slug: generative-ai/instruction-tuning
-description: Concise guide to Instruction Tuning in Generative AI and Agentic Systems.
+description: "Supervised adaptation that teaches a pretrained model to follow task instructions and response formats."
 area: generative-ai
 topics:
   - instruction-tuning
@@ -12,25 +12,36 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - pretraining.md
+  - alignment.md
+  - fine-tuning-versus-rag.md
+  - prompting.md
+  - structured-output.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Instruction Tuning
 
-## Summary
+Instruction tuning trains a pretrained model on instruction-response pairs so it follows natural-language tasks more reliably. It sits between [pretraining](pretraining.md) and [alignment](alignment.md), and can reduce prompt burden for [structured output](structured-output.md) or domain-specific workflows.
 
-Instruction tuning adapts a pretrained model to follow task instructions more reliably. It teaches interaction patterns such as answering, extracting, refusing, formatting, and following constraints.
+## Mechanism
 
-## Step-by-step example
+Given demonstrations $(x,y)$, supervised instruction tuning minimizes token cross-entropy $-\sum_t\log p_\theta(y_t\mid x,y_{<t})$. Preference methods can then compare outputs, but the supervised stage teaches the basic mapping from instruction to answer.
 
-A base model may merely continue text about SQL; an instruction-tuned model is more likely to answer a request by writing a query and explaining it.
+## Concrete artifact
 
-## Common failure modes
+```jsonl
+{"messages":[{"role":"user","content":"Extract total and currency: Paid 12.40 EUR"}],"response":{"total":12.4,"currency":"EUR"}}
+```
 
-- Changing Instruction Tuning without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Instruction Tuning.
-- Shipping Instruction Tuning without rollback, monitoring, and examples for known hard cases.
+This training row teaches behavior; it should not be used to store fast-changing policy facts that belong in [RAG](rag.md).
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+## Caveats
+
+Bad demonstrations produce polished bad behavior. Keep held-out tasks and refusal examples separate from the training set.
+
+## References
+
+- [Ouyang et al., 2022, Training language models to follow instructions](https://arxiv.org/abs/2203.02155)
+- [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)
+- [Hu et al., 2021, LoRA](https://arxiv.org/abs/2106.09685)

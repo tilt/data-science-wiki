@@ -1,7 +1,7 @@
 ---
 title: LLM-as-Judge
 slug: generative-ai/llm-as-judge
-description: Concise guide to LLM-as-Judge in Generative AI and Agentic Systems.
+description: "Using a model to grade model outputs under a rubric, with calibration, schemas, and human audits."
 area: generative-ai
 topics:
   - llm-as-judge
@@ -12,25 +12,43 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - agent-evaluation.md
+  - rag-evaluation.md
+  - hallucination-mitigation.md
+  - structured-output.md
+  - guardrails.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # LLM-as-Judge
 
-## Summary
+LLM-as-judge uses a model to grade outputs for qualities such as helpfulness, citation support, rubric fit, safety compliance, or task completion. It can accelerate [agent evaluation](agent-evaluation.md) and [rag evaluation](rag-evaluation.md), but it is still a model call that needs calibration against human labels.
 
-LLM-as-judge uses a model to grade, compare, or label outputs from another system. It helps with scalable review of open-ended outputs, but it must be checked against human judgement.
+## Mechanism
 
-## Step-by-step example
+A judge prompt should include the task, candidate answer, evidence, rubric, and required output schema. The judge should return structured fields that can be aggregated: score, pass/fail, violated rubric item, explanation, confidence, and whether human review is required. For a score $s \in \{0,1,2,3\}$, track agreement with human labels and inspect disagreements by task category.
 
-For a RAG assistant, a judge can classify an answer as supported, partially supported, unsupported, or appropriately refused using the retrieved passages and a rubric.
+Use [structured output](structured-output.md) so judge results can be parsed and compared across model versions. Keep the rubric narrow: a citation-support judge should not also grade tone, completeness, and policy risk unless the schema separates those dimensions.
 
-## Common failure modes
+## Concrete artifact
 
-- Changing LLM-as-Judge without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by LLM-as-Judge.
-- Shipping LLM-as-Judge without rollback, monitoring, and examples for known hard cases.
+```json
+{
+  "score": 1,
+  "rubric": "citation_support",
+  "claim_checked": "Enterprise refunds are approved within two days.",
+  "evidence_result": "unsupported",
+  "reason": "The cited source says approval can take up to five business days.",
+  "requires_human_review": true
+}
+```
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+## Caveats
+
+Judges can prefer verbose answers, miss domain-specific errors, leak answer-order bias, or over-trust confident writing. Keep gold human labels, adversarial examples, and periodic human audits. A judge score is an evaluation signal, not proof that an answer is correct.
+
+## References
+
+- [OpenAI API documentation: Graders](https://platform.openai.com/docs/guides/graders)
+- [Kim et al., 2023, Prometheus](https://arxiv.org/abs/2310.08491)
+- [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)

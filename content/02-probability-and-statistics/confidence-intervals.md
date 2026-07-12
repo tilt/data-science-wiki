@@ -1,7 +1,7 @@
 ---
 title: Confidence Intervals
 slug: probability-and-statistics/confidence-intervals
-description: Concise guide to Confidence Intervals in Probability and Statistics.
+description: "Repeated-sampling procedures that report parameter uncertainty as an interval with nominal long-run coverage."
 area: probability-and-statistics
 topics:
   - confidence-intervals
@@ -12,26 +12,61 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - central-limit-theorem.md
+  - statistical-estimation.md
+  - hypothesis-testing.md
+  - ../16-experimentation-and-evaluation/statistical-significance.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Confidence Intervals
 
-A confidence interval is a procedure that gives a range of plausible parameter values with a specified long-run coverage rate. It communicates estimation uncertainty, not a guarantee about one realized interval.
+A confidence interval is a random interval produced by a procedure with a target long-run coverage rate. For an approximately normal estimator,
 
-## Core idea
+$$
+\hat\theta \pm z_{1-\alpha/2}\operatorname{SE}(\hat\theta)
+$$
 
-A 95 percent confidence interval means that if the same sampling procedure were repeated many times, about 95 percent of the constructed intervals would contain the true parameter. After one interval is observed, the true parameter is fixed; the procedure is what has coverage.
+is the usual large-sample form. For a normal mean with unknown variance,
 
-## Example
+$$
+\bar X \pm t_{1-\alpha/2,n-1}\frac{s}{\sqrt n}.
+$$
 
-If a survey estimates conversion at 12 percent with a 95 percent interval of 10-14 percent, the data is compatible with values in that range under the model assumptions. It does not mean there is a 95 percent probability that this specific interval contains the true value in frequentist interpretation.
+The [central limit theorem](central-limit-theorem.md) supplies many standard errors; [statistical estimation](statistical-estimation.md) supplies the estimator; [hypothesis testing](hypothesis-testing.md) often uses the same sampling distribution.
 
-## Practical use
+## Worked simulation
 
-Confidence intervals are more informative than point estimates alone because they show uncertainty and sample-size limitations. They are useful for model metrics, experiment effects, error rates, and business estimates.
+```python
+import numpy as np
+from scipy import stats
 
-## Failure modes
+rng = np.random.default_rng(20260711)
+reps, n, mu, sigma = 20000, 30, 5, 2
+x = rng.normal(mu, sigma, size=(reps, n))
+means = x.mean(axis=1)
+s = x.std(axis=1, ddof=1)
+tcrit = stats.t.ppf(.975, n - 1)
+lo = means - tcrit * s / np.sqrt(n)
+hi = means + tcrit * s / np.sqrt(n)
+print("coverage", round(((lo <= mu) & (mu <= hi)).mean(), 4),
+      "avg_width", round((hi - lo).mean(), 4),
+      "tcrit", round(tcrit, 4))
+```
 
-Intervals can be invalid under biased sampling, dependence, optional stopping, incorrect variance estimates, or distribution shift. Narrow intervals around a biased estimate are still misleading.
+Observed output:
+
+```text
+coverage 0.9514 avg_width 1.4798 tcrit 2.0452
+```
+
+Across repeated samples, the 95 percent t-interval covers the fixed mean about 95 percent of the time.
+
+## Caveats
+
+One realized interval either contains the parameter or it does not. Coverage can fail under biased sampling, dependence, optional stopping, nonresponse, or variance formulas that ignore clustering. In experiments, pair intervals with effect size and [statistical significance](../16-experimentation-and-evaluation/statistical-significance.md), not only a binary decision.
+
+## References
+
+- [OpenStax Introductory Statistics 2e, Chapter 8 introduction](https://openstax.org/books/introductory-statistics-2e/pages/8-introduction)
+- [SciPy t distribution reference](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html)

@@ -1,7 +1,7 @@
 ---
 title: Dense Retrieval
 slug: information-retrieval-and-search/dense-retrieval
-description: Concise guide to Dense Retrieval in Information Retrieval and Search.
+description: "Retrieval by comparing learned query and document embeddings in vector space."
 area: information-retrieval-and-search
 topics:
   - dense-retrieval
@@ -12,25 +12,73 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - vector-indexes.md
+  - approximate-nearest-neighbour-search.md
+  - hybrid-search.md
+  - ../07-natural-language-processing/embeddings.md
+  - ../10-generative-ai/vector-databases.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Dense Retrieval
 
-## Summary
+Dense retrieval embeds queries and documents into continuous vectors, then ranks documents by vector similarity. It is the semantic counterpart to [sparse retrieval](sparse-retrieval.md): exact token overlap is no longer required, but quality depends heavily on the embedding model and training data.
 
-Dense retrieval represents queries and documents as vectors and retrieves by vector similarity. It captures semantic similarity beyond exact term overlap.
+## Defining math
 
-## Step-by-step example
+A dual-encoder retriever computes
 
-A query for "cancel my subscription" may retrieve a document titled "terminate recurring billing" because the embedding model places them near each other.
+$$
+z_q=f_\theta(q), \qquad z_d=g_\theta(d),
+$$
 
-## Common failure modes
+then scores candidates with dot product or cosine similarity:
 
-- Optimizing Dense Retrieval on aggregate relevance while missing important query classes and hard negatives.
-- Evaluating retrieval components separately when the user sees the combined retrieval, reranking, filtering, and presentation pipeline.
-- Ignoring index freshness, permissions, latency, and failure behavior under empty or ambiguous queries.
+$$
+s(q,d)=\frac{z_q^\top z_d}{\lVert z_q\rVert_2\lVert z_d\rVert_2}.
+$$
 
-- Confusing retrieval quality with downstream answer quality.
-- Ignoring freshness, permissions, metadata filters, and operational latency.
+Document vectors can be precomputed and stored in [vector indexes](vector-indexes.md); query vectors are computed at request time. This is cheaper than a cross-encoder [reranking](reranking.md) model because it does not jointly encode every query-document pair.
+
+## Worked example
+
+```python
+import re
+import numpy as np
+
+rng = np.random.default_rng(7)
+texts = ["cancel recurring billing", "terminate subscription payments", "bm25 exact token matching"]
+query = "cancel subscription"
+words = set(sum([re.findall(r"[a-z0-9]+", x) for x in texts + [query]], []))
+base = {w: rng.normal(size=4) for w in words}
+base["terminate"] = base["cancel"] + np.array([0.08, -0.04, 0.03, 0.02])
+base["subscription"] = base["billing"] + np.array([0.02, 0.01, -0.03, 0.01])
+
+def emb(text):
+    v = sum((base[t] for t in re.findall(r"[a-z0-9]+", text)), np.zeros(4))
+    return v / np.linalg.norm(v)
+
+D = np.vstack([emb(t) for t in texts])
+scores = D @ emb(query)
+print("scores", [(i + 1, round(float(s), 3)) for i, s in enumerate(scores)])
+print("rank", [int(i + 1) for i in np.argsort(scores)[::-1]])
+```
+
+Observed output:
+
+```text
+scores [(1, 0.851), (2, 0.883), (3, 0.696)]
+rank [2, 1, 3]
+```
+
+The paraphrase document ranks first even though it does not share the token `cancel`. A lexical [BM25](bm25.md) search would need synonyms or query rewriting to make the same jump.
+
+## Caveats
+
+Dense retrieval can blur distinctions that matter: product codes, negation, numbers, dates, and permissions often need lexical or metadata constraints. Embeddings also drift when the corpus or model changes, so reindexing and [search evaluation](search-evaluation.md) need to be part of the release process. In RAG systems, dense recall is only the first step; [hybrid search](hybrid-search.md) and reranking often decide whether the final context is usable.
+
+## References
+
+- [Karpukhin et al., Dense Passage Retrieval for Open-Domain Question Answering](https://arxiv.org/abs/2004.04906)
+- [Khattab and Zaharia, ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction](https://arxiv.org/abs/2004.12832)
+- [Elasticsearch Reference: dense_vector field type](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/dense-vector)

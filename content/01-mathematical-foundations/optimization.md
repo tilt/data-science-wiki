@@ -1,49 +1,72 @@
 ---
 title: Optimization
 slug: mathematical-foundations/optimization
-description: Concise guide to Optimization in Mathematical Foundations.
+description: "Choosing variables to minimize or maximize an objective under possible constraints."
 area: mathematical-foundations
 topics:
   - optimization
-level: intermediate
+level: foundational
 status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - gradients.md
 related:
-  - index.md
+  - gradient-descent.md
+  - convex-optimization.md
+  - constrained-optimization.md
+  - numerical-stability.md
+  - ../06-deep-learning/optimizers.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Optimization
 
-Optimization chooses variables that minimize a loss, maximize a reward, or satisfy a tradeoff. It is the mathematical engine behind fitting models, tuning systems, allocating resources, and selecting policies.
+Optimization is the task of choosing variables that make an objective small or large. In machine learning the variables are often parameters, the objective is a loss plus regularization, and the algorithm may be a deterministic solver, [gradient descent](gradient-descent.md), or a stochastic optimizer.
 
-## Problem form
+## Defining math
 
-A typical optimization problem is
+A standard minimization problem is
 
 $$
-\min_x f(x),
+\min_{x\in\mathcal X} f(x).
 $$
 
-where $x$ is the decision variable and $f$ is the objective. Constraints, regularizers, penalties, and stochastic estimates make real problems richer than this simple form.
+With equality and inequality constraints it becomes
 
-## ML examples
+$$
+\min_x f(x)\quad\text{subject to}\quad h_i(x)=0,\; g_j(x)\le 0.
+$$
 
-Training linear regression minimizes squared error. Training logistic regression minimizes cross-entropy. Tuning a recommender may optimize engagement subject to latency and diversity constraints. Reinforcement learning optimizes expected return under uncertainty.
+Unconstrained differentiable optima satisfy the first-order stationarity condition $\nabla f(x^\star)=0$, but that is only a candidate condition unless curvature or global structure is known. [Convex optimization](convex-optimization.md) is special because local minima are global minima.
 
-## Step-by-step framing
+## Executed demo
 
-To formulate an optimization problem:
+```python
+import numpy as np
+from scipy import optimize
 
-1. choose the decision variables;
-2. define the objective;
-3. add constraints or penalties;
-4. decide what data estimates the objective;
-5. choose an algorithm appropriate for smoothness, scale, and convexity.
+res = optimize.minimize(lambda z: (z[0]-2)**2 + (z[1]+1)**2, x0=np.array([0., 0.]))
+print("x_star", np.round(res.x, 6))
+print("objective", round(res.fun, 12))
+print("iterations", res.nit)
+```
+
+Observed output:
+
+```text
+x_star [ 2. -1.]
+objective 0.0
+iterations 2
+```
+
+The solver finds the bottom of a shifted quadratic. For nonconvex losses such as deep-network training, an optimizer may instead find a useful stationary point, which is why [optimizers](../06-deep-learning/optimizers.md) are judged empirically as well as mathematically.
 
 ## Caveats
 
-The optimizer solves the objective you give it, not the intent you had. Poor objectives can reward shortcuts, unfair outcomes, overfitting, or operationally impossible solutions. Debug the objective and data before blaming the algorithm.
+The objective defines the behavior. A perfectly optimized proxy can still be misaligned with the real task, and poor scaling can make a mathematically simple problem numerically hard. Constraints, regularization, and [numerical stability](numerical-stability.md) are part of the optimization problem, not afterthoughts.
+
+## References
+
+- [SciPy documentation: `scipy.optimize.minimize`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
+- [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)

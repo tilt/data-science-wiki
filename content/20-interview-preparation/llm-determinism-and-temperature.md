@@ -17,6 +17,12 @@ prerequisites:
   - "../10-generative-ai/temperature-and-determinism.md"
 related:
   - "../10-generative-ai/temperature-and-determinism.md"
+  - "../10-generative-ai/sampling-and-decoding.md"
+  - "../10-generative-ai/top-k-and-top-p-sampling.md"
+  - "../10-generative-ai/determinism-and-reproducibility.md"
+  - "../10-generative-ai/structured-output.md"
+  - how-model-knows-which-tool-to-use.md
+  - generative-ai.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -24,28 +30,31 @@ last_reviewed: 2026-07-11
 
 ## Answer
 
-Temperature rescales logits before sampling. Lower temperature sharpens the distribution and approaches greedy decoding, but hosted APIs can still vary because of model-version changes, serving infrastructure, numerical nondeterminism, seeds, and post-processing.
+Temperature rescales next-token logits before sampling. Lower temperature sharpens the distribution and moves decoding toward greedy choices; higher temperature spreads probability mass across more alternatives. Temperature controls sampling randomness, but hosted LLM applications can still change because retrieval, tools, model versions, seeds, batching, validators, or post-processing changed.
 
 ## What a strong answer adds
 
-1. The model produces logits for possible next tokens.
-2. Temperature divides those logits before they are converted to probabilities.
-3. Low temperature concentrates probability on the highest-scoring tokens.
-4. High temperature spreads probability across more alternatives.
-5. Decoding then samples or chooses tokens according to the configured strategy.
+1. The model produces logits, not final words. [Sampling and decoding](../10-generative-ai/sampling-and-decoding.md) convert those logits into tokens.
+2. The canonical formula is $p_i(T)=\exp(z_i/T)/\sum_j \exp(z_j/T)$, where $z_i$ is a token logit and $T$ is temperature.
+3. Low temperature is appropriate for extraction, classification, and [tool-use](how-model-knows-which-tool-to-use.md) style calls where variation is a liability.
+4. High temperature can help brainstorming, but it also increases the chance of unsupported or poorly formatted output.
+5. Reproducibility requires a run trace: model identifier, prompt, retrieved documents, tool schemas, tool outputs, decoding settings, seed if available, validators, and output.
 
-Temperature controls sampling randomness, not every source of system nondeterminism. Even at a low temperature, outputs can change if the provider updates the model, batching changes floating-point behavior, retrieval context changes, or the application post-processes responses differently.
+## Interview artifact
 
-## Prototype answer
-
-Start with: "Temperature changes the token distribution." Then add: "Temperature zero is closer to greedy decoding, but not a contractual guarantee of identical outputs in every hosted system." Finish with production practice: "For reproducibility, log model version, prompt, tools, retrieval context, decoding parameters, seed if supported, and output validation results."
+Use this compact contrast in a spoken answer: "If the top token logit is only slightly higher than the next token, temperature can decide whether the model almost always takes the top token or samples from several plausible continuations. But if my RAG index changes between runs, a fixed temperature does not save reproducibility." That links temperature to [determinism and reproducibility](../10-generative-ai/determinism-and-reproducibility.md) rather than treating it as a magic switch.
 
 ## Common follow-ups
 
-- Use lower temperature for extraction, classification, and tool calls.
-- Use higher temperature for brainstorming or creative drafting.
-- Use schema validation and golden tests when correctness matters more than variation.
+- **"Is temperature 0 guaranteed deterministic?"** No. It is close to greedy decoding, but provider infrastructure, floating-point behavior, model updates, retrieval, and application code can still change outputs.
+- **"How do top-p and top-k relate?"** [Top-k and top-p sampling](../10-generative-ai/top-k-and-top-p-sampling.md) truncate the candidate set; temperature changes the shape of the probabilities before or around that sampling step.
+- **"What would you do in production?"** Use low temperature, [structured output](../10-generative-ai/structured-output.md), schema validation, golden tests, and full trace logging.
 
-## Canonical concept
+## Canonical links
 
-Read the topic page: [Temperature and Determinism](../10-generative-ai/temperature-and-determinism.md).
+Read [Temperature and Determinism](../10-generative-ai/temperature-and-determinism.md) for the formula and toy output, [Sampling and Decoding](../10-generative-ai/sampling-and-decoding.md) for the larger decoding family, and [Generative AI](generative-ai.md) for the interview map.
+
+## References
+
+- [OpenAI API documentation: Text generation](https://developers.openai.com/api/docs/guides/text)
+- [Holtzman et al., 2020, The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751)

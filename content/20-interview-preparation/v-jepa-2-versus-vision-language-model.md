@@ -15,6 +15,12 @@ prerequisites:
   - "../09-video-understanding/v-jepa-2.md"
 related:
   - "../09-video-understanding/v-jepa-2-versus-vision-language-models.md"
+  - "../09-video-understanding/v-jepa-2.md"
+  - "../09-video-understanding/v-jepa.md"
+  - "../09-video-understanding/world-models-and-jepa.md"
+  - "../10-generative-ai/vision-language-models.md"
+  - world-models.md
+  - lecun-jepa-world-models-motivation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -22,25 +28,32 @@ last_reviewed: 2026-07-11
 
 ## Answer
 
-V-JEPA 2 is centered on self-supervised video representation learning and latent-space prediction. Vision-language models are centered on aligning visual inputs with language for tasks such as visual question answering, captioning, and multimodal instruction following.
+V-JEPA 2 is centered on self-supervised video representation learning and latent prediction. A vision-language model is centered on aligning visual inputs with language so it can caption, answer questions, retrieve, or follow multimodal instructions. One learns predictive visual latents; the other exposes a language-facing interface.
 
 ## What a strong answer adds
 
-1. A VLM is defined by language-conditioned behavior: it can answer, describe, follow instructions, or produce text from visual input.
-2. V-JEPA-style systems learn visual representations by predicting missing or future information in embedding space.
-3. The VLM objective rewards language alignment; the JEPA objective rewards useful latent prediction.
-4. A JEPA representation can support downstream video tasks, and language heads can be added, but that does not make language alignment the core training idea.
+1. [V-JEPA 2](../09-video-understanding/v-jepa-2.md) extends the [V-JEPA](../09-video-understanding/v-jepa.md) idea: predict masked or future representations rather than reconstructing every pixel.
+2. A [vision-language model](../10-generative-ai/vision-language-models.md) is trained or aligned for language-conditioned behavior.
+3. V-JEPA-style objectives are useful for motion, anticipation, representation transfer, and [world-model](world-models.md) framing.
+4. VLM objectives are useful when the product output is text, dialogue, captioning, visual QA, or instruction following.
+5. A system can combine them: a predictive video encoder, temporal retrieval/localization, and a language model for explanation.
 
-## Prototype answer
+## Interview artifact
 
-Say: "A VLM is about visual-language alignment; V-JEPA 2 is about predictive visual representation learning." Then give a task contrast: "Ask a VLM to answer a question about an image. Use V-JEPA-style representations when you want robust video features for recognition, prediction, or planning."
+Use a task contrast. "If the user asks, 'What is happening in this video?', a VLM is the natural interface. If the system needs features for anticipating the next action, planning toward an image goal, or measuring motion-sensitive transfer, V-JEPA-style latent prediction is closer to the training objective." That keeps the answer consistent with the canonical [V-JEPA 2 versus Vision-Language Models](../09-video-understanding/v-jepa-2-versus-vision-language-models.md) page.
 
 ## Common follow-ups
 
-- VLMs are usually easier to inspect through language outputs.
-- JEPA-style models are motivated by world modelling and abstraction.
-- Evaluation differs: VLMs use answer quality and grounding; JEPA-style representations are judged by downstream task transfer and predictive usefulness.
+- **"Can V-JEPA 2 answer language questions?"** The V-JEPA 2 paper reports language alignment experiments, but language alignment is not the core pretraining idea.
+- **"Which is easier to evaluate?"** VLMs can be graded on answer quality and grounding; JEPA-style models need transfer, prediction, robustness, and planning evaluations.
+- **"Which should I use?"** Use the interface and evidence the product needs: language-first user interaction favors VLMs; video dynamics and planning features favor predictive representation learning.
 
-## Canonical concept
+## Canonical links
 
-Read the topic page: [V-JEPA 2 versus Vision-Language Models](../09-video-understanding/v-jepa-2-versus-vision-language-models.md).
+Read [V-JEPA 2 versus Vision-Language Models](../09-video-understanding/v-jepa-2-versus-vision-language-models.md), [World Models and JEPA](../09-video-understanding/world-models-and-jepa.md), and the interview map [World Models](world-models.md).
+
+## References
+
+- [Assran et al., 2025, V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning](https://arxiv.org/abs/2506.09985)
+- [Bardes et al., 2024, Revisiting Feature Prediction for Learning Visual Representations from Video](https://arxiv.org/abs/2404.08471)
+- [Alayrac et al., 2022, Flamingo: a Visual Language Model for Few-Shot Learning](https://arxiv.org/abs/2204.14198)

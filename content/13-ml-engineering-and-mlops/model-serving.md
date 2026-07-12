@@ -1,7 +1,7 @@
 ---
 title: Model Serving
 slug: ml-engineering-and-mlops/model-serving
-description: Concise guide to Model Serving in ML Engineering and MLOps.
+description: "The runtime contract that turns model artifacts into production predictions."
 area: ml-engineering-and-mlops
 topics:
   - model-serving
@@ -12,26 +12,54 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - batch-and-online-inference.md
+  - model-versioning.md
+  - monitoring.md
+  - docker.md
+  - ../10-generative-ai/model-serving.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Model Serving
 
-Model serving exposes trained model behavior to applications through batch jobs, online endpoints, streaming APIs, or embedded runtimes. The serving layer must preserve the model contract while meeting latency, reliability, security, and observability requirements.
+Model serving is the production runtime that loads a versioned artifact, applies the expected preprocessing, validates requests, executes inference, and returns a stable response schema. It is narrower than the whole ML system lifecycle but broader than `model.predict`: serving owns latency, resource limits, rollout compatibility, and telemetry.
 
-## Core responsibilities
+## Artifact: Serving Contract
 
-A serving system loads the correct model artifact, applies the same preprocessing used in training, validates requests, executes inference, returns a stable response schema, and emits telemetry. It also needs versioning, rollout controls, fallback behavior, and resource management.
+The serving contract should be explicit enough that [canary deployment](canary-deployment.md), [shadow deployment](shadow-deployment.md), and [rollbacks](rollbacks.md) can move traffic without changing client code.
 
-## Example
+```yaml
+openapi: 3.1.0
+info:
+  title: Fraud score API
+  version: "2026-07-11"
+paths:
+  /v1/fraud:score:
+    post:
+      x-model-version-header: X-Model-Version
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              required: [transaction_id, amount, currency, account_age_days]
+      responses:
+        "200":
+          description: Score and decision metadata
+          content:
+            application/json:
+              schema:
+                required: [score, threshold, decision, model_version, feature_version]
+```
 
-A fraud model serving endpoint receives transaction features, checks schema and freshness, computes a score, applies a threshold, returns a decision plus reason codes, and logs model version, feature version, latency, and decision metadata. If the feature store is unavailable, it follows a documented fallback rather than returning arbitrary scores.
+The minimum runtime flow is request validation, feature retrieval, model invocation, thresholding, response serialization, and event emission. A [model-versioning](model-versioning.md) record must include thresholds and preprocessing, not only the serialized weights. If the feature store or model process fails, the service should return a documented fallback or an explicit error; silent default scores corrupt [monitoring](monitoring.md).
 
-## Serving patterns
+## Failure Modes
 
-Batch serving is efficient for scheduled predictions. Online serving supports request-time decisions. Streaming serving handles continuous events. Edge serving runs near the user or device. The right pattern depends on freshness, latency, cost, and failure tolerance.
+Serving fails when artifacts are mutable, schemas are informal, or clients infer meaning from undocumented fields. Cold starts and large model loads can violate latency SLOs even when accuracy is unchanged. Generative systems add prompt, retrieval, and safety-policy versions, which is why the parallel page on [generative AI model serving](../10-generative-ai/model-serving.md) treats context construction as part of the served behavior.
 
-## Failure modes
+## References
 
-Common failures include train-serving skew, missing feature validation, unversioned artifacts, cold-start latency, silent fallback changes, and no rollback path.
+- [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [TensorFlow Serving RESTful API](https://www.tensorflow.org/tfx/serving/api_rest)
+- [MLflow Models documentation](https://mlflow.org/docs/latest/ml/model/)

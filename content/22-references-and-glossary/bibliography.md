@@ -15,16 +15,19 @@ aliases:
 prerequisites: []
 related:
   - "glossary.md"
+  - "references.md"
+  - "further-reading.md"
+  - "acronyms.md"
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Bibliography
 
-The machine-readable bibliography lives at `references/bibliography.yml`. Topic pages may list keys in front matter under `references`; validation fails if a key does not exist.
+The machine-readable bibliography lives at `references/bibliography.yml`. Topic pages may list keys in front matter under `references`; validation fails if a key does not exist. Use [references](references.md) for source policy and [further reading](further-reading.md) for study routes.
 
 ## How bibliography keys work
 
-Each key is stable, lowercase, and portable. A content page can reference a key in YAML front matter, while the human-readable `## References` section can explain why that source matters. This keeps source validation separate from prose.
+Each key is stable, lowercase, and portable. A content page can reference a key in YAML front matter, while the human-readable `## References` section can explain why that source matters. This keeps source validation separate from prose and leaves [glossary](glossary.md) pages focused on terminology.
 
 ## Current key groups
 

@@ -1,7 +1,7 @@
 ---
 title: Data Pipelines
 slug: data-engineering/data-pipelines
-description: Concise guide to Data Pipelines in Data Engineering.
+description: "Production dataflows that move, validate, transform, and publish datasets."
 area: data-engineering
 topics:
   - data-pipelines
@@ -12,25 +12,54 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - etl-and-elt.md
+  - airflow.md
+  - data-quality.md
+  - data-contracts.md
+  - data-lineage.md
+  - ../13-ml-engineering-and-mlops/training-pipelines.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Data Pipelines
 
-## Summary
+A data pipeline is a repeatable path from source data to a named output dataset. The pipeline contract includes inputs, transformation code, scheduling, quality gates, lineage, and replay behavior. That is broader than [Airflow](airflow.md), which orchestrates tasks, or [dbt](dbt.md), which usually handles warehouse SQL transforms.
 
-Data pipelines move and transform data through repeatable steps such as ingestion, validation, cleaning, aggregation, and publishing. They are production systems with contracts and failure modes.
+## Pipeline contract
 
-## Step-by-step example
+The smallest useful pipeline spec names source, transform, target, and watermark. I computed the hash below from the JSON manifest so the run can be compared during an incident or backfill:
 
-A pipeline can ingest clickstream events, validate schema, deduplicate sessions, write warehouse tables, and publish features for model training.
+```python
+import hashlib, json
 
-## Common failure modes
+manifest = {
+  "source": "gs://raw/events/date=2026-01-01/*.jsonl",
+  "transform": "models/marts/fct_sessions.sql@9f31a2c",
+  "target": "warehouse.analytics.fct_sessions",
+  "watermark": "2026-01-02T00:00:00Z",
+}
+print(hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest()[:16])
+```
 
-- Changing Data Pipelines without a contract for schema, freshness, ownership, and downstream consumers.
-- Letting silent nulls, duplicates, late data, or semantic drift pass because only job success is monitored.
-- Building transformations that cannot be backfilled, tested, or traced during incidents.
+Observed output:
 
-- Transformations that cannot be replayed, tested, or traced to owners.
-- Confusing pipeline success with data correctness for the downstream decision.
+```text
+99164d02d2818938
+```
+
+That identifier is not a replacement for [data-lineage](data-lineage.md), but it gives operators a concrete handle: this run used exactly this source prefix, code version, target table, and cutoff. [Data-contracts](data-contracts.md) should define whether the source is allowed to add fields, change nullability, or arrive late.
+
+## Architecture
+
+Most pipelines have four boundaries: ingestion writes immutable raw data to [cloud-storage](cloud-storage.md), transformation builds curated tables, validation enforces [data-quality](data-quality.md), and publication exposes a table, file set, feature view, or dashboard source. [ETL and ELT](etl-and-elt.md) changes where transformation happens, not the need for those boundaries.
+
+Pipelines that feed [training pipelines](../13-ml-engineering-and-mlops/training-pipelines.md) need snapshot identifiers and point-in-time semantics; otherwise a later training run can silently see different features from the same nominal date.
+
+## Failure modes
+
+Append-only ingestion without deduplication creates double counting. Watermarks that use processing time instead of event time can drop late business events. A retryable task that writes a partial output without atomic replacement can publish mixed old and new data.
+
+## References
+
+- [Apache Beam Programming Guide](https://beam.apache.org/documentation/programming-guide/)
+- [Apache Airflow documentation: DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html)

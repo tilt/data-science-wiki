@@ -1,7 +1,7 @@
 ---
 title: Time Series Fundamentals
 slug: time-series-and-forecasting/time-series-fundamentals
-description: Concise guide to Time Series Fundamentals in Time-Series Forecasting.
+description: The data assumptions and temporal constraints that make forecasting different from ordinary prediction.
 area: time-series-and-forecasting
 topics:
   - time-series-fundamentals
@@ -12,31 +12,27 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - stationarity.md
+  - trend-seasonality-cycles-noise.md
+  - autocorrelation-and-partial-autocorrelation.md
+  - forecasting-problem-formulation.md
+  - backtesting.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Time Series Fundamentals
 
-Time-series analysis studies observations ordered in time. The ordering matters because nearby observations are often dependent, seasonal patterns repeat, and future data must not leak into past decisions.
+A time series is a sequence of observations indexed by time. Forecasting differs from ordinary supervised prediction because order is part of the data-generating process: nearby observations can be dependent, seasonal positions can repeat, and future information is unavailable when the forecast is made.
 
-## Core concepts
+The basic object is usually written as $y_1,\ldots,y_T$, with forecasts $\hat{y}_{T+h|T}$ for horizon $h$ made using information available up to time $T$. That conditioning bar is the discipline behind the whole section. Any feature, split, scaling statistic, or target transformation that uses observations after $T$ has leaked future information.
 
-A time series can contain trend, seasonality, cycles, shocks, noise, and changing variance. Forecasting methods exploit temporal structure through lags, rolling windows, state variables, or learned sequence representations.
+Most forecasting problems combine several structures. [Trend, seasonality, cycles, and noise](trend-seasonality-cycles-noise.md) describe broad visible patterns. [Autocorrelation and partial autocorrelation](autocorrelation-and-partial-autocorrelation.md) describe lag dependence. [Stationarity](stationarity.md) asks whether those relationships are stable enough for classical models. [Forecasting problem formulation](forecasting-problem-formulation.md) fixes the target, horizon, granularity, update cadence, and decision that the forecast supports.
 
-## Example
+The simplest useful baselines are often naive: forecast the last observed value, the same seasonal position, or a moving average. These baselines are not throwaways. They reveal whether a complex model is learning temporal structure or merely matching an easy persistence pattern. More expressive methods - [ARIMA](arima.md), [exponential smoothing](exponential-smoothing.md), machine-learning regressors, and neural sequence models - should be compared to those baselines with [backtesting](backtesting.md).
 
-Daily restaurant demand may rise on weekends, dip on holidays, and grow over months. A random train-test split would leak future patterns into training. A time-aware split trains on earlier dates and evaluates on later dates, matching the real forecasting problem.
+A time-series workflow therefore starts by checking timestamp integrity, gaps, duplicates, aggregation level, calendar conventions, and known future covariates. Only then does model choice become meaningful. A daily sales forecast with censored stockouts, a temperature-driven load forecast, and an intermittent spare-parts forecast are all "time series," but they require different assumptions and validation cuts.
 
-## Practical workflow
+## References
 
-1. Plot the series and important calendar events.
-2. Check missing timestamps, outliers, and aggregation level.
-3. Build naive and seasonal baselines.
-4. Add trend, seasonal, lag, and external features.
-5. Evaluate with rolling-origin validation.
-6. Inspect errors by horizon and segment.
-
-## Failure modes
-
-Common mistakes include using future information, ignoring calendar effects, optimizing only one-step forecasts when decisions need longer horizons, and treating all series as equally predictable.
+- [Hyndman & Athanasopoulos, FPP3: Getting started](https://otexts.com/fpp3/intro.html)
+- [Hyndman & Athanasopoulos, FPP3: Time series graphics](https://otexts.com/fpp3/graphics.html)

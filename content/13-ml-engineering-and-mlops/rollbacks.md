@@ -1,7 +1,7 @@
 ---
 title: Rollbacks
 slug: ml-engineering-and-mlops/rollbacks
-description: Concise guide to Rollbacks in ML Engineering and MLOps.
+description: "Restoring a known-good ML behavior after an unsafe release or drift response."
 area: ml-engineering-and-mlops
 topics:
   - rollbacks
@@ -12,26 +12,48 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - canary-deployment.md
+  - model-versioning.md
+  - model-serving.md
+  - production-incident-response.md
+  - service-level-objectives.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Rollbacks
 
-A rollback restores a previous known-good behavior after a release causes unacceptable risk or degradation. Rollback planning is part of deployment design, not an emergency improvisation.
+A rollback restores the last acceptable production behavior after a release, retrain, threshold change, or dependency update causes unacceptable risk. In ML systems, "behavior" includes [model-versioning](model-versioning.md), feature definitions, thresholds, prompts, retrieval indexes, and routing, not just application code.
 
-## What can be rolled back
+## Mechanism
 
-In ML systems, rollback may involve code, model artifacts, thresholds, feature definitions, prompts, retrieval indexes, data pipelines, or routing rules. The rollback target must be compatible with current schemas and dependencies.
+Rollback readiness is a pre-release contract. The team should know the trigger, owner, command, expected recovery time, validation query, and customer communication path before the [canary deployment](canary-deployment.md) begins. The previous artifact must remain compatible with current schemas and dependencies.
 
-## Example
+## Artifact: Rollback Runbook Step
 
-A new churn model increases false positives after rollout. A safe rollback returns traffic to the previous model version, restores the previous threshold, and verifies that the feature pipeline still emits fields expected by the old model. If the schema changed, a code rollback alone may fail.
+```yaml
+rollback:
+  trigger: "p95_latency_ms > 180 for 10m OR fraud_false_positive_rate +0.7pp"
+  owner: "ml-platform-oncall"
+  action:
+    kubernetes:
+      deployment: fraud-scorer
+      command: "kubectl rollout undo deployment/fraud-scorer --to-revision=41"
+  restore:
+    model_uri: "registry://fraud-scorer/41"
+    threshold_config: "s3://ml-config/fraud/thresholds/v41.yaml"
+  verify:
+    - "stable model_version appears in 99% of responses"
+    - "p95_latency_ms below 140 for 15m"
+    - "fallback_rate below 0.5%"
+```
 
-## Rollback checklist
+This is tied to [model-serving](model-serving.md): clients should not change when routing returns to the old version. During [production incident response](production-incident-response.md), preserve the failed artifact and logs; deleting the bad version destroys evidence.
 
-Before launch, define the rollback trigger, owner, command or feature flag, expected recovery time, validation checks, and communication path. After rollback, preserve the failed version for diagnosis rather than deleting evidence.
+## Failure Modes
 
-## Failure modes
+Rollbacks fail when database migrations are irreversible, features were renamed without compatibility shims, old containers were garbage-collected, or dashboards cannot distinguish versions. A rollback can also restore an older model that no longer satisfies current [service-level objectives](service-level-objectives.md), so verification must check business and model signals, not only pod health.
 
-Rollbacks fail when database migrations are irreversible, old model artifacts have been removed, cached state is incompatible, or dashboards cannot distinguish old and new behavior.
+## References
+
+- [Kubernetes Deployments: rolling back a deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+- [Google SRE Book: Managing Incidents](https://sre.google/sre-book/managing-incidents/)

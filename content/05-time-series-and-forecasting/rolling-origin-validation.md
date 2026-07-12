@@ -1,7 +1,7 @@
 ---
 title: Rolling Origin Validation
 slug: time-series-and-forecasting/rolling-origin-validation
-description: Concise guide to Rolling Origin Validation in Time-Series Forecasting.
+description: Time-ordered validation that repeatedly advances the forecast cutoff.
 area: time-series-and-forecasting
 topics:
   - rolling-origin-validation
@@ -12,25 +12,34 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - backtesting.md
+  - forecast-error-metrics.md
+  - forecast-evaluation.md
+  - hyperparameter-optimization-for-forecasting.md
+  - forecasting-pitfalls-and-worked-examples.md
+  - ../16-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Rolling Origin Validation
 
-## Summary
+Rolling-origin validation evaluates a forecaster by moving the training cutoff forward through history. At cutoff $t_i$, the model is trained only on observations up to $t_i$ and evaluated on one or more future horizons:
 
-Rolling-origin validation evaluates forecasts by moving the training cutoff forward through time. It simulates repeated historical forecast decisions.
+$$
+\hat{y}_{t_i+h|t_i},\qquad h=1,\ldots,H.
+$$
 
-## Step-by-step example
+This mirrors the production forecasting contract: each forecast can use the past and any covariates genuinely known at forecast creation time, but not outcomes or derived statistics from the future.
 
-Train through January and forecast February, then train through February and forecast March, continuing across historical cutoffs.
+There are two common variants. Expanding-window validation keeps the first training date fixed and adds more history at each cutoff. Sliding-window validation keeps a fixed lookback length and drops older observations, which can help when [concept drift in forecasting](concept-drift-in-forecasting.md) is expected. Multi-horizon validation records errors separately by horizon because a model that is strong at $h=1$ may be weak at $h=14$.
 
-## Common failure modes
+Leakage usually enters outside the split object. Lag features, rolling means, scalers, target encoders, hyperparameter search, and imputation must be fitted inside each fold whenever they depend on observed targets. That is why rolling origin is the fold design behind [backtesting](backtesting.md), not a complete evaluation system by itself.
 
-- Evaluating Rolling Origin Validation with random splits that leak future information into training.
-- Reporting one average error while hiding horizon, season, segment, or peak-period failures.
-- Ignoring calendar effects, data revisions, missing timestamps, or operational constraints on when forecasts are available.
+Rolling validation produces the error table consumed by [forecast error metrics](forecast-error-metrics.md), [forecast evaluation](forecast-evaluation.md), and [hyperparameter optimization for forecasting](hyperparameter-optimization-for-forecasting.md). The useful output is not a single score but a matrix by cutoff, horizon, segment, and model, so failures around holidays, cold-start series, or long horizons are visible.
 
-- Ignoring horizon-specific error, calendar effects, missing periods, or regime changes.
-- Reporting point accuracy without checking uncertainty, slices, and operational cost.
+The cutoffs should also match the production retraining policy. A model retrained every night can use denser origins than a model retrained monthly. When labels arrive late, evaluation must delay scoring until outcomes are genuinely available.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Time series cross-validation](https://otexts.com/fpp3/tscv.html)
+- [scikit-learn TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)

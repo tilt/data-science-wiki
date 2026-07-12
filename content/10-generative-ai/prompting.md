@@ -1,7 +1,7 @@
 ---
 title: Prompting
 slug: generative-ai/prompting
-description: Concise guide to Prompting in Generative AI and Agentic Systems.
+description: "Specifying task, context, constraints, and examples in the model request."
 area: generative-ai
 topics:
   - prompting
@@ -12,29 +12,38 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - in-context-learning.md
+  - structured-output.md
+  - context-construction.md
+  - sampling-and-decoding.md
+  - guardrails.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Prompting
 
-## Summary
-
-Prompting specifies a model task through instructions, context, examples, constraints, and desired output format. A good prompt narrows ambiguity; it does not replace system design.
-
-## Step-by-step example
-
-A better summarization prompt states audience, maximum length, required sections, facts to preserve, and what to do if the source is incomplete.
-
-## Common failure modes
-
-- Changing Prompting without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Prompting.
-- Shipping Prompting without rollback, monitoring, and examples for known hard cases.
-
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+Prompting is the runtime interface for telling a model what task to perform. It includes instructions, examples for [in-context learning](in-context-learning.md), retrieved evidence from [context construction](context-construction.md), tool descriptions, and output constraints such as [structured output](structured-output.md).
 
 ## Mechanism
 
-A prompt defines task framing, constraints, examples, available evidence, output format, and refusal conditions. In production, prompt changes should be treated like code changes: versioned, tested on regression examples, and reviewed for side effects on safety, formatting, and latency.
+A prompt should separate roles: system policy, developer instructions, user request, trusted evidence, and untrusted data. The model then estimates the next-token distribution conditioned on that sequence, and [sampling and decoding](sampling-and-decoding.md) turns it into output.
+
+## Concrete artifact
+
+```text
+SYSTEM: Answer only from SOURCES. If unsupported, say so.
+USER: What approval is needed for a 700 EUR refund?
+SOURCES:
+[policy-7] Manager approval is required above 500 EUR.
+OUTPUT: JSON with answer and citations.
+```
+
+## Caveats
+
+Prompt wording can hide policy conflicts. A prompt is not an access-control system; enforce permissions and schema checks outside the model.
+
+## References
+
+- [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
+- [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)
+- [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)

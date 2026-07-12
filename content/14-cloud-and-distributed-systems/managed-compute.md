@@ -1,7 +1,7 @@
 ---
 title: Managed Compute
 slug: cloud-and-distributed-systems/managed-compute
-description: Concise guide to Managed Compute in Cloud and Distributed Systems.
+description: "Choosing managed VMs, containers, functions, jobs, and endpoints by workload shape."
 area: cloud-and-distributed-systems
 topics:
   - managed-compute
@@ -12,26 +12,60 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - aws-fundamentals.md
+  - google-cloud-fundamentals.md
+  - scalability.md
+  - reliability.md
+  - cost-management.md
+  - gpu-systems.md
+  - ../13-ml-engineering-and-mlops/model-serving.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Managed Compute
 
-Managed compute lets teams run services, jobs, containers, functions, or notebooks without owning the underlying servers directly. It speeds delivery but still requires explicit design for permissions, cost, reliability, and observability.
+Managed compute is the set of cloud services that run code while the provider operates part of the underlying fleet. The useful distinction is not "serverless versus servers"; it is startup latency, concurrency model, runtime limit, state, accelerator access, network control, and operational ownership. A [model serving](../13-ml-engineering-and-mlops/model-serving.md) API, a nightly batch job, and a GPU trainer have different compute shapes even if all run containers.
 
-## Compute choices
+## Selection mechanism
 
-Virtual machines provide control. Container services package applications consistently. Serverless functions suit event-driven tasks. Managed batch jobs suit scheduled processing. Managed ML endpoints simplify inference deployment. Kubernetes offers portability and control but adds operational overhead.
+Use the workload contract:
 
-## Example
+```text
+request/job shape -> runtime + state + hardware -> scaling signal -> deployment unit -> failure behavior
+```
 
-A nightly embedding job may run as a managed batch container that reads new documents, computes embeddings, writes them to a vector index, and exits. A user-facing inference API may run on an autoscaled container service with stricter latency targets.
+Functions fit short event handlers. Cloud Run-style containers fit stateless HTTP services with configurable concurrency. Kubernetes fits teams that need custom scheduling, sidecars, or portability. Batch services fit finite jobs. GPU instances or managed ML jobs fit [GPU systems](gpu-systems.md). The choice feeds [cost management](cost-management.md): high concurrency can reduce instances, but only if application code is actually safe and efficient under parallel requests.
 
-## Selection criteria
+## Executed concurrency check
 
-Choose based on startup time, runtime length, statefulness, scaling pattern, hardware needs, network access, deployment workflow, and team operating skill. The simplest managed option is often best until workload constraints force more control.
+For a stateless HTTP service handling 300 requests/s with 180 ms service time and a 70% target utilization, the required instance count changes sharply with per-instance concurrency.
 
-## Failure modes
+```python
+import math
+rps = 300
+latency = 0.18
+util = 0.70
+for conc in [1, 8, 80]:
+    need = math.ceil((rps * latency) / (conc * util))
+    print(f"cloud_run_concurrency_{conc}_instances {need}")
+```
 
-Managed compute fails when teams ignore cold starts, quotas, hidden retries, logging cost, regional outages, or IAM permissions. Managed does not mean ownerless.
+Observed output:
+
+```text
+cloud_run_concurrency_1_instances 78
+cloud_run_concurrency_8_instances 10
+cloud_run_concurrency_80_instances 1
+```
+
+Cloud Run documentation explicitly treats concurrency as a scaling and cost control. The output is not a recommendation to set concurrency to 80 blindly; CPU-bound Python code or shared mutable state can require a lower setting. That is a [scalability](scalability.md) test, not a console default.
+
+## Caveats
+
+Managed compute still needs IAM, quotas, logs, rollbacks, and health checks. Cold starts matter for bursty APIs. Hidden retries can duplicate side effects unless the handler is idempotent. Regional outages still require [reliability](reliability.md) design, and managed GPU endpoints can be capacity-constrained in ways a generic autoscaler cannot fix.
+
+## References
+
+- [Cloud Run maximum concurrent requests](https://docs.cloud.google.com/run/docs/about-concurrency)
+- [Amazon EC2 concepts](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html)
+- [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)

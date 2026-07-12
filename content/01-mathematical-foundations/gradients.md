@@ -1,55 +1,93 @@
 ---
 title: Gradients
 slug: mathematical-foundations/gradients
-description: Concise guide to Gradients in Mathematical Foundations.
+description: "Vectors of partial derivatives that point toward steepest local increase."
 area: mathematical-foundations
 topics:
+  - calculus
   - gradients
 level: foundational
 status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - calculus.md
 related:
-  - index.md
+  - calculus.md
+  - jacobians-and-hessians.md
+  - gradient-descent.md
+  - stochastic-gradient-descent.md
+  - ../06-deep-learning/backpropagation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Gradients
 
-A gradient is the vector of partial derivatives of a scalar function. In ML, gradients tell training algorithms how changing each parameter would change the loss locally.
+The gradient of a scalar function is the vector of partial derivatives. It gives the local direction of steepest increase under the Euclidean norm, so its negative is the basic descent direction used by [gradient descent](gradient-descent.md) and neural-network [backpropagation](../06-deep-learning/backpropagation.md).
 
-## Definition
+## Defining math
 
-For $f(x_1,\ldots,x_n)$,
-
-$$
-\nabla f = \left[\frac{\partial f}{\partial x_1}, \ldots, \frac{\partial f}{\partial x_n}\right].
-$$
-
-The gradient points in the direction of steepest local increase. Moving in the negative gradient direction decreases the function most quickly for a small step.
-
-## Example
-
-For
+For $f:\mathbb R^d\to\mathbb R$,
 
 $$
-f(x,y)=x^2+3y^2,
+\nabla f(x)=
+\begin{bmatrix}
+\frac{\partial f}{\partial x_1}\\
+\vdots\\
+\frac{\partial f}{\partial x_d}
+\end{bmatrix}.
 $$
 
-the gradient is
+The first-order approximation is
 
 $$
-\nabla f = [2x, 6y].
+f(x+\Delta)\approx f(x)+\nabla f(x)^\top\Delta.
 $$
 
-At $(1,2)$, the gradient is $[2,12]$, so the function is much more sensitive to changes in $y$ than $x$ at that point.
+For squared error on one linear prediction, $L(w)=(x^\top w-y)^2$, the gradient is
 
-## ML intuition
+$$
+\nabla_w L=2(x^\top w-y)x.
+$$
 
-Backpropagation computes gradients of a loss with respect to millions or billions of parameters using the chain rule. Optimizers then use those gradients to update the parameters.
+This formula is the small local object that becomes batched matrix expressions in [matrix multiplication](matrix-multiplication.md) and stochastic estimates in [stochastic gradient descent](stochastic-gradient-descent.md).
+
+## Executed demo
+
+```python
+import numpy as np
+
+w = np.array([1.5, -0.5])
+x = np.array([2., -1.])
+y = 4.0
+pred = x @ w
+loss = (pred-y)**2
+grad = 2*(pred-y)*x
+eps = 1e-6
+fd = []
+for j in range(2):
+    e = np.zeros(2); e[j] = eps
+    fd.append((((x@(w+e)-y)**2) - ((x@(w-e)-y)**2))/(2*eps))
+print("loss", round(loss, 4))
+print("analytic_grad", np.round(grad, 4))
+print("finite_diff_grad", np.round(fd, 4))
+```
+
+Observed output:
+
+```text
+loss 0.25
+analytic_grad [-2.  1.]
+finite_diff_grad [-2.  1.]
+```
+
+The analytic gradient and finite-difference check agree, which is the same sanity test used when implementing custom derivatives.
 
 ## Caveats
 
-Gradients are local. They can point toward a poor region when the loss surface is non-convex, be too small to make progress, or become numerically unstable. Gradient checks on small examples help catch implementation errors.
+Gradients are local. A small gradient can mean a minimum, a saddle point, saturation, or bad scaling. For curvature and second-order checks, use [Jacobians and Hessians](jacobians-and-hessians.md) rather than gradient magnitude alone.
+
+## References
+
+- [MIT OpenCourseWare: 18.02SC Multivariable Calculus](https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/)
+- [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)

@@ -1,7 +1,7 @@
 ---
 title: Alignment
 slug: generative-ai/alignment
-description: Concise guide to Alignment in Generative AI and Agentic Systems.
+description: "Training and system controls that make model behavior fit human intent, policy, and context."
 area: generative-ai
 topics:
   - alignment
@@ -12,25 +12,40 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - instruction-tuning.md
+  - guardrails.md
+  - hallucination-mitigation.md
+  - data-privacy.md
+  - agent-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Alignment
 
-## Summary
+Alignment is not one switch. It combines training, preference optimization, prompting, [guardrails](guardrails.md), [data privacy](data-privacy.md), and evaluation so a model follows intended behavior under realistic pressure.
 
-Alignment is the work of making model behavior fit human intent, domain policy, and context. In applications it includes training, instruction hierarchy, guardrails, evaluation, monitoring, and external controls.
+## Mechanism
 
-## Step-by-step example
+Instruction-tuned systems often start with supervised demonstrations and then use human or AI preference data. A preference objective can compare a chosen response $y_w$ to a rejected response $y_l$ for prompt $x$ and increase the margin between their scores. Runtime alignment is separate: the application constrains tools, validates [structured output](structured-output.md), and checks [hallucination mitigation](hallucination-mitigation.md).
 
-A medical information assistant should use approved sources, refuse diagnosis requests, cite evidence, route urgent cases to human help, and log high-risk interactions for review.
+## Concrete artifact
 
-## Common failure modes
+```json
+{
+  "policy": "Answer with cited sources or say evidence is unavailable.",
+  "training_signal": "chosen_vs_rejected",
+  "runtime_checks": ["citation_support", "pii_redaction", "tool_permission"]
+}
+```
 
-- Changing Alignment without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Alignment.
-- Shipping Alignment without rollback, monitoring, and examples for known hard cases.
+The artifact separates learned behavior from controls that remain outside the model.
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+## Caveats
+
+Preference data can encode annotator bias or reward verbosity. A model can be aligned for chat helpfulness but misaligned for a regulated workflow unless the workflow has its own tests.
+
+## References
+
+- [Ouyang et al., 2022, Training language models to follow instructions](https://arxiv.org/abs/2203.02155)
+- [Rafailov et al., 2023, Direct Preference Optimization](https://arxiv.org/abs/2305.18290)
+- [NIST AI Risk Management Framework 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)

@@ -1,53 +1,90 @@
 ---
 title: Named Entity Recognition
 slug: natural-language-processing/named-entity-recognition
-description: Concise guide to Named Entity Recognition in Natural Language Processing.
+description: "Detecting typed spans such as people, organizations, locations, dates, and products."
 area: natural-language-processing
 topics:
   - named-entity-recognition
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - sequence-labelling.md
+  - information-extraction.md
+  - entity-linking-and-matching.md
+  - tokenization.md
+  - evaluation-of-nlp-systems.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Named Entity Recognition
 
-## Summary
+Named entity recognition (NER) detects spans and assigns entity types such as person, organization, location, date, product, or medication. It is a special case of [sequence labelling](sequence-labelling.md), and it often feeds [entity linking and matching](entity-linking-and-matching.md) or [information extraction](information-extraction.md). The output is not just a class; the exact span boundary is part of the prediction.
 
-Named Entity Recognition belongs to natural language processing. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Defining mechanism
 
-## Core idea
+NER commonly predicts BIO tags for tokens:
 
-- Define the inputs, outputs, and boundaries for Named Entity Recognition.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+$$
+\hat y_i=\arg\max_k P(y_i=k\mid x_{1:n}).
+$$
+
+The tag sequence is then converted into spans:
+
+$$
+\{(s,e,\tau): y_s=B\text{-}\tau,\ y_{s+1:e-1}=I\text{-}\tau\}.
+$$
+
+Evaluation usually requires exact span and type agreement, because confusing `Paris` as an organization instead of a location changes downstream behavior.
 
 ## Worked example
 
-Compare a simple baseline with an approach that uses Named Entity Recognition. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+```python
+import numpy as np
 
-## Practical checklist
+np.random.seed(7)
+def spans(tags):
+    out, start, typ = [], None, None
+    for i, t in enumerate(tags + ["O"]):
+        if t.startswith("B-") or (t == "O" and typ):
+            if typ:
+                out.append((start, i, typ)); start, typ = None, None
+        if t.startswith("B-"):
+            start, typ = i, t[2:]
+        elif t.startswith("I-") and typ is None:
+            start, typ = i, t[2:]
+    return out
 
-- Define the text unit, label or output policy, language coverage, and annotation edge cases for Named Entity Recognition.
-- Create examples for ambiguity, long text, rare entities, and domain-specific vocabulary.
-- Evaluate by slice and inspect outputs, not only aggregate text metrics.
+gold = ["B-PER", "I-PER", "O", "B-LOC", "O", "B-ORG"]
+pred = ["B-PER", "I-PER", "O", "B-ORG", "O", "B-ORG"]
+G, P = set(spans(gold)), set(spans(pred))
+tp = len(G & P)
+precision, recall = tp / len(P), tp / len(G)
+f1 = 2 * precision * recall / (precision + recall)
+print("gold_spans", sorted(G))
+print("pred_spans", sorted(P))
+print("span_precision", round(precision, 3), "span_recall", round(recall, 3), "span_f1", round(f1, 3))
+```
 
-- Inspect tokenization and truncation on real examples.
-- Separate classification, extraction, linking, retrieval, and generation objectives.
-- Evaluate exact fields and semantic usefulness separately.
-- Review errors for ambiguity, domain shift, and annotation disagreement.
+Observed output:
 
-## Common failure modes
+```text
+gold_spans [(0, 2, 'PER'), (3, 4, 'LOC'), (5, 6, 'ORG')]
+pred_spans [(0, 2, 'PER'), (3, 4, 'ORG'), (5, 6, 'ORG')]
+span_precision 0.667 span_recall 0.667 span_f1 0.667
+```
 
-- Training Named Entity Recognition on ambiguous labels or annotation rules that annotators apply inconsistently.
-- Evaluating only clean examples while long, multilingual, noisy, or domain-specific text fails.
-- Ignoring entity, span, or document-level errors because the aggregate metric looks acceptable.
+The model found the boundary for token 3 but assigned the wrong type, so that span is false positive and false negative under exact typed-span scoring.
 
-- Letting truncation remove the evidence needed for the prediction.
-- Evaluating generated or extracted text with a metric that misses semantic errors.
+## Caveats
+
+Entity schemas are domain-specific. `Apple` can be a company, food item, record label, or product family; dates and locations may be nested inside larger legal or medical spans. [Tokenization](tokenization.md) can split names into awkward pieces, and aggregate F1 can hide severe errors on rare entity types.
+
+## References
+
+- [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
+- [Finkel, Grenager, and Manning, Incorporating Non-local Information into Information Extraction Systems](https://aclanthology.org/P05-1045/)
+- [scikit-learn API: f1_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html)

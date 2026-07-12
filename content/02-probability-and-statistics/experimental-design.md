@@ -1,7 +1,7 @@
 ---
 title: Experimental Design
 slug: probability-and-statistics/experimental-design
-description: Concise guide to Experimental Design in Probability and Statistics.
+description: "Planning assignment, blocking, outcomes, and analysis before data collection so comparisons answer the intended question."
 area: probability-and-statistics
 topics:
   - experimental-design
@@ -12,20 +12,55 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - hypothesis-testing.md
+  - confidence-intervals.md
+  - statistical-modelling.md
+  - ../16-experimentation-and-evaluation/a-b-testing.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Experimental Design
 
-## Summary
+Experimental design fixes how units are assigned, measured, and analyzed before outcomes are known. The core mechanism is control of variation:
 
-Experimental design defines how data will be collected or assigned so a comparison can support a valid conclusion. It controls confounding, bias, variance, and interpretability before analysis begins.
+$$
+Y_i=\alpha+\tau T_i+\epsilon_i,
+$$
 
-## Step-by-step example
+where $T_i$ is assigned by the design, not chosen after observing $Y_i$. Randomization supports unbiased comparisons; blocking and pairing reduce noise; pre-specified [hypothesis tests](hypothesis-testing.md) and [confidence intervals](confidence-intervals.md) keep uncertainty statements interpretable. In product work, this is the statistical core of [A/B testing](../16-experimentation-and-evaluation/a-b-testing.md).
 
-For an A/B test, decide the randomization unit, eligibility criteria, primary metric, guardrails, sample size, and stopping rule before seeing results.
+## Worked simulation
 
-## Design check
+```python
+import numpy as np
 
-A useful experiment design names the unit of assignment, the source of variation, the outcome window, and the exclusion rules before data is collected. If any of these are chosen after seeing results, uncertainty estimates and p-values are no longer measuring the planned question.
+rng = np.random.default_rng(123)
+blocks = 500
+base = rng.normal(0, 2, size=blocks)
+tau = .4
+control = base + rng.normal(0, 1, size=blocks)
+treat = base + tau + rng.normal(0, 1, size=blocks)
+paired = treat - control
+unpaired_se = np.sqrt(treat.var(ddof=1) / blocks + control.var(ddof=1) / blocks)
+paired_se = paired.std(ddof=1) / np.sqrt(blocks)
+print("estimated_effect", round(paired.mean(), 4),
+      "unpaired_se", round(unpaired_se, 4),
+      "blocked_se", round(paired_se, 4))
+```
+
+Observed output:
+
+```text
+estimated_effect 0.3655 unpaired_se 0.1437 blocked_se 0.0668
+```
+
+Pairing units that share the same baseline variation cuts the standard error by more than half in this simulation.
+
+## Caveats
+
+Randomization does not fix attrition, interference between units, metric peeking, or outcomes chosen after seeing results. The design should name the assignment unit, analysis unit, primary metric, guardrails, exclusion rules, and stopping rule.
+
+## References
+
+- [Design of experiments](https://en.wikipedia.org/wiki/Design_of_experiments)
+- [OpenStax Introductory Statistics 2e, Chapter 9 introduction](https://openstax.org/books/introductory-statistics-2e/pages/9-introduction)

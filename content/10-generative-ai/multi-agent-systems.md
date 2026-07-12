@@ -1,7 +1,7 @@
 ---
-title: Multi Agent Systems
+title: Multi-Agent Systems
 slug: generative-ai/multi-agent-systems
-description: Concise guide to Multi Agent Systems in Generative AI and Agentic Systems.
+description: "Workflows with multiple model roles coordinated through explicit protocols, typed handoffs, and shared evidence."
 area: generative-ai
 topics:
   - multi-agent-systems
@@ -12,25 +12,45 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - agentic-systems.md
+  - agent-loops.md
+  - tool-routing.md
+  - reflection-and-reviewer-patterns.md
+  - agent-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# Multi Agent Systems
+# Multi-Agent Systems
 
-## Summary
+A multi-agent system uses more than one model role or policy loop, such as researcher, planner, coder, reviewer, and coordinator. It extends [agentic systems](agentic-systems.md), but it also increases coordination cost and [agent evaluation](agent-evaluation.md) complexity.
 
-A multi-agent system uses multiple model-driven roles or workflows that communicate or coordinate. It is useful only when roles have distinct information, tools, or review responsibilities.
+## Mechanism
 
-## Step-by-step example
+The reliable version is not free-form chat between personas. It is a protocol: role, input contract, output schema, allowed tools, handoff condition, and stop rule. [Tool routing](tool-routing.md) should remain centralized when tools have permissions or side effects. [Reflection and reviewer patterns](reflection-and-reviewer-patterns.md) are a two-role special case where one role produces and another critiques against a rubric.
 
-For a report, one role gathers sources, another drafts, another checks claims against citations, and a policy checker rejects unsupported statements.
+Shared evidence matters more than role labels. If the researcher passes unsourced prose to the writer, the writer inherits unverified claims. A better handoff passes claim objects with source IDs, confidence, and unresolved questions. The coordinator then decides whether the next role has enough evidence to proceed.
 
-## Common failure modes
+## Concrete artifact
 
-- Changing Multi Agent Systems without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Multi Agent Systems.
-- Shipping Multi Agent Systems without rollback, monitoring, and examples for known hard cases.
+```json
+{
+  "handoff": "researcher_to_writer",
+  "payload": {
+    "claims": [
+      {"text": "Enterprise refunds above 500 EUR require manager approval.", "source_id": "policy-7"}
+    ],
+    "open_questions": ["Does the customer have enterprise status?"]
+  },
+  "acceptance": "all_claims_have_sources"
+}
+```
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+## Caveats
+
+More agents can amplify errors through plausible summaries. Use typed handoffs, shared evidence stores, and centralized permission checks rather than relying on conversational memory. Add agents only when the role boundary removes real complexity or creates an auditable review point.
+
+## References
+
+- [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
+- [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
+- [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)

@@ -1,7 +1,7 @@
 ---
 title: Information Extraction
 slug: natural-language-processing/information-extraction
-description: Concise guide to Information Extraction in Natural Language Processing.
+description: "Turning unstructured text into typed fields, relations, events, and records with source evidence."
 area: natural-language-processing
 topics:
   - information-extraction
@@ -12,25 +12,59 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - named-entity-recognition.md
+  - sequence-labelling.md
+  - entity-linking-and-matching.md
+  - document-understanding.md
+  - evaluation-of-nlp-systems.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Information Extraction
 
-## Summary
+Information extraction (IE) converts text into structured records: entities, fields, relations, events, or table rows. [Named entity recognition](named-entity-recognition.md) finds typed spans; IE adds schema constraints such as invoice id, total, due date, buyer, supplier, and source offsets. It connects naturally to [document understanding](document-understanding.md) when layout matters.
 
-Information extraction turns unstructured text into structured fields, entities, relations, events, or records. It is useful when downstream systems need data rather than prose.
+## Defining mechanism
 
-## Step-by-step example
+An extraction system predicts a record
 
-From a contract clause, an extraction system might return party names, effective date, renewal term, and termination conditions with source spans.
+$$
+\hat r=\{(f_j, v_j, s_j, e_j)\}_{j=1}^m,
+$$
 
-## Common failure modes
+where $f_j$ is a field name, $v_j$ is a value, and $(s_j,e_j)$ identifies the supporting span. Sequence models estimate span labels; rule systems can use typed patterns; generative systems should still return evidence spans. Evaluation often checks field-level exact match, not only token F1.
 
-- Training Information Extraction on ambiguous labels or annotation rules that annotators apply inconsistently.
-- Evaluating only clean examples while long, multilingual, noisy, or domain-specific text fails.
-- Ignoring entity, span, or document-level errors because the aggregate metric looks acceptable.
+## Worked example
 
-- Domain shift in vocabulary, style, language, or document structure.
-- Evaluating surface form while missing semantic correctness or downstream utility.
+```python
+import numpy as np, re
+
+np.random.seed(7)
+texts = ["Invoice 104 total $42.10 due 2026-08-01",
+         "Invoice 105 total $17.00 due 2026-08-09"]
+gold = [{"id": "104", "total": "42.10", "due": "2026-08-01"},
+        {"id": "105", "total": "17.00", "due": "2026-08-09"}]
+pat = re.compile(r"Invoice (?P<id>\d+) total \$(?P<total>\d+\.\d{2}) due (?P<due>\d{4}-\d{2}-\d{2})")
+pred = [pat.search(t).groupdict() for t in texts]
+field_acc = np.mean([pred[i][k] == gold[i][k] for i in range(2) for k in gold[i]])
+print("records", pred)
+print("field_exact_accuracy", round(float(field_acc), 3))
+```
+
+Observed output:
+
+```text
+records [{'id': '104', 'total': '42.10', 'due': '2026-08-01'}, {'id': '105', 'total': '17.00', 'due': '2026-08-09'}]
+field_exact_accuracy 1.0
+```
+
+The regex is deliberately narrow, but it demonstrates the artifact IE must produce: typed fields, not just highlighted text.
+
+## Caveats
+
+Exact schemas are brittle. Real documents contain missing fields, repeated totals, handwritten corrections, OCR errors, and values split across layout regions. Low-confidence extractions should carry source spans for review. For names or products, pair extraction with [entity linking and matching](entity-linking-and-matching.md), then report field-level and record-level metrics in [evaluation of NLP systems](evaluation-of-nlp-systems.md).
+
+## References
+
+- [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
+- [Finkel, Grenager, and Manning, Incorporating Non-local Information into Information Extraction Systems](https://aclanthology.org/P05-1045/)

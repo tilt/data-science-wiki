@@ -1,43 +1,57 @@
 ---
 title: Entropy
 slug: mathematical-foundations/entropy
-description: Concise guide to Entropy in Mathematical Foundations.
+description: "Expected surprise of a probability distribution, measured in bits or nats."
 area: mathematical-foundations
 topics:
+  - information-theory
   - entropy
 level: foundational
 status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - information-theory.md
 related:
-  - index.md
+  - information-theory.md
+  - cross-entropy.md
+  - kl-divergence.md
+  - mutual-information.md
+  - ../02-probability-and-statistics/random-variables.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Entropy
 
-Entropy measures uncertainty or average surprise in a probability distribution. A distribution concentrated on one outcome has low entropy; a spread-out distribution has higher entropy.
+Entropy is the expected surprise of a random variable. A concentrated distribution has low entropy because outcomes are predictable; a uniform distribution has higher entropy because more outcomes remain plausible.
 
-## Definition
+## Defining math
 
-For a discrete distribution $p$,
+For a discrete distribution $p$ over outcomes $x$,
 
 $$
-H(p) = -\sum_x p(x)\log p(x).
+H(X)=-\sum_x p(x)\log_2 p(x).
 $$
 
-The log base determines the unit: base 2 gives bits, natural log gives nats.
+The convention is $0\log 0=0$ by limit. Base-2 logarithms measure bits; natural logarithms measure nats. Entropy is the baseline term in [cross-entropy](cross-entropy.md):
 
-## Example
+$$
+H(p,q)=H(p)+D_{\mathrm{KL}}(p\Vert q).
+$$
 
-A fair coin has higher entropy than a coin that lands heads 99 percent of the time because the fair coin is harder to predict. A classifier output of `[0.5, 0.5]` is more uncertain than `[0.99, 0.01]`.
+That identity explains why minimizing cross-entropy over $q$ is equivalent to minimizing [KL divergence](kl-divergence.md) from the data distribution when $p$ is fixed.
 
-## ML use
+## Worked scenario
 
-Entropy appears in decision trees, active learning, reinforcement learning exploration, language modelling, compression, and uncertainty analysis. High predictive entropy can indicate uncertainty, ambiguity, or out-of-distribution inputs.
+Imagine a three-symbol source where $A$ appears half the time and $B$ and $C$ each appear one quarter of the time. Seeing $A$ carries $-\log_2(0.5)=1$ bit of surprise, while seeing either rarer symbol carries $-\log_2(0.25)=2$ bits. The expected surprise is therefore $0.5\cdot 1+0.25\cdot 2+0.25\cdot 2=1.5$ bits.
+
+If the same source were uniform over three symbols, every outcome would carry $-\log_2(1/3)\approx 1.585$ bits. Uniform entropy is higher because no symbol can be guessed more confidently than another; the skewed source is partly predictable before the next symbol arrives.
 
 ## Caveats
 
-Entropy summarizes uncertainty in a distribution, but it does not tell whether the distribution is correct. A model can be confidently wrong with low entropy.
+Entropy is not variance. Relabeling categories leaves entropy unchanged, and two distributions with very different practical consequences can have the same entropy. For dependence between variables, use [mutual information](mutual-information.md), not marginal entropy alone.
+
+## References
+
+- [MacKay, Information Theory, Inference, and Learning Algorithms](https://www.inference.org.uk/itprnn/book.pdf)
+- [SciPy documentation: `scipy.special.rel_entr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.rel_entr.html)

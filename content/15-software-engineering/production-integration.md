@@ -1,7 +1,7 @@
 ---
 title: Production Integration
 slug: software-engineering/production-integration
-description: Concise guide to Production Integration in Software Engineering.
+description: Connecting a service or model to real users with contracts, telemetry, and rollback.
 area: software-engineering
 topics:
   - production-integration
@@ -10,32 +10,62 @@ status: review
 page_type: system-design
 aliases: []
 prerequisites:
-  - index.md
+  - api-design.md
 related:
-  - index.md
+  - "api-design.md"
+  - "web-backends.md"
+  - "software-architecture.md"
+  - "testing.md"
+  - "../13-ml-engineering-and-mlops/canary-deployment.md"
+  - "../13-ml-engineering-and-mlops/rollbacks.md"
+  - "../13-ml-engineering-and-mlops/monitoring.md"
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Production Integration
 
-Production integration is the work of connecting a model, data pipeline, or service to the real product environment. It turns a working prototype into a component with contracts, monitoring, rollback paths, and ownership.
+Production integration is the work of connecting a prototype to real product traffic. The mechanism is a launch contract: interface, authentication, data freshness, rollout path, telemetry, fallback, owner, and rollback. For ML systems this is where notebook assumptions meet [web backends](web-backends.md), latency budgets, authorization, and [monitoring](../13-ml-engineering-and-mlops/monitoring.md).
 
-## Core idea
+## Integration Contract
 
-Integration risk usually sits between systems: schema changes, authentication, latency budgets, retries, deployment order, and mismatched assumptions about data freshness. A production integration plan should name the upstream dependencies, downstream consumers, failure behavior, rollout strategy, and operational owner.
+Before launch, name the upstream dependencies, downstream consumers, schema versions, timeout budget, retry policy, idempotency key, trace propagation, and user-visible fallback. Roll out behind shadow traffic, a feature flag, or [canary deployment](../13-ml-engineering-and-mlops/canary-deployment.md). The same checklist should link to [testing](testing.md) fixtures and the [API design](api-design.md) contract it exercises.
 
-## Step-by-step checklist
+## Executed Artifact
 
-1. Define the interface: request schema, response schema, errors, timeouts, and versioning.
-2. Test against realistic data, including missing, delayed, and malformed inputs.
-3. Add observability for traffic, latency, error classes, output distribution, and business guardrails.
-4. Roll out behind a feature flag, canary, or shadow path.
-5. Document rollback steps and on-call ownership before full launch.
+```python
+from statistics import quantiles
 
-## Example
+requests = [
+    {"path": "shadow", "ok": True, "latency_ms": 83},
+    {"path": "shadow", "ok": True, "latency_ms": 91},
+    {"path": "canary", "ok": True, "latency_ms": 104},
+    {"path": "canary", "ok": False, "latency_ms": 260},
+    {"path": "control", "ok": True, "latency_ms": 72},
+]
+canary = [r for r in requests if r["path"] == "canary"]
+error_rate = sum(not r["ok"] for r in canary) / len(canary)
+p95 = quantiles([r["latency_ms"] for r in requests], n=20, method="inclusive")[18]
+print("canary_error_rate", round(error_rate, 2))
+print("overall_p95_ms", round(p95, 1))
+print("rollback", error_rate > 0.05 or p95 > 250)
+```
 
-A model that scores support tickets may work in a notebook, but production integration must decide what happens when the ticket body is empty, the feature store is stale, the model service times out, or the score conflicts with a human escalation rule.
+Observed output:
 
-## Failure modes
+```text
+canary_error_rate 0.5
+overall_p95_ms 228.8
+rollback True
+```
 
-Prototype integrations fail when they assume batch data is available online, ignore authorization boundaries, or ship without a fallback. The most expensive failures are often not model errors but contract mismatches between teams.
+The numbers are intentionally small, but the contract is real: define thresholds before launch and automate the decision path. A [software architecture](software-architecture.md) that has no rollback path is not production-ready, even if the model looks good offline.
+
+## Failure Modes
+
+Integrations fail when batch data is assumed to exist online, retries are unsafe, provider errors become generic 500s, or trace IDs stop at the first service boundary. Use W3C trace context or equivalent propagation so incidents can cross service boundaries. Document [rollbacks](../13-ml-engineering-and-mlops/rollbacks.md) before the first full release.
+
+## References
+
+- [OpenTelemetry semantic conventions: HTTP spans](https://opentelemetry.io/docs/specs/semconv/http/http-spans/)
+- [W3C Trace Context](https://www.w3.org/TR/trace-context/)
+- [Google AIP-185: API Versioning](https://google.aip.dev/185)

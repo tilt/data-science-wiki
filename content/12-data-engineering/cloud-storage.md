@@ -1,7 +1,7 @@
 ---
 title: Cloud Storage
 slug: data-engineering/cloud-storage
-description: Concise guide to Cloud Storage in Data Engineering.
+description: "Object storage layout for raw, staged, curated, and reproducible data assets."
 area: data-engineering
 topics:
   - cloud-storage
@@ -12,22 +12,58 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - data-pipelines.md
+  - bigquery.md
+  - reproducibility.md
+  - data-warehouses.md
+  - ../14-cloud-and-distributed-systems/managed-storage.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Cloud Storage
 
-Cloud storage in data engineering provides durable, scalable storage for datasets, logs, raw files, curated tables, and pipeline artifacts. It is usually the landing zone and exchange layer for data systems.
+Cloud object storage is the durable file layer behind many lakes, warehouses, exports, and model datasets. In data engineering it is usually not a filesystem replacement; it is an object namespace with explicit paths, metadata, lifecycle policy, and access controls.
 
-## Core role
+## Layout mechanism
 
-Object storage is common for data lakes because it stores files cheaply and durably. Pipelines write raw, staged, and curated data with partitioning, lifecycle rules, access controls, and metadata.
+A useful layout makes data version, grain, and partition visible:
 
-## Example
+```text
+gs://company-lake/raw/orders/source=stripe/dt=2026-01-01/part-000.jsonl
+gs://company-lake/staged/orders/dt=2026-01-01/part-000.parquet
+gs://company-lake/curated/fct_orders/v=20260102/part-000.parquet
+```
 
-An ingestion pipeline writes raw event files by date, a transformation job creates curated parquet tables, and an ML pipeline reads a versioned snapshot for training. Storage layout determines cost and query performance.
+I computed a simple sizing check for 73 million rows per month at 420 bytes per row:
+
+```python
+rows = 73_000_000
+row_bytes = 420
+days = 30
+raw_bytes = rows * row_bytes / days
+print("daily_partition_gib", round(raw_bytes / (1024**3), 2))
+print("128_mib_files_per_day", round(raw_bytes / (128 * 1024**2)))
+```
+
+Observed output:
+
+```text
+daily_partition_gib 0.95
+128_mib_files_per_day 8
+```
+
+Eight roughly 128 MiB files per day is a reasonable starting point for parallel reads. Thousands of tiny files would slow listing and planning; one huge file would underuse parallelism in [data-pipelines](data-pipelines.md).
+
+## Architecture
+
+[BigQuery](bigquery.md) can load from or query files in Google Cloud Storage, while [data-warehouses](data-warehouses.md) often keep curated copies in managed table storage for governance and performance. For [reproducibility](reproducibility.md), use immutable prefixes or object versioning rather than overwriting `latest/` paths.
 
 ## Failure modes
 
-Cloud storage fails operationally when permissions are broad, partitioning is poor, files are too small, lifecycle policies delete needed data, or schemas are undocumented.
+Object paths that omit partition keys make backfills and deletion hard. Lifecycle rules can delete raw data before audits or model investigations finish. Treating object storage as a low-latency database creates poor consistency and listing assumptions compared with purpose-built [managed-storage](../14-cloud-and-distributed-systems/managed-storage.md).
+
+## References
+
+- [Google Cloud Storage documentation: About Cloud Storage objects](https://cloud.google.com/storage/docs/objects)
+- [Amazon S3 documentation: What is Amazon S3?](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+- [Amazon S3 documentation: Retaining multiple versions of objects with S3 Versioning](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html)

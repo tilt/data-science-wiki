@@ -16,10 +16,11 @@ prerequisites:
   - backtesting.md
 related:
   - forecast-error-metrics.md
-  - prediction-intervals.md
-  - probabilistic-forecasting.md
+  - backtesting.md
+  - rolling-origin-validation.md
   - forecast-calibration.md
-  - business-cost-aware-forecasting-losses.md
+  - forecasting-pitfalls-and-worked-examples.md
+  - ../16-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -59,3 +60,12 @@ Model selection should consider absolute accuracy, relative accuracy, bias, tail
 - Ignoring overforecasting or underforecasting direction.
 - Comparing models across different backtest folds.
 - Evaluating forecasts before inverse-transforming them to original units.
+
+## Connections
+
+Forecast evaluation joins [backtesting](backtesting.md), [rolling-origin validation](rolling-origin-validation.md), [forecast error metrics](forecast-error-metrics.md), and [forecast calibration](forecast-calibration.md). It also overlaps with general [offline evaluation](../16-experimentation-and-evaluation/offline-evaluation.md) when comparing deployed model candidates.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Evaluating point forecast accuracy](https://otexts.com/fpp3/accuracy.html)
+- [Hyndman & Athanasopoulos, FPP3: Time series cross-validation](https://otexts.com/fpp3/tscv.html)

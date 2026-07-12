@@ -1,7 +1,7 @@
 ---
 title: Monitoring
 slug: ml-engineering-and-mlops/monitoring
-description: Concise guide to Monitoring in ML Engineering and MLOps.
+description: "Known production signals that detect service, data, and model health problems."
 area: ml-engineering-and-mlops
 topics:
   - monitoring
@@ -12,28 +12,51 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - observability.md
+  - data-drift.md
+  - concept-drift.md
+  - model-degradation.md
+  - service-level-objectives.md
   - ../05-time-series-and-forecasting/forecast-monitoring.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+# Monitoring
 
-## Summary
+Monitoring watches known signals and alerts when they violate a defined expectation. ML monitoring must cover service health, data health, model behavior, and delayed outcomes. A model API can be up while stale features or shifted populations make its decisions wrong.
 
-Monitoring watches production systems for known signals that indicate health, degradation, or risk. For ML, monitoring must include both service health and model-behavior health.
+## Mechanism
 
-## What to monitor
+Good monitors name the metric, owner, aggregation window, threshold, labels, and action. Infrastructure metrics include traffic, latency, error rate, saturation, and dependency failures. ML metrics add feature freshness, missingness, score distributions, prediction mix, [data drift](data-drift.md), [concept drift](concept-drift.md) proxies, and later [model degradation](model-degradation.md).
 
-System metrics include traffic, latency, error rate, saturation, queue depth, and dependency failures. Model metrics include input distributions, missing-feature rates, score distributions, prediction mix, calibration proxies, feedback delay, and business guardrails. The right set depends on the model’s decision and failure cost.
+## Artifact: Prometheus Alert
 
-## Example
+```yaml
+groups:
+  - name: fraud-model
+    rules:
+      - alert: FraudScorerHighFallbackRate
+        expr: |
+          sum(rate(fraud_predictions_total{fallback="true"}[10m]))
+          /
+          sum(rate(fraud_predictions_total[10m])) > 0.01
+        for: 15m
+        labels:
+          severity: page
+          service: fraud-scorer
+        annotations:
+          summary: "Fallback rate above 1% for fraud scorer"
+          runbook: "https://runbooks.example.com/fraud-scorer/fallback-rate"
+```
 
-A credit-risk model should monitor request volume, timeout rate, feature freshness, missing income fields, score distribution by channel, approval-rate changes, and later default outcomes when labels arrive. Alerts should distinguish a system outage from a population shift.
+The alert is useful because it points to a specific owner and runbook. A dashboard without an action path belongs more to [observability](observability.md) than paging. For forecasts, monitoring has extra temporal concerns such as horizon-specific error and freshness, covered in [forecast monitoring](../05-time-series-and-forecasting/forecast-monitoring.md).
 
-## Alert design
+## Failure Modes
 
-Good alerts are actionable, routed to an owner, and tied to runbooks. Thresholds should account for expected seasonality and low-traffic periods. Dashboards are useful for diagnosis, but alerts should be reserved for conditions that require timely action.
+Monitoring fails when thresholds are copied across models, labels are missing from metrics, or alerts fire on symptoms nobody can mitigate. It also fails when it excludes model version and feature version, making [production incident response](production-incident-response.md) reconstruct state from logs after the fact.
 
-## Failure modes
+## References
 
-Monitoring fails when it tracks only infrastructure, uses noisy thresholds, ignores delayed labels, or detects shifts with no path to response.
+- [Prometheus alerting rules](https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/)
+- [OpenTelemetry Signals](https://opentelemetry.io/docs/concepts/signals/)
+- [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)

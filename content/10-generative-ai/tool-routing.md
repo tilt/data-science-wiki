@@ -1,7 +1,7 @@
 ---
 title: Tool Routing
 slug: generative-ai/tool-routing
-description: Concise guide to Tool Routing in Generative AI and Agentic Systems.
+description: "Choosing whether to answer directly or call a specific tool."
 area: generative-ai
 topics:
   - tool-routing
@@ -12,25 +12,50 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - tool-use-and-function-calling.md
+  - tool-schemas.md
+  - agent-loops.md
+  - planning.md
+  - guardrails.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Tool Routing
 
-## Summary
+Tool routing decides whether a request should be answered directly, sent to retrieval, or handled by an external tool. In [agent loops](agent-loops.md), routing connects [planning](planning.md) to [tool use and function calling](tool-use-and-function-calling.md).
 
-Tool routing decides whether a model should answer directly or request a specific external tool. Correct routing combines model judgement with application policy.
+## Mechanism
 
-## Step-by-step example
+Routing can be rule-based, model-based, or hybrid. The route should include tool name, arguments, confidence, and required confirmation. [Tool schemas](tool-schemas.md) validate arguments, while [guardrails](guardrails.md) enforce permissions and side-effect policy.
 
-A travel assistant routes weather questions to a weather API, itinerary edits to a calendar tool, and payments to a confirmation workflow.
+## Executed artifact
 
-## Common failure modes
+```python
+queries = ["weather in Berlin", "refund order 52", "what is your return policy"]
+rules = [("weather", "get_weather"), ("refund", "create_refund"), ("return policy", "search_docs")]
+print("TOOL_ROUTING")
+for query in queries:
+    route = next(tool for keyword, tool in rules if keyword in query)
+    print(query, "->", route)
+```
 
-- Changing Tool Routing without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Tool Routing.
-- Shipping Tool Routing without rollback, monitoring, and examples for known hard cases.
+Observed output:
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+```text
+TOOL_ROUTING
+weather in Berlin -> get_weather
+refund order 52 -> create_refund
+what is your return policy -> search_docs
+```
+
+The deterministic router maps all three inputs to distinct tools: weather lookup, refund creation, and document search. That is the contract a model router must satisfy too: choose the route from the user's intent, then provide arguments that match the selected tool's schema.
+
+## Caveats
+
+Similar tool descriptions cause wrong calls. Never let a model route to tools the user is not authorized to use.
+
+## References
+
+- [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
+- [OpenAI API documentation: Function calling](https://platform.openai.com/docs/guides/function-calling)
+- [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)

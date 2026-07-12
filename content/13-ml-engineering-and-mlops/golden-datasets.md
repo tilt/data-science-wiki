@@ -1,7 +1,7 @@
 ---
 title: Golden Datasets
 slug: ml-engineering-and-mlops/golden-datasets
-description: Concise guide to Golden Datasets in ML Engineering and MLOps.
+description: "Small trusted evaluation sets used as regression and acceptance references."
 area: ml-engineering-and-mlops
 topics:
   - golden-datasets
@@ -12,29 +12,45 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - evaluation-datasets.md
+  - dataset-versioning.md
+  - ci-cd-for-ml.md
+  - human-in-the-loop-systems.md
+  - ../16-experimentation-and-evaluation/golden-datasets.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Golden Datasets
 
-## Summary
+Golden datasets are small, trusted, versioned examples that serve as acceptance references for model, prompt, retrieval, or pipeline changes. They complement larger [evaluation datasets](evaluation-datasets.md): a golden set is meant to be inspected and defended case by case.
 
-Golden datasets are trusted, versioned evaluation sets used as acceptance references for model, prompt, retrieval, or pipeline changes. They are small enough to inspect and important enough to protect.
+## Mechanism
 
-## Step-by-step example
+A golden dataset should include inputs, expected outputs or grading criteria, slice tags, risk labels, source, reviewer, and version. It belongs in [ci-cd-for-ml](ci-cd-for-ml.md) because regressions on known critical cases should block promotion even when aggregate metrics improve.
 
-A RAG golden set can include questions, expected sources, acceptable answers, risk labels, and known failure cases from incidents.
+## Artifact: Golden Record Schema
 
-## Common failure modes
+```yaml
+golden_case:
+  id: "fraud-gold-0142"
+  input_ref: "s3://golden/fraud/0142.json"
+  expected:
+    decision: manual_review
+    min_score: 0.82
+    required_reason_codes: [new_device, velocity]
+  tags: [new_account, card_not_present, prior_incident_pattern]
+  source: "2026-05 incident review"
+  reviewer: "risk-ops"
+  version: "golden-fraud:v4"
+```
 
-- Deploying Golden Datasets without reproducible lineage for data, code, artifacts, configuration, and evaluation.
-- Monitoring infrastructure health while missing data freshness, model behavior, or user-impact degradation.
-- Making Golden Datasets hard to roll back because schemas, state, or dependencies changed silently.
+The experimentation section has the canonical page on [golden datasets](../16-experimentation-and-evaluation/golden-datasets.md). This MLOps page emphasizes release blocking, ownership, and [dataset versioning](dataset-versioning.md).
 
-- Averaging away severe failures, minority slices, or uncertainty.
-- Treating a benchmark result as production readiness without reviewing examples.
+## Failure Modes
 
-## Design check
+Golden sets become brittle when expected outputs are overspecified for cases with legitimate ambiguity. They become useless when teams add only easy examples or silently edit expected labels after a model fails. Use [human-in-the-loop systems](human-in-the-loop-systems.md) to review contested cases and create a new version instead of mutating history.
 
-A golden dataset should be small enough to run often and stable enough to detect regressions, but it should not become the only benchmark. Keep examples with known expected behavior, hard edge cases, and previous incidents so future changes can prove they did not reintroduce old failures.
+## References
+
+- [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
+- [Great Expectations documentation](https://docs.greatexpectations.io/docs/core/introduction/try_gx/)

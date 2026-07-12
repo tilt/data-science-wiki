@@ -1,8 +1,7 @@
 ---
-title: Governance OF Model and Knowledge Base Changes
+title: Governance of Model and Knowledge Base Changes
 slug: responsible-ai-safety-and-governance/governance-of-model-and-knowledge-base-changes
-description: Concise guide to Governance OF Model and Knowledge Base Changes in
-  Responsible AI, Safety, and Governance.
+description: "Release controls for model, prompt, policy, and retrieval-corpus changes."
 area: responsible-ai-safety-and-governance
 topics:
   - governance-of-model-and-knowledge-base-changes
@@ -13,26 +12,62 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - auditability.md
+  - policy-enforcement.md
+  - compliance.md
+  - risk-classification.md
+  - adversarial-evaluation.md
+  - ../13-ml-engineering-and-mlops/model-versioning.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Governance of Model and Knowledge Base Changes
 
-Governance of model and knowledge-base changes controls how behavior changes enter production. It matters because a model update, prompt change, retrieval-index refresh, or policy edit can alter user outcomes even when application code is unchanged.
+Governance of model and knowledge base changes controls behavior changes that may bypass ordinary application-code review. A model swap, prompt edit, threshold move, retrieval-index refresh, tool schema change, or safety policy update can change user outcomes as much as a code deployment, so it needs the same level of evidence as [model versioning](../13-ml-engineering-and-mlops/model-versioning.md) and [auditability](auditability.md).
 
-## What changes need governance
+## Control mechanism
 
-Governed changes include model artifacts, thresholds, prompts, tools, retrieval corpora, embedding models, safety policies, fine-tuning data, evaluation sets, and fallback rules. Each change should have an owner, reason, test evidence, approval path, rollout plan, and rollback plan.
+Change classes should determine evidence depth:
 
-## Example
+```yaml
+change_id: ai_release_2026_07_11_004
+class: medium_risk_behavior_change
+artifact_changes:
+  model: support_llm_v4.1 -> support_llm_v4.2
+  retrieval_index: refund_policy_2026_06_01 -> refund_policy_2026_07_01
+  prompt_policy: safety_policy_v18 -> safety_policy_v19
+required_evidence:
+  - golden_dataset_regression
+  - adversarial_prompt_injection_suite
+  - hallucination_and_grounding_review
+  - privacy_and_pii_log_review
+approvals:
+  - product_owner
+  - risk_owner
+rollback:
+  restore_model: support_llm_v4.1
+  restore_index: refund_policy_2026_06_01
+  restore_policy: safety_policy_v18
+```
 
-A support assistant adds a new refund-policy document to its knowledge base. The change seems small, but it can alter answers about eligibility. A governed release records the source document, approval, index version, regression results on refund questions, and monitoring plan for escalations.
+The rollback plan must include non-code artifacts. Restoring the old application container does not restore the old embedding model, retrieved corpus, or [policy enforcement](policy-enforcement.md) rule if those live in separate control planes.
 
-## Practical workflow
+## Sourced artifact
 
-Use change classes: low-risk content refresh, medium-risk behavior change, high-risk policy or model change. Require stronger evidence as risk increases. Keep release notes tied to versioned artifacts so incidents can trace behavior back to the responsible change.
+NIST AI RMF separates mapping, measuring, and managing risks across the AI lifecycle. A release record can mirror that:
 
-## Failure modes
+| RMF function | Release evidence |
+| --- | --- |
+| Map | Intended use, affected users, data sources, deployment context |
+| Measure | [Adversarial evaluation](adversarial-evaluation.md), [factual correctness](factual-correctness.md), fairness, privacy, security tests |
+| Manage | Go/no-go decision, risk treatment, monitoring owner, rollback plan |
+| Govern | Approval policy, roles, versioned documentation, escalation path |
 
-Governance fails when teams update prompts or documents directly in production, when approvals do not include test evidence, or when rollback restores code but not the old index or policy.
+## Caveats
+
+Change governance fails when "content-only" updates are treated as harmless. A new benefits document can change eligibility answers; a new tool schema can expand agency; a prompt tweak can alter refusal behavior. Reclassify changes when the user population, jurisdiction, tool access, or decision impact changes.
+
+## References
+
+- [NIST AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
+- [NIST AI 600-1: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)

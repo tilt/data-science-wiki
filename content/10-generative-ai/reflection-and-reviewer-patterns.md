@@ -1,8 +1,7 @@
 ---
 title: Reflection and Reviewer Patterns
 slug: generative-ai/reflection-and-reviewer-patterns
-description: Concise guide to Reflection and Reviewer Patterns in Generative AI
-  and Agentic Systems.
+description: "A second pass that critiques, verifies, or revises model output before release."
 area: generative-ai
 topics:
   - reflection-and-reviewer-patterns
@@ -13,25 +12,37 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - agentic-systems.md
+  - multi-agent-systems.md
+  - llm-as-judge.md
+  - agent-evaluation.md
+  - hallucination-mitigation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Reflection and Reviewer Patterns
 
-## Summary
+Reflection and reviewer patterns add a critique step after a draft. The reviewer can be the same model, another model, deterministic validators, or a human. In [multi-agent systems](multi-agent-systems.md), this is the simplest useful role split.
 
-Reflection and reviewer patterns ask a model, another model, or a separate step to critique, verify, or improve an output. They help, but do not replace evidence or deterministic checks.
+## Mechanism
 
-## Step-by-step example
+The safe pattern gives the reviewer the draft, task, rubric, and evidence, then asks for structured defects rather than vague advice. [LLM-as-judge](llm-as-judge.md) can identify unsupported claims, while deterministic validators check schemas and citations. The [agentic systems](agentic-systems.md) loop decides whether to revise, escalate, or stop.
 
-For generated SQL, a reviewer prompt can inspect intent, but a stronger workflow also runs the query on test data and checks expected columns.
+## Concrete artifact
 
-## Common failure modes
+```json
+{
+  "defects": [{"type": "unsupported_claim", "claim": "shipping is two days", "source_id": "policy-9"}],
+  "action": "revise"
+}
+```
 
-- Changing Reflection and Reviewer Patterns without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Reflection and Reviewer Patterns.
-- Shipping Reflection and Reviewer Patterns without rollback, monitoring, and examples for known hard cases.
+## Caveats
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+Self-review can rubber-stamp confident errors. Reviewers need independent evidence, clear rubrics, and evaluation against known hard cases.
+
+## References
+
+- [Kim et al., 2023, Prometheus](https://arxiv.org/abs/2310.08491)
+- [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)
+- [Anthropic Claude docs: Reduce hallucinations](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)

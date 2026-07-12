@@ -1,8 +1,7 @@
 ---
-title: Evaluation OF Recommenders
+title: Evaluation of Recommenders
 slug: recommendation-systems/evaluation-of-recommenders
-description: Concise guide to Evaluation OF Recommenders in Recommendation
-  Systems and Personalization.
+description: "Ranking, coverage, and experimental checks for recommender quality."
 area: recommendation-systems
 topics:
   - evaluation-of-recommenders
@@ -11,27 +10,62 @@ status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - ranking.md
 related:
-  - index.md
+  - offline-versus-online-evaluation.md
+  - ranking.md
+  - diversity-novelty-coverage-serendipity.md
+  - feedback-loops.md
+  - ../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# Evaluation OF Recommenders
+# Evaluation of Recommenders
 
-## Summary
+Recommender evaluation asks whether ranked lists are useful, robust, and healthy for users and inventory. Accuracy metrics such as recall@k and NDCG are necessary, but they miss novelty, diversity, coverage, calibration, and long-term [feedback loops](feedback-loops.md).
 
-Recommender evaluation checks whether ranked lists are useful, fair to inventory, robust for user segments, and beneficial in production. Offline ranking scores are necessary but not sufficient.
+## Defining math
 
-## Step-by-step example
+For a top-$k$ list $L_k$ and relevant set $G_u$,
 
-Hold out recent interactions, generate recommendations from earlier data, and check whether held-out items appear near the top. Then inspect examples for new users, niche items, and popular-item bias.
+$$
+\operatorname{Precision@}k=\frac{\lvert L_k\cap G_u\rvert}{k},\qquad
+\operatorname{Recall@}k=\frac{\lvert L_k\cap G_u\rvert}{\lvert G_u\rvert}.
+$$
 
-## Common failure modes
+NDCG discounts hits by rank and normalizes by the ideal list. The same family appears in [ranking and retrieval metrics](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md).
 
-- Optimizing Evaluation OF Recommenders on historical interactions without correcting for exposure and position bias.
-- Treating missing interactions as negative feedback when they may mean the user never saw the item.
-- Improving average ranking metrics while harming cold-start users, long-tail items, diversity, or business guardrails.
+## Worked example
 
-- Optimizing a single offline metric while ignoring exposure, freshness, diversity, or cold start.
-- Failing to log enough context to reproduce why an item was recommended.
+```python
+import numpy as np
+from sklearn.metrics import ndcg_score
+y_true = np.array([[0,0,1,1,0]])
+y_score = np.array([[.9,.2,.8,.4,.1]])
+top3 = np.argsort(-y_score[0])[:3]
+hits = y_true[0, top3].sum()
+print("top3", top3.tolist())
+print("precision_at_3", round(float(hits / 3), 3))
+print("recall_at_3", round(float(hits / y_true.sum()), 3))
+print("ndcg_at_3", round(float(ndcg_score(y_true, y_score, k=3)), 3))
+```
+
+Observed output:
+
+```text
+top3 [0, 2, 3]
+precision_at_3 0.667
+recall_at_3 1.0
+ndcg_at_3 0.693
+```
+
+Both relevant items appear in the top three, but one irrelevant item ranks first, so NDCG penalizes the ordering. [Offline versus online evaluation](offline-versus-online-evaluation.md) decides whether this historical score predicts live behavior.
+
+## Caveats
+
+Random train-test splits leak future behavior; time-based splits are usually more realistic. Missing interactions are not guaranteed negatives. Report segment metrics, coverage, and list quality, not only a single average score.
+
+## References
+
+- [Herlocker et al., 2004, Evaluating Collaborative Filtering Recommender Systems](https://doi.org/10.1145/963770.963772)
+- [scikit-learn documentation: ndcg_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html)

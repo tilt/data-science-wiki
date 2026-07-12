@@ -1,7 +1,7 @@
 ---
 title: Autoregressive Models
 slug: time-series-and-forecasting/autoregressive-models
-description: Concise guide to Autoregressive Models in Time-Series Forecasting.
+description: Models that forecast a stationary series from its own lagged values.
 area: time-series-and-forecasting
 topics:
   - autoregressive-models
@@ -12,25 +12,35 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - autocorrelation-and-partial-autocorrelation.md
+  - arma.md
+  - arima.md
+  - feature-engineering-for-forecasting.md
+  - rnn-and-lstm-forecasting.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Autoregressive Models
 
-## Summary
+An autoregressive model predicts a value from earlier values of the same series. It is the simplest mathematical expression of temporal persistence: if the recent past is above its long-run mean, the near future is likely to remain above the mean, but the strength and decay of that persistence are learned from data.
 
-Autoregressive models predict the next value from previous values of the same series. They are simple baselines and building blocks for ARIMA, state-space, and neural forecasting models.
+An AR$(p)$ model has the form
 
-## Step-by-step example
+$$
+y_t = c + \phi_1 y_{t-1} + \phi_2 y_{t-2} + \cdots + \phi_p y_{t-p} + \varepsilon_t.
+$$
 
-A daily demand model might predict tomorrow from demand over the last seven days, with coefficients showing how much each lag contributes.
+The lag coefficients are not generic feature importances. They define the dynamics of the process. In an AR(1), $|\phi_1| < 1$ gives mean reversion: shocks decay geometrically instead of persisting forever. Positive coefficients create smooth persistence; negative coefficients create alternating overshoot. Higher-order AR models can represent damped oscillations and dependence at multiple short lags, but they also become easier to overfit.
 
-## Common failure modes
+The model assumes the target process is stationary or has already been transformed into one. That is why AR models sit close to [stationarity](stationarity.md) and [ARMA](arma.md). In an [ARIMA](arima.md) model, the AR component is applied after differencing. In a machine-learning forecaster, the same idea appears as lag [feature engineering for forecasting](feature-engineering-for-forecasting.md), except the regression model may be nonlinear and may pool many related series.
 
-- Evaluating Autoregressive Models with random splits that leak future information into training.
-- Reporting one average error while hiding horizon, season, segment, or peak-period failures.
-- Ignoring calendar effects, data revisions, missing timestamps, or operational constraints on when forecasts are available.
+AR order is often screened with the PACF: a pure AR process tends to show a partial-autocorrelation cutoff after the true order, while the ACF decays. Real data rarely follows the textbook pattern exactly, so order choice should be checked by residual autocorrelation and [rolling-origin validation](rolling-origin-validation.md). Strong one-step fit is not enough, because recursive multi-step AR forecasts feed on their own previous predictions.
 
-- Ignoring horizon-specific error, calendar effects, missing periods, or regime changes.
-- Reporting point accuracy without checking uncertainty, slices, and operational cost.
+## Connections
+
+Autoregression is the AR component of [ARMA](arma.md), [ARIMA](arima.md), and [SARIMA](sarima.md). It also explains why lag features matter in [machine-learning forecasting](machine-learning-forecasting.md) and why sequence models such as [RNN and LSTM forecasting](rnn-and-lstm-forecasting.md) can be viewed as learned nonlinear autoregressions.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Autoregressive models](https://otexts.com/fpp3/arima.html)
+- [statsmodels AutoReg API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.ar_model.AutoReg.html)

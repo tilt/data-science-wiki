@@ -1,7 +1,7 @@
 ---
 title: Conditional Probability
 slug: probability-and-statistics/conditional-probability
-description: Concise guide to Conditional Probability in Probability and Statistics.
+description: "Probability after restricting attention to cases where the conditioning event occurred."
 area: probability-and-statistics
 topics:
   - conditional-probability
@@ -12,38 +12,55 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - probability-spaces.md
+  - bayes-theorem.md
+  - common-distributions.md
+  - hypothesis-testing.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Conditional Probability
 
-Conditional probability measures the probability of an event given that another event is known. It is the basis for Bayes' rule, probabilistic inference, calibration, and many diagnostic calculations.
-
-## Definition
-
-For events $A$ and $B$ with $P(B)>0$:
+Conditional probability changes the reference population. For events $A$ and $B$ in a [probability space](probability-spaces.md), with $P(B)>0$,
 
 $$
-P(A \mid B)=\frac{P(A \cap B)}{P(B)}.
+P(A\mid B)=\frac{P(A\cap B)}{P(B)}.
 $$
 
-This changes the reference population from all cases to only the cases where $B$ occurred.
+This definition is the algebraic base for [Bayes' theorem](bayes-theorem.md), diagnostic tests, classifier calibration, and likelihood calculations in [hypothesis testing](hypothesis-testing.md).
 
-## Step-by-step example
+## Intuition
 
-If 2 percent of emails are phishing and a detector flags 90 percent of phishing emails but also flags 5 percent of safe emails, the probability that a flagged email is phishing is not 90 percent. It depends on the base rate:
+Conditioning discards outcomes outside $B$ and renormalizes the remaining mass to one. The event $A$ is then evaluated only inside that narrowed sample space. This is why $P(A\mid B)$ and $P(B\mid A)$ can be very different.
 
-$$
-P(\text{phishing}\mid\text{flag}) = \frac{0.90 \cdot 0.02}{0.90\cdot0.02 + 0.05\cdot0.98} \approx 0.27.
-$$
+## Worked computation
 
-Most flagged emails may still be safe because phishing is rare.
+```python
+import numpy as np
 
-## Practical use
+rng = np.random.default_rng(20260711)
+N = 500000
+disease = rng.random(N) < 0.01
+positive = np.where(disease, rng.random(N) < 0.99, rng.random(N) < 0.05)
+exact = (0.99 * 0.01) / (0.99 * 0.01 + 0.05 * 0.99)
+print("sim_P(disease|positive)", round(disease[positive].mean(), 4))
+print("exact", round(exact, 4), "positive_rate", round(positive.mean(), 4))
+```
 
-Conditional probability helps avoid base-rate errors, reason about classifier outputs, and interpret risk scores. It also clarifies the difference between $P(A \mid B)$ and $P(B \mid A)$.
+Observed output:
 
-## Failure modes
+```text
+sim_P(disease|positive) 0.1649
+exact 0.1667 positive_rate 0.0601
+```
 
-Common mistakes include reversing conditionals, ignoring base rates, and assuming independence without evidence.
+Even with 99 percent sensitivity, most positives are false positives because the disease is rare and the false-positive term is applied to a much larger group.
+
+## Caveats
+
+Conditioning on a post-treatment event, selected sample, or model flag can introduce selection bias. Independence is a special claim: $P(A\mid B)=P(A)$, not the default.
+
+## References
+
+- [ProbabilityCourse: Conditional Probability](https://www.probabilitycourse.com/chapter1/1_4_0_conditional_probability.php)
+- [OpenStax Introductory Statistics 2e, Chapter 3 introduction](https://openstax.org/books/introductory-statistics-2e/pages/3-introduction)

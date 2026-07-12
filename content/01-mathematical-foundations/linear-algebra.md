@@ -1,7 +1,7 @@
 ---
 title: Linear Algebra
 slug: mathematical-foundations/linear-algebra
-description: Concise guide to Linear Algebra in Mathematical Foundations.
+description: "The language of vectors, matrices, subspaces, projections, and linear transformations."
 area: mathematical-foundations
 topics:
   - linear-algebra
@@ -10,34 +10,63 @@ status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - vectors-and-matrices.md
 related:
-  - index.md
+  - vectors-and-matrices.md
+  - matrix-multiplication.md
+  - rank.md
+  - singular-value-decomposition.md
+  - ../03-classical-machine-learning/linear-models.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Linear Algebra
 
-Linear algebra studies vectors, matrices, linear transformations, and geometric structure. It is the notation and computation layer behind embeddings, neural networks, regression, PCA, recommender systems, and optimization.
+Linear algebra studies vector spaces and linear maps between them. In data science, it is the shared language for feature matrices, least-squares projections, embeddings, covariance geometry, neural layers, [PCA](../03-classical-machine-learning/pca.md), and recommendation factors.
 
-## Core intuition
+## Defining math
 
-A vector represents a point, direction, feature row, parameter set, or embedding. A matrix represents a table of data or a linear transformation that maps vectors to new vectors. Matrix multiplication composes transformations and aggregates weighted sums.
-
-## Example
-
-A linear model predicts
+A linear map $T$ satisfies
 
 $$
-\hat{y}=x^T w.
+T(\alpha x+\beta y)=\alpha T(x)+\beta T(y).
 $$
 
-The feature vector $x$ and weight vector $w$ are combined by a dot product. Each feature contributes according to its weight, and the sum becomes the prediction.
+After choosing bases, every finite-dimensional linear map is represented by a matrix $A$, and applying it is [matrix multiplication](matrix-multiplication.md):
 
-## Why it matters in ML
+$$
+y=Ax.
+$$
 
-Datasets are matrices, model parameters are tensors, embeddings live in vector spaces, and gradients are vectors. Understanding norms, rank, orthogonality, decompositions, and projections makes many algorithms easier to reason about.
+The fundamental questions are geometric: what directions are stretched, which directions collapse to zero, what subspace is reachable, and how far a vector is from a subspace. These questions become [rank](rank.md), [orthogonality](orthogonality.md), projections, [eigenvalues](eigenvalues-and-eigenvectors.md), and the [singular value decomposition](singular-value-decomposition.md).
+
+## Executed demo
+
+```python
+import numpy as np
+
+A = np.array([[1., 2.], [3., 4.], [5., 6.]])
+x = np.array([0.5, -1.])
+print("A_shape", A.shape)
+print("A_x", A @ x)
+print("column_rank", np.linalg.matrix_rank(A))
+```
+
+Observed output:
+
+```text
+A_shape (3, 2)
+A_x [-1.5 -2.5 -3.5]
+column_rank 2
+```
+
+The matrix maps a two-coordinate input into three coordinates, and its two columns are independent. That is why it can represent a two-dimensional plane inside $\mathbb R^3$, a useful picture for [linear models](../03-classical-machine-learning/linear-models.md) and projections.
 
 ## Caveats
 
-Linear algebra mistakes often come from shape mismatches, confusing rows and columns, ignoring scaling, or treating geometric similarity as semantic truth without validation.
+Linear algebra gives exact identities over exact numbers, while machine computation uses floating point. Nearly dependent columns can make a matrix look full-rank algebraically but unstable numerically; check singular values or conditioning when estimates are sensitive.
+
+## References
+
+- [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
+- [NumPy documentation: `numpy.linalg.matrix_rank`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.matrix_rank.html)

@@ -1,8 +1,7 @@
 ---
 title: Language Model Architecture
 slug: generative-ai/language-model-architecture
-description: Concise guide to Language Model Architecture in Generative AI and
-  Agentic Systems.
+description: "Decoder-style transformer machinery behind next-token generation."
 area: generative-ai
 topics:
   - language-model-architecture
@@ -13,40 +12,61 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - ../06-deep-learning/attention.md
+  - tokenization.md
+  - sampling-and-decoding.md
+  - pretraining.md
+  - context-construction.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Language Model Architecture
 
-## Summary
+A modern language model usually tokenizes text, embeds tokens and positions, applies stacks of masked self-attention and feed-forward blocks, then projects hidden states to vocabulary logits for [sampling and decoding](sampling-and-decoding.md). The core mechanism is the transformer [attention](../06-deep-learning/attention.md) block.
 
-Language model architecture describes how text is represented, transformed, and predicted inside a model. Modern generative models are commonly transformer-based, with token embeddings, attention, feed-forward layers, normalization, and an output head.
+## Defining math
 
-## Mechanism
-
-For a decoder-only language model, tokens become embeddings, transformer blocks update hidden states, and the output head produces next-token logits:
+Causal self-attention uses
 
 $$
-h_0 = E[t] + p,
+\operatorname{softmax}\left(\frac{QK^\top+M}{\sqrt{d_k}}\right)V,
 $$
 
-$$
-h_\ell = \operatorname{Block}_\ell(h_{\ell-1}),
-$$
+where mask $M$ sets future positions to $-\infty$. [Pretraining](pretraining.md) then optimizes next-token likelihood over [tokenization](tokenization.md) outputs.
 
-$$
-P(t_{n+1}\mid t_{\le n})=\operatorname{softmax}(W_o h_L).
-$$
+## Executed artifact
 
-The causal attention mask prevents a token from attending to future tokens during training and generation. Architecture choices such as context length, positional encoding, normalization placement, feed-forward size, and attention variant affect memory, latency, and failure modes.
+```python
+import numpy as np
 
-## Step-by-step example
+scores = np.array([
+    [2.0, 1.0, 0.0],
+    [2.0, 1.0, 0.0],
+    [2.0, 1.0, 0.0],
+])
+mask = np.triu(np.ones((3, 3), dtype=bool), 1)
+masked = np.where(mask, -np.inf, scores)
+exp_scores = np.exp(masked - np.nanmax(masked, axis=1, keepdims=True))
+exp_scores = np.where(mask, 0, exp_scores)
+weights = exp_scores / exp_scores.sum(axis=1, keepdims=True)
+print("MASKED_ATTENTION")
+print(np.round(weights, 3).tolist())
+```
 
-For "Paris is the capital of", tokens become vectors, attention mixes prior context, later layers transform the representation, and the output head gives high probability to likely continuations.
+Observed output:
 
-## Common failure modes
+```text
+MASKED_ATTENTION
+[[1.0, 0.0, 0.0], [0.731, 0.269, 0.0], [0.665, 0.245, 0.09]]
+```
 
-- Assuming architecture alone determines capability while ignoring training data, objective, and inference constraints.
-- Extending context without testing retrieval placement, attention behavior, and long-context regressions.
-- Comparing models without normalizing for parameter count, token budget, tool access, and evaluation set.
+The first token can attend only to itself; later tokens can attend backward. Without this mask, next-token training would leak future labels.
+
+## Caveats
+
+Long contexts increase attention memory and retrieval confusion. Architecture alone does not define product behavior; prompts, tools, safety layers, and context do.
+
+## References
+
+- [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+- [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)

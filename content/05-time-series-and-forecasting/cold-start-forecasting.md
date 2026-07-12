@@ -16,9 +16,12 @@ aliases:
 prerequisites:
   - forecasting-data-and-covariates.md
 related:
+  - forecasting-data-and-covariates.md
   - machine-learning-forecasting.md
-  - forecast-ensembling.md
   - intermittent-demand.md
+  - demand-forecasting.md
+  - forecast-ensembling.md
+  - ../18-domain-applications/demand-prediction-in-logistics.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -77,3 +80,12 @@ Cold-start entities should be evaluated as a separate population. A global avera
 - Letting unseen categories map silently to arbitrary encodings.
 - Using per-series model selection when a series has too few validation points.
 - Hiding fallback usage in logs instead of surfacing it as a metric.
+
+## Connections
+
+Cold starts tie [forecasting data and covariates](forecasting-data-and-covariates.md) to production fallback rules. [Machine learning forecasting](machine-learning-forecasting.md) can borrow strength from related series, while [intermittent demand](intermittent-demand.md) and [demand forecasting](demand-forecasting.md) define common operational cases.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: New product forecasting](https://otexts.com/fpp3/new-products.html)
+- [Hyndman & Athanasopoulos, FPP3: Forecasting by analogy](https://otexts.com/fpp3/analogies.html)

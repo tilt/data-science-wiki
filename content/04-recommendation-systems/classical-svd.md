@@ -1,39 +1,73 @@
 ---
 title: Classical SVD
 slug: recommendation-systems/classical-svd
-description: Concise guide to Classical SVD in Recommendation Systems and Personalization.
+description: "The exact dense-matrix decomposition behind low-rank recommender intuition."
 area: recommendation-systems
 topics:
   - classical-svd
+  - singular-value-decomposition
 level: foundational
 status: review
 page_type: algorithm
 aliases: []
 prerequisites:
-  - index.md
+  - ../01-mathematical-foundations/singular-value-decomposition.md
 related:
-  - index.md
+  - truncated-svd.md
+  - svd-versus-matrix-factorization.md
+  - sparse-utility-matrices-and-svd.md
+  - matrix-factorization.md
+  - ../01-mathematical-foundations/low-rank-approximation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Classical SVD
 
-Classical SVD factorizes a fully observed matrix into singular vectors and singular values. In recommendation systems it is an important foundation, but it does not directly solve sparse user-item recommendation without adaptation.
+Classical singular value decomposition factorizes a complete numeric matrix. In recommender systems it supplies the low-rank vocabulary used by [matrix factorization](matrix-factorization.md), but it is not by itself a correct treatment of missing ratings.
 
-## Core idea
+## Defining math
 
-The singular value decomposition is
+For a dense matrix $A\in\mathbb R^{m\times n}$,
 
 $$
-R = U \Sigma V^T.
+A=U\Sigma V^\top,
 $$
 
-For a dense rating matrix $R$, the top singular components give a low-rank approximation. Users and items can be represented in a shared latent space derived from the matrix.
+where columns of $U$ and $V$ are orthonormal and $\Sigma$ contains nonnegative singular values. The rank-$k$ approximation keeps the largest $k$ singular values:
 
-## Why recommendation is harder
+$$
+A_k=U_k\Sigma_kV_k^\top.
+$$
 
-Real user-item matrices are sparse: most users interact with only a tiny fraction of items. Filling missing entries with zeros changes the meaning of the data because "unknown" is not the same as "disliked". This is why recommender systems often use matrix factorization objectives defined only over observed or weighted interactions.
+This connects to [low-rank approximation](../01-mathematical-foundations/low-rank-approximation.md). The recommender-specific problem is that [utility matrices](utility-and-interaction-matrices.md) are usually sparse and missing entries mean unknown exposure, not zero dislike.
 
-## Example
+## Worked example
 
-If a small dense movie-rating matrix is available, SVD can reveal latent taste directions. In production, the same intuition is usually implemented through explicit-feedback or implicit-feedback factorization rather than direct SVD on a filled matrix.
+```python
+import numpy as np
+A = np.array([[5., 4., 1.], [4., 4., 1.], [1., 1., 5.], [1., 0., 4.]])
+U, s, Vt = np.linalg.svd(A, full_matrices=False)
+A2 = (U[:, :2] * s[:2]) @ Vt[:2]
+print("singular_values", np.round(s, 3).tolist())
+print("rank2_error", round(float(np.linalg.norm(A - A2)), 3))
+print("rank2_row0", np.round(A2[0], 2).tolist())
+```
+
+Observed output:
+
+```text
+singular_values [9.304, 5.647, 0.739]
+rank2_error 0.739
+rank2_row0 [4.78, 4.24, 1.02]
+```
+
+The top two components almost reconstruct the dense matrix. [Truncated SVD](truncated-svd.md) computes this approximation directly when only the leading components are needed.
+
+## Caveats
+
+Do not turn sparse recommender data into a dense matrix by filling unknown cells with zeros unless that is the deliberate data-generating assumption. [SVD versus matrix factorization](svd-versus-matrix-factorization.md) is mainly about this distinction: SVD decomposes a given matrix, while recommender factorization learns from observed or weighted interactions.
+
+## References
+
+- [scikit-learn documentation: TruncatedSVD](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html)
+- [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)

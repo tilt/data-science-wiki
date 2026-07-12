@@ -1,7 +1,7 @@
 ---
 title: Code Review
 slug: software-engineering/code-review
-description: Concise guide to Code Review in Software Engineering.
+description: Human review of correctness, maintainability, and operational risk before merge.
 area: software-engineering
 topics:
   - code-review
@@ -10,32 +10,58 @@ status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - testing.md
 related:
-  - index.md
+  - "testing.md"
+  - "refactoring.md"
+  - "documentation.md"
+  - "requirements-engineering.md"
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Code Review
 
-Code review is a quality gate for correctness, maintainability, security, and shared understanding. In data and ML systems, review must cover not only code style but also data assumptions, evaluation logic, reproducibility, and operational failure modes.
+Code review is a change-control mechanism for catching defects that automated checks do not understand yet. In data and ML systems, that includes feature semantics, leakage risk, metric definitions, rollout behavior, and operational ownership. A reviewer should read the intent first, then inspect contracts, tests, data assumptions, and failure handling before style details.
 
-## What reviewers check
+## Review Contract
 
-A useful review asks whether the change is necessary, understandable, tested, observable, and reversible. For model-facing code, reviewers should also inspect feature definitions, leakage risk, metric definitions, dataset splits, prompt or retrieval changes, and migration behavior.
+A useful review separates blockers from preferences. Block on wrong behavior, missing tests for risky paths, broken [API design](api-design.md), security or privacy regressions, migrations without rollback, and undocumented changes to user-visible behavior. Prefer comments such as "this changes the time window from rolling 24 hours to UTC calendar day; please update the feature contract and backtest by region" over vague comments such as "seems risky."
 
-A practical review checklist:
+## Executed Artifact
 
-- read the problem statement before the diff;
-- check changed interfaces and invariants first;
-- inspect tests and failure paths before formatting details;
-- verify that data contracts and metrics were updated when behavior changed;
-- ask for smaller changes when unrelated refactors obscure the risk.
+This snippet reproduces a semantic review issue: a feature changed from rolling 24 hours to UTC calendar day.
 
-## Example
+```python
+from datetime import datetime, timezone, timedelta
 
-A pull request changes a fraud model feature from transaction count in the last 24 hours to count in the last calendar day. The code may pass unit tests, but review should catch the semantic change: calendar-day features behave differently by timezone and reset at midnight. The reviewer should ask for a feature contract update and a backtest showing impact by region.
+now = datetime(2026, 7, 11, 12, 0, tzinfo=timezone.utc)
+events = [
+    datetime(2026, 7, 10, 13, 0, tzinfo=timezone.utc),
+    datetime(2026, 7, 10, 23, 30, tzinfo=timezone.utc),
+    datetime(2026, 7, 11, 8, 0, tzinfo=timezone.utc),
+]
+last_24h = [e for e in events if now - e <= timedelta(hours=24)]
+calendar_day = [e for e in events if e.date() == now.date()]
+print("last_24h_count", len(last_24h))
+print("utc_calendar_day_count", len(calendar_day))
+print("semantic_change", len(last_24h) != len(calendar_day))
+```
 
-## Failure modes
+Observed output:
 
-Reviews become weak when they focus only on syntax, approve changes without running or reading tests, or rely on one expert as a bottleneck. Good teams keep review comments specific, separate blocking issues from preferences, and capture repeated lessons in linters, tests, or design notes.
+```text
+last_24h_count 3
+utc_calendar_day_count 1
+semantic_change True
+```
+
+The diff might look like a harmless SQL cleanup, but the product behavior changed. Review should ask for an updated [documentation](documentation.md) contract, a [testing](testing.md) fixture for the boundary condition, and a separate [refactoring](refactoring.md) commit if cleanup is mixed with behavior change.
+
+## Failure Modes
+
+Reviews fail when one expert becomes the only quality gate, when comments are mostly taste, or when large pull requests hide the important change. Repeated review comments should migrate into linters, tests, templates, or [requirements engineering](requirements-engineering.md) checklists so humans spend attention on new risks.
+
+## References
+
+- [Google Engineering Practices: How to do a code review](https://google.github.io/eng-practices/review/reviewer/)
+- [pytest documentation: assertions](https://docs.pytest.org/en/stable/how-to/assert.html)

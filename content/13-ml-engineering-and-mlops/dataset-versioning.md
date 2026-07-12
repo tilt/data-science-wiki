@@ -1,7 +1,7 @@
 ---
 title: Dataset Versioning
 slug: ml-engineering-and-mlops/dataset-versioning
-description: Concise guide to Dataset Versioning in ML Engineering and MLOps.
+description: "Recording exact data snapshots, labels, and splits used for training and evaluation."
 area: ml-engineering-and-mlops
 topics:
   - dataset-versioning
@@ -12,26 +12,52 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - model-versioning.md
+  - training-pipelines.md
+  - experiment-tracking.md
+  - evaluation-datasets.md
+  - ../12-data-engineering/data-lineage.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Dataset Versioning
 
-Dataset versioning records exactly which data was used for training, evaluation, backfills, and audits. Without it, model results become hard to reproduce and regressions become hard to explain.
+Dataset versioning records the exact data snapshot, labels, filters, schema, and split policy used for training or evaluation. Without it, [experiment tracking](experiment-tracking.md) can tell which run won but not what evidence it used.
 
-## What to version
+## Mechanism
 
-A useful dataset version includes the data source, extraction time, query or transformation code, schema, filters, label definitions, sampling rules, and storage location. For mutable production data, versioning must identify the snapshot, not only the table name.
+A dataset version should be immutable and addressable. It should identify source tables or files, extraction time, transformation code, label definition, exclusions, schema, checksums, and train/validation/test split seed. For mutable warehouses, table name is not a version; the snapshot or query result is.
 
-## Example
+## Artifact: Dataset Manifest
 
-A churn model trained on `customers` and `events` should record the table snapshots, feature pipeline version, label window, exclusion rules, and train-validation split seed. If the model is challenged later, the team can reconstruct both the inputs and the target definition.
+```yaml
+dataset:
+  name: churn_training
+  version: "2026-07-11.v3"
+  sources:
+    - table: warehouse.customers
+      snapshot: "2026-07-10T23:59:00Z"
+    - table: warehouse.events
+      snapshot: "2026-07-10T23:59:00Z"
+  label:
+    definition: "cancelled subscription within 30 days"
+    positive_window_days: 30
+  split:
+    method: deterministic_hash
+    key: customer_id
+    seed: 20260711
+  checks:
+    row_count: 1832741
+    schema_hash: "sha256:6b7f..."
+```
 
-## Practical checks
+[Training pipelines](training-pipelines.md) should emit this manifest and [model-versioning](model-versioning.md) should point to it. The related data-engineering page on [data lineage](../12-data-engineering/data-lineage.md) covers the upstream graph; this page fixes the ML snapshot contract.
 
-Store dataset metadata next to model artifacts, make splits deterministic, validate schema changes before training, and keep evaluation datasets immutable unless a new version is deliberately created. When labels are corrected, create a new dataset version rather than silently mutating history.
+## Failure Modes
 
-## Failure modes
+Common failures are training from live tables, overwriting labels, changing exclusion rules without a new version, and mixing active-learning labels into old benchmarks. Version the split as well as the raw data.
 
-Common failures are training from live tables, overwriting evaluation files, treating a notebook as the only record of filters, and mixing corrected labels into old benchmark claims.
+## References
+
+- [DVC: Versioning Data and Models](https://dvc.org/doc/use-cases/versioning-data-and-models)
+- [MLflow Tracking documentation](https://mlflow.org/docs/latest/ml/tracking/)

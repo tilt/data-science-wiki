@@ -1,43 +1,81 @@
 ---
 title: Convex Optimization
 slug: mathematical-foundations/convex-optimization
-description: Concise guide to Convex Optimization in Mathematical Foundations.
+description: "Optimization problems where convexity turns local optimality into global optimality."
 area: mathematical-foundations
 topics:
-  - convex-optimization
+  - optimization
+  - convexity
 level: intermediate
 status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - optimization.md
 related:
-  - index.md
+  - optimization.md
+  - constrained-optimization.md
+  - gradient-descent.md
+  - jacobians-and-hessians.md
+  - ../03-classical-machine-learning/logistic-regression.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Convex Optimization
 
-Convex optimization studies problems where every local optimum is also globally optimal. This property makes optimization more reliable and gives strong guarantees for many classical ML methods.
+Convex optimization studies problems where the feasible set and objective have no hidden local traps. This is why least squares, regularized linear models, and [logistic regression](../03-classical-machine-learning/logistic-regression.md) are easier to reason about than general neural-network training.
 
-## Core idea
+## Defining math
 
-A function is convex when the line segment between any two points on its graph lies above the function. Formally,
+A set $C$ is convex if
 
 $$
-f(\theta x + (1-\theta)y) \le \theta f(x) + (1-\theta)f(y)
+\theta x+(1-\theta)y\in C\quad\text{for all }x,y\in C,\;\theta\in[0,1].
 $$
 
-for $0 \le \theta \le 1$. A convex optimization problem minimizes a convex objective over a convex feasible set.
+A function $f$ is convex if
 
-## ML examples
+$$
+f(\theta x+(1-\theta)y)\le \theta f(x)+(1-\theta)f(y).
+$$
 
-Linear regression with squared error is convex in the weights. Logistic regression with standard regularization is also convex. Training a deep neural network is usually non-convex, so optimization can depend more heavily on initialization, architecture, and training dynamics.
+The problem
 
-## Step-by-step intuition
+$$
+\min_{x\in C} f(x)
+$$
 
-Imagine a bowl-shaped loss surface. Gradient descent can move downhill without getting trapped in a bad local valley because no such valley exists. It may still be slow if the bowl is narrow or badly scaled, but the target is well-defined.
+is convex when both conditions hold. For differentiable $f$, $f(y)\ge f(x)+\nabla f(x)^\top(y-x)$ gives the supporting-hyperplane view. For twice-differentiable $f$, $\nabla^2 f(x)\succeq 0$ connects convexity to [Jacobians and Hessians](jacobians-and-hessians.md).
+
+## Executed demo
+
+```python
+import numpy as np
+
+xs = np.array([-2., 1., 4.])
+w = np.array([0.2, 0.5, 0.3])
+lhs = (w @ xs)**2
+rhs = w @ (xs**2)
+print("f(weighted_mean)", round(lhs, 4))
+print("weighted_f_mean", round(rhs, 4))
+print("gap", round(rhs-lhs, 4))
+```
+
+Observed output:
+
+```text
+f(weighted_mean) 1.69
+weighted_f_mean 6.1
+gap 4.41
+```
+
+For $f(x)=x^2$, Jensen's inequality holds with a positive gap: evaluating after averaging is below averaging the evaluations.
 
 ## Caveats
 
-Convexity can be lost by changing the parameterization, adding non-convex constraints, or optimizing a surrogate that differs from the real business objective. Always check what variable the problem is convex in.
+Convexity is a property of the chosen variables and formulation. Reparameterizing can destroy it, constraints can make the feasible set nonconvex, and stochastic training noise can still slow [gradient descent](gradient-descent.md) even when the objective is convex.
+
+## References
+
+- [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
+- [Stanford EE364a: Convex Optimization I](https://web.stanford.edu/class/ee364a/)

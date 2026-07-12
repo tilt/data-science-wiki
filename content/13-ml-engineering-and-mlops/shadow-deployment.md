@@ -1,7 +1,7 @@
 ---
 title: Shadow Deployment
 slug: ml-engineering-and-mlops/shadow-deployment
-description: Concise guide to Shadow Deployment in ML Engineering and MLOps.
+description: "Running a candidate model on copied live traffic without exposing its output."
 area: ml-engineering-and-mlops
 topics:
   - shadow-deployment
@@ -12,26 +12,47 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - model-serving.md
+  - canary-deployment.md
+  - monitoring.md
+  - observability.md
+  - rollbacks.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Shadow Deployment
 
-A shadow deployment runs a new model or service version on production traffic without exposing its output to users. It tests integration and behavior under real load before user-visible rollout.
+A shadow deployment sends production requests to the current service and copies the same requests to a candidate model whose response is logged but not shown to users. It tests [model-serving](model-serving.md) integration, latency, resource use, and output distributions before a [canary deployment](canary-deployment.md) exposes users.
 
-## Core idea
+## Mechanism
 
-Requests go to the current production path and are copied to the shadow path. The system records shadow outputs, latency, errors, and resource usage, but the production response still comes from the stable version. This reveals compatibility problems that offline tests miss.
+The stable path remains authoritative. The shadow path must be side-effect free: no emails, charges, database writes, recommendation impressions, or policy actions. Every copied request should carry the same correlation ID so [observability](observability.md) can compare stable and shadow behavior.
 
-## Example
+## Artifact: Shadow Routing Policy
 
-Before replacing a search reranker, route live queries to both old and new rerankers. Users see the old ranking. Engineers compare latency, timeout rate, score distributions, and offline relevance judgments from logged shadow outputs. If the shadow path crashes on long queries, the issue is caught before exposure.
+```yaml
+endpoint: fraud-score-prod
+production_variant:
+  name: stable-v41
+  initial_weight: 1.0
+shadow_variants:
+  - name: candidate-v42
+    sampling_percentage: 20
+    capture:
+      fields: [request_id, model_version, score, latency_ms, error]
+      destination: s3://ml-observability/fraud-shadow/2026-07-11/
+side_effect_policy:
+  allow_writes: false
+  allow_external_calls: false
+```
+
+The useful comparison is not only "did it crash?" but "where do scores differ and why?" Pair shadow logs with [monitoring](monitoring.md) dashboards for latency, timeout rate, output quantiles, and missing-feature errors.
 
 ## Limits
 
-Shadow deployments cannot measure user reaction because users never see the shadow output. They also require care around side effects: a shadow path must not send emails, charge cards, update records, or trigger external actions.
+Shadowing cannot estimate user reaction because users never see the candidate output. It also cannot detect policies triggered only after exposure, such as feedback loops in recommenders. When shadow results look safe, the next step is a limited canary with explicit [rollbacks](rollbacks.md).
 
-## Failure modes
+## References
 
-Common failures are copying only easy traffic, forgetting to disable side effects, under-provisioning the shadow path, and treating shadow success as proof of product impact.
+- [Amazon SageMaker: Testing models with shadow variants](https://docs.aws.amazon.com/sagemaker/latest/dg/model-shadow-deployment.html)
+- [OpenTelemetry Signals](https://opentelemetry.io/docs/concepts/signals/)

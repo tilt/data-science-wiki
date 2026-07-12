@@ -25,7 +25,7 @@ prerequisites:
   - "03-classical-machine-learning/index.md"
   - "13-ml-engineering-and-mlops/index.md"
 related:
-  - "21-project-and-experience-map/index.md"
+  - "20-interview-preparation/index.md"
 historical_context: false
 last_reviewed: 2026-07-10
 ---

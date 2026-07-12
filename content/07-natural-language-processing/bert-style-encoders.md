@@ -1,7 +1,7 @@
 ---
-title: Bert Style Encoders
+title: BERT-Style Encoders
 slug: natural-language-processing/bert-style-encoders
-description: Concise guide to Bert Style Encoders in Natural Language Processing.
+description: "Bidirectional transformer encoders trained to produce contextual token and sentence representations."
 area: natural-language-processing
 topics:
   - bert-style-encoders
@@ -12,29 +12,65 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - embeddings.md
+  - tokenization.md
+  - decoder-only-transformers.md
+  - sequence-labelling.md
+  - semantic-textual-similarity.md
+  - ../06-deep-learning/transformers.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# Bert Style Encoders
+# BERT-Style Encoders
 
-## Summary
+BERT-style encoders read an entire token sequence bidirectionally and produce contextual representations for tokens or pooled text. They are strong for [sequence labelling](sequence-labelling.md), [semantic textual similarity](semantic-textual-similarity.md), classification, reranking, and feature extraction. Unlike [decoder-only transformers](decoder-only-transformers.md), they are not trained to generate left-to-right completions.
 
-BERT-style encoders produce contextual representations for text by reading tokens bidirectionally. They are strong for classification, retrieval features, tagging, and sentence-pair tasks.
+## Defining mechanism
 
-## Step-by-step example
+Encoder self-attention has no causal future mask:
 
-For sentiment classification, a BERT encoder reads the whole review and produces a contextual vector that a classifier maps to positive or negative sentiment.
+$$
+H^{(\ell+1)}=\operatorname{TransformerEncoderLayer}(H^{(\ell)}),
+$$
 
-## Common failure modes
+so token $i$ can attend to tokens on both sides. BERT-style pretraining commonly uses masked language modelling:
 
-- Training Bert Style Encoders on ambiguous labels or annotation rules that annotators apply inconsistently.
-- Evaluating only clean examples while long, multilingual, noisy, or domain-specific text fails.
-- Ignoring entity, span, or document-level errors because the aggregate metric looks acceptable.
+$$
+\mathcal L_{\text{MLM}}=-\sum_{i\in M}\log P_\theta(t_i\mid t_{\setminus M}),
+$$
 
-- Domain shift in vocabulary, style, language, or document structure.
-- Evaluating surface form while missing semantic correctness or downstream utility.
+where $M$ is the set of masked positions. [Tokenization](tokenization.md) defines those positions, and the resulting contextual [embeddings](embeddings.md) can be fine-tuned or reused.
 
-## When to use it
+## Worked example
 
-Use encoder models when the task needs a compact representation of an input text rather than open-ended generation. They are strong defaults for classification, retrieval embeddings, duplicate detection, reranking features, and token-level labelling. Prefer a decoder-only model when the output must be fluent generated text or multi-step reasoning.
+```python
+import math, torch
+
+torch.manual_seed(7)
+X = torch.randn(4, 3)
+Wq, Wk, Wv = torch.randn(3, 3), torch.randn(3, 3), torch.randn(3, 2)
+weights = torch.softmax((X @ Wq) @ (X @ Wk).T / math.sqrt(3), dim=-1)
+print("row0_weights", torch.round(weights[0], decimals=3).tolist())
+print("row0_future_mass_positions_1_to_3", round(float(weights[0,1:].sum()), 3))
+print("all_rows_sum", torch.round(weights.sum(dim=1), decimals=3).tolist())
+```
+
+Observed output:
+
+```text
+row0_weights [0.257999986410141, 0.019999999552965164, 0.04399999976158142, 0.6769999861717224]
+row0_future_mass_positions_1_to_3 0.742
+all_rows_sum [1.0, 1.0, 1.0, 1.0]
+```
+
+Position 0 places most of its attention mass on later positions because no causal mask blocks them. That is useful for understanding tasks but invalid for next-token generation.
+
+## Caveats
+
+Encoder outputs are sensitive to truncation, pooling choice, and domain mismatch. A classifier head can overfit annotation artifacts even when the base encoder is strong. For multilingual or noisy inputs, inspect tokenizer fragmentation and slice metrics before trusting pooled vectors.
+
+## References
+
+- [Devlin et al., BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
+- [Vaswani et al., Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+- [PyTorch documentation: MultiheadAttention](https://docs.pytorch.org/docs/2.7/generated/torch.nn.MultiheadAttention.html)

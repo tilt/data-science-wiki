@@ -1,7 +1,7 @@
 ---
 title: Hallucination Mitigation
 slug: generative-ai/hallucination-mitigation
-description: Concise guide to Hallucination Mitigation in Generative AI and Agentic Systems.
+description: "Reducing unsupported generated claims through retrieval, constraints, abstention, and evaluation."
 area: generative-ai
 topics:
   - hallucination-mitigation
@@ -12,25 +12,45 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - grounding.md
+  - citations.md
+  - rag.md
+  - llm-as-judge.md
+  - guardrails.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Hallucination Mitigation
 
-## Summary
+Hallucination mitigation reduces unsupported claims; it does not make a model know truth in the abstract. The strongest controls combine [grounding](grounding.md), [citations](citations.md), constrained answer formats, abstention, and targeted evaluation.
 
-Hallucination mitigation reduces unsupported, fabricated, or misleading model outputs. The goal is to make unsupported claims less likely and easier to catch.
+## Mechanism
 
-## Step-by-step example
+A practical pipeline retrieves evidence, instructs the model to answer only from that evidence, extracts claims, and checks each claim against cited spans. [LLM-as-judge](llm-as-judge.md) can help label semantic support, but deterministic checks should verify that cited source IDs were actually retrieved and that every required claim has a citation.
 
-For a legal assistant, retrieve approved documents, answer only from them, validate citations, and route missing-evidence cases to refusal or human review.
+Mitigation can happen before generation through better retrieval, during generation through source-grounded prompts and schemas, and after generation through citation validation or abstention. [Guardrails](guardrails.md) decide what happens when support is missing: revise, ask for more evidence, route to a human, or say there is not enough information.
 
-## Common failure modes
+## Concrete artifact
 
-- Changing Hallucination Mitigation without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Hallucination Mitigation.
-- Shipping Hallucination Mitigation without rollback, monitoring, and examples for known hard cases.
+```json
+{
+  "answer_policy": "If no cited source supports a claim, say 'I do not have enough evidence.'",
+  "checks": ["source_id_seen", "claim_has_citation", "citation_support"],
+  "fail_action": "revise_or_abstain",
+  "unsupported_claim": {
+    "claim": "Refunds are approved in two days.",
+    "cited_source": "policy-9",
+    "source_says": "up to five business days"
+  }
+}
+```
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+## Caveats
+
+Retrieval can introduce false evidence. A fluent answer with citations can still be wrong if the cited passage is irrelevant, stale, or contradicted elsewhere. Reducing hallucination is therefore a system property, not a prompt trick.
+
+## References
+
+- [Anthropic Claude docs: Reduce hallucinations](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
+- [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
+- [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)

@@ -1,53 +1,62 @@
 ---
-title: Human IN THE Loop Systems
+title: Human-in-the-Loop Systems
 slug: ml-engineering-and-mlops/human-in-the-loop-systems
-description: Concise guide to Human IN THE Loop Systems in ML Engineering and MLOps.
+description: "Operational workflows where humans review, correct, or override model decisions."
 area: ml-engineering-and-mlops
 topics:
   - human-in-the-loop-systems
 level: foundational
-status: draft
-page_type: system-design
+status: review
+page_type: concept
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - active-learning.md
+  - production-incident-response.md
+  - golden-datasets.md
+  - monitoring.md
+  - ../17-responsible-ai-safety-and-governance/human-oversight.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# Human IN THE Loop Systems
+# Human-in-the-Loop Systems
 
-## Summary
+Human-in-the-loop systems route selected model decisions to people for review, correction, escalation, or labeling. They are not a vague safety blanket; they are an operational queue with eligibility rules, reviewer instructions, latency targets, audit logs, and feedback paths.
 
-Human IN THE Loop Systems belongs to ML engineering. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Mechanism
 
-## Core idea
+The model or policy layer decides when automation is allowed, when abstention is required, and when review is mandatory. Review outcomes should feed [golden datasets](golden-datasets.md), [active learning](active-learning.md), incident analysis, and future training data only after quality checks.
 
-- Define the inputs, outputs, and boundaries for Human IN THE Loop Systems.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+## Artifact: Review Queue Contract
 
-## Worked example
+```yaml
+review_queue:
+  name: fraud_manual_review
+  enqueue_when:
+    - "score >= 0.82 and amount_usd > 500"
+    - "model_confidence < 0.55"
+    - "policy_tag in [sanctions_possible, vulnerable_customer]"
+  reviewer_sla:
+    p90_minutes: 15
+    max_backlog: 500
+  actions: [approve, block, request_more_info, escalate]
+  audit_fields:
+    - model_version
+    - score
+    - reason_codes
+    - reviewer_id
+    - decision
+    - decision_time
+```
 
-Compare a simple baseline with an approach that uses Human IN THE Loop Systems. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+The queue must appear in [monitoring](monitoring.md): backlog and SLA violations can be production incidents even when the model service is healthy. Governance details connect to [human oversight](../17-responsible-ai-safety-and-governance/human-oversight.md).
 
-## Practical checklist
+## Failure Modes
 
-- Version the code, data, model artifacts, configuration, and evaluation evidence touched by Human IN THE Loop Systems.
-- Define the owner, rollout path, observability signals, and rollback procedure.
-- Test failure behavior with stale data, missing dependencies, and incompatible versions.
+Human review fails when reviewers see no context, when queues overload during drift, or when labels are treated as ground truth without inter-reviewer checks. Automation bias can make reviewers rubber-stamp high-confidence scores, so sample accepted decisions for audit.
 
-- Separate training quality, serving reliability, and business impact.
-- Define promotion, rollback, monitoring, and incident-response criteria.
-- Test batch and online paths with representative fixtures.
-- Keep human review paths explicit where automated decisions are risky.
+## References
 
-## Common failure modes
-
-- Deploying Human IN THE Loop Systems without reproducible lineage for data, code, artifacts, configuration, and evaluation.
-- Monitoring infrastructure health while missing data freshness, model behavior, or user-impact degradation.
-- Making Human IN THE Loop Systems hard to roll back because schemas, state, or dependencies changed silently.
-
-- Monitoring service health but not model behavior.
-- Lacking rollback criteria when live performance degrades.
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+- [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)

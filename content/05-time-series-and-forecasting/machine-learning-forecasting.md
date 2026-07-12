@@ -19,9 +19,11 @@ prerequisites:
   - forecasting-data-and-covariates.md
 related:
   - feature-engineering-for-forecasting.md
-  - forecast-error-metrics.md
-  - ../03-classical-machine-learning/regression.md
-  - ../03-classical-machine-learning/gradient-boosting.md
+  - deep-learning-forecasting.md
+  - forecasting-data-and-covariates.md
+  - backtesting.md
+  - cold-start-forecasting.md
+  - ../03-classical-machine-learning/random-forests.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -89,3 +91,12 @@ Machine learning forecasters require explicit lag and rolling-window engineering
 - Letting target encodings use future labels.
 - Selecting complex boosted trees without checking simpler baselines.
 - Training one global model that performs well in aggregate but fails for sparse or high-value partitions.
+
+## Connections
+
+Machine-learning forecasters depend on [feature engineering for forecasting](feature-engineering-for-forecasting.md), future covariates, and leakage-free [backtesting](backtesting.md). They bridge classical tabular models such as [random forests](../03-classical-machine-learning/random-forests.md) with [deep learning forecasting](deep-learning-forecasting.md) for large panels.
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Time series regression models](https://otexts.com/fpp3/regression.html)
+- [scikit-learn Gradient Boosting documentation](https://scikit-learn.org/stable/modules/ensemble.html#gradient-boosting)

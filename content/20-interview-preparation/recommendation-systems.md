@@ -1,44 +1,54 @@
 ---
 title: Recommendation Systems
 slug: interview-preparation/recommendation-systems
-description: Concise guide to Recommendation Systems in Interview Preparation.
+description: Interview map for recommender-system design, sparse feedback, ranking, and evaluation questions.
 area: interview-preparation
 topics:
   - recommendation-systems
+  - interview-question-map
 level: foundational
 status: review
-page_type: system-design
+page_type: topic-index
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - svd-versus-matrix-factorization.md
+  - sparse-utility-matrix-and-ordinary-svd.md
+  - "../04-recommendation-systems/recommendation-system-overview.md"
+  - "../04-recommendation-systems/retrieval-and-ranking-architectures.md"
+  - "../04-recommendation-systems/cold-start-problem.md"
+  - "../04-recommendation-systems/evaluation-of-recommenders.md"
+  - evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Recommendation Systems
 
-Recommendation-system interview questions test whether you can reason about sparse feedback, candidate generation, ranking, evaluation, cold start, feedback loops, and production tradeoffs. This page is an interview route into the canonical recommender pages.
+## Map answer
 
-## Prototype answer structure
+Recommendation-system interviews test whether you can reason about sparse feedback, candidate generation, ranking, exploration, cold start, evaluation, feedback loops, and serving tradeoffs. Do not answer with one algorithm unless the question is specifically algorithmic.
 
-For a system-design question, answer in layers:
+## Question map
 
-1. Clarify users, items, objective, constraints, and feedback signals.
-2. Propose candidate generation, usually mixing collaborative, content, popularity, and fresh-item sources.
-3. Rank candidates with user, item, context, and interaction features.
-4. Add filtering, diversity, safety, and business rules.
-5. Evaluate offline, then online with guardrails.
-6. Monitor drift, feedback loops, latency, and cold-start segments.
+| Prompt type | Strong answer should mention | Canonical page |
+| --- | --- | --- |
+| "Design a news recommender." | Fast candidate sources, freshness, user/context features, ranking, diversity, editorial constraints, exploration, and latency. | [Retrieval and Ranking Architectures](../04-recommendation-systems/retrieval-and-ranking-architectures.md) |
+| "How do you handle new users/items?" | Popularity, content features, onboarding, exploration, business rules, and segment-specific evaluation. | [Cold Start Problem](../04-recommendation-systems/cold-start-problem.md) |
+| "Why not ordinary SVD?" | Missing means unknown, zero filling changes the objective, and observed-entry losses match the data better. | [Sparse Utility Matrices and Ordinary SVD](../04-recommendation-systems/sparse-utility-matrices-and-svd.md) |
+| "How do you evaluate ranking?" | Recall@k, NDCG, coverage, diversity, novelty, time splits, online experiments, and guardrails. | [Evaluation of Recommenders](../04-recommendation-systems/evaluation-of-recommenders.md) |
 
-## Example prompt
+## Interview artifact
 
-"Design a news recommender." A strong answer mentions fast-changing inventory, fresh-item exploration, editorial constraints, personalized ranking, topic diversity, and online evaluation. A weak answer jumps directly to matrix factorization and ignores freshness or feedback loops.
+For "Design a marketplace recommender," use a layered answer: candidate generation from collaborative, content, popularity, fresh-item, and sponsored sources; ranking with user, item, context, and interaction features; post-ranking filters for safety, availability, diversity, and business constraints; offline [evaluation](evaluation.md); then an online experiment with latency and complaint guardrails. This gives a better answer than jumping straight to [matrix factorization](../04-recommendation-systems/matrix-factorization.md).
 
-## Common pitfalls
+## Common follow-ups
 
-Do not describe only one algorithm. Real recommenders are pipelines. Also avoid evaluating only historical clicks, because the system decides which items receive exposure and therefore which clicks can be observed.
+- **"What is the hardest data issue?"** Exposure bias: you only observe interactions for items the system showed.
+- **"What is the simplest good baseline?"** Popularity plus recency and eligibility rules, compared against personalized retrieval and ranking.
+- **"What do the SVD prompts test?"** Whether you understand sparse utility matrices and the difference between algebraic decomposition and recommender modelling.
 
-## Canonical wiki links
+## References
 
-Study [recommendation system overview](../04-recommendation-systems/recommendation-system-overview.md), [retrieval and ranking architectures](../04-recommendation-systems/retrieval-and-ranking-architectures.md), [cold start](../04-recommendation-systems/cold-start-problem.md), and [evaluation of recommenders](../04-recommendation-systems/evaluation-of-recommenders.md).
+- [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
+- [Herlocker et al., 2004, Evaluating Collaborative Filtering Recommender Systems](https://doi.org/10.1145/963770.963772)

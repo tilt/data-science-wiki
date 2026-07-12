@@ -1,8 +1,7 @@
 ---
 title: Cost and Latency Optimization
 slug: generative-ai/cost-and-latency-optimization
-description: Concise guide to Cost and Latency Optimization in Generative AI and
-  Agentic Systems.
+description: "Reducing time and resource use per successful generative-AI task."
 area: generative-ai
 topics:
   - cost-and-latency-optimization
@@ -13,25 +12,45 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - model-serving.md
+  - local-versus-hosted-models.md
+  - context-construction.md
+  - retrieval-pipelines.md
+  - determinism-and-reproducibility.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Cost and Latency Optimization
 
-## Summary
+Cost and latency optimization should target successful task completion, not the cheapest single model call. A [model serving](model-serving.md) plan must include retrieval, [context construction](context-construction.md), retries, validation, and user-visible streaming.
 
-Cost and latency optimization reduces time and money per successful generative-AI task. The target is successful task completion, not raw token price alone.
+## Mechanism
 
-## Step-by-step example
+For one request, latency is approximately critical-path time: $L=L_{queue}+L_{retrieval}+L_{first\ token}+L_{decode}+L_{validation}$. Cost accounting should record input tokens, output tokens, tool calls, reranks, cache hits, and failed retries. Route simple tasks differently from evidence-heavy [retrieval pipelines](retrieval-pipelines.md).
 
-For a RAG assistant, measure retrieval time, model time, token volume, retries, and validation failures before deciding whether to shorten context or route to a smaller model.
+## Executed artifact
 
-## Common failure modes
+```python
+steps = [("plan", 120), ("search", 350), ("read", 500), ("write", 420), ("verify", 260)]
+print("AGENT_BUDGET")
+print("total_tokens", sum(tokens for _, tokens in steps), "max_step", max(steps, key=lambda item: item[1]))
+```
 
-- Changing Cost and Latency Optimization without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Cost and Latency Optimization.
-- Shipping Cost and Latency Optimization without rollback, monitoring, and examples for known hard cases.
+Observed output:
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+```text
+AGENT_BUDGET
+total_tokens 1650 max_step ('read', 500)
+```
+
+The trace totals 1,650 tokens across five steps, with `read` alone consuming 500 tokens. Optimizing `read` first has the largest single-step opportunity because it is about 30 percent of the token budget before generation even starts.
+
+## Caveats
+
+Shortening prompts can remove evidence and increase hallucinations. Aggressive batching can improve throughput while hurting tail latency or reproducibility.
+
+## References
+
+- [OpenAI API documentation: Latency optimization](https://platform.openai.com/docs/guides/latency-optimization)
+- [OpenAI API documentation: Cost optimization](https://platform.openai.com/docs/guides/cost-optimization)
+- [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)

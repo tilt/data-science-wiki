@@ -1,7 +1,7 @@
 ---
 title: Reranking
 slug: generative-ai/reranking
-description: Concise guide to Reranking in Generative AI and Agentic Systems.
+description: "Second-stage scoring of retrieved candidates with a more precise query-document model."
 area: generative-ai
 topics:
   - reranking
@@ -12,32 +12,51 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - retrieval-pipelines.md
+  - hybrid-retrieval.md
+  - embeddings.md
+  - rag.md
+  - vector-databases.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Reranking
 
-## Summary
-
-Reranking applies a stronger or more task-specific scoring step after initial retrieval. In RAG, it improves the order of candidate chunks before context construction.
+Reranking reorders candidates after a fast first-stage retriever. It lets [retrieval pipelines](retrieval-pipelines.md) use cheap lexical or vector search for recall, then a more expensive model for precision before [RAG](rag.md) context is packed.
 
 ## Mechanism
 
-A retriever first returns candidates $c_{1:n}$. A reranker computes a query-specific score,
+First-stage retrieval scores documents independently or approximately. A reranker scores $(q,d_i)$ pairs directly and sorts by $r(q,d_i)$. It is commonly applied after [hybrid retrieval](hybrid-retrieval.md), [embeddings](embeddings.md), or [vector databases](vector-databases.md) return a short candidate list.
 
-$$
-s_i=f(q,c_i),
-$$
+## Executed artifact
 
-and keeps the best chunks under the context budget. In RAG, this is valuable because the generator often sees only a small number of chunks; moving the right evidence from rank 30 to rank 3 can change the answer.
+```python
+import numpy as np
 
-## Step-by-step example
+first_pass = np.array([0.78, 0.74, 0.70])
+cross_score = np.array([0.20, 0.95, 0.50])
+final = 0.3 * first_pass + 0.7 * cross_score
+print("RERANK")
+print("first_pass", [int(i) for i in np.argsort(-first_pass)])
+print("reranked", [int(i) for i in np.argsort(-final)], np.round(final, 3).tolist())
+```
 
-A hybrid retriever returns 100 policy chunks; a reranker scores them against the exact question and promotes the passages that answer it directly.
+Observed output:
 
-## Common failure modes
+```text
+RERANK
+first_pass [0, 1, 2]
+reranked [1, 2, 0] [0.374, 0.887, 0.56]
+```
 
-- Improving average relevance while demoting rare but critical evidence.
-- Adding a cross-encoder reranker without measuring tail latency and context-budget impact.
-- Training on click or judgment data that reflects old ranking position bias.
+The cross-score moved document 1 above the vector winner, which is exactly the point of a second stage.
+
+## Caveats
+
+Rerankers can overfit to benchmark phrasing and add latency. Evaluate top-k recall before reranking and answer support after reranking.
+
+## References
+
+- [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)
+- [Muennighoff et al., 2022, MTEB](https://arxiv.org/abs/2210.07316)
+- [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)

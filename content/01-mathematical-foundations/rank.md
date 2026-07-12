@@ -1,43 +1,72 @@
 ---
 title: Rank
 slug: mathematical-foundations/rank
-description: Concise guide to Rank in Mathematical Foundations.
+description: "The dimension of the independent information carried by a matrix."
 area: mathematical-foundations
 topics:
+  - linear-algebra
   - rank
 level: foundational
 status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - linear-algebra.md
 related:
-  - index.md
+  - linear-algebra.md
+  - matrix-multiplication.md
+  - singular-value-decomposition.md
+  - low-rank-approximation.md
+  - ../04-recommendation-systems/latent-factor-models.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Rank
 
-Matrix rank measures the number of linearly independent directions in a matrix. It tells how much unique information or dimensional structure the matrix contains.
+Rank is the number of independent directions in a matrix. It tells how many dimensions a linear map can preserve, how many independent columns a design matrix has, and how many factors a [low-rank approximation](low-rank-approximation.md) is allowed to use.
 
-## Core idea
+## Defining math
 
-A matrix has rank $r$ if its columns span an $r$-dimensional space. If one column is a linear combination of others, it does not add rank. Full rank means no direction is redundant within the matrix's smaller dimension.
-
-## Example
-
-The matrix
+For $A\in\mathbb R^{m\times n}$,
 
 $$
-egin{bmatrix}1 & 2\ 2 & 4\end{bmatrix}
+\operatorname{rank}(A)=\dim(\operatorname{col}(A))=\dim(\operatorname{row}(A)).
 $$
 
-has rank 1 because the second column is twice the first. It looks like a 2-column matrix, but it contains only one independent column direction.
+Equivalently, rank is the number of nonzero singular values in the [SVD](singular-value-decomposition.md):
 
-## ML use
+$$
+\operatorname{rank}(A)=|\{i:\sigma_i(A)>0\}|.
+$$
 
-Rank matters in linear regression, PCA, matrix factorization, embeddings, and identifiability. Low-rank structure can make compression possible; rank deficiency can make parameter estimates non-unique.
+Rank controls solvability and identifiability. If a regression design matrix lacks full column rank, several coefficient vectors can produce the same fitted values. In recommender [latent-factor models](../04-recommendation-systems/latent-factor-models.md), choosing factor dimension is choosing an explicit rank bottleneck.
+
+## Executed demo
+
+```python
+import numpy as np
+
+A = np.array([[1., 2., 3.], [2., 4., 6.], [1., 1., 1.]])
+print("rank", np.linalg.matrix_rank(A))
+print("singular_values", np.round(np.linalg.svd(A, compute_uv=False), 6))
+print("det_first_2x2", np.linalg.det(A[:2, :2]))
+```
+
+Observed output:
+
+```text
+rank 2
+singular_values [8.5198 0.6429 0.    ]
+det_first_2x2 0.0
+```
+
+The second row is twice the first, so the matrix has only two independent directions. The zero singular value exposes the lost dimension even though the matrix has three rows and three columns.
 
 ## Caveats
 
-Numerical rank is not always obvious. A matrix can be technically full rank but have tiny singular values that make computations unstable. In practice, tolerance choices matter.
+Numerical rank is thresholded. Floating-point noise can turn exact zeros into tiny nonzero singular values, and nearly collinear features can be full-rank but still unstable. Always interpret rank with the scale of the singular values and downstream sensitivity.
+
+## References
+
+- [NumPy documentation: `numpy.linalg.matrix_rank`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.matrix_rank.html)
+- [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)

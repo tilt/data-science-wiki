@@ -1,53 +1,58 @@
 ---
-title: CI CD FOR ML
+title: CI/CD for ML
 slug: ml-engineering-and-mlops/ci-cd-for-ml
-description: Concise guide to CI CD FOR ML in ML Engineering and MLOps.
+description: "Automated tests and promotion gates for code, data, models, and serving contracts."
 area: ml-engineering-and-mlops
 topics:
   - ci-cd-for-ml
 level: foundational
-status: draft
+status: review
 page_type: system-design
 aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - training-pipelines.md
+  - experiment-tracking.md
+  - model-versioning.md
+  - evaluation-datasets.md
+  - docker.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# CI CD FOR ML
+# CI/CD for ML
 
-## Summary
+CI/CD for ML extends ordinary software delivery with checks for data contracts, training reproducibility, model quality, serving compatibility, and rollback metadata. A green unit-test suite is not enough to promote a model that was trained on the wrong snapshot.
 
-CI CD FOR ML belongs to ML engineering. To make the page useful, explain the object being studied, the decision it supports, the assumptions behind it, and how it fails when those assumptions are violated.
+## Mechanism
 
-## Core idea
+The pipeline should separately test code, data, model artifact, and deployment contract. Continuous integration blocks broken changes; continuous delivery promotes an approved [model-versioning](model-versioning.md) record through staging and production using [docker](docker.md) images and rollout controls.
 
-- Define the inputs, outputs, and boundaries for CI CD FOR ML.
-- Identify the assumptions that make the method or concept valid.
-- Check how the idea behaves when data is noisy, incomplete, shifted, or used in production.
+## Artifact: Promotion Workflow
 
-## Worked example
+```yaml
+name: ml-release
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python -m pytest tests/unit tests/contracts
+      - run: python scripts/check_dataset_contract.py --dataset churn_eval:v7
+      - run: python scripts/evaluate_candidate.py --min-auc 0.84 --max-p95-ms 120
+      - run: docker build -t registry.example.com/churn-scorer:${{ github.sha }} .
+```
 
-Compare a simple baseline with an approach that uses CI CD FOR ML. Keep the dataset, split, metric, and review examples fixed so any improvement or regression can be attributed to the change.
+This workflow references [evaluation datasets](evaluation-datasets.md) and produces evidence that [experiment tracking](experiment-tracking.md) should store with the candidate run. Promotion should fail closed when dataset versions, thresholds, or serving schemas are missing.
 
-## Practical checklist
+## Failure Modes
 
-- Version the code, data, model artifacts, configuration, and evaluation evidence touched by CI CD FOR ML.
-- Define the owner, rollout path, observability signals, and rollback procedure.
-- Test failure behavior with stale data, missing dependencies, and incompatible versions.
+CI/CD becomes theater when it retrains on mutable tables, treats aggregate accuracy as the only gate, or deploys without a [rollbacks](rollbacks.md) target. Human approval is still useful for risky changes, but it should review concrete evidence, not notebook screenshots.
 
-- Separate training quality, serving reliability, and business impact.
-- Define promotion, rollback, monitoring, and incident-response criteria.
-- Test batch and online paths with representative fixtures.
-- Keep human review paths explicit where automated decisions are risky.
+## References
 
-## Common failure modes
-
-- Deploying CI CD FOR ML without reproducible lineage for data, code, artifacts, configuration, and evaluation.
-- Monitoring infrastructure health while missing data freshness, model behavior, or user-impact degradation.
-- Making CI CD FOR ML hard to roll back because schemas, state, or dependencies changed silently.
-
-- Monitoring service health but not model behavior.
-- Lacking rollback criteria when live performance degrades.
+- [GitHub Actions workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)
+- [Google Cloud: MLOps continuous delivery and automation pipelines](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)

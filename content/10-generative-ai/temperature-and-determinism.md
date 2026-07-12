@@ -1,71 +1,79 @@
 ---
 title: Temperature and Determinism
 slug: generative-ai/temperature-and-determinism
-description: Temperature and Determinism overview and practical notes.
+description: "How logit temperature changes entropy and why low temperature is not full reproducibility."
 area: generative-ai
 topics:
-  - "temperature"
-  - "sampling-and-decoding"
-  - "determinism"
+  - temperature
+  - sampling-and-decoding
+  - determinism
 level: intermediate
-status: draft
+status: review
 page_type: concept
 aliases: []
-prerequisites: []
-related: []
+prerequisites:
+  - index.md
+related:
+  - sampling-and-decoding.md
+  - top-k-and-top-p-sampling.md
+  - determinism-and-reproducibility.md
+  - structured-output.md
+  - model-serving.md
 historical_context: false
-last_reviewed: 2026-07-10
-references:
-  - "openai-text-generation-docs"
+last_reviewed: 2026-07-11
 ---
 # Temperature and Determinism
 
-## Summary
+Temperature rescales logits before sampling. It is one control inside [sampling and decoding](sampling-and-decoding.md), but [determinism and reproducibility](determinism-and-reproducibility.md) also depend on model version, retrieval, tools, seeds, serving, and post-processing.
 
-Temperature rescales logits before sampling. For logits $z_i$ and temperature $T$:
+## Defining math
+
+For logits $z_i$ and temperature $T$,
 
 $$
-p_i = \frac{\exp(z_i / T)}{\sum_j \exp(z_j / T)}
+p_i(T)=\frac{\exp(z_i/T)}{\sum_j\exp(z_j/T)}.
 $$
 
-Lower temperature sharpens the distribution. Higher temperature flattens it.
+Lower $T$ sharpens the distribution; higher $T$ flattens it. At the limit toward zero, decoding approaches greedy selection.
 
-## Logits and softmax
+## Executed artifact
 
-A language model produces logits, which are unnormalized scores for possible next tokens. Softmax turns logits into probabilities. Temperature modifies the logits before softmax, changing how concentrated the distribution is.
+```python
+import numpy as np
 
-## Temperature approaching zero
+tokens = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"]
+logits = np.array([3.2, 2.1, 1.4, 0.7, -0.2, -1.0])
 
-As $T$ approaches zero, the highest-logit token dominates the distribution. In practice, systems often implement temperature zero as greedy decoding or a near-greedy approximation. That reduces randomness but does not guarantee identical hosted outputs across all conditions.
+def softmax(x):
+    z = x - x.max()
+    e = np.exp(z)
+    return e / e.sum()
 
-## Sampling, top-k, and top-p
+def entropy(p):
+    return -(p * np.log2(np.clip(p, 1e-12, 1))).sum()
 
-Temperature is only one decoding control. Top-k keeps the $k$ most likely tokens before sampling. Top-p, or nucleus sampling, keeps the smallest set of tokens whose cumulative probability exceeds a threshold. These filters interact with temperature: a high temperature followed by narrow top-k may still be constrained, while a low temperature with broad top-p may still behave mostly greedily.
+def fmt(p):
+    return [(tokens[i], round(float(v), 3)) for i, v in enumerate(p) if v > 0]
 
-## Small numeric example
+for temp in [0.7, 1.5]:
+    probs = softmax(logits / temp)
+    print(f"temperature={temp}", fmt(probs), "entropy_bits", round(float(entropy(probs)), 3))
+```
 
-For logits $[2, 1, 0]$:
+Observed output:
 
-- At $T=1$, the first token is preferred but alternatives remain plausible.
-- At $T=0.5$, the first token becomes much more dominant.
-- At $T=2$, the probabilities flatten and lower-scoring tokens become more likely.
+```text
+temperature=0.7 [('alpha', 0.756), ('beta', 0.157), ('gamma', 0.058), ('delta', 0.021), ('epsilon', 0.006), ('zeta', 0.002)] entropy_bits 1.141
+temperature=1.5 [('alpha', 0.468), ('beta', 0.225), ('gamma', 0.141), ('delta', 0.088), ('epsilon', 0.049), ('zeta', 0.028)] entropy_bits 2.063
+```
 
-The exact probabilities depend on applying softmax after scaling.
+Higher temperature nearly doubles entropy in the toy distribution, from 1.141 bits at $T=0.7$ to 2.063 bits at $T=1.5$. The top token `alpha` falls from 0.756 to 0.468, so more probability mass is available for lower-ranked tokens even though the ranking itself has not changed.
 
-## Determinism caveat
+## Caveats
 
-A model forward pass can be deterministic under controlled software, hardware, seeds, model weights, and decoding settings. Hosted APIs may still change model versions, serving infrastructure, numeric kernels, safety layers, or hidden defaults, so temperature zero is not a universal reproducibility guarantee.
-
-## Seeds and hosted APIs
-
-Some APIs expose a seed parameter, but reproducibility also depends on model version, request parameters, retrieval context, tool outputs, and post-processing. A seed is useful for regression testing, not a complete provenance record.
-
-## Production recommendations
-
-Record model version, prompt, parameters, seed if available, tool schemas, retrieval inputs, and post-processing code. Use repeated sampling for evaluation when outputs are nondeterministic.
-
-For high-stakes extraction, prefer constrained structured output, low temperature, explicit validation, and repeatable evaluation fixtures. For creative ideation, use higher temperature only when diversity is valuable and downstream review exists.
+Temperature zero can still drift in hosted systems. For extraction, combine low temperature with [structured output](structured-output.md) validation.
 
 ## References
 
-- Primary: OpenAI API documentation, Text generation.
+- [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
+- [Holtzman et al., 2020, The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751)

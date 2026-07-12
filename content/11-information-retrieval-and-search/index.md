@@ -1,57 +1,65 @@
 ---
 title: Information Retrieval and Search
 slug: 11-information-retrieval-and-search
-description: Index and learning map for Information Retrieval and Search.
+description: "Learning map for lexical search, dense retrieval, hybrid retrieval, ranking metrics, and search systems."
 area: information-retrieval-and-search
 topics:
-  - "inverted-indexes"
-  - "tf-idf"
-  - "bm25"
-  - "dense-retrieval"
-  - "sparse-retrieval"
-  - "hybrid-search"
-  - "approximate-nearest-neighbour-search"
-  - "vector-indexes"
-  - "reranking"
-  - "search-evaluation"
-  - "precision-recall-map-mrr-ndcg"
-  - "elasticsearch"
+  - inverted-indexes
+  - tf-idf
+  - bm25
+  - dense-retrieval
+  - sparse-retrieval
+  - hybrid-search
+  - approximate-nearest-neighbour-search
+  - vector-indexes
+  - reranking
+  - search-evaluation
+  - precision-recall-map-mrr-ndcg
+  - elasticsearch
 level: foundational
-status: draft
+status: review
 page_type: area-index
 aliases:
-  - "Information Retrieval and Search"
+  - Information Retrieval and Search
 prerequisites:
-  - "02-probability-and-statistics/index.md"
-  - "07-natural-language-processing/index.md"
+  - ../02-probability-and-statistics/index.md
+  - ../07-natural-language-processing/index.md
 related:
-  - "10-generative-ai/index.md"
-  - "04-recommendation-systems/index.md"
+  - ../10-generative-ai/index.md
+  - ../04-recommendation-systems/index.md
+  - ../16-experimentation-and-evaluation/index.md
 historical_context: false
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 ---
 # Information Retrieval and Search
 
-## Summary
+Information retrieval is the engineering and measurement discipline behind finding useful material in a collection. This section moves from lexical indexes and ranking formulas to vector retrieval, hybrid systems, graph retrieval, and evaluation.
 
-Information Retrieval and Search is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+## Lexical Core
 
-## Subtopics
+- [Inverted Indexes](inverted-indexes.md): postings lists, positions, and candidate generation.
+- [TF-IDF](tf-idf.md): sparse vector weighting with term frequency and inverse document frequency.
+- [BM25](bm25.md): lexical ranking with term-frequency saturation and document-length normalization.
+- [Sparse Retrieval](sparse-retrieval.md): the broader term-feature retrieval family.
 
-- [Inverted Indexes](inverted-indexes.md)
-- [TF IDF](tf-idf.md)
-- [BM25](bm25.md)
-- [Dense Retrieval](dense-retrieval.md)
-- [Sparse Retrieval](sparse-retrieval.md)
-- [Hybrid Search](hybrid-search.md)
-- [Approximate Nearest Neighbour Search](approximate-nearest-neighbour-search.md)
-- [Vector Indexes](vector-indexes.md)
-- [Reranking](reranking.md)
-- [Search Evaluation](search-evaluation.md)
-- [Precision, Recall, MAP, MRR, and NDCG](precision-recall-map-mrr-ndcg.md)
-- [Ranking and Retrieval Metrics](ranking-and-retrieval-metrics.md)
-- [Elasticsearch](elasticsearch.md)
-- [ELK Stack](elk-stack.md)
-- [Literature Management Search Systems](literature-management-search-systems.md)
-- [Knowledge Graphs](knowledge-graphs.md)
-- [Graph Based Retrieval](graph-based-retrieval.md)
+## Dense And Hybrid Retrieval
+
+- [Dense Retrieval](dense-retrieval.md): embedding-based semantic retrieval.
+- [Vector Indexes](vector-indexes.md): exact, compressed, and approximate vector search structures.
+- [Approximate Nearest Neighbour Search](approximate-nearest-neighbour-search.md): recall-latency trade-offs for vector retrieval.
+- [Hybrid Search](hybrid-search.md): fusion of lexical, dense, graph, or metadata signals.
+- [Reranking](reranking.md): second-stage ordering with richer features or cross-encoders.
+
+## Evaluation
+
+- [Ranking and Retrieval Metrics](ranking-and-retrieval-metrics.md): precision@k, recall@k, MAP, MRR, and NDCG.
+- [Precision, Recall, MAP, MRR, and NDCG](precision-recall-map-mrr-ndcg.md): compact metric glossary.
+- [Search Evaluation](search-evaluation.md): labelled query sets, slices, offline evaluation, and online checks.
+
+## Systems And Structure
+
+- [Elasticsearch](elasticsearch.md): Lucene-backed indexed search and vector fields.
+- [ELK Stack](elk-stack.md): ingest, index, search, and visualize operational events.
+- [Knowledge Graphs](knowledge-graphs.md): entity-relation retrieval and graph patterns.
+- [Graph Based Retrieval](graph-based-retrieval.md): retrieval through links, citations, and typed neighborhoods.
+- [Literature Management Search Systems](literature-management-search-systems.md): search over papers, metadata, notes, and citation graphs.

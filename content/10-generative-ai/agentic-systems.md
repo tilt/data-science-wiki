@@ -1,7 +1,7 @@
 ---
 title: Agentic Systems
 slug: generative-ai/agentic-systems
-description: Concise guide to Agentic Systems in Generative AI and Agentic Systems.
+description: "Systems that put language models inside controlled action loops with tools, state, and evaluation."
 area: generative-ai
 topics:
   - agentic-systems
@@ -12,25 +12,42 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - agent-loops.md
+  - tool-routing.md
+  - planning.md
+  - guardrails.md
+  - agent-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Agentic Systems
 
-## Summary
+An agentic system gives a model conditional control over a workflow. The model may choose when to search, call tools, ask for clarification, or stop, while application code enforces [tool routing](tool-routing.md), [guardrails](guardrails.md), and traceable [agent evaluation](agent-evaluation.md).
 
-An agentic system uses a language model inside a control loop that can inspect state, choose actions, call tools, evaluate intermediate results, and decide whether to continue. The design problem is deciding which choices belong to model judgement and which must be enforced by application code.
+## Mechanism
 
-## Step-by-step example
+The core design split is model judgement versus deterministic control. A practical architecture is:
 
-A research assistant can search sources, inspect passages, draft an answer, verify citations, and stop only when evidence supports the response. Search and verification should be external services; the model should not be the only judge of success.
+```text
+user goal -> policy/context builder -> model decision -> validator -> tool/runtime -> observation log -> model decision
+```
 
-## Common failure modes
+[Planning](planning.md) can be a private scratch step, a visible task graph, or no separate step at all. The important contract is that actions are typed and observations are appended as data, not silently merged into hidden state.
 
-- Changing Agentic Systems without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Agentic Systems.
-- Shipping Agentic Systems without rollback, monitoring, and examples for known hard cases.
+## Concrete artifact
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+```json
+{"decision":{"type":"tool_call","name":"search_docs","arguments":{"query":"refund approval limit"}},"state":{"step":2,"remaining_steps":4}}
+```
+
+The action is only a proposal until the orchestrator validates name, schema, user permission, and budget.
+
+## Caveats
+
+Agentic systems are inappropriate when a fixed pipeline is enough. Added autonomy increases test surface: tool misuse, prompt injection, stale memory, and runaway cost.
+
+## References
+
+- [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
+- [OpenAI API documentation: Function calling](https://platform.openai.com/docs/guides/function-calling)
+- [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)

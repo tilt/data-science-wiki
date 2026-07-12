@@ -19,8 +19,9 @@ prerequisites:
 related:
   - prediction-intervals.md
   - quantile-loss.md
-  - forecast-calibration.md
   - conformal-prediction-for-forecasting.md
+  - forecast-calibration.md
+  - deep-learning-forecasting.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -88,3 +89,12 @@ The median is a typical forecast. The 90th percentile is more relevant if server
 - Evaluating only point accuracy and ignoring uncertainty quality.
 - Assuming residual uncertainty is constant across horizons or series groups.
 - Calibrating intervals on the final evaluation period.
+
+## Connections
+
+Probabilistic forecasting generalizes point forecasts into distributions. Its practical surface includes [prediction intervals](prediction-intervals.md), [quantile loss](quantile-loss.md), [forecast calibration](forecast-calibration.md), and [conformal prediction for forecasting](conformal-prediction-for-forecasting.md).
+
+## References
+
+- [Hyndman & Athanasopoulos, FPP3: Distributional forecasts and prediction intervals](https://otexts.com/fpp3/prediction-intervals.html)
+- [Salinas, Flunkert, and Gasthaus, DeepAR](https://arxiv.org/abs/1704.04110)

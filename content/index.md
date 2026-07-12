@@ -36,7 +36,6 @@ related:
   - "18-domain-applications"
   - "19-history-of-ai-and-machine-learning"
   - "20-interview-preparation"
-  - "21-project-and-experience-map"
   - "22-references-and-glossary"
 historical_context: false
 last_reviewed: 2026-07-10
@@ -47,7 +46,6 @@ last_reviewed: 2026-07-10
 
 - [Browse by subject](00-home-and-navigation/index.md)
 - [Browse by learning path](00-home-and-navigation/learning-paths.md)
-- [Browse by professional experience](21-project-and-experience-map/index.md)
 - [Browse by interview question](20-interview-preparation/index.md)
 - [Browse by mathematical prerequisite](01-mathematical-foundations/index.md)
 - [Browse by production lifecycle](13-ml-engineering-and-mlops/index.md)
@@ -77,7 +75,6 @@ last_reviewed: 2026-07-10
 - [Domain Applications](18-domain-applications/index.md)
 - [History of AI and Machine Learning](19-history-of-ai-and-machine-learning/index.md)
 - [Interview Preparation](20-interview-preparation/index.md)
-- [Project and Experience Map](21-project-and-experience-map/index.md)
 - [References and Glossary](22-references-and-glossary/index.md)
 
 ## Authoring policy

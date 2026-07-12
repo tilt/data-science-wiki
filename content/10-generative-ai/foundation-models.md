@@ -1,7 +1,7 @@
 ---
 title: Foundation Models
 slug: generative-ai/foundation-models
-description: Concise guide to Foundation Models in Generative AI and Agentic Systems.
+description: "Large pretrained models adapted to many downstream tasks through prompting, retrieval, or fine-tuning."
 area: generative-ai
 topics:
   - foundation-models
@@ -12,25 +12,36 @@ aliases: []
 prerequisites:
   - index.md
 related:
-  - index.md
+  - pretraining.md
+  - instruction-tuning.md
+  - language-model-architecture.md
+  - fine-tuning-versus-rag.md
+  - multimodal-models.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Foundation Models
 
-## Summary
+A foundation model is pretrained broadly enough to serve as a base for many tasks. In this section, [pretraining](pretraining.md) creates the base distribution, [instruction tuning](instruction-tuning.md) adapts behavior, and [fine tuning versus RAG](fine-tuning-versus-rag.md) decides how applications specialize it.
 
-A foundation model is a large pretrained model intended to support many downstream tasks through prompting, retrieval, adaptation, or tool use. It is a reusable component, not a complete product.
+## Mechanism
 
-## Step-by-step example
+For language models, the base objective is often next-token prediction: maximize $\sum_t \log p_\theta(x_t\mid x_{<t})$. The same base [language model architecture](language-model-architecture.md) can then be prompted, fine-tuned, aligned, or connected to retrieval and tools. [Multimodal models](multimodal-models.md) extend the foundation idea to image, audio, or video tokens.
 
-A contract-review assistant may start with a general language model, then add a contract corpus, citations, schemas, reviewer workflows, and tests for hallucinated clauses.
+## Concrete artifact
 
-## Common failure modes
+```text
+base_model -> instruction_tuning -> safety_policy -> tool/retrieval wrapper -> product task
+```
 
-- Changing Foundation Models without a versioned task-specific evaluation set and trace review.
-- Measuring only final fluency while ignoring retrieval, tool, schema, safety, or latency effects introduced by Foundation Models.
-- Shipping Foundation Models without rollback, monitoring, and examples for known hard cases.
+The artifact shows why application behavior should not be attributed only to the base weights.
 
-- Evaluating only fluent outputs instead of inspecting evidence, traces, schemas, or user impact.
-- Ignoring cost, latency, permissions, and rollback behavior until after deployment.
+## Caveats
+
+Foundation-model capability is uneven across languages, domains, modalities, and time-sensitive facts. Avoid relying on implicit parametric memory when the answer must be current or auditable.
+
+## References
+
+- [Kaplan et al., 2020, Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361)
+- [Touvron et al., 2023, Llama 2](https://arxiv.org/abs/2307.09288)
+- [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)

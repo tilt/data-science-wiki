@@ -1,47 +1,85 @@
 ---
 title: Orthogonality
 slug: mathematical-foundations/orthogonality
-description: Concise guide to Orthogonality in Mathematical Foundations.
+description: "Perpendicular vector directions that separate variation, projections, and basis coordinates."
 area: mathematical-foundations
 topics:
+  - linear-algebra
   - orthogonality
 level: foundational
 status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - index.md
+  - vectors-and-matrices.md
 related:
-  - index.md
+  - vectors-and-matrices.md
+  - norms-and-distances.md
+  - matrix-decompositions.md
+  - singular-value-decomposition.md
+  - ../03-classical-machine-learning/pca.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-## Summary
+# Orthogonality
 
-Orthogonality means vectors are perpendicular under an inner product. In data science, it signals independence of directions in a geometric sense, not necessarily statistical independence.
+Orthogonality means two directions have zero dot product. It is the algebraic version of perpendicularity and is what lets projections, [SVD](singular-value-decomposition.md), QR decomposition, and [PCA](../03-classical-machine-learning/pca.md) separate variation into non-overlapping directions.
 
-## Definition
+## Defining math
 
-Two vectors $u$ and $v$ are orthogonal when their dot product is zero:
+Vectors $x,y\in\mathbb R^d$ are orthogonal when
 
 $$
-u^T v = 0.
+x^\top y=0.
 $$
 
-Orthogonal directions do not overlap in the coordinate system defined by the inner product.
+A matrix $Q$ has orthonormal columns when
 
-## Example
+$$
+Q^\top Q=I.
+$$
 
-In two dimensions, $[1,0]$ and $[0,1]$ are orthogonal. Moving along one direction does not change the coordinate on the other. In high-dimensional embeddings, near-orthogonal vectors have low cosine similarity.
+Then multiplication by $Q$ preserves Euclidean lengths inside its column space:
 
-## ML use
+$$
+\lVert Qz\rVert_2^2=z^\top Q^\top Qz=\lVert z\rVert_2^2.
+$$
 
-Orthogonality appears in PCA components, QR decompositions, regularization, numerical stability, and representation analysis. Orthogonal bases make projections easy because each coordinate can be handled independently.
+That length preservation is why orthogonal bases are numerically convenient in [matrix decompositions](matrix-decompositions.md) and why residuals in least squares are orthogonal to fitted directions.
 
-## Practical caution
+## Executed demo
 
-Orthogonality depends on the representation and scaling. Features can be orthogonal after preprocessing but still statistically or causally related in the real world.
+```python
+import numpy as np
+
+Q, _ = np.linalg.qr(np.array([[1., 1.], [1., 0.], [0., 1.]]))
+print("Q")
+print(np.round(Q, 4))
+print("QtQ")
+print(np.round(Q.T @ Q, 4))
+print("dot_columns", round(Q[:, 0] @ Q[:, 1], 12))
+```
+
+Observed output:
+
+```text
+Q
+[[-0.7071  0.4082]
+ [-0.7071 -0.4082]
+ [-0.      0.8165]]
+QtQ
+[[1. 0.]
+ [0. 1.]]
+dot_columns 0.0
+```
+
+The QR factorization turned two independent columns into an orthonormal basis. The off-diagonal zero in $Q^\top Q$ shows that the two learned basis directions do not overlap under the dot product.
 
 ## Caveats
 
-A common mistake is treating low dot product as proof that concepts are unrelated. In sparse or high-dimensional spaces, many vectors can be nearly orthogonal by chance.
+Orthogonality depends on the inner product. Standard Euclidean orthogonality may be the wrong geometry when features have different units or correlated noise; then [norms and distances](norms-and-distances.md) or whitening need to define the metric first.
+
+## References
+
+- [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
+- [NumPy documentation: `numpy.linalg.qr`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html)

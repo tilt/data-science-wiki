@@ -25,8 +25,8 @@ prerequisites:
   - "08-computer-vision/index.md"
   - "06-deep-learning/index.md"
 related:
-  - "10-generative-ai/index.md"
-  - "18-domain-applications/index.md"
+  - "../10-generative-ai/index.md"
+  - "../18-domain-applications/index.md"
 historical_context: false
 last_reviewed: 2026-07-10
 ---
@@ -55,4 +55,6 @@ Video Understanding is a major knowledge area in this wiki. The index is designe
 - [Self Supervised Video Representation Learning](self-supervised-video-representation-learning.md)
 - [V-JEPA](v-jepa.md)
 - [V-JEPA 2](v-jepa-2.md)
+- [V-JEPA 2 versus Vision-Language Models](v-jepa-2-versus-vision-language-models.md)
 - [World Models](world-models.md)
+- [World Models and JEPA](world-models-and-jepa.md)

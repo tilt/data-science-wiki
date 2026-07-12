@@ -1,40 +1,79 @@
 ---
 title: Stochastic Gradient Descent
 slug: mathematical-foundations/stochastic-gradient-descent
-description: Concise guide to Stochastic Gradient Descent in Mathematical Foundations.
+description: "Gradient descent using noisy gradients from samples or mini-batches."
 area: mathematical-foundations
 topics:
+  - optimization
   - stochastic-gradient-descent
 level: foundational
 status: review
 page_type: algorithm
-aliases: []
+aliases:
+  - SGD
 prerequisites:
-  - index.md
+  - gradient-descent.md
 related:
-  - index.md
+  - gradient-descent.md
+  - gradients.md
+  - optimization.md
+  - ../06-deep-learning/optimizers.md
+  - ../03-classical-machine-learning/logistic-regression.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Stochastic Gradient Descent
 
-## Summary
+Stochastic gradient descent updates parameters using one example or a mini-batch instead of the full dataset. The update is noisier than batch [gradient descent](gradient-descent.md), but each step is cheaper and the noise can help large-scale learning move through flat regions.
 
-Optimization chooses parameters that minimize or maximize an objective. In ML, optimization quality affects both model performance and reproducibility.
+## Defining math
 
-## Core idea
+For empirical risk
 
-- Gradients point in the direction of steepest local increase; gradient descent moves against them.
-- Convex objectives have no bad local minima, but many ML objectives are non-convex.
-- Numerical stability prevents overflow, underflow, and ill-conditioned updates.
+$$
+F(\theta)=\frac{1}{n}\sum_{i=1}^n \ell_i(\theta),
+$$
 
-## Worked example
+full gradient descent uses $\nabla F(\theta)$. SGD samples an index or mini-batch $B_t$ and updates
 
-For linear regression, derive the loss, compute gradients, choose a learning rate, monitor validation loss, and stop when improvement stalls or overfitting begins.
+$$
+\theta_{t+1}=\theta_t-\eta_t\frac{1}{|B_t|}\sum_{i\in B_t}\nabla \ell_i(\theta_t).
+$$
+
+The mini-batch gradient is an unbiased estimate of the full gradient when samples are drawn uniformly. This is the mathematical bridge from [gradients](gradients.md) to neural-network [optimizers](../06-deep-learning/optimizers.md) and online versions of models such as [logistic regression](../03-classical-machine-learning/logistic-regression.md).
+
+## Executed demo
+
+```python
+import numpy as np
+
+rng = np.random.default_rng(4)
+X = rng.normal(size=(20, 1)); y = 3*X[:, 0] + 1
+w = 0.; b = 0.; eta = 0.1
+for epoch in range(5):
+    for i in rng.permutation(len(X)):
+        pred = w*X[i, 0] + b
+        err = pred - y[i]
+        w -= eta*2*err*X[i, 0]
+        b -= eta*2*err
+print("w_b_after_5_epochs", round(w, 4), round(b, 4))
+print("mse", round(np.mean((w*X[:, 0]+b-y)**2), 8))
+```
+
+Observed output:
+
+```text
+w_b_after_5_epochs 3.0 1.0
+mse 0.0
+```
+
+On this noiseless one-dimensional regression, SGD recovers the true slope and intercept after five passes through the data.
 
 ## Caveats
 
-- The learning rate controls stability: too large can diverge, too small can stall.
-- Mini-batch gradients are noisy estimates of the full gradient, so loss curves should be interpreted with smoothing or validation checks.
-- Feature scaling, initialization, and conditioning can dominate convergence speed.
-- Momentum, adaptive optimizers, and schedules change the update rule; compare them under the same data order and stopping criteria.
+SGD is sensitive to learning-rate schedules and batch construction. Non-shuffled data can bias early updates, and noisy gradients can bounce around the optimum unless the step size decays or averaging is used.
+
+## References
+
+- [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
+- [SciPy documentation: `scipy.optimize.minimize`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)

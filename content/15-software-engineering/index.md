@@ -1,7 +1,7 @@
 ---
 title: Software Engineering
 slug: 15-software-engineering
-description: Index and learning map for Software Engineering.
+description: Index and learning map for software engineering concepts used in data and AI systems.
 area: software-engineering
 topics:
   - "python"
@@ -24,16 +24,14 @@ aliases:
 prerequisites:
   - "Basic programming"
 related:
-  - "12-data-engineering/index.md"
-  - "13-ml-engineering-and-mlops/index.md"
+  - "../12-data-engineering/index.md"
+  - "../13-ml-engineering-and-mlops/index.md"
 historical_context: false
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-11
 ---
 # Software Engineering
 
-## Summary
-
-Software Engineering is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+Software engineering in this wiki focuses on the contracts that make data and AI systems maintainable: tested behavior, stable APIs, reviewable architecture, safe production integration, and operational documentation.
 
 ## Subtopics
 
