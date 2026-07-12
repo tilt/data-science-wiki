@@ -1,4 +1,4 @@
-.PHONY: help doctor setup install preview build clean validate lint test check-links check-content portability-check format ci deploy-info new-page new-topic generate-subtopics improve-generated-content export-mkdocs serve-build list-stubs list-drafts
+.PHONY: help doctor setup install preview preview-watch build clean validate lint test check-links check-content portability-check format ci deploy-info new-page new-topic generate-subtopics improve-generated-content export-mkdocs serve-build list-stubs list-drafts
 
 PORT ?= 8080
 WS_PORT ?= $(shell expr $(PORT) + 1)
@@ -15,7 +15,12 @@ install: ## Install locked dependencies reproducibly.
 	npm ci
 	npx quartz plugin install
 
-preview: ## Start Quartz local preview with watching.
+preview: ## Serve public/ locally; build once first only if public/ is missing.
+	@if [ ! -f public/index.html ]; then echo "public/index.html not found; running make build first."; $(MAKE) build; fi
+	@echo "Preview URL: http://localhost:$(PORT)"
+	node scripts/serve-public.mjs --port $(PORT) --dir public
+
+preview-watch: ## Start Quartz local preview with watching.
 	@echo "Preview URL: http://localhost:$(PORT)"
 	npm run quartz -- build --serve --port $(PORT) --wsPort $(WS_PORT)
 
@@ -64,8 +69,8 @@ improve-generated-content: ## Replace generated placeholder prose with concise t
 export-mkdocs: portability-check ## Generate an MkDocs-compatible staging directory.
 	node scripts/export-mkdocs.mjs
 
-serve-build: build ## Serve the built public directory for inspection.
-	npx serve public
+serve-build: build ## Build, then serve the public directory for inspection.
+	node scripts/serve-public.mjs --port $(PORT) --dir public
 
 list-stubs: ## List stub pages.
 	node scripts/list-content.mjs stubs

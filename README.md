@@ -37,7 +37,7 @@ Open Obsidian, choose "Open folder as vault", and select this repository's `cont
 make preview
 ```
 
-The default URL is `http://localhost:8080`. Use `PORT=8090 make preview` to choose another port.
+The default URL is `http://localhost:8080`. Use `PORT=8090 make preview` to choose another port. `make preview` serves the existing `public/` build when present; use `make preview-watch` when you want Quartz to rebuild on file changes.
 
 ## Validation
 
