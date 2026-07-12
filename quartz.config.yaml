@@ -57,12 +57,15 @@ plugins:
         dark: github-dark
       keepBackground: false
     order: 20
-  - source: github:quartz-community/obsidian-flavored-markdown
+  - source: github:quartz-community/obsidian-flavored-markdown#07eaca7b31a537c7c4a0fd2848b1f00014c940af
     enabled: true
     options:
       enableInHtmlEmbed: false
       enableCheckbox: true
     order: 30
+  - source: ./plugins/mermaid-stability
+    enabled: true
+    order: 31
   - source: github:quartz-community/github-flavored-markdown
     enabled: true
     order: 40

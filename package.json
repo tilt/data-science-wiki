@@ -7,16 +7,19 @@
   "license": "MIT",
   "scripts": {
     "quartz": "./quartz/bootstrap-cli.mjs",
-    "install-plugins": "npx tsx ./quartz/plugins/loader/install-plugins.ts",
+    "install-plugins": "npx tsx ./quartz/plugins/loader/install-plugins.ts && node scripts/patch-mermaid-config.mjs",
+    "patch-plugins": "node scripts/patch-mermaid-config.mjs",
     "prebuild": "npm run install-plugins",
     "build": "npx quartz build",
-    "preview": "npx quartz build --serve",
+    "preview": "node scripts/serve-public.mjs",
+    "preview:watch": "npm run patch-plugins && npx quartz build --serve",
     "check": "tsc --noEmit && npx prettier . --check",
     "format": "npx prettier . --write",
     "test": "tsx --test",
     "validate:content": "node scripts/validate-content.mjs",
     "check-links": "node scripts/check-links.mjs",
-    "portability-check": "node scripts/portability-check.mjs"
+    "portability-check": "node scripts/portability-check.mjs",
+    "test:mermaid": "node scripts/check-mermaid-rendering.mjs"
   },
   "engines": {
     "node": ">=22",
@@ -61,6 +64,7 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@quartz-community/types": "github:quartz-community/types",
     "@quartz-community/utils": "github:quartz-community/utils",
     "@types/hast": "^3.0.4",

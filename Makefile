@@ -14,6 +14,7 @@ setup: install ## Safe first-time setup.
 install: ## Install locked dependencies reproducibly.
 	npm ci
 	npx quartz plugin install
+	npm run patch-plugins
 
 preview: ## Serve public/ locally; build once first only if public/ is missing.
 	@if [ ! -f public/index.html ]; then echo "public/index.html not found; running make build first."; $(MAKE) build; fi
@@ -22,9 +23,11 @@ preview: ## Serve public/ locally; build once first only if public/ is missing.
 
 preview-watch: ## Start Quartz local preview with watching.
 	@echo "Preview URL: http://localhost:$(PORT)"
+	npm run patch-plugins
 	npm run quartz -- build --serve --port $(PORT) --wsPort $(WS_PORT)
 
 build: ## Build the static site into public/.
+	npm run patch-plugins
 	npm run quartz -- build
 
 clean: ## Remove generated build artifacts only.

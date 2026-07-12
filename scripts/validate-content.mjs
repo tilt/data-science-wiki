@@ -55,8 +55,7 @@ const expectedAreas = [
   "18-domain-applications",
   "19-history-of-ai-and-machine-learning",
   "20-interview-preparation",
-  "21-project-and-experience-map",
-  "22-references-and-glossary",
+  "21-references-and-glossary",
 ]
 const bibliographyPath = path.join(root, "references", "bibliography.yml")
 const bibliography = fs.existsSync(bibliographyPath)

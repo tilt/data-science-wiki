@@ -1,0 +1,37 @@
+{
+  "name": "mermaid-stability",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./components": {
+      "import": "./dist/components/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "quartz": {
+    "name": "mermaid-stability",
+    "displayName": "Mermaid Stability",
+    "description": "Stabilizes Mermaid rendering after theme changes and browser text metric differences.",
+    "category": [
+      "component"
+    ],
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "defaultEnabled": true,
+    "components": {
+      "MermaidStability": {
+        "displayName": "Mermaid Stability",
+        "description": "Injects global Mermaid render stabilization resources.",
+        "defaultPosition": "afterBody",
+        "defaultPriority": 100
+      }
+    }
+  }
+}
