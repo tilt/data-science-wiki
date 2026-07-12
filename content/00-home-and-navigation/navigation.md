@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Navigation
 
 ## Summary
@@ -27,7 +28,7 @@ Navigation explains how to move through the wiki by task: learning, interview pr
 
 ## Routes
 
-Use subject indexes when studying a domain from first principles. Use [learning paths](learning-paths.md) for sequenced study and [interview preparation](../20-interview-preparation/index.md) when preparing concise answers. Use the [references and glossary](../22-references-and-glossary/index.md) pages when looking up terminology.
+Use subject indexes when studying a domain from first principles. Use [learning paths](learning-paths.md) for sequenced study and [interview preparation](../20-interview-preparation/index.md) when preparing concise answers. Use the [references and glossary](../21-references-and-glossary/index.md) pages when looking up terminology.
 
 ## Example
 

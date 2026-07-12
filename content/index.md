@@ -36,10 +36,11 @@ related:
   - "18-domain-applications"
   - "19-history-of-ai-and-machine-learning"
   - "20-interview-preparation"
-  - "22-references-and-glossary"
+  - "21-references-and-glossary"
 historical_context: false
 last_reviewed: 2026-07-10
 ---
+
 # Data Science, Machine Learning & AI Wiki
 
 ## Start routes
@@ -75,7 +76,7 @@ last_reviewed: 2026-07-10
 - [Domain Applications](18-domain-applications/index.md)
 - [History of AI and Machine Learning](19-history-of-ai-and-machine-learning/index.md)
 - [Interview Preparation](20-interview-preparation/index.md)
-- [References and Glossary](22-references-and-glossary/index.md)
+- [References and Glossary](21-references-and-glossary/index.md)
 
 ## Authoring policy
 
