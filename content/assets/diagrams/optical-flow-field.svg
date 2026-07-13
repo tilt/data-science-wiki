@@ -51,6 +51,6 @@
     <circle cx="355" cy="352" r="7" fill="#f97316"/>
     <text x="370" y="357">later intensity pattern</text>
     <path d="M582 352 L630 342" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
-    <text x="646" y="357">flow vector $(u,v)$</text>
+    <text x="646" y="357">flow vector (u,v)</text>
   </g>
 </svg>

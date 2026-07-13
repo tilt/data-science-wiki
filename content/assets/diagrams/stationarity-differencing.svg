@@ -23,6 +23,6 @@
     <line x1="506" y1="105" x2="534" y2="105" stroke="#2563eb" stroke-width="4"/>
     <text x="544" y="109">level y_t</text>
     <line x1="506" y1="130" x2="534" y2="130" stroke="#f97316" stroke-width="4"/>
-    <text x="544" y="134">difference y_t - y_{t-1}</text>
+    <text x="544" y="134">difference y_t - y_t-1</text>
   </g>
 </svg>

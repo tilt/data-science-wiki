@@ -19,7 +19,7 @@
     <rect x="220" y="135" width="145" height="98" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
     <text x="292" y="164" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">pretraining</text>
     <text x="292" y="191" text-anchor="middle" font-size="13" fill="#374151">next-token loss</text>
-    <text x="292" y="211" text-anchor="middle" font-size="13" fill="#374151">$-\log p(x_t|x_{&lt;t})$</text>
+    <text x="292" y="211" text-anchor="middle" font-size="13" fill="#374151">-log p(x_t | x&lt;t)</text>
 
     <rect x="405" y="135" width="145" height="98" rx="8" fill="#ecfdf5" stroke="#0f766e" stroke-width="2"/>
     <text x="477" y="164" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">instruction tuning</text>

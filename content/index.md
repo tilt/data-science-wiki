@@ -22,6 +22,7 @@ related:
   - "04-recommendation-systems"
   - "05-time-series-and-forecasting"
   - "06-deep-learning"
+  - "06a-reinforcement-learning"
   - "07-natural-language-processing"
   - "08-computer-vision"
   - "09-video-understanding"
@@ -37,7 +38,6 @@ related:
   - "19-history-of-ai-and-machine-learning"
   - "20-interview-preparation"
   - "21-references-and-glossary"
-  - "22-reinforcement-learning"
 historical_context: false
 last_reviewed: 2026-07-10
 ---
@@ -63,7 +63,7 @@ last_reviewed: 2026-07-10
 - [Recommendation Systems and Personalization](04-recommendation-systems/index.md)
 - [Time-Series Forecasting](05-time-series-and-forecasting/index.md)
 - [Deep Learning](06-deep-learning/index.md)
-- [Reinforcement Learning](22-reinforcement-learning/index.md)
+- [Reinforcement Learning](06a-reinforcement-learning/index.md)
 - [Natural Language Processing](07-natural-language-processing/index.md)
 - [Computer Vision](08-computer-vision/index.md)
 - [Video Understanding](09-video-understanding/index.md)

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Contrastive learning embedding geometry</title>
+  <desc id="desc">A two-dimensional embedding plot showing an anchor, its positive view, negatives, and arrows for attraction and repulsion.</desc>
+  <rect width="960" height="540" fill="transparent"/>
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <g font-family="Arial, sans-serif">
+    <text x="480" y="42" text-anchor="middle" font-size="27" font-weight="700" fill="#111827">Contrastive learning shapes an embedding space</text>
+    <text x="480" y="72" text-anchor="middle" font-size="15" fill="#4b5563">Positive views are pulled together; negatives compete in the softmax denominator.</text>
+
+    <rect x="78" y="105" width="620" height="355" rx="8" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <line x1="118" y1="420" x2="655" y2="420" stroke="#94a3b8" stroke-width="1.5"/>
+    <line x1="118" y1="420" x2="118" y2="132" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="385" y="446" text-anchor="middle" font-size="13" fill="#475569">embedding dimension 1</text>
+    <text x="92" y="282" text-anchor="middle" font-size="13" fill="#475569" transform="rotate(-90 92 282)">embedding dimension 2</text>
+
+    <circle cx="310" cy="275" r="12" fill="#2563eb"/>
+    <text x="310" y="252" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">anchor</text>
+    <circle cx="370" cy="235" r="12" fill="#0f766e"/>
+    <text x="370" y="213" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">positive view</text>
+
+    <circle cx="525" cy="160" r="11" fill="#dc2626"/>
+    <circle cx="575" cy="325" r="11" fill="#dc2626"/>
+    <circle cx="210" cy="360" r="11" fill="#dc2626"/>
+    <circle cx="455" cy="380" r="11" fill="#dc2626"/>
+    <text x="595" y="152" font-size="14" font-weight="700" fill="#111827">negatives</text>
+
+    <path d="M322 267 C340 254 351 246 358 241" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow-blue)"/>
+    <text x="330" y="318" text-anchor="middle" font-size="14" fill="#2563eb">pull together</text>
+
+    <path d="M325 265 C393 220 462 183 512 165" fill="none" stroke="#dc2626" stroke-width="2.4" stroke-dasharray="7 5" marker-end="url(#arrow-red)"/>
+    <path d="M326 281 C415 303 501 320 562 323" fill="none" stroke="#dc2626" stroke-width="2.4" stroke-dasharray="7 5" marker-end="url(#arrow-red)"/>
+    <path d="M301 288 C270 315 238 341 220 355" fill="none" stroke="#dc2626" stroke-width="2.4" stroke-dasharray="7 5" marker-end="url(#arrow-red)"/>
+    <text x="510" y="286" text-anchor="middle" font-size="14" fill="#dc2626">push apart</text>
+
+    <rect x="735" y="128" width="170" height="245" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="820" y="160" text-anchor="middle" font-size="16" font-weight="700" fill="#111827">softmax over batch</text>
+    <text x="820" y="198" text-anchor="middle" font-size="13" fill="#374151">anchor-positive score</text>
+    <rect x="770" y="212" width="100" height="18" rx="4" fill="#93c5fd"/>
+    <text x="820" y="254" text-anchor="middle" font-size="13" fill="#374151">negative scores</text>
+    <rect x="770" y="268" width="76" height="14" rx="4" fill="#fecaca"/>
+    <rect x="770" y="291" width="55" height="14" rx="4" fill="#fecaca"/>
+    <rect x="770" y="314" width="38" height="14" rx="4" fill="#fecaca"/>
+    <text x="820" y="355" text-anchor="middle" font-size="13" fill="#374151">loss falls when the</text>
+    <text x="820" y="374" text-anchor="middle" font-size="13" fill="#374151">positive gets most mass</text>
+  </g>
+</svg>

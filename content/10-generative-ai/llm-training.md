@@ -25,7 +25,7 @@ related:
   - "alignment.md"
   - "fine-tuning-versus-rag.md"
   - "../06-deep-learning/self-supervised-learning.md"
-  - "../22-reinforcement-learning/reinforcement-learning-from-human-feedback.md"
+  - "../06a-reinforcement-learning/reinforcement-learning-from-human-feedback.md"
 historical_context: false
 last_reviewed: 2026-07-13
 ---
@@ -67,7 +67,7 @@ In chat training, the loss is usually applied to assistant tokens, not user toke
 
 ## Stage 4: Preference Optimization
 
-Preference data compares candidate responses. In [RLHF](../22-reinforcement-learning/reinforcement-learning-from-human-feedback.md), a reward model learns from chosen/rejected pairs and the policy is optimized with a reward-minus-KL objective:
+Preference data compares candidate responses. In [RLHF](../06a-reinforcement-learning/reinforcement-learning-from-human-feedback.md), a reward model learns from chosen/rejected pairs and the policy is optimized with a reward-minus-KL objective:
 
 $$
 \max_\pi\;
@@ -107,7 +107,7 @@ LLM training is not a linear recipe. Modern systems often iterate: collect failu
 
 - [Pretraining](pretraining.md) gives the local next-token objective in a narrower page.
 - [Self-Supervised Learning](../06-deep-learning/self-supervised-learning.md) explains why next-token prediction does not require manual labels.
-- [Reinforcement Learning from Human Feedback](../22-reinforcement-learning/reinforcement-learning-from-human-feedback.md) covers preference modeling and RLHF in detail.
+- [Reinforcement Learning from Human Feedback](../06a-reinforcement-learning/reinforcement-learning-from-human-feedback.md) covers preference modeling and RLHF in detail.
 - [Alignment](alignment.md) covers training-time and runtime controls for intended behavior.
 
 ## References

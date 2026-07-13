@@ -1,6 +1,6 @@
 ---
 title: Reinforcement Learning
-slug: 22-reinforcement-learning
+slug: 06a-reinforcement-learning
 description: Sequential decision making with rewards, policies, value functions, exploration, and preference-based optimization.
 area: reinforcement-learning
 topics:

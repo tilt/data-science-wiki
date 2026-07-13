@@ -13,22 +13,22 @@
   <g font-family="Arial, sans-serif">
     <rect x="90" y="145" width="230" height="120" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
     <text x="205" y="180" text-anchor="middle" font-size="19" font-weight="700" fill="#111827">Agent</text>
-    <text x="205" y="210" text-anchor="middle" font-size="14" fill="#374151">policy $\pi(a|s)$</text>
-    <text x="205" y="235" text-anchor="middle" font-size="14" fill="#374151">value estimate $V(s)$ or $Q(s,a)$</text>
+    <text x="205" y="210" text-anchor="middle" font-size="14" fill="#374151">policy pi(a|s)</text>
+    <text x="205" y="235" text-anchor="middle" font-size="14" fill="#374151">value estimate V(s) or Q(s,a)</text>
 
     <rect x="580" y="145" width="230" height="120" rx="8" fill="#ecfdf5" stroke="#0f766e" stroke-width="2"/>
     <text x="695" y="180" text-anchor="middle" font-size="19" font-weight="700" fill="#111827">Environment</text>
-    <text x="695" y="210" text-anchor="middle" font-size="14" fill="#374151">transition $P(s'|s,a)$</text>
-    <text x="695" y="235" text-anchor="middle" font-size="14" fill="#374151">reward $R(s,a,s')$</text>
+    <text x="695" y="210" text-anchor="middle" font-size="14" fill="#374151">transition P(s'|s,a)</text>
+    <text x="695" y="235" text-anchor="middle" font-size="14" fill="#374151">reward R(s,a,s')</text>
 
     <path d="M322 180 C405 125 495 125 578 180" fill="none" stroke="#374151" stroke-width="2.5" marker-end="url(#arrow)"/>
-    <text x="450" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">action $A_t$</text>
+    <text x="450" y="134" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">action A_t</text>
 
     <path d="M578 235 C495 310 405 310 322 235" fill="none" stroke="#374151" stroke-width="2.5" marker-end="url(#arrow)"/>
-    <text x="450" y="319" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">next state $S_{t+1}$ and reward $R_{t+1}$</text>
+    <text x="450" y="319" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">next state S_t+1 and reward R_t+1</text>
 
     <rect x="330" y="170" width="240" height="76" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
     <text x="450" y="197" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">learning signal</text>
-    <text x="450" y="222" text-anchor="middle" font-size="13" fill="#374151">$r+\gamma V(s')-V(s)$ or policy advantage</text>
+    <text x="450" y="222" text-anchor="middle" font-size="13" fill="#374151">r + gamma V(s') - V(s) or policy advantage</text>
   </g>
 </svg>

@@ -42,6 +42,7 @@ const expectedAreas = [
   "04-recommendation-systems",
   "05-time-series-and-forecasting",
   "06-deep-learning",
+  "06a-reinforcement-learning",
   "07-natural-language-processing",
   "08-computer-vision",
   "09-video-understanding",
@@ -57,7 +58,6 @@ const expectedAreas = [
   "19-history-of-ai-and-machine-learning",
   "20-interview-preparation",
   "21-references-and-glossary",
-  "22-reinforcement-learning",
 ]
 const bibliographyPath = path.join(root, "references", "bibliography.yml")
 const bibliography = fs.existsSync(bibliographyPath)

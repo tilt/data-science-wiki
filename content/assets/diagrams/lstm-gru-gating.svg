@@ -16,27 +16,27 @@
 
     <rect x="60" y="185" width="210" height="62" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
     <text x="165" y="211" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">previous memory</text>
-    <text x="165" y="232" text-anchor="middle" font-size="14" fill="#374151">$c_{t-1}$</text>
+    <text x="165" y="232" text-anchor="middle" font-size="14" fill="#374151">c_t-1</text>
 
     <rect x="360" y="168" width="250" height="96" rx="8" fill="#ecfdf5" stroke="#0f766e" stroke-width="2"/>
     <text x="485" y="194" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">memory update</text>
-    <text x="485" y="219" text-anchor="middle" font-size="14" fill="#374151">$c_t=f_t \odot c_{t-1}+i_t \odot \tilde c_t$</text>
+    <text x="485" y="219" text-anchor="middle" font-size="14" fill="#374151">c_t = f_t * c_t-1 + i_t * c~_t</text>
     <text x="485" y="243" text-anchor="middle" font-size="13" fill="#374151">additive path helps gradients persist</text>
 
     <rect x="710" y="185" width="210" height="62" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
     <text x="815" y="211" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">new hidden output</text>
-    <text x="815" y="232" text-anchor="middle" font-size="14" fill="#374151">$h_t=o_t \odot \tanh(c_t)$</text>
+    <text x="815" y="232" text-anchor="middle" font-size="14" fill="#374151">h_t = o_t * tanh(c_t)</text>
 
     <rect x="360" y="290" width="70" height="46" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-    <text x="395" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">$f_t$</text>
+    <text x="395" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">f_t</text>
     <text x="395" y="351" text-anchor="middle" font-size="12" fill="#374151">forget</text>
 
     <rect x="450" y="290" width="70" height="46" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-    <text x="485" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">$i_t$</text>
+    <text x="485" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">i_t</text>
     <text x="485" y="351" text-anchor="middle" font-size="12" fill="#374151">write</text>
 
     <rect x="540" y="290" width="70" height="46" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-    <text x="575" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">$o_t$</text>
+    <text x="575" y="318" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">o_t</text>
     <text x="575" y="351" text-anchor="middle" font-size="12" fill="#374151">expose</text>
 
     <path d="M272 216 L356 216" fill="none" stroke="#374151" stroke-width="2.3" marker-end="url(#arrow)"/>
@@ -52,16 +52,16 @@
 
     <rect x="300" y="420" width="170" height="58" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
     <text x="385" y="445" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">old state</text>
-    <text x="385" y="466" text-anchor="middle" font-size="13" fill="#374151">$h_{t-1}$</text>
+    <text x="385" y="466" text-anchor="middle" font-size="13" fill="#374151">h_t-1</text>
 
     <rect x="530" y="420" width="260" height="58" rx="8" fill="#ecfdf5" stroke="#0f766e" stroke-width="2"/>
     <text x="660" y="445" text-anchor="middle" font-size="14" font-weight="700" fill="#111827">new state</text>
-    <text x="660" y="466" text-anchor="middle" font-size="13" fill="#374151">$h_t=z_t \odot h_{t-1}+(1-z_t)\odot \tilde h_t$</text>
+    <text x="660" y="466" text-anchor="middle" font-size="13" fill="#374151">h_t = z_t * h_t-1 + (1-z_t) * h~_t</text>
 
     <rect x="465" y="354" width="72" height="42" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-    <text x="501" y="381" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">$z_t$ keep</text>
+    <text x="501" y="381" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">z_t keep</text>
     <rect x="555" y="354" width="72" height="42" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
-    <text x="591" y="381" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">$r_t$ reset</text>
+    <text x="591" y="381" text-anchor="middle" font-size="13" font-weight="700" fill="#111827">r_t reset</text>
 
     <path d="M472 449 L526 449" fill="none" stroke="#374151" stroke-width="2.3" marker-end="url(#arrow)"/>
     <path d="M501 398 L565 421" fill="none" stroke="#f97316" stroke-width="2" marker-end="url(#arrow)"/>

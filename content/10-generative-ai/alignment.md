@@ -18,7 +18,7 @@ related:
   - hallucination-mitigation.md
   - data-privacy.md
   - agent-evaluation.md
-  - ../22-reinforcement-learning/reinforcement-learning-from-human-feedback.md
+  - ../06a-reinforcement-learning/reinforcement-learning-from-human-feedback.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
