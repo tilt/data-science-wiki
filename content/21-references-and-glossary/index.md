@@ -32,6 +32,7 @@ References and Glossary is the wiki's lookup and citation spine. It collects def
 
 - [References](references.md)
 - [Glossary](glossary.md)
+- [Metrics Glossary](metrics.md)
 - [Notation](notation.md)
 - [Acronyms](acronyms.md)
 - [Further Reading](further-reading.md)
@@ -39,6 +40,7 @@ References and Glossary is the wiki's lookup and citation spine. It collects def
 ## How to use this section
 
 - Use [Glossary](glossary.md) for short definitions of recurring terms.
+- Use [Metrics Glossary](metrics.md) to look up evaluation metrics and jump to their canonical pages.
 - Use [Acronyms](acronyms.md) when a page uses abbreviated names.
 - Use [Notation](notation.md) to interpret formulas consistently across math, forecasting, ML, and evaluation pages.
 - Use [Bibliography](bibliography.md) to understand source keys in front matter.

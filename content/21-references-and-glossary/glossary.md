@@ -23,7 +23,7 @@ last_reviewed: 2026-07-10
 ---
 # Glossary
 
-This glossary defines recurring terms used across the wiki. It is intentionally concise; follow linked concept pages for formulas, examples, and production details. Use [acronyms](acronyms.md) for short forms, [notation](notation.md) for symbols, and [references](references.md) for source policy.
+This glossary defines recurring terms used across the wiki. It is intentionally concise; follow linked concept pages for formulas, examples, and production details. Use [acronyms](acronyms.md) for short forms, [notation](notation.md) for symbols, [metrics](metrics.md) for evaluation metrics, and [references](references.md) for source policy.
 
 | Term | Meaning |
 | ---- | ------- |
