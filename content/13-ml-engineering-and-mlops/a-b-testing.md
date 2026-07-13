@@ -34,32 +34,16 @@ $$
 
 The experimentation section has the canonical stats treatment in [A/B testing](../16-experimentation-and-evaluation/a-b-testing.md); this page focuses on ML release mechanics.
 
-## Executed Check
+## Worked Check
 
-```python
-from scipy.stats import norm
+For a production experiment with 12,000 control users and 11,850 treatment users:
 
-n_a, conv_a = 12000, 984
-n_b, conv_b = 11850, 1055
-p_a, p_b = conv_a / n_a, conv_b / n_b
-p_pool = (conv_a + conv_b) / (n_a + n_b)
-se = (p_pool * (1 - p_pool) * (1/n_a + 1/n_b)) ** 0.5
-z = (p_b - p_a) / se
-p = 2 * (1 - norm.cdf(abs(z)))
-print("ab_rates", round(p_a, 4), round(p_b, 4))
-print("ab_lift_pp", round((p_b - p_a) * 100, 2))
-print("ab_z", round(z, 3), "p", round(p, 4))
-```
+| arm | users | conversions | rate |
+| --- | ---: | ---: | ---: |
+| control | 12,000 | 984 | 0.0820 |
+| treatment | 11,850 | 1,055 | 0.0890 |
 
-Observed output:
-
-```text
-ab_rates 0.082 0.089
-ab_lift_pp 0.7
-ab_z 1.941 p 0.0522
-```
-
-The observed lift is positive but misses a conventional 5% two-sided threshold. A release decision should also inspect guardrails such as [model degradation](model-degradation.md), latency, complaint rate, and segment harm. A [canary deployment](canary-deployment.md) can precede the experiment, but it is not a substitute for randomized impact measurement.
+The absolute lift is 0.7 percentage points. Using the pooled-rate z-test gives $z=1.941$ and a two-sided $p=0.0522$, so the observed lift is positive but misses a conventional 5% two-sided threshold. A release decision should also inspect guardrails such as [model degradation](model-degradation.md), latency, complaint rate, and segment harm. A [canary deployment](canary-deployment.md) can precede the experiment, but it is not a substitute for randomized impact measurement.
 
 ## Failure Modes
 

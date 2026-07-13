@@ -38,26 +38,16 @@ where $g$ is a cheap retrieval score and $h$ is a richer [ranking](ranking.md) m
 
 ## Worked example
 
-```python
-import numpy as np
-user = np.array([.8, .2])
-item_emb = np.array([[.9,.1], [.1,.8], [.7,.2], [.4,.6]])
-retrieval = item_emb @ user
-cand = np.argsort(-retrieval)[:3]
-margin = np.array([.0, .2, .1, .3])
-rerank = retrieval[cand] + margin[cand]
-print("retrieved", cand.tolist())
-print("reranked", cand[np.argsort(-rerank)].tolist())
-```
+A cheap retrieval score can select candidates before the ranker adds richer features:
 
-Observed output:
+| Item | Retrieval score | Retrieved? | Ranker margin | Final rank score |
+| --- | ---: | --- | ---: | ---: |
+| 0 | 0.74 | yes | 0.00 | 0.74 |
+| 1 | 0.24 | no | 0.20 | not ranked |
+| 2 | 0.60 | yes | 0.10 | 0.70 |
+| 3 | 0.44 | yes | 0.30 | 0.74 |
 
-```text
-retrieved [0, 2, 3]
-reranked [0, 3, 2]
-```
-
-The retrieval model recalls items 0, 2, and 3; the ranker changes the order using an extra margin feature. [Hybrid recommenders](hybrid-recommenders.md) often feed several such scores into the ranker.
+The retrieval stage recalls items 0, 2, and 3; item 1 is never seen by the ranker. The ranker then promotes item 3 above item 2 using the margin feature. [Hybrid recommenders](hybrid-recommenders.md) often feed several such scores into the ranker.
 
 ## Caveats
 

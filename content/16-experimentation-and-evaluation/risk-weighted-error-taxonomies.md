@@ -40,28 +40,16 @@ with weights chosen before evaluation. A production gate might allow minor forma
 
 ## Worked calculation
 
-```python
-import numpy as np
+For ten reviewed outputs, suppose the severity counts and weights are:
 
-sev = np.array(["minor","major","critical","minor","ok","major","ok","critical","minor","ok"])
-weights = {"ok": 0, "minor": 1, "major": 5, "critical": 20}
-weighted = np.array([weights[s] for s in sev])
-print(f"raw_error_rate {(sev != 'ok').mean():.2f}")
-print(f"severe_error_rate {np.isin(sev, ['major','critical']).mean():.2f}")
-print(f"risk_weighted_errors {weighted.sum()}")
-print("by_severity", {k: int((sev == k).sum()) for k in ["ok","minor","major","critical"]})
-```
+| severity | count | weight | contribution |
+| --- | ---: | ---: | ---: |
+| ok | 3 | 0 | 0 |
+| minor | 3 | 1 | 3 |
+| major | 2 | 5 | 10 |
+| critical | 2 | 20 | 40 |
 
-Observed output:
-
-```text
-raw_error_rate 0.70
-severe_error_rate 0.40
-risk_weighted_errors 53
-by_severity {'ok': 3, 'minor': 3, 'major': 2, 'critical': 2}
-```
-
-The raw error rate is bad, but the more important signal is the two critical failures. A system with lower average score but zero critical errors may be preferable in the comparison frame for [generative AI and classical ML systems](comparing-generative-ai-and-classical-ml-systems.md).
+The raw error rate is $(3+2+2)/10=0.70$, the severe-error rate is $(2+2)/10=0.40$, and the risk-weighted total is $3+10+40=53$. The raw error rate is bad, but the more important signal is the two critical failures. A system with lower average score but zero critical errors may be preferable in the comparison frame for [generative AI and classical ML systems](comparing-generative-ai-and-classical-ml-systems.md).
 
 ## Caveats
 

@@ -51,7 +51,7 @@ Observed output:
 mean_diff 0.5646 t_stat 2.4319 p_value 0.0173
 ```
 
-The Welch t-test reports a small p-value for this simulated difference, but the decision should still consider effect size, cost, and [statistical significance](../16-experimentation-and-evaluation/statistical-significance.md) in context.
+The simulated mean difference is `0.5646`, and the Welch t-statistic is `2.4319`, producing `p_value 0.0173`. That is evidence against equal means under the test assumptions, but the decision should still consider effect size, cost, and [statistical significance](../16-experimentation-and-evaluation/statistical-significance.md) in context.
 
 ## Caveats
 

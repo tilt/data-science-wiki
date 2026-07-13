@@ -62,7 +62,7 @@ first_transitions [(0, 0, 0.97, 0.97), (0, 0, 2.15, 3.12), (0, 0, 0.18, 3.3), (0
 time_after_12 38.09 final_state 1
 ```
 
-The state path alone hides elapsed time: several self-transitions consume very different durations before the process reaches state 1.
+The first six transitions all stay in state 0, but their holding times range from `0.18` to `3.76`, so the state path alone hides elapsed time. After 12 transitions the process has consumed `38.09` time units and ended in state 1.
 
 ## Caveats
 

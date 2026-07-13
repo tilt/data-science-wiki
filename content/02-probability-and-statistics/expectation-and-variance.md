@@ -38,27 +38,22 @@ is often easier to compute. These quantities define the parameters of many [comm
 
 ## Worked computation
 
-```python
-import numpy as np
+Consider a discrete variable with values $0,1,2,5$ and probabilities $0.50,0.30,0.15,0.05$.
 
-x = np.array([0, 1, 2, 5])
-p = np.array([.50, .30, .15, .05])
-mu = np.dot(x, p)
-var = np.dot((x - mu) ** 2, p)
-rng = np.random.default_rng(20260711)
-sample = rng.choice(x, size=200000, p=p)
-print("exact_mean", round(mu, 4), "exact_var", round(var, 4))
-print("sample_mean", round(sample.mean(), 4), "sample_var", round(sample.var(), 4))
-```
+| $x$ | $P(X=x)$ | $xP(X=x)$ | $x^2P(X=x)$ |
+| ---: | ---: | ---: | ---: |
+| 0 | 0.50 | 0.00 | 0.00 |
+| 1 | 0.30 | 0.30 | 0.30 |
+| 2 | 0.15 | 0.30 | 0.60 |
+| 5 | 0.05 | 0.25 | 1.25 |
 
-Observed output:
+The mean is $\mathbb E[X]=0.00+0.30+0.30+0.25=0.85$. The second moment is $\mathbb E[X^2]=2.15$, so
 
-```text
-exact_mean 0.85 exact_var 1.4275
-sample_mean 0.8492 sample_var 1.4311
-```
+$$
+\operatorname{Var}(X)=2.15-0.85^2=1.4275.
+$$
 
-The simulated long-run average is near the exact expectation. Variance is large relative to the mean because the rare value 5 contributes a large squared deviation.
+Variance is large relative to the mean because the rare value 5 contributes $1.25$ to the second moment, even though its probability is only 5 percent.
 
 ## Caveats
 

@@ -39,43 +39,18 @@ A hallucination review should classify each unsupported output by where the fail
 
 This is why "use RAG" is not a complete hallucination control. Retrieval can reduce uncertainty, but the answer still needs claim-level support and an abstention path.
 
-## Executed abstention comparison
+## Worked abstention comparison
 
-I ran a four-question toy evaluation comparing a baseline answer policy with an abstention policy:
+A four-question review compares a baseline answer policy with an abstention policy:
 
-```python
-from collections import defaultdict
+| question type | baseline supported? | abstention policy supported? |
+| --- | ---: | ---: |
+| refund window | yes | yes |
+| dental surgery coverage | no | yes, abstains |
+| fax cancellation | no | yes, abstains |
+| admin MFA | yes | yes |
 
-outputs = [
-    ("baseline", "Refunds are available for 30 days.", True),
-    ("baseline", "Dental surgery is covered.", False),
-    ("baseline", "You can cancel by fax.", False),
-    ("baseline", "Admins must use MFA.", True),
-    ("abstain_policy", "Refunds are available for 30 days.", True),
-    ("abstain_policy", "I cannot determine dental surgery coverage from the supplied document.", True),
-    ("abstain_policy", "I cannot determine fax cancellation from the supplied document.", True),
-    ("abstain_policy", "Admins must use MFA.", True),
-]
-
-by_policy = defaultdict(list)
-for policy, _text, supported in outputs:
-    by_policy[policy].append(supported)
-
-print("HALLUCINATIONS")
-for policy, vals in by_policy.items():
-    unsupported_claim_rate = 1 - sum(vals) / len(vals)
-    print(policy, "unsupported_claim_rate", round(unsupported_claim_rate, 2), "n", len(vals))
-```
-
-Observed output:
-
-```text
-HALLUCINATIONS
-baseline unsupported_claim_rate 0.5 n 4
-abstain_policy unsupported_claim_rate 0.0 n 4
-```
-
-The abstention policy removed unsupported claims in this small set by replacing two guesses with "I cannot determine..." responses. That improves factuality but may reduce apparent helpfulness, so the metric should be reported beside coverage and user escalation rates in the [error taxonomy](error-taxonomies.md).
+The baseline has 2 unsupported claims out of 4 answers, so its unsupported-claim rate is 0.50. The abstention policy has 0 unsupported claims out of 4 reviewed outputs because it replaces two guesses with "I cannot determine..." responses. That improves factuality but may reduce apparent helpfulness, so the metric should be reported beside coverage and user escalation rates in the [error taxonomy](error-taxonomies.md).
 
 ## Caveats
 

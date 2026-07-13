@@ -54,10 +54,10 @@ print("beta_hat", np.round(bhat, 4).tolist(),
 Observed output:
 
 ```text
-beta_hat [0.9369, 1.8339] sigma_hat 0.6944 loglik -84.342
+beta_hat [1.0462, 1.9582] sigma_hat 0.7355 loglik -88.934
 ```
 
-The fitted parameters are close to the generating values, but the interpretation depends on the Gaussian error and independence assumptions.
+The fitted coefficients `[1.0462,1.9582]` are close to the generating values `[1.0,2.0]`, and the fitted noise scale is `0.7355` for data generated with scale 0.7. The log-likelihood `-88.934` is meaningful only under the Gaussian error and independence assumptions.
 
 ## Caveats
 

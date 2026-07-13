@@ -40,24 +40,14 @@ This audit should sit next to [human evaluation](human-evaluation.md), not repla
 
 ## Worked calculation
 
-```python
-import numpy as np
-from sklearn.metrics import cohen_kappa_score
+On a twelve-example audit, the human and judge labels compare as follows:
 
-human = np.array(["A","A","B","tie","B","A","B","A","tie","B","A","B"])
-judge = np.array(["A","B","B","tie","B","A","A","A","tie","B","A","B"])
-print(f"agreement {(human == judge).mean():.3f}")
-print(f"cohen_kappa {cohen_kappa_score(human, judge):.3f}")
-print(f"non_tie_judge_A_share {(judge[judge != 'tie'] == 'A').mean():.3f}")
-```
-
-Observed output:
-
-```text
-agreement 0.833
-cohen_kappa 0.733
-non_tie_judge_A_share 0.500
-```
+| audit statistic | value |
+| --- | ---: |
+| exact agreements | 10 of 12 |
+| raw agreement | 0.833 |
+| Cohen's kappa | 0.733 |
+| judge A-share after removing ties | 0.500 |
 
 The judge agrees with the human labels on 10 of 12 examples and shows no A-side preference in this small audit. That is promising, but too small for a production claim; use [repeated sampling](repeated-sampling.md) and slice audits before trusting automated scores.
 

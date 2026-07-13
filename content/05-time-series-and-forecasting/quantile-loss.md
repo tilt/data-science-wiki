@@ -54,33 +54,18 @@ The median forecast minimizes expected absolute error and corresponds to $\tau=0
 
 When models estimate several quantiles independently, they can produce invalid ordering such as $\hat{q}_{0.9}<\hat{q}_{0.5}$. This is called quantile crossing. It can be reduced with monotonic constraints, joint models, post-processing, or careful calibration.
 
-## Executed example
+## Worked example
 
-```python
-import numpy as np
+For $\tau=0.9$, use $L_\tau=\max(0.9e,-0.1e)$ where $e=y-\hat q$:
 
-y = np.array([2.0, 5.0, 8.0, 10.0])
-q50 = np.array([3.0, 4.0, 7.0, 12.0])
-q90 = np.array([4.0, 6.0, 9.0, 13.0])
+| $y$ | 0.9-quantile forecast | Error $e$ | Pinball loss |
+| ---: | ---: | ---: | ---: |
+| 2 | 4 | -2 | 0.2 |
+| 5 | 6 | -1 | 0.1 |
+| 8 | 9 | -1 | 0.1 |
+| 10 | 13 | -3 | 0.3 |
 
-def pinball(y, q, tau):
-    e = y - q
-    return np.maximum(tau * e, (tau - 1) * e)
-
-print("mean_pinball_tau_0.5", round(float(pinball(y, q50, 0.5).mean()), 3))
-print("mean_pinball_tau_0.9", round(float(pinball(y, q90, 0.9).mean()), 3))
-print("losses_tau_0.9", np.round(pinball(y, q90, 0.9), 3).tolist())
-```
-
-Observed output:
-
-```text
-mean_pinball_tau_0.5 0.625
-mean_pinball_tau_0.9 0.175
-losses_tau_0.9 [0.2, 0.1, 0.1, 0.3]
-```
-
-At $\tau=0.9$, underpredicting is penalized nine times as much as overpredicting by the same amount, which is why high quantiles are useful for service-level decisions.
+The mean 0.9-quantile loss is $(0.2+0.1+0.1+0.3)/4=0.175$. For the median forecasts $3,4,7,12$, the mean $\tau=0.5$ pinball loss is $0.625$. At $\tau=0.9$, underpredicting is penalized nine times as much as overpredicting by the same amount, which is why high quantiles are useful for service-level decisions.
 
 ## Connections
 

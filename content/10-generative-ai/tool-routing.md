@@ -28,27 +28,15 @@ Tool routing decides whether a request should be answered directly, sent to retr
 
 Routing can be rule-based, model-based, or hybrid. The route should include tool name, arguments, confidence, and required confirmation. [Tool schemas](tool-schemas.md) validate arguments, while [guardrails](guardrails.md) enforce permissions and side-effect policy.
 
-## Executed artifact
+## Worked routing table
 
-```python
-queries = ["weather in Berlin", "refund order 52", "what is your return policy"]
-rules = [("weather", "get_weather"), ("refund", "create_refund"), ("return policy", "search_docs")]
-print("TOOL_ROUTING")
-for query in queries:
-    route = next(tool for keyword, tool in rules if keyword in query)
-    print(query, "->", route)
-```
+| User request | Intent signal | Route | Required argument check |
+| --- | --- | --- | --- |
+| `weather in Berlin` | Weather lookup | `get_weather` | Location is present. |
+| `refund order 52` | Side-effecting refund | `create_refund` | Order ID and user authorization must be checked. |
+| `what is your return policy` | Policy question | `search_docs` | Query can be answered from documentation. |
 
-Observed output:
-
-```text
-TOOL_ROUTING
-weather in Berlin -> get_weather
-refund order 52 -> create_refund
-what is your return policy -> search_docs
-```
-
-The deterministic router maps all three inputs to distinct tools: weather lookup, refund creation, and document search. That is the contract a model router must satisfy too: choose the route from the user's intent, then provide arguments that match the selected tool's schema.
+The table maps three inputs to distinct tools: weather lookup, refund creation, and document search. That is the contract a model router must satisfy too: choose the route from the user's intent, then provide arguments that match the selected tool's schema.
 
 ## Caveats
 

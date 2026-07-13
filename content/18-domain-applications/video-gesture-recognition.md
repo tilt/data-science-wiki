@@ -31,36 +31,17 @@ The canonical concept is [gesture recognition](../09-video-understanding/gesture
 
 The real-time hand-gesture CNN paper is a useful public reference because it frames the hard parts explicitly: no reliable start/end cue, each gesture should fire once, and memory and power budgets constrain the architecture.
 
-## Executed Artifact
+## Worked Interval Check
 
-This executed interval example compared a predicted swipe window with ground truth and counted a separate false trigger.
+This interval example compares a predicted swipe window with ground truth and counts a separate false trigger:
 
-```python
-gt = (12, 28)
-pred = (10, 25)
-false_trigger = (40, 48)
+| interval | start frame | end frame | length |
+| --- | ---: | ---: | ---: |
+| ground-truth swipe | 12 | 28 | 16 |
+| predicted swipe | 10 | 25 | 15 |
+| false trigger | 40 | 48 | 8 |
 
-def temporal_iou(a, b):
-    intersection = max(0, min(a[1], b[1]) - max(a[0], b[0]))
-    union = max(a[1], b[1]) - min(a[0], b[0])
-    return intersection / union
-
-score = temporal_iou(gt, pred)
-
-print("temporal_iou_swipe", round(score, 3))
-print("false_trigger_frames", false_trigger[1] - false_trigger[0])
-print("accepted_at_tiou_0_5", score >= 0.5)
-```
-
-Observed output:
-
-```text
-temporal_iou_swipe 0.722
-false_trigger_frames 8
-accepted_at_tiou_0_5 True
-```
-
-The swipe passes a temporal-IoU threshold of 0.5, but the extra eight-frame false trigger would still be bad for a command interface. That is why gesture systems need event-level metrics from [real-time video understanding](../09-video-understanding/real-time-video-understanding.md), not only per-frame accuracy.
+The swipe intersection is frames 12 through 25, or 13 frames, and the union is frames 10 through 28, or 18 frames. Temporal IoU is therefore $13/18=0.722$, so the swipe passes a 0.5 threshold. The extra eight-frame false trigger would still be bad for a command interface, which is why gesture systems need event-level metrics from [real-time video understanding](../09-video-understanding/real-time-video-understanding.md), not only per-frame accuracy.
 
 ## Failure Modes
 

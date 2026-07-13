@@ -47,28 +47,16 @@ The threshold should be chosen with [calibration](calibration.md), [coverage](co
 
 ## Worked calculation
 
-```python
-import numpy as np
+For ten examples with confidences `0.98, 0.91, 0.84, 0.79, 0.73, 0.68, 0.61, 0.55, 0.49, 0.42`, suppose the correct answered examples are the first, second, third, fifth, and eighth cases. The threshold trade-off is:
 
-conf = np.array([.98,.91,.84,.79,.73,.68,.61,.55,.49,.42])
-correct = np.array([1,1,1,0,1,0,0,1,0,0])
-for thresh in [.5,.7,.8,.9]:
-    ans = conf >= thresh
-    coverage = ans.mean()
-    error = 1 - correct[ans].mean() if ans.any() else np.nan
-    print(f"threshold {thresh:.1f} coverage {coverage:.2f} answered_error {error:.2f} abstained {len(conf)-ans.sum()}")
-```
+| threshold | answered cases | coverage | answered errors | answered error rate | abstained |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| 0.5 | 8 | 0.80 | 3 | 0.38 | 2 |
+| 0.7 | 5 | 0.50 | 1 | 0.20 | 5 |
+| 0.8 | 3 | 0.30 | 0 | 0.00 | 7 |
+| 0.9 | 2 | 0.20 | 0 | 0.00 | 8 |
 
-Observed output:
-
-```text
-threshold 0.5 coverage 0.80 answered_error 0.38 abstained 2
-threshold 0.7 coverage 0.50 answered_error 0.20 abstained 5
-threshold 0.8 coverage 0.30 answered_error 0.00 abstained 7
-threshold 0.9 coverage 0.20 answered_error 0.00 abstained 8
-```
-
-Raising the threshold removes errors here but answers far fewer cases. If the unanswered cases are support tickets, the cost is human queue load; if they are medical questions, the cost may be preferable to unsupported advice.
+Raising the threshold removes errors here because the wrong cases sit below 0.8, but it answers far fewer cases. If the unanswered cases are support tickets, the cost is human queue load; if they are medical questions, the cost may be preferable to unsupported advice.
 
 ## Caveats
 

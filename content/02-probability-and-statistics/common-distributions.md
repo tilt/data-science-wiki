@@ -56,12 +56,12 @@ for name, s in samples.items():
 Observed output:
 
 ```text
-binom_20_.3 mean 6.005 var 4.17 q95 9.0
-poisson_4 mean 3.992 var 3.989 q95 8.0
-gamma_2_3 mean 6.006 var 18.102 q95 14.223
+binom_20_.3 mean 5.985 var 4.184 q95 9.0
+poisson_4 mean 4.003 var 4.016 q95 8.0
+gamma_2_3 mean 6.005 var 18.137 q95 14.262
 ```
 
-The binomial and gamma examples have similar means but very different spreads and upper tails, so replacing one distribution with another changes risk calculations.
+The binomial and gamma examples have similar means near 6, but their variances differ sharply: `4.184` versus `18.137`. The gamma 95th percentile, `14.262`, is much higher than the binomial 95th percentile, `9.0`, so replacing one distribution with another changes risk calculations.
 
 ## Caveats
 

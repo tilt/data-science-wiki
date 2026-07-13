@@ -41,28 +41,21 @@ flowchart LR
 
 Lifecycle policy is part of the mechanism, not cleanup afterthought. For example, training checkpoints might stay in frequent-access storage for 14 days, transition to cold storage for 90 days, then expire after model governance requirements are met.
 
-## Executed small-object check
+## Worked small-object check
 
-Some infrequent-access object classes have minimum billable object sizes. This calculation shows the storage multiplier for 50 million 32 KiB feature fragments if each is billed as at least 128 KiB.
+Some infrequent-access object classes have minimum billable object sizes. For 50 million feature fragments of 32 KiB each, the physical payload is
 
-```python
-objects = 50_000_000
-actual = objects * 32 * 1024 / 1024**4
-billable = objects * 128 * 1024 / 1024**4
-print(f"actual_32kib_objects_tib {actual:.2f}")
-print(f"billable_128kib_min_tib {billable:.2f}")
-print(f"billable_multiplier {billable/actual:.1f}x")
-```
+$$
+\frac{50{,}000{,}000\times32\text{ KiB}}{1024^3}\approx1.49\text{ TiB}.
+$$
 
-Observed output:
+If each object is billed as at least 128 KiB, the billable storage becomes
 
-```text
-actual_32kib_objects_tib 1.49
-billable_128kib_min_tib 5.96
-billable_multiplier 4.0x
-```
+$$
+\frac{50{,}000{,}000\times128\text{ KiB}}{1024^3}\approx5.96\text{ TiB},
+$$
 
-The fix is architectural: compact small records into Parquet/Avro shards or a table format before moving them to colder classes. Otherwise [storage and decoding bottlenecks](storage-and-decoding-bottlenecks.md) show up as slow listing, excess requests, and poor scan throughput.
+which is a $5.96/1.49=4.0\times$ multiplier. The fix is architectural: compact small records into Parquet/Avro shards or a table format before moving them to colder classes. Otherwise [storage and decoding bottlenecks](storage-and-decoding-bottlenecks.md) show up as slow listing, excess requests, and poor scan throughput.
 
 ## Caveats
 

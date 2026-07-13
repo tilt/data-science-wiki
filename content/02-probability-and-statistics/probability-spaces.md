@@ -44,29 +44,23 @@ For finite sample spaces, $\mathcal F$ is often the power set. For continuous sp
 
 ## Worked computation
 
-```python
-import numpy as np
+For two fair dice, the sample space has $6\times 6=36$ equally likely ordered outcomes. Let $A$ be the event "sum is at least 10" and $B$ be the event "the dice are doubles." The event $A$ contains six outcomes:
 
-pairs = np.array([(i, j) for i in range(1, 7) for j in range(1, 7)])
-A = pairs.sum(axis=1) >= 10
-B = pairs[:, 0] == pairs[:, 1]
-print("outcomes", len(pairs))
-print("P(sum>=10)", A.mean())
-print("P(doubles)", B.mean())
-print("P(union)", np.logical_or(A, B).mean(), "check",
-      A.mean() + B.mean() - np.logical_and(A, B).mean())
-```
+| Sum | Outcomes |
+| --- | --- |
+| 10 | $(4,6),(5,5),(6,4)$ |
+| 11 | $(5,6),(6,5)$ |
+| 12 | $(6,6)$ |
 
-Observed output:
+So $P(A)=6/36=1/6$. The doubles event has six outcomes, so $P(B)=6/36=1/6$. Their intersection contains $(5,5)$ and $(6,6)$, hence $P(A\cap B)=2/36=1/18$. Therefore
 
-```text
-outcomes 36
-P(sum>=10) 0.16666666666666666
-P(doubles) 0.16666666666666666
-P(union) 0.2777777777777778 check 0.2777777777777778
-```
+$$
+P(A\cup B)=P(A)+P(B)-P(A\cap B)
+=\frac{6}{36}+\frac{6}{36}-\frac{2}{36}
+=\frac{10}{36}\approx 0.2778.
+$$
 
-The union probability matches $P(A\cup B)=P(A)+P(B)-P(A\cap B)$ because the event algebra supports complements, intersections, and unions.
+The union calculation works because the event algebra contains complements, intersections, and unions; without a fixed $\Omega$ and $\mathcal F$, the phrase "probability of either event" would not be well-defined.
 
 ## Caveats
 

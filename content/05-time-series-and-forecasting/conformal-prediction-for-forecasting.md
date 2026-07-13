@@ -79,33 +79,20 @@ If horizon 1 has residual quantile 8 and horizon 14 has residual quantile 31, th
 - Building symmetric intervals for targets with strong lower bounds or skew.
 - Ignoring feature leakage in the backtests used for calibration.
 
-## Executed example
+## Worked example
 
-```python
-import numpy as np
+For six calibration forecasts, the absolute residuals are:
 
-cal_y = np.array([10, 12, 13, 15, 18, 21], dtype=float)
-cal_pred = np.array([9, 11, 14, 14, 16, 22], dtype=float)
-alpha = 0.2
-scores = np.abs(cal_y - cal_pred)
-rank = np.ceil((len(scores) + 1) * (1 - alpha)) / len(scores)
-q = np.quantile(scores, rank, method="higher")
-test_pred = np.array([20.0, 25.0])
-intervals = np.column_stack([test_pred - q, test_pred + q])
-print("scores", scores.astype(int).tolist())
-print("conformal_radius", round(float(q), 3))
-print("test_intervals", intervals.astype(int).tolist())
-```
+| Observation | Forecast | Absolute residual |
+| ---: | ---: | ---: |
+| 10 | 9 | 1 |
+| 12 | 11 | 1 |
+| 13 | 14 | 1 |
+| 15 | 14 | 1 |
+| 18 | 16 | 2 |
+| 21 | 22 | 1 |
 
-Observed output:
-
-```text
-scores [1, 1, 1, 1, 2, 1]
-conformal_radius 2.0
-test_intervals [[18, 22], [23, 27]]
-```
-
-The calibration residual quantile becomes a fixed radius around future point forecasts. Time-series use needs calibration windows that respect temporal ordering.
+With $\alpha=0.2$, the conformal rank is $\lceil(6+1)(1-0.2)\rceil=\lceil5.6\rceil=6$, so the selected residual radius is the largest calibration score, $q=2$. Future point forecasts of 20 and 25 become intervals $[18,22]$ and $[23,27]$. Time-series use needs calibration windows that respect temporal ordering.
 
 ## Connections
 

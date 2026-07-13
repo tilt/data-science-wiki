@@ -47,36 +47,19 @@ The same logic appears in [online experiments](online-experiments.md), but produ
 
 ## Worked calculation
 
-```python
-from scipy.stats import norm
+Suppose the control arm has 492 conversions from 10,000 users and the treatment arm has 548 conversions from 10,000 users:
 
-conv_a, n_a = 492, 10000
-conv_b, n_b = 548, 10000
-p_a, p_b = conv_a / n_a, conv_b / n_b
-p_pool = (conv_a + conv_b) / (n_a + n_b)
-se_null = (p_pool * (1 - p_pool) * (1 / n_a + 1 / n_b)) ** 0.5
-z = (p_b - p_a) / se_null
-pval = 2 * (1 - norm.cdf(abs(z)))
-se = (p_a * (1 - p_a) / n_a + p_b * (1 - p_b) / n_b) ** 0.5
-ci = (p_b - p_a - norm.ppf(.975) * se, p_b - p_a + norm.ppf(.975) * se)
-print(f"control_rate {p_a:.4f}")
-print(f"treatment_rate {p_b:.4f}")
-print(f"absolute_lift {p_b-p_a:.4f}")
-print(f"z {z:.3f} p_value {pval:.4f}")
-print(f"95pct_ci [{ci[0]:.4f}, {ci[1]:.4f}]")
-```
+| quantity | value |
+| --- | ---: |
+| control rate | 0.0492 |
+| treatment rate | 0.0548 |
+| absolute lift | 0.0056 |
+| pooled null rate | 0.0520 |
+| z-score | 1.783 |
+| two-sided p-value | 0.0745 |
+| 95 percent confidence interval | [-0.0006, 0.0118] |
 
-Observed output:
-
-```text
-control_rate 0.0492
-treatment_rate 0.0548
-absolute_lift 0.0056
-z 1.783 p_value 0.0745
-95pct_ci [-0.0006, 0.0118]
-```
-
-The treatment is 0.56 percentage points higher, but the 95 percent interval still includes a small negative effect. This is not statistically significant at a 5 percent two-sided threshold. It could still be worth a follow-up if a 0.5 point lift is commercially meaningful, or irrelevant if the minimum practical lift was 1.5 points.
+The treatment is 0.56 percentage points higher, but the 95 percent interval still includes a small negative effect. This is not statistically significant at a 5 percent two-sided threshold because $p=0.0745$ is larger than 0.05. It could still be worth a follow-up if a 0.5 point lift is commercially meaningful, or irrelevant if the minimum practical lift was 1.5 points.
 
 ## Caveats
 

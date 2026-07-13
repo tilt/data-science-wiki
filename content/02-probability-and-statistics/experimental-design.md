@@ -54,7 +54,7 @@ Observed output:
 estimated_effect 0.3655 unpaired_se 0.1437 blocked_se 0.0668
 ```
 
-Pairing units that share the same baseline variation cuts the standard error by more than half in this simulation.
+The simulated treatment effect is `0.3655`, close to the true lift of 0.4. Pairing units that share the same baseline variation cuts the standard error from `0.1437` to `0.0668`, more than half in this simulation.
 
 ## Caveats
 

@@ -45,26 +45,16 @@ The rubric should define observable criteria, examples, tie-breaking rules, and 
 
 ## Worked calculation
 
-```python
-import numpy as np
-from sklearn.metrics import cohen_kappa_score
+Two reviewers label twelve examples as pass or fail:
 
-r1 = np.array(["pass","pass","fail","pass","fail","fail","pass","pass","fail","pass","fail","pass"])
-r2 = np.array(["pass","fail","fail","pass","fail","pass","pass","pass","fail","pass","fail","fail"])
-print(f"agreement {(r1 == r2).mean():.3f}")
-print(f"cohen_kappa {cohen_kappa_score(r1, r2):.3f}")
-print(f"disagreements {np.where(r1 != r2)[0].tolist()}")
-```
+| result | count |
+| --- | ---: |
+| both pass | 6 |
+| both fail | 3 |
+| reviewer 1 pass, reviewer 2 fail | 2 |
+| reviewer 1 fail, reviewer 2 pass | 1 |
 
-Observed output:
-
-```text
-agreement 0.750
-cohen_kappa 0.500
-disagreements [1, 5, 11]
-```
-
-The reviewers agree on 75 percent of examples, but kappa is only 0.50 after chance agreement. The disagreement indices should be reviewed against the rubric before treating the labels as a stable [golden dataset](golden-datasets.md).
+Raw agreement is $(6+3)/12=0.750$. The label margins imply substantial chance agreement, so Cohen's kappa drops to 0.500. The three disagreement cases should be reviewed against the rubric before treating the labels as a stable [golden dataset](golden-datasets.md).
 
 ## Caveats
 

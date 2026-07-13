@@ -53,7 +53,11 @@ P(theta>0.5) 0.8666
 central_95_credible_interval [0.3857, 0.8614]
 ```
 
-A $\operatorname{Beta}(2,2)$ prior and 7 heads in 10 flips give a $\operatorname{Beta}(9,5)$ posterior. Unlike a frequentist [confidence interval](confidence-intervals.md), the credible interval is a posterior probability statement conditional on the model.
+The code uses conjugacy: a $\operatorname{Beta}(2,2)$ prior plus 7 heads and 3 tails gives posterior parameters $(2+7,2+3)=(9,5)$. It then evaluates the posterior CDF at $0.5$, giving $P(\theta>0.5)=0.8666$, and uses the 2.5% and 97.5% posterior quantiles to get the central credible interval $[0.3857,0.8614]$.
+
+![Posterior density for a Beta(9,5) distribution with theta=0.5 marked and the central 95 percent credible interval shaded.](../assets/diagrams/bayesian-statistics-beta-posterior.svg)
+
+The shaded interval is a posterior probability statement conditional on the model, unlike a frequentist [confidence interval](confidence-intervals.md). The red line at $\theta=0.5$ sits left of most posterior mass, which is why the probability that the coin is biased toward heads is about 86.7%.
 
 ## Caveats
 

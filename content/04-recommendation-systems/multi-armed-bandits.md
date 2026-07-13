@@ -43,24 +43,15 @@ $$
 
 ## Worked example
 
-```python
-import numpy as np
-pulls = np.array([40, 10, 5])
-wins = np.array([4, 2, 0])
-t = pulls.sum()
-ucb = wins / pulls + np.sqrt(2 * np.log(t) / pulls)
-print("ucb_values", np.round(ucb, 3).tolist())
-print("chosen_arm", int(np.argmax(ucb)))
-```
+After 55 total pulls, a UCB policy combines the empirical win rate with an uncertainty bonus:
 
-Observed output:
+| Arm | Wins / pulls | Empirical rate | Exploration bonus | UCB score |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | 4 / 40 | 0.100 | 0.448 | 0.548 |
+| 1 | 2 / 10 | 0.200 | 0.895 | 1.095 |
+| 2 | 0 / 5 | 0.000 | 1.266 | 1.266 |
 
-```text
-ucb_values [0.548, 1.095, 1.266]
-chosen_arm 2
-```
-
-Arm 2 has no wins, but its low count gives it the largest exploration bonus. This is the mechanism behind [exploration versus exploitation](exploration-versus-exploitation.md).
+Arm 2 has no wins, but its low count gives it the largest exploration bonus, so it is chosen next. This is the mechanism behind [exploration versus exploitation](exploration-versus-exploitation.md).
 
 ## Caveats
 

@@ -42,24 +42,18 @@ required replicas = ceil((arrival_rate * service_time) / safe_concurrency_per_re
 
 That formula is only the start. [Managed compute](managed-compute.md) can add replicas, but [distributed data processing](distributed-data-processing.md) still needs partitioning and [distributed model training](distributed-model-training.md) still needs communication bandwidth. [Reliability](reliability.md) also constrains scaling because retries and failover traffic can become the largest load source during incidents.
 
-## Executed capacity check
+## Worked capacity check
 
-This calculation estimates pods from request rate, p95 service time, per-pod concurrency, and target utilization.
+Estimate pods from request rate, p95 service time, per-pod concurrency, and target utilization:
 
-```python
-import math
-for rps, p95, cap, util in [(240, 0.12, 20, 0.70), (1000, 0.08, 50, 0.65)]:
-    inflight = rps * p95
-    pods = math.ceil(inflight / (cap * util))
-    print(f"rps_{rps}_latency_{p95}s_inflight {inflight:.1f} pods_at_cap_{cap}_util_{util} {pods}")
-```
+$$
+\text{pods}=\left\lceil\frac{\text{rps}\times\text{p95 seconds}}{\text{per-pod concurrency}\times\text{target utilization}}\right\rceil.
+$$
 
-Observed output:
-
-```text
-rps_240_latency_0.12s_inflight 28.8 pods_at_cap_20_util_0.7 3
-rps_1000_latency_0.08s_inflight 80.0 pods_at_cap_50_util_0.65 3
-```
+| Workload | In-flight requests | Capacity denominator | Required pods |
+| --- | ---: | ---: | ---: |
+| 240 rps, 0.12 s p95, cap 20, util 0.70 | 28.8 | 14.0 | 3 |
+| 1000 rps, 0.08 s p95, cap 50, util 0.65 | 80.0 | 32.5 | 3 |
 
 The second workload has more traffic but shorter service time and larger safe concurrency, so it still needs three pods. Real autoscalers add stabilization windows, metric lag, startup time, and min/max bounds; the calculation is the baseline to compare against observed HPA or Cloud Run behavior.
 

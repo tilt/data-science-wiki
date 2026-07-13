@@ -28,31 +28,20 @@ Documentation is a product interface for future maintainers. It should preserve 
 
 Useful engineering documentation has an owner, a source of truth, and a freshness rule. API docs should live near [API design](api-design.md) schemas. Runbooks should name alerts, dashboards, rollback commands, and escalation paths for [production integration](production-integration.md). Decision records should link to [technical decision records](technical-decision-records.md), not duplicate their reasoning. Requirements docs should carry acceptance criteria from [requirements engineering](requirements-engineering.md).
 
-## Executed Artifact
+## Worked Contract
 
-```python
-feature_doc = {
-    "owner": "search-platform",
-    "source_table": "events.ticket_views",
-    "refresh": "hourly at minute 10",
-    "null_semantics": "missing user_id -> no personalized features",
-    "backfill": "recompute by event_date, max 31 days",
-    "consumers": ["ticket-triage-v2", "agent-assist-v1"],
-}
-required = ["owner", "source_table", "refresh", "null_semantics", "backfill", "consumers"]
-missing = [field for field in required if not feature_doc.get(field)]
-print("missing_required_fields", missing)
-print("consumer_count", len(feature_doc["consumers"]))
-```
+For a feature document, a reviewer can check a small contract instead of reading free-form prose:
 
-Observed output:
+| required field | example value |
+| --- | --- |
+| owner | `search-platform` |
+| source table | `events.ticket_views` |
+| refresh | hourly at minute 10 |
+| null semantics | missing `user_id` means no personalized features |
+| backfill | recompute by `event_date`, maximum 31 days |
+| consumers | `ticket-triage-v2`, `agent-assist-v1` |
 
-```text
-missing_required_fields []
-consumer_count 2
-```
-
-This is a documentation contract, not just prose. A reviewer can check whether a feature doc names ownership, source data, null semantics, backfill behavior, and consumers before a change merges. The same idea supports [testing](testing.md): a fixture can assert that a contract file contains required fields.
+No required fields are missing, and two consumers are named. This is a documentation contract, not just prose. The same idea supports [testing](testing.md): a fixture can assert that a contract file contains required fields.
 
 ## Failure Modes
 

@@ -27,35 +27,17 @@ Code review is a change-control mechanism for catching defects that automated ch
 
 A useful review separates blockers from preferences. Block on wrong behavior, missing tests for risky paths, broken [API design](api-design.md), security or privacy regressions, migrations without rollback, and undocumented changes to user-visible behavior. Prefer comments such as "this changes the time window from rolling 24 hours to UTC calendar day; please update the feature contract and backtest by region" over vague comments such as "seems risky."
 
-## Executed Artifact
+## Worked Review
 
-This snippet reproduces a semantic review issue: a feature changed from rolling 24 hours to UTC calendar day.
+This review case reproduces a semantic issue: a feature changed from rolling 24 hours to UTC calendar day. With `now = 2026-07-11 12:00 UTC`, the three events are:
 
-```python
-from datetime import datetime, timezone, timedelta
+| event time | included in rolling 24 hours? | included in UTC calendar day? |
+| --- | ---: | ---: |
+| 2026-07-10 13:00 UTC | yes | no |
+| 2026-07-10 23:30 UTC | yes | no |
+| 2026-07-11 08:00 UTC | yes | yes |
 
-now = datetime(2026, 7, 11, 12, 0, tzinfo=timezone.utc)
-events = [
-    datetime(2026, 7, 10, 13, 0, tzinfo=timezone.utc),
-    datetime(2026, 7, 10, 23, 30, tzinfo=timezone.utc),
-    datetime(2026, 7, 11, 8, 0, tzinfo=timezone.utc),
-]
-last_24h = [e for e in events if now - e <= timedelta(hours=24)]
-calendar_day = [e for e in events if e.date() == now.date()]
-print("last_24h_count", len(last_24h))
-print("utc_calendar_day_count", len(calendar_day))
-print("semantic_change", len(last_24h) != len(calendar_day))
-```
-
-Observed output:
-
-```text
-last_24h_count 3
-utc_calendar_day_count 1
-semantic_change True
-```
-
-The diff might look like a harmless SQL cleanup, but the product behavior changed. Review should ask for an updated [documentation](documentation.md) contract, a [testing](testing.md) fixture for the boundary condition, and a separate [refactoring](refactoring.md) commit if cleanup is mixed with behavior change.
+The rolling window counts 3 events, while the calendar-day version counts 1. The diff might look like a harmless SQL cleanup, but the product behavior changed. Review should ask for an updated [documentation](documentation.md) contract, a [testing](testing.md) fixture for the boundary condition, and a separate [refactoring](refactoring.md) commit if cleanup is mixed with behavior change.
 
 ## Failure Modes
 

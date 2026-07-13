@@ -59,7 +59,7 @@ dist_after_20 [0.5155, 0.3526, 0.1319]
 stationary [0.5147, 0.3529, 0.1324] check [0.5147, 0.3529, 0.1324]
 ```
 
-Starting in state 0, repeated multiplication moves the distribution close to the stationary distribution.
+Starting in state 0, repeated multiplication moves the distribution from `[0.85,0.15,0.0]` after one step to `[0.5155,0.3526,0.1319]` after 20 steps. That is close to the stationary distribution `[0.5147,0.3529,0.1324]`, which also satisfies $\pi P=\pi$ in the printed check.
 
 ## Caveats
 

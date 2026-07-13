@@ -52,12 +52,12 @@ Observed output:
 
 ```text
 sample_cov
-[[4.069 1.825]
- [1.825 1.009]]
-sample_corr 0.901 theoretical_corr 0.9
+[[3.891 1.751]
+ [1.751 0.979]]
+sample_corr 0.897 theoretical_corr 0.9
 ```
 
-The sample covariance matrix is close to the generating matrix; the correlation is high because $1.8$ is large relative to the product of the standard deviations.
+The sample covariance matrix, with off-diagonal entry about `1.751`, is close to the generating covariance `1.8`. The sample correlation `0.897` is near the theoretical `0.9` because that covariance is large relative to the product of the standard deviations.
 
 ## Caveats
 

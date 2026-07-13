@@ -67,7 +67,7 @@ w_b_after_5_epochs 3.0 1.0
 mse 0.0
 ```
 
-On this noiseless one-dimensional regression, SGD recovers the true slope and intercept after five passes through the data.
+On this noiseless one-dimensional regression, SGD recovers the true slope and intercept after five passes through the data: `w_b_after_5_epochs` is `3.0 1.0`, and the resulting MSE is `0.0`.
 
 ## Caveats
 

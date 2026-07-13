@@ -44,22 +44,12 @@ The common reporting layer should include [calibration](calibration.md), [absten
 
 ## Worked calculation
 
-```python
-import numpy as np
+Score eight shared cases with severity levels `ok = 0`, `minor = 1`, `major = 2`, `critical = 3`, and risk weights `0, 1, 3, 10`:
 
-classic = np.array([0,1,0,2,0,1,0,0])
-generative = np.array([0,0,1,3,0,2,0,1])
-wmap = np.array([0,1,3,10])  # ok, minor, major, critical
-for name, sev in [("classic", classic), ("generative", generative)]:
-    print(f"{name}_mean_severity {sev.mean():.3f} weighted_error {wmap[sev].sum()} severe_rate {(sev >= 2).mean():.3f}")
-```
-
-Observed output:
-
-```text
-classic_mean_severity 0.500 weighted_error 5 severe_rate 0.125
-generative_mean_severity 0.875 weighted_error 15 severe_rate 0.250
-```
+| system | severities | mean severity | weighted error | severe rate |
+| --- | --- | ---: | ---: | ---: |
+| classical | 0, 1, 0, 2, 0, 1, 0, 0 | 0.500 | 5 | 0.125 |
+| generative | 0, 0, 1, 3, 0, 2, 0, 1 | 0.875 | 15 | 0.250 |
 
 The generative system has a worse risk profile despite only eight examples: more severe errors and triple the weighted error. That should block a launch even if user preference or fluency looked better in a [paired evaluation](paired-evaluation.md).
 

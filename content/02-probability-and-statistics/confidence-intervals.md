@@ -57,10 +57,10 @@ print("coverage", round(((lo <= mu) & (mu <= hi)).mean(), 4),
 Observed output:
 
 ```text
-coverage 0.9514 avg_width 1.4798 tcrit 2.0452
+coverage 0.9499 avg_width 1.4796 tcrit 2.0452
 ```
 
-Across repeated samples, the 95 percent t-interval covers the fixed mean about 95 percent of the time.
+Across repeated samples, the 95 percent t-interval covers the fixed mean `0.9499` of the time, close to the nominal 0.95 target. The average width, `1.4796`, reflects the sample size, noise scale, and $t$ critical value `2.0452`.
 
 ## Caveats
 

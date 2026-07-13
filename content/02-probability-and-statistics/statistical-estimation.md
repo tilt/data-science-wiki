@@ -53,10 +53,10 @@ print("estimator_mean", round(means.mean(), 4),
 Observed output:
 
 ```text
-estimator_mean 2.0 bias 0.0 estimator_var 0.162 theory_var 0.16
+estimator_mean 1.9981 bias -0.0019 estimator_var 0.1587 theory_var 0.16
 ```
 
-For exponential data with mean 2 and variance 4, the sample mean is unbiased and its variance is $\sigma^2/n=4/25$.
+For exponential data with mean 2 and variance 4, the simulated estimator mean is `1.9981`, so the bias is only `-0.0019`. The estimator variance, `0.1587`, is close to the theoretical $\sigma^2/n=4/25=0.16$.
 
 ## Caveats
 

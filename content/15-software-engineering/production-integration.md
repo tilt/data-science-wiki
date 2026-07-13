@@ -30,35 +30,19 @@ Production integration is the work of connecting a prototype to real product tra
 
 Before launch, name the upstream dependencies, downstream consumers, schema versions, timeout budget, retry policy, idempotency key, trace propagation, and user-visible fallback. Roll out behind shadow traffic, a feature flag, or [canary deployment](../13-ml-engineering-and-mlops/canary-deployment.md). The same checklist should link to [testing](testing.md) fixtures and the [API design](api-design.md) contract it exercises.
 
-## Executed Artifact
+## Worked Launch Gate
 
-```python
-from statistics import quantiles
+Suppose a launch contract says to roll back when the canary error rate exceeds 5 percent or the overall p95 latency exceeds 250 ms. A five-request smoke sample contains:
 
-requests = [
-    {"path": "shadow", "ok": True, "latency_ms": 83},
-    {"path": "shadow", "ok": True, "latency_ms": 91},
-    {"path": "canary", "ok": True, "latency_ms": 104},
-    {"path": "canary", "ok": False, "latency_ms": 260},
-    {"path": "control", "ok": True, "latency_ms": 72},
-]
-canary = [r for r in requests if r["path"] == "canary"]
-error_rate = sum(not r["ok"] for r in canary) / len(canary)
-p95 = quantiles([r["latency_ms"] for r in requests], n=20, method="inclusive")[18]
-print("canary_error_rate", round(error_rate, 2))
-print("overall_p95_ms", round(p95, 1))
-print("rollback", error_rate > 0.05 or p95 > 250)
-```
+| path | ok? | latency ms |
+| --- | --- | ---: |
+| shadow | yes | 83 |
+| shadow | yes | 91 |
+| canary | yes | 104 |
+| canary | no | 260 |
+| control | yes | 72 |
 
-Observed output:
-
-```text
-canary_error_rate 0.5
-overall_p95_ms 228.8
-rollback True
-```
-
-The numbers are intentionally small, but the contract is real: define thresholds before launch and automate the decision path. A [software architecture](software-architecture.md) that has no rollback path is not production-ready, even if the model looks good offline.
+One of two canary requests failed, so the canary error rate is 0.50. The inclusive p95 latency over all five requests is 228.8 ms, below the latency threshold, but the error-rate guardrail alone triggers rollback. The numbers are intentionally small, but the contract is real: define thresholds before launch and automate the decision path. A [software architecture](software-architecture.md) that has no rollback path is not production-ready, even if the model looks good offline.
 
 ## Failure Modes
 

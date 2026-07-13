@@ -50,11 +50,11 @@ print("exact", round(exact, 4), "positive_rate", round(positive.mean(), 4))
 Observed output:
 
 ```text
-sim_P(disease|positive) 0.1649
-exact 0.1667 positive_rate 0.0601
+sim_P(disease|positive) 0.1646
+exact 0.1667 positive_rate 0.0596
 ```
 
-Even with 99 percent sensitivity, most positives are false positives because the disease is rare and the false-positive term is applied to a much larger group.
+The simulation gives $P(disease\mid positive)\approx0.1646$, close to the exact value `0.1667`. Even with 99 percent sensitivity, most positives are false positives because the positive rate is only about `0.0596` and the false-positive term is applied to the much larger healthy group.
 
 ## Caveats
 

@@ -53,11 +53,11 @@ print("P(hit_20_by_200)", round((walk.max(axis=1) >= 20).mean(), 4))
 Observed output:
 
 ```text
-final_mean -0.02 final_var 201.079 theory_var 200
-P(hit_20_by_200) 0.1608
+final_mean -0.061 final_var 197.853 theory_var 200
+P(hit_20_by_200) 0.1576
 ```
 
-The mean final position is near zero, but variance grows linearly with time. Individual paths can hit high levels even when the expected step is zero.
+The mean final position is near zero at `-0.061`, but the final variance is `197.853`, close to the theoretical value 200. The hit probability `0.1576` shows that individual paths can still reach level 20 even when the expected step is zero.
 
 ## Connections and caveats
 

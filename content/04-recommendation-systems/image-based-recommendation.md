@@ -36,21 +36,13 @@ where $p_u^\top q_i$ is collaborative preference, $f(i)$ is an image embedding, 
 
 ## Worked example
 
-```python
-import numpy as np
-visual = np.array([.92, .88, .15])
-collab = np.array([.20, .75, .80])
-score = .55 * visual + .45 * collab
-print("visual_collab_blend", np.round(score, 3).tolist())
-print("top_item", int(np.argmax(score)))
-```
+Blend a visual similarity score with a collaborative score:
 
-Observed output:
-
-```text
-visual_collab_blend [0.596, 0.822, 0.443]
-top_item 1
-```
+| Item | Visual score | Collaborative score | Blend $0.55v+0.45c$ |
+| --- | ---: | ---: | ---: |
+| 0 | 0.92 | 0.20 | 0.596 |
+| 1 | 0.88 | 0.75 | 0.822 |
+| 2 | 0.15 | 0.80 | 0.443 |
 
 Item 0 is most visually similar, but item 1 wins after collaborative evidence is included. This is the same design principle as [hybrid recommenders](hybrid-recommenders.md): combine complementary signals rather than trusting one modality.
 

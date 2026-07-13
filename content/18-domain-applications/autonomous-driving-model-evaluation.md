@@ -31,37 +31,17 @@ Perception evaluation uses [object detection](../08-computer-vision/object-detec
 
 nuScenes is a public benchmark anchor: the paper reports 1,000 scenes, each 20 seconds long, with 6 cameras, 5 radars, 1 lidar, 360-degree coverage, and 3D annotations for 23 classes and 8 attributes.
 
-## Executed Artifact
+## Worked Scenario Slice
 
-This executed scenario table shows how aggregate recall can hide a high-risk slice.
+This scenario table shows how aggregate recall can hide a high-risk slice:
 
-```python
-scenarios = {
-    "day_clear": (940, 982, 1),
-    "night_rain": (35, 50, 8),
-    "occluded_pedestrian": (7, 12, 20),
-}
-aggregate_recall = sum(hit for hit, total, _ in scenarios.values()) / sum(
-    total for _, total, _ in scenarios.values()
-)
-risk_weighted_miss_rate = sum(
-    (1 - hit / total) * risk for hit, total, risk in scenarios.values()
-) / sum(risk for _, _, risk in scenarios.values())
+| scenario | detected | total | recall | risk weight |
+| --- | ---: | ---: | ---: | ---: |
+| day clear | 940 | 982 | 0.957 | 1 |
+| night rain | 35 | 50 | 0.700 | 8 |
+| occluded pedestrian | 7 | 12 | 0.583 | 20 |
 
-print("aggregate_recall", round(aggregate_recall, 3))
-print("occluded_pedestrian_recall", round(scenarios["occluded_pedestrian"][0] / scenarios["occluded_pedestrian"][1], 3))
-print("risk_weighted_miss_rate", round(risk_weighted_miss_rate, 3))
-```
-
-Observed output:
-
-```text
-aggregate_recall 0.941
-occluded_pedestrian_recall 0.583
-risk_weighted_miss_rate 0.372
-```
-
-The overall recall looks strong, but occluded-pedestrian recall is only 58.3%. That slice should drive model review before deployment even if the aggregate benchmark improves.
+The aggregate recall is $(940+35+7)/(982+50+12)=0.941$. The risk-weighted miss rate is 0.372 because the occluded-pedestrian miss rate is high and its risk weight is large. The overall recall looks strong, but occluded-pedestrian recall is only 58.3%. That slice should drive model review before deployment even if the aggregate benchmark improves.
 
 ## Failure Modes
 

@@ -40,31 +40,12 @@ The metric is only meaningful if relevance labels, candidate generation, and tim
 
 ## Worked calculation
 
-```python
-import numpy as np
+Compare two rankings with graded gains:
 
-gains_A = np.array([3,0,2,1,0])
-gains_B = np.array([2,3,1,0,0])
-def dcg(g, k):
-    g = np.asarray(g)[:k]
-    return np.sum((2**g - 1) / np.log2(np.arange(2, k + 2)))
-def ndcg(g, k):
-    ideal = np.sort(g)[::-1]
-    return dcg(g, k) / dcg(ideal, k)
-print(f"ndcg3_A {ndcg(gains_A,3):.3f}")
-print(f"ndcg3_B {ndcg(gains_B,3):.3f}")
-print(f"precision3_A {(gains_A[:3] > 0).mean():.3f}")
-print(f"precision3_B {(gains_B[:3] > 0).mean():.3f}")
-```
-
-Observed output:
-
-```text
-ndcg3_A 0.905
-ndcg3_B 0.843
-precision3_A 0.667
-precision3_B 1.000
-```
+| system | top-five gains | [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md)@3 | relevant items in top 3 |
+| --- | --- | ---: | ---: |
+| A | 3, 0, 2, 1, 0 | 0.905 | 2 of 3 |
+| B | 2, 3, 1, 0, 0 | 0.843 | 3 of 3 |
 
 System B retrieves more relevant items in the first three slots, but system A puts the highest-gain item first and therefore wins [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md)@3. The decision depends on whether the product values the first slot, any relevant result, or a downstream action.
 

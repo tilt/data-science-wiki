@@ -61,7 +61,7 @@ n=50 mean=0.0039 std=0.9915 skew=0.2877 q025=-1.7956 q975=2.0871
 normal_q025_q975 [-1.96  1.96]
 ```
 
-The standardized means from an exponential distribution keep mean near 0 and standard deviation near 1 while skewness shrinks as $n$ grows.
+The standardized means from an exponential distribution keep mean near 0 and standard deviation near 1 for all three sample sizes. The skewness shrinks from `1.3804` at $n=2$ to `0.2877` at $n=50$, which is the numerical sign that the sampling distribution is becoming more normal.
 
 ## Caveats
 

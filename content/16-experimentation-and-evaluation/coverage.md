@@ -45,29 +45,16 @@ $$
 
 ## Worked calculation
 
-```python
-import numpy as np
+Suppose the required launch claim spans four languages and two domains. The evaluation set contains English billing, English legal, German billing, German legal, and Spanish billing examples:
 
-slices = np.array([["en","billing"],["en","billing"],["en","legal"],["de","billing"],["de","legal"],["es","billing"]])
-langs = ["en","de","es","fr"]
-domains = ["billing","legal"]
-covered = {(l, d) for l, d in slices}
-print(f"covered_cells {len(covered)}/{len(langs)*len(domains)}")
-for l in langs:
-    print(l, "".join("1" if (l, d) in covered else "0" for d in domains))
-```
+| language | billing | legal |
+| --- | ---: | ---: |
+| English | covered | covered |
+| German | covered | covered |
+| Spanish | covered | missing |
+| French | missing | missing |
 
-Observed output:
-
-```text
-covered_cells 5/8
-en 11
-de 11
-es 10
-fr 00
-```
-
-The set covers 5 of 8 required language-domain cells. Aggregate accuracy from this set says nothing about French, and it only tests Spanish billing. That gap should block claims about broad launch readiness even if [offline evaluation](offline-evaluation.md) looks strong.
+The set covers 5 of 8 required language-domain cells, so slice coverage is $5/8=0.625$. Aggregate accuracy from this set says nothing about French, and it only tests Spanish billing. That gap should block claims about broad launch readiness even if [offline evaluation](offline-evaluation.md) looks strong.
 
 ## Caveats
 

@@ -28,34 +28,16 @@ Chunking decides the unit that [retrieval pipelines](retrieval-pipelines.md) can
 
 A chunker maps a document $D$ into ordered spans $(c_i, m_i)$, where $m_i$ stores source, heading, permissions, and version. Fixed token windows are simple, but heading-aware spans preserve local meaning. Overlap helps boundary cases but increases duplicate retrieval.
 
-## Executed artifact
+## Worked chunking example
 
-```python
-doc = """# Refunds
-Refunds require receipt. Manager approval is required above 500 EUR.
-# Shipping
-Standard shipping is five days."""
-chunks = []
-current = []
-for line in doc.splitlines():
-    if line.startswith("# ") and current:
-        chunks.append(" ".join(current))
-        current = [line]
-    else:
-        current.append(line)
-chunks.append(" ".join(current))
-print("CHUNKING")
-print(chunks)
-```
+For a two-section policy document, heading-aware chunking keeps each heading with the paragraph it governs:
 
-Observed output:
+| Chunk | Text | Why this boundary helps |
+| ---: | --- | --- |
+| 1 | `# Refunds Refunds require receipt. Manager approval is required above 500 EUR.` | A later answer can cite the approval rule with the refund heading attached. |
+| 2 | `# Shipping Standard shipping is five days.` | Shipping facts do not contaminate refund retrieval. |
 
-```text
-CHUNKING
-['# Refunds Refunds require receipt. Manager approval is required above 500 EUR.', '# Shipping Standard shipping is five days.']
-```
-
-The executed splitter kept each heading with its paragraph, so a later answer can cite the refund rule without mixing it with shipping.
+This boundary is more useful than a fixed window that might split the refund heading from the approval rule or merge refund and shipping facts into one retrieved passage.
 
 ## Caveats
 

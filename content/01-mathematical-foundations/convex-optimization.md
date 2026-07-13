@@ -69,7 +69,7 @@ weighted_f_mean 6.1
 gap 4.41
 ```
 
-For $f(x)=x^2$, Jensen's inequality holds with a positive gap: evaluating after averaging is below averaging the evaluations.
+For $f(x)=x^2$, Jensen's inequality holds with a positive gap: evaluating after averaging gives $1.69$, while averaging the evaluated points gives $6.1$. The gap of $4.41$ is the visible cost of spread under a curved convex function.
 
 ## Caveats
 

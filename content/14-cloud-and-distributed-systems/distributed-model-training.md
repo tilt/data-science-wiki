@@ -36,31 +36,18 @@ $$
 
 The optimizer step is then identical on each rank. Ring all-reduce moves about $2(N-1)/N$ copies of the gradient tensor per GPU. FSDP changes the memory contract: instead of replicating parameters, gradients, and optimizer state on every rank, it shards them and uses all-gather/reduce-scatter around forward and backward. That connects to [mixed precision](../06-deep-learning/mixed-precision.md), activation checkpointing, and [reliability](reliability.md) because checkpoint format must include sharded optimizer state.
 
-## Executed communication check
+## Worked communication check
 
-For a 7B-parameter model with fp16 gradients, this calculation estimates ideal ring all-reduce transfer per GPU over a 400 Gbps link.
+For a 7B-parameter model with fp16 gradients, the gradient tensor is about $7\text{B}\cdot2/1024^3=13.04$ GiB. Ring all-reduce moves about $2(N-1)/N$ copies of that tensor per GPU:
 
-```python
-params = 7_000_000_000
-grad_gib = params * 2 / 1024**3
-for n in [2, 4, 8, 16]:
-    transfer_gib = 2 * (n - 1) / n * grad_gib
-    ideal_s = transfer_gib * 1024**3 / (400e9 / 8)
-    print(f"{n}_gpu_ring_allreduce_transfer_gib_per_gpu {transfer_gib:.2f} ideal_400gbps_seconds {ideal_s:.3f}")
-print(f"fsdp_8way_param_grad_adam_gib_per_rank {(params*(2+2+4+4+4)/8)/1024**3:.2f}")
-```
+| GPUs | transfer per GPU | ideal time on 400 Gbps link |
+| ---: | ---: | ---: |
+| 2 | 13.04 GiB | 0.280 s |
+| 4 | 19.56 GiB | 0.420 s |
+| 8 | 22.82 GiB | 0.490 s |
+| 16 | 24.45 GiB | 0.525 s |
 
-Observed output:
-
-```text
-2_gpu_ring_allreduce_transfer_gib_per_gpu 13.04 ideal_400gbps_seconds 0.280
-4_gpu_ring_allreduce_transfer_gib_per_gpu 19.56 ideal_400gbps_seconds 0.420
-8_gpu_ring_allreduce_transfer_gib_per_gpu 22.82 ideal_400gbps_seconds 0.490
-16_gpu_ring_allreduce_transfer_gib_per_gpu 24.45 ideal_400gbps_seconds 0.525
-fsdp_8way_param_grad_adam_gib_per_rank 13.04
-```
-
-The ideal number excludes software overhead and topology effects, but it shows why "add GPUs" eventually hits communication. If [distributed data processing](distributed-data-processing.md) cannot feed batches and [storage and decoding bottlenecks](storage-and-decoding-bottlenecks.md) leave devices idle, the all-reduce math is not the limiting factor.
+With 8-way FSDP, the fp16 parameters, fp16 gradients, and Adam state estimate shard to about 13.04 GiB per rank. The ideal communication number excludes software overhead and topology effects, but it shows why "add GPUs" eventually hits communication. If [distributed data processing](distributed-data-processing.md) cannot feed batches and [storage and decoding bottlenecks](storage-and-decoding-bottlenecks.md) leave devices idle, the all-reduce math is not the limiting factor.
 
 ## Caveats
 

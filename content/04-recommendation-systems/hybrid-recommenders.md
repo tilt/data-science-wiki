@@ -37,23 +37,15 @@ with weights tuned offline and online. More complex systems use a ranker that co
 
 ## Worked example
 
-```python
-import numpy as np
-collab = np.array([.95, .2, .55])
-content = np.array([.3, .9, .5])
-score = .65 * collab + .35 * content
-print("hybrid_scores", np.round(score, 3).tolist())
-print("rank", np.argsort(-score).tolist())
-```
+Suppose a late-fusion recommender uses 65% collaborative score and 35% content score:
 
-Observed output:
+| Item | Collaborative score | Content score | Hybrid score |
+| --- | ---: | ---: | ---: |
+| 0 | 0.95 | 0.30 | $0.65(0.95)+0.35(0.30)=0.722$ |
+| 1 | 0.20 | 0.90 | $0.65(0.20)+0.35(0.90)=0.445$ |
+| 2 | 0.55 | 0.50 | $0.65(0.55)+0.35(0.50)=0.532$ |
 
-```text
-hybrid_scores [0.722, 0.445, 0.532]
-rank [0, 2, 1]
-```
-
-The collaborative favorite remains first, while content rescues item 2 above item 1. Visual hybrids follow the same pattern in [image-based recommendation](image-based-recommendation.md).
+The ranking is therefore item 0, item 2, then item 1. The collaborative favorite remains first, while content rescues item 2 above item 1. Visual hybrids follow the same pattern in [image-based recommendation](image-based-recommendation.md).
 
 ## Caveats
 

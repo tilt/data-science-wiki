@@ -29,38 +29,17 @@ Medical MRI analysis applies computer vision to volumetric scans for tumor segme
 
 Brain tumor work often uses [MRI segmentation](../08-computer-vision/mri-segmentation.md), while other applications use [MRI classification](../08-computer-vision/mri-classification.md) or detection. Evaluation needs [detection and segmentation metrics](../08-computer-vision/detection-and-segmentation-metrics.md) such as Dice, lesion recall, boundary error, and patient-level sensitivity. Splits must be patient-level and site-aware to avoid [data leakage](../03-classical-machine-learning/data-leakage.md). The BraTS 2021 benchmark paper describes a multi-institutional mpMRI benchmark focused on glioma segmentation and molecular-status classification across 2,040 patients.
 
-## Executed Artifact
+## Worked Mask Check
 
-This executed toy mask illustrates why a high Dice score can still miss a clinically important small lesion.
+This toy mask illustrates why a high Dice score can still miss a clinically important small lesion:
 
-```python
-import numpy as np
+| region | true positive voxels | missed voxels | false-positive voxels |
+| --- | ---: | ---: | ---: |
+| main tumor | 9 | 0 | 0 |
+| tiny lesion | 0 | 1 | 0 |
+| nearby false alarm | 0 | 0 | 1 |
 
-y_true = np.zeros((6, 6), dtype=int)
-y_pred = np.zeros((6, 6), dtype=int)
-y_true[1:4, 1:4] = 1
-y_true[4, 4] = 1
-y_pred[1:4, 1:4] = 1
-y_pred[4, 3] = 1
-
-dice = 2 * (y_true & y_pred).sum() / (y_true.sum() + y_pred.sum())
-tiny_lesion_recalled = int(y_pred[4, 4] == 1)
-false_positive_voxels = int(((y_pred == 1) & (y_true == 0)).sum())
-
-print("tumor_dice", round(dice, 3))
-print("tiny_lesion_recalled", tiny_lesion_recalled)
-print("false_positive_voxels", false_positive_voxels)
-```
-
-Observed output:
-
-```text
-tumor_dice 0.9
-tiny_lesion_recalled 0
-false_positive_voxels 1
-```
-
-The Dice score is 0.90 because the large region overlaps well, but the isolated lesion is missed. That is why [medical image analysis](../08-computer-vision/medical-image-analysis.md) evaluation should include lesion-level recall and reader review, not just aggregate voxel overlap.
+The true mask has 10 positive voxels and the predicted mask has 10 positive voxels. Their overlap is 9 voxels, so Dice is $2\cdot 9/(10+10)=0.90$. The score is high because the large region overlaps well, but the isolated lesion is missed and one nearby false positive is added. That is why [medical image analysis](../08-computer-vision/medical-image-analysis.md) evaluation should include lesion-level recall and reader review, not just aggregate voxel overlap.
 
 ## Failure Modes
 

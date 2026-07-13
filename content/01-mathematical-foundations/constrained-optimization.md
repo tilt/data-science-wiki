@@ -69,7 +69,7 @@ objective 0.5
 constraint 1.0
 ```
 
-The unconstrained minimum of $x^2+y^2$ is $(0,0)$, but the line $x+y=1$ forces the closest feasible point to be $(0.5,0.5)$.
+The unconstrained minimum of $x^2+y^2$ is $(0,0)$, but the line $x+y=1$ forces the closest feasible point to be $(0.5,0.5)$. The output confirms both the objective value, $0.5^2+0.5^2=0.5$, and the active constraint value, $0.5+0.5=1.0$.
 
 ## Caveats
 

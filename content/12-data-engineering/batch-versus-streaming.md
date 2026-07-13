@@ -26,24 +26,15 @@ Batch processing runs over bounded inputs: a date partition, snapshot, or file s
 
 ## Timing mechanism
 
-A batch job can wait until a partition is complete and recompute it. A streaming job needs event time, processing time, a window, and a lateness policy. This toy calculation uses three events in a 10-minute window. Batch sees all events by recomputation; a stream with 5 minutes of allowed lateness misses the event that arrived at 10:12.
+A batch job can wait until a partition is complete and recompute it. A streaming job needs event time, processing time, a window, and a lateness policy. In a 10-minute event-time window ending at 10:10, these events behave differently:
 
-```python
-events = [("e1", "10:00", "10:01"), ("e2", "10:04", "10:12"), ("e3", "10:08", "10:09")]
-batch = sum(1 for _, event, arrival in events if event < "10:10")
-stream = sum(1 for _, event, arrival in events if event < "10:10" and arrival <= "10:05")
-print("batch_count_10m", batch)
-print("stream_count_with_5m_allowed_lateness", stream)
-```
+| Event | Event time | Arrival time | Batch count? | Stream count with 5-minute allowed lateness? |
+| --- | --- | --- | --- | --- |
+| e1 | 10:00 | 10:01 | yes | yes |
+| e2 | 10:04 | 10:12 | yes | no |
+| e3 | 10:08 | 10:09 | yes | no |
 
-Observed output:
-
-```text
-batch_count_10m 3
-stream_count_with_5m_allowed_lateness 1
-```
-
-The streaming number is lower because the completeness decision was made before all event-time records arrived. That may be acceptable for fraud alerts but unacceptable for financial reporting in a [data-warehouse](data-warehouses.md).
+Batch counts all three records when it recomputes the partition. A stream that closes the window at 10:05 only counts e1, because both e2 and e3 arrive after that completeness cutoff. The streaming number is lower because the completeness decision was made before all event-time records arrived. That may be acceptable for fraud alerts but unacceptable for financial reporting in a [data-warehouse](data-warehouses.md).
 
 ## Design choice
 

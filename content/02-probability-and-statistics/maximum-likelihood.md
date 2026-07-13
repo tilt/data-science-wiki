@@ -38,28 +38,21 @@ This connects [common distributions](common-distributions.md) to losses: Gaussia
 
 ## Worked computation
 
-```python
-import numpy as np
+Suppose a coin is flipped 10 times and produces 7 heads. Under a Bernoulli model with head probability $p$, the likelihood is
 
-flips = np.array([1] * 7 + [0] * 3)
-grid = np.linspace(.01, .99, 99)
-ll = np.array([
-    np.sum(flips * np.log(p) + (1 - flips) * np.log(1 - p))
-    for p in grid
-])
-print("grid_mle_p", round(grid[ll.argmax()], 2), "closed_form", flips.mean())
-print("loglik_at_.5", round(np.sum(flips * np.log(.5) + (1 - flips) * np.log(.5)), 4),
-      "loglik_at_.7", round(ll.max(), 4))
-```
+$$
+L(p)=p^7(1-p)^3,
+\qquad
+\ell(p)=7\log p+3\log(1-p).
+$$
 
-Observed output:
+Differentiating gives
 
-```text
-grid_mle_p 0.7 closed_form 0.7
-loglik_at_.5 -6.9315 loglik_at_.7 -6.1086
-```
+$$
+\frac{d\ell}{dp}=\frac{7}{p}-\frac{3}{1-p}.
+$$
 
-For Bernoulli data, the MLE is the sample proportion. The log-likelihood at $p=0.7$ is less negative than at a fair coin.
+Setting this derivative to zero yields $7(1-p)=3p$, so $\hat p=7/10=0.7$. The fair-coin log-likelihood is $10\log(0.5)\approx -6.9315$, while the fitted value gives $7\log(0.7)+3\log(0.3)\approx -6.1086$. The MLE is preferred because it assigns the observed sequence a higher probability, which appears as a less negative log-likelihood.
 
 ## Caveats
 

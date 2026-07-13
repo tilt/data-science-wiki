@@ -42,24 +42,18 @@ This is different from ordinary [evaluation of recommenders](evaluation-of-recom
 
 ## Worked example
 
-```python
-import numpy as np
-logged_actions = np.array([0, 1, 0, 2, 1, 2])
-rewards = np.array([1, 0, 0, 1, 1, 0])
-policy_actions = np.array([0, 0, 0, 2, 2, 2])
-keep = logged_actions == policy_actions
-print("matched_events", int(keep.sum()))
-print("replay_ctr", round(float(rewards[keep].mean()), 3))
-```
+Replay evaluation keeps only rows where the candidate policy chose the same action as the logged policy:
 
-Observed output:
+| Event | Logged action | Reward | Candidate action | Replay? |
+| ---: | ---: | ---: | ---: | --- |
+| 1 | 0 | 1 | 0 | yes |
+| 2 | 1 | 0 | 0 | no |
+| 3 | 0 | 0 | 0 | yes |
+| 4 | 2 | 1 | 2 | yes |
+| 5 | 1 | 1 | 2 | no |
+| 6 | 2 | 0 | 2 | yes |
 
-```text
-matched_events 4
-replay_ctr 0.5
-```
-
-Only four events can be replayed because rewards for unshown actions are missing. [Bandit algorithms](bandit-algorithms.md) require this partial-feedback discipline.
+Only four events can be replayed because rewards for unshown actions are missing. Among the matched rows, rewards are $1,0,1,0$, so the replay CTR is $2/4=0.5$. [Bandit algorithms](bandit-algorithms.md) require this partial-feedback discipline.
 
 ## Caveats
 

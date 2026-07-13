@@ -55,29 +55,17 @@ $$
 
 ## Worked example
 
-```python
-import numpy as np
-from sklearn.metrics import ndcg_score
+For ranked graded relevance labels $[3,0,2,1,0]$, binary relevance appears at ranks 1, 3, and 4.
 
-rel = np.array([3, 0, 2, 1, 0])
-binary = rel > 0
-k = 3
-precision = binary[:k].sum() / k
-recall = binary[:k].sum() / binary.sum()
-ap = np.mean([binary[:i + 1].sum() / (i + 1) for i, b in enumerate(binary) if b])
-rr = 1 / (np.argmax(binary) + 1)
-ndcg = ndcg_score([rel], [np.arange(len(rel), 0, -1)], k=5)
-print("p3", round(float(precision), 3), "r3", round(float(recall), 3),
-      "AP", round(float(ap), 3), "RR", round(float(rr), 3), "NDCG5", round(float(ndcg), 3))
-```
+| Metric | Calculation | Value |
+| --- | --- | ---: |
+| $P@3$ | two relevant results in the top three | 0.667 |
+| $R@3$ | two of three known relevant results found | 0.667 |
+| $AP$ | $(1/1+2/3+3/4)/3$ | 0.806 |
+| $RR$ | first relevant result at rank 1 | 1.000 |
+| $NDCG@5$ | graded gain discounted by rank and normalized by ideal order | 0.930 |
 
-Observed output:
-
-```text
-p3 0.667 r3 0.667 AP 0.806 RR 1.0 NDCG5 0.93
-```
-
-The first result is relevant, so reciprocal rank is perfect. Recall@3 is not perfect because one relevant item is still below rank 3.
+The first result is relevant, so reciprocal rank is perfect. $R@3$ is not perfect because one relevant item is still below rank 3.
 
 ## Choosing metrics
 

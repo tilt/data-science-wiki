@@ -45,28 +45,15 @@ MAP averages precision at relevant ranks. MRR is $1/r$ for the rank $r$ of the f
 
 ## Worked example
 
-```python
-import numpy as np
-from sklearn.metrics import ndcg_score
+For ranked graded relevance labels $[3,0,2,1,0]$, the binary relevant positions are ranks 1, 3, and 4. At $k=3$, two of the first three results are relevant, so $P@3=2/3=0.667$ and $R@3=2/3=0.667$.
 
-rel = np.array([3, 0, 2, 1, 0])
-binary = rel > 0
-precision3 = binary[:3].sum() / 3
-recall3 = binary[:3].sum() / binary.sum()
-ap = np.mean([binary[:i + 1].sum() / (i + 1) for i, b in enumerate(binary) if b])
-rr = 1 / (np.argmax(binary) + 1)
-ndcg5 = ndcg_score([rel], [np.arange(len(rel), 0, -1)], k=5)
-print(round(float(precision3), 3), round(float(recall3), 3),
-      round(float(ap), 3), round(float(rr), 3), round(float(ndcg5), 3))
-```
+Average precision uses the precision at each relevant rank:
 
-Observed output:
+$$
+AP=\frac{1/1+2/3+3/4}{3}=0.806.
+$$
 
-```text
-0.667 0.667 0.806 1.0 0.93
-```
-
-The same ranking can look strong or weak depending on the question. It has an excellent first hit, decent top-3 precision, and imperfect recall.
+The first result is relevant, so reciprocal rank is $1/1=1.0$. With graded gains and logarithmic rank discounting, the displayed order has normalized discounted gain about 0.93. The same ranking can therefore look strong or weak depending on whether the question is first-hit quality, top-3 cleanliness, full recall, or graded ordering.
 
 ## Practical use
 

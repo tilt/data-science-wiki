@@ -40,29 +40,21 @@ flowchart LR
 
 Functions fit short event handlers. Cloud Run-style containers fit stateless HTTP services with configurable concurrency. Kubernetes fits teams that need custom scheduling, sidecars, or portability. Batch services fit finite jobs. GPU instances or managed ML jobs fit [GPU systems](gpu-systems.md). The choice feeds [cost management](cost-management.md): high concurrency can reduce instances, but only if application code is actually safe and efficient under parallel requests.
 
-## Executed concurrency check
+## Worked concurrency check
 
-For a stateless HTTP service handling 300 requests/s with 180 ms service time and a 70% target utilization, the required instance count changes sharply with per-instance concurrency.
+For a stateless HTTP service handling 300 requests/s with 180 ms service time, Little's Law gives about $300\times0.18=54$ in-flight requests. With a 70% target utilization, the required instance count is
 
-```python
-import math
-rps = 300
-latency = 0.18
-util = 0.70
-for conc in [1, 8, 80]:
-    need = math.ceil((rps * latency) / (conc * util))
-    print(f"cloud_run_concurrency_{conc}_instances {need}")
-```
+$$
+\left\lceil\frac{54}{\text{concurrency}\times0.70}\right\rceil.
+$$
 
-Observed output:
+| Per-instance concurrency | Required instances |
+| ---: | ---: |
+| 1 | 78 |
+| 8 | 10 |
+| 80 | 1 |
 
-```text
-cloud_run_concurrency_1_instances 78
-cloud_run_concurrency_8_instances 10
-cloud_run_concurrency_80_instances 1
-```
-
-Cloud Run documentation explicitly treats concurrency as a scaling and cost control. The output is not a recommendation to set concurrency to 80 blindly; CPU-bound Python code or shared mutable state can require a lower setting. That is a [scalability](scalability.md) test, not a console default.
+Cloud Run documentation explicitly treats concurrency as a scaling and cost control. The table is not a recommendation to set concurrency to 80 blindly; CPU-bound Python code or shared mutable state can require a lower setting. That is a [scalability](scalability.md) test, not a console default.
 
 ## Caveats
 

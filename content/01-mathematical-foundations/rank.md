@@ -56,7 +56,7 @@ Observed output:
 
 ```text
 rank 2
-singular_values [8.5198 0.6429 0.    ]
+singular_values [8.519783 0.642883 0.      ]
 det_first_2x2 0.0
 ```
 

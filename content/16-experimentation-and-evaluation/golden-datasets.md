@@ -45,32 +45,17 @@ The dataset should deliberately include common cases, rare cases, regressions, a
 
 ## Worked inventory
 
-```python
-from collections import Counter
+For a ten-case regression gate, a deliberately curated inventory might look like this:
 
-records = [
-    ("billing","common","low"), ("billing","rare","medium"),
-    ("account","common","low"), ("account","rare","high"),
-    ("security","rare","critical"), ("security","common","high"),
-    ("returns","common","low"), ("returns","rare","medium"),
-    ("legal","rare","critical"), ("legal","common","high"),
-]
-by_domain = Counter(r[0] for r in records)
-by_risk = Counter(r[2] for r in records)
-print("domain_counts", dict(sorted(by_domain.items())))
-print("risk_counts", dict(sorted(by_risk.items())))
-print(f"critical_share {by_risk['critical']/len(records):.2f}")
-```
+| slice | common | rare | highest risk represented |
+| --- | ---: | ---: | --- |
+| account | 1 | 1 | high |
+| billing | 1 | 1 | medium |
+| legal | 1 | 1 | critical |
+| returns | 1 | 1 | medium |
+| security | 1 | 1 | critical |
 
-Observed output:
-
-```text
-domain_counts {'account': 2, 'billing': 2, 'legal': 2, 'returns': 2, 'security': 2}
-risk_counts {'critical': 2, 'high': 3, 'low': 3, 'medium': 2}
-critical_share 0.20
-```
-
-This tiny set is balanced by domain and intentionally has 20 percent critical cases. That would be wrong for population accuracy but right for a regression gate that must exercise rare dangerous behavior.
+The risk counts are 3 low, 2 medium, 3 high, and 2 critical, so the critical share is $2/10=0.20$. That would be wrong for population accuracy but right for a regression gate that must exercise rare dangerous behavior.
 
 ## Caveats
 

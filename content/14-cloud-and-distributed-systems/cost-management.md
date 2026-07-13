@@ -36,32 +36,17 @@ $$
 
 For systems work, the practical unit is more useful than the bill total: dollars per training run, dollars per million requests, dollars per TB retained, dollars per successful document ingestion, or dollars per evaluated model. [Managed storage](managed-storage.md) and [managed compute](managed-compute.md) need separate tags because storage retention and compute bursts scale differently. Generative systems should also track token, retrieval, reranking, and evaluation traffic separately, as in [cost and latency optimization](../10-generative-ai/cost-and-latency-optimization.md).
 
-## Executed cost check
+## Worked cost check
 
 Using AWS-published S3 example rates for inter-region transfer, Multi-Region Access Point routing, and internet egress:
 
-```python
-rates = {"inter_region_s3_gb": 0.02, "mrap_route_gb": 0.0033, "internet_egress_gb": 0.09}
-usage = {"replicate_gb": 2000, "route_gb": 500, "egress_gb": 20}
-rep = usage["replicate_gb"] * rates["inter_region_s3_gb"]
-route = usage["route_gb"] * rates["mrap_route_gb"]
-eg = usage["egress_gb"] * rates["internet_egress_gb"]
-print(f"s3_cross_region_replication_2000gb_usd {rep:.2f}")
-print(f"multi_region_access_point_routing_500gb_usd {route:.2f}")
-print(f"s3_internet_egress_20gb_usd {eg:.2f}")
-print(f"total_usd {rep+route+eg:.2f}")
-```
+| Driver | Usage | Rate | Cost |
+| --- | ---: | ---: | ---: |
+| Cross-region replication | 2,000 GB | $0.0200/GB | $40.00 |
+| Multi-Region Access Point routing | 500 GB | $0.0033/GB | $1.65 |
+| Internet egress | 20 GB | $0.0900/GB | $1.80 |
 
-Observed output:
-
-```text
-s3_cross_region_replication_2000gb_usd 40.00
-multi_region_access_point_routing_500gb_usd 1.65
-s3_internet_egress_20gb_usd 1.80
-total_usd 43.45
-```
-
-The small routing line is not the point; the 2 TB replication line is. Cost review should follow data movement and retention, not only instance size. A `CostCenter=search`, `Environment=prod`, `Workload=rag-ingestion` tag set is only useful if budgets and Cost Explorer reports group by those labels.
+The total is $40.00+$1.65+$1.80=$43.45. The small routing line is not the point; the 2 TB replication line is. Cost review should follow data movement and retention, not only instance size. A `CostCenter=search`, `Environment=prod`, `Workload=rag-ingestion` tag set is only useful if budgets and Cost Explorer reports group by those labels.
 
 ## Caveats
 

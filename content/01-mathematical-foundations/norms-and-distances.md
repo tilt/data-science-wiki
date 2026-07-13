@@ -68,7 +68,7 @@ distance_to_y 3.6056
 triangle_gap 0.0111
 ```
 
-The same vector has different sizes under different norms. The positive triangle gap verifies that $\lVert x+y\rVert_2$ did not exceed $\lVert x\rVert_2+\lVert y\rVert_2$.
+The same vector has different sizes under different norms: $7.0$ under $L_1$, $5.0$ under $L_2$, and $4.0$ under $L_\infty$. The positive triangle gap, $0.0111$, verifies that $\lVert x+y\rVert_2$ did not exceed $\lVert x\rVert_2+\lVert y\rVert_2$.
 
 ## Caveats
 

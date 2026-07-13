@@ -48,14 +48,14 @@ for n in [10, 100, 1000, 10000, 100000]:
 Observed output:
 
 ```text
-n=10 running_mean=0.30000
-n=100 running_mean=0.34000
-n=1000 running_mean=0.37000
-n=10000 running_mean=0.36840
-n=100000 running_mean=0.36797
+n=10 running_mean=0.50000
+n=100 running_mean=0.41000
+n=1000 running_mean=0.35100
+n=10000 running_mean=0.36600
+n=100000 running_mean=0.36698
 ```
 
-The early average is noisy, but the running mean moves toward the Bernoulli expectation $0.37$.
+The early average is noisy: after 10 draws it is `0.50000`, and after 100 draws it is `0.41000`. By 100,000 draws the running mean is `0.36698`, close to the Bernoulli expectation $0.37$.
 
 ## Caveats
 

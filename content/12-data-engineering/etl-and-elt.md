@@ -26,28 +26,13 @@ ETL transforms data before loading it into the target system. ELT loads raw data
 
 ## Mechanism
 
-In ETL, a pipeline might parse and normalize a SaaS export before writing warehouse tables. In ELT, the same raw export lands in [cloud-storage](cloud-storage.md) or a raw schema, then [dbt](dbt.md) or warehouse SQL creates staged and curated models. I ran this tiny transform to make the boundary concrete:
+In ETL, a pipeline might parse and normalize a SaaS export before writing warehouse tables. In ELT, the same raw export lands in [cloud-storage](cloud-storage.md) or a raw schema, then [dbt](dbt.md) or warehouse SQL creates staged and curated models.
 
-```python
-raw = [
-    {"order_id": 1, "amount": "12.30", "currency": "usd"},
-    {"order_id": 2, "amount": "7.00", "currency": "eur"},
-]
-staged = []
-for r in raw:
-    staged.append({
-        "order_id": r["order_id"],
-        "amount_cents": int(round(float(r["amount"]) * 100)),
-        "currency": r["currency"].upper(),
-    })
-print(staged)
-```
-
-Observed output:
-
-```text
-[{'order_id': 1, 'amount_cents': 1230, 'currency': 'USD'}, {'order_id': 2, 'amount_cents': 700, 'currency': 'EUR'}]
-```
+| Raw field | Staged field | Rule |
+| --- | --- | --- |
+| `order_id=1` | `order_id=1` | Preserve source identifier. |
+| `amount="12.30"` | `amount_cents=1230` | Parse decimal currency and multiply by 100. |
+| `currency="usd"` | `currency="USD"` | Normalize to uppercase accepted codes. |
 
 In ETL, that conversion happens before loading. In ELT, the raw string amount is loaded and this conversion becomes reviewed [SQL](sql.md), often with [data-quality](data-quality.md) tests on non-null `amount_cents` and accepted currency codes.
 

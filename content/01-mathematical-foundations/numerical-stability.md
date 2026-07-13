@@ -62,7 +62,7 @@ stable_softmax [0.090031 0.244728 0.665241]
 finite_stable True
 ```
 
-The naive expression overflows, while the shifted expression returns finite probabilities with the same mathematical value.
+The naive expression overflows and prints `[nan nan nan]` because exponentials near $e^{1000}$ exceed floating-point range. Subtracting the maximum before exponentiating returns finite probabilities, `[0.090031,0.244728,0.665241]`, with the same mathematical softmax value.
 
 ## Caveats
 

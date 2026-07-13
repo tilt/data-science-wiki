@@ -36,25 +36,15 @@ For a new item, $s_{\text{content}}$ might come from metadata or image embedding
 
 ## Worked example
 
-```python
-import numpy as np
-user_profile = np.array([0.8, 0.2, 0.0])
-new_items = np.array([[0.9,0.1,0.0], [0.1,0.2,0.9], [0.5,0.5,0.0]])
-content = new_items @ user_profile
-popularity = np.array([.30, .70, .40])
-score = .75 * content + .25 * popularity
-print("content_scores", np.round(content, 3).tolist())
-print("blended_rank", np.argsort(-score).tolist())
-```
+A new user profile $[0.8,0.2,0.0]$ can still score new items from content features and a popularity prior:
 
-Observed output:
+| Item | Content vector | Content score | Popularity prior | Blend $0.75s_{\text{content}}+0.25s_{\text{prior}}$ |
+| --- | --- | ---: | ---: | ---: |
+| 0 | $[0.9,0.1,0.0]$ | 0.74 | 0.30 | 0.630 |
+| 1 | $[0.1,0.2,0.9]$ | 0.12 | 0.70 | 0.265 |
+| 2 | $[0.5,0.5,0.0]$ | 0.50 | 0.40 | 0.475 |
 
-```text
-content_scores [0.74, 0.12, 0.5]
-blended_rank [0, 2, 1]
-```
-
-The first new item wins because content aligns with the user profile, even before collaborative data exists. [Exploration versus exploitation](exploration-versus-exploitation.md) controls how aggressively cold items are exposed for learning.
+The rank is item 0, item 2, then item 1. The first new item wins because content aligns with the user profile, even before collaborative data exists. [Exploration versus exploitation](exploration-versus-exploitation.md) controls how aggressively cold items are exposed for learning.
 
 ## Caveats
 

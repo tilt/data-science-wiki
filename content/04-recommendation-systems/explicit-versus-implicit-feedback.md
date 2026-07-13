@@ -43,26 +43,15 @@ which is used by [weighted matrix factorization](weighted-matrix-factorization.m
 
 ## Worked example
 
-```python
-import numpy as np
-ratings = np.array([5., 4., 1.])
-counts = np.array([20., 2., 0.])
-pref = (counts > 0).astype(int)
-conf = 1 + 2 * np.log1p(counts)
-print("explicit_mean", round(float(ratings.mean()), 3))
-print("implicit_pref", pref.tolist())
-print("confidence", np.round(conf, 2).tolist())
-```
+Compare three explicit ratings with three implicit event counts:
 
-Observed output:
+| Item | Explicit rating | Implicit count | Preference $p_{ui}$ | Confidence $1+2\log(1+r_{ui})$ |
+| --- | ---: | ---: | ---: | ---: |
+| A | 5 | 20 | 1 | 7.09 |
+| B | 4 | 2 | 1 | 3.20 |
+| C | 1 | 0 | 0 | 1.00 |
 
-```text
-explicit_mean 3.333
-implicit_pref [1, 1, 0]
-confidence [7.09, 3.2, 1.0]
-```
-
-The explicit ratings include a negative one-star signal. The implicit conversion only knows that two items were engaged with and one was not, so it must be evaluated differently in [ranking](ranking.md) and [recommender evaluation](evaluation-of-recommenders.md).
+The explicit mean rating is $(5+4+1)/3=3.333$, and the one-star rating is a negative signal. The implicit conversion only knows that two items were engaged with and one was not, so it must be evaluated differently in [ranking](ranking.md) and [recommender evaluation](evaluation-of-recommenders.md).
 
 ## Caveats
 

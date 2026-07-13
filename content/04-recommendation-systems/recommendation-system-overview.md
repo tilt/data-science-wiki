@@ -36,28 +36,15 @@ where $C_u$ is a small candidate set drawn from the full item catalog $\mathcal 
 
 ## Worked example
 
-```python
-import numpy as np
-logs = np.array([[0,0,1], [0,1,1], [1,2,1], [2,3,1], [2,1,1]])
-R = np.zeros((3, 4), dtype=int)
-R[logs[:, 0], logs[:, 1]] = logs[:, 2]
-pop = R.sum(axis=0)
-unseen = np.where(R[0] == 0)[0]
-rec = unseen[np.argsort(-pop[unseen])]
-print("matrix_shape", R.shape)
-print("item_popularity", pop.tolist())
-print("user0_candidates", rec.tolist())
-```
+A tiny log with three users and four items becomes this implicit-feedback matrix:
 
-Observed output:
+| User | Item 0 | Item 1 | Item 2 | Item 3 |
+| ---: | ---: | ---: | ---: | ---: |
+| 0 | 1 | 1 | 0 | 0 |
+| 1 | 0 | 0 | 1 | 0 |
+| 2 | 0 | 1 | 0 | 1 |
 
-```text
-matrix_shape (3, 4)
-item_popularity [1, 2, 1, 1]
-user0_candidates [2, 3]
-```
-
-This toy pipeline builds a [utility matrix](utility-and-interaction-matrices.md), removes seen items, and returns popularity candidates. Real systems add [collaborative filtering](collaborative-filtering.md), content, diversity, and online logging.
+The item popularity vector is $[1,2,1,1]$. User 0 has already seen items 0 and 1, so the popularity fallback can only recommend unseen items 2 and 3; they tie at popularity 1. This toy pipeline builds a [utility matrix](utility-and-interaction-matrices.md), removes seen items, and returns popularity candidates. Real systems add [collaborative filtering](collaborative-filtering.md), content, diversity, and online logging.
 
 ## Caveats
 

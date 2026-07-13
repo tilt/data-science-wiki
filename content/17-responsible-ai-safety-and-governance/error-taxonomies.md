@@ -43,41 +43,20 @@ status: open
 
 The label `wrong_answer` is too broad to drive action. `wrong_entity` points toward retrieval or entity linking; `unsupported_claim` points toward generation and citation checks; `pii_leak` points toward [privacy](privacy.md), access control, and [policy enforcement](policy-enforcement.md). The taxonomy should be stable enough for trending but flexible enough to add new classes when an incident exposes a missing category.
 
-## Executed aggregation
+## Worked aggregation
 
-I ran a tiny aggregation over six reviewed failures:
+A six-failure review inventory can be aggregated directly:
 
-```python
-from collections import Counter
+| error | symptom | likely cause | severity |
+| --- | --- | --- | ---: |
+| E01 | unsupported_claim | generation | 4 |
+| E02 | retrieval_miss | retrieval | 3 |
+| E03 | wrong_entity | retrieval | 5 |
+| E04 | pii_leak | policy | 5 |
+| E05 | unsafe_tool_call | agent | 5 |
+| E06 | format_violation | interface | 1 |
 
-errors = [
-    ("E01", "unsupported_claim", "generation", 4),
-    ("E02", "retrieval_miss", "retrieval", 3),
-    ("E03", "wrong_entity", "retrieval", 5),
-    ("E04", "pii_leak", "policy", 5),
-    ("E05", "unsafe_tool_call", "agent", 5),
-    ("E06", "format_violation", "interface", 1),
-]
-by_type = Counter(error_type for _, error_type, _, _ in errors)
-by_cause = Counter(cause for _, _, cause, _ in errors)
-risk_points = sum(severity for _, _, _, severity in errors)
-
-print("ERROR_TAXONOMIES")
-print("by_type", dict(by_type))
-print("by_cause", dict(by_cause))
-print("risk_points", risk_points)
-```
-
-Observed output:
-
-```text
-ERROR_TAXONOMIES
-by_type {'unsupported_claim': 1, 'retrieval_miss': 1, 'wrong_entity': 1, 'pii_leak': 1, 'unsafe_tool_call': 1, 'format_violation': 1}
-by_cause {'generation': 1, 'retrieval': 2, 'policy': 1, 'agent': 1, 'interface': 1}
-risk_points 23
-```
-
-The important output is not the count of six; it is the split by cause. Retrieval owns two failures, while policy and agent controls own separate high-severity failures. That distinction is what lets [governance of model and knowledge base changes](governance-of-model-and-knowledge-base-changes.md) assign the next fix to the right owner.
+The total severity is $4+3+5+5+5+1=23$. The important output is not the count of six; it is the split by cause. Retrieval owns two failures, while policy and agent controls own separate high-severity failures. That distinction is what lets [governance of model and knowledge base changes](governance-of-model-and-knowledge-base-changes.md) assign the next fix to the right owner.
 
 ## Caveats
 

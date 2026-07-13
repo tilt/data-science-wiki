@@ -48,34 +48,49 @@ $$
 
 The Hessian describes local curvature. In unconstrained twice-differentiable [convex optimization](convex-optimization.md), $\nabla^2 g(x)\succeq 0$ everywhere is a curvature certificate.
 
-## Executed demo
+## Worked calculation
 
-```python
-import numpy as np
+For
 
-x = np.array([1., 2.])
-J = np.array([[2*x[0], 1.], [x[1], x[0]]])
-H = np.array([[6*x[0], 0.], [0., 2.]])
-print("jacobian_at_[1,2]")
-print(J)
-print("hessian_at_[1,2]")
-print(H)
-print("hessian_eigvals", np.linalg.eigvalsh(H))
-```
+$$
+f(x_1,x_2)=
+\begin{bmatrix}
+x_1^2+x_2\\
+x_1x_2
+\end{bmatrix},
+$$
 
-Observed output:
+the Jacobian is
 
-```text
-jacobian_at_[1,2]
-[[2. 1.]
- [2. 1.]]
-hessian_at_[1,2]
-[[6. 0.]
- [0. 2.]]
-hessian_eigvals [2. 6.]
-```
+$$
+J_f(x)=
+\begin{bmatrix}
+2x_1 & 1\\
+x_2 & x_1
+\end{bmatrix}.
+$$
 
-Here $f(x_1,x_2)=(x_1^2+x_2,x_1x_2)$ and $g(x_1,x_2)=x_1^3+x_2^2$. The positive Hessian eigenvalues at $(1,2)$ show locally positive curvature in both coordinate directions.
+At $(1,2)$ this becomes
+
+$$
+J_f(1,2)=
+\begin{bmatrix}
+2 & 1\\
+2 & 1
+\end{bmatrix}.
+$$
+
+For $g(x_1,x_2)=x_1^3+x_2^2$, the Hessian is
+
+$$
+\nabla^2 g(x)=
+\begin{bmatrix}
+6x_1 & 0\\
+0 & 2
+\end{bmatrix},
+$$
+
+so $\nabla^2 g(1,2)=\begin{bmatrix}6&0\\0&2\end{bmatrix}$. Its eigenvalues are 6 and 2 because the matrix is diagonal. Both are positive, so the surface has locally positive curvature in both coordinate directions at that point.
 
 ## Caveats
 

@@ -53,11 +53,11 @@ print("mean_count_by_1000", round(counts.mean(), 3),
 Observed output:
 
 ```text
-mean_interarrival 5.9987 theory_rate 0.1667
-mean_count_by_1000 166.42 count_per_time 0.1664
+mean_interarrival 6.0013 theory_rate 0.1667
+mean_count_by_1000 166.289 count_per_time 0.1663
 ```
 
-The simulated long-run count per unit time is close to $1/\mathbb E[S]$.
+The simulated mean interarrival time is `6.0013`, close to the modeled mean 6, so the theoretical renewal rate is about `0.1667`. The observed count per unit time, `0.1663`, is close to $1/\mathbb E[S]$.
 
 ## Caveats
 

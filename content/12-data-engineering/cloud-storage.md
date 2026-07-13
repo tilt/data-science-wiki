@@ -34,25 +34,13 @@ gs://company-lake/staged/orders/dt=2026-01-01/part-000.parquet
 gs://company-lake/curated/fct_orders/v=20260102/part-000.parquet
 ```
 
-I computed a simple sizing check for 73 million rows per month at 420 bytes per row:
+For 73 million rows per month at about 420 bytes per row, the daily partition size is
 
-```python
-rows = 73_000_000
-row_bytes = 420
-days = 30
-raw_bytes = rows * row_bytes / days
-print("daily_partition_gib", round(raw_bytes / (1024**3), 2))
-print("128_mib_files_per_day", round(raw_bytes / (128 * 1024**2)))
-```
+$$
+\frac{73{,}000{,}000\times420}{30\times1024^3}\approx0.95\text{ GiB}.
+$$
 
-Observed output:
-
-```text
-daily_partition_gib 0.95
-128_mib_files_per_day 8
-```
-
-Eight roughly 128 MiB files per day is a reasonable starting point for parallel reads. Thousands of tiny files would slow listing and planning; one huge file would underuse parallelism in [data-pipelines](data-pipelines.md).
+Targeting roughly 128 MiB files gives $0.95\text{ GiB}/128\text{ MiB}\approx8$ files per day. That is a reasonable starting point for parallel reads. Thousands of tiny files would slow listing and planning; one huge file would underuse parallelism in [data-pipelines](data-pipelines.md).
 
 ## Architecture
 

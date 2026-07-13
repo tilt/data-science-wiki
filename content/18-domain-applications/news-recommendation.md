@@ -31,36 +31,19 @@ Most systems use [retrieval and ranking architectures](../04-recommendation-syst
 
 MIND is a canonical public news recommendation artifact. The project page says it contains about 160,000 English news articles and more than 15 million impression logs from 1 million users, with article text, categories, entities, clicks, non-clicks, and histories.
 
-## Executed Artifact
+## Worked Ranking Check
 
-This executed toy ranking computed [nDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) and [source coverage](../16-experimentation-and-evaluation/coverage.md) for five candidate articles.
+This toy ranking checks [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) and [source coverage](../16-experimentation-and-evaluation/coverage.md) for five candidate articles:
 
-```python
-import numpy as np
+| rank | article gain | source |
+| ---: | ---: | --- |
+| 1 | 3 | local |
+| 2 | 2 | local |
+| 3 | 2 | wire |
+| 4 | 1 | opinion |
+| 5 | 0 | wire |
 
-gains = np.array([3, 2, 0, 1, 2])
-order = np.array([0, 4, 1, 3, 2])
-sources = np.array(["local", "wire", "wire", "opinion", "local"])[order]
-
-def dcg(values):
-    return sum((2 ** value - 1) / np.log2(rank + 2) for rank, value in enumerate(values))
-
-ndcg = dcg(gains[order]) / dcg(sorted(gains, reverse=True))
-
-print("ndcg_at_5", round(ndcg, 3))
-print("unique_sources_at_5", len(set(sources)))
-print("top5_sources", sources.tolist())
-```
-
-Observed output:
-
-```text
-ndcg_at_5 1.0
-unique_sources_at_5 3
-top5_sources ['local', 'local', 'wire', 'opinion', 'wire']
-```
-
-The relevance ranking is perfect on the toy labels, but two sources appear twice. That is acceptable only if the editorial policy allows it; a real news ranker should report diversity and coverage beside relevance.
+The ranked gains are already in ideal order, so [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md)@5 is 1.0. The list covers three unique sources, but local and wire each appear twice. That is acceptable only if the editorial policy allows it; a real news ranker should report diversity and coverage beside relevance.
 
 ## Failure Modes
 

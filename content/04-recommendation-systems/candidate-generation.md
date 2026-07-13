@@ -36,27 +36,15 @@ The production contract is usually: retrieve many, deduplicate, enforce eligibil
 
 ## Worked example
 
-```python
-sources = {"als": {"A": .91, "B": .72, "C": .15},
-           "content": {"B": .63, "D": .81, "E": .35},
-           "trending": {"A": .25, "D": .4, "F": .77}}
-merged = {}
-for vals in sources.values():
-    m = max(vals.values())
-    for item, score in vals.items():
-        merged[item] = max(merged.get(item, 0), score / m)
-print("merged_top4", sorted((k, round(v, 3)) for k, v in merged.items()))
-print("ranked", [k for k, v in sorted(merged.items(), key=lambda kv: -kv[1])[:4]])
-```
+Three candidate sources might emit scores on different scales:
 
-Observed output:
+| Source | Raw candidates | Source maximum | Normalized candidates |
+| --- | --- | ---: | --- |
+| ALS | A: 0.91, B: 0.72, C: 0.15 | 0.91 | A: 1.000, B: 0.791, C: 0.165 |
+| Content | B: 0.63, D: 0.81, E: 0.35 | 0.81 | B: 0.778, D: 1.000, E: 0.432 |
+| Trending | A: 0.25, D: 0.40, F: 0.77 | 0.77 | A: 0.325, D: 0.519, F: 1.000 |
 
-```text
-merged_top4 [('A', 1.0), ('B', 0.791), ('C', 0.165), ('D', 1.0), ('E', 0.432), ('F', 1.0)]
-ranked ['A', 'D', 'F', 'B']
-```
-
-Normalizing per source lets different candidate generators contribute. The ranker can later learn which source is trustworthy for which user or context.
+Taking the maximum normalized score per item gives A: 1.000, B: 0.791, C: 0.165, D: 1.000, E: 0.432, and F: 1.000. The top four candidates are A, D, F, and B. Normalizing per source lets different candidate generators contribute, while the ranker can later learn which source is trustworthy for which user or context.
 
 ## Caveats
 

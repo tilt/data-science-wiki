@@ -77,6 +77,10 @@ ece_4bin 0.0942
 
 The model is underconfident in every bin here: observed rates are above mean predicted probabilities. A threshold policy should not treat these scores as literal risks until validation and slice checks support that use.
 
+![Reliability diagram showing observed frequencies above the ideal calibration diagonal in all four bins.](../assets/diagrams/calibration-reliability-diagram.svg)
+
+The plot turns the printed bin table into the usual reliability diagram. Points above the diagonal mean the event happens more often than the model predicts, so all four bins point in the same underconfidence direction.
+
 ## Caveats
 
 Do not calibrate on the final test set and then report that same set as unbiased evidence. Global calibration can hide subgroup miscalibration. For LLM judges, numeric scores are preferences or rubric outputs, not probabilities, unless explicitly validated against human labels.

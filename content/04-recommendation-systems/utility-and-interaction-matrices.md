@@ -36,26 +36,15 @@ The symbol $\Omega$ matters because missing entries are unknown, not automatical
 
 ## Worked example
 
-```python
-import numpy as np
-events = [(0,0,5), (0,2,1), (1,1,4), (2,2,5)]
-R = np.full((3, 4), np.nan)
-for u, i, r in events:
-    R[u, i] = r
-print("observed_entries", int(np.isfinite(R).sum()))
-print("sparsity", round(float(1 - np.isfinite(R).mean()), 3))
-print("user0_row", np.where(np.isnan(R[0]), -1, R[0]).astype(int).tolist())
-```
+Four observed events produce a sparse $3\times4$ utility matrix:
 
-Observed output:
+| User | Item 0 | Item 1 | Item 2 | Item 3 |
+| ---: | ---: | ---: | ---: | ---: |
+| 0 | 5 | missing | 1 | missing |
+| 1 | missing | 4 | missing | missing |
+| 2 | missing | missing | 5 | missing |
 
-```text
-observed_entries 4
-sparsity 0.667
-user0_row [5, -1, 1, -1]
-```
-
-The `-1` display sentinels mark missing cells only for printing. Treating them as real negative ratings would create the problem explained in [sparse utility matrices and SVD](sparse-utility-matrices-and-svd.md).
+There are 4 observed entries out of 12 cells, so sparsity is $1-4/12=0.667$. User 0's observed row is rating 5 for item 0 and rating 1 for item 2; the missing cells are unknown, not dislikes. Treating missing cells as real negative ratings would create the problem explained in [sparse utility matrices and SVD](sparse-utility-matrices-and-svd.md).
 
 ## Caveats
 

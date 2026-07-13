@@ -28,20 +28,15 @@ Cost and latency optimization should target successful task completion, not the 
 
 For one request, latency is approximately critical-path time: $L=L_{queue}+L_{retrieval}+L_{first\ token}+L_{decode}+L_{validation}$. Cost accounting should record input tokens, output tokens, tool calls, reranks, cache hits, and failed retries. Route simple tasks differently from evidence-heavy [retrieval pipelines](retrieval-pipelines.md).
 
-## Executed artifact
+## Worked budget table
 
-```python
-steps = [("plan", 120), ("search", 350), ("read", 500), ("write", 420), ("verify", 260)]
-print("AGENT_BUDGET")
-print("total_tokens", sum(tokens for _, tokens in steps), "max_step", max(steps, key=lambda item: item[1]))
-```
-
-Observed output:
-
-```text
-AGENT_BUDGET
-total_tokens 1650 max_step ('read', 500)
-```
+| Step | Tokens | Share of total |
+| --- | ---: | ---: |
+| Plan | 120 | 7.3% |
+| Search | 350 | 21.2% |
+| Read | 500 | 30.3% |
+| Write | 420 | 25.5% |
+| Verify | 260 | 15.8% |
 
 The trace totals 1,650 tokens across five steps, with `read` alone consuming 500 tokens. Optimizing `read` first has the largest single-step opportunity because it is about 30 percent of the token budget before generation even starts.
 

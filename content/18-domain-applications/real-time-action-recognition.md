@@ -32,31 +32,22 @@ The core modeling task is [temporal action recognition](../09-video-understandin
 
 UCF101 is a classic public action-recognition benchmark: the paper describes 101 action classes, more than 13,000 clips, and 27 hours of unconstrained video. Kinetics later scaled action data to 400 classes with at least 400 clips per class.
 
-## Executed Artifact
+## Worked Streaming Check
 
-This executed toy smoothed ten frame-level action probabilities with a three-frame window and triggered above 0.55.
+This toy stream smooths ten frame-level action probabilities with a three-frame window and triggers above 0.55:
 
-```python
-import numpy as np
+| frame window | mean probability |
+| --- | ---: |
+| 0-2 | 0.083 |
+| 1-3 | 0.170 |
+| 2-4 | 0.327 |
+| 3-5 | 0.527 |
+| 4-6 | 0.680 |
+| 5-7 | 0.703 |
+| 6-8 | 0.597 |
+| 7-9 | 0.400 |
 
-probs = np.array([0.05, 0.08, 0.12, 0.31, 0.55, 0.72, 0.77, 0.62, 0.40, 0.18])
-smoothed = np.convolve(probs, np.ones(3) / 3, mode="valid")
-trigger_frame = np.where(smoothed > 0.55)[0][0] + 2
-
-print("trigger_frame", int(trigger_frame))
-print("detection_delay_frames", int(trigger_frame - 4))
-print("max_smoothed_prob", round(float(smoothed.max()), 3))
-```
-
-Observed output:
-
-```text
-trigger_frame 6
-detection_delay_frames 2
-max_smoothed_prob 0.703
-```
-
-The detector fires two frames after the assumed onset at frame 4. That delay may be acceptable for video tagging and unacceptable for a safety stop, so evaluation belongs with [real-time video understanding](../09-video-understanding/real-time-video-understanding.md), not just offline clip accuracy.
+The first window above 0.55 is frames 4-6, so the trigger is emitted at frame 6. If the assumed onset is frame 4, the detection delay is 2 frames, and the peak smoothed probability is 0.703. That delay may be acceptable for video tagging and unacceptable for a safety stop, so evaluation belongs with [real-time video understanding](../09-video-understanding/real-time-video-understanding.md), not just offline clip accuracy.
 
 ## Failure Modes
 

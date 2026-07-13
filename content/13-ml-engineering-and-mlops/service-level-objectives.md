@@ -28,25 +28,21 @@ A service level objective is a measurable target for user-visible reliability. I
 
 An SLO is defined over a service level indicator and a window. The error budget is the allowed badness: for a 99.9% monthly availability SLO, 0.1% of the window may be bad. The budget should govern [canary deployment](canary-deployment.md), release freezes, and [production incident response](production-incident-response.md).
 
-## Executed Budget Calculation
+## Worked budget calculation
 
-```python
-window_minutes = 30 * 24 * 60
-slo = 0.999
-budget_minutes = window_minutes * (1 - slo)
-incident_minutes = 9.5
-print("slo_budget_minutes_30d", round(budget_minutes, 2))
-print("slo_incident_burn_pct", round(incident_minutes / budget_minutes * 100, 1))
-```
+A 30-day window has $30\times24\times60=43{,}200$ minutes. For a 99.9% availability SLO, the allowed bad fraction is $1-0.999=0.001$, so the monthly error budget is
 
-Observed output:
+$$
+43{,}200\times0.001=43.2\text{ minutes}.
+$$
 
-```text
-slo_budget_minutes_30d 43.2
-slo_incident_burn_pct 22.0
-```
+A 9.5-minute incident burns
 
-A 9.5-minute incident consumes 22.0% of the 30-day budget. That is the operational reason to stop a rollout even if a candidate model looks promising offline.
+$$
+\frac{9.5}{43.2}\times100\approx22.0\%
+$$
+
+of that budget. That is the operational reason to stop a rollout even if a candidate model looks promising offline.
 
 ## Artifact: ML SLO Definition
 

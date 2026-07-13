@@ -81,7 +81,7 @@ analytic_grad [-2.  1.]
 finite_diff_grad [-2.  1.]
 ```
 
-The analytic gradient and finite-difference check agree, which is the same sanity test used when implementing custom derivatives.
+The prediction is off by $-0.5$, so the squared loss is $0.25$ and the analytic gradient is $2(-0.5)[2,-1]=[-2,1]$. The finite-difference gradient prints the same vector, which is the same sanity test used when implementing custom derivatives.
 
 ## Caveats
 

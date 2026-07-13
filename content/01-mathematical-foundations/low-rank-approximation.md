@@ -68,7 +68,7 @@ rank2_error 2.0
 singular_values [5.6569 3.7417 2.    ]
 ```
 
-Keeping two singular directions leaves only the last singular value as error. Keeping one leaves the square-root sum of the last two squared singular values.
+Keeping two singular directions leaves only the last singular value, $2.0$, as Frobenius error. Keeping one direction discards singular values $3.7417$ and $2.0$, giving $\sqrt{3.7417^2+2.0^2}\approx4.2426$.
 
 ## Caveats
 

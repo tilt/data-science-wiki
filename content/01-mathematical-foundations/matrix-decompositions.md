@@ -62,7 +62,7 @@ qr_QtQ
  [0. 1.]]
 ```
 
-The Cholesky factor reconstructs the positive definite matrix exactly to displayed precision, and the QR factor produces an orthonormal basis. Both replace a matrix with factors whose properties are easier to reason about.
+The Cholesky factor has positive diagonal entries $2.0$ and $1.4142$, and its reconstruction error is $0.0$ to displayed precision. The QR check prints $Q^\top Q$ as the identity, so both decompositions replace a matrix with factors whose properties are easier to reason about.
 
 ## Caveats
 

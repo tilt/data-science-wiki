@@ -88,31 +88,15 @@ If only 78 percent of observations fall inside nominal 90 percent intervals at h
 - Using ensemble spread as an interval without calibration.
 - Evaluating intervals on the data used to tune their width.
 
-## Executed example
+## Worked example
 
-```python
-import numpy as np
+Suppose recent residuals from point forecasts are $1.0,0.5,-1.0,-0.5,1.0,1.0$. Their sample standard deviation is about $0.876$. A normal 95 percent interval around a next point forecast of 17 is
 
-y = np.array([10.0, 12.0, 13.0, 12.0, 15.0, 16.0])
-yhat = np.array([9.0, 11.5, 14.0, 12.5, 14.0, 15.0])
-resid = y - yhat
-sigma = resid.std(ddof=1)
-next_hat = 17.0
-lo, hi = next_hat - 1.96 * sigma, next_hat + 1.96 * sigma
-print("residual_sd", round(float(sigma), 3))
-print("normal_95_interval", [round(float(lo), 3), round(float(hi), 3)])
-print("in_sample_coverage", round(float(np.mean((y >= yhat - 1.96 * sigma) & (y <= yhat + 1.96 * sigma))), 3))
-```
+$$
+17\pm1.96(0.876)=[15.284,18.716].
+$$
 
-Observed output:
-
-```text
-residual_sd 0.876
-normal_95_interval [15.284, 18.716]
-in_sample_coverage 1.0
-```
-
-This residual-based normal interval is easy to compute, but its validity depends on residual assumptions; calibration should be checked out of sample.
+The same interval rule covers all six in-sample observations in this toy set, giving in-sample coverage 1.0. That looks reassuring, but it is not an honest validation result because the residual scale was estimated on the same data; calibration should be checked out of sample.
 
 ## Connections
 

@@ -63,7 +63,11 @@ analytic 0.55291066
 abs_error 7.01e-12
 ```
 
-The centered finite difference matches the analytic derivative for this smooth function. That local slope is exactly the kind of signal [gradient descent](gradient-descent.md) uses when minimizing a loss.
+The code estimates the derivative of $f(x)=\sin(x)e^{-0.2x}$ at $x=0.7$ using the symmetric slope between $x-h$ and $x+h$. That finite-difference estimate, `0.55291066`, matches the analytic derivative to an absolute error of about $7.01\times10^{-12}$, so the local tangent slope is being measured accurately.
+
+![Plot of f(x)=sin(x)e^{-0.2x} with a tangent line at x=0.7 whose slope is 0.5529.](../assets/diagrams/calculus-function-derivative.svg)
+
+The dashed tangent in the plot is the geometric version of the number printed by the code. That local slope is exactly the kind of signal [gradient descent](gradient-descent.md) uses when minimizing a loss.
 
 ## Caveats
 

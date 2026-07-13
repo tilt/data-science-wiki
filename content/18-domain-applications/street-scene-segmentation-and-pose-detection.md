@@ -29,33 +29,17 @@ Street-scene segmentation and pose detection convert road imagery into spatial u
 
 The segmentation side is [semantic segmentation](../08-computer-vision/semantic-segmentation.md); the human-structure side is [pose estimation](../08-computer-vision/pose-estimation.md). In a road stack, both interact with [object detection](../08-computer-vision/object-detection.md) and [person tracking and track aggregation](../09-video-understanding/person-tracking-and-track-aggregation.md). Evaluation should include mIoU, boundary quality, small-object recall, keypoint error, latency, and scenario slices such as rain, night, glare, occlusion, and new cities. Cityscapes is the canonical street-scene segmentation artifact: the paper reports stereo video from 50 cities, 5,000 finely annotated images, and 20,000 additional coarse annotations.
 
-## Executed Artifact
+## Worked Segmentation Check
 
-This executed 4x4 mask example computed IoU for road, car, and person classes.
+This 4x4 mask example computes IoU for road, car, and person classes:
 
-```python
-import numpy as np
+| class | intersection pixels | union pixels | IoU |
+| --- | ---: | ---: | ---: |
+| road | 6 | 6 | 1.000 |
+| car | 6 | 7 | 0.857 |
+| person | 3 | 4 | 0.750 |
 
-true = np.array([[0, 0, 1, 1], [0, 2, 2, 1], [0, 2, 2, 1], [0, 0, 1, 1]])
-pred = np.array([[0, 0, 1, 1], [0, 2, 1, 1], [0, 2, 2, 1], [0, 0, 1, 1]])
-ious = []
-for cls in [0, 1, 2]:
-    intersection = ((true == cls) & (pred == cls)).sum()
-    union = ((true == cls) | (pred == cls)).sum()
-    ious.append(intersection / union)
-
-print("class_ious_road_car_person", [round(float(value), 3) for value in ious])
-print("mean_iou", round(float(np.mean(ious)), 3))
-```
-
-Observed output:
-
-```text
-class_ious_road_car_person [1.0, 0.857, 0.75]
-mean_iou 0.869
-```
-
-The mean IoU looks high, but person IoU is the weakest class. For safety-sensitive perception, [detection and segmentation metrics](../08-computer-vision/detection-and-segmentation-metrics.md) should be inspected per class and per scenario, not averaged away.
+The mean IoU is $(1.000+0.857+0.750)/3=0.869$. The mean looks high, but person IoU is the weakest class. For safety-sensitive perception, [detection and segmentation metrics](../08-computer-vision/detection-and-segmentation-metrics.md) should be inspected per class and per scenario, not averaged away.
 
 ## Failure Modes
 

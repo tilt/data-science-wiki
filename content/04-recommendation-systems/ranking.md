@@ -36,29 +36,16 @@ then sort by $s$. A list-level postprocessor can add constraints such as author 
 
 ## Worked example
 
-```python
-import numpy as np
-rel = np.array([.9, .85, .7, .6])
-age = np.array([1, 10, 2, 0])
-author = np.array([0, 0, 1, 1])
-score = rel - .03 * age
-order = []
-for idx in np.argsort(-score):
-    idx = int(idx)
-    if len(order) < 2 and (not order or author[idx] != author[order[-1]]):
-        order.append(idx)
-print("raw_scores", np.round(score, 3).tolist())
-print("diversified_top2", order)
-```
+Apply a freshness penalty of $0.03$ per age unit, then enforce author diversity in the top two:
 
-Observed output:
+| Item | Relevance | Age | Author | Score $rel-0.03\,age$ |
+| --- | ---: | ---: | ---: | ---: |
+| 0 | 0.90 | 1 | 0 | 0.87 |
+| 1 | 0.85 | 10 | 0 | 0.55 |
+| 2 | 0.70 | 2 | 1 | 0.64 |
+| 3 | 0.60 | 0 | 1 | 0.60 |
 
-```text
-raw_scores [0.87, 0.55, 0.64, 0.6]
-diversified_top2 [0, 2]
-```
-
-Item 1 has high base relevance but is stale and from the same author as item 0, so item 2 enters the top list. This connects ranking directly to [diversity, novelty, coverage, and serendipity](diversity-novelty-coverage-serendipity.md).
+The raw score order is item 0, item 2, item 3, then item 1. Item 1 has high base relevance but is stale and from the same author as item 0, so item 2 enters the top list. This connects ranking directly to [diversity, novelty, coverage, and serendipity](diversity-novelty-coverage-serendipity.md).
 
 ## Caveats
 

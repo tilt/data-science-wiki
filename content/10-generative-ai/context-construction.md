@@ -28,35 +28,19 @@ Context construction is the packing layer between retrieval and generation. It d
 
 With a token budget $B$, each candidate item has cost $c_i$ and estimated utility $u_i$. The system chooses a subset with $\sum c_i\le B$, while reserving room for the answer and preserving instruction precedence. This is why [retrieval pipelines](retrieval-pipelines.md) should return ranked, source-labeled chunks rather than raw documents.
 
-## Executed artifact
+## Worked packing table
 
-```python
-items = [
-    ("system", 80, 10),
-    ("schema", 120, 9),
-    ("chat_history", 160, 5),
-    ("retrieved_A", 140, 8),
-    ("retrieved_B", 110, 6),
-]
-budget = 420
-chosen = []
-used = 0
-for name, tokens, value in sorted(items, key=lambda item: -item[2] / item[1]):
-    if used + tokens <= budget:
-        chosen.append(name)
-        used += tokens
-print("CONTEXT_PACKING")
-print({"chosen": chosen, "tokens_used": used, "budget": budget})
-```
+With a 420-token budget, a simple utility-per-token packer ranks items as follows:
 
-Observed output:
+| Item | Tokens | Utility | Utility per token | Kept? |
+| --- | ---: | ---: | ---: | --- |
+| `system` | 80 | 10 | 0.125 | yes |
+| `schema` | 120 | 9 | 0.075 | yes |
+| `retrieved_A` | 140 | 8 | 0.057 | yes |
+| `retrieved_B` | 110 | 6 | 0.055 | no |
+| `chat_history` | 160 | 5 | 0.031 | no |
 
-```text
-CONTEXT_PACKING
-{'chosen': ['system', 'schema', 'retrieved_A'], 'tokens_used': 340, 'budget': 420}
-```
-
-The greedy packer kept high-utility instructions and evidence but dropped chat history. That trade-off should be visible in [determinism and reproducibility](determinism-and-reproducibility.md) traces.
+The kept items use $80+120+140=340$ tokens, leaving 80 unused because the next candidate would exceed the 420-token budget. The greedy packer kept high-utility instructions and evidence but dropped chat history. That trade-off should be visible in [determinism and reproducibility](determinism-and-reproducibility.md) traces.
 
 ## Caveats
 

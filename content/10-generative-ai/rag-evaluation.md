@@ -55,29 +55,15 @@ Abstention quality and task success are usually binary or rubric scores defined 
 
 The evaluation set should include answerable questions, unanswerable questions, stale-source cases, conflicting-source cases, and adversarial retrieved text. Without those slices, a RAG system can look strong by answering easy questions while failing the exact cases that retrieval was meant to solve.
 
-## Executed artifact
+## Worked evaluation table
 
-```python
-gold = {"leave-eligibility", "manager-approval"}
-retrieved = ["leave-eligibility", "parking", "manager-approval"]
-cited = {"leave-eligibility"}
-answer_claims = 3
-supported_claims = 2
+Suppose the gold evidence set is `{leave-eligibility, manager-approval}`. The retriever returns `leave-eligibility`, `parking`, and `manager-approval`, and the answer cites only `leave-eligibility`.
 
-print("RAG_EVAL")
-print("context_recall", len(gold & set(retrieved)) / len(gold))
-print("citation_precision", len(cited & gold) / len(cited))
-print("claim_support_rate", supported_claims / answer_claims)
-```
-
-Observed output:
-
-```text
-RAG_EVAL
-context_recall 1.0
-citation_precision 1.0
-claim_support_rate 0.6666666666666666
-```
+| Check | Calculation | Result |
+| --- | --- | ---: |
+| Context recall | $2/2$ gold chunks retrieved | 1.0 |
+| Citation precision | $1/1$ cited sources are gold evidence | 1.0 |
+| Claim support rate | $2/3$ answer claims supported | 0.667 |
 
 The retriever found both gold chunks and the citation points to a gold source, but only two of three answer claims were supported.
 

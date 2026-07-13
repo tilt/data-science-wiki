@@ -34,30 +34,22 @@ The smoothing parameter $\alpha$ controls adaptation. A high $\alpha$ tracks new
 
 The intuition is state updating. Each observation is partly signal and partly noise. Exponential smoothing moves the latent state toward the observation by an amount determined by the estimated smoothing parameter, then forecasts from that state. This is why the family connects naturally to [state-space models](state-space-models.md): many ETS methods can be written as innovations state-space models with observation error feeding the state update.
 
-## Executed example
+## Worked example
 
-```python
-import numpy as np
+With observations $20,21,19,22,24,23,25,26$ and $\alpha=0.4$, the level update is $\ell_t=0.4y_t+0.6\ell_{t-1}$:
 
-y = np.array([20, 21, 19, 22, 24, 23, 25, 26], dtype=float)
-alpha = 0.4
-level = y[0]
-levels = [level]
-for obs in y[1:]:
-    level = alpha * obs + (1 - alpha) * level
-    levels.append(level)
-print("smoothed_levels", np.round(levels, 2).tolist())
-print("next_forecast", round(float(levels[-1]), 2))
-```
+| Time | Observation | Smoothed level |
+| ---: | ---: | ---: |
+| 1 | 20 | 20.00 |
+| 2 | 21 | 20.40 |
+| 3 | 19 | 19.84 |
+| 4 | 22 | 20.70 |
+| 5 | 24 | 22.02 |
+| 6 | 23 | 22.41 |
+| 7 | 25 | 23.45 |
+| 8 | 26 | 24.47 |
 
-Observed output:
-
-```text
-smoothed_levels [20.0, 20.4, 19.84, 20.7, 22.02, 22.41, 23.45, 24.47]
-next_forecast 24.47
-```
-
-With $\alpha=0.4$, the level moves toward new observations without jumping all the way to them. The one-step forecast from simple exponential smoothing is the latest level.
+The level moves toward new observations without jumping all the way to them. The one-step forecast from simple exponential smoothing is the latest level, so the next forecast is 24.47.
 
 Exponential smoothing is often a strong baseline for business series with stable [trend, seasonality, cycles, and noise](trend-seasonality-cycles-noise.md). It can lag abrupt regime shifts, so compare it against [ARIMA](arima.md), seasonal naive baselines, and machine-learning models using [forecast error metrics](forecast-error-metrics.md) over realistic cutoffs.
 

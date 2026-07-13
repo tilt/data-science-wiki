@@ -40,30 +40,15 @@ where $\bar p=(p_0+p_1)/2$. After launch, [statistical significance](statistical
 
 ## Worked calculation
 
-```python
-from scipy.stats import norm
-import numpy as np
+Suppose the baseline conversion rate is $p_0=0.100$ and the smallest useful target is $p_1=0.112$, a 1.2 percentage-point lift. With $\alpha=0.05$, 80 percent power, $z_{0.975}=1.96$, $z_{0.80}=0.84$, and $\bar p=0.106$:
 
-alpha, power = .05, .80
-p0, p1 = .10, .112
-z_alpha = norm.ppf(1 - alpha / 2)
-z_power = norm.ppf(power)
-pbar = (p0 + p1) / 2
-n = ((z_alpha*np.sqrt(2*pbar*(1-pbar)) + z_power*np.sqrt(p0*(1-p0)+p1*(1-p1)))**2) / (p1-p0)**2
-print(f"baseline {p0:.3f} target {p1:.3f} mde_pp {(p1-p0)*100:.1f}")
-print(f"required_per_variant {np.ceil(n).astype(int)}")
-print(f"total_required {int(2*np.ceil(n))}")
-```
+$$
+n\approx
+\frac{(1.96\sqrt{2(0.106)(0.894)}+0.84\sqrt{0.10(0.90)+0.112(0.888)})^2}{0.012^2}
+\approx 10{,}330
+$$
 
-Observed output:
-
-```text
-baseline 0.100 target 0.112 mde_pp 1.2
-required_per_variant 10330
-total_required 20660
-```
-
-A 1.2 percentage-point conversion lift from a 10 percent baseline needs about 10,330 users per arm at 80 percent power. If that traffic takes six weeks, a [paired evaluation](paired-evaluation.md) or stronger offline gate may be cheaper before running the live test.
+That means about 10,330 users per arm, or 20,660 users total before losses and guardrail exclusions. If that traffic takes six weeks, a [paired evaluation](paired-evaluation.md) or stronger offline gate may be cheaper before running the live test.
 
 ## Caveats
 

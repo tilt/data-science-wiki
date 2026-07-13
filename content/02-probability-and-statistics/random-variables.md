@@ -35,28 +35,25 @@ The same outcome can feed many random variables. For two dice, one variable migh
 
 ## Worked computation
 
-```python
-import numpy as np
+Let $X$ be the maximum of two fair dice. For $X=k$, at least one die must show $k$ and neither die can exceed $k$. The count is therefore $k^2-(k-1)^2=2k-1$ out of 36 ordered outcomes.
 
-pairs = np.array([(i, j) for i in range(1, 7) for j in range(1, 7)])
-vals, counts = np.unique(pairs.max(axis=1), return_counts=True)
-pmf = counts / counts.sum()
-mu = np.sum(vals * pmf)
-var = np.sum((vals - mu) ** 2 * pmf)
-print("values", vals.tolist())
-print("pmf", np.round(pmf, 4).tolist())
-print("E[max]", round(mu, 4), "Var[max]", round(var, 4))
-```
+| $k$ | Count | $P(X=k)$ |
+| --- | ---: | ---: |
+| 1 | 1 | $1/36$ |
+| 2 | 3 | $3/36$ |
+| 3 | 5 | $5/36$ |
+| 4 | 7 | $7/36$ |
+| 5 | 9 | $9/36$ |
+| 6 | 11 | $11/36$ |
 
-Observed output:
+The expectation is
 
-```text
-values [1, 2, 3, 4, 5, 6]
-pmf [0.0278, 0.0833, 0.1389, 0.1944, 0.25, 0.3056]
-E[max] 4.4722 Var[max] 1.9715
-```
+$$
+\mathbb E[X]=\frac{1\cdot1+2\cdot3+3\cdot5+4\cdot7+5\cdot9+6\cdot11}{36}
+=\frac{161}{36}\approx 4.4722.
+$$
 
-The random variable "maximum of two dice" is biased toward high values because many outcomes map to 5 or 6.
+Using the same probabilities, $\mathbb E[X^2]=791/36$, so $\operatorname{Var}(X)=791/36-(161/36)^2\approx 1.9715$. The random variable "maximum of two dice" is biased toward high values because many more outcomes map to 5 or 6 than to 1 or 2.
 
 ## Caveats
 

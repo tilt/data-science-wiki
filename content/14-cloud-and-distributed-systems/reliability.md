@@ -37,34 +37,30 @@ $$
 
 The architecture then maps dependencies and failure domains. A user request might require a load balancer, API container, cache, database, object store, and model endpoint. If each dependency is required in series, total availability is approximately the product of dependency availabilities. [Managed compute](managed-compute.md) health checks and [managed storage](managed-storage.md) replication help, but only if clients use timeouts, bounded retries, circuit breakers, and tested recovery paths.
 
-## Executed availability check
+## Worked availability check
 
-This calculation converts common availability targets into monthly error budgets and shows how three serial 99.9% dependencies degrade a request path.
+A 30-day month has 43,200 minutes, so common availability targets imply these monthly error budgets:
 
-```python
-month_min = 30 * 24 * 60
-for avail in [0.99, 0.999, 0.9995, 0.9999]:
-    print(f"{avail*100:.2f}%_monthly_error_budget_min {(1-avail)*month_min:.1f}")
-serial = 0.999 ** 3
-parallel = 1 - (1 - 0.999) ** 2
-print(f"three_serial_99.9_dependencies_availability_pct {serial*100:.4f}")
-print(f"three_serial_monthly_downtime_min {(1-serial)*month_min:.1f}")
-print(f"two_independent_99.9_active_active_pct {parallel*100:.4f}")
-```
+| Availability target | Monthly error budget |
+| ---: | ---: |
+| 99.00% | 432.0 minutes |
+| 99.90% | 43.2 minutes |
+| 99.95% | 21.6 minutes |
+| 99.99% | 4.3 minutes |
 
-Observed output:
+Three required 99.9% dependencies in series have approximate availability
 
-```text
-99.00%_monthly_error_budget_min 432.0
-99.90%_monthly_error_budget_min 43.2
-99.95%_monthly_error_budget_min 21.6
-99.99%_monthly_error_budget_min 4.3
-three_serial_99.9_dependencies_availability_pct 99.7003
-three_serial_monthly_downtime_min 129.5
-two_independent_99.9_active_active_pct 99.9999
-```
+$$
+0.999^3=0.997003,
+$$
 
-Serial dependencies spend error budget quickly. Active-active redundancy can improve availability only when failures are sufficiently independent and failover does not depend on the failed component. That is why [scalability](scalability.md) and reliability reviews both inspect shared databases, regional control planes, and retry storms.
+or 99.7003%. In a 30-day window, that corresponds to $(1-0.997003)\times43{,}200\approx129.5$ minutes of downtime. Two independent 99.9% active-active replicas have availability
+
+$$
+1-(1-0.999)^2=0.999999,
+$$
+
+or 99.9999%, but only if failures are sufficiently independent and failover does not depend on the failed component. That is why [scalability](scalability.md) and reliability reviews both inspect shared databases, regional control planes, and retry storms.
 
 ## Caveats
 

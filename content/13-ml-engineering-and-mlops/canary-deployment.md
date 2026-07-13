@@ -28,29 +28,16 @@ A canary deployment routes a small, controlled share of production traffic to a 
 
 Canaries need three contracts: traffic assignment, guardrail metrics, and rollback triggers. Traffic can be random, sticky by user, regional, or feature-flagged. Guardrails should include service health, score distribution, fallback rate, and delayed product or label outcomes. The first decision is usually "continue ramp or [roll back](rollbacks.md)," not "declare the model better."
 
-## Executed Guardrail
+## Worked Guardrail
 
-```python
-from scipy.stats import norm
+Suppose the baseline path sees 37 errors in 50,000 requests and the canary path sees 9 errors in 5,000 requests:
 
-base_err, canary_err = 37, 9
-base_n, canary_n = 50000, 5000
-pb, pc = base_err / base_n, canary_err / canary_n
-se = (pb * (1 - pb) / base_n + pc * (1 - pc) / canary_n) ** 0.5
-z = (pc - pb) / se
-p = 1 - norm.cdf(z)
-print("canary_error_rates", round(pb, 5), round(pc, 5))
-print("canary_z", round(z, 3), "one_sided_p", round(p, 4))
-```
+| path | requests | errors | error rate |
+| --- | ---: | ---: | ---: |
+| baseline | 50,000 | 37 | 0.00074 |
+| canary | 5,000 | 9 | 0.00180 |
 
-Observed output:
-
-```text
-canary_error_rates 0.00074 0.0018
-canary_z 1.733 one_sided_p 0.0416
-```
-
-At a 5% one-sided guardrail, this canary's error rate is high enough to stop the ramp. A real rollout would also check [service-level objectives](service-level-objectives.md), segment mix, and output drift in [monitoring](monitoring.md).
+The canary error rate is more than twice the baseline rate. A one-sided normal approximation gives $z=1.733$ and $p=0.0416$, so at a 5% one-sided guardrail this canary is high enough to stop the ramp. A real rollout would also check [service-level objectives](service-level-objectives.md), segment mix, and output drift in [monitoring](monitoring.md).
 
 ## Artifact: Progressive Rollout
 

@@ -49,7 +49,7 @@ import numpy as np
 rng = np.random.default_rng(7)
 texts = ["cancel recurring billing", "terminate subscription payments", "bm25 exact token matching"]
 query = "cancel subscription"
-words = set(sum([re.findall(r"[a-z0-9]+", x) for x in texts + [query]], []))
+words = sorted(set(sum([re.findall(r"[a-z0-9]+", x) for x in texts + [query]], [])))
 base = {w: rng.normal(size=4) for w in words}
 base["terminate"] = base["cancel"] + np.array([0.08, -0.04, 0.03, 0.02])
 base["subscription"] = base["billing"] + np.array([0.02, 0.01, -0.03, 0.01])
@@ -67,7 +67,7 @@ print("rank", [int(i + 1) for i in np.argsort(scores)[::-1]])
 Observed output:
 
 ```text
-scores [(1, 0.851), (2, 0.883), (3, 0.696)]
+scores [(1, 0.218), (2, 0.575), (3, 0.182)]
 rank [2, 1, 3]
 ```
 

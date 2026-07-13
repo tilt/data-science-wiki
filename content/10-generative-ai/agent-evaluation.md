@@ -34,26 +34,15 @@ $$
 
 [LLM-as-judge](llm-as-judge.md) can grade language quality, but deterministic checks should own tool names, schemas, and permissions.
 
-## Executed artifact
+## Worked trace check
 
-```python
-trace = [("search_docs", True), ("refund_payment", False), ("final_answer", True)]
-required = {"search_docs", "final_answer"}
-forbidden = {"refund_payment"}
-successful_events = {name for name, ok in trace if ok}
-all_events = {name for name, _ in trace}
-print("TRACE_EVAL")
-print({"required_seen": required <= successful_events, "forbidden_called": bool(forbidden & all_events)})
-```
+| Trace event | Succeeded? | Required? | Forbidden? |
+| --- | --- | --- | --- |
+| `search_docs` | yes | yes | no |
+| `refund_payment` | no | no | yes |
+| `final_answer` | yes | yes | no |
 
-Observed output:
-
-```text
-TRACE_EVAL
-{'required_seen': True, 'forbidden_called': True}
-```
-
-The trace found the required calls but still fails because a forbidden `refund_payment` action appeared. That is the kind of failure final-answer grading misses.
+The required successful events are present: `search_docs` and `final_answer`. The trace still fails because a forbidden `refund_payment` action appeared at all, even though it did not succeed. That is the kind of failure final-answer grading misses.
 
 ## Caveats
 
