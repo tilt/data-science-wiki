@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="430" viewBox="0 0 860 430" role="img" aria-labelledby="title desc">
+  <title id="title">Generative AI harness architecture</title>
+  <desc id="desc">A harness flows from frozen cases and fixtures through a runner, system adapter, trace recorder, graders, and reports.</desc>
+  <rect x="0" y="0" width="860" height="430" fill="transparent"/>
+  <text x="430" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#111827">A harness makes generative-AI runs reproducible and gradable</text>
+  <text x="430" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">Freeze cases and fixtures, run the system adapter, record traces, grade behavior, and report regressions.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#374151"/>
+    </marker>
+  </defs>
+
+  <g font-family="Arial, sans-serif" font-size="14" fill="#111827">
+    <rect x="40" y="118" width="150" height="76" rx="6" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+    <text x="115" y="148" text-anchor="middle" font-weight="700">Case set</text>
+    <text x="115" y="171" text-anchor="middle" font-size="12">tasks, labels, slices</text>
+
+    <rect x="40" y="236" width="150" height="76" rx="6" fill="#ccfbf1" stroke="#0f766e" stroke-width="2"/>
+    <text x="115" y="266" text-anchor="middle" font-weight="700">Fixtures</text>
+    <text x="115" y="289" text-anchor="middle" font-size="12">tools, index, clock</text>
+
+    <rect x="250" y="178" width="130" height="76" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="315" y="209" text-anchor="middle" font-weight="700">Runner</text>
+    <text x="315" y="232" text-anchor="middle" font-size="12">orchestrates cases</text>
+
+    <rect x="440" y="118" width="150" height="76" rx="6" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+    <text x="515" y="148" text-anchor="middle" font-weight="700">System adapter</text>
+    <text x="515" y="171" text-anchor="middle" font-size="12">prompt, RAG, agent</text>
+
+    <rect x="440" y="236" width="150" height="76" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="515" y="266" text-anchor="middle" font-weight="700">Trace recorder</text>
+    <text x="515" y="289" text-anchor="middle" font-size="12">events, costs, outputs</text>
+
+    <rect x="650" y="118" width="150" height="76" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="725" y="148" text-anchor="middle" font-weight="700">Graders</text>
+    <text x="725" y="171" text-anchor="middle" font-size="12">checks, judge, human</text>
+
+    <rect x="650" y="236" width="150" height="76" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="725" y="266" text-anchor="middle" font-weight="700">Report</text>
+    <text x="725" y="289" text-anchor="middle" font-size="12">slices, regressions, CI</text>
+  </g>
+
+  <g stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrow)">
+    <path d="M190 156 L250 204"/>
+    <path d="M190 274 L250 228"/>
+    <path d="M380 216 L440 156"/>
+    <path d="M515 194 L515 236"/>
+    <path d="M590 274 L650 274"/>
+    <path d="M590 156 L650 156"/>
+    <path d="M725 194 L725 236"/>
+  </g>
+
+  <text x="430" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#374151">The final score is useful only because the harness also stores the replayable trace behind it.</text>
+</svg>

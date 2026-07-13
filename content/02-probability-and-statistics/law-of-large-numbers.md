@@ -57,6 +57,10 @@ n=100000 running_mean=0.36698
 
 The early average is noisy: after 10 draws it is `0.50000`, and after 100 draws it is `0.41000`. By 100,000 draws the running mean is `0.36698`, close to the Bernoulli expectation $0.37$.
 
+![Running Bernoulli sample mean moving toward the expectation 0.37 as the sample size grows.](../assets/diagrams/law-of-large-numbers-running-mean.svg)
+
+The line is jagged early because a few Bernoulli draws can move the average a lot. Later, each new draw changes $\bar X_n$ by only about $1/n$, so the curve settles near the expectation line at $0.37$.
+
 ## Caveats
 
 More data does not repair a biased sample, changing population, dependence, leakage, or infinite mean. The theorem also does not say every finite prefix is close to the truth.

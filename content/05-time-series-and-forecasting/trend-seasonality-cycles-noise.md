@@ -34,6 +34,10 @@ Trend is directional movement over a period relevant to the decision. It may be 
 
 These components affect model choice. [SARIMA](sarima.md) is appropriate when seasonal dependence is regular and captured by seasonal lags. [Exponential smoothing](exponential-smoothing.md) handles level, trend, and seasonal states directly. [Feature engineering for forecasting](feature-engineering-for-forecasting.md) can encode holidays, events, and multiple seasonalities when a pure univariate model is too restrictive.
 
+![A synthetic time series decomposed into trend, seasonal oscillation, slower cycle, and residual noise components.](../assets/diagrams/time-series-components.svg)
+
+The diagram separates components that are often mixed in the raw series. The trend changes the long-run level, the seasonal component repeats at a fixed period, the cycle moves more slowly without a fixed calendar alignment, and the residual is the remaining irregular variation.
+
 Decomposition is descriptive unless it improves forecasting or diagnosis. A visually pleasing trend line can leak future data if computed over the full sample before validation. Seasonal plots can hide changing seasonal strength. Residual plots should be checked with [autocorrelation and partial autocorrelation](autocorrelation-and-partial-autocorrelation.md), and any modeling choice should be validated with [forecast evaluation](forecast-evaluation.md).
 
 ## References

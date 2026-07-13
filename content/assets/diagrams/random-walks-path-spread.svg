@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-labelledby="title desc">
+  <title id="title">Random walk path spread</title>
+  <desc id="desc">Several random walk paths spread around zero with plus and minus square-root time guides.</desc>
+  <rect x="0" y="0" width="760" height="430" fill="transparent"/>
+  <text x="380" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#111827">Random walks stay centered but spread out</text>
+  <text x="380" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">For a symmetric walk, E[S_n] = 0 while Var(S_n) = n.</text>
+  <line x1="84" y1="214" x2="690" y2="214" stroke="#111827" stroke-width="1.2"/>
+  <line x1="84" y1="90" x2="84" y2="338" stroke="#111827" stroke-width="1.5"/>
+  <line x1="84" y1="338" x2="690" y2="338" stroke="#111827" stroke-width="1.5"/>
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="84" y1="152" x2="690" y2="152"/>
+    <line x1="84" y1="276" x2="690" y2="276"/>
+    <line x1="235" y1="90" x2="235" y2="338"/>
+    <line x1="387" y1="90" x2="387" y2="338"/>
+    <line x1="538" y1="90" x2="538" y2="338"/>
+  </g>
+  <path d="M84 214 C160 194 235 178 311 169 C405 158 499 142 690 126" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="7 6" opacity="0.75"/>
+  <path d="M84 214 C160 234 235 250 311 259 C405 270 499 286 690 302" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="7 6" opacity="0.75"/>
+  <path d="M84 214 L144 202 L205 226 L265 198 L326 190 L387 218 L447 206 L508 230 L568 202 L629 182 L690 198" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <path d="M84 214 L144 226 L205 238 L265 250 L326 226 L387 238 L447 262 L508 274 L568 286 L629 298 L690 282" fill="none" stroke="#14b8a6" stroke-width="3" opacity="0.85"/>
+  <path d="M84 214 L144 190 L205 178 L265 166 L326 178 L387 154 L447 142 L508 154 L568 130 L629 142 L690 118" fill="none" stroke="#f97316" stroke-width="3" opacity="0.85"/>
+  <path d="M84 214 L144 226 L205 202 L265 214 L326 238 L387 250 L447 226 L508 238 L568 214 L629 226 L690 210" fill="none" stroke="#7c3aed" stroke-width="3" opacity="0.75"/>
+  <g font-family="Arial, sans-serif" font-size="12" fill="#374151">
+    <text x="84" y="360" text-anchor="middle">0</text>
+    <text x="235" y="360" text-anchor="middle">50</text>
+    <text x="387" y="360" text-anchor="middle">100</text>
+    <text x="538" y="360" text-anchor="middle">150</text>
+    <text x="690" y="360" text-anchor="middle">200</text>
+    <text x="386" y="395" text-anchor="middle" font-size="14">step n</text>
+    <text x="58" y="218" text-anchor="end">0</text>
+    <text x="58" y="156" text-anchor="end">+10</text>
+    <text x="58" y="280" text-anchor="end">-10</text>
+    <text x="632" y="118" fill="#dc2626">+sqrt(n)</text>
+    <text x="632" y="318" fill="#dc2626">-sqrt(n)</text>
+  </g>
+</svg>

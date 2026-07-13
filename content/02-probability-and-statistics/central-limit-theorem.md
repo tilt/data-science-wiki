@@ -63,6 +63,10 @@ normal_q025_q975 [-1.96  1.96]
 
 The standardized means from an exponential distribution keep mean near 0 and standard deviation near 1 for all three sample sizes. The skewness shrinks from `1.3804` at $n=2$ to `0.2877` at $n=50$, which is the numerical sign that the sampling distribution is becoming more normal.
 
+![Standardized exponential sample means becoming more symmetric and closer to a normal curve as n grows.](../assets/diagrams/central-limit-theorem-convergence.svg)
+
+The plot shows the same lesson visually: the $n=2$ curve is still right-skewed, while the $n=50$ curve is much closer to the symmetric normal reference. The approximation improves in shape, not just in the printed mean and standard deviation.
+
 ## Caveats
 
 The theorem is asymptotic, not a guarantee that $n=30$ is enough. Heavy tails can make $\sigma^2$ infinite, dependence changes the effective sample size, and clustered data need variance formulas that match the sampling design.

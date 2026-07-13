@@ -58,6 +58,10 @@ difference mean 1.1 trend_slope 0.0 acf1 -0.414
 
 The level series has a deterministic upward slope. First differencing removes that slope in this toy example, which is why differencing is checked before fitting ARIMA-style models.
 
+![A trending level series and its first differences, showing how differencing removes the deterministic slope.](../assets/diagrams/stationarity-differencing.svg)
+
+The level plot violates weak stationarity because its mean changes with time. The differenced plot is centered around a stable value in this toy example, so its covariance structure is more plausible to model with stationary ARMA-style assumptions.
+
 Stationarity tests and plots are aids, not commands. Over-differencing can create artificial negative autocorrelation and remove useful low-frequency signal. A better workflow is to compare transformations with [autocorrelation and partial autocorrelation](autocorrelation-and-partial-autocorrelation.md), residual diagnostics, and [backtesting](backtesting.md) rather than declaring a page-level test result decisive.
 
 ## References

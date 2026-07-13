@@ -59,6 +59,10 @@ P(hit_20_by_200) 0.1576
 
 The mean final position is near zero at `-0.061`, but the final variance is `197.853`, close to the theoretical value 200. The hit probability `0.1576` shows that individual paths can still reach level 20 even when the expected step is zero.
 
+![Sample random-walk paths spreading around zero with plus and minus square-root time guides.](../assets/diagrams/random-walks-path-spread.svg)
+
+The paths keep crossing zero, but the vertical spread grows with time. The dashed guides mark the $\pm\sqrt n$ scale, matching the variance formula $\operatorname{Var}(S_n)=n$ for a simple symmetric walk.
+
 ## Connections and caveats
 
 The [law of large numbers](law-of-large-numbers.md) says average step size converges; the [central limit theorem](central-limit-theorem.md) explains why $S_n/\sqrt n$ is approximately normal. Random walk baselines appear in time series, but real series can have mean reversion, seasonality, bounded states, and structural breaks.

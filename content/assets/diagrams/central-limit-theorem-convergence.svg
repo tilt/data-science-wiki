@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-labelledby="title desc">
+  <title id="title">Central limit theorem convergence</title>
+  <desc id="desc">Density curves for standardized sample means become more symmetric and closer to a normal curve as sample size grows.</desc>
+  <rect x="0" y="0" width="760" height="430" fill="transparent"/>
+  <text x="380" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#111827">Standardized averages become more normal</text>
+  <text x="380" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">Exponential observations are skewed; centered sample means smooth out as n increases.</text>
+  <line x1="82" y1="342" x2="690" y2="342" stroke="#111827" stroke-width="1.5"/>
+  <line x1="82" y1="82" x2="82" y2="342" stroke="#111827" stroke-width="1.5"/>
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="82" y1="286" x2="690" y2="286"/>
+    <line x1="82" y1="230" x2="690" y2="230"/>
+    <line x1="82" y1="174" x2="690" y2="174"/>
+    <line x1="82" y1="118" x2="690" y2="118"/>
+    <line x1="386" y1="82" x2="386" y2="342"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="12" fill="#374151">
+    <text x="82" y="363" text-anchor="middle">-3</text>
+    <text x="183" y="363" text-anchor="middle">-2</text>
+    <text x="285" y="363" text-anchor="middle">-1</text>
+    <text x="386" y="363" text-anchor="middle">0</text>
+    <text x="487" y="363" text-anchor="middle">1</text>
+    <text x="589" y="363" text-anchor="middle">2</text>
+    <text x="690" y="363" text-anchor="middle">3</text>
+    <text x="386" y="395" text-anchor="middle" font-size="14">standardized mean</text>
+    <text x="31" y="212" text-anchor="middle" transform="rotate(-90 31 212)" font-size="14">relative density</text>
+  </g>
+  <path d="M82 341 C143 338 193 326 234 300 C277 271 318 226 354 190 C383 161 414 148 447 164 C485 182 523 221 560 263 C604 312 646 336 690 341" fill="none" stroke="#f97316" stroke-width="4" opacity="0.8"/>
+  <path d="M82 342 C138 339 195 324 244 292 C292 260 330 211 371 184 C409 160 453 165 493 197 C536 231 576 284 626 320 C650 336 671 341 690 342" fill="none" stroke="#14b8a6" stroke-width="4" opacity="0.85"/>
+  <path d="M82 342 C148 341 214 328 270 289 C321 253 350 204 386 176 C422 204 451 253 502 289 C558 328 624 341 690 342" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <path d="M82 342 C155 341 222 330 276 294 C328 259 354 202 386 176 C418 202 444 259 496 294 C550 330 617 341 690 342" fill="none" stroke="#111827" stroke-width="2" stroke-dasharray="7 6" opacity="0.7"/>
+  <g font-family="Arial, sans-serif" font-size="13" fill="#111827">
+    <line x1="514" y1="95" x2="542" y2="95" stroke="#f97316" stroke-width="4" opacity="0.8"/>
+    <text x="552" y="99">n = 2</text>
+    <line x1="514" y1="120" x2="542" y2="120" stroke="#14b8a6" stroke-width="4" opacity="0.85"/>
+    <text x="552" y="124">n = 10</text>
+    <line x1="514" y1="145" x2="542" y2="145" stroke="#2563eb" stroke-width="4"/>
+    <text x="552" y="149">n = 50</text>
+    <line x1="514" y1="170" x2="542" y2="170" stroke="#111827" stroke-width="2" stroke-dasharray="7 6"/>
+    <text x="552" y="174">normal reference</text>
+  </g>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-labelledby="title desc">
+  <title id="title">Law of large numbers running mean</title>
+  <desc id="desc">A Bernoulli running mean starts noisy and settles near the expectation 0.37 as sample size grows.</desc>
+  <rect x="0" y="0" width="760" height="430" fill="transparent"/>
+  <text x="380" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#111827">Running means stabilize around the expectation</text>
+  <text x="380" y="60" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">Bernoulli samples with p = 0.37: early averages move sharply, later averages move slowly.</text>
+  <line x1="85" y1="338" x2="690" y2="338" stroke="#111827" stroke-width="1.5"/>
+  <line x1="85" y1="86" x2="85" y2="338" stroke="#111827" stroke-width="1.5"/>
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="85" y1="288" x2="690" y2="288"/>
+    <line x1="85" y1="238" x2="690" y2="238"/>
+    <line x1="85" y1="187" x2="690" y2="187"/>
+    <line x1="85" y1="137" x2="690" y2="137"/>
+    <line x1="85" y1="87" x2="690" y2="87"/>
+  </g>
+  <line x1="85" y1="202" x2="690" y2="202" stroke="#dc2626" stroke-width="2" stroke-dasharray="7 6"/>
+  <path d="M85 86 L236 132 L387 251 L539 213 L690 204" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <g fill="#2563eb">
+    <circle cx="85" cy="86" r="5"/>
+    <circle cx="236" cy="132" r="5"/>
+    <circle cx="387" cy="251" r="5"/>
+    <circle cx="539" cy="213" r="5"/>
+    <circle cx="690" cy="204" r="5"/>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="12" fill="#374151">
+    <text x="85" y="360" text-anchor="middle">10</text>
+    <text x="236" y="360" text-anchor="middle">100</text>
+    <text x="387" y="360" text-anchor="middle">1k</text>
+    <text x="539" y="360" text-anchor="middle">10k</text>
+    <text x="690" y="360" text-anchor="middle">100k</text>
+    <text x="386" y="395" text-anchor="middle" font-size="14">sample size n (log scale)</text>
+    <text x="48" y="92" text-anchor="end">0.50</text>
+    <text x="48" y="142" text-anchor="end">0.45</text>
+    <text x="48" y="193" text-anchor="end">0.40</text>
+    <text x="48" y="243" text-anchor="end">0.35</text>
+    <text x="48" y="293" text-anchor="end">0.30</text>
+    <text x="48" y="342" text-anchor="end">0.25</text>
+    <text x="35" y="212" text-anchor="middle" transform="rotate(-90 35 212)" font-size="14">running mean</text>
+    <text x="610" y="194" font-size="13" fill="#dc2626">E[X] = 0.37</text>
+  </g>
+</svg>

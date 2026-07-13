@@ -76,6 +76,10 @@ pacf_lags_1_3 [0.23, 0.467, -0.008]
 
 The lag-2 ACF is large because the series alternates around a pattern; the PACF calculation asks what each lag adds after shorter lags are already in the regression.
 
+![ACF and PACF bars for the toy series, showing a large lag-2 ACF and a smaller direct lag-2 PACF after shorter lags are included.](../assets/diagrams/acf-pacf-bars.svg)
+
+The ACF bars show total lag association, while the PACF bars show direct lag contribution after shorter lags are included. That distinction is why the lag-2 ACF can be large even when model selection should still check whether lag 2 improves validation performance.
+
 ## Connections
 
 ACF/PACF diagnostics connect [time-series fundamentals](time-series-fundamentals.md) to [autoregressive models](autoregressive-models.md), [moving-average models](moving-average-models.md), and [ARIMA](arima.md). Interpret them after checking [stationarity](stationarity.md), because trend can create spurious lag structure.

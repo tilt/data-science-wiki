@@ -76,6 +76,7 @@ Generative AI and Agentic Systems is a major knowledge area in this wiki. The in
 - [RAG Evaluation](rag-evaluation.md)
 - [RAG Benchmark Design](rag-benchmark-design.md)
 - [Agent Evaluation](agent-evaluation.md)
+- [Harnesses](harnesses.md)
 - [LLM-as-Judge](llm-as-judge.md)
 - [Fine Tuning Versus RAG](fine-tuning-versus-rag.md)
 - [Multimodal Models](multimodal-models.md)

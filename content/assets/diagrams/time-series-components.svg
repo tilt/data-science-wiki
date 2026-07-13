@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500" role="img" aria-labelledby="title desc">
+  <title id="title">Time series components</title>
+  <desc id="desc">A synthetic observed time series shown with separate trend, seasonal, cycle, and residual components.</desc>
+  <rect x="0" y="0" width="760" height="500" fill="transparent"/>
+  <text x="380" y="34" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#111827">Trend, seasonality, cycle, and noise are different structures</text>
+  <text x="380" y="58" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">A decomposition is useful when each component maps to a modeling or diagnosis decision.</text>
+  <g font-family="Arial, sans-serif" font-size="13" fill="#374151">
+    <text x="60" y="103">observed</text>
+    <text x="60" y="193">trend</text>
+    <text x="60" y="283">seasonal</text>
+    <text x="60" y="373">cycle + noise</text>
+  </g>
+  <g stroke="#e5e7eb" stroke-width="1">
+    <line x1="150" y1="115" x2="700" y2="115"/>
+    <line x1="150" y1="205" x2="700" y2="205"/>
+    <line x1="150" y1="295" x2="700" y2="295"/>
+    <line x1="150" y1="385" x2="700" y2="385"/>
+  </g>
+  <path d="M150 122 L195 101 L240 112 L285 90 L330 102 L375 84 L420 94 L465 72 L510 85 L555 66 L600 78 L645 58 L700 70" fill="none" stroke="#111827" stroke-width="3"/>
+  <path d="M150 205 L700 155" fill="none" stroke="#2563eb" stroke-width="4"/>
+  <path d="M150 295 C170 270 190 270 210 295 C230 320 250 320 270 295 C290 270 310 270 330 295 C350 320 370 320 390 295 C410 270 430 270 450 295 C470 320 490 320 510 295 C530 270 550 270 570 295 C590 320 610 320 630 295 C650 270 675 270 700 295" fill="none" stroke="#14b8a6" stroke-width="4"/>
+  <path d="M150 385 C205 350 260 350 315 385 C370 420 425 420 480 385 C535 350 590 350 645 385 C665 398 685 392 700 386" fill="none" stroke="#f97316" stroke-width="4"/>
+  <path d="M150 385 L182 377 L214 394 L246 381 L278 389 L310 371 L342 395 L374 382 L406 392 L438 376 L470 401 L502 385 L534 392 L566 374 L598 386 L630 397 L662 379 L700 389" fill="none" stroke="#7c3aed" stroke-width="2" opacity="0.75"/>
+  <line x1="150" y1="435" x2="700" y2="435" stroke="#111827" stroke-width="1.5"/>
+  <text x="425" y="468" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#374151">time</text>
+</svg>

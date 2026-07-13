@@ -61,6 +61,10 @@ stationary [0.5147, 0.3529, 0.1324] check [0.5147, 0.3529, 0.1324]
 
 Starting in state 0, repeated multiplication moves the distribution from `[0.85,0.15,0.0]` after one step to `[0.5155,0.3526,0.1319]` after 20 steps. That is close to the stationary distribution `[0.5147,0.3529,0.1324]`, which also satisfies $\pi P=\pi$ in the printed check.
 
+![Three Markov-chain state probabilities converging toward their stationary probabilities over repeated transitions.](../assets/diagrams/markov-chains-convergence.svg)
+
+The visualization makes the convergence pattern explicit: state 0 falls from certainty toward about `0.515`, state 1 rises toward about `0.353`, and state 2 approaches a smaller long-run share near `0.132`.
+
 ## Caveats
 
 The memoryless assumption can be too strong when dwell time or earlier history matters. Rare transitions are hard to estimate, and nonstationary systems need time-varying transition probabilities.
