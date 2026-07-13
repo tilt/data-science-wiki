@@ -12,6 +12,7 @@ aliases: []
 prerequisites:
   - index.md
 related:
+  - autoencoders.md
   - self-supervised-learning.md
   - contrastive-learning.md
   - transfer-learning.md
@@ -21,7 +22,7 @@ last_reviewed: 2026-07-11
 ---
 # Representation Learning
 
-Representation learning is the practice of learning features instead of hand-designing them. A network maps raw input $x$ to a latent vector $z=f_\theta(x)$ that should make reconstruction, classification, retrieval, or [transfer learning](transfer-learning.md) easier. It is the shared substrate behind [self-supervised learning](self-supervised-learning.md) and [contrastive learning](contrastive-learning.md).
+Representation learning is the practice of learning features instead of hand-designing them. A network maps raw input $x$ to a latent vector $z=f_\theta(x)$ that should make reconstruction, classification, retrieval, or [transfer learning](transfer-learning.md) easier. It is the shared substrate behind [autoencoders](autoencoders.md), [self-supervised learning](self-supervised-learning.md), and [contrastive learning](contrastive-learning.md).
 
 ## Defining math
 
@@ -37,7 +38,7 @@ $$
 \min_{\theta,\psi}\frac{1}{n}\sum_i L(g_\psi(f_\theta(x_i)),y_i).
 $$
 
-An autoencoder instead learns by reconstruction:
+An [autoencoder](autoencoders.md) instead learns by reconstruction:
 
 $$
 z=f_\theta(x),\qquad \hat x=d_\phi(z),\qquad

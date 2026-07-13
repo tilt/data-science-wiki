@@ -18,6 +18,7 @@ aliases:
 prerequisites:
   - index.md
 related:
+  - autoencoders.md
   - self-supervised-learning.md
   - representation-learning.md
   - multimodal-learning.md
@@ -99,6 +100,7 @@ Contrastive learning does not discover "semantic similarity" in the abstract. It
 ## Connections
 
 - [Self-Supervised Learning](self-supervised-learning.md) covers the broader family of label-free pretext objectives.
+- [Autoencoders](autoencoders.md) learn by reconstructing inputs or masked content instead of comparing positives and negatives.
 - [Representation Learning](representation-learning.md) explains why embedding quality matters for transfer.
 - [Multimodal Learning](multimodal-learning.md) uses contrastive losses to align representations from different modalities.
 - [Dense Retrieval](../11-information-retrieval-and-search/dense-retrieval.md) turns embedding similarity into a search system.

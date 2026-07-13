@@ -18,8 +18,10 @@ topics:
   - attention
   - transformers
   - representation-learning
+  - autoencoders
   - self-supervised-learning
   - contrastive-learning
+  - generative-adversarial-networks
   - transfer-learning
   - fine-tuning
   - multimodal-learning
@@ -71,11 +73,16 @@ Deep learning studies neural networks as trainable function approximators: layer
 ## Representation Learning
 
 - [Representation Learning](representation-learning.md): learned feature spaces for reconstruction, prediction, retrieval, and transfer.
+- [Autoencoders](autoencoders.md): encoder-decoder models that learn latent codes by reconstruction.
 - [Self-Supervised Learning](self-supervised-learning.md): pretext objectives generated from unlabeled data.
 - [Contrastive Learning](contrastive-learning.md): embedding objectives that pull positives together and push negatives apart.
 - [Transfer Learning](transfer-learning.md): reusing pretrained features on a new task.
 - [Fine-Tuning](fine-tuning.md): selectively updating pretrained parameters or adapters.
 - [Multimodal Learning](multimodal-learning.md): aligning and fusing text, image, audio, video, and other modalities.
+
+## Generative Models
+
+- [Generative Adversarial Networks](generative-adversarial-networks.md): generator-discriminator games for sharp implicit generative modeling.
 
 ## Engineering
 

@@ -6,6 +6,7 @@ area: generative-ai
 topics:
   - "foundation-models"
   - "stable-diffusion"
+  - "generative-adversarial-networks"
   - "language-model-architecture"
   - "tokenization"
   - "pretraining"
@@ -85,6 +86,7 @@ Generative AI and Agentic Systems is a major knowledge area in this wiki. The in
 - [Multimodal Models](multimodal-models.md)
 - [Vision Language Models](vision-language-models.md)
 - [Stable Diffusion](stable-diffusion.md)
+- [Generative Adversarial Networks](../06-deep-learning/generative-adversarial-networks.md)
 - [Local Versus Hosted Models](local-versus-hosted-models.md)
 - [Model Serving](model-serving.md)
 - [Quantization](quantization.md)

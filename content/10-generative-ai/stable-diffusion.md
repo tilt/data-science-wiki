@@ -20,6 +20,8 @@ related:
   - vision-language-models.md
   - foundation-models.md
   - sampling-and-decoding.md
+  - ../06-deep-learning/autoencoders.md
+  - ../06-deep-learning/generative-adversarial-networks.md
   - ../08-computer-vision/self-supervised-visual-learning.md
   - ../08-computer-vision/image-representation.md
 historical_context: false
@@ -29,7 +31,7 @@ last_reviewed: 2026-07-13
 
 Stable Diffusion is a family of text-conditioned image-generation models built around latent diffusion. Instead of denoising full-resolution pixels directly, the model compresses an image into a lower-dimensional latent representation, denoises that latent under text conditioning, and decodes the final latent back to pixels. That latent-space design is the practical reason Stable Diffusion-style systems can produce high-resolution images with less compute than pixel-space diffusion.
 
-Stable Diffusion sits between [generative AI](index.md) and [computer vision](../08-computer-vision/index.md). The generator is a diffusion model, but it depends on visual representation learning: an autoencoder defines the image latent space, a text or vision-language encoder supplies conditioning, and the denoiser learns visual structure from large image corpora. For representation-side context, see [self-supervised visual learning](../08-computer-vision/self-supervised-visual-learning.md).
+Stable Diffusion sits between [generative AI](index.md) and [computer vision](../08-computer-vision/index.md). The generator is a diffusion model, but it depends on visual representation learning: an [autoencoder](../06-deep-learning/autoencoders.md) defines the image latent space, a text or vision-language encoder supplies conditioning, and the denoiser learns visual structure from large image corpora. For representation-side context, see [self-supervised visual learning](../08-computer-vision/self-supervised-visual-learning.md).
 
 ## Defining mechanism
 
@@ -39,7 +41,7 @@ $$
 z_0 = E(x),
 $$
 
-where $E$ is usually an autoencoder encoder. The forward diffusion process adds Gaussian noise:
+where $E$ is usually an [autoencoder](../06-deep-learning/autoencoders.md) encoder. The forward diffusion process adds Gaussian noise:
 
 $$
 q(z_t\mid z_0)=

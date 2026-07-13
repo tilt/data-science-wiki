@@ -1,6 +1,6 @@
 # Code Example Audit Ledger
 
-Enumerated pages: 483
+Enumerated pages: 485
 
 | path | has_code | outcome | one-line rationale | action taken |
 | --- | --- | --- | --- | --- |
@@ -164,11 +164,13 @@ Enumerated pages: 483
 | content/05-time-series-and-forecasting/trend-seasonality-cycles-noise.md | no | both | Component decomposition is inherently visual and benefits from a non-redundant schematic. | Added component plot separating trend, seasonal, cycle, and residual structures. |
 | content/06-deep-learning/activation-functions.md | yes | keep+explain | Activation Functions uses an executed tensor/optimization artifact with value-specific interpretation. | Inspected; kept code and existing explanation. |
 | content/06-deep-learning/attention.md | yes | keep+explain | Attention uses an executed tensor/optimization artifact with value-specific interpretation. | Inspected; kept code and existing explanation. |
+| content/06-deep-learning/autoencoders.md | no | no-change | New autoencoder page uses formulas, architecture diagram, variant table, and relevance discussion instead of code. | Added page and cross-linked to self-supervised learning, contrastive learning, representation learning, and Stable Diffusion. |
 | content/06-deep-learning/backpropagation.md | yes | keep+explain | Backpropagation uses an executed tensor/optimization artifact with value-specific interpretation. | Inspected; kept code and existing explanation. |
 | content/06-deep-learning/contrastive-learning.md | no | replace-with-explanation | NT-Xent is clearer as objective geometry, a worked probability calculation, and a plot than as a tensor snippet. | Removed code; added embedding-geometry SVG, objective explanation, worked loss calculation, batch/negative construction discussion, and references. |
 | content/06-deep-learning/convolutional-neural-networks.md | yes | keep+explain | Convolutional Neural Networks uses an executed tensor/optimization artifact with value-specific interpretation. | Inspected; kept code and existing explanation. |
 | content/06-deep-learning/distributed-training.md | yes | keep+explain | Distributed Training uses an executed tensor/optimization artifact with value-specific interpretation. | Inspected; kept code and existing explanation. |
 | content/06-deep-learning/fine-tuning.md | yes | keep+explain | Fine-tuning snippet demonstrates frozen-backbone optimization and trainable parameter count. | Kept code and explained why only four parameters update while base weights stay unchanged. |
+| content/06-deep-learning/generative-adversarial-networks.md | no | no-change | New GAN page uses minimax objective, game diagram, comparison tables, and current relevance discussion instead of code. | Added page and cross-linked to autoencoders, representation learning, Stable Diffusion, and computer vision. |
 | content/06-deep-learning/index.md | no | no-change | Deep Learning has no code and is a navigational section index. | Inspected; no edit. |
 | content/06-deep-learning/initialization.md | yes | keep+explain | Initialization uses an executed tensor/optimization artifact with value-specific interpretation. | Inspected; kept code and existing explanation. |
 | content/06-deep-learning/loss-functions.md | yes | keep+explain | Loss Functions uses an executed tensor/optimization artifact with value-specific interpretation. | Inspected; kept code and existing explanation. |
