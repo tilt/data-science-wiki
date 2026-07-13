@@ -43,6 +43,14 @@ $$
 \hat\beta = (X^\top X)^{-1}X^\top y.
 $$
 
+One common fit metric is
+
+$$
+R^2=1-\frac{\sum_i(y_i-\hat y_i)^2}{\sum_i(y_i-\bar y)^2},
+$$
+
+which compares squared residual error with the error from predicting the sample mean.
+
 Residuals $e_i = y_i - \hat y_i$ are not just errors; their pattern is a diagnostic. Curvature suggests missing [feature engineering](feature-engineering.md), changing variance suggests heteroscedasticity, and large leverage points can dominate the fitted line. Penalized versions such as ridge replace the objective with $\lVert y-X\beta\rVert_2^2 + \lambda\lVert\beta\rVert_2^2$, connecting regression directly to [regularization](regularization.md).
 
 ## Intuition

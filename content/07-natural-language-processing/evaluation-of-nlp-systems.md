@@ -37,6 +37,14 @@ $$
 
 Macro-F1 averages classes equally; micro-F1 aggregates counts. For NLP, also separate span correctness, label correctness, factual correctness, latency, abstention, and downstream utility. Bootstrap intervals communicate how unstable a small evaluation set is.
 
+For generated text, BLEU compares a candidate output with one or more references using modified n-gram precision and a brevity penalty:
+
+$$
+\operatorname{BLEU}=BP\cdot \exp\left(\sum_{n=1}^{N} w_n \log p_n\right),
+$$
+
+where $p_n$ is modified $n$-gram precision, $w_n$ is the weight for each order, and $BP$ penalizes overly short candidates. It is most useful for corpus-level machine translation comparisons where many acceptable phrasings are represented in references. BLEU is a weak proxy for summarization quality, factuality, citation support, or instruction following, so generated text systems should pair it with task-specific review.
+
 ## Worked example
 
 ```python

@@ -29,6 +29,12 @@ Human evaluation uses trained reviewers when the target behavior is open-ended, 
 
 ## Defining statistic
 
+Raw agreement is the observed matching rate between reviewers:
+
+$$
+p_o=\frac{1}{n}\sum_i \mathbf 1\{r_{1i}=r_{2i}\}.
+$$
+
 Raw agreement is not enough because reviewers can agree by chance. Cohen's kappa adjusts observed agreement $p_o$ by expected agreement $p_e$:
 
 $$

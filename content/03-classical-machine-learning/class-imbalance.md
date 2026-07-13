@@ -31,6 +31,14 @@ $$
 precision=\frac{TP}{TP+FP}, \qquad recall=\frac{TP}{TP+FN}.
 $$
 
+Balanced accuracy averages recall across classes; in binary classification it is $(TPR+TNR)/2$, where $TPR$ is sensitivity and $TNR$ is specificity. PR-AUC summarizes the precision-recall curve for the rare positive class and is often computed through average precision,
+
+$$
+\operatorname{AP}=\sum_j (R_j-R_{j-1})P_j,
+$$
+
+where $P_j$ and $R_j$ are precision and recall after the $j$th ranked prediction. It is often more diagnostic than ROC-AUC when the negative class dominates.
+
 Class weighting changes empirical risk to $\min_f\sum_i w_{y_i}L(y_i,f(x_i))$, where $w_k$ is larger for rare or costly classes.
 
 ## Intuition

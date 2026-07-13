@@ -63,6 +63,8 @@ Good evaluation covers retrieval and answer quality separately, plus the trace a
 | Trace / audit | tool calls captured; retrieved chunks captured; final answer linked to evidence; duplicate or repeated searches avoided; context expansions recorded |
 | Operational | latency; number of model calls; number of retrieval calls; index build time; storage size; embedding-model dependency; failure modes |
 
+Rank of first expected source is the 1-based position of the earliest retrieved source that appears in `expected_sources`; if no expected source appears, the value is undefined or set to a fixed miss sentinel before aggregation.
+
 Retrieval and answer metrics are complementary: source recall@k explains *whether the evidence was available*, while the answer metrics explain *whether the model used it faithfully*. Citation-correspondence and [grounding](grounding.md) checks connect the two — a fact should trace to a retrieved source, verified against the labelled evidence rather than judged on tone. Where a rubric judgment is needed, an [LLM-as-judge](../16-experimentation-and-evaluation/llm-as-judge.md) can score fact presence, but it should compare against the labelled `expected_facts`, not grade freely.
 
 ## Comparison procedure

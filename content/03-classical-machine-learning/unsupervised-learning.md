@@ -28,6 +28,14 @@ Unsupervised learning fits structure from $X$ without observed target labels. Th
 Many unsupervised methods optimize a reconstruction, partition, or likelihood objective. [Clustering](clustering.md) with k-means solves $\min_{C_1,
 \dots,C_K}\sum_k\sum_{x_i\in C_k}\lVert x_i-\mu_k\rVert_2^2$. [PCA](pca.md) solves $\max_{W^\top W=I}\operatorname{tr}(W^\top X^\top XW)$. Anomaly methods learn a score $s(x)$ and flag points crossing a threshold.
 
+When reference labels are available after clustering, adjusted Rand index compares pair assignments while correcting for chance:
+
+$$
+\operatorname{ARI}=\frac{RI-\mathbb E[RI]}{\max(RI)-\mathbb E[RI]}.
+$$
+
+It is an external validation score, not an unsupervised objective.
+
 ## Intuition
 
 Without labels, the method's definition of "structure" is the whole game. Variance, Euclidean distance, density, and neighborhood preservation can all disagree. [Dimensionality reduction](dimensionality-reduction.md) that helps visualization may discard information needed for a later classifier.

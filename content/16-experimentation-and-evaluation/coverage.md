@@ -37,6 +37,12 @@ $$
 
 For numeric regions, define bins before evaluation: score thresholds, latency bands, document age, or confidence ranges. [Repeated sampling](repeated-sampling.md) can quantify metric variability, but it cannot create evidence for cells that have zero examples.
 
+For evidence-grounded systems, source coverage uses the same idea over required source handles:
+
+$$
+\operatorname{source\ coverage}=\frac{|S_{\mathrm{tested}}\cap S_{\mathrm{required}}|}{|S_{\mathrm{required}}|}.
+$$
+
 ## Worked calculation
 
 ```python

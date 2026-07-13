@@ -41,6 +41,19 @@ $$
 \operatorname{Novelty}(L)=\frac{1}{k}\sum_{i\in L}-\log_2 p(i).
 $$
 
+Catalog coverage over many recommendation lists $\mathcal L$ is
+
+$$
+\operatorname{Coverage}(\mathcal L)=
+\frac{|\bigcup_{L\in\mathcal L}L|}{|\mathcal I|},
+$$
+
+where $\mathcal I$ is the eligible item catalog. A simple serendipity score averages relevance times unexpectedness:
+
+$$
+\operatorname{Serendipity}(L)=\frac{1}{k}\sum_{i\in L}\operatorname{rel}(i)\operatorname{unexpected}(i).
+$$
+
 These complement [ranking](ranking.md) metrics such as [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md).
 
 ## Worked example

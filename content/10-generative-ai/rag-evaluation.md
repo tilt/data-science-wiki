@@ -29,6 +29,30 @@ RAG evaluation separates retrieval quality from generation quality. A good final
 
 Useful retrieval metrics include context recall, precision@k, [nDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md), and filter correctness. Useful generation metrics include answer support, citation precision, citation coverage, abstention quality, and task success. [LLM-as-judge](llm-as-judge.md) can grade semantic support, but source IDs, retrieved chunk membership, and citation presence should be deterministic checks.
 
+| Metric | Definition |
+| ------ | ---------- |
+| Context recall | Fraction of labelled evidence sources or chunks recovered into the retrieval context. |
+| Citation precision | Fraction of cited sources that actually support the cited claim or belong to the expected evidence set. |
+| Citation coverage | Fraction of answer claims or required facts that carry a citation. |
+| Answer support | Whether generated claims are entailed by, or at least directly backed by, retrieved evidence. |
+| Claim support rate | Fraction of checked claims that are supported by the retrieved evidence. |
+| Abstention quality | Whether the system refuses answerless or unsafe cases while still answering supported cases. |
+| Task success | Whether the final answer satisfies the benchmark's task-specific acceptance criteria. |
+
+With expected evidence $E$, retrieved context $C$, cited claims $Q_c$, and all checked claims $Q$, common deterministic summaries are:
+
+$$
+\operatorname{context\ recall}=\frac{|E\cap C|}{|E|},\quad
+\operatorname{citation\ precision}=\frac{\#\text{ supported citations}}{\#\text{ citations}},
+$$
+
+$$
+\operatorname{citation\ coverage}=\frac{|Q_c|}{|Q|},\quad
+\operatorname{claim\ support\ rate}=\frac{\#\text{ supported claims}}{|Q|}.
+$$
+
+Abstention quality and task success are usually binary or rubric scores defined per benchmark item, then averaged across items.
+
 The evaluation set should include answerable questions, unanswerable questions, stale-source cases, conflicting-source cases, and adversarial retrieved text. Without those slices, a RAG system can look strong by answering easy questions while failing the exact cases that retrieval was meant to solve.
 
 ## Executed artifact

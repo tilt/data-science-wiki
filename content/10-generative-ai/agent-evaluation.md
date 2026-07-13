@@ -26,7 +26,13 @@ Agent evaluation measures the whole control loop, not just a final answer. A use
 
 ## Mechanism
 
-A trace grader should score at least four fields: final task result, required actions, forbidden actions, and resource envelope. For a task $t$, a simple pass predicate is $P(t)=O_t \land R_t \land \neg F_t \land B_t$, where $O$ is outcome correctness, $R$ required evidence/actions, $F$ forbidden events, and $B$ budget compliance. [LLM-as-judge](llm-as-judge.md) can grade language quality, but deterministic checks should own tool names, schemas, and permissions.
+A trace grader should score at least four fields: final task result, required actions, forbidden actions, and resource envelope. For a task $t$, a simple pass predicate is $P(t)=O_t \land R_t \land \neg F_t \land B_t$, where $O$ is outcome correctness, $R$ required evidence/actions, $F$ forbidden events, and $B$ budget compliance. A simple budget check is
+
+$$
+B_t=\mathbf 1\{\operatorname{calls}_t\le C_{\max}\land \operatorname{latency}_t\le L_{\max}\land \operatorname{cost}_t\le K_{\max}\}.
+$$
+
+[LLM-as-judge](llm-as-judge.md) can grade language quality, but deterministic checks should own tool names, schemas, and permissions.
 
 ## Executed artifact
 

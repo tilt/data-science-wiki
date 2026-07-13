@@ -26,7 +26,15 @@ Evaluation metrics are loss or scoring functions used after fitting to estimate 
 
 ## Defining math
 
-For regression, $RMSE=\sqrt{n^{-1}\sum_i(y_i-\hat y_i)^2}$ and $MAE=n^{-1}\sum_i|y_i-\hat y_i|$. For binary classification, $precision=TP/(TP+FP)$, $recall=TP/(TP+FN)$, and $F_1=2PR/(P+R)$. For probabilities, log loss is $-n^{-1}\sum_i y_i\log\hat p_i+(1-y_i)\log(1-\hat p_i)$.
+For regression, $MSE=n^{-1}\sum_i(y_i-\hat y_i)^2$, $RMSE=\sqrt{MSE}$, and $MAE=n^{-1}\sum_i|y_i-\hat y_i|$. For binary classification, $accuracy=(TP+TN)/(TP+TN+FP+FN)$, $precision=TP/(TP+FP)$, $recall=TP/(TP+FN)$, and $F_1=2PR/(P+R)$. For probabilities, log loss is $-n^{-1}\sum_i y_i\log\hat p_i+(1-y_i)\log(1-\hat p_i)$.
+
+ROC-AUC summarizes how well positive examples are ranked above negative examples across thresholds:
+
+$$
+\operatorname{AUC}=P(s(x^+)>s(x^-))+\frac{1}{2}P(s(x^+)=s(x^-)).
+$$
+
+Average precision summarizes the precision-recall curve and is often reported as PR-AUC for rare-positive ranking tasks.
 
 ## Intuition
 

@@ -47,7 +47,7 @@ This glossary is a cross-domain lookup index for evaluation metrics used across 
 | Metric | Field of application | Meaning |
 | ------ | -------------------- | ------- |
 | [Mean absolute error](../03-classical-machine-learning/evaluation-metrics.md) | Regression | Average absolute prediction error in target units. |
-| [Mean squared error](../02-probability-and-statistics/statistical-estimation.md) | Regression and estimation | Average squared error, emphasizing larger misses. |
+| [Mean squared error](../03-classical-machine-learning/evaluation-metrics.md) | Regression | Average squared prediction error, emphasizing larger misses. |
 | [Root mean squared error](../03-classical-machine-learning/evaluation-metrics.md) | Regression | Square root of mean squared error, reported in target units. |
 | [R-squared](../03-classical-machine-learning/regression.md) | Regression | Share of target variance explained relative to a baseline. |
 

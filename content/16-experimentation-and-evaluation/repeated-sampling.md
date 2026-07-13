@@ -35,7 +35,7 @@ $$
 T^{*(1)}, T^{*(2)}, \ldots, T^{*(B)}.
 $$
 
-Percentile intervals take quantiles of that bootstrap distribution. The mechanism estimates variability under the observed sampling scheme; it does not prove that the original examples cover the deployment population.
+A bootstrap interval is an uncertainty interval computed from the empirical distribution of the resampled statistic. Percentile intervals take quantiles of that bootstrap distribution. The mechanism estimates variability under the observed sampling scheme; it does not prove that the original examples cover the deployment population.
 
 ## Worked calculation
 

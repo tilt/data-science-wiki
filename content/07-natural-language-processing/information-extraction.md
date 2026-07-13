@@ -34,6 +34,8 @@ $$
 
 where $f_j$ is a field name, $v_j$ is a value, and $(s_j,e_j)$ identifies the supporting span. Sequence models estimate span labels; rule systems can use typed patterns; generative systems should still return evidence spans. Evaluation often checks field-level exact match, not only token F1.
 
+Field exact match is the indicator $\mathbf 1\{\hat v_f=v_f\}$ for one schema field. Field exact accuracy averages that indicator across required fields and records, so a nearly correct value still counts as wrong when exact downstream values matter.
+
 ## Worked example
 
 ```python
