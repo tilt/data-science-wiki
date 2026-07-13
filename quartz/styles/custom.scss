@@ -4,6 +4,8 @@
 
 :root[saved-theme="dark"] .markdown-rendered img[src$="calculus-function-derivative.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src$="bayesian-statistics-beta-posterior.svg"],
-:root[saved-theme="dark"] .markdown-rendered img[src$="calibration-reliability-diagram.svg"] {
+:root[saved-theme="dark"] .markdown-rendered img[src$="calibration-reliability-diagram.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="common-distributions-shapes.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="covariance-correlation-sample.svg"] {
   filter: invert(1) hue-rotate(180deg) saturate(0.95) brightness(1.05);
 }

@@ -33,29 +33,30 @@ $$
 
 This is not a universal best representation; it shows the contract. The first term carries average visual content, and the second carries coarse temporal change. [Video transformers](video-transformers.md) keep many tokens instead of reducing early, while [self-supervised video representation learning](self-supervised-video-representation-learning.md) trains the encoder that produces the embeddings.
 
-## Worked example
+## Worked representation example
 
-```python
-import torch
+For four frame embeddings
 
-emb = torch.tensor([[1.0,0.0],[0.8,0.2],[0.2,0.9],[-0.1,1.0]])
-clip_mean = emb.mean(0)
-delta = emb[-1] - emb[0]
-rep = torch.cat([clip_mean, delta])
-print("clip_mean", torch.round(clip_mean, decimals=3).tolist())
-print("temporal_delta", torch.round(delta, decimals=3).tolist())
-print("representation", torch.round(rep, decimals=3).tolist())
-```
+| frame | embedding |
+|---:|---:|
+| 1 | $(1.0,0.0)$ |
+| 2 | $(0.8,0.2)$ |
+| 3 | $(0.2,0.9)$ |
+| 4 | $(-0.1,1.0)$ |
 
-Observed output:
+the mean embedding is
 
-```text
-clip_mean [0.4749999940395355, 0.5249999761581421]
-temporal_delta [-1.100000023841858, 1.0]
-representation [0.4749999940395355, 0.5249999761581421, -1.100000023841858, 1.0]
-```
+$$
+\frac{(1.0,0.0)+(0.8,0.2)+(0.2,0.9)+(-0.1,1.0)}{4}=(0.475,0.525),
+$$
 
-The pooled part says the clip contains both embedding directions; the delta says it moved from the first toward the second.
+and the endpoint delta is
+
+$$
+e_4-e_1=(-0.1,1.0)-(1.0,0.0)=(-1.1,1.0).
+$$
+
+The concatenated representation is therefore $(0.475,0.525,-1.1,1.0)$. The pooled part says the clip contains both embedding directions; the delta says it moved from the first direction toward the second.
 
 ## Caveats
 

@@ -28,28 +28,21 @@ Reranking reorders candidates after a fast first-stage retriever. It lets [retri
 
 First-stage retrieval scores documents independently or approximately. A reranker scores $(q,d_i)$ pairs directly and sorts by $r(q,d_i)$. It is commonly applied after [hybrid retrieval](hybrid-retrieval.md), [embeddings](embeddings.md), or [vector databases](vector-databases.md) return a short candidate list.
 
-## Executed artifact
+## Worked scoring example
 
-```python
-import numpy as np
+Suppose the first-stage retriever returns three documents in vector-score order: document 0, then 1, then 2. A cross-encoder reranker can change the order because it scores the query-document pair directly:
 
-first_pass = np.array([0.78, 0.74, 0.70])
-cross_score = np.array([0.20, 0.95, 0.50])
-final = 0.3 * first_pass + 0.7 * cross_score
-print("RERANK")
-print("first_pass", [int(i) for i in np.argsort(-first_pass)])
-print("reranked", [int(i) for i in np.argsort(-final)], np.round(final, 3).tolist())
-```
+$$
+s_{\text{final}}(q,d)=0.3\,s_{\text{first}}(q,d)+0.7\,s_{\text{cross}}(q,d).
+$$
 
-Observed output:
+| document | first-stage score | cross-score | final score |
+|---:|---:|---:|---:|
+| 0 | 0.78 | 0.20 | $0.3(0.78)+0.7(0.20)=0.374$ |
+| 1 | 0.74 | 0.95 | $0.3(0.74)+0.7(0.95)=0.887$ |
+| 2 | 0.70 | 0.50 | $0.3(0.70)+0.7(0.50)=0.560$ |
 
-```text
-RERANK
-first_pass [0, 1, 2]
-reranked [1, 2, 0] [0.374, 0.887, 0.56]
-```
-
-The cross-score moved document 1 above the vector winner, which is exactly the point of a second stage.
+The reranked order is therefore document 1, document 2, document 0. The first-stage winner falls to last because the cross-score judges it weak after seeing the full query-document pair.
 
 ## Caveats
 

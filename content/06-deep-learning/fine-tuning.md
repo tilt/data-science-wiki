@@ -78,7 +78,7 @@ loss 0.7045
 base_weight_change 0.0
 ```
 
-Only the head's weight and bias are trainable, so the base layer is used in the forward pass but receives no update.
+The frozen base maps each 3-dimensional input to 3 hidden features, but its weight and bias have `requires_grad=False`, so the optimizer never sees those parameters. Only the 3 head weights plus 1 head bias are trainable, giving `trainable_params 4`. The `base_weight_change` is exactly `0.0` because gradients flow through the base to train the head, but no update is applied to the base weights.
 
 ## Caveats
 

@@ -30,26 +30,28 @@ A practical pipeline classifies fields, redacts or masks high-risk patterns, min
 
 Use the least destructive control that satisfies the privacy requirement. Some tasks need redaction before the model call. Others should keep private fields out of the prompt and fetch them through a permissioned tool only when needed. Logs should avoid raw prompts unless the retention and access policy explicitly allows them.
 
-## Executed artifact
+## Worked redaction example
 
-```python
-import re
+Before sending support text to a model, deterministic recognizers can replace high-risk fields with typed placeholders:
 
-text = "Email ana@example.com about acct 1234-5678-9012-3456."
-redacted = re.sub(r"\b(?:\d{4}-){3}\d{4}\b", "[CARD]", text)
-redacted = re.sub(r"[\w.-]+@[\w.-]+", "[EMAIL]", redacted)
-print("PII")
-print(redacted)
-```
+| input span | recognizer | replacement |
+|---|---|---|
+| `ana@example.com` | email pattern | `[EMAIL]` |
+| `1234-5678-9012-3456` | card-shaped digit pattern | `[CARD]` |
 
-Observed output:
+The prompt fragment
 
 ```text
-PII
+Email ana@example.com about acct 1234-5678-9012-3456.
+```
+
+becomes
+
+```text
 Email [EMAIL] about acct [CARD].
 ```
 
-The executed regex redacted an email address and a card-shaped account string before a hypothetical model call.
+Typed placeholders preserve the task shape while removing direct identifiers. The example is intentionally narrow: deterministic rules are useful for structured PII, but they do not solve names, addresses, or context-dependent identifiers by themselves.
 
 ## Caveats
 

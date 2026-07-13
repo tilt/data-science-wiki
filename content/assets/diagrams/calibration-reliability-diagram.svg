@@ -3,8 +3,8 @@
   <desc id="desc">A calibration plot comparing mean predicted probability with observed frequency. All four observed points sit above the ideal diagonal, showing underconfidence.</desc>
   <style><![CDATA[
     :root {
-      --plot-bg: #ffffff;
-      --plot-panel: #f8fafc;
+      --plot-bg: transparent;
+      --plot-panel: transparent;
       --plot-fg: #202124;
       --plot-note: #3c4043;
       --plot-muted: #5f6368;

@@ -57,7 +57,7 @@ Observed output:
 (7, 70)
 ```
 
-Without the timestamp predicate, the feature would be 1069 and leak future behavior into training.
+The query joins transactions only when `event_ts < label_ts`, so the feature is $30+40=70$. The later transaction for `999` is excluded because it occurs two hours after the label timestamp; without the timestamp predicate, the feature would be $30+40+999=1069$ and would leak future behavior into training.
 
 ## Architecture
 

@@ -20,7 +20,7 @@
   <style type="text/css"><![CDATA[
 *{stroke-linejoin: round; stroke-linecap: butt}
 :root {
-  --plot-bg: #ffffff;
+  --plot-bg: transparent;
   --plot-fg: #111827;
   --plot-muted: #6b7280;
   --plot-annotation: #374151;

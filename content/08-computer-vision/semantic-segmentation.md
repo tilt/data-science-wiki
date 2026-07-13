@@ -34,30 +34,23 @@ $$
 
 Fully convolutional networks make this efficient by replacing dense classification heads with spatial feature maps and upsampling. U-Net-style decoders add skip connections so low-resolution semantic features can recover fine boundaries, which is why they are common in [MRI segmentation](mri-segmentation.md).
 
-## Worked example
+## Worked metric example
 
-```python
-import numpy as np
+For one 12-pixel mask with classes 0, 1, and 2, pixel accuracy counts all correct pixels:
 
-y_true = np.array([[0,0,1,1],[0,2,2,1],[0,2,1,1]])
-y_pred = np.array([[0,1,1,1],[0,2,0,1],[0,2,2,1]])
-ious = []
-for c in [0, 1, 2]:
-    inter = np.logical_and(y_true == c, y_pred == c).sum()
-    union = np.logical_or(y_true == c, y_pred == c).sum()
-    ious.append(inter / union)
-print("per_class_iou", np.round(ious, 3).tolist(), "mean_iou", round(float(np.mean(ious)), 3))
-print("pixel_accuracy", round(float((y_true == y_pred).mean()), 3))
-```
+$$
+\operatorname{accuracy}=\frac{9}{12}=0.75.
+$$
 
-Observed output:
+Intersection-over-union computes overlap per class:
 
-```text
-per_class_iou [0.6, 0.667, 0.5] mean_iou 0.589
-pixel_accuracy 0.75
-```
+| class | intersection | union | IoU |
+|---:|---:|---:|---:|
+| 0 | 3 | 5 | 0.600 |
+| 1 | 4 | 6 | 0.667 |
+| 2 | 2 | 4 | 0.500 |
 
-Pixel accuracy is 0.75, but mean IoU is lower because class-wise overlap punishes false regions and missed regions directly.
+The mean IoU is $(0.600+0.667+0.500)/3=0.589$. It is lower than pixel accuracy because class-wise overlap punishes false regions and missed regions directly instead of letting easy background pixels dominate the score.
 
 ## Caveats
 

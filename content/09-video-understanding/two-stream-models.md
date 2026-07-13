@@ -34,28 +34,21 @@ $$
 
 The streams are complementary: RGB sees objects and scene context, while flow emphasizes motion direction and speed. A basketball court and a person holding a ball help, but the jump-shot label depends on the temporal motion that [temporal action recognition](temporal-action-recognition.md) must capture.
 
-## Worked example
+## Worked fusion example
 
-```python
-import torch
+The RGB stream may prefer the scene/object class while the flow stream prefers the action class. With $\alpha=0.45$, the fused logits are
 
-rgb = torch.tensor([1.2, 0.1, -0.4])
-flow = torch.tensor([0.0, 1.4, -0.2])
-fused = 0.45 * rgb + 0.55 * flow
-print("rgb_prob", torch.round(rgb.softmax(0), decimals=3).tolist())
-print("flow_prob", torch.round(flow.softmax(0), decimals=3).tolist())
-print("fused_prob", torch.round(fused.softmax(0), decimals=3).tolist(), "pred_class", int(fused.argmax()))
-```
+$$
+z=0.45(1.2,0.1,-0.4)+0.55(0.0,1.4,-0.2)=(0.54,0.815,-0.29).
+$$
 
-Observed output:
+| stream | class 0 probability | class 1 probability | class 2 probability | predicted class |
+|---|---:|---:|---:|---:|
+| RGB only | 0.652 | 0.217 | 0.132 | 0 |
+| flow only | 0.170 | 0.690 | 0.139 | 1 |
+| fused | 0.363 | 0.478 | 0.158 | 1 |
 
-```text
-rgb_prob [0.6520000100135803, 0.21699999272823334, 0.13199999928474426]
-flow_prob [0.17000000178813934, 0.6899999976158142, 0.13899999856948853]
-fused_prob [0.3630000054836273, 0.4779999852180481, 0.15800000727176666] pred_class 1
-```
-
-The RGB stream prefers class 0, but the motion stream is strong enough that fused evidence predicts class 1.
+The fused prediction is class 1 because the motion evidence is strong and slightly upweighted. The table is also the failure mode: if optical flow is noisy, late fusion can confidently move the prediction away from the RGB evidence.
 
 ## Caveats
 

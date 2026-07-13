@@ -35,7 +35,23 @@ $$
 
 Covariance keeps the product of the units; correlation is unitless and lies in $[-1,1]$ when variances are positive. Covariance matrices are central in [statistical modelling](statistical-modelling.md) and [PCA](../03-classical-machine-learning/pca.md).
 
-## Worked computation
+## Executed sample check
+
+The code below draws 5000 observations from a bivariate normal distribution with mean vector $(0,0)$ and covariance matrix
+
+$$
+\Sigma =
+\begin{bmatrix}
+4 & 1.8\\
+1.8 & 1
+\end{bmatrix}.
+$$
+
+The diagonal entries say that $\sigma_X=\sqrt{4}=2$ and $\sigma_Y=\sqrt{1}=1$. The off-diagonal covariance is $1.8$, so the population correlation should be
+
+$$
+\rho_{X,Y}=\frac{1.8}{\sqrt{4}\sqrt{1}}=0.9.
+$$
 
 ```python
 import numpy as np
@@ -57,7 +73,11 @@ sample_cov
 sample_corr 0.897 theoretical_corr 0.9
 ```
 
-The sample covariance matrix, with off-diagonal entry about `1.751`, is close to the generating covariance `1.8`. The sample correlation `0.897` is near the theoretical `0.9` because that covariance is large relative to the product of the standard deviations.
+`np.cov(xy, rowvar=False)` treats the two columns as the variables and estimates the covariance matrix from the drawn sample. The sample covariance matrix is close to $\Sigma$: its variances, `3.891` and `0.979`, are near the generating values `4` and `1`, while its off-diagonal entry `1.751` is near the generating covariance `1.8`.
+
+`np.corrcoef(xy, rowvar=False)[0, 1]` standardizes that cross-covariance by the sample standard deviations. The sample correlation `0.897` is near the theoretical `0.9`; it is not exactly equal because 5000 draws still contain sampling noise.
+
+![A positively correlated sample cloud with an elongated ellipse showing covariance direction.](../assets/diagrams/covariance-correlation-sample.svg)
 
 ## Caveats
 

@@ -33,29 +33,23 @@ $$
 
 where $D_{\mathrm{test}}$ is a frozen dataset, $M$ is the metric set, $S$ is the slice taxonomy, and $C$ is the compute environment. Reporting only $\frac{1}{n}\sum_i \mathbf 1\{\hat y_i=y_i\}$ misses false-positive cost, recall requirements, and runtime.
 
-## Worked example
+## Worked benchmark comparison
 
-```python
-import numpy as np
+On a 10-image binary benchmark with 5 positives, compare two candidate models:
 
-truth = np.array([1,1,0,1,0,0,1,0,1,0])
-fast = np.array([1,0,0,1,0,1,1,0,0,0])
-slow = np.array([1,1,0,1,0,0,0,0,1,0])
-for name, pred, ms in [("fast", fast, 12), ("slow", slow, 47)]:
-    acc = (pred == truth).mean()
-    recall = ((pred == 1) & (truth == 1)).sum() / (truth == 1).sum()
-    fp = ((pred == 1) & (truth == 0)).sum()
-    print(name, "accuracy", round(acc, 3), "recall", round(recall, 3), "false_positives", int(fp), "latency_ms", ms)
-```
+| model | correct predictions | true positives found | false positives | latency |
+|---|---:|---:|---:|---:|
+| fast | 7 of 10 | 3 of 5 | 1 | 12 ms |
+| slow | 9 of 10 | 4 of 5 | 0 | 47 ms |
 
-Observed output:
+The resulting metrics are
 
-```text
-fast accuracy 0.7 recall 0.6 false_positives 1 latency_ms 12
-slow accuracy 0.9 recall 0.8 false_positives 0 latency_ms 47
-```
+| model | accuracy | recall | false positives | latency |
+|---|---:|---:|---:|---:|
+| fast | $7/10=0.700$ | $3/5=0.600$ | 1 | 12 ms |
+| slow | $9/10=0.900$ | $4/5=0.800$ | 0 | 47 ms |
 
-The slow model is better on this metric set, but the fast model may still win if real-time latency is binding.
+The slow model is better on accuracy, recall, and false positives, but it is almost four times slower. If the product needs sub-20 ms inference, the fast model may still be the deployable choice even though its task metrics are worse.
 
 ## Caveats
 

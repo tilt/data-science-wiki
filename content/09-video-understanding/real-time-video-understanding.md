@@ -34,28 +34,24 @@ $$
 
 Throughput must also hold: if a stream samples $r$ clips per second, average compute per clip must be less than $1/r$ seconds, with headroom for bursts. [Video transformers](video-transformers.md) stress this budget because attention cost grows with token count.
 
-## Worked example
+## Worked latency budget
 
-```python
-fps = 30
-sample_every = 3
-model_ms = 42
-buffer_frames = 8
-sampled_fps = fps / sample_every
-compute_budget_ms = 1000 / sampled_fps
-latency_ms = buffer_frames * 1000 / fps + model_ms
-print("sampled_fps", sampled_fps, "budget_ms_per_sample", round(compute_budget_ms, 1))
-print("end_to_end_latency_ms", round(latency_ms, 1), "meets_500ms", latency_ms <= 500)
-```
+For a 30 fps stream sampled every third frame, the model receives
 
-Observed output:
+$$
+r = 30/3 = 10
+$$
 
-```text
-sampled_fps 10.0 budget_ms_per_sample 100.0
-end_to_end_latency_ms 308.7 meets_500ms True
-```
+clips per second, so each clip has a compute budget of $1000/10=100$ ms before the system falls behind. If the model takes 42 ms, it has throughput headroom. Latency is different:
 
-This setup has compute headroom and meets a 500 ms deadline, but the buffer contributes more latency than the model.
+| component | value |
+|---|---:|
+| 8-frame buffer at 30 fps | $8\cdot1000/30=266.7$ ms |
+| model inference | 42.0 ms |
+| end-to-end subtotal | 308.7 ms |
+| deadline | 500.0 ms |
+
+The setup meets a 500 ms deadline, but the buffer contributes far more latency than the model. Reducing model time alone would not help much unless the buffering policy also changes.
 
 ## Caveats
 

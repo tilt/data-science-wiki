@@ -36,31 +36,16 @@ where $f_j$ is a field name, $v_j$ is a value, and $(s_j,e_j)$ identifies the su
 
 Field exact match is the indicator $\mathbf 1\{\hat v_f=v_f\}$ for one schema field. Field exact accuracy averages that indicator across required fields and records, so a nearly correct value still counts as wrong when exact downstream values matter.
 
-## Worked example
+## Worked extraction example
 
-```python
-import numpy as np, re
+For two invoice snippets, an IE system should return typed fields with evidence, not just highlighted text:
 
-np.random.seed(7)
-texts = ["Invoice 104 total $42.10 due 2026-08-01",
-         "Invoice 105 total $17.00 due 2026-08-09"]
-gold = [{"id": "104", "total": "42.10", "due": "2026-08-01"},
-        {"id": "105", "total": "17.00", "due": "2026-08-09"}]
-pat = re.compile(r"Invoice (?P<id>\d+) total \$(?P<total>\d+\.\d{2}) due (?P<due>\d{4}-\d{2}-\d{2})")
-pred = [pat.search(t).groupdict() for t in texts]
-field_acc = np.mean([pred[i][k] == gold[i][k] for i in range(2) for k in gold[i]])
-print("records", pred)
-print("field_exact_accuracy", round(float(field_acc), 3))
-```
+| source text | extracted id | extracted total | extracted due date |
+|---|---:|---:|---:|
+| `Invoice 104 total $42.10 due 2026-08-01` | `104` | `$42.10` | `2026-08-01` |
+| `Invoice 105 total $17.00 due 2026-08-09` | `105` | `$17.00` | `2026-08-09` |
 
-Observed output:
-
-```text
-records [{'id': '104', 'total': '42.10', 'due': '2026-08-01'}, {'id': '105', 'total': '17.00', 'due': '2026-08-09'}]
-field_exact_accuracy 1.0
-```
-
-The regex is deliberately narrow, but it demonstrates the artifact IE must produce: typed fields, not just highlighted text.
+There are 2 records and 3 required fields per record, so field exact accuracy is $6/6=1.0$ here. The example is deliberately narrow, but it shows the artifact IE must produce: a schema-conformant record that downstream systems can validate.
 
 ## Caveats
 

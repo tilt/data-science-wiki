@@ -39,6 +39,8 @@ The classifier tries to put the boundary as far as possible from the nearest dif
 
 ## Worked example
 
+This example fits a linear SVM after standardizing the features. `LinearSVC.decision_function` returns the signed margin score $f(x)=w^\top x+b$: negative scores are one class, positive scores are the other, and larger absolute values are farther from the learned boundary.
+
 ```python
 from sklearn.datasets import make_classification
 from sklearn.model_selection import train_test_split
@@ -62,7 +64,7 @@ accuracy 0.956
 decision_first5 [-1.973 -0.781  1.463  0.301 -0.661]
 ```
 
-The sign of each decision score gives the class; the magnitude is distance-like confidence, not a calibrated probability.
+The held-out accuracy is `0.956`, so the linear margin separates most test examples in this synthetic problem. The first five scores predict classes by sign: the first two and fifth are on the negative side, while the third and fourth are on the positive side. The magnitude is distance-like confidence, not a calibrated probability.
 
 ## Caveats
 

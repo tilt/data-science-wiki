@@ -35,33 +35,42 @@ X\sim\operatorname{Poisson}(\lambda), \quad
 P(X=k)=e^{-\lambda}\frac{\lambda^k}{k!}.
 $$
 
+For a positive continuous quantity, the shape-scale Gamma density is
+
+$$
+X\sim\operatorname{Gamma}(\alpha,\theta), \quad
+f(x)=\frac{x^{\alpha-1}e^{-x/\theta}}{\Gamma(\alpha)\theta^\alpha},\quad x>0.
+$$
+
+The Gamma function generalizes factorials to positive real inputs:
+
+$$
+\Gamma(\alpha)=\int_0^\infty t^{\alpha-1}e^{-t}\,dt,\quad \alpha>0,
+$$
+
+so for integer $m$, $\Gamma(m)=(m-1)!$.
+
+Its distribution function is the accumulated density,
+
+$$
+F(x)=P(X\le x)=\int_0^x \frac{t^{\alpha-1}e^{-t/\theta}}{\Gamma(\alpha)\theta^\alpha}\,dt.
+$$
+
 Distribution choice directly affects [maximum likelihood](maximum-likelihood.md), [expectation and variance](expectation-and-variance.md), and whether a [central limit theorem](central-limit-theorem.md) approximation is reasonable.
 
-## Worked computation
+## Worked visual comparison
 
-```python
-import numpy as np
+The distribution should match the mechanism and the support. Use a binomial model when there is a fixed number of independent opportunities, such as 20 users each either clicking or not clicking. Use a Poisson model when counting events over a fixed exposure window, such as support tickets arriving in one hour under a roughly constant rate. Use a gamma model for positive continuous amounts or waiting-time-like quantities, such as time until a multi-step repair completes.
 
-rng = np.random.default_rng(20260711)
-samples = {
-    "binom_20_.3": rng.binomial(20, .3, 100000),
-    "poisson_4": rng.poisson(4, 100000),
-    "gamma_2_3": rng.gamma(2, 3, 100000),
-}
-for name, s in samples.items():
-    print(name, "mean", round(s.mean(), 3),
-          "var", round(s.var(), 3), "q95", round(np.quantile(s, .95), 3))
-```
+| distribution | what it models | mean | variance | support |
+|---|---|---:|---:|---|
+| $\operatorname{Binomial}(n,p)$ | successes in $n$ independent yes/no trials | $np$ | $np(1-p)$ | integers $0,\ldots,n$ |
+| $\operatorname{Poisson}(\lambda)$ | event count in a fixed interval at rate $\lambda$ | $\lambda$ | $\lambda$ | integers $0,1,\ldots$ |
+| $\operatorname{Gamma}(\alpha,\theta)$ | positive waiting-time-like quantity | $\alpha\theta$ | $\alpha\theta^2$ | real values $x>0$ |
 
-Observed output:
+![Binomial, Poisson, and Gamma distributions compared by shape, support, and tail spread.](../assets/diagrams/common-distributions-shapes.svg)
 
-```text
-binom_20_.3 mean 5.985 var 4.184 q95 9.0
-poisson_4 mean 4.003 var 4.016 q95 8.0
-gamma_2_3 mean 6.005 var 18.137 q95 14.262
-```
-
-The binomial and gamma examples have similar means near 6, but their variances differ sharply: `4.184` versus `18.137`. The gamma 95th percentile, `14.262`, is much higher than the binomial 95th percentile, `9.0`, so replacing one distribution with another changes risk calculations.
+The plot instantiates the generic rows with $\operatorname{Binomial}(20,0.3)$, $\operatorname{Poisson}(4)$, and $\operatorname{Gamma}(2,3)$. The binomial and gamma examples both have mean 6, but the gamma variance is $18$ instead of $4.2$, so its right tail is much wider. The Poisson example is centered lower, near 4, and its variance equals its mean; that equality is a modeling assumption, not a universal law for count data.
 
 ## Caveats
 

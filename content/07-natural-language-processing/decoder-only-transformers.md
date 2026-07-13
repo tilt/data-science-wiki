@@ -42,6 +42,8 @@ $$
 
 ## Worked example
 
+The code constructs one attention head by hand, applies the upper-triangular causal mask, and then checks that masked future positions receive zero probability after softmax.
+
 ```python
 import math, torch
 
@@ -66,7 +68,7 @@ future_weight_sum 0.0
 context_last [-0.27000001072883606, -0.9359999895095825]
 ```
 
-The first position can attend only to itself; the sum of all illegal future attention weights is exactly zero in this run.
+The first row is `[1.0, 0.0, 0.0, 0.0]` because position 0 can attend only to itself. Row 2 assigns weight to positions 0, 1, and 2 but zero to position 3, and the printed `future_weight_sum 0.0` confirms that every illegal future edge was removed by the mask before softmax.
 
 ## Caveats
 

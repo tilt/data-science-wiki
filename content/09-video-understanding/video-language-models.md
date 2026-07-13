@@ -35,27 +35,23 @@ $$
 
 The pooled context $c$ can condition a decoder or classifier. Larger systems use [video transformers](video-transformers.md), projection layers, and language-model attention, but the interface remains language-facing. The comparison page [V-JEPA 2 versus Vision-Language Models](v-jepa-2-versus-vision-language-models.md) is about this objective and interface difference.
 
-## Worked example
+## Worked attention example
 
-```python
-import torch
+For three frame tokens $v_t$ and a text query $q$, the raw alignment score is $q^\top v_t$. The softmax turns those scores into attention weights:
 
-frame_tokens = torch.tensor([[1.0,0.0,0.2],[0.1,0.8,0.1],[0.0,1.1,0.3]])
-text_query = torch.tensor([0.0,1.0,0.2])
-attn = (frame_tokens @ text_query).softmax(0)
-answer_vec = attn @ frame_tokens
-print("attention_over_frames", torch.round(attn, decimals=3).tolist())
-print("pooled_video_token", torch.round(answer_vec, decimals=3).tolist())
-```
+| frame | token $v_t$ | score $q^\top v_t$ | attention weight |
+|---:|---:|---:|---:|
+| 1 | $(1.0,0.0,0.2)$ | 0.04 | 0.160 |
+| 2 | $(0.1,0.8,0.1)$ | 0.82 | 0.349 |
+| 3 | $(0.0,1.1,0.3)$ | 1.16 | 0.491 |
 
-Observed output:
+The pooled token is therefore
 
-```text
-attention_over_frames [0.1599999964237213, 0.3490000069141388, 0.4909999966621399]
-pooled_video_token [0.19499999284744263, 0.8190000057220459, 0.21400000154972076]
-```
+$$
+c=0.160v_1+0.349v_2+0.491v_3=(0.195,0.819,0.214).
+$$
 
-The text query is most aligned with the later frames, so the pooled token emphasizes those video features.
+The query is most aligned with the later frames, so the pooled representation emphasizes the second coordinate that those frames carry.
 
 ## Caveats
 
