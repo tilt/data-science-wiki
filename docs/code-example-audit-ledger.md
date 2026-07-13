@@ -1,6 +1,6 @@
 # Code Example Audit Ledger
 
-Enumerated pages: 475
+Enumerated pages: 483
 
 | path | has_code | outcome | one-line rationale | action taken |
 | --- | --- | --- | --- | --- |
@@ -253,7 +253,7 @@ Enumerated pages: 475
 | content/10-generative-ai/agent-evaluation.md | no | replace-with-explanation | Agent-evaluation counters were static and clearer as a trace table. | Strict pass: replaced Python counters with worked trace/rubric table. |
 | content/10-generative-ai/agent-loops.md | yes | keep+explain | Agent Loops keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/agentic-systems.md | yes | keep+explain | Agentic Systems keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
-| content/10-generative-ai/alignment.md | yes | keep+explain | Alignment keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
+| content/10-generative-ai/alignment.md | yes | keep+explain | Alignment keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation; added LLM-training and RLHF related links. |
 | content/10-generative-ai/chunking.md | no | replace-with-explanation | Chunking token arithmetic was deterministic process explanation. | Strict pass: replaced Python split demo with worked chunking example. |
 | content/10-generative-ai/citations.md | yes | keep+explain | Citations keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/context-construction.md | no | replace-with-explanation | Context-budget allocation was better as a budget table than code. | Strict pass: replaced Python context packing with worked budget table. |
@@ -266,10 +266,12 @@ Enumerated pages: 475
 | content/10-generative-ai/grounding.md | yes | keep+explain | Grounding keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/guardrails.md | yes | keep+explain | Guardrails keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/hallucination-mitigation.md | yes | keep+explain | Hallucination Mitigation keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
+| content/10-generative-ai/harnesses.md | yes | keep+explain | Harnesses keeps a YAML harness contract that is a meaningful system-design artifact. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/hybrid-retrieval.md | yes | keep+explain | Hybrid Retrieval keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/in-context-learning.md | yes | keep+explain | In-Context Learning keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
-| content/10-generative-ai/index.md | no | no-change | Generative AI and Agentic Systems has no code and reads as substantive prose or a section index. | Inspected; no edit. |
-| content/10-generative-ai/instruction-tuning.md | yes | keep+explain | Instruction Tuning keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
+| content/10-generative-ai/index.md | no | no-change | Generative AI and Agentic Systems has no code and reads as substantive prose or a section index. | Added LLM Training to the section index. |
+| content/10-generative-ai/instruction-tuning.md | yes | keep+explain | Instruction Tuning keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation; added LLM-training and RLHF related links. |
+| content/10-generative-ai/llm-training.md | no | no-change | New LLM-training page uses formulas, a pipeline diagram, and stage tables rather than low-value code. | Added page and cross-linked it to self-supervised learning and RLHF. |
 | content/10-generative-ai/language-model-architecture.md | yes | keep+explain | Language Model Architecture keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/llm-as-judge.md | yes | keep+explain | LLM-as-Judge keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/local-versus-hosted-models.md | yes | keep+explain | Local Versus Hosted Models keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
@@ -279,7 +281,7 @@ Enumerated pages: 475
 | content/10-generative-ai/multimodal-models.md | yes | keep+explain | Multimodal Models keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/pii-protection.md | yes | replace-with-example | PII redaction is a process/control topic where before-and-after text is clearer than regex code. | Replaced Python regex with a typed redaction table and input/output text example. |
 | content/10-generative-ai/planning.md | yes | keep+explain | Planning keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
-| content/10-generative-ai/pretraining.md | yes | keep+explain | Pretraining keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
+| content/10-generative-ai/pretraining.md | yes | keep+explain | Pretraining keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation; added LLM-training and self-supervised related links. |
 | content/10-generative-ai/prompt-injection.md | yes | keep+explain | Prompt Injection keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/prompting.md | yes | keep+explain | Prompting keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
 | content/10-generative-ai/quantization.md | yes | keep+explain | Quantization keeps a concrete code, schema, or architecture artifact that earns its place. | Inspected; kept artifact and existing explanation. |
@@ -477,4 +479,11 @@ Enumerated pages: 475
 | content/21-references-and-glossary/metrics.md | no | no-change | Metrics Glossary has no code and is substantive narrative, interview, glossary, or index content. | Inspected; no edit. |
 | content/21-references-and-glossary/notation.md | no | no-change | Notation has no code and is substantive narrative, interview, glossary, or index content. | Inspected; no edit. |
 | content/21-references-and-glossary/references.md | no | no-change | References has no code and is substantive narrative, interview, glossary, or index content. | Inspected; no edit. |
-| content/index.md | no | no-change | Data Science, Machine Learning & AI Wiki has no code and is substantive narrative, interview, glossary, or index content. | Inspected; no edit. |
+| content/22-reinforcement-learning/index.md | no | no-change | New RL area index uses a loop diagram and learning map instead of code. | Added page. |
+| content/22-reinforcement-learning/markov-decision-processes.md | no | no-change | MDP mechanics are clearer as definitions, formulas, and a sequential scenario than code. | Added page. |
+| content/22-reinforcement-learning/value-functions-and-bellman-equations.md | no | no-change | Bellman recursion is explained with formulas and a hand calculation rather than code. | Added page. |
+| content/22-reinforcement-learning/q-learning-and-dqn.md | no | no-change | Q-learning update and DQN mechanics are shown as formulas and mechanism table. | Added page. |
+| content/22-reinforcement-learning/policy-gradients-and-actor-critic.md | no | no-change | Policy-gradient, PPO, and SAC objectives are better represented as formulas and explanations. | Added page. |
+| content/22-reinforcement-learning/offline-and-model-based-reinforcement-learning.md | no | no-change | Offline/model-based RL risks and sequence-model framing are clearer as formulas and tables. | Added page. |
+| content/22-reinforcement-learning/reinforcement-learning-from-human-feedback.md | no | no-change | RLHF uses preference and KL objectives rather than executable toy code. | Added page and linked it to LLM training. |
+| content/index.md | no | no-change | Data Science, Machine Learning & AI Wiki has no code and is substantive narrative, interview, glossary, or index content. | Added Reinforcement Learning to major-area navigation. |

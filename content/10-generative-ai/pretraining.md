@@ -12,10 +12,12 @@ aliases: []
 prerequisites:
   - index.md
 related:
+  - llm-training.md
   - foundation-models.md
   - language-model-architecture.md
   - instruction-tuning.md
   - tokenization.md
+  - ../06-deep-learning/self-supervised-learning.md
   - ../01-mathematical-foundations/cross-entropy.md
 historical_context: false
 last_reviewed: 2026-07-11

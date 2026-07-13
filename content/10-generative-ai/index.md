@@ -9,6 +9,7 @@ topics:
   - "language-model-architecture"
   - "tokenization"
   - "pretraining"
+  - "llm-training"
   - "instruction-tuning"
   - "alignment"
   - "in-context-learning"
@@ -43,6 +44,7 @@ Generative AI and Agentic Systems is a major knowledge area in this wiki. The in
 - [Language Model Architecture](language-model-architecture.md)
 - [Tokenization](tokenization.md)
 - [Pretraining](pretraining.md)
+- [LLM Training](llm-training.md)
 - [Instruction Tuning](instruction-tuning.md)
 - [Alignment](alignment.md)
 - [In-Context Learning](in-context-learning.md)
