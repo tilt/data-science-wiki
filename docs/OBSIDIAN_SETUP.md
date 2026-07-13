@@ -20,6 +20,8 @@ make setup
 make preview
 ```
 
+Use `make preview-watch` instead when you want Quartz to rebuild while editing.
+
 11. Run validation, commit, and push:
 
 ```sh

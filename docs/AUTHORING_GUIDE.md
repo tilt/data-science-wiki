@@ -36,3 +36,7 @@ Generated pages are drafts. Treat them as concise first explanations, then hand-
 Forecasting material belongs under `content/05-time-series-and-forecasting/`. Add new forecasting methods as focused concept, model, algorithm, or system-design pages and link them from the area index. Cross-link related machine learning, evaluation, deep learning, and MLOps pages with standard Markdown links.
 
 Before adding project-derived forecasting notes, generalize identifiers, package names, class names, client names, repository paths, and operational details. Keep reusable concepts, assumptions, formulas, evaluation protocols, and engineering patterns.
+
+## Integrating project knowledge
+
+The rule above applies to any project-derived content, not only forecasting. To turn findings from a pitch, workshop, or engagement into generic wiki knowledge — sanitize, generalize, place in the owning numbered section, reuse existing page types, cross-link instead of duplicating — follow [Integrating Project Knowledge](integrating-project-knowledge.md). The RAG architecture pages under `content/10-generative-ai/` are the worked example.
