@@ -4,6 +4,7 @@ slug: domain-applications/real-time-action-recognition
 description: "Low-latency video action classification and detection for streams where late decisions lose value."
 area: domain-applications
 topics:
+  - application
   - real-time-action-recognition
 level: intermediate
 status: review

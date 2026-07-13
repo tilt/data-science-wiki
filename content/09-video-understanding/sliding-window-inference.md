@@ -35,28 +35,18 @@ Overlap improves coverage and boundary recall but increases compute. Predictions
 
 ## Worked example
 
-```python
-import numpy as np
+For $T=20$ frames, window size $w=6$, and stride $s=4$, the full windows are:
 
-T, win, stride = 20, 6, 4
-windows = [(s, min(s+win, T)) for s in range(0, T-win+1, stride)]
-coverage = np.zeros(T, dtype=int)
-for s, e in windows:
-    coverage[s:e] += 1
-print("windows", windows)
-print("coverage", coverage.tolist())
-print("min_max_coverage", [int(coverage.min()), int(coverage.max())])
-```
+| window | interval | covered frames |
+|---:|---:|---|
+| $W_0$ | $[0,6)$ | 0, 1, 2, 3, 4, 5 |
+| $W_1$ | $[4,10)$ | 4, 5, 6, 7, 8, 9 |
+| $W_2$ | $[8,14)$ | 8, 9, 10, 11, 12, 13 |
+| $W_3$ | $[12,18)$ | 12, 13, 14, 15, 16, 17 |
 
-Observed output:
+Frames 4, 5, 8, 9, 12, and 13 are covered twice because adjacent windows overlap. Frames 18 and 19 are uncovered because the simple full-window schedule stops at frame 18. Production code usually adds a final padded or shifted window so the tail of the stream is not silently missed.
 
-```text
-windows [(0, 6), (4, 10), (8, 14), (12, 18)]
-coverage [1, 1, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 2, 2, 1, 1, 1, 1, 0, 0]
-min_max_coverage [0, 2]
-```
-
-The final two frames are uncovered because the simple range stops at the last full window. Production code usually adds a final padded or shifted window.
+![Sliding-window inference trades overlap against compute and can leave tail frames uncovered without a final padded window.](../assets/diagrams/sliding-window-coverage.svg)
 
 ## Caveats
 

@@ -63,7 +63,7 @@ last_reviewed: 2026-07-10
 - [Time-Series Forecasting](05-time-series-and-forecasting/index.md)
 - [Deep Learning](06-deep-learning/index.md)
 - [Natural Language Processing](07-natural-language-processing/index.md)
-- [Computer Vision and Medical Imaging](08-computer-vision/index.md)
+- [Computer Vision](08-computer-vision/index.md)
 - [Video Understanding](09-video-understanding/index.md)
 - [Generative AI and Agentic Systems](10-generative-ai/index.md)
 - [Information Retrieval and Search](11-information-retrieval-and-search/index.md)

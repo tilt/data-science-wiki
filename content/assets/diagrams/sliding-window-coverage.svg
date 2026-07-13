@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="360" viewBox="0 0 860 360" role="img" aria-labelledby="title desc">
+  <title id="title">Sliding window coverage</title>
+  <desc id="desc">Four overlapping six-frame windows over a 20-frame video leave frames 18 and 19 uncovered.</desc>
+  <rect width="860" height="360" fill="transparent"/>
+  <text x="430" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#111827">Sliding windows trade coverage for compute</text>
+  <text x="430" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#4b5563">Window size 6, stride 4: overlap helps boundaries, but the tail needs special handling.</text>
+  <g transform="translate(70,100)" font-family="Arial, sans-serif">
+    <g fill="#f8fafc" stroke="#cbd5e1">
+      <rect x="0" y="130" width="720" height="30"/>
+    </g>
+    <g fill="#374151" font-size="11">
+      <text x="0" y="182" text-anchor="middle">0</text>
+      <text x="144" y="182" text-anchor="middle">4</text>
+      <text x="288" y="182" text-anchor="middle">8</text>
+      <text x="432" y="182" text-anchor="middle">12</text>
+      <text x="576" y="182" text-anchor="middle">16</text>
+      <text x="720" y="182" text-anchor="middle">20</text>
+    </g>
+    <g stroke="#94a3b8" stroke-width="1">
+      <line x1="0" y1="42" x2="0" y2="164"/>
+      <line x1="144" y1="42" x2="144" y2="164"/>
+      <line x1="288" y1="42" x2="288" y2="164"/>
+      <line x1="432" y1="42" x2="432" y2="164"/>
+      <line x1="576" y1="42" x2="576" y2="164"/>
+      <line x1="648" y1="42" x2="648" y2="164"/>
+      <line x1="720" y1="42" x2="720" y2="164"/>
+    </g>
+    <rect x="0" y="18" width="216" height="30" rx="4" fill="#bfdbfe" stroke="#2563eb"/>
+    <rect x="144" y="54" width="216" height="30" rx="4" fill="#bbf7d0" stroke="#16a34a"/>
+    <rect x="288" y="18" width="216" height="30" rx="4" fill="#fde68a" stroke="#d97706"/>
+    <rect x="432" y="54" width="216" height="30" rx="4" fill="#fecaca" stroke="#dc2626"/>
+    <text x="-20" y="39" text-anchor="end" font-size="13" fill="#111827">W0</text>
+    <text x="-20" y="75" text-anchor="end" font-size="13" fill="#111827">W1</text>
+    <text x="268" y="39" text-anchor="end" font-size="13" fill="#111827">W2</text>
+    <text x="412" y="75" text-anchor="end" font-size="13" fill="#111827">W3</text>
+    <rect x="144" y="130" width="72" height="30" fill="#93c5fd" opacity="0.75"/>
+    <rect x="288" y="130" width="72" height="30" fill="#93c5fd" opacity="0.75"/>
+    <rect x="432" y="130" width="72" height="30" fill="#93c5fd" opacity="0.75"/>
+    <rect x="648" y="130" width="72" height="30" fill="#e5e7eb" stroke="#6b7280" stroke-dasharray="4 4"/>
+    <text x="684" y="121" text-anchor="middle" font-size="13" fill="#374151">uncovered tail</text>
+    <text x="360" y="222" text-anchor="middle" font-size="14" fill="#374151">overlap gives boundary coverage; final padded/shifted windows prevent silent misses</text>
+  </g>
+</svg>

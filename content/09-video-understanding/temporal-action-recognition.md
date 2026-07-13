@@ -36,24 +36,17 @@ The aggregator may be temporal averaging, max pooling, a recurrent model, [3D co
 
 ## Worked example
 
-```python
-import torch
+Suppose a five-frame clip has class logits for three possible actions:
 
-logits = torch.tensor([[0.2,0.1,0.0],[0.3,0.2,0.1],[0.1,1.6,0.2],[0.0,1.8,0.1],[0.2,1.0,0.0]])
-mean_prob = logits.mean(0).softmax(0)
-max_prob = logits.max(0).values.softmax(0)
-print("mean_prob", torch.round(mean_prob, decimals=3).tolist(), "pred", int(mean_prob.argmax()))
-print("max_prob", torch.round(max_prob, decimals=3).tolist(), "pred", int(max_prob.argmax()))
-```
+| frame | class 0 | class 1 | class 2 | strongest cue |
+|---:|---:|---:|---:|---|
+| 1 | 0.2 | 0.1 | 0.0 | weak background evidence |
+| 2 | 0.3 | 0.2 | 0.1 | weak background evidence |
+| 3 | 0.1 | 1.6 | 0.2 | action cue appears |
+| 4 | 0.0 | 1.8 | 0.1 | action cue peaks |
+| 5 | 0.2 | 1.0 | 0.0 | action cue fades |
 
-Observed output:
-
-```text
-mean_prob [0.24400000274181366, 0.531000018119812, 0.22499999403953552] pred 1
-max_prob [0.15700000524520874, 0.7020000219345093, 0.1420000046491623] pred 1
-```
-
-Both aggregators identify class 1, but max pooling gives more weight to a brief high-confidence interval. That is useful for short actions and risky for noisy spikes.
+Mean pooling gives logits $(0.16,0.94,0.08)$ and softmax probabilities $(0.244,0.531,0.225)$, so class 1 wins. Max pooling gives logits $(0.3,1.8,0.2)$ and probabilities $(0.157,0.702,0.142)$, so class 1 wins more confidently because one brief interval was highly discriminative. That behavior is helpful for short actions and dangerous when a single noisy frame can spike a class logit.
 
 ## Caveats
 

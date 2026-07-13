@@ -33,29 +33,25 @@ $$
 
 Planning can happen in latent space by rolling out candidate actions and minimizing a cost. [World models and JEPA](world-models-and-jepa.md) focuses on the variant where prediction happens in representation space rather than pixel space.
 
-## Worked example
+## Worked rollout
 
-```python
-import torch
+With a simple latent transition
 
-A = torch.tensor([[1.0,0.2],[0.0,0.9]])
-z = torch.tensor([1.0,0.5])
-roll = [z]
-for _ in range(3):
-    roll.append(A @ roll[-1])
-roll = torch.stack(roll)
-print("latent_rollout", torch.round(roll, decimals=3).tolist())
-print("step3_position", torch.round(roll[-1], decimals=3).tolist())
-```
+$$
+A=\begin{bmatrix}1.0&0.2\\0.0&0.9\end{bmatrix},
+\qquad z_0=(1.0,0.5),
+$$
 
-Observed output:
+the rollout is:
 
-```text
-latent_rollout [[1.0, 0.5], [1.100000023841858, 0.44999998807907104], [1.190000057220459, 0.4050000011920929], [1.2710000276565552, 0.36399999260902405]]
-step3_position [1.2710000276565552, 0.36399999260902405]
-```
+| step | latent state |
+|---:|---:|
+| 0 | $(1.000,0.500)$ |
+| 1 | $(1.100,0.450)$ |
+| 2 | $(1.190,0.405)$ |
+| 3 | $(1.271,0.364)$ |
 
-The transition matrix rolls latent state forward. Real learned world models replace this hand-coded matrix with neural dynamics trained from video or interaction.
+The first coordinate grows because it receives $0.2$ times the second coordinate at each step; the second coordinate decays by a factor of $0.9$. Real learned world models replace this hand-coded matrix with neural dynamics trained from video or interaction.
 
 ## Caveats
 

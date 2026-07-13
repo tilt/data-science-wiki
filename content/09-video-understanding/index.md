@@ -34,7 +34,16 @@ last_reviewed: 2026-07-10
 
 ## Summary
 
-Video Understanding is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+Video understanding turns ordered frames into representations, events, tracks, language-facing answers, or predictions about what happens next. The section starts with representations and spatiotemporal cues, then moves through model families, temporal decision problems, multi-person systems, and world-model-style latent prediction.
+
+Read the pages as four connected clusters:
+
+| cluster | pages |
+|---|---|
+| Representations and motion cues | [Video Representation](video-representation.md), [Spatial and Temporal Modelling](spatial-and-temporal-modelling.md), [Optical Flow](optical-flow.md) |
+| Recognition architectures | [3D Convolutional Networks](3d-convolutional-networks.md), [Two-Stream Models](two-stream-models.md), [Video Transformers](video-transformers.md), [Temporal Action Recognition](temporal-action-recognition.md) |
+| Streaming and multi-person decisions | [Temporal Localization](temporal-localization.md), [Sliding Window Inference](sliding-window-inference.md), [Trigger Point Prediction](trigger-point-prediction.md), [Person Tracking and Track Aggregation](person-tracking-and-track-aggregation.md), [Real Time Video Understanding](real-time-video-understanding.md), [Gesture Recognition](gesture-recognition.md) |
+| Foundation models and prediction | [Self Supervised Video Representation Learning](self-supervised-video-representation-learning.md), [Video Language Models](video-language-models.md), [V-JEPA](v-jepa.md), [V-JEPA 2](v-jepa-2.md), [World Models](world-models.md), [World Models and JEPA](world-models-and-jepa.md) |
 
 ## Subtopics
 

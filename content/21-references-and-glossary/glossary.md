@@ -39,6 +39,27 @@ This glossary defines recurring terms used across the wiki. It is intentionally 
 | SVD | [Singular value decomposition](../01-mathematical-foundations/singular-value-decomposition.md), a matrix decomposition into singular vectors and singular values. |
 | VLM | [Vision-language model](../10-generative-ai/vision-language-models.md), a model that aligns visual inputs with language. |
 
+## Application Domains
+
+Application pages connect canonical methods to domain-specific inputs, outputs, risks, and evaluation slices. They carry the `application` topic in front matter so the wiki can surface them together.
+
+| Application | Canonical page | Main method families |
+| --- | --- | --- |
+| Autonomous driving | [Autonomous Driving](../18-domain-applications/autonomous-driving.md) | Perception, prediction, planning, control, simulation, safety evaluation. |
+| Autonomous-driving evaluation | [Autonomous Driving Model Evaluation](../18-domain-applications/autonomous-driving-model-evaluation.md) | Scenario slicing, risk-weighted metrics, simulation, replay. |
+| Demand prediction in logistics | [Demand Prediction in Logistics](../18-domain-applications/demand-prediction-in-logistics.md) | Forecasting, covariates, hierarchy, cold starts. |
+| Energy forecasting | [Energy Forecasting](../18-domain-applications/energy-forecasting.md) | Time-series forecasting, exogenous variables, calibration. |
+| Malware classification and clustering | [Malware Classification and Clustering](../18-domain-applications/malware-classification-and-clustering.md) | Classification, clustering, embeddings, adversarial drift. |
+| Marketing text categorization | [Marketing Text Categorization](../18-domain-applications/marketing-text-categorization.md) | Text classification, taxonomy design, evaluation. |
+| Matchmaking | [Matchmaking](../18-domain-applications/matchmaking.md) | Recommendation, ranking, constraints, fairness. |
+| Medical MRI analysis | [Medical MRI Analysis](../18-domain-applications/medical-mri-analysis.md) | Computer vision, segmentation, classification, patient-level validation. |
+| Museum label extraction and entity matching | [Museum Label Text Extraction and Entity Matching](../18-domain-applications/museum-label-text-extraction-and-entity-matching.md) | OCR, entity matching, retrieval, human review. |
+| News recommendation | [News Recommendation](../18-domain-applications/news-recommendation.md) | Recommenders, ranking, freshness, diversity, feedback loops. |
+| Predictive maintenance | [Predictive Maintenance](../18-domain-applications/predictive-maintenance.md) | Time series, anomaly detection, survival/risk scoring. |
+| Real-time action recognition | [Real Time Action Recognition](../18-domain-applications/real-time-action-recognition.md) | Video understanding, streaming inference, trigger prediction. |
+| Street-scene segmentation and pose detection | [Street Scene Segmentation and Pose Detection](../18-domain-applications/street-scene-segmentation-and-pose-detection.md) | Semantic segmentation, pose estimation, detection metrics. |
+| Video gesture recognition | [Video Gesture Recognition](../18-domain-applications/video-gesture-recognition.md) | Gesture recognition, temporal localization, tracking. |
+
 ## How to use this page
 
 Use the glossary when a term appears before its full explanation. For study, jump from the term to the relevant subject area: matrix terms usually live in mathematical foundations, recommender terms in recommendation systems, retrieval terms in search, and governance terms in responsible AI.

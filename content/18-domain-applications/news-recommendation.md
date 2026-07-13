@@ -4,6 +4,7 @@ slug: domain-applications/news-recommendation
 description: "Ranking fresh articles under personalization, editorial, diversity, and feedback-loop constraints."
 area: domain-applications
 topics:
+  - application
   - news-recommendation
 level: intermediate
 status: review

@@ -14,6 +14,15 @@
 :root[saved-theme="dark"] .markdown-rendered img[src$="time-series-components.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src$="stationarity-differencing.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src$="acf-pacf-bars.svg"],
-:root[saved-theme="dark"] .markdown-rendered img[src$="generative-ai-harness-architecture.svg"] {
+:root[saved-theme="dark"] .markdown-rendered img[src$="generative-ai-harness-architecture.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="v-jepa2-tubelets-rope.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="optical-flow-field.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="temporal-localization-timeline.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="trigger-point-threshold.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="sliding-window-coverage.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="video-transformer-token-cost.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="self-supervised-video-objectives.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="stable-diffusion-latent-pipeline.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src$="autonomous-driving-stack.svg"] {
   filter: invert(1) hue-rotate(180deg) saturate(0.95) brightness(1.05);
 }

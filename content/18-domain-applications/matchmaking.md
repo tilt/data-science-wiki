@@ -4,6 +4,7 @@ slug: domain-applications/matchmaking
 description: "Two-sided recommendation where success requires mutual interest, capacity, timing, and safety constraints."
 area: domain-applications
 topics:
+  - application
   - matchmaking
 level: intermediate
 status: review

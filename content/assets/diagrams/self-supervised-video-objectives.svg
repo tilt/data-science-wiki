@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="430" viewBox="0 0 900 430" role="img" aria-labelledby="title desc">
+  <title id="title">Self-supervised video objective families</title>
+  <desc id="desc">Four self-supervised video training signals: contrastive views, masked tubelet reconstruction, latent target prediction, and multimodal alignment.</desc>
+  <rect width="900" height="430" fill="transparent"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#374151"/>
+    </marker>
+  </defs>
+  <text x="450" y="38" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#111827">Self-supervised targets come from the video itself</text>
+  <text x="450" y="65" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#4b5563">Modern systems mix masking, matching, latent prediction, and multimodal alignment.</text>
+
+  <g font-family="Arial, sans-serif">
+    <rect x="48" y="105" width="180" height="220" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="138" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">contrastive views</text>
+    <rect x="82" y="158" width="86" height="54" rx="4" fill="#bfdbfe" stroke="#2563eb"/>
+    <rect x="98" y="178" width="86" height="54" rx="4" fill="#dbeafe" stroke="#2563eb"/>
+    <path d="M115 248 C128 270 148 270 161 248" fill="none" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+    <text x="138" y="288" text-anchor="middle" font-size="13" fill="#374151">pull positives close</text>
+
+    <rect x="260" y="105" width="180" height="220" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+    <text x="350" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">masked tubelets</text>
+    <g transform="translate(302,157)" stroke="#f97316">
+      <rect x="0" y="0" width="96" height="96" fill="#ffedd5"/>
+      <line x1="32" y1="0" x2="32" y2="96"/>
+      <line x1="64" y1="0" x2="64" y2="96"/>
+      <line x1="0" y1="32" x2="96" y2="32"/>
+      <line x1="0" y1="64" x2="96" y2="64"/>
+      <rect x="32" y="32" width="32" height="32" fill="#111827" opacity="0.8"/>
+      <rect x="64" y="0" width="32" height="32" fill="#111827" opacity="0.8"/>
+    </g>
+    <text x="350" y="288" text-anchor="middle" font-size="13" fill="#374151">reconstruct hidden targets</text>
+
+    <rect x="472" y="105" width="180" height="220" rx="8" fill="#ecfdf5" stroke="#0f766e" stroke-width="2"/>
+    <text x="562" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">latent prediction</text>
+    <circle cx="528" cy="190" r="30" fill="#bbf7d0" stroke="#0f766e" stroke-width="2"/>
+    <circle cx="596" cy="190" r="30" fill="#dcfce7" stroke="#0f766e" stroke-width="2"/>
+    <path d="M558 190 L566 190" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="528" y="195" text-anchor="middle" font-size="13" fill="#111827">ctx</text>
+    <text x="596" y="195" text-anchor="middle" font-size="13" fill="#111827">target</text>
+    <text x="562" y="242" text-anchor="middle" font-size="13" fill="#374151">match feature space</text>
+    <text x="562" y="288" text-anchor="middle" font-size="13" fill="#374151">skip pixel detail</text>
+
+    <rect x="684" y="105" width="180" height="220" rx="8" fill="#fdf2f8" stroke="#db2777" stroke-width="2"/>
+    <text x="774" y="132" text-anchor="middle" font-size="15" font-weight="700" fill="#111827">multimodal alignment</text>
+    <rect x="726" y="160" width="96" height="54" rx="4" fill="#fbcfe8" stroke="#db2777"/>
+    <text x="774" y="193" text-anchor="middle" font-size="13" fill="#111827">video</text>
+    <rect x="726" y="232" width="96" height="34" rx="4" fill="#fce7f3" stroke="#db2777"/>
+    <text x="774" y="254" text-anchor="middle" font-size="13" fill="#111827">text/audio</text>
+    <path d="M774 214 L774 229" stroke="#374151" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="774" y="288" text-anchor="middle" font-size="13" fill="#374151">align modalities</text>
+  </g>
+
+  <text x="450" y="372" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#374151">The downstream task determines which signal matters most: retrieval, recognition, anticipation, planning, or language-facing interaction.</text>
+</svg>

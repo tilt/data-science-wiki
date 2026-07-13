@@ -4,6 +4,7 @@ slug: domain-applications/demand-prediction-in-logistics
 description: "Forecasting SKU, lane, or depot demand so logistics capacity can be positioned before orders arrive."
 area: domain-applications
 topics:
+  - application
   - demand-prediction-in-logistics
 level: intermediate
 status: review

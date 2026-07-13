@@ -4,6 +4,7 @@ slug: domain-applications/museum-label-text-extraction-and-entity-matching
 description: "OCR, field extraction, and authority matching for turning gallery labels into structured collection data."
 area: domain-applications
 topics:
+  - application
   - museum-label-text-extraction-and-entity-matching
 level: intermediate
 status: review

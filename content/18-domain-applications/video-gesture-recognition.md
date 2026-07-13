@@ -4,6 +4,7 @@ slug: domain-applications/video-gesture-recognition
 description: "Temporal recognition of hand and body gestures for interaction, accessibility, and control systems."
 area: domain-applications
 topics:
+  - application
   - video-gesture-recognition
 level: intermediate
 status: review

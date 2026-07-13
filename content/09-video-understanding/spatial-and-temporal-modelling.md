@@ -36,28 +36,18 @@ A spatial-only model can treat frames independently or average them; a temporal 
 
 ## Worked example
 
-```python
-import torch
+Two clips can have the same spatial summary and opposite temporal meaning:
 
-clip_a = torch.tensor([0., 1., 2., 3.])
-clip_b = torch.tensor([3., 2., 1., 0.])
-temporal_filter = torch.tensor([-1., 1.])
-def conv1d_valid(x):
-    return torch.stack([(x[i:i+2] * temporal_filter).sum() for i in range(len(x)-1)])
-print("frame_means", [round(clip_a.mean().item(), 3), round(clip_b.mean().item(), 3)])
-print("temporal_edges_a", conv1d_valid(clip_a).tolist())
-print("temporal_edges_b", conv1d_valid(clip_b).tolist())
-```
+| frame | clip A feature | clip B feature |
+|---:|---:|---:|
+| 1 | 0 | 3 |
+| 2 | 1 | 2 |
+| 3 | 2 | 1 |
+| 4 | 3 | 0 |
+| mean | 1.5 | 1.5 |
+| successive differences | $(+1,+1,+1)$ | $(-1,-1,-1)$ |
 
-Observed output:
-
-```text
-frame_means [1.5, 1.5]
-temporal_edges_a [1.0, 1.0, 1.0]
-temporal_edges_b [-1.0, -1.0, -1.0]
-```
-
-The two clips have the same frame average, but their temporal derivatives have opposite signs. A representation that averages too early cannot distinguish them.
+The frame average is identical for both clips, so a spatial-only pooling representation cannot distinguish them. The temporal derivative tells the actual story: clip A is increasing over time, while clip B is decreasing. This is why temporal models keep order-sensitive evidence instead of reducing every frame to one pooled statistic too early.
 
 ## Caveats
 

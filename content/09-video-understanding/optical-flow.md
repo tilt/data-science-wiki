@@ -83,6 +83,10 @@ mean_abs_constraint_residual 0.00548
 
 The local linearization recovers the synthetic subpixel shift closely. It works here because the texture has gradients in multiple directions; a flat patch or a single straight edge would make the least-squares system poorly conditioned.
 
+The visual picture is a field of small displacement arrows. A uniform right-and-up shift has similar arrows across textured regions, but reliable estimation still depends on local gradients:
+
+![Optical flow estimates a displacement field between adjacent video frames; textured regions support stable arrows while flat regions are ambiguous.](../assets/diagrams/optical-flow-field.svg)
+
 ## Caveats
 
 Brightness constancy breaks under lighting changes, specularities, motion blur, and occlusion. Large displacements need pyramids or learned matching because the first-order approximation is local. Flow is also apparent image motion, not necessarily physical 3D motion: camera movement, parallax, and rolling shutter can dominate the field.

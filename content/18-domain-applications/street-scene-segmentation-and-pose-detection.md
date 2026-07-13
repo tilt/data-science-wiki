@@ -4,6 +4,7 @@ slug: domain-applications/street-scene-segmentation-and-pose-detection
 description: "Road-scene pixel labeling and human pose estimation for spatial understanding in traffic environments."
 area: domain-applications
 topics:
+  - application
   - street-scene-segmentation-and-pose-detection
 level: intermediate
 status: review

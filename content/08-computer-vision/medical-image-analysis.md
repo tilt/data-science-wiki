@@ -8,7 +8,9 @@ topics:
 level: foundational
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - Medical Imaging
+  - Medical image analysis
 prerequisites:
   - index.md
 related:
@@ -22,6 +24,15 @@ last_reviewed: 2026-07-11
 # Medical Image Analysis
 
 Medical image analysis applies computer vision to X-ray, CT, MRI, ultrasound, microscopy, pathology, and other clinical images. It includes [MRI classification](mri-classification.md), [MRI segmentation](mri-segmentation.md), detection, measurement, registration, triage, and longitudinal change analysis. The same metric can imply different clinical risk depending on workflow.
+
+This page is the medical-imaging hub inside [computer vision](index.md). The domain is not separate from computer vision methodologically: it still uses classification, detection, segmentation, registration, self-supervised pretraining, and benchmarking. It is separate operationally because patient-level splits, site shift, acquisition protocols, calibration, and clinical error costs dominate whether a model is usable.
+
+| task family | typical output | computer-vision link |
+|---|---|---|
+| Classification | Scan-, series-, slice-, or patient-level label. | [Image classification](image-classification.md), [MRI classification](mri-classification.md) |
+| Segmentation | Pixel or voxel masks for anatomy, lesions, organs, or tumor regions. | [Semantic segmentation](semantic-segmentation.md), [MRI segmentation](mri-segmentation.md) |
+| Detection and measurement | Lesion boxes, counts, diameters, volume, or change over time. | [Object detection](object-detection.md), [detection and segmentation metrics](detection-and-segmentation-metrics.md) |
+| Representation learning | Encoder features for scarce-label clinical tasks. | [Self supervised visual learning](self-supervised-visual-learning.md), [domain shift](domain-shift.md) |
 
 ## Defining mechanism
 

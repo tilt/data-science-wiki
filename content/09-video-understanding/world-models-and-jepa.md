@@ -36,31 +36,17 @@ $$
 
 Training lowers energy for the true target and keeps alternatives higher, either directly through regression or with contrastive/regularized variants. The world-model interpretation appears when the predicted latent represents a missing or future state rather than a random augmentation.
 
-## Worked example
+## Worked energy comparison
 
-```python
-import numpy as np
-import torch
+Suppose the predicted future latent is $\hat z=(1.1,0.6)$. Compare it with the true target and two alternatives:
 
-context = torch.tensor([1.0, 0.5])
-target = torch.tensor([1.2, 0.55])
-negatives = torch.tensor([[0.2,1.4],[1.8,-0.3]])
-pred = torch.tensor([1.1, 0.6])
-def energy(a, b):
-    return ((a - b) ** 2).sum().item()
-energies = [energy(pred, target)] + [energy(pred, n) for n in negatives]
-print("energies_target_then_negatives", [round(e, 3) for e in energies])
-print("target_rank", int(np.argsort(energies).tolist().index(0) + 1))
-```
+| candidate latent | energy $E(\hat z,z)=\lVert \hat z-z\rVert_2^2$ | rank |
+|---:|---:|---:|
+| true target $(1.2,0.55)$ | $(1.1-1.2)^2+(0.6-0.55)^2=0.013$ | 1 |
+| alternative $(1.8,-0.3)$ | $(1.1-1.8)^2+(0.6+0.3)^2=1.300$ | 2 |
+| alternative $(0.2,1.4)$ | $(1.1-0.2)^2+(0.6-1.4)^2=1.450$ | 3 |
 
-Observed output:
-
-```text
-energies_target_then_negatives [0.013, 1.45, 1.3]
-target_rank 1
-```
-
-The true target has the lowest energy, so the latent prediction is closer to the actual future than to the two alternatives.
+The true target has the lowest energy, so the latent prediction is closer to the actual future than to the two alternatives. In JEPA-style training, learning pushes true future or masked-target latents toward low energy without forcing the model to reconstruct every pixel.
 
 ## Caveats
 

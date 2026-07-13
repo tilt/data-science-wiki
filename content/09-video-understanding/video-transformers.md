@@ -33,35 +33,46 @@ $$
 
 Full space-time attention forms an $N\times N$ score matrix, where $N=(T/\tau)(H/P)(W/P)$ for tubelet length $\tau$ and patch size $P$. Factorized variants attend spatially and temporally in separate steps to reduce cost and stabilize learning.
 
-## Worked example
+The important implementation detail is that video tokens have geometry. A token is not just sequence element $i$; it corresponds to an original address such as $(t,h,w)$ or to a tubelet covering a small block of time and space. Positional encodings must agree with that address. If a system physically keeps only person- or hand-region tokens for [gesture recognition](gesture-recognition.md), the kept tokens should retain their original positions rather than being renumbered as a dense sequence.
 
-```python
-import math, torch
+## Worked token budget
 
-torch.manual_seed(4)
-frames, h, w, patch, tubelet = 8, 16, 16, 8, 2
-tokens = (frames//tubelet) * (h//patch) * (w//patch)
-Q = torch.randn(tokens, 4); K = torch.randn(tokens, 4); V = torch.randn(tokens, 4)
-weights = (Q @ K.T / math.sqrt(4)).softmax(-1)
-context = weights @ V
-print("tokens", tokens, "attention_scores", tokens*tokens)
-print("row0_top3_weights", torch.round(torch.topk(weights[0], 3).values, decimals=3).tolist())
-print("context0", torch.round(context[0], decimals=3).tolist())
-```
+The useful implementation question is usually not a random attention weight; it is how many tokens and pairwise scores the design creates. For $8$ frames of size $16\times16$, tubelet length $\tau=2$, and patch size $P=8$:
 
-Observed output:
+$$
+N=(8/2)(16/8)(16/8)=16,\qquad N^2=256.
+$$
 
-```text
-tokens 16 attention_scores 256
-row0_top3_weights [0.17100000381469727, 0.13099999725818634, 0.10899999737739563]
-context0 [0.2280000001192093, -0.13300000131130219, -0.041999999433755875, -0.35100001096725464]
-```
+Changing only the patch size changes the cost quickly:
 
-Even this tiny clip builds 256 pairwise scores. Real clips quickly make token count the dominant memory and latency constraint, which matters for [real-time video understanding](real-time-video-understanding.md).
+| patch size | token count $N$ | full-attention score count $N^2$ | interpretation |
+|---:|---:|---:|---|
+| $8\times8$ | 16 | 256 | cheap, coarse hand/object detail |
+| $4\times4$ | 64 | 4096 | four times more tokens, sixteen times more scores |
+| $2\times2$ | 256 | 65536 | fine detail, expensive full attention |
+
+This quadratic score growth is why real clips quickly make token count the dominant memory and latency constraint, especially for [real-time video understanding](real-time-video-understanding.md).
+
+![Video-transformer attention cost grows quadratically as patch size shrinks and token count rises.](../assets/diagrams/video-transformer-token-cost.svg)
+
+## Patch Size And RoI Tradeoffs
+
+Patch size is a budget knob. Smaller patches preserve small objects such as hands, fingers, tools, and signs, but increase token count and attention cost. Larger patches reduce compute but can erase the motion detail needed for fine-grained gestures.
+
+| design choice | effect |
+|---|---|
+| Smaller spatial patch | More hand detail, more tokens, higher attention cost. |
+| Larger spatial patch | Cheaper inference, coarser hand and object geometry. |
+| Tubelets | Fewer temporal tokens, but each token already mixes adjacent frames. |
+| Person RoI crop before the backbone | Keeps the actor and nearby context while removing other people and background. |
+| Hand RoI crop before the backbone | More pixels allocated to the hand, less body and object context. |
+| RoI token keep inside the backbone | Lower token budget while preserving the original frame, if positions are handled correctly. |
+
+This is why comparing full-frame, static-crop, tracking-crop, and token-keep variants can reveal more about input-domain alignment than about the model family alone.
 
 ## Caveats
 
-Attention can model long-range dependencies, but it does not automatically solve sampling, supervision, or temporal boundary errors. Long videos require sparse, factorized, streaming, or hierarchical designs. Fine-tuning image-pretrained transformers can help, but video-specific motion cues still need adequate temporal coverage.
+Attention can model long-range dependencies, but it does not automatically solve sampling, supervision, or temporal boundary errors. Long videos require sparse, factorized, streaming, or hierarchical designs. Fine-tuning image-pretrained transformers can help, but video-specific motion cues still need adequate temporal coverage. RoI cropping and token keeping can improve signal-to-noise, but they can also remove context or corrupt geometry if token positions no longer match the physical video grid.
 
 ## References
 

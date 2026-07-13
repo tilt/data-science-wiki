@@ -39,27 +39,16 @@ Detectors score candidate segments, then evaluate mean average precision at one 
 
 ## Worked example
 
-```python
-def tiou(a, b):
-    inter = max(0, min(a[1], b[1]) - max(a[0], b[0]))
-    union = max(a[1], b[1]) - min(a[0], b[0])
-    return inter / union
+For ground truth $s=[12,22]$, compare two proposed segments:
 
-truth = (12.0, 22.0)
-pred = (10.0, 21.0)
-bad = (0.0, 10.0)
-print("tiou_good", round(tiou(pred, truth), 3), "tiou_bad", round(tiou(bad, truth), 3))
-print("boundary_error_good", [pred[0]-truth[0], pred[1]-truth[1]])
-```
-
-Observed output:
-
-```text
-tiou_good 0.75 tiou_bad 0.0
-boundary_error_good [-2.0, -1.0]
-```
+| segment | interval | intersection | union span | tIoU | boundary error |
+|---|---:|---:|---:|---:|---:|
+| good proposal | $[10,21]$ | $21-12=9$ | $22-10=12$ | $9/12=0.75$ | start $-2$s, end $-1$s |
+| bad proposal | $[0,10]$ | $0$ | $22-0=22$ | $0/22=0$ | no overlap |
 
 The good segment overlaps substantially but starts two seconds early and ends one second early. For a highlight reel that may be fine; for a safety trigger it may not.
+
+![Temporal localization compares predicted and true action intervals by their overlap and union span.](../assets/diagrams/temporal-localization-timeline.svg)
 
 ## Caveats
 

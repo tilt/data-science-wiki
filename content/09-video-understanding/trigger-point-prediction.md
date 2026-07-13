@@ -36,24 +36,16 @@ More careful systems add hysteresis, minimum duration, or cost-sensitive stoppin
 
 ## Worked example
 
-```python
-import numpy as np
+With threshold $\theta=0.70$, the first frame whose streaming probability crosses the threshold is frame 5:
 
-prob = np.array([0.08,0.12,0.22,0.41,0.62,0.74,0.81])
-threshold = 0.7
-trigger = int(np.argmax(prob >= threshold)) if np.any(prob >= threshold) else None
-print("probabilities", np.round(prob, 2).tolist())
-print("trigger_frame", trigger, "trigger_prob", prob[trigger], "latency_after_event_start", trigger-3)
-```
+| frame | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| $p_t$ | 0.08 | 0.12 | 0.22 | 0.41 | 0.62 | 0.74 | 0.81 |
+| decision | wait | wait | wait | wait | wait | trigger | already triggered |
 
-Observed output:
+If the event began at frame 3, the trigger fires two frames later with $p_5=0.74$. That delay may be acceptable for review queues but too slow for direct manipulation in [gesture recognition](gesture-recognition.md). A lower threshold would fire earlier, but it would also make ordinary pre-event motion more likely to trigger.
 
-```text
-probabilities [0.08, 0.12, 0.22, 0.41, 0.62, 0.74, 0.81]
-trigger_frame 5 trigger_prob 0.74 latency_after_event_start 2
-```
-
-If the event began at frame 3, the trigger fires two frames later. That delay may be acceptable for review queues but too slow for direct manipulation in [gesture recognition](gesture-recognition.md).
+![Trigger-point prediction fires when the streaming probability first crosses the decision threshold.](../assets/diagrams/trigger-point-threshold.svg)
 
 ## Caveats
 

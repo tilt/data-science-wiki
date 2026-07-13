@@ -4,6 +4,7 @@ slug: domain-applications/energy-forecasting
 description: "Forecasting load, generation, and consumption under weather, calendar, and grid reliability constraints."
 area: domain-applications
 topics:
+  - application
   - energy-forecasting
 level: intermediate
 status: review

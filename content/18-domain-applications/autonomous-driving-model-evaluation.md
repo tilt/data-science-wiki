@@ -4,6 +4,7 @@ slug: domain-applications/autonomous-driving-model-evaluation
 description: "Scenario, slice, and risk-weighted evaluation for autonomous-driving perception and behavior models."
 area: domain-applications
 topics:
+  - application
   - autonomous-driving-model-evaluation
 level: advanced
 status: review
@@ -12,6 +13,7 @@ aliases: []
 prerequisites:
   - index.md
 related:
+  - autonomous-driving.md
   - ../16-experimentation-and-evaluation/offline-evaluation.md
   - ../16-experimentation-and-evaluation/risk-weighted-error-taxonomies.md
   - ../16-experimentation-and-evaluation/golden-datasets.md
@@ -23,7 +25,7 @@ last_reviewed: 2026-07-11
 ---
 # Autonomous Driving Model Evaluation
 
-Autonomous-driving evaluation measures whether perception, prediction, planning, and control behave acceptably under road scenarios that matter for safety. Inputs include camera, lidar, radar, maps, ego-motion, annotations, scenario tags, simulation results, and disengagement or intervention logs. Targets include object boxes, tracks, segmentation, predicted trajectories, planned maneuvers, and policy-level outcomes.
+Autonomous-driving evaluation measures whether perception, prediction, planning, and control behave acceptably under road scenarios that matter for safety. It is the evaluation companion to the broader [autonomous driving](autonomous-driving.md) application page. Inputs include camera, lidar, radar, maps, ego-motion, annotations, scenario tags, simulation results, and disengagement or intervention logs. Targets include object boxes, tracks, segmentation, predicted trajectories, planned maneuvers, and policy-level outcomes.
 
 ## Framing
 

@@ -44,28 +44,16 @@ $$
 
 The first produces predictive visual representations; the second produces language-conditioned outputs. [World models and JEPA](world-models-and-jepa.md) explains why representation-space prediction is treated as a world-modeling route.
 
-## Worked example
+## Worked comparison
 
-```python
-import torch
+The difference is easiest to see by comparing what each objective scores:
 
-future_latent = torch.tensor([1.0, 0.3])
-caption_logits = torch.tensor([0.2, 1.1, -0.4])
-latent_pred = torch.tensor([0.95, 0.25])
-latent_loss = ((latent_pred - future_latent) ** 2).mean()
-caption_prob = caption_logits.softmax(0)
-print("latent_prediction_mse", round(latent_loss.item(), 4))
-print("caption_probs", torch.round(caption_prob, decimals=3).tolist(), "text_answer_class", int(caption_prob.argmax()))
-```
+| model family | prediction | target | score being optimized |
+|---|---:|---:|---:|
+| V-JEPA-style latent prediction | $\hat z=(0.95,0.25)$ | $z=(1.0,0.3)$ | $\frac{(0.95-1.0)^2+(0.25-0.3)^2}{2}=0.0025$ |
+| language-facing VLM | caption logits $(0.2,1.1,-0.4)$ | answer token/class 1 | softmax probabilities $(0.249,0.614,0.137)$ |
 
-Observed output:
-
-```text
-latent_prediction_mse 0.0025
-caption_probs [0.24899999797344208, 0.6140000224113464, 0.13699999451637268] text_answer_class 1
-```
-
-The latent objective grades prediction accuracy in representation space; the language objective grades a text-facing answer distribution. A product may need both.
+The latent objective grades prediction accuracy in representation space; the language objective grades a text-facing answer distribution. A product may need both: visual dynamics for anticipation or planning, and language alignment for captions, retrieval, or question answering.
 
 ## Practical choice
 

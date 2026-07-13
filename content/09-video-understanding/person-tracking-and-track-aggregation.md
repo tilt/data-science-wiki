@@ -62,6 +62,8 @@ matches [(0, 0), (1, 1)] mean_iou 0.655
 
 The IoU matrix is nearly diagonal: track 0 overlaps detection 0 at 0.747 and track 1 overlaps detection 1 at 0.562, while the cross-pairs are 0.0. The Hungarian assignment therefore links each track to its compatible detection, yielding a mean matched IoU of 0.655.
 
+This code earns its place because it demonstrates the programming API used for the assignment step. `linear_sum_assignment` minimizes a cost matrix, so the example passes `-M` to maximize IoU. In a real tracker, that matrix would usually combine IoU, motion prediction, appearance embeddings, and gating rules before assignment.
+
 ## Caveats
 
 Occlusion and crossing paths cause identity switches. Aggregating over a broken track can dilute the event or assign it to the wrong person. Real-time deployments must bound track memory and handle detector dropouts explicitly.

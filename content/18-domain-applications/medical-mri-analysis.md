@@ -4,6 +4,7 @@ slug: domain-applications/medical-mri-analysis
 description: "Computer-vision analysis of MRI scans for segmentation, detection, measurement, and clinical review support."
 area: domain-applications
 topics:
+  - application
   - medical-mri-analysis
 level: intermediate
 status: review

@@ -60,6 +60,8 @@ first_channel_t0_patch [[0.06400000303983688, 0.09799999743700027, 0.10199999809
 
 The temporal stride halves the eight-frame clip to four temporal positions. The kernel is an average here, but learned kernels specialize into appearance-motion patterns.
 
+The snippet is an API example as much as a calculation: PyTorch `Conv3d` expects input shaped as batch, channels, time/depth, height, width. The manual depth-height-width calculation uses the standard convolution-size formula, so the output shape `[1, 2, 4, 6, 6]` means two learned filters were applied at four temporal positions over the original spatial grid. The first patch values are smaller near the boundary because padding inserts zeros around the clip.
+
 ## Caveats
 
 3D kernels are parameter- and memory-heavy because activations retain time as well as space. Short clips can miss long-range context, while aggressive temporal stride hurts [temporal localization](temporal-localization.md). Pretraining and careful sampling matter because video labels are expensive and adjacent frames are highly redundant.

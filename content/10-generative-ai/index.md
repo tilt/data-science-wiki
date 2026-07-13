@@ -5,6 +5,7 @@ description: Index and learning map for Generative AI and Agentic Systems.
 area: generative-ai
 topics:
   - "foundation-models"
+  - "stable-diffusion"
   - "language-model-architecture"
   - "tokenization"
   - "pretraining"
@@ -81,6 +82,7 @@ Generative AI and Agentic Systems is a major knowledge area in this wiki. The in
 - [Fine Tuning Versus RAG](fine-tuning-versus-rag.md)
 - [Multimodal Models](multimodal-models.md)
 - [Vision Language Models](vision-language-models.md)
+- [Stable Diffusion](stable-diffusion.md)
 - [Local Versus Hosted Models](local-versus-hosted-models.md)
 - [Model Serving](model-serving.md)
 - [Quantization](quantization.md)

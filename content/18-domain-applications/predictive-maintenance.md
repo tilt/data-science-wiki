@@ -4,6 +4,7 @@ slug: domain-applications/predictive-maintenance
 description: "Sensor-driven failure prediction and remaining-useful-life estimation for maintenance decisions."
 area: domain-applications
 topics:
+  - application
   - predictive-maintenance
 level: intermediate
 status: review

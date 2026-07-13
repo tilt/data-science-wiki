@@ -4,6 +4,7 @@ slug: domain-applications/marketing-text-categorization
 description: "Classifying short marketing and lifecycle messages into intent, channel, compliance, or routing categories."
 area: domain-applications
 topics:
+  - application
   - marketing-text-categorization
 level: foundational
 status: review

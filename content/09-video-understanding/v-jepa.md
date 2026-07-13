@@ -40,33 +40,22 @@ $$
 
 Predicting representations encourages semantic structure and temporal consistency without spending all capacity on pixel-level detail.
 
-## Worked example
+## Worked latent-prediction example
 
-```python
-import torch
+For two masked target tokens with three-dimensional latents, suppose the predictor and target encoder produce:
 
-torch.manual_seed(4)
-context = torch.randn(2,3)
-target = torch.randn(2,3)
-predictor = torch.nn.Linear(3,3,bias=False)
-with torch.no_grad():
-    predictor.weight.copy_(torch.eye(3) * 0.7)
-pred = predictor(context)
-loss = ((pred - target) ** 2).mean()
-print("predicted_latents", torch.round(pred, decimals=3).tolist())
-print("target_latents", torch.round(target, decimals=3).tolist())
-print("latent_mse", round(loss.item(), 4))
-```
+| token | predicted latent $\hat z_m$ | target latent $z_m$ | squared error sum |
+|---:|---:|---:|---:|
+| 1 | $(-1.124,0.163,1.568)$ | $(-1.426,0.904,0.856)$ | 1.147 |
+| 2 | $(0.593,0.840,-0.281)$ | $(0.689,0.885,1.771)$ | 4.222 |
 
-Observed output:
+The mean squared error over the six latent coordinates is
 
-```text
-predicted_latents [[-1.1239999532699585, 0.16300000250339508, 1.5679999589920044], [0.5929999947547913, 0.8399999737739563, -0.2809999883174896]]
-target_latents [[-1.4259999990463257, 0.9039999842643738, 0.8560000061988831], [0.6890000104904175, 0.8849999904632568, 1.7710000276565552]]
-latent_mse 0.8948
-```
+$$
+\mathcal L=\frac{1.147+4.222}{6}=0.895.
+$$
 
-The toy predictor is not good yet, so its latent MSE is high. Training adjusts the predictor and context encoder so missing-target representations become predictable.
+The first token is already fairly close to its target, but the second misses the third coordinate badly. Training adjusts the predictor and context encoder so missing-target representations become predictable from the visible context.
 
 ## Caveats
 

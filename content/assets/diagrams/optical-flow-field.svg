@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="420" viewBox="0 0 860 420" role="img" aria-labelledby="title desc">
+  <title id="title">Optical flow field</title>
+  <desc id="desc">A textured blob moves slightly right and upward between frames, producing a field of displacement arrows.</desc>
+  <rect width="860" height="420" fill="transparent"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <radialGradient id="blobA" cx="50%" cy="48%" r="58%">
+      <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.9"/>
+      <stop offset="65%" stop-color="#93c5fd" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blobB" cx="50%" cy="48%" r="58%">
+      <stop offset="0%" stop-color="#f97316" stop-opacity="0.9"/>
+      <stop offset="65%" stop-color="#fdba74" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <text x="430" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#111827">Optical flow is a displacement field</text>
+  <text x="430" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#4b5563">Brightness changes imply local motion; texture makes the arrows estimable.</text>
+
+  <g font-family="Arial, sans-serif">
+    <rect x="75" y="105" width="250" height="210" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+    <rect x="535" y="105" width="250" height="210" rx="8" fill="#f8fafc" stroke="#94a3b8"/>
+    <text x="200" y="92" text-anchor="middle" font-size="16" font-weight="700" fill="#111827">frame t</text>
+    <text x="660" y="92" text-anchor="middle" font-size="16" font-weight="700" fill="#111827">frame t+1</text>
+    <ellipse cx="188" cy="210" rx="92" ry="65" fill="url(#blobA)"/>
+    <ellipse cx="656" cy="190" rx="92" ry="65" fill="url(#blobB)"/>
+    <g stroke="#64748b" stroke-width="1" opacity="0.6">
+      <path d="M110 138 L292 300"/>
+      <path d="M112 292 L290 138"/>
+      <path d="M92 212 L310 212"/>
+      <path d="M552 138 L752 300"/>
+      <path d="M554 292 L750 138"/>
+      <path d="M552 212 L768 212"/>
+    </g>
+  </g>
+
+  <g stroke="#2563eb" stroke-width="4" fill="none" marker-end="url(#arrow)">
+    <path d="M365 150 L450 132"/>
+    <path d="M365 190 L450 172"/>
+    <path d="M365 230 L450 212"/>
+    <path d="M365 270 L450 252"/>
+  </g>
+  <text x="408" y="326" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#374151">estimated motion: right and slightly upward</text>
+
+  <g font-family="Arial, sans-serif" font-size="13" fill="#374151">
+    <circle cx="155" cy="352" r="7" fill="#60a5fa"/>
+    <text x="170" y="357">earlier intensity pattern</text>
+    <circle cx="355" cy="352" r="7" fill="#f97316"/>
+    <text x="370" y="357">later intensity pattern</text>
+    <path d="M582 352 L630 342" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)" fill="none"/>
+    <text x="646" y="357">flow vector $(u,v)$</text>
+  </g>
+</svg>
