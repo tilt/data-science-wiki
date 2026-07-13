@@ -28,8 +28,12 @@ const checks = [
 let errors = 0
 for (const file of files) {
   const raw = fs.readFileSync(file, "utf8")
+  // Obsidian/MDX/JSX syntax only matters in prose. Inside fenced or inline code
+  // it is literal text (e.g. numpy output like `[[0, 1]]`) that renders the same
+  // in MkDocs, so strip code before these checks to avoid false positives.
+  const prose = raw.replace(/```[\s\S]*?```/g, "").replace(/`[^`]*`/g, "")
   for (const [re, label] of checks) {
-    if (re.test(raw)) {
+    if (re.test(prose)) {
       console.error("ERROR:", path.relative(root, file), "uses", label)
       errors++
     }

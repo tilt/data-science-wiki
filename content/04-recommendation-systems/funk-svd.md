@@ -11,6 +11,9 @@ status: review
 page_type: algorithm
 aliases:
   - FunkSVD
+prerequisites:
+  - matrix-factorization.md
+  - latent-factor-models.md
 related:
   - matrix-factorization.md
   - alternating-least-squares.md

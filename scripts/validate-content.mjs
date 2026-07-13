@@ -15,6 +15,7 @@ const pageTypes = new Set([
   "implementation",
   "system-design",
   "comparison",
+  "case-study",
   "history",
   "interview-question",
   "reference",
@@ -173,9 +174,18 @@ for (const file of files) {
 
   const isMetricReferencePage =
     rel.endsWith("content/11-information-retrieval-and-search/ranking-and-retrieval-metrics.md") ||
-    rel.endsWith("content/11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md")
+    rel.endsWith("content/11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md") ||
+    rel.endsWith("content/16-experimentation-and-evaluation/coverage.md")
   if (!isMetricReferencePage) {
-    const textWithoutLinks = body.replace(/\[[^\]]+\]\([^)]+\)/g, "")
+    // Only prose must link metric terms. Code identifiers (`ndcg`, `mrr`) and
+    // LaTeX cannot hold Markdown links, so strip fenced code, inline code, and
+    // math before checking.
+    const textWithoutLinks = body
+      .replace(/```[\s\S]*?```/g, "")
+      .replace(/`[^`]*`/g, "")
+      .replace(/\$\$[\s\S]*?\$\$/g, "")
+      .replace(/\$[^$\n]*\$/g, "")
+      .replace(/\[[^\]]+\]\([^)]+\)/g, "")
     for (const metric of metricTermsThatMustBeLinked) {
       const pattern = new RegExp(`\\b${metric.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`, "i")
       if (pattern.test(textWithoutLinks)) {

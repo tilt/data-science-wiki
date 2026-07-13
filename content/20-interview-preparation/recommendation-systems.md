@@ -36,7 +36,7 @@ Recommendation-system interviews test whether you can reason about sparse feedba
 | "Design a news recommender." | Fast candidate sources, freshness, user/context features, ranking, diversity, editorial constraints, exploration, and latency. | [Retrieval and Ranking Architectures](../04-recommendation-systems/retrieval-and-ranking-architectures.md) |
 | "How do you handle new users/items?" | Popularity, content features, onboarding, exploration, business rules, and segment-specific evaluation. | [Cold Start Problem](../04-recommendation-systems/cold-start-problem.md) |
 | "Why not ordinary SVD?" | Missing means unknown, zero filling changes the objective, and observed-entry losses match the data better. | [Sparse Utility Matrices and Ordinary SVD](../04-recommendation-systems/sparse-utility-matrices-and-svd.md) |
-| "How do you evaluate ranking?" | Recall@k, NDCG, coverage, diversity, novelty, time splits, online experiments, and guardrails. | [Evaluation of Recommenders](../04-recommendation-systems/evaluation-of-recommenders.md) |
+| "How do you evaluate ranking?" | Recall@k, [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md), coverage, diversity, novelty, time splits, online experiments, and guardrails. | [Evaluation of Recommenders](../04-recommendation-systems/evaluation-of-recommenders.md) |
 
 ## Interview artifact
 

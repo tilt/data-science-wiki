@@ -29,7 +29,7 @@ Offline evaluation measures a system on fixed historical or curated data before 
 
 ## Defining metric
 
-For ranked retrieval or recommendation, NDCG rewards placing highly relevant items near the top:
+For ranked retrieval or recommendation, [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) rewards placing highly relevant items near the top:
 
 $$
 DCG@k=\sum_{i=1}^k \frac{2^{rel_i}-1}{\log_2(i+1)}, \qquad
@@ -66,7 +66,7 @@ precision3_A 0.667
 precision3_B 1.000
 ```
 
-System B retrieves more relevant items in the first three slots, but system A puts the highest-gain item first and therefore wins NDCG@3. The decision depends on whether the product values the first slot, any relevant result, or a downstream action.
+System B retrieves more relevant items in the first three slots, but system A puts the highest-gain item first and therefore wins [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md)@3. The decision depends on whether the product values the first slot, any relevant result, or a downstream action.
 
 ## Caveats
 

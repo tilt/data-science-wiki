@@ -65,7 +65,7 @@ Documents 1 and 2 tie because each is first in one retriever and third in the ot
 
 ## Where it fits
 
-Hybrid retrieval is usually still a candidate-generation stage. The merged set can feed [reranking](reranking.md), metadata filters, diversity rules, or source balancing. In RAG systems it sits near [retrieval pipelines](../10-generative-ai/retrieval-pipelines.md), where source coverage and citation quality matter as much as raw relevance.
+Hybrid retrieval is usually still a candidate-generation stage. The merged set can feed [reranking](reranking.md), metadata filters, diversity rules, or source balancing. In RAG systems it sits near [retrieval pipelines](../10-generative-ai/retrieval-pipelines.md), where [source coverage](../16-experimentation-and-evaluation/coverage.md) and citation quality matter as much as raw relevance.
 
 ## Caveats
 

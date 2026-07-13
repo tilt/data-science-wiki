@@ -33,7 +33,7 @@ MIND is a canonical public news recommendation artifact. The project page says i
 
 ## Executed Artifact
 
-This executed toy ranking computed nDCG and source coverage for five candidate articles.
+This executed toy ranking computed [nDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) and [source coverage](../16-experimentation-and-evaluation/coverage.md) for five candidate articles.
 
 ```python
 import numpy as np

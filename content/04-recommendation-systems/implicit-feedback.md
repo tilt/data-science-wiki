@@ -10,6 +10,9 @@ status: review
 page_type: concept
 aliases:
   - Implicit feedback
+prerequisites:
+  - collaborative-filtering.md
+  - explicit-versus-implicit-feedback.md
 related:
   - explicit-versus-implicit-feedback.md
   - weighted-matrix-factorization.md

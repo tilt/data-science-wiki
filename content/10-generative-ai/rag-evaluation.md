@@ -27,7 +27,7 @@ RAG evaluation separates retrieval quality from generation quality. A good final
 
 ## Mechanism
 
-Useful retrieval metrics include context recall, precision@k, nDCG, and filter correctness. Useful generation metrics include answer support, citation precision, citation coverage, abstention quality, and task success. [LLM-as-judge](llm-as-judge.md) can grade semantic support, but source IDs, retrieved chunk membership, and citation presence should be deterministic checks.
+Useful retrieval metrics include context recall, precision@k, [nDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md), and filter correctness. Useful generation metrics include answer support, citation precision, citation coverage, abstention quality, and task success. [LLM-as-judge](llm-as-judge.md) can grade semantic support, but source IDs, retrieved chunk membership, and citation presence should be deterministic checks.
 
 The evaluation set should include answerable questions, unanswerable questions, stale-source cases, conflicting-source cases, and adversarial retrieved text. Without those slices, a RAG system can look strong by answering easy questions while failing the exact cases that retrieval was meant to solve.
 

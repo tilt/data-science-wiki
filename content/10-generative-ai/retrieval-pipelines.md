@@ -52,7 +52,7 @@ This is a retrieval artifact, not a generation artifact. It should be evaluated 
 
 ## Caveats
 
-Do not tune retrieval only through final answer fluency. A model can answer from prior knowledge even when retrieval failed, or produce a plausible answer from irrelevant chunks. Keep retrieval-specific metrics such as recall@k, nDCG, filter correctness, and citation support separate from answer style.
+Do not tune retrieval only through final answer fluency. A model can answer from prior knowledge even when retrieval failed, or produce a plausible answer from irrelevant chunks. Keep retrieval-specific metrics such as recall@k, [nDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md), filter correctness, and citation support separate from answer style.
 
 ## References
 

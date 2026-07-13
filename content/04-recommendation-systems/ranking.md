@@ -32,7 +32,7 @@ $$
 s(u,i)=f_\theta(x_{u,i})-\lambda\,\operatorname{age}(i),
 $$
 
-then sort by $s$. A list-level postprocessor can add constraints such as author diversity or inventory caps. [Evaluation of recommenders](evaluation-of-recommenders.md) then uses top-k metrics such as NDCG or recall.
+then sort by $s$. A list-level postprocessor can add constraints such as author diversity or inventory caps. [Evaluation of recommenders](evaluation-of-recommenders.md) then uses top-k metrics such as [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) or recall.
 
 ## Worked example
 

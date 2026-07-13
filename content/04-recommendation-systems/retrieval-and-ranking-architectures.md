@@ -61,7 +61,7 @@ The retrieval model recalls items 0, 2, and 3; the ranker changes the order usin
 
 ## Caveats
 
-Retrieval and ranking must be evaluated separately. A ranker with excellent NDCG cannot fix low candidate recall, and a high-recall generator can still overload serving latency. Keep eligibility, freshness, deduplication, and exploration decisions visible in logs.
+Retrieval and ranking must be evaluated separately. A ranker with excellent [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) cannot fix low candidate recall, and a high-recall generator can still overload serving latency. Keep eligibility, freshness, deduplication, and exploration decisions visible in logs.
 
 ## References
 

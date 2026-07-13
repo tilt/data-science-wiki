@@ -41,7 +41,7 @@ $$
 \operatorname{Novelty}(L)=\frac{1}{k}\sum_{i\in L}-\log_2 p(i).
 $$
 
-These complement [ranking](ranking.md) metrics such as NDCG.
+These complement [ranking](ranking.md) metrics such as [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md).
 
 ## Worked example
 

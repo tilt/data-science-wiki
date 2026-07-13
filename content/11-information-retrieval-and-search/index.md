@@ -52,7 +52,7 @@ Information retrieval is the engineering and measurement discipline behind findi
 
 ## Evaluation
 
-- [Ranking and Retrieval Metrics](ranking-and-retrieval-metrics.md): precision@k, recall@k, MAP, MRR, and NDCG.
+- [Ranking and Retrieval Metrics](ranking-and-retrieval-metrics.md): precision@k, recall@k, MAP, [MRR](precision-recall-map-mrr-ndcg.md), and [NDCG](precision-recall-map-mrr-ndcg.md).
 - [Precision, Recall, MAP, MRR, and NDCG](precision-recall-map-mrr-ndcg.md): compact metric glossary.
 - [Search Evaluation](search-evaluation.md): labelled query sets, slices, offline evaluation, and online checks.
 

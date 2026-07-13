@@ -7,7 +7,7 @@ topics:
   - classical-machine-learning
 level: foundational
 status: review
-page_type: index
+page_type: area-index
 aliases: []
 prerequisites: []
 related:

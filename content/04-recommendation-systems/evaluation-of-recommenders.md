@@ -22,7 +22,7 @@ last_reviewed: 2026-07-11
 ---
 # Evaluation of Recommenders
 
-Recommender evaluation asks whether ranked lists are useful, robust, and healthy for users and inventory. Accuracy metrics such as recall@k and NDCG are necessary, but they miss novelty, diversity, coverage, calibration, and long-term [feedback loops](feedback-loops.md).
+Recommender evaluation asks whether ranked lists are useful, robust, and healthy for users and inventory. Accuracy metrics such as recall@k and [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) are necessary, but they miss novelty, diversity, coverage, calibration, and long-term [feedback loops](feedback-loops.md).
 
 ## Defining math
 
@@ -33,7 +33,7 @@ $$
 \operatorname{Recall@}k=\frac{\lvert L_k\cap G_u\rvert}{\lvert G_u\rvert}.
 $$
 
-NDCG discounts hits by rank and normalizes by the ideal list. The same family appears in [ranking and retrieval metrics](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md).
+[NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) discounts hits by rank and normalizes by the ideal list. The same family appears in [ranking and retrieval metrics](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md).
 
 ## Worked example
 
@@ -59,7 +59,7 @@ recall_at_3 1.0
 ndcg_at_3 0.693
 ```
 
-Both relevant items appear in the top three, but one irrelevant item ranks first, so NDCG penalizes the ordering. [Offline versus online evaluation](offline-versus-online-evaluation.md) decides whether this historical score predicts live behavior.
+Both relevant items appear in the top three, but one irrelevant item ranks first, so [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) penalizes the ordering. [Offline versus online evaluation](offline-versus-online-evaluation.md) decides whether this historical score predicts live behavior.
 
 ## Caveats
 

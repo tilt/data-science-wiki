@@ -9,7 +9,7 @@ topics:
   - prototype-answers
 level: foundational
 status: review
-page_type: section-index
+page_type: area-index
 aliases:
   - Interview Prep
 prerequisites: []
