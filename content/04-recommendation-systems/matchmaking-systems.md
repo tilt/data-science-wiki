@@ -36,26 +36,18 @@ The geometric mean penalizes one-sided interest. A serving system still uses [ca
 
 ## Worked example
 
-```python
-import numpy as np
-A_to_B = np.array([[.9,.4,.2], [.3,.8,.6]])
-B_to_A = np.array([[.7,.5], [.6,.9], [.2,.8]]).T
-mutual = np.sqrt(A_to_B * B_to_A)
-print("mutual_scores")
-print(np.round(mutual, 3))
-print("best_pair", tuple(int(v) for v in np.argwhere(mutual == mutual.max())[0]))
-```
+Suppose two people on side A are being matched to three people on side B. Directional scores alone would overvalue one-sided interest, so the reciprocal score uses the geometric mean:
 
-Observed output:
+| Pair | $s_{A\to B}$ | $s_{B\to A}$ | $\sqrt{s_{A\to B}s_{B\to A}}$ | Interpretation |
+| --- | ---: | ---: | ---: | --- |
+| A0-B0 | 0.90 | 0.70 | 0.794 | Strong mutual match. |
+| A0-B1 | 0.40 | 0.60 | 0.490 | Moderate from both sides. |
+| A0-B2 | 0.20 | 0.20 | 0.200 | Weak from both sides. |
+| A1-B0 | 0.30 | 0.50 | 0.387 | One side is not very interested. |
+| A1-B1 | 0.80 | 0.90 | 0.849 | Best reciprocal match. |
+| A1-B2 | 0.60 | 0.80 | 0.693 | Good but not top. |
 
-```text
-mutual_scores
-[[0.794 0.49  0.2  ]
- [0.387 0.849 0.693]]
-best_pair (1, 1)
-```
-
-Pair `(1, 1)` wins because both sides score each other highly. A one-sided recommender might over-contact the same popular candidate and create a [feedback loop](feedback-loops.md).
+Pair A1-B1 wins because both sides score each other highly. A one-sided recommender might over-contact the same popular candidate and create a [feedback loop](feedback-loops.md).
 
 ## Caveats
 

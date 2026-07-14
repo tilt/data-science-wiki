@@ -36,25 +36,16 @@ For binary interactions, the numerator is often just a weighted sum of neighbor 
 
 ## Worked example
 
-```python
-import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
-X = np.array([[5,4,0,0], [4,5,1,0], [0,1,5,4], [0,0,4,5]], dtype=float)
-sim = cosine_similarity(X)[0]
-scores = sim @ X
-scores[X[0] > 0] = -1
-print("neighbors", np.round(sim, 3).tolist())
-print("top_unseen_item", int(np.argmax(scores)))
-```
+For target user U0 with ratings $(5,4,0,0)$, cosine similarity compares U0's rating vector with each other user's vector:
 
-Observed output:
+| User | Ratings | Similarity to U0 | Contribution to unseen items |
+| --- | --- | ---: | --- |
+| U0 | $(5,4,0,0)$ | 1.000 | Target user; already-seen items are filtered. |
+| U1 | $(4,5,1,0)$ | 0.964 | Strong neighbor; contributes to item 2. |
+| U2 | $(0,1,5,4)$ | 0.096 | Weak neighbor; contributes little. |
+| U3 | $(0,0,4,5)$ | 0.000 | No overlap with U0's rated items. |
 
-```text
-neighbors [1.0, 0.964, 0.096, 0.0]
-top_unseen_item 2
-```
-
-The nearest user has rated item 2, so it becomes the top unseen candidate. [Matrix factorization](matrix-factorization.md) can be viewed as replacing this local neighbor lookup with a global low-rank model.
+After filtering items 0 and 1, item 2 receives the strongest neighbor-weighted support because the nearest user rated it. [Matrix factorization](matrix-factorization.md) can be viewed as replacing this local neighbor lookup with a global low-rank model.
 
 ## Caveats
 

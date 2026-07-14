@@ -28,36 +28,25 @@ In-context learning is the model's ability to infer a task pattern from examples
 
 A prompt supplies examples $(x_i,y_i)$ followed by a new input $x_*$. The model conditions on the whole sequence and estimates $p(y_*\mid x_1,y_1,\ldots,x_*)$. Example order, label balance, and decoding settings from [temperature and determinism](temperature-and-determinism.md) can change the result.
 
-## Executed artifact
+## Worked example
 
-```python
-import numpy as np
+Few-shot examples teach a pattern only if they disambiguate the input space:
 
-examples = [("invoice overdue", "billing"), ("refund status", "support"), ("rain tomorrow", "weather")]
-query = "refund invoice"
-vocab = sorted(set(" ".join([text for text, _ in examples] + [query]).split()))
+| Example input | Label | Signal |
+| --- | --- | --- |
+| `invoice overdue` | billing | `invoice` points to billing. |
+| `refund status` | support | `refund` points to support. |
+| `rain tomorrow` | weather | Weather is clearly separate. |
+| New input: `refund invoice` | ? | Contains one cue for each of two labels. |
 
-def bow(text):
-    return np.array([text.split().count(word) for word in vocab], dtype=float)
+The new input is ambiguous because it combines `refund` and `invoice`. A model may choose either label depending on example order, wording, and prior knowledge. Better in-context examples would include refund invoices explicitly, or the prompt should ask a clarifying question when examples conflict.
 
-def cosine(a, b):
-    denom = np.linalg.norm(a) * np.linalg.norm(b)
-    return 0.0 if denom == 0 else float(a @ b / denom)
-
-query_vec = bow(query)
-scores = [(label, round(cosine(query_vec, bow(text)), 3)) for text, label in examples]
-print("IN_CONTEXT")
-print(sorted(scores, key=lambda item: -item[1]))
-```
-
-Observed output:
-
-```text
-IN_CONTEXT
-[('billing', 0.5), ('support', 0.5), ('weather', 0.0)]
-```
-
-A toy bag-of-words nearest-example classifier ties between billing and support for `refund invoice`, illustrating why ambiguous demonstrations need clearer examples or a fallback question.
+| Prompt design lever | Why it matters |
+| --- | --- |
+| Balanced labels | Prevents the model from overusing the majority example. |
+| Boundary examples | Shows what to do when cues conflict. |
+| Output format examples | Teaches stable structure without fine-tuning. |
+| Fallback instruction | Reduces confident guesses on ambiguous inputs. |
 
 ## Caveats
 

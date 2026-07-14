@@ -34,34 +34,23 @@ $$
 
 The training objective determines what similarity means; a search embedding is not automatically a clustering or classification embedding.
 
-## Executed artifact
+## Worked example
 
-```python
-import numpy as np
+Suppose a query embedding points mostly toward the "refund" direction, with some "billing" component and no "weather" component. Cosine similarity ranks documents by vector angle:
 
-docs = {
-    "A refund policy": np.array([1.0, 0.2, 0.0]),
-    "B invoice payment": np.array([0.1, 1.0, 0.0]),
-    "C weekend forecast": np.array([0.0, 0.1, 1.0]),
-}
-query = np.array([0.9, 0.3, 0.0])
+| Candidate | Vector intuition | Cosine to query | Retrieval meaning |
+| --- | --- | ---: | --- |
+| A refund policy | Strong refund component, small billing component. | 0.992 | Best semantic match. |
+| B invoice payment | Strong billing component, weak refund component. | 0.409 | Related business topic, but weaker. |
+| C weekend forecast | Weather component unrelated to the query. | 0.031 | Semantically off-topic. |
 
-def cosine(a, b):
-    return float(a @ b / (np.linalg.norm(a) * np.linalg.norm(b)))
+The query vector points toward the refund document, so vector search retrieves it first. A [reranking](reranking.md) step can still change the order after reading full query-document pairs, especially when exact dates, names, or policy constraints matter.
 
-scores = [(name, round(cosine(query, vec), 3)) for name, vec in docs.items()]
-print("EMBEDDINGS")
-print(sorted(scores, key=lambda item: -item[1]))
-```
-
-Observed output:
-
-```text
-EMBEDDINGS
-[('A refund policy', 0.992), ('B invoice payment', 0.409), ('C weekend forecast', 0.031)]
-```
-
-The query vector points toward the refund document. A [reranking](reranking.md) step can still change the order after reading query-document pairs.
+| Design choice | Effect |
+| --- | --- |
+| Normalize embeddings before cosine search | Makes angle rather than vector length drive ranking. |
+| Use a domain-tuned embedding model | Improves similarity for local jargon and document structure. |
+| Keep metadata filters with vectors | Prevents semantically similar but unauthorized or stale passages from entering context. |
 
 ## Caveats
 

@@ -37,6 +37,15 @@ where $k\ll\min(m,n)$. In information retrieval, this can compress a [TF-IDF](..
 
 ## Worked example
 
+The matrix below can be read as four users or documents over four item/term features:
+
+| Row | Feature pattern |
+| --- | --- |
+| 0 | Features 0 and 1 active. |
+| 1 | Features 0 and 2 active. |
+| 2 | Features 2 and 3 active. |
+| 3 | Features 1 and 3 active. |
+
 ```python
 import numpy as np
 from sklearn.decomposition import TruncatedSVD
@@ -55,7 +64,7 @@ explained_variance_ratio [0.0, 0.5]
 row0_embedding [1.0, 0.707]
 ```
 
-The two-dimensional embedding is a compact representation of row co-occurrence. A recommender would still need [ranking](ranking.md), filters, and evaluation around this representation.
+The two-dimensional embedding is a compact representation of row co-occurrence. The first component captures the shared overall activity scale, while the second separates rows by which feature pair they contain. A recommender would still need [ranking](ranking.md), filters, and evaluation around this representation.
 
 ## Caveats
 

@@ -31,6 +31,18 @@ Energy series often have multiple seasonalities: intraday shape, weekday/weekend
 
 Evaluation should be segmented. Average error can hide failures during heat waves, cold snaps, holidays, outages, tariff changes, and occupancy shifts. For operational use, forecasts should be checked by horizon, temperature band, calendar type, and peak-load periods, because peak misses can matter more than ordinary-hour misses.
 
+## Feature and Evaluation Map
+
+| Driver | Modeling role | Failure mode to check |
+| --- | --- | --- |
+| Hour, weekday, and holiday flags | Capture repeating human schedules. | Holiday calendars and daylight-saving changes can shift load abruptly. |
+| Temperature and humidity | Explain heating, cooling, and nonlinear weather response. | Extreme temperatures may be rare in training data but dominate operational risk. |
+| Tariffs and demand-response events | Represent price-driven consumption changes. | Policy changes can break historical relationships. |
+| Occupancy or production schedules | Explain building or industrial load independent of weather. | Missing schedule updates can look like model drift. |
+| Meter outages and corrections | Distinguish true demand from measurement artifacts. | Training on uncorrected outages teaches impossible low-load patterns. |
+
+Evaluation slices should mirror these drivers: horizon, meter group, temperature band, calendar type, and peak-load windows. That makes the forecast useful for operations instead of only producing a low average error.
+
 ## Connections
 
 Energy forecasting is a high-seasonality case of [demand forecasting](demand-forecasting.md). Weather and calendar fields belong in [forecasting data and covariates](forecasting-data-and-covariates.md), while repeated structure connects to [trend-seasonality-cycles-noise](trend-seasonality-cycles-noise.md) and the applied page on [energy forecasting](../19-domain-applications/energy-forecasting.md).

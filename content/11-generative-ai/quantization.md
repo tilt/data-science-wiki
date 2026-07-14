@@ -28,31 +28,30 @@ Quantization stores model values in lower precision, commonly int8 or 4-bit form
 
 Uniform symmetric int8 quantization can use scale $s=\max |x|/127$, quantized value $q=\operatorname{round}(x/s)$, and reconstruction $\hat x=sq$. The error $x-\hat x$ affects logits, attention, and sometimes tool-routing reliability.
 
-## Executed artifact
+## Worked example
 
-```python
-import numpy as np
+For values $x=(-1.25,-0.10,0,0.80,1.70)$, the largest magnitude is $1.70$, so symmetric int8 quantization uses
 
-x = np.array([-1.25, -0.1, 0.0, 0.8, 1.7])
-scale = max(abs(x)) / 127
-q = np.round(x / scale).astype(np.int8)
-reconstructed = q.astype(float) * scale
-print("QUANTIZATION")
-print("scale", round(scale, 5))
-print("int8", q.tolist())
-print("max_abs_error", round(float(np.max(np.abs(x - reconstructed))), 5))
-```
+$$
+s=\frac{1.70}{127}\approx0.01339.
+$$
 
-Observed output:
+| Value $x$ | Quantized $q=\operatorname{round}(x/s)$ | Reconstructed $\hat x=sq$ | Error |
+| ---: | ---: | ---: | ---: |
+| -1.25 | -93 | -1.245 | -0.005 |
+| -0.10 | -7 | -0.094 | -0.006 |
+| 0.00 | 0 | 0.000 | 0.000 |
+| 0.80 | 60 | 0.803 | -0.003 |
+| 1.70 | 127 | 1.700 | 0.000 |
 
-```text
-QUANTIZATION
-scale 0.01339
-int8 [-93, -7, 0, 60, 127]
-max_abs_error 0.0063
-```
+The endpoint maps exactly to 127 by construction. Intermediate values absorb rounding error, so real models need layer-wise and task-level evaluation after quantization rather than relying on memory savings alone.
 
-This toy vector reconstructs closely: the largest absolute reconstruction error is 0.0063 after mapping values into int8 with scale 0.01339. The endpoint 1.7 maps exactly to 127 by construction, while intermediate values absorb rounding error, which is why real models need layer-wise evaluation after quantization.
+| Choice | Trade-off |
+| --- | --- |
+| Weight-only quantization | Reduces model memory with fewer activation changes. |
+| Weight-and-activation quantization | Can improve throughput but is more sensitive to outliers. |
+| Per-tensor scale | Simpler metadata, worse fit for heterogeneous channels. |
+| Per-channel scale | More metadata, often lower reconstruction error. |
 
 ## Caveats
 

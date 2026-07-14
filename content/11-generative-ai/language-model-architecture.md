@@ -34,33 +34,25 @@ $$
 
 where mask $M$ sets future positions to $-\infty$. [Pretraining](pretraining.md) then optimizes next-token likelihood over [tokenization](tokenization.md) outputs.
 
-## Executed artifact
+## Worked mask example
 
-```python
-import numpy as np
+For a three-token prefix, causal masking permits only the lower-triangular part of the attention matrix:
 
-scores = np.array([
-    [2.0, 1.0, 0.0],
-    [2.0, 1.0, 0.0],
-    [2.0, 1.0, 0.0],
-])
-mask = np.triu(np.ones((3, 3), dtype=bool), 1)
-masked = np.where(mask, -np.inf, scores)
-exp_scores = np.exp(masked - np.nanmax(masked, axis=1, keepdims=True))
-exp_scores = np.where(mask, 0, exp_scores)
-weights = exp_scores / exp_scores.sum(axis=1, keepdims=True)
-print("MASKED_ATTENTION")
-print(np.round(weights, 3).tolist())
-```
+| Query position | Can attend to token 1 | Can attend to token 2 | Can attend to token 3 | Reason |
+| --- | ---: | ---: | ---: | --- |
+| Token 1 | yes | no | no | No future context is available. |
+| Token 2 | yes | yes | no | The model may use the prefix seen so far. |
+| Token 3 | yes | yes | yes | All positions up to the current token are visible. |
 
-Observed output:
+With unmasked scores $(2,1,0)$ at every row, the masked softmax weights become roughly $(1,0,0)$ for token 1, $(0.731,0.269,0)$ for token 2, and $(0.665,0.245,0.090)$ for token 3. The values differ by row because the denominator only includes visible positions. Without this mask, next-token training would leak future labels.
 
-```text
-MASKED_ATTENTION
-[[1.0, 0.0, 0.0], [0.731, 0.269, 0.0], [0.665, 0.245, 0.09]]
-```
-
-The first token can attend only to itself; later tokens can attend backward. Without this mask, next-token training would leak future labels.
+| Component | Function |
+| --- | --- |
+| Token embedding | Converts token IDs into vectors. |
+| Positional information | Tells attention where each token sits in the sequence. |
+| Masked self-attention | Routes information from earlier visible tokens. |
+| Feed-forward block | Applies a position-wise nonlinear transformation. |
+| Vocabulary projection | Converts the final hidden state into next-token logits. |
 
 ## Caveats
 

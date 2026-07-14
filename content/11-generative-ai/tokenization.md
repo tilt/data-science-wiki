@@ -28,40 +28,27 @@ Tokenization converts text into the units consumed by a model. It affects [langu
 
 Subword tokenizers learn a vocabulary of pieces so rare words can be represented as combinations. Byte-pair encoding repeatedly merges frequent adjacent symbols; other systems use unigram or byte-level variants. Context limits count tokens, not words, so [context construction](context-construction.md) needs the model's tokenizer.
 
-## Executed artifact
+## Worked BPE Example
 
-```python
-word = "lowest"
-symbols = list(word) + ["</w>"]
-merges = [("l", "o"), ("lo", "w"), ("e", "s"), ("es", "t"), ("low", "est")]
+Starting with `lowest` as characters plus an end-of-word marker, learned byte-pair merges reduce the sequence:
 
-print("TOKENIZATION")
-for a, b in merges:
-    out = []
-    i = 0
-    while i < len(symbols):
-        if i + 1 < len(symbols) and symbols[i] == a and symbols[i + 1] == b:
-            out.append(a + b)
-            i += 2
-        else:
-            out.append(symbols[i])
-            i += 1
-    symbols = out
-    print((a, b), "->", symbols)
-```
+| Merge rule | Tokens after applying the rule |
+| --- | --- |
+| Start | `l`, `o`, `w`, `e`, `s`, `t`, `</w>` |
+| `l` + `o` -> `lo` | `lo`, `w`, `e`, `s`, `t`, `</w>` |
+| `lo` + `w` -> `low` | `low`, `e`, `s`, `t`, `</w>` |
+| `e` + `s` -> `es` | `low`, `es`, `t`, `</w>` |
+| `es` + `t` -> `est` | `low`, `est`, `</w>` |
+| `low` + `est` -> `lowest` | `lowest`, `</w>` |
 
-Observed output:
+Without the last merge, the same word would remain split as `low` and `est`. That affects context length, billing, prompt truncation, and the units available to [language model architecture](language-model-architecture.md) during generation.
 
-```text
-TOKENIZATION
-('l', 'o') -> ['lo', 'w', 'e', 's', 't', '</w>']
-('lo', 'w') -> ['low', 'e', 's', 't', '</w>']
-('e', 's') -> ['low', 'es', 't', '</w>']
-('es', 't') -> ['low', 'est', '</w>']
-('low', 'est') -> ['lowest', '</w>']
-```
-
-The toy BPE path shows each merge reducing the sequence: `l`+`o` becomes `lo`, then `lo`+`w` becomes `low`, and the final learned merge produces `lowest`. Without the last merge, the same word would remain split as `low` and `est`, which is why tokenizer vocabularies directly affect context length and generation units.
+| Text type | Why token counts can surprise |
+| --- | --- |
+| Numbers | Digit grouping and separators may split into several tokens. |
+| Code | Symbols, indentation, and rare identifiers can tokenize densely. |
+| Non-English text | Coverage depends on the tokenizer training mixture. |
+| Tables or JSON | Repeated punctuation can consume context quickly. |
 
 ## Caveats
 

@@ -26,29 +26,25 @@ Data lineage records how datasets are produced and consumed. Good lineage answer
 
 ## Event mechanism
 
-OpenLineage models jobs, runs, and datasets. I computed a stable short hash for this lineage event so it can be compared with run metadata:
+OpenLineage models jobs, runs, and datasets. A minimal lineage event names the job version, its inputs, and its outputs:
 
-```python
-import hashlib, json
-
-event = {
+```json
+{
   "job": "dbt.model.analytics.fct_orders",
   "inputs": ["raw.orders", "raw.customers"],
   "outputs": ["analytics.fct_orders"],
-  "code_sha": "9f31a2c",
+  "code_sha": "9f31a2c"
 }
-print(json.dumps(event, sort_keys=True))
-print(hashlib.sha256(json.dumps(event, sort_keys=True).encode()).hexdigest()[:12])
-```
-
-Observed output:
-
-```text
-{"code_sha": "9f31a2c", "inputs": ["raw.orders", "raw.customers"], "job": "dbt.model.analytics.fct_orders", "outputs": ["analytics.fct_orders"]}
-190e1b94e945
 ```
 
 The event is small, but it captures the essential graph edge: one job version read two input datasets and produced one output dataset. [Airflow](airflow.md) can emit task-level runs; dbt can emit model-level dependencies; [data-pipelines](data-pipelines.md) need both when debugging production incidents.
+
+| Field | Why it matters during an incident |
+| --- | --- |
+| `job` | Identifies the transformation that created the downstream dataset. |
+| `inputs` | Shows which upstream tables, partitions, or files may have caused the issue. |
+| `outputs` | Shows which datasets, dashboards, features, or audits may be affected. |
+| `code_sha` | Ties the data edge to the exact transformation version that ran. |
 
 ## Architecture
 

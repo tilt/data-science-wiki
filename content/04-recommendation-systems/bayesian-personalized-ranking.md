@@ -37,6 +37,8 @@ With [matrix factorization](matrix-factorization.md), $\hat x_{ui}=p_u^\top q_i$
 
 ## Worked example
 
+For one triple $(u,i,j)$, the important quantity is the margin $\hat x_{ui}-\hat x_{uj}$. If the margin is near zero, the model barely prefers the observed item. The BPR gradient increases the user vector's alignment with $q_i-q_j$, increases $q_i$ toward the user vector, and moves $q_j$ away from it.
+
 ```python
 import numpy as np
 rng = np.random.default_rng(5)
@@ -59,7 +61,7 @@ margin_before 0.007
 margin_after 0.0139
 ```
 
-One update increases the positive-minus-negative margin. [Weighted matrix factorization](weighted-matrix-factorization.md) uses confidence-weighted squared error instead of pairwise comparisons.
+One update increases the positive-minus-negative margin from `0.0070` to `0.0139`. The number is small because this is a single low-dimensional update with small random initial factors; training repeats this comparison across many sampled triples. [Weighted matrix factorization](weighted-matrix-factorization.md) uses confidence-weighted squared error instead of pairwise comparisons.
 
 ## Caveats
 

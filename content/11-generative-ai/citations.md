@@ -28,36 +28,29 @@ Citations are evidence pointers, not decorations. A cited source must support th
 
 A citation contract can require each factual claim to carry `{claim, source_id, span}`. A validator then checks that the source was retrieved, the span exists, and the claim is semantically supported. [Hallucination mitigation](hallucination-mitigation.md) should treat uncited factual claims as defects, not as style issues.
 
-## Executed artifact
+## Worked support check
 
-```python
-import re
+| Generated claim | Cited passage | Verdict | Reason |
+| --- | --- | --- | --- |
+| Manager approval is required above 500 EUR. | Manager approval is required above 500 EUR. | Supported | The threshold, actor, and requirement match. |
+| Standard shipping is two days. | Standard shipping is five days. | Contradicted | The citation is about the right topic but gives a different duration. |
+| Premium members always receive refunds. | Premium members may request refund review. | Not supported | The claim is stronger than the passage. |
+| The policy changed in 2026. | No retrieved span mentions a policy-change date. | Missing evidence | A citation cannot support a fact that is absent from the retrieved text. |
 
-claims = {
-    "manager approval required above 500 EUR": "policy-7",
-    "shipping is two days": "policy-9",
+Lexical overlap would score the shipping example highly because both strings share "standard shipping" and "days." Citation support is stricter: the cited span must entail the generated claim at the right granularity.
+
+## Citation Contract
+
+```json
+{
+  "claim": "Manager approval is required above 500 EUR.",
+  "source_id": "policy-7",
+  "span": "Manager approval is required above 500 EUR.",
+  "support": "supported"
 }
-sources = {
-    "policy-7": "Manager approval is required above 500 EUR.",
-    "policy-9": "Standard shipping is five days.",
-}
-print("CITATION_SUPPORT")
-for claim, source_id in claims.items():
-    claim_terms = set(re.findall(r"[a-z0-9]+", claim.lower()))
-    source_terms = set(re.findall(r"[a-z0-9]+", sources[source_id].lower()))
-    overlap = len(claim_terms & source_terms) / len(claim_terms)
-    print(claim, "overlap", round(overlap, 2))
 ```
 
-Observed output:
-
-```text
-CITATION_SUPPORT
-manager approval required above 500 EUR overlap 1.0
-shipping is two days overlap 0.75
-```
-
-The first claim matches its cited policy. The second has high lexical overlap but contradicts the source, showing why lexical checks are only a triage artifact.
+The contract should travel with the answer so [RAG evaluation](rag-evaluation.md) can audit [source coverage](rag-evaluation.md), unsupported claims, and stale references.
 
 ## Caveats
 

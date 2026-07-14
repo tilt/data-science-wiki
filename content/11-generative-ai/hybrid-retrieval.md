@@ -36,30 +36,24 @@ $$
 
 Lexical scores may come from BM25; dense scores from vector search in [vector databases](vector-databases.md). [Reciprocal rank fusion](../12-information-retrieval-and-search/hybrid-search.md) is another robust option when scores are not comparable, and this fusion step is the core of the indexed design in [RAG architecture comparison](rag-architecture-comparison.md).
 
-## Executed artifact
+## Worked example
 
-```python
-import numpy as np
+After score normalization, combine lexical and dense scores with $\lambda=0.55$:
 
-lexical = np.array([2.0, 0.3, 1.1])
-dense = np.array([0.62, 0.91, 0.55])
+| Document | Lexical signal | Dense signal | Hybrid score | Interpretation |
+| --- | ---: | ---: | ---: | --- |
+| 0 | strongest | medium | 0.475 | Exact evidence dominates without losing semantic relevance. |
+| 1 | weak | strongest | -0.034 | Semantically close, but lexical evidence is thin. |
+| 2 | medium | weakest | -0.440 | Neither signal is strong enough. |
 
-def zscore(x):
-    return (x - x.mean()) / x.std()
+Document 0 wins after fusion because its lexical score is strongest and its dense score is not weak enough to offset that advantage. Document 1 has the best dense score but ranks second after its low lexical match is included, illustrating why hybrid retrieval can favor exact evidence over pure semantic similarity.
 
-score = 0.55 * zscore(lexical) + 0.45 * zscore(dense)
-print("HYBRID_FIXED")
-print([(int(i), round(float(score[i]), 3)) for i in np.argsort(-score)])
-```
-
-Observed output:
-
-```text
-HYBRID_FIXED
-[(0, 0.475), (1, -0.034), (2, -0.44)]
-```
-
-Document 0 wins after fusion with a score of 0.475 because its lexical score is strongest and its dense score is not weak enough to offset that advantage. Document 1 has the best dense score but only reaches -0.034 after its low lexical match is included, illustrating why hybrid retrieval can favor exact evidence over pure semantic similarity.
+| Retrieval pattern | When it helps |
+| --- | --- |
+| Lexical-only | Exact product codes, names, legal terms, and identifiers. |
+| Dense-only | Paraphrases, conceptual questions, and vocabulary mismatch. |
+| Hybrid | Workflows that need both semantic recall and exact support. |
+| Hybrid plus reranking | High-value answers where the system can afford a slower second pass. |
 
 ## Caveats
 
