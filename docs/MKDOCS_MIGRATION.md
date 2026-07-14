@@ -1,5 +1,7 @@
 # MkDocs Material Migration
 
+Quartz is the production renderer. This document records the portability path if the wiki is ever exported to MkDocs Material.
+
 ## Already compatible
 
 Canonical content uses Markdown, YAML front matter, relative links, standard math delimiters, fenced Mermaid blocks, and source-controlled assets.

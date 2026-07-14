@@ -22,9 +22,17 @@ Use `last_reviewed` only when a page has been substantively reviewed or created 
 ## Optional fields
 
 - `references`: bibliography keys from `references/bibliography.yml`.
+- `last_reviewed`: date used only when a page has been substantively reviewed or created.
 
 When `references` is present, `make validate` verifies that every key exists in the centralized bibliography. Keep human-readable source notes in a page-level `## References` section as well; the front-matter keys are for validation and future export.
 
 ## Page types
 
 `area-index`, `topic-index`, `concept`, `algorithm`, `model`, `implementation`, `system-design`, `comparison`, `history`, `interview-question`, `reference`.
+
+## Status values
+
+- `stub`: placeholder or very thin page.
+- `draft`: useful seed explanation that still needs review or depth.
+- `review`: substantively checked and suitable for normal browsing.
+- `complete`: high-confidence page that should change only intentionally.

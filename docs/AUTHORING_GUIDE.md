@@ -1,15 +1,17 @@
 # Authoring Guide
 
+Use this guide for routine edits to pages under `content/`. For prose quality rules, see [Authoring Style](AUTHORING_STYLE.md). For required metadata, see [Content Model](CONTENT_MODEL.md).
+
 ## Workflow
 
 1. Run `make doctor`.
-2. Run `make preview`.
+2. Run `make preview-watch`.
 3. Open `content/` in Obsidian.
 4. Create or edit a page.
 5. Check local browser rendering.
 6. Run `make validate`.
 7. Commit and push.
-8. Let GitHub Actions deploy.
+8. Let GitHub Actions or GitLab CI deploy from the default branch.
 
 ## Markdown policy
 
@@ -31,12 +33,11 @@ make validate
 
 Generated pages are drafts. Treat them as concise first explanations, then hand-edit high-priority pages with formulas, examples, references, and production notes.
 
-## Forecasting content
+## Placement rules
 
-Forecasting material belongs under `content/05-time-series-and-forecasting/`. Add new forecasting methods as focused concept, model, algorithm, or system-design pages and link them from the area index. Cross-link related machine learning, evaluation, deep learning, and MLOps pages with standard Markdown links.
+- Put new pages in the owning numbered section.
+- Cross-link instead of duplicating existing concepts.
+- Keep public URLs and paths generic; do not include private project names or internal identifiers.
+- Use `references` front matter only for keys present in `references/bibliography.yml`.
 
-Before adding project-derived forecasting notes, generalize identifiers, package names, class names, client names, repository paths, and operational details. Keep reusable concepts, assumptions, formulas, evaluation protocols, and engineering patterns.
-
-## Integrating project knowledge
-
-The rule above applies to any project-derived content, not only forecasting. To turn findings from a pitch, workshop, or engagement into generic wiki knowledge — sanitize, generalize, place in the owning numbered section, reuse existing page types, cross-link instead of duplicating — follow [Integrating Project Knowledge](integrating-project-knowledge.md). The RAG architecture pages under `content/11-generative-ai/` are the worked example.
+To turn findings from a pitch, workshop, or engagement into generic wiki knowledge, follow [Integrating Project Knowledge](integrating-project-knowledge.md).

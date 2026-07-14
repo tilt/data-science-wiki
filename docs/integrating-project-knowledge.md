@@ -31,7 +31,7 @@ example of this process.
    `content/12-information-retrieval-and-search/bm25.md`), weave ≥3 lateral cross-links into prose and
    mirror them in `related:` frontmatter (the `plugins/related-links` component renders them and feeds
    the graph), include one concrete artifact per page (a table, a Mermaid diagram, an executed example,
-   or a cited fact — see `docs/authoring-style.md`), and cite only real, public sources.
+   or a cited fact — see `docs/AUTHORING_STYLE.md`), and cite only real, public sources.
 7. **Diagram where it helps.** Use fenced ```mermaid blocks for architecture and flow diagrams.
 8. **Verify.** Run `npx quartz build` (or `make validate`), a repo-wide broken-link check, and a
    **banned-term grep** over the new and edited pages to confirm no client/corpus/domain terms leaked.

@@ -11,7 +11,7 @@ Important targets:
 - `make build`: build `public/`.
 - `make validate`: run content, link, and portability checks.
 - `make check-content`: validate page metadata, top-level reachability, orphan warnings, repository hygiene, and bibliography keys.
-- `make ci`: run validation and build.
+- `make ci`: run validation, lint, tests, and build.
 - `make deploy-info`: print inferred GitHub Pages URL information.
 - `make generate-subtopics`: create concise pages for missing subtopics and link area index subtopic lists.
 - `make improve-generated-content`: rewrite generated topic pages with concise topic-specific explanations and examples.

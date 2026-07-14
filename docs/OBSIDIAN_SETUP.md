@@ -1,5 +1,9 @@
 # Obsidian Setup
 
+The repository commits portable Obsidian settings under `content/.obsidian/`. Open only the `content/` folder as the vault, not the repository root.
+
+## First run
+
 1. Clone the repository.
 2. Install Node.js 22.13.0 or newer Node 22, npm 10.9.2 or newer, Git, and Make.
 3. Run:
@@ -14,7 +18,7 @@ make setup
 7. Use Markdown links and store attachments under `assets/`. The committed settings set relative Markdown links and automatic link updates.
 8. Create or edit a page under the relevant subject directory.
 9. Preview formulas with `$...$`, `$$...$$`, and fenced `mermaid` blocks in Obsidian.
-10. Run the local web preview:
+10. Run the local web preview from the repository root:
 
 ```sh
 make preview
@@ -22,7 +26,9 @@ make preview
 
 Use `make preview-watch` instead when you want Quartz to rebuild while editing.
 
-11. Run validation, commit, and push:
+## Before committing
+
+Run validation, inspect the working tree, then commit:
 
 ```sh
 make validate
@@ -32,7 +38,7 @@ git commit -m "Update wiki content"
 git push
 ```
 
-12. Ignored files include Obsidian workspace state, local plugin caches, `node_modules/`, `public/`, and generated exports.
+Ignored files include Obsidian workspace state, local plugin caches, `node_modules/`, `public/`, and generated exports.
 
 ## Optional plugins
 

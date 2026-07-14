@@ -21,3 +21,6 @@ content/.obsidian/snippets/
 
 # Quartz generated cache
 quartz/.quartz-cache/
+
+# master prompts
+docs/prompts/
