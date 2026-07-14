@@ -47,6 +47,19 @@ $$
 
 This is the chain rule from [gradients](../01-mathematical-foundations/gradients.md), organized so each intermediate Jacobian-vector product is computed once instead of recomputing every path independently.
 
+The forward pass (solid) computes and caches activations; the backward pass (dotted) reuses them to send the error signal back into each parameter:
+
+```mermaid
+flowchart TD
+  X[Input x] --> H[Hidden activation h]
+  H --> Yhat[Output y hat]
+  Yhat --> L[Loss L]
+  L -.-> dY[Error signal at the output]
+  dY -.-> dW2[Gradient for W2 reuses h]
+  dY -.-> dH[Propagate through W2 and the activation derivative]
+  dH -.-> dW1[Gradient for W1 reuses x]
+```
+
 ## Worked example
 
 This snippet lets PyTorch differentiate a two-layer network and compares selected gradients with a manual backpropagation calculation.

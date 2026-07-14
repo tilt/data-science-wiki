@@ -45,6 +45,19 @@ $$
 
 Encoder blocks usually use bidirectional self-attention. Decoder language models use a causal mask so token $t$ cannot attend to positions $>t$, avoiding label leakage.
 
+```mermaid
+flowchart TD
+  Input[Token embeddings plus positions] --> LN1[Layer norm]
+  LN1 --> Attn[Self-attention]
+  Attn --> Add1[Residual add]
+  Input --> Add1
+  Add1 --> LN2[Layer norm]
+  LN2 --> FFN[Feed-forward network]
+  FFN --> Add2[Residual add]
+  Add1 --> Add2
+  Add2 --> Output[Block output, repeated over N blocks]
+```
+
 ## Worked example
 
 This snippet builds a causal attention mask and feed-forward block output to show how decoder attention excludes future tokens.

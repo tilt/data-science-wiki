@@ -35,7 +35,7 @@ The M5 competition is a useful public benchmark because it used Walmart hierarch
 
 ## Executed Artifact
 
-This executed toy example compared a same-weekday seasonal naive forecast with a calendar-plus-promotion ridge model over three SKU-like series.
+To show what a naive same-weekday baseline misses, the example below forecasts three SKU-like series and compares that baseline with a ridge model that also sees calendar and promotion signals.
 
 ```python
 import numpy as np

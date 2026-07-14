@@ -40,6 +40,10 @@ $$
 
 Some production variants add biases, $\hat r_{ui}=\mu+b_u+b_i+p_u^\top q_i$, while [weighted matrix factorization](weighted-matrix-factorization.md) changes the loss for [implicit feedback](implicit-feedback.md). Unlike [classical SVD](classical-svd.md), the optimization is over observed or weighted entries; missing cells are not silently treated as zeros, which is the core issue in [sparse utility matrices and SVD](sparse-utility-matrices-and-svd.md).
 
+In shape terms, $P\in\mathbb R^{|\mathcal U|\times k}$ stores one $k$-dimensional embedding row $p_u$ per user, and $Q\in\mathbb R^{|\mathcal I|\times k}$ stores one embedding row $q_i$ per item. Multiplying $P Q^\top$ reconstructs a dense score matrix $\hat R\in\mathbb R^{|\mathcal U|\times|\mathcal I|}$, where the cell $\hat r_{ui}$ is the dot product $p_u^\top q_i$. The bottleneck dimension $k$ is intentionally much smaller than the number of users or items, so the model must explain many cells through shared latent structure.
+
+![A shape diagram showing a users-by-items score matrix approximated by a users-by-k user-factor matrix times a k-by-items item-factor matrix; one user row and one item column form a highlighted dot product.](../assets/diagrams/matrix-factorization-shapes.svg)
+
 ## Intuition
 
 The model compresses repeated co-preference patterns. If users who like quiet documentaries also like long-form interviews, the two item factors can land near the same direction, and a user factor aligned with that direction will score both highly. The factor dimensions are not guaranteed to be interpretable, but they are useful because they share statistical strength across sparse rows and columns.

@@ -10,7 +10,7 @@ topics:
   - decision-transformer
   - planning
 level: advanced
-status: draft
+status: complete
 page_type: concept
 aliases:
   - "Offline RL"
@@ -21,11 +21,12 @@ prerequisites:
   - "markov-decision-processes.md"
   - "value-functions-and-bellman-equations.md"
 related:
+  - "off-policy-evaluation.md"
   - "q-learning-and-dqn.md"
   - "policy-gradients-and-actor-critic.md"
   - "../19-domain-applications/autonomous-driving.md"
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # Offline and Model-Based Reinforcement Learning
@@ -79,7 +80,7 @@ Simulation makes RL practical when real exploration is expensive. The simulator 
 
 ## Caveats
 
-Offline scores can be misleading because the learned policy changes the action distribution. Before deployment, use off-policy evaluation, held-out scenarios, conservative constraints, and small staged rollouts. For safety-critical systems, RL is usually one component inside a larger assurance process rather than the sole decision-maker.
+Offline scores can be misleading because the learned policy changes the action distribution. Before deployment, use [off-policy evaluation](off-policy-evaluation.md), held-out scenarios, conservative constraints, and small staged rollouts. For safety-critical systems, RL is usually one component inside a larger assurance process rather than the sole decision-maker.
 
 ## Connections
 

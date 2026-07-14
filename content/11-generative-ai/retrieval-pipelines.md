@@ -31,6 +31,19 @@ The pipeline has two contracts. The offline contract builds searchable records: 
 
 Those logs make failures diagnosable. A bad answer can come from missing ingestion, stale permissions, poor chunk boundaries, a query rewrite that removed the key term, a dense index that missed an exact identifier, a reranker that preferred fluent but irrelevant text, or context packing that dropped the decisive passage.
 
+```mermaid
+flowchart TD
+  Corpus[Source corpus] --> Chunk[Chunking]
+  Chunk --> Embed[Embedding and lexical indexing]
+  Embed --> Index[Searchable index with permissions and versions]
+  Query[User query] --> Rewrite[Query rewrite and filters]
+  Rewrite --> Retrieve[Hybrid retrieval over the index]
+  Index --> Retrieve
+  Retrieve --> Rerank[Reranking]
+  Rerank --> Pack[Context packing and citation validation]
+  Pack --> Model[Generative model]
+```
+
 ## Concrete artifact
 
 ```json

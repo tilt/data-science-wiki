@@ -227,4 +227,4 @@ Forecast ensembling combines candidates from [statistical forecasting](statistic
 ## References
 
 - [Hyndman & Athanasopoulos, FPP3: Forecast combinations](https://otexts.com/fpp3/combinations.html)
-- [Nixtla StatsForecast documentation](https://nixtlaverse.nixtla.io/statsforecast/index.html)
+- [Nixtla StatsForecast documentation](https://nixtla.github.io/statsforecast/)

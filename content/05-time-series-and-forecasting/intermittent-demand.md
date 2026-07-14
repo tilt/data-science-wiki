@@ -79,4 +79,4 @@ Intermittent demand is a special case of [demand forecasting](demand-forecasting
 ## References
 
 - [Hyndman & Athanasopoulos, FPP3: Time series of counts](https://otexts.com/fpp3/counts.html)
-- [Nixtla StatsForecast intermittent-demand model index](https://nixtlaverse.nixtla.io/statsforecast/index.html)
+- [Nixtla StatsForecast intermittent-demand model index](https://nixtla.github.io/statsforecast/)

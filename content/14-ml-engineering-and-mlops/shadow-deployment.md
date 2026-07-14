@@ -29,6 +29,15 @@ A shadow deployment sends production requests to the current service and copies 
 
 The stable path remains authoritative. The shadow path must be side-effect free: no emails, charges, database writes, recommendation impressions, or policy actions. Every copied request should carry the same correlation ID so [observability](observability.md) can compare stable and shadow behavior.
 
+```mermaid
+flowchart TD
+  Request[Production request] --> Stable[Stable model: authoritative response]
+  Stable --> User[User]
+  Request --> Shadow[Shadow model: side-effect free]
+  Shadow --> Logs[Log scores and latency with a correlation ID]
+  Logs --> Compare[Compare stable versus shadow behavior]
+```
+
 ## Artifact: Shadow Routing Policy
 
 ```yaml

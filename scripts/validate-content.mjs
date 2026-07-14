@@ -211,6 +211,22 @@ for (const file of files) {
     }
   }
 
+  // Guard against a literal "|" inside inline math within a table row. Markdown
+  // parses "|" as a column separator, so "$P(s'|s)$" silently splits the cell
+  // and corrupts the table (and prettier then reflows the broken grid). Strip
+  // code first so backticked currency like `$42.10` is ignored, and only flag
+  // spans that also carry a LaTeX-structure char (\ _ ^) so bare currency such
+  // as "$0.02/GB | $40" is not a false positive. Use \mid instead of a raw "|".
+  const bodyNoCode = body.replace(/```[\s\S]*?```/g, "").replace(/`[^`]*`/g, "")
+  for (const line of bodyNoCode.split("\n")) {
+    if (!/^\s*\|.*\|/.test(line)) continue
+    for (const span of line.matchAll(/\$[^$\n]+\$/g)) {
+      if (span[0].includes("|") && /[\\_^]/.test(span[0])) {
+        fail(rel + " has a literal | inside inline math in a table cell (use \\mid): " + span[0])
+      }
+    }
+  }
+
   for (const m of raw.matchAll(linkRe)) {
     let href = m[1].trim().replace(/^<|>$/g, "")
     if (!href || href.startsWith("#") || /^[a-z][a-z0-9+.-]*:/i.test(href)) continue

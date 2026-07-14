@@ -45,6 +45,17 @@ The score $s(q,d)$ is high when the two vectors point in a similar direction. Le
 
 Document vectors can be precomputed and stored in [vector indexes](vector-indexes.md); query vectors are computed at request time. This is cheaper than a cross-encoder [reranking](reranking.md) model because it does not jointly encode every query-document pair.
 
+```mermaid
+flowchart TD
+  Docs[Documents] --> DEnc[Document encoder]
+  DEnc --> Zd[Document vectors in a vector index]
+  Query[Query] --> QEnc[Query encoder]
+  QEnc --> Zq[Query vector]
+  Zq --> Sim[Cosine similarity over candidates]
+  Zd --> Sim
+  Sim --> Ranked[Ranked documents]
+```
+
 ## Worked example
 
 This snippet builds toy dense embeddings with synonym-like vectors and ranks documents by query-document cosine similarity.

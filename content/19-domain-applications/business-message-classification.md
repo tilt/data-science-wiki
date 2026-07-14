@@ -36,7 +36,7 @@ Marketing lifecycle classification is one concrete use case, but the same patter
 
 ## Executed Artifact
 
-This executed tiny TF-IDF logistic-regression example intentionally used only eight training messages and two held-out messages.
+To show how message-type routing can be learned from wording alone, the example below trains a TF-IDF logistic-regression classifier to separate promotional, transactional, and nurture messages. It deliberately uses only eight training and two held-out messages, so it illustrates the setup rather than a trustworthy score.
 
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer

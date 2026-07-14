@@ -27,9 +27,7 @@ A data warehouse stores integrated, historical, queryable data for analytics. It
 
 ## Warehouse mechanism
 
-Warehouses separate raw landing data from curated analytical models. A common flow is raw orders -> cleaned staging -> facts and dimensions from [dimensional-modelling](dimensional-modelling.md). I ran this SQLite aggregate as the final mart layer:
-
-This snippet aggregates paid raw orders into daily warehouse-style revenue rows with SQL grouping.
+Warehouses separate raw landing data from curated analytical models. A common flow is raw orders -> cleaned staging -> facts and dimensions from [dimensional-modelling](dimensional-modelling.md). The mart layer is where business definitions live: the SQLite aggregate below turns raw orders into daily revenue, and that metric means what it means only because the query restricts to `status = 'paid'` before grouping by day.
 
 ```python
 import sqlite3
@@ -62,6 +60,15 @@ The metric is only meaningful because the query encodes a status filter. In prod
 ## Architecture
 
 Warehouse layers usually separate `raw`, `staging`, `intermediate`, and `mart` schemas. [ETL and ELT](etl-and-elt.md) determines whether transforms run before or after loading, but modern cloud warehouses typically favor ELT because storage is cheap and SQL engines scale independently. [BigQuery](bigquery.md) adds partitioning and clustering so table layout can reduce scanned bytes for common predicates.
+
+```mermaid
+flowchart TD
+  Sources[Source systems] --> Raw[Raw: immutable landing data]
+  Raw --> Staging[Staging: cleaned and typed]
+  Staging --> Intermediate[Intermediate: reusable business logic]
+  Intermediate --> Mart[Mart: facts and dimensions]
+  Mart --> Consumers[Dashboards, analysis, and feature pipelines]
+```
 
 ## Failure modes
 

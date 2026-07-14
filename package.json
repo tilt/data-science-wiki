@@ -18,6 +18,7 @@
     "test": "tsx --test",
     "validate:content": "node scripts/validate-content.mjs",
     "check-links": "node scripts/check-links.mjs",
+    "check-external-links": "node scripts/check-external-links.mjs",
     "portability-check": "node scripts/portability-check.mjs",
     "test:mermaid": "node scripts/check-mermaid-rendering.mjs"
   },

@@ -29,6 +29,14 @@ In ML systems, microservices split responsibilities such as feature retrieval, m
 
 Each service owns an API contract, deployment unit, telemetry, and failure policy. A typical synchronous decision path is application API -> feature service -> [model-serving](model-serving.md) service -> policy service. A slow dependency can consume the whole user-facing latency budget, so [reliability](reliability.md) depends on timeouts, bulkheads, retries with limits, and fallbacks.
 
+```mermaid
+flowchart TD
+  App[Application API] --> Feature[Feature service]
+  Feature --> Scorer[Model-serving service]
+  Scorer --> Policy[Policy and decision service]
+  Policy --> Response[Decision returned to the application]
+```
+
 ## Artifact: Service Boundary Sketch
 
 ```yaml

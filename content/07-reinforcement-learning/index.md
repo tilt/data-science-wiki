@@ -13,7 +13,7 @@ topics:
   - offline-rl
   - rlhf
 level: foundational
-status: draft
+status: complete
 page_type: area-index
 aliases:
   - "Reinforcement Learning"
@@ -26,7 +26,7 @@ related:
   - "../19-domain-applications/autonomous-driving.md"
   - "../18-responsible-ai-safety-and-governance/index.md"
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # Reinforcement Learning
@@ -41,16 +41,23 @@ The core loop is simple, but the learning problem is hard because actions affect
 
 - [Markov Decision Processes](markov-decision-processes.md)
 - [Value Functions and Bellman Equations](value-functions-and-bellman-equations.md)
+- [Temporal-Difference Learning](temporal-difference-learning.md)
 - [Q-Learning and DQN](q-learning-and-dqn.md)
 - [Policy Gradients and Actor-Critic Methods](policy-gradients-and-actor-critic.md)
+- [Proximal Policy Optimization](proximal-policy-optimization.md)
+- [Exploration in Reinforcement Learning](exploration-in-reinforcement-learning.md)
+- [Reward Design and Shaping](reward-design-and-shaping.md)
 - [Offline and Model-Based Reinforcement Learning](offline-and-model-based-reinforcement-learning.md)
+- [Off-Policy Evaluation](off-policy-evaluation.md)
 - [Reinforcement Learning from Human Feedback](reinforcement-learning-from-human-feedback.md)
 
 ## Learning Map
 
-Start with [Markov decision processes](markov-decision-processes.md) to name states, actions, rewards, transitions, and discounting. Then read [value functions and Bellman equations](value-functions-and-bellman-equations.md) to see how future reward becomes a recursive prediction problem.
+Start with [Markov decision processes](markov-decision-processes.md) to name states, actions, rewards, transitions, and discounting. Then read [value functions and Bellman equations](value-functions-and-bellman-equations.md) to see how future reward becomes a recursive prediction problem, and [temporal-difference learning](temporal-difference-learning.md) to learn those values online by bootstrapping.
 
-For algorithms, [Q-learning and DQN](q-learning-and-dqn.md) covers value-based control, while [policy gradients and actor-critic methods](policy-gradients-and-actor-critic.md) covers direct policy optimization. [Offline and model-based RL](offline-and-model-based-reinforcement-learning.md) explains methods that learn from logged data or learned dynamics instead of unrestricted trial-and-error. [RLHF](reinforcement-learning-from-human-feedback.md) connects reward modeling and preference optimization to [LLM training](../11-generative-ai/llm-training.md).
+For algorithms, [Q-learning and DQN](q-learning-and-dqn.md) covers value-based control, while [policy gradients and actor-critic methods](policy-gradients-and-actor-critic.md) covers direct policy optimization and [proximal policy optimization](proximal-policy-optimization.md) makes those updates stable enough for production. [Exploration in reinforcement learning](exploration-in-reinforcement-learning.md) and [reward design and shaping](reward-design-and-shaping.md) address the two problems every RL system faces: gathering enough information, and specifying an objective that cannot be gamed.
+
+For deployment, [offline and model-based RL](offline-and-model-based-reinforcement-learning.md) explains methods that learn from logged data or learned dynamics instead of unrestricted trial-and-error, and [off-policy evaluation](off-policy-evaluation.md) estimates a new policy's value before it is ever run live. [RLHF](reinforcement-learning-from-human-feedback.md) connects reward modeling and preference optimization to [LLM training](../11-generative-ai/llm-training.md).
 
 ## When RL Is the Right Tool
 

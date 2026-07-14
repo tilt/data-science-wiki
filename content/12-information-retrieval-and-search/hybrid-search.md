@@ -44,6 +44,16 @@ Here $s(d)$ is the fused score for document $d$, and $\lambda\in[0,1]$ sets the 
 
 RRF avoids score calibration; weighted sums give more control when a labelled development set is available.
 
+```mermaid
+flowchart TD
+  Query[Query] --> BM25[BM25 lexical retriever]
+  Query --> Dense[Dense embedding retriever]
+  BM25 --> Fuse[Fusion: reciprocal rank or weighted score]
+  Dense --> Fuse
+  Fuse --> Merged[Merged candidate set]
+  Merged --> Rerank[Reranking and filters]
+```
+
 ## Worked example
 
 This snippet combines sparse and dense rankings with reciprocal-rank fusion and prints the fused document order.
@@ -79,5 +89,5 @@ Fusion can hide regressions: a dense retriever may improve paraphrase queries wh
 ## References
 
 - [Elasticsearch Reference: Reciprocal rank fusion](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion)
-- [Cormack, Clarke, and Buettcher, Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods](https://plg.uwaterloo.ca/~gvcormac/cormacksigir09-rrf.pdf)
+- [Cormack, Clarke, and Buettcher, Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods](https://doi.org/10.1145/1571941.1572114)
 - [Bruch, Gai, and Ingber, An Analysis of Fusion Functions for Hybrid Retrieval](https://arxiv.org/abs/2210.11934)

@@ -29,6 +29,16 @@ Training pipelines automate the steps that turn versioned data into an evaluated
 
 A pipeline typically extracts point-in-time data, validates schema, builds features, trains, evaluates, records an [experiment tracking](experiment-tracking.md) run, registers a candidate [model version](model-versioning.md), and publishes a release report. It consumes [dataset versioning](dataset-versioning.md) manifests and often depends on upstream [feature pipelines](../13-data-engineering/feature-pipelines.md).
 
+```mermaid
+flowchart TD
+  Data[Point-in-time data and dataset manifest] --> Validate[Validate schema and check label leakage]
+  Validate --> Features[Build features]
+  Features --> Train[Train model]
+  Train --> Evaluate[Evaluate against release gates]
+  Evaluate --> Register[Register candidate model version]
+  Register --> Report[Publish release report]
+```
+
 ## Artifact: Pipeline DAG
 
 ```yaml

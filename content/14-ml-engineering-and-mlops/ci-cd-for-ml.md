@@ -29,6 +29,16 @@ CI/CD for ML extends ordinary software delivery with checks for data contracts, 
 
 The pipeline should separately test code, data, model artifact, and deployment contract. Continuous integration blocks broken changes; continuous delivery promotes an approved [model-versioning](model-versioning.md) record through staging and production using [docker](docker.md) images and rollout controls.
 
+```mermaid
+flowchart TD
+  Change[Code, data, or model change] --> TestCode[Test code and contracts]
+  TestCode --> TestData[Validate dataset contract]
+  TestData --> EvalModel[Evaluate candidate against gates]
+  EvalModel --> Build[Build serving image]
+  Build --> Staging[Promote to staging]
+  Staging --> Production[Promote to production with a rollback target]
+```
+
 ## Artifact: Promotion Workflow
 
 ```yaml

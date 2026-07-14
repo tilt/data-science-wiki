@@ -43,6 +43,15 @@ $$
 
 HNSW does this with greedy routing over a layered proximity graph; partitioning methods do it by searching only promising cells; quantized indexes trade vector precision for smaller memory footprints.
 
+```mermaid
+flowchart TD
+  Query[Query vector] --> Route[Route to a candidate set: graph or cells]
+  Route --> Candidates[Small candidate subset]
+  Candidates --> Score[Compute distances on candidates only]
+  Score --> TopK[Approximate top k]
+  TopK --> Rescore[Optional exact rescore or rerank]
+```
+
 ## Worked example
 
 This snippet compares exact nearest neighbours with a coarse cell-restricted candidate search to show the speed-recall tradeoff in approximate retrieval.

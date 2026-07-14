@@ -29,6 +29,16 @@ A canary deployment routes a small, controlled share of production traffic to a 
 
 Canaries need three contracts: traffic assignment, guardrail metrics, and rollback triggers. Traffic can be random, sticky by user, regional, or feature-flagged. Guardrails should include service health, score distribution, fallback rate, and delayed product or label outcomes. The first decision is usually "continue ramp or [roll back](rollbacks.md)," not "declare the model better."
 
+```mermaid
+flowchart TD
+  Traffic[Production traffic] --> Router[Traffic split]
+  Router --> Stable[Stable model: majority of traffic]
+  Router --> Canary[Canary model: small share]
+  Canary --> Guardrails[Guardrail metrics: errors, latency, drift]
+  Guardrails --> Ramp[Continue ramp]
+  Guardrails --> Rollback[Roll back]
+```
+
 ## Worked Guardrail
 
 Suppose the baseline path sees 37 errors in 50,000 requests and the canary path sees 9 errors in 5,000 requests:

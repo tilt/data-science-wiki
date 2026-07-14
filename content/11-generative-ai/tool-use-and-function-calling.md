@@ -31,6 +31,17 @@ A language model does not execute tools internally. It emits a structured reques
 
 The model sees available [tool schemas](tool-schemas.md), task context, and prior observations. It then generates either a final answer or a tool call. The orchestrator checks schema validity, permissions, idempotency, timeouts, and [prompt injection](prompt-injection.md) risk before execution. [Tool routing](tool-routing.md) can be deterministic, model-selected, or hybrid, but the final execution boundary should remain outside the model.
 
+```mermaid
+flowchart TD
+  Model[Model with tool schemas and context] --> Decide[Emit final answer or tool call]
+  Decide --> Answer[Final answer]
+  Decide --> Call[Tool call: name and arguments]
+  Call --> Checks[Orchestrator: validate schema, permissions, injection risk]
+  Checks --> Execute[Execute tool outside the model]
+  Execute --> Observation[Append result as an observation]
+  Observation --> Model
+```
+
 ## Concrete artifact
 
 ```json

@@ -40,6 +40,15 @@ $$
 
 Gradients through convolution are still handled by [backpropagation](backpropagation.md); the key difference is that shared weights accumulate gradient contributions from every spatial position where the filter was used.
 
+```mermaid
+flowchart TD
+  Image[Input image] --> Conv[Convolution: shared filters over the grid]
+  Conv --> Act[Nonlinearity]
+  Act --> Pool[Pooling or strided reduction]
+  Pool --> Stack[Repeat: deeper layers see larger receptive fields]
+  Stack --> Head[Flatten or pool, then classifier]
+```
+
 ## Worked example
 
 This snippet applies a small convolutional filter to a toy image and reports the output alongside the receptive field after two $3\times3$ layers.

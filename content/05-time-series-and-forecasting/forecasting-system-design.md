@@ -123,5 +123,5 @@ System design connects [forecasting problem formulation](forecasting-problem-for
 
 ## References
 
-- [Nixtla StatsForecast documentation](https://nixtlaverse.nixtla.io/statsforecast/index.html)
+- [Nixtla StatsForecast documentation](https://nixtla.github.io/statsforecast/)
 - [sktime forecasting tutorial](https://www.sktime.net/docs/examples/forecasting/)

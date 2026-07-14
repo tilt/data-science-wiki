@@ -64,6 +64,19 @@ The query joins transactions only when `event_ts < label_ts`, so the feature is 
 
 Feature pipelines sit between [data-pipelines](data-pipelines.md) and [training-pipelines](../14-ml-engineering-and-mlops/training-pipelines.md). Batch features can be built in a warehouse with [dbt](dbt.md) or SQL; low-latency features may require streaming updates from [batch-versus-streaming](batch-versus-streaming.md) systems into an online store. [Dataset-versioning](../14-ml-engineering-and-mlops/dataset-versioning.md), [data-lineage](data-lineage.md), and [data-quality](data-quality.md) checks must travel with the training dataset.
 
+The same feature definitions must feed both paths; when the offline and online paths diverge, the result is training-serving skew.
+
+```mermaid
+flowchart TD
+  Data[Curated data from data pipelines] --> Defs[Shared feature definitions]
+  Defs --> Batch[Batch path: warehouse or dbt features]
+  Defs --> Stream[Streaming path: low-latency updates]
+  Batch --> Offline[Offline store for training]
+  Stream --> Online[Online store for serving]
+  Offline --> Train[Training with point-in-time joins]
+  Online --> Serve[Serving under low latency]
+```
+
 ## Failure modes
 
 Training-serving skew appears when offline SQL uses a different join, window, or fill value than online serving code. Backfills can rewrite historical features unless snapshot identifiers are pinned. Aggregations over late events need explicit watermark behavior, not accidental dependence on ingestion order.

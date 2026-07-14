@@ -1,4 +1,4 @@
-.PHONY: help doctor setup install preview preview-watch build clean validate lint test check-links check-content portability-check format ci deploy-info new-page new-topic generate-subtopics improve-generated-content export-mkdocs serve-build list-stubs list-drafts
+.PHONY: help doctor setup install preview preview-watch build clean validate lint test check-links check-external-links check-content portability-check format ci deploy-info new-page new-topic generate-subtopics improve-generated-content export-mkdocs serve-build list-stubs list-drafts list-stale
 
 PORT ?= 8080
 WS_PORT ?= $(shell expr $(PORT) + 1)
@@ -44,6 +44,9 @@ test: ## Run automated tests.
 check-links: ## Detect broken internal Markdown links and missing assets.
 	node scripts/check-links.mjs
 
+check-external-links: ## Check external URL liveness over the network (non-blocking; add ARGS=--strict to fail).
+	node scripts/check-external-links.mjs $(ARGS)
+
 check-content: ## Validate front matter, indexes, duplicate slugs, aliases, and hygiene.
 	node scripts/validate-content.mjs
 
@@ -80,3 +83,6 @@ list-stubs: ## List stub pages.
 
 list-drafts: ## List draft pages.
 	node scripts/list-content.mjs drafts
+
+list-stale: ## List pages whose last_reviewed is older than DAYS (default 180).
+	node scripts/list-stale.mjs $(DAYS)

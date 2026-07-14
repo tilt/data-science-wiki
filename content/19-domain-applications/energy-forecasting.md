@@ -35,9 +35,7 @@ The UCI household power dataset is a concrete public artifact: it contains 2,075
 
 ## Executed Artifact
 
-This executed hourly load toy compared yesterday-same-hour against a weather-calendar gradient boosting regressor.
-
-This snippet simulates hourly load from temperature and calendar effects, then compares a same-hour-yesterday baseline with a weather-calendar gradient-boosted forecaster.
+To show how much of the load signal lives in weather and calendar features, the example below pits a same-hour-yesterday baseline against a gradient-boosted model that also sees temperature and calendar terms, and it reports the peak-hour error separately because average accuracy can hide missed ramps.
 
 ```python
 import os

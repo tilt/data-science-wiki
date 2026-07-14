@@ -29,6 +29,19 @@ Batch inference scores many entities on a schedule; online inference scores one 
 
 A batch path usually reads a point-in-time feature snapshot, writes predictions to a table, and exposes them through lookup. An online path validates a request, fetches fresh features, runs inference synchronously, and returns a bounded-latency response. The contract should name the scoring time, feature freshness, model version, fallback behavior, and owner of stale predictions.
 
+```mermaid
+flowchart TD
+  Model[Registered model version] --> Batch[Batch path]
+  Model --> Online[Online path]
+  Batch --> Snapshot[Read point-in-time feature snapshot]
+  Snapshot --> Write[Write predictions to a table]
+  Write --> Lookup[Serve by lookup]
+  Online --> Request[Validate request]
+  Request --> Fresh[Fetch fresh features]
+  Fresh --> Infer[Synchronous inference under a latency bound]
+  Infer --> Fallback[Fall back to last batch score if needed]
+```
+
 ## Artifact: Dual-Mode Contract
 
 ```yaml

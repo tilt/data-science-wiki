@@ -141,4 +141,4 @@ Statistical forecasting collects [ARIMA](arima.md), [SARIMA](sarima.md), [expone
 ## References
 
 - [Hyndman & Athanasopoulos, FPP3: The forecaster toolbox](https://otexts.com/fpp3/toolbox.html)
-- [Nixtla StatsForecast documentation](https://nixtlaverse.nixtla.io/statsforecast/index.html)
+- [Nixtla StatsForecast documentation](https://nixtla.github.io/statsforecast/)

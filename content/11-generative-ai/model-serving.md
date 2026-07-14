@@ -29,6 +29,18 @@ Model serving is the runtime layer that turns application requests into model re
 
 A serving path typically runs request normalization, policy checks, [context construction](context-construction.md), model selection, model call, streaming or full decode, [structured output](structured-output.md) validation, logging, and retry or fallback. Local serving adds scheduler choices such as batching, KV-cache reuse, [quantization](quantization.md), and GPU memory management. Hosted serving adds provider rate limits, network latency, data-retention policy, and vendor-specific request features.
 
+```mermaid
+flowchart TD
+  Request[Application request] --> Normalize[Request normalization and policy checks]
+  Normalize --> Context[Context construction]
+  Context --> Select[Model selection]
+  Select --> Call[Model call: streaming or full decode]
+  Call --> Validate[Structured-output validation]
+  Validate --> Respond[Log and return response]
+  Validate --> Fallback[Retry or fall back to another model]
+  Fallback --> Call
+```
+
 The serving layer should log enough to reproduce and debug behavior without storing sensitive prompts unnecessarily: model identifier, prompt or context hash, tool versions, schema version, token counts, latency, retry count, validation result, and final status.
 
 ## Concrete artifact

@@ -25,3 +25,32 @@ A strong page usually has:
 - references when factual claims depend on external sources
 
 It does not need every possible section. Remove empty structure before adding prose to satisfy a template.
+
+## Code is a demonstration, not the explanation
+
+A code snippet confirms and makes concrete an idea the prose has already
+explained. It is never the place a concept is first defined.
+
+- **Delete-the-code test.** If every fenced snippet were removed, the page must
+  still teach the concept through prose and formulas. If it would not, the
+  explanation is under-built — fix the prose, do not lean on the code.
+- Explain the mechanism in words and, where the topic is mathematical, an
+  understandable formula with every symbol defined. The reader should never
+  have to decompile Python to recover what the code means.
+- Open a snippet by stating **what it demonstrates and why** ("To show why
+  clustering cannot replace supervised detection, …"), not by narrating what the
+  code does line by line ("This snippet trains a classifier and prints AUC").
+- After the output, interpret it: name the takeaway the numbers illustrate.
+
+## Formatting gotchas
+
+- **Pipes in table-cell math.** Markdown reads `|` as a column separator, so a
+  literal pipe inside inline math in a table cell (for example `$P(s'\mid s)$`
+  written as `$P(s'|s)$`) silently splits the cell and corrupts the table;
+  Prettier then reflows the broken grid, hiding the cause. Write `\mid` (or
+  `\vert`) instead of a raw `|` inside `$...$`. `make check-content` fails on
+  this. Display math in `$$...$$` blocks is unaffected because it is not inside
+  a table row.
+- **Mermaid labels.** Keep node labels plain text; avoid parentheses, quotes,
+  and raw `|` so diagrams render under the repository's `htmlLabels: false`
+  Mermaid patch. Colons and commas inside `[...]` labels are fine.

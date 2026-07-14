@@ -54,6 +54,15 @@ That identifier is not a replacement for [data-lineage](data-lineage.md), but it
 
 Most pipelines have four boundaries: ingestion writes immutable raw data to [cloud-storage](cloud-storage.md), transformation builds curated tables, validation enforces [data-quality](data-quality.md), and publication exposes a table, file set, feature view, or dashboard source. [ETL and ELT](etl-and-elt.md) changes where transformation happens, not the need for those boundaries.
 
+```mermaid
+flowchart TD
+  Source[Source systems] --> Ingest[Ingestion: immutable raw data in cloud storage]
+  Ingest --> Transform[Transformation: build curated tables]
+  Transform --> Validate[Validation: enforce data-quality gates]
+  Validate --> Publish[Publication: table, file set, feature view, or dashboard]
+  Publish --> Downstream[Training pipelines and analytics]
+```
+
 Pipelines that feed [training pipelines](../14-ml-engineering-and-mlops/training-pipelines.md) need snapshot identifiers and point-in-time semantics; otherwise a later training run can silently see different features from the same nominal date.
 
 ## Failure modes

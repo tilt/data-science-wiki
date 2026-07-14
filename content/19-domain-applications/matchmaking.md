@@ -35,7 +35,7 @@ GroupLens' MovieLens 100K is not a matchmaking dataset, but it is a useful recom
 
 ## Executed Artifact
 
-This executed toy used cosine similarity in both directions and greedily selected non-overlapping reciprocal pairs.
+To show why matchmaking must score both sides of a pair, the example below combines each user's interest with the other side's attractiveness into one reciprocal score, then greedily selects non-overlapping pairs, exposing how early high-reciprocity choices leave weaker leftovers.
 
 ```python
 import numpy as np

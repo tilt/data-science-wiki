@@ -31,6 +31,17 @@ The reliable version is not free-form chat between personas. It is a protocol: r
 
 Shared evidence matters more than role labels. If the researcher passes unsourced prose to the writer, the writer inherits unverified claims. A better handoff passes claim objects with source IDs, confidence, and unresolved questions. The coordinator then decides whether the next role has enough evidence to proceed.
 
+```mermaid
+flowchart TD
+  Coordinator[Coordinator] --> Researcher[Researcher]
+  Researcher --> Handoff[Typed handoff: claims with source IDs]
+  Handoff --> Coordinator
+  Coordinator --> Writer[Writer]
+  Writer --> Reviewer[Reviewer: critique against a rubric]
+  Reviewer --> Coordinator
+  Coordinator --> Output[Final output, or reject and retry]
+```
+
 ## Concrete artifact
 
 ```json

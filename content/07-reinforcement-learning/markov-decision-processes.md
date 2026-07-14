@@ -8,7 +8,7 @@ topics:
   - markov-decision-processes
   - sequential-decision-making
 level: foundational
-status: draft
+status: complete
 page_type: concept
 aliases:
   - "MDP"
@@ -20,7 +20,7 @@ related:
   - "q-learning-and-dqn.md"
   - "../02-probability-and-statistics/markov-chains.md"
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # Markov Decision Processes

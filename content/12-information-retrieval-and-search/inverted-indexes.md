@@ -35,6 +35,16 @@ $$
 
 where $d$ is a document ID, $\operatorname{tf}_{t,d}$ is term frequency, and positions $p_i$ support phrase and proximity queries. Boolean retrieval intersects postings lists; ranked retrieval adds document statistics such as field length and document frequency.
 
+```mermaid
+flowchart TD
+  Docs[Documents] --> Terms[Tokenize into terms]
+  Terms --> Index[Inverted index: term to postings]
+  Query[Query terms] --> Lookup[Look up only the query terms]
+  Index --> Lookup
+  Lookup --> Intersect[Intersect or score postings]
+  Intersect --> Results[Candidate documents]
+```
+
 ## Worked example
 
 This snippet builds a positional inverted index for a tiny corpus and intersects postings lists for an AND query.

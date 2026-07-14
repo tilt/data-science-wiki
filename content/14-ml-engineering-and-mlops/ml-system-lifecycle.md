@@ -29,6 +29,17 @@ The ML system lifecycle is the controlled path from problem framing to data crea
 
 Each stage should produce an artifact that the next stage consumes: a decision brief, dataset manifest, training run, evaluation report, model version, serving contract, rollout record, monitoring dashboard, and retirement note. The lifecycle is circular only when [monitoring](monitoring.md) or incidents create new evidence that justifies another training or policy cycle.
 
+```mermaid
+flowchart TD
+  Frame[Frame: problem and harm model] --> BuildData[Build data: dataset manifest]
+  BuildData --> Train[Train: tracked run]
+  Train --> Evaluate[Evaluate: slice gates]
+  Evaluate --> Deploy[Deploy: model version and serving contract]
+  Deploy --> Operate[Operate: monitoring and incident response]
+  Operate --> Retire[Retire when value ends]
+  Operate --> Train
+```
+
 ## Artifact: Lifecycle Gates
 
 ```yaml

@@ -44,6 +44,19 @@ $$
 
 The $\sqrt{d_k}$ divisor keeps dot-product logits from growing with key dimension. Masks can forbid future tokens or padded positions, which is essential in [language-model architectures](../11-generative-ai/language-model-architecture.md).
 
+```mermaid
+flowchart TD
+  Input[Input sequence] --> Q[Queries Q]
+  Input --> K[Keys K]
+  Input --> V[Values V]
+  Q --> Scores[Score: scaled dot product of Q and K]
+  K --> Scores
+  Scores --> Weights[Softmax over scores gives attention weights]
+  Weights --> Context[Weighted sum of value vectors]
+  V --> Context
+  Context --> Output[Context vectors]
+```
+
 ## Worked example
 
 This snippet computes scaled dot-product attention weights from queries and keys, then forms the context vector as the weighted sum of values.

@@ -10,21 +10,21 @@ topics:
   - ppo
   - sac
 level: intermediate
-status: draft
+status: complete
 page_type: algorithm
 aliases:
   - "Policy Gradient"
   - "Actor-Critic"
-  - "PPO"
   - "SAC"
 prerequisites:
   - "value-functions-and-bellman-equations.md"
 related:
+  - "proximal-policy-optimization.md"
   - "q-learning-and-dqn.md"
   - "reinforcement-learning-from-human-feedback.md"
   - "../01-mathematical-foundations/gradients.md"
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # Policy Gradients and Actor-Critic Methods
@@ -61,6 +61,18 @@ Actor-critic methods split the work:
 
 The critic reduces variance because the actor no longer treats every sampled return as equally informative. The actor still learns from sampled experience, but the critic supplies a shaped learning signal.
 
+```mermaid
+flowchart TD
+  State[State] --> Actor[Actor: policy network]
+  State --> Critic[Critic: value network]
+  Actor --> Action[Action]
+  Action --> Environment[Environment]
+  Environment --> Feedback[Reward and next state]
+  Feedback --> Critic
+  Critic --> Advantage[Advantage estimate]
+  Advantage --> Actor
+```
+
 ## PPO
 
 Proximal Policy Optimization (PPO) limits how far the new policy moves from the old policy during one update. In LLM training, a "PPO loop" usually means repeatedly sampling model responses, scoring them with a reward model, applying a KL penalty against a reference policy, and updating the policy with PPO. With probability ratio
@@ -80,7 +92,7 @@ L^{\text{CLIP}}(\theta)=
 \right].
 $$
 
-The clipping term discourages a large policy update from making a once-good action suddenly much more likely. That makes PPO practical for many deep RL and RLHF systems.
+The clipping term discourages a large policy update from making a once-good action suddenly much more likely. That makes PPO practical for many deep RL and RLHF systems. See [Proximal Policy Optimization](proximal-policy-optimization.md) for generalized advantage estimation, the full training loop, and why PPO dominates RLHF.
 
 ## Soft Actor-Critic
 

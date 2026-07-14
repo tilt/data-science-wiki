@@ -9,7 +9,7 @@ topics:
   - bellman-equations
   - dynamic-programming
 level: foundational
-status: draft
+status: complete
 page_type: concept
 aliases:
   - "Bellman Equations"
@@ -22,7 +22,7 @@ related:
   - "policy-gradients-and-actor-critic.md"
   - "../01-mathematical-foundations/optimization.md"
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # Value Functions and Bellman Equations

@@ -10,7 +10,7 @@ topics:
   - reward-modeling
   - dpo
 level: advanced
-status: draft
+status: complete
 page_type: algorithm
 aliases:
   - "RLHF"
@@ -24,7 +24,7 @@ related:
   - "../11-generative-ai/alignment.md"
   - "../11-generative-ai/instruction-tuning.md"
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # Reinforcement Learning from Human Feedback
@@ -67,6 +67,19 @@ The reward term pushes the model toward preferred responses. The KL penalty keep
 | RLHF policy update     | prompts and sampled responses | reward minus KL penalty            | improves preference reward while limiting drift |
 
 This is why RLHF belongs both to [reinforcement learning](index.md) and [LLM training](../11-generative-ai/llm-training.md).
+
+```mermaid
+flowchart TD
+  Pretrained[Pretrained base model] --> SFT[Supervised fine-tuning on demonstrations]
+  SFT --> Reference[Reference policy]
+  Prefs[Human preference pairs] --> Reward[Reward model]
+  Reference --> PPO[PPO update: reward minus KL penalty to reference]
+  Reward --> PPO
+  Reference --> DPO[Direct preference optimization]
+  Prefs --> DPO
+  PPO --> Aligned[Aligned policy]
+  DPO --> Aligned
+```
 
 ## Direct Preference Optimization
 

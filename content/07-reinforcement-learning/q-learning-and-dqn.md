@@ -9,7 +9,7 @@ topics:
   - dqn
   - value-based-rl
 level: intermediate
-status: draft
+status: complete
 page_type: algorithm
 aliases:
   - "Q-Learning"
@@ -18,11 +18,12 @@ aliases:
 prerequisites:
   - "value-functions-and-bellman-equations.md"
 related:
+  - "temporal-difference-learning.md"
   - "policy-gradients-and-actor-critic.md"
   - "offline-and-model-based-reinforcement-learning.md"
   - "../06-deep-learning/convolutional-neural-networks.md"
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-14
 ---
 
 # Q-Learning and DQN

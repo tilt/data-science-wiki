@@ -27,9 +27,7 @@ Data quality is not a dashboard of vague health indicators. It is a set of execu
 
 ## Check mechanism
 
-I ran these checks against a small payments table with one null amount, one duplicate payment id, and one unexpected currency:
-
-This snippet runs SQL quality checks for missing values, duplicate keys, and invalid ranges against an in-memory table.
+Each expectation becomes a query that counts violations, so an abstract property turns into a number a gate can act on. Against a small payments table seeded with one null amount, one duplicate `payment_id`, and one non-USD row, completeness is the count of null amounts, uniqueness is the count of `payment_id` values that appear more than once, and validity is the count of rows outside the allowed currency set:
 
 ```python
 import sqlite3
