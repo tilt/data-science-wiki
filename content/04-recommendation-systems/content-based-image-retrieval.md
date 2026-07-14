@@ -55,6 +55,8 @@ nearest_image 0
 
 The query retrieves the nearest visual vector. [Image-based recommendation](image-based-recommendation.md) adds user preference or collaborative scores so the result is not merely a near-duplicate search.
 
+In the example, items 0 and 1 are almost collinear with the query vector, so their cosine scores are near 1. Items 2 and 3 point toward different feature dimensions, so they are much less similar even if their raw vector magnitudes were comparable. This is why embedding normalization and nearest-neighbor indexing are part of the retrieval contract, not incidental implementation details.
+
 ## Caveats
 
 Visual similarity can overemphasize color, background, camera angle, or brand presentation. A user may want complements rather than substitutes. Safety filters, inventory constraints, and deduplication belong in the downstream [retrieval and ranking architecture](retrieval-and-ranking-architectures.md).

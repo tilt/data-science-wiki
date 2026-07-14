@@ -52,7 +52,19 @@ last_reviewed: 2026-07-10
 
 ## Summary
 
-Time-Series Forecasting is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+Time-series forecasting predicts future values from observations ordered in time. The modeling problem is inseparable from the decision: what is known at the forecast origin, which horizon matters, how uncertainty is represented, and how errors translate into cost. Validation must respect temporal order, otherwise future information leaks into training.
+
+This section moves from basic time-series structure to statistical models, machine-learning models, evaluation, probabilistic forecasts, reconciliation, monitoring, and domain examples.
+
+## Forecasting Route
+
+| Question | Start with | Then read |
+| --- | --- | --- |
+| What is the target and horizon? | [Time Series Fundamentals](time-series-fundamentals.md), [Forecasting Problem Formulation](forecasting-problem-formulation.md) | [Forecasting Data and Covariates](forecasting-data-and-covariates.md) |
+| What structure is in the series? | [Trend Seasonality Cycles Noise](trend-seasonality-cycles-noise.md), [Stationarity](stationarity.md) | [Autocorrelation and Partial Autocorrelation](autocorrelation-and-partial-autocorrelation.md) |
+| Which model family fits? | [Statistical Forecasting](statistical-forecasting.md), [Machine Learning Forecasting](machine-learning-forecasting.md) | [Deep Learning Forecasting](deep-learning-forecasting.md), [Transformer Based Forecasting](transformer-based-forecasting.md) |
+| How should forecasts be judged? | [Forecast Evaluation](forecast-evaluation.md), [Rolling Origin Validation](rolling-origin-validation.md) | [Forecast Error Metrics](forecast-error-metrics.md), [Business-Cost-Aware Forecasting Losses](business-cost-aware-forecasting-losses.md) |
+| How is uncertainty handled? | [Probabilistic Forecasting](probabilistic-forecasting.md), [Prediction Intervals](prediction-intervals.md) | [Quantile Loss](quantile-loss.md), [Conformal Prediction for Forecasting](conformal-prediction-for-forecasting.md) |
 
 ## Subtopics
 

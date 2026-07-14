@@ -37,7 +37,18 @@ last_reviewed: 2026-07-10
 
 ## Summary
 
-Experimentation and Evaluation is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+Experimentation and evaluation turns model behavior into evidence. Offline evaluation estimates behavior before launch, online experiments measure user or business impact under real traffic, and human or model-assisted review handles cases where there is no simple label. The core question is always the same: what decision will this evidence support, and what failure modes would the aggregate metric hide?
+
+This section connects statistical testing from [Probability and Statistics](../02-probability-and-statistics/index.md), forecasting backtests from [Time-Series Forecasting](../05-time-series-and-forecasting/index.md), and production monitoring from [ML Engineering and MLOps](../14-ml-engineering-and-mlops/index.md).
+
+## Evaluation Route
+
+| Situation | Start with | Watch for |
+| --- | --- | --- |
+| Model selection before launch | [Offline Evaluation](offline-evaluation.md), [Golden Datasets](golden-datasets.md) | leakage, stale labels, slice regressions |
+| Product or policy change | [Online Experiments](online-experiments.md), [A/B Testing](a-b-testing.md) | interference, novelty effects, underpowered tests |
+| Generative or subjective outputs | [Human Evaluation](human-evaluation.md), [LLM-as-Judge](llm-as-judge.md), [Paired Evaluation](paired-evaluation.md) | rubric drift, order bias, judge bias |
+| Safety-sensitive systems | [Risk Weighted Error Taxonomies](risk-weighted-error-taxonomies.md), [Abstention](abstention.md), [Coverage](coverage.md) | hidden high-cost errors |
 
 ## Subtopics
 

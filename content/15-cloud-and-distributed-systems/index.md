@@ -32,7 +32,18 @@ last_reviewed: 2026-07-10
 
 ## Summary
 
-Cloud and Distributed Systems is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+Cloud and distributed systems covers the infrastructure layer that makes data and ML systems usable at scale: managed compute, storage, accelerators, distributed processing, reliability, and cost control. The recurring tradeoff is locality versus elasticity: cloud services make capacity easy to obtain, but network boundaries, storage formats, accelerator memory, and operational failure modes decide whether a design is actually fast, reliable, and affordable.
+
+Use this section when a model or data pipeline stops being a notebook problem and becomes a system problem. For ML-specific deployment concerns, pair it with [ML Engineering and MLOps](../14-ml-engineering-and-mlops/index.md); for data layout and orchestration, pair it with [Data Engineering](../13-data-engineering/index.md).
+
+## Study Route
+
+| Need | Start with | Then read |
+| --- | --- | --- |
+| Choose cloud primitives | [AWS Fundamentals](aws-fundamentals.md), [Google Cloud Fundamentals](google-cloud-fundamentals.md) | [Managed Compute](managed-compute.md), [Managed Storage](managed-storage.md) |
+| Scale data workloads | [Distributed Data Processing](distributed-data-processing.md) | [Scalability](scalability.md), [Reliability](reliability.md) |
+| Train or serve large models | [GPU Systems](gpu-systems.md) | [Distributed Model Training](distributed-model-training.md), [Storage and Decoding Bottlenecks](storage-and-decoding-bottlenecks.md) |
+| Control production spend | [Cost Management](cost-management.md) | [Managed Compute](managed-compute.md), [Managed Storage](managed-storage.md) |
 
 ## Subtopics
 

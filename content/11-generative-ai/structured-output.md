@@ -28,29 +28,29 @@ Structured output asks the model to return data in a parseable shape, usually JS
 
 The schema defines fields, types, required keys, enums, and whether extra properties are allowed. Generation can be constrained by the provider, but applications should still validate the parsed object. [Tool schemas](tool-schemas.md) use the same idea for model-proposed tool calls.
 
-## Executed artifact
+## Schema Example
 
-```python
-schema_required = {"merchant": str, "total": float, "currency": str}
-records = [
-    {"merchant": "Miro Cafe", "total": 12.4, "currency": "EUR"},
-    {"merchant": "Miro Cafe", "total": "12.40"},
-]
-print("SCHEMA_VALIDATION")
-for record in records:
-    valid = all(key in record and isinstance(record[key], typ) for key, typ in schema_required.items())
-    print(record, "valid", valid)
+```json
+{
+  "type": "object",
+  "required": ["merchant", "total", "currency"],
+  "properties": {
+    "merchant": {"type": "string"},
+    "total": {"type": "number"},
+    "currency": {"type": "string", "enum": ["EUR", "USD", "GBP"]}
+  },
+  "additionalProperties": false
+}
 ```
 
-Observed output:
+For the record `{"merchant":"Miro Cafe","total":12.4,"currency":"EUR"}`, all required fields are present, the amount is numeric, and the currency is allowed. The record `{"merchant":"Miro Cafe","total":"12.40"}` fails even though it is parseable JSON: `total` is a string, `currency` is missing, and a downstream payment or accounting system should reject it before business logic runs.
 
-```text
-SCHEMA_VALIDATION
-{'merchant': 'Miro Cafe', 'total': 12.4, 'currency': 'EUR'} valid True
-{'merchant': 'Miro Cafe', 'total': '12.40'} valid False
-```
-
-The first record passes because all three required keys are present with the expected Python types. The second record fails both parts of the contract: `total` is the string `"12.40"` instead of a float, and `currency` is missing, so parseable JSON would still be rejected by schema validation.
+| Check | Catches |
+| --- | --- |
+| JSON parsing | Broken syntax. |
+| Schema validation | Missing fields, wrong types, invalid enums, unexpected fields. |
+| Source-grounding validation | Values not supported by the input document. |
+| Business-rule validation | Impossible totals, unsupported currencies, duplicate records, or policy violations. |
 
 ## Caveats
 

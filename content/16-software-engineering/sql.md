@@ -29,6 +29,14 @@ SQL in software engineering is an application contract: which records a user may
 
 Application SQL should use parameter binding, explicit authorization predicates, pagination, indexes aligned with access paths, and transaction scopes around multi-step changes. Query success is not enough: the returned rows must be authorized and semantically correct for the [API design](api-design.md) contract.
 
+| Concern | Good service SQL practice | Failure it prevents |
+| --- | --- | --- |
+| Injection | bind parameters instead of concatenating strings | user input becoming executable SQL |
+| Authorization | include server-side tenant or owner predicates | returning records the user should not see |
+| Consistency | wrap multi-step writes in transactions | partial updates after downstream failures |
+| Performance | design indexes for access paths and pagination | queries that pass tests but fail under load |
+| Evolvability | keep migrations backward compatible during deploys | old code reading a half-migrated schema |
+
 ## Executed Artifact
 
 ```python
@@ -65,6 +73,12 @@ ticket_count_after_rollback 2
 ```
 
 The malicious-looking ticket ID is data, not executable SQL, because placeholders bind parameters separately from the statement. The rollback also proves why [testing](testing.md) should cover failed transaction paths, not only successful queries. [Web backends](web-backends.md) should enforce the owner predicate server-side; the frontend must not be trusted to filter records.
+
+## Service Boundary
+
+SQL should not leak upward as arbitrary query access from the client. A backend endpoint should expose task-specific operations such as "list my tickets" or "close ticket" and keep row-level predicates inside the service. This makes the [API design](api-design.md) reviewable: reviewers can see which user, tenant, status, or time-window constraints are enforced for each operation.
+
+For analytical workloads, query flexibility belongs in governed data tools or warehouses. For application services, stable query shapes are a reliability feature because they can be indexed, tested, rate-limited, and audited.
 
 ## Failure Modes
 

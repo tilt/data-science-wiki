@@ -34,7 +34,19 @@ last_reviewed: 2026-07-10
 
 ## Summary
 
-Recommendation Systems and Personalization is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+Recommendation systems choose, order, and diversify items for a user or context. A recommender is usually a multi-stage system: candidate generation finds a tractable set, ranking orders it, and post-processing applies constraints such as diversity, freshness, eligibility, or safety. The hard part is often not the scoring model but the feedback loop between exposure, user behavior, and future training data.
+
+This section connects [linear algebra](../01-mathematical-foundations/linear-algebra.md), [classical machine learning](../03-classical-machine-learning/index.md), [information retrieval](../12-information-retrieval-and-search/index.md), and [experimentation](../17-experimentation-and-evaluation/index.md).
+
+## System Map
+
+| Problem | Start with | Why it matters |
+| --- | --- | --- |
+| Represent interactions | [Utility and Interaction Matrices](utility-and-interaction-matrices.md), [Explicit Versus Implicit Feedback](explicit-versus-implicit-feedback.md) | defines what the model treats as preference |
+| Collaborative signal | [Collaborative Filtering](collaborative-filtering.md), [User Based Collaborative Filtering](user-based-collaborative-filtering.md), [Item Based Collaborative Filtering](item-based-collaborative-filtering.md) | uses patterns across users and items |
+| Latent factors | [Matrix Factorization](matrix-factorization.md), [Funk SVD](funk-svd.md), [Weighted Matrix Factorization](weighted-matrix-factorization.md) | handles sparse interaction data |
+| Retrieval and ranking | [Candidate Generation](candidate-generation.md), [Ranking](ranking.md), [Retrieval and Ranking Architectures](retrieval-and-ranking-architectures.md) | separates recall from final ordering |
+| Online behavior | [Feedback Loops](feedback-loops.md), [Bandit Algorithms](bandit-algorithms.md), [Exploration Versus Exploitation](exploration-versus-exploitation.md) | controls learning under changing exposure |
 
 ## Subtopics
 

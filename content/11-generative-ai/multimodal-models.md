@@ -28,6 +28,15 @@ Multimodal models connect text with images, audio, video, or structured signals.
 
 A common pattern is modality encoder -> projection/alignment -> language model. Contrastive models align image and text embeddings; generative VLMs condition token generation on visual features. [Structured output](structured-output.md) is often needed when perception feeds software, and [prompting](prompting.md) must specify what visual evidence counts.
 
+| Pattern | Mechanism | Typical use |
+| --- | --- | --- |
+| Dual encoder | encode each modality into comparable embeddings | retrieval, matching, zero-shot classification |
+| Cross-attention model | let text tokens attend to visual/audio features | captioning, question answering, document extraction |
+| Token-unified model | represent multiple modalities as token streams | multimodal generation or reasoning |
+| Tool-mediated system | call OCR, ASR, vision, or search tools around a model | auditable workflows with specialized components |
+
+The modality boundary matters. If a document extraction system fails, the error may come from OCR, layout parsing, visual perception, language reasoning, or schema formatting. Good evaluations isolate those layers instead of scoring only the final JSON.
+
 ## Concrete artifact
 
 ```json
@@ -40,7 +49,7 @@ A common pattern is modality encoder -> projection/alignment -> language model. 
 
 ## Caveats
 
-Perception errors and language errors look similar in final text. Evaluate by modality, image quality, layout, and refusal on unreadable inputs.
+Perception errors and language errors look similar in final text. Evaluate by modality, image quality, layout, language, and refusal on unreadable inputs. Also track whether the model uses visible evidence or fills gaps from prior knowledge, because fluent answers can hide weak visual grounding.
 
 ## References
 

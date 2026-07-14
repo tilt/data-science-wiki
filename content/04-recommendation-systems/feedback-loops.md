@@ -36,25 +36,15 @@ where $e_i$ is exposure share and $q_i$ is click probability. Even when a niche 
 
 ## Worked example
 
-```python
-import numpy as np
-exposure = np.array([90., 10.])
-quality = np.array([.06, .12])
-for _ in range(3):
-    clicks = exposure * quality
-    exposure = 100 * (clicks / clicks.sum())
-print("final_exposure_share", np.round(exposure / 100, 3).tolist())
-print("click_rates", quality.tolist())
-```
+Start with item A receiving 90% exposure and item B receiving 10%. A has click probability $0.06$; B is actually better with click probability $0.12$.
 
-Observed output:
+| Step | A exposure | B exposure | A expected clicks | B expected clicks |
+| --- | ---: | ---: | ---: | ---: |
+| Before update | 90.0 | 10.0 | 5.4 | 1.2 |
+| After one click-based update | 81.8 | 18.2 | 4.9 | 2.2 |
+| After three updates | 52.9 | 47.1 | 3.2 | 5.7 |
 
-```text
-final_exposure_share [0.529, 0.471]
-click_rates [0.06, 0.12]
-```
-
-The better item gains share only after repeated updates; with harsher exploitation or weaker initial exposure, it might never surface. This is why [offline evaluation](offline-versus-online-evaluation.md) needs exposure-aware logs.
+The better item gains share only after repeated updates. With harsher exploitation, weaker initial exposure, or noisy short windows, it might never surface. This is why [offline evaluation](offline-versus-online-evaluation.md) needs exposure-aware logs.
 
 ## Caveats
 

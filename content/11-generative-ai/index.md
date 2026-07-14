@@ -37,7 +37,19 @@ last_reviewed: 2026-07-10
 
 ## Summary
 
-Generative AI and Agentic Systems is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+Generative AI covers models and systems that create text, images, structured outputs, plans, tool calls, or multimodal responses. This section separates model training concepts from application architecture: a language model can be pretrained and aligned, but a useful product still needs retrieval, context construction, tools, evaluation, privacy controls, and serving constraints.
+
+Read the early pages for foundation-model mechanics, then branch based on the system you are building. RAG pages focus on evidence and retrieval, agent pages focus on tool-mediated loops, and safety pages focus on behavior constraints and failure handling.
+
+## System Map
+
+| Goal | Start with | Then read |
+| --- | --- | --- |
+| Understand model behavior | [Foundation Models](foundation-models.md), [Language Model Architecture](language-model-architecture.md), [LLM Training](llm-training.md) | [Instruction Tuning](instruction-tuning.md), [Alignment](alignment.md) |
+| Control generation | [Prompting](prompting.md), [Sampling and Decoding](sampling-and-decoding.md), [Temperature and Determinism](temperature-and-determinism.md) | [Structured Output](structured-output.md), [Guardrails](guardrails.md) |
+| Build RAG | [RAG](rag.md), [Retrieval Pipelines](retrieval-pipelines.md), [Chunking](chunking.md) | [RAG Evaluation](rag-evaluation.md), [Citations](citations.md) |
+| Build agents | [Agentic Systems](agentic-systems.md), [Tool Use and Function Calling](tool-use-and-function-calling.md), [Agent Loops](agent-loops.md) | [Agent Evaluation](agent-evaluation.md), [Harnesses](harnesses.md) |
+| Work with images or multimodal models | [Multimodal Models](multimodal-models.md), [Vision Language Models](vision-language-models.md), [Stable Diffusion](stable-diffusion.md) | [Generative Adversarial Networks](../06-deep-learning/generative-adversarial-networks.md) |
 
 ## Subtopics
 

@@ -32,9 +32,18 @@ References connect topic pages to source material. The wiki uses human-readable 
 - Use official documentation for product or API usage.
 - Use secondary explanations only as supporting context, not as the sole source for technical claims.
 
+| Claim type | Best source | Why |
+| --- | --- | --- |
+| Algorithm definition or theorem | Original paper, textbook, or standard reference | Avoids inherited simplifications or changed notation. |
+| Library/API behavior | Official documentation for the exact project | Behavior can change across versions and providers. |
+| Benchmark result or model capability | Paper, technical report, or benchmark card with dates | Prevents stale leaderboard claims from becoming timeless prose. |
+| Governance or safety control | Standard, regulator, or recognized framework | Keeps policy claims tied to an auditable authority. |
+
 ## Page-level references
 
 When a page relies on a source, add a short `## References` section with enough information to verify the claim. If the source is in the central [bibliography](bibliography.md), also add its key to the front matter under `references`.
+
+A reference should support a specific claim in the page. If a source only inspired the topic or is useful background, put it in [further reading](further-reading.md) rather than using it as evidence for a concrete technical statement.
 
 ## Common mistakes
 

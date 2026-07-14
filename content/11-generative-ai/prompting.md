@@ -28,6 +28,16 @@ Prompting is the runtime interface for telling a model what task to perform. It 
 
 A prompt should separate roles: system policy, developer instructions, user request, trusted evidence, and untrusted data. The model then estimates the next-token distribution conditioned on that sequence, and [sampling and decoding](sampling-and-decoding.md) turns it into output.
 
+| Prompt part | Purpose | Failure when unclear |
+| --- | --- | --- |
+| Role and task | tells the model what job to perform | generic answer or wrong level of detail |
+| Evidence boundary | separates trusted sources from user text | prompt injection or unsupported claims |
+| Output contract | defines schema, tone, length, citations | hard-to-parse or incomplete output |
+| Examples | demonstrate edge cases or style | overfitting to example content |
+| Refusal rule | defines when not to answer | fabricated answer under missing evidence |
+
+Good prompting is not magic wording. It is interface design: make the task, inputs, constraints, and output contract explicit enough that the model does not have to infer hidden requirements.
+
 ## Concrete artifact
 
 ```text
@@ -40,7 +50,7 @@ OUTPUT: JSON with answer and citations.
 
 ## Caveats
 
-Prompt wording can hide policy conflicts. A prompt is not an access-control system; enforce permissions and schema checks outside the model.
+Prompt wording can hide policy conflicts. A prompt is not an access-control system; enforce permissions and schema checks outside the model. Treat untrusted documents, webpages, emails, and tickets as data, not instructions; otherwise prompt injection can override the intended task.
 
 ## References
 

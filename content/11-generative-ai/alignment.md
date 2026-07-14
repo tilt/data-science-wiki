@@ -30,6 +30,15 @@ Alignment is not one switch. It combines training, preference optimization, prom
 
 Instruction-tuned systems often start with supervised demonstrations and then use human or AI preference data. A preference objective can compare a chosen response $y_w$ to a rejected response $y_l$ for prompt $x$ and increase the margin between their scores. Runtime alignment is separate: the application constrains tools, validates [structured output](structured-output.md), and checks [hallucination mitigation](hallucination-mitigation.md).
 
+One common preference-learning signal is pairwise: for the same prompt, the training data says that $y_w$ is preferred to $y_l$. The optimizer should raise the relative score of the chosen response without simply making every response longer or more agreeable. In production, that learned preference is only one layer:
+
+| Layer | What it controls |
+| --- | --- |
+| Supervised instruction data | Basic task following, response style, and refusal patterns. |
+| Preference optimization | Ranking chosen answers above rejected answers for comparable prompts. |
+| System prompt and tool policy | Runtime boundaries, allowed actions, and required evidence. |
+| Validators and audits | Schema validity, citation support, privacy checks, and regression tests. |
+
 ## Concrete artifact
 
 ```json
@@ -40,7 +49,7 @@ Instruction-tuned systems often start with supervised demonstrations and then us
 }
 ```
 
-The artifact separates learned behavior from controls that remain outside the model.
+The artifact separates learned behavior from controls that remain outside the model. A citation policy can be reinforced during training, but the application still needs an evidence checker because a fluent unsupported answer can satisfy style preferences while failing the workflow.
 
 ## Caveats
 

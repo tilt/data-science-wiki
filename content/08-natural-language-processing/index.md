@@ -34,7 +34,19 @@ last_reviewed: 2026-07-10
 
 ## Summary
 
-Natural Language Processing is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+Natural language processing covers models and systems that turn text into tokens, labels, spans, embeddings, structured records, or generated language. This section focuses on language-specific tasks and evaluation contracts; broader foundation-model training and agent workflows live in [Generative AI and Agentic Systems](../11-generative-ai/index.md), while retrieval systems live in [Information Retrieval and Search](../12-information-retrieval-and-search/index.md).
+
+The practical distinction is output shape. Text classification predicts document-level labels, sequence labelling predicts token or span annotations, semantic similarity compares meanings, and document understanding combines OCR, layout, text, and extraction.
+
+## Task Map
+
+| Output needed | Start with | Typical evaluation concern |
+| --- | --- | --- |
+| Clean text representation | [Text Preprocessing](text-preprocessing.md), [Tokenization](tokenization.md), [Embeddings](embeddings.md) | normalization and vocabulary choices |
+| Document or message labels | [Text Classification](text-classification.md), [Topic Classification](topic-classification.md), [Urgency Classification](urgency-classification.md) | class imbalance and thresholding |
+| Entities and spans | [Named Entity Recognition](named-entity-recognition.md), [Sequence Labelling](sequence-labelling.md) | span boundaries and partial matches |
+| Matching and retrieval features | [Semantic Textual Similarity](semantic-textual-similarity.md), [Entity Linking and Matching](entity-linking-and-matching.md) | hard negatives and ambiguity |
+| Structured documents | [OCR and Handwritten Text Recognition](ocr-and-handwritten-text-recognition.md), [Document Understanding](document-understanding.md) | layout errors and extraction confidence |
 
 ## Subtopics
 

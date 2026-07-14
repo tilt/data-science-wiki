@@ -39,7 +39,19 @@ last_reviewed: 2026-07-10
 
 ## Summary
 
-ML Engineering and MLOps is a major knowledge area in this wiki. The index is designed for both hierarchical study and cross-linked exploration through tags, backlinks, and the graph.
+ML engineering and MLOps covers the lifecycle around a model: versioned data, reproducible training, evaluation gates, deployment, monitoring, reliability, and incident response. The model is only one artifact. A production ML system also includes datasets, feature definitions, pipelines, serving contracts, dashboards, rollback paths, and ownership.
+
+Use this section when the question is "how do we operate this model safely and repeatedly?" For infrastructure primitives, see [Cloud and Distributed Systems](../15-cloud-and-distributed-systems/index.md). For experiment design and release evidence, see [Experimentation and Evaluation](../17-experimentation-and-evaluation/index.md).
+
+## Lifecycle Map
+
+| Lifecycle stage | Start with | Operational evidence |
+| --- | --- | --- |
+| Build and train | [ML System Lifecycle](ml-system-lifecycle.md), [Training Pipelines](training-pipelines.md) | reproducible code, data, config, and metrics |
+| Track artifacts | [Experiment Tracking](experiment-tracking.md), [Dataset Versioning](dataset-versioning.md), [Model Versioning](model-versioning.md) | lineage from model back to data and run |
+| Serve | [Model Serving](model-serving.md), [Batch and Online Inference](batch-and-online-inference.md), [Microservices](microservices.md) | latency, throughput, schema, rollback |
+| Release safely | [Shadow Deployment](shadow-deployment.md), [Canary Deployment](canary-deployment.md), [Rollbacks](rollbacks.md) | staged exposure and abort criteria |
+| Operate | [Monitoring](monitoring.md), [Observability](observability.md), [Production Incident Response](production-incident-response.md) | alerts, traces, drift, and owner response |
 
 ## Subtopics
 

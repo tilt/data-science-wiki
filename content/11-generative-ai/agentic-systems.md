@@ -41,13 +41,22 @@ flowchart LR
 
 [Planning](planning.md) can be a private scratch step, a visible task graph, or no separate step at all. The important contract is that actions are typed and observations are appended as data, not silently merged into hidden state.
 
+An agent loop should make each transition auditable:
+
+| Step | Model responsibility | Deterministic responsibility |
+| --- | --- | --- |
+| Interpret goal | Propose next intent or missing information. | Attach policy, identity, budget, and relevant context. |
+| Choose action | Select a tool call, ask a question, or stop. | Validate schema, permission, rate limit, and cost. |
+| Observe result | Incorporate the returned observation into the next decision. | Log the call, redact sensitive data, and preserve source metadata. |
+| Terminate | Produce final answer or completion state. | Check success criteria and escalation rules. |
+
 ## Concrete artifact
 
 ```json
 {"decision":{"type":"tool_call","name":"search_docs","arguments":{"query":"refund approval limit"}},"state":{"step":2,"remaining_steps":4}}
 ```
 
-The action is only a proposal until the orchestrator validates name, schema, user permission, and budget.
+The action is only a proposal until the orchestrator validates name, schema, user permission, and budget. This separation keeps autonomy useful without letting the model silently bypass product controls.
 
 ## Caveats
 

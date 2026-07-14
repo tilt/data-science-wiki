@@ -30,6 +30,8 @@ A judge prompt should include the task, candidate answer, evidence, rubric, and 
 
 Use [structured output](structured-output.md) so judge results can be parsed and compared across model versions. Keep the rubric narrow: a citation-support judge should not also grade tone, completeness, and policy risk unless the schema separates those dimensions.
 
+Calibration is the difference between a convenient judge and a useful evaluator. If 100 human-labeled examples contain 20 unsupported answers and the judge flags only 12, the judge is missing 8 failures before it ever reaches production traffic. Track confusion matrices, disagreement examples, and score drift across model versions instead of trusting the average score alone.
+
 ## Concrete artifact
 
 ```json
@@ -42,6 +44,8 @@ Use [structured output](structured-output.md) so judge results can be parsed and
   "requires_human_review": true
 }
 ```
+
+The artifact is useful because it separates the score from the checked claim and the evidence result. That makes it possible to audit whether the judge found the right source mismatch rather than merely assigning a low number.
 
 ## Caveats
 

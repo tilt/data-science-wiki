@@ -34,37 +34,22 @@ $$
 L(\theta)=-\sum_{t=1}^{T}\log p_\theta(x_t\mid x_{<t}).
 $$
 
-This is cross-entropy over the vocabulary at each position.
+This is cross-entropy over the vocabulary at each position. Softmax converts logits $z$ to probabilities,
 
-## Executed artifact
+$$
+p_i=\frac{\exp(z_i)}{\sum_j \exp(z_j)}.
+$$
 
-```python
-import numpy as np
+If the correct token receives probability $0.77$, its loss is $-\log(0.77)\approx0.26$. If a later correct token receives probability $0.16$, its loss is $-\log(0.16)\approx1.83$. The mean of these two losses is about $1.05$, and perplexity is $\exp(1.05)\approx2.86$, meaning the model is as uncertain as choosing among roughly three equally likely tokens on this toy batch.
 
-logits = np.array([[2.0, 0.5, -0.5], [0.2, 1.4, 0.0]])
-targets = np.array([0, 2])
-exp_logits = np.exp(logits - logits.max(axis=1, keepdims=True))
-probs = exp_logits / exp_logits.sum(axis=1, keepdims=True)
-token_losses = -np.log(probs[np.arange(len(targets)), targets])
-print("PRETRAINING")
-print(
-    "token_losses",
-    np.round(token_losses, 3).tolist(),
-    "mean",
-    round(float(token_losses.mean()), 3),
-    "ppl",
-    round(float(np.exp(token_losses.mean())), 3),
-)
-```
+## Training Pipeline
 
-Observed output:
-
-```text
-PRETRAINING
-token_losses [0.266, 1.837] mean 1.052 ppl 2.862
-```
-
-The second token has higher loss because the toy logits assigned lower probability to the target. Perplexity is the exponential of mean token loss.
+| Stage | Why it matters |
+| --- | --- |
+| Data filtering and deduplication | Removes obvious noise, duplicates, and evaluation contamination. |
+| Tokenization | Converts text or multimodal inputs into the units the model consumes. |
+| Distributed optimization | Trains on many accelerators with checkpointing, learning-rate schedules, and loss monitoring. |
+| Evaluation slices | Tracks domain, language, safety, and memorization behavior instead of relying on aggregate loss alone. |
 
 ## Caveats
 

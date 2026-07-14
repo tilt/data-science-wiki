@@ -33,6 +33,17 @@ last_reviewed: 2026-07-11
 
 Software engineering in this wiki focuses on the contracts that make data and AI systems maintainable: tested behavior, stable APIs, reviewable architecture, safe production integration, and operational documentation.
 
+For AI work, software quality is not separate from model quality. A good model can fail because schemas drift, tests miss edge cases, APIs hide uncertainty, or deployment code cannot be reviewed safely. Use this section to strengthen the ordinary engineering surface around data products, ML services, and generative-AI applications.
+
+## Engineering Route
+
+| Need | Start with | Then read |
+| --- | --- | --- |
+| Write reliable implementation code | [Python](python.md), [SQL](sql.md) | [Testing](testing.md), [Code Review](code-review.md) |
+| Design service boundaries | [Software Architecture](software-architecture.md), [API Design](api-design.md) | [Web Backends](web-backends.md), [Production Integration](production-integration.md) |
+| Keep systems maintainable | [Refactoring](refactoring.md), [Design Patterns](design-patterns.md) | [Documentation](documentation.md), [Technical Decision Records](technical-decision-records.md) |
+| Align product and engineering behavior | [Requirements Engineering](requirements-engineering.md) | [Behaviour Driven Development](behaviour-driven-development.md) |
+
 ## Subtopics
 
 - [Python](python.md)
