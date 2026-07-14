@@ -31,7 +31,7 @@ last_reviewed: 2026-07-13
 ---
 # LLM Training
 
-LLM training is a staged process. A base model first learns a broad next-token distribution from large text or multimodal corpora. Post-training then turns that base model into a usable assistant or domain model through supervised demonstrations, preference optimization, safety data, and evaluation.
+LLM training is a staged process. A base model first learns a broad next-token distribution from large text or multimodal corpora. Post-training then turns that base model into a usable assistant or domain model through supervised demonstrations, [preference optimization](../06a-reinforcement-learning/reinforcement-learning-from-human-feedback.md), safety data, and evaluation.
 
 ![LLM training pipeline](../assets/diagrams/llm-training-pipeline.svg)
 
@@ -56,7 +56,7 @@ Scaling work shows that model size, training tokens, compute, and data quality i
 
 ## Stage 3: Supervised Instruction Tuning
 
-[Instruction tuning](instruction-tuning.md) trains on prompt-response demonstrations. For a prompt $x$ and target response tokens $y_1,\ldots,y_m$, the supervised loss is
+[Instruction tuning](instruction-tuning.md), also called supervised fine-tuning (SFT) in many LLM pipelines, trains on prompt-response demonstrations. For a prompt $x$ and target response tokens $y_1,\ldots,y_m$, the supervised loss is
 
 $$
 L_{\mathrm{SFT}}(\theta)
@@ -67,7 +67,7 @@ In chat training, the loss is usually applied to assistant tokens, not user toke
 
 ## Stage 4: Preference Optimization
 
-Preference data compares candidate responses. In [RLHF](../06a-reinforcement-learning/reinforcement-learning-from-human-feedback.md), a reward model learns from chosen/rejected pairs and the policy is optimized with a reward-minus-KL objective:
+Preference data compares candidate responses. In [RLHF](../06a-reinforcement-learning/reinforcement-learning-from-human-feedback.md), a reward model learns from chosen/rejected pairs and the policy is optimized with a reward-minus-[KL](../01-mathematical-foundations/kl-divergence.md)-regularized objective:
 
 $$
 \max_\pi\;
@@ -78,11 +78,11 @@ r_\phi(x,y)
 \right].
 $$
 
-The KL term matters: it prevents the model from drifting too far from the supervised model while it optimizes an imperfect reward model. Direct methods such as DPO optimize from preference pairs without running a separate PPO loop, but they still depend on the same core ingredients: a reference policy, preference data, and careful evaluation.
+The [KL](../01-mathematical-foundations/kl-divergence.md) term matters: it prevents the model from drifting too far from the supervised model while it optimizes an imperfect reward model. Direct methods such as [DPO](../06a-reinforcement-learning/reinforcement-learning-from-human-feedback.md#direct-preference-optimization) optimize from preference pairs without running a separate [PPO](../06a-reinforcement-learning/policy-gradients-and-actor-critic.md#ppo) rollout/update loop, but they still depend on the same core ingredients: a reference policy, preference data, and careful evaluation.
 
 ## Stage 5: Adaptation and Serving Constraints
 
-Domain adaptation can use continued pretraining, full fine-tuning, parameter-efficient methods such as LoRA, or [RAG](rag.md). Fine-tuning changes model weights; RAG changes context at inference time. For volatile facts, private corpora, or citation-heavy answers, [fine tuning versus RAG](fine-tuning-versus-rag.md) is often the more important design decision than another training run.
+Domain adaptation can use continued pretraining, full fine-tuning, parameter-efficient methods such as [LoRA](../06-deep-learning/fine-tuning.md#lora-footprint), or [RAG](rag.md). Fine-tuning changes model weights; RAG changes context at inference time. For volatile facts, private corpora, or citation-heavy answers, [fine tuning versus RAG](fine-tuning-versus-rag.md) is often the more important design decision than another training run.
 
 Serving constraints feed back into training choices. Context length, quantization, latency, refusal behavior, tool schemas, and cost targets shape what data and evaluations matter.
 
@@ -94,7 +94,7 @@ Evaluate each stage separately:
 | --- | --- |
 | Pretraining | loss curves, held-out perplexity, contamination audits, capability benchmarks |
 | Instruction tuning | task-following tests, format adherence, regression sets |
-| Preference optimization | win-rate studies, reward-model audits, KL drift, safety checks |
+| Preference optimization | win-rate studies, reward-model audits, [KL](../01-mathematical-foundations/kl-divergence.md) drift, safety checks |
 | Deployment | latency, cost, grounding quality, privacy, human review outcomes |
 
 Training loss is not enough. A lower next-token loss can coexist with worse instruction behavior, and a higher preference score can hide reward hacking or over-refusal.

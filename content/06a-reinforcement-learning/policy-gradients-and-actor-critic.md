@@ -60,7 +60,7 @@ The critic reduces variance because the actor no longer treats every sampled ret
 
 ## PPO
 
-Proximal Policy Optimization limits how far the new policy moves from the old policy during one update. With probability ratio
+Proximal Policy Optimization (PPO) limits how far the new policy moves from the old policy during one update. In LLM training, a "PPO loop" usually means repeatedly sampling model responses, scoring them with a reward model, applying a KL penalty against a reference policy, and updating the policy with PPO. With probability ratio
 
 $$
 \rho_t(\theta)=\frac{\pi_\theta(A_t\mid S_t)}{\pi_{\theta_{\text{old}}}(A_t\mid S_t)},

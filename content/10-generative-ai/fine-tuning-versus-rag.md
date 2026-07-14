@@ -22,7 +22,7 @@ last_reviewed: 2026-07-11
 ---
 # Fine Tuning Versus RAG
 
-Fine-tuning changes model behavior or parameters. [RAG](rag.md) changes the evidence available at request time. They are complementary: [instruction tuning](instruction-tuning.md) can teach format and domain behavior, while [retrieval pipelines](retrieval-pipelines.md) supply current or private facts.
+Fine-tuning changes model behavior or parameters. [RAG](rag.md) changes the evidence available at request time. They are complementary: [instruction tuning](instruction-tuning.md) can teach format and domain behavior, while [retrieval pipelines](retrieval-pipelines.md) supply current or private facts. Parameter-efficient adapters such as [LoRA](../06-deep-learning/fine-tuning.md#lora-footprint) reduce the training and storage footprint by freezing the base model and training a small low-rank update.
 
 ## Decision mechanism
 

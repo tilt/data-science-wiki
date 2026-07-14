@@ -28,7 +28,7 @@ last_reviewed: 2026-07-13
 ---
 # Reinforcement Learning from Human Feedback
 
-Reinforcement learning from human feedback trains models from preferences rather than only from gold labels. For language models, humans or AI judges compare candidate responses. A reward model learns which responses are preferred, and the policy is optimized to produce higher-reward responses while staying close to a reference model.
+Reinforcement learning from human feedback (RLHF) trains models from preferences rather than only from gold labels. For language models, humans or AI judges compare candidate responses. A reward model learns which responses are preferred, and the policy is optimized to produce higher-reward responses while staying close to a reference model.
 
 ## Preference Data
 
@@ -43,6 +43,8 @@ where $r_\phi$ is the learned reward and $\sigma$ is the logistic function. The 
 
 ## KL-Regularized Policy Optimization
 
+KL means [Kullback-Leibler divergence](../01-mathematical-foundations/kl-divergence.md), a directed measure of how much one distribution differs from another. In RLHF, the distribution being controlled is usually the trained policy $\pi(\cdot\mid x)$ relative to a reference policy $\pi_{\mathrm{ref}}(\cdot\mid x)$.
+
 After reward modeling, the policy can be optimized with an objective like
 
 $$
@@ -53,7 +55,7 @@ r_\phi(x,y)
 \right].
 $$
 
-The reward term pushes the model toward preferred responses. The KL penalty keeps it close to the reference policy, usually the supervised instruction-tuned model, so optimization does not exploit reward-model flaws too aggressively.
+The reward term pushes the model toward preferred responses. The KL penalty keeps it close to the reference policy, usually the supervised instruction-tuned model, so optimization does not exploit reward-model flaws too aggressively. In LLM training notes, "KL objective" often means this reward-minus-KL regularized objective, not a pure KL-minimization task.
 
 ## Typical LLM Training Stage
 
@@ -67,7 +69,7 @@ This is why RLHF belongs both to [reinforcement learning](index.md) and [LLM tra
 
 ## Direct Preference Optimization
 
-Direct Preference Optimization avoids a separate reward-model-plus-RL loop by optimizing the policy directly from preference pairs:
+Direct Preference Optimization (DPO) avoids a separate reward-model-plus-RL loop by optimizing the policy directly from preference pairs:
 
 $$
 L_{\mathrm{DPO}}(\theta)
@@ -80,7 +82,11 @@ L_{\mathrm{DPO}}(\theta)
 \right].
 $$
 
-The chosen response is pushed up relative to the reference model, and the rejected response is pushed down relative to the same reference. This often makes preference optimization simpler to implement than PPO-based RLHF, though the quality still depends on data, evaluation, and the suitability of the preference objective.
+The chosen response is pushed up relative to the reference model, and the rejected response is pushed down relative to the same reference. This often makes preference optimization simpler to implement than [PPO](policy-gradients-and-actor-critic.md#ppo)-based RLHF, though the quality still depends on data, evaluation, and the suitability of the preference objective.
+
+## PPO Loop
+
+A PPO loop is the iterative reinforcement-learning stage used in many classic RLHF pipelines. The current policy samples responses, the reward model scores them, the KL penalty compares the current policy to the reference policy, and [PPO](policy-gradients-and-actor-critic.md#ppo) updates the policy under a clipped objective. That loop is more operationally complex than DPO because it needs sampling, reward evaluation, KL control, optimizer updates, and monitoring for reward hacking or policy drift.
 
 ## Caveats
 
@@ -90,7 +96,7 @@ Preference optimization can reward verbosity, sycophancy, over-refusal, or styli
 
 - [LLM Training](../10-generative-ai/llm-training.md) places RLHF after pretraining and supervised instruction tuning.
 - [Alignment](../10-generative-ai/alignment.md) covers training and runtime controls around preference optimization.
-- [Policy Gradients and Actor-Critic Methods](policy-gradients-and-actor-critic.md) explains PPO and the actor-critic machinery often used in RLHF.
+- [Policy Gradients and Actor-Critic Methods](policy-gradients-and-actor-critic.md#ppo) explains PPO and the actor-critic machinery often used in RLHF.
 
 ## References
 

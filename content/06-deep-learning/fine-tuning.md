@@ -45,7 +45,35 @@ $$
 W' = W + \Delta W,\qquad \Delta W = BA,\quad \operatorname{rank}(\Delta W)\le r.
 $$
 
-That changes the trainable parameter count and optimizer state, which affects [regularization](regularization.md) and [optimizers](optimizers.md).
+For a dense weight matrix $W\in\mathbb R^{d_{\mathrm{out}}\times d_{\mathrm{in}}}$, full fine-tuning trains $d_{\mathrm{out}}d_{\mathrm{in}}$ parameters for that matrix. LoRA freezes $W$ and trains two skinny matrices:
+
+$$
+B\in\mathbb R^{d_{\mathrm{out}}\times r},\qquad
+A\in\mathbb R^{r\times d_{\mathrm{in}}}.
+$$
+
+The trainable parameter count becomes
+
+$$
+r(d_{\mathrm{out}}+d_{\mathrm{in}}),
+$$
+
+which is much smaller when the rank $r$ is small. For a $4096\times4096$ projection, full fine-tuning trains $16{,}777{,}216$ parameters. With $r=8$, LoRA trains $8(4096+4096)=65{,}536$ parameters for the adapter, about $0.39\%$ of the full matrix.
+
+## LoRA Footprint
+
+LoRA achieves a small footprint because the large pretrained matrix stays frozen. Only the low-rank adapter weights and their [optimizer](optimizers.md) state need to be trained, checkpointed, and swapped for a task. At inference time, the adapter can be applied as $Wx + BAx$, or the low-rank update can be merged into $W$ for deployment.
+
+This has three practical consequences:
+
+| Aspect | Full fine-tuning | LoRA-style adapter tuning |
+| --- | --- | --- |
+| Trainable weights | all selected base weights | only low-rank adapter matrices |
+| Optimizer state | large, because Adam-style state tracks trained weights | small, because state tracks adapter weights |
+| Task storage | often a full model copy or large delta | compact adapter checkpoint |
+| Base model sharing | each task may need separate weights | many adapters can share one frozen base |
+
+The small footprint is not magic compression of the original model. It is a modeling assumption: the task-specific update can be well approximated by a low-rank matrix. If the target task needs broad changes across many directions, too small a rank can underfit.
 
 ## Worked example
 
