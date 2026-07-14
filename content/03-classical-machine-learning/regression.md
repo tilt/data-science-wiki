@@ -59,6 +59,8 @@ OLS projects the target vector onto the column space of the design matrix. The f
 
 ## Worked example
 
+This snippet fits a one-feature linear regression on the diabetes dataset and reports the slope, intercept, RMSE, and several predictions beside true values.
+
 ```python
 from sklearn.datasets import load_diabetes
 from sklearn.linear_model import LinearRegression

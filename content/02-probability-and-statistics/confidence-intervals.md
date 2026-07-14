@@ -37,6 +37,8 @@ The [central limit theorem](central-limit-theorem.md) supplies many standard err
 
 ## Worked simulation
 
+This simulation repeatedly builds $t$ confidence intervals for normal samples and measures empirical coverage, average width, and the critical value used.
+
 ```python
 import numpy as np
 from scipy import stats

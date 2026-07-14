@@ -38,6 +38,8 @@ The feature vector $x_i$ may include first-stage scores, exact-match indicators,
 
 ## Worked example
 
+This snippet starts from first-stage candidate scores and reranks them with freshness and exact-match features.
+
 ```python
 import numpy as np
 

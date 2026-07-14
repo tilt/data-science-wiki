@@ -36,6 +36,8 @@ Assignments are solved per frame, then each track aggregates features over time 
 
 ## Worked example
 
+This snippet computes IoU between existing tracks and new detections, then uses Hungarian assignment to choose the best track-detection matches.
+
 ```python
 import numpy as np
 from scipy.optimize import linear_sum_assignment

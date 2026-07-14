@@ -39,6 +39,8 @@ A bootstrap interval is an uncertainty interval computed from the empirical dist
 
 ## Worked calculation
 
+This snippet bootstraps observed metric deltas to estimate standard error, a percentile confidence interval, and the probability that the delta is positive.
+
 ```python
 import numpy as np
 

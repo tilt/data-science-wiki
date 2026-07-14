@@ -35,6 +35,8 @@ Field normalization constrains raw OCR to domain vocabularies: artist names, dat
 
 ## Worked example
 
+This snippet compares OCR strings with corrected museum-label fields using edit distance and a small dictionary correction check.
+
 ```python
 import numpy as np
 

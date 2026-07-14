@@ -45,6 +45,8 @@ Guardrail metrics then protect user experience even when the primary metric impr
 
 ## Worked calculation
 
+This snippet checks an online experiment for sample-ratio mismatch and tests whether treatment latency differs from control latency.
+
 ```python
 import numpy as np
 from scipy import stats

@@ -37,6 +37,8 @@ If holding times do not depend on states, the timing resembles [renewal theory](
 
 ## Worked simulation
 
+This simulation samples both the next state and the holding time for a Markov renewal process, recording the first transitions and accumulated elapsed time.
+
 ```python
 import numpy as np
 

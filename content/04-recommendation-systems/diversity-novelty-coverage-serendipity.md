@@ -58,6 +58,8 @@ These complement [ranking](ranking.md) metrics such as [NDCG](../12-information-
 
 ## Worked example
 
+This snippet computes intra-list diversity, mean novelty, and catalog coverage for a recommended item list from item features and popularity.
+
 ```python
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity

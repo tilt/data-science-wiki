@@ -42,6 +42,8 @@ Without labels, the method's definition of "structure" is the whole game. Varian
 
 ## Worked example
 
+This snippet clusters standardized Iris measurements without labels, then compares internal silhouette quality with adjusted Rand agreement against the hidden species labels.
+
 ```python
 from sklearn.cluster import KMeans
 from sklearn.datasets import load_iris

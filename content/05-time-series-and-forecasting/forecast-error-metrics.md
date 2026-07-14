@@ -140,6 +140,8 @@ Use metrics to answer concrete questions: How wrong are forecasts in target unit
 
 ## Executed example
 
+This snippet computes MAE, RMSE, WAPE, and signed bias for the same forecast errors so their scale and sensitivity can be compared.
+
 ```python
 import numpy as np
 

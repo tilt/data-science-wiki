@@ -36,6 +36,8 @@ BM25 changes the weighting and normalization, but the retrieval contract remains
 
 ## Worked example
 
+This snippet constructs bag-of-words vectors for documents and a query, then scores documents by sparse cosine similarity.
+
 ```python
 import re
 from collections import Counter

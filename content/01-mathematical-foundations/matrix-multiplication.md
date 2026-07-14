@@ -39,6 +39,8 @@ This is why [gradients](gradients.md) in linear models contain terms like $X^\to
 
 ## Executed demo
 
+This snippet multiplies two small matrices and separately recomputes one output entry as a row-column dot product.
+
 ```python
 import numpy as np
 

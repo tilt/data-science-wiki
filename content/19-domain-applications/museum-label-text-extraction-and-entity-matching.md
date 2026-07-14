@@ -36,6 +36,8 @@ The Getty ULAN page is a real authority artifact: it exposes the Union List of A
 
 This executed string-matching toy used a noisy OCR line: `Claude M0net, Water Lillies, 1907`.
 
+This snippet scores noisy OCR text against candidate artwork entities with sequence similarity and returns the best-matching entity.
+
 ```python
 from difflib import SequenceMatcher
 

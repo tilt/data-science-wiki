@@ -43,6 +43,8 @@ NIST SP 800-122 treats PII confidentiality as context-dependent: the same field 
 
 I ran a tiny pattern-based redaction over three log records:
 
+This snippet scans records for email, SSN, and phone-number patterns, redacts detected PII, and counts redactions by type.
+
 ```python
 import re
 from collections import Counter

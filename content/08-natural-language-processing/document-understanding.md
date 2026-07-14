@@ -36,6 +36,8 @@ where $p_i$ is the page id. The model may classify tokens, link key-value pairs,
 
 ## Worked example
 
+This snippet trains a simple token classifier using layout-style features and reports predicted token roles, accuracy, and the probability for an amount token.
+
 ```python
 import numpy as np
 from sklearn.linear_model import LogisticRegression

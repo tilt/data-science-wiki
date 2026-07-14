@@ -37,6 +37,8 @@ $$
 
 ## Worked computation
 
+This snippet propagates an initial state distribution through a transition matrix and computes the stationary distribution that remains unchanged after one transition.
+
 ```python
 import numpy as np
 

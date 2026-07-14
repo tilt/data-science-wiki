@@ -37,6 +37,8 @@ The all-reduce operation both sums and distributes the gradient average. Model p
 
 ## Worked example
 
+This snippet averages two worker gradient steps to show how all-reduce produces the synchronized update used in data-parallel training.
+
 ```python
 import numpy as np
 

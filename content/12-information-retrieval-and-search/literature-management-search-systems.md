@@ -36,6 +36,8 @@ Text scoring can use [BM25](bm25.md); graph scoring can use citation, co-author,
 
 ## Worked example
 
+This snippet ranks short paper titles with TF-IDF against a query and reports the highest-scoring paper.
+
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np

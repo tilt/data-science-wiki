@@ -33,6 +33,8 @@ A single deep tree may latch onto one accidental split. A forest asks many trees
 
 ## Worked example
 
+This snippet compares a single decision tree with a random forest on the same classification split, including the forest's out-of-bag score.
+
 ```python
 from sklearn.datasets import make_classification
 from sklearn.ensemble import RandomForestClassifier

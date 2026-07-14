@@ -30,6 +30,8 @@ Drift checks compare a reference window with a current window by feature, slice,
 
 ## Executed PSI Check
 
+This snippet bins a reference and current feature distribution and computes population stability index from the bucket proportions.
+
 ```python
 import numpy as np
 

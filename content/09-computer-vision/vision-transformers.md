@@ -46,6 +46,8 @@ Patch size controls spatial granularity: a large patch lowers compute but makes 
 
 ## Worked example
 
+This snippet splits an image tensor into patches, projects them into tokens, and computes one row of token attention weights.
+
 ```python
 import torch
 

@@ -35,6 +35,8 @@ where $c_i$ is a class and $s_i$ is a confidence score. Two-stage detectors such
 
 ## Worked example
 
+This snippet computes box IoU and runs non-maximum suppression so overlapping lower-score boxes are removed.
+
 ```python
 import numpy as np
 

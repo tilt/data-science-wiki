@@ -47,6 +47,8 @@ That makes [backpropagation](backpropagation.md) explicit while still delegating
 
 ## Worked example
 
+This snippet builds a one-parameter PyTorch computation, runs backpropagation, applies an SGD step, and prints the autograd function type.
+
 ```python
 import torch
 

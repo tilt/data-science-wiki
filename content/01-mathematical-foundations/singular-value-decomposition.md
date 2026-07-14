@@ -65,6 +65,8 @@ Geometrically, $V^\top$ chooses orthogonal input coordinates, $\Sigma$ stretches
 
 ## Executed demo
 
+This snippet decomposes a matrix with SVD, verifies exact reconstruction, and compares the rank-1 error with the discarded singular-value tail.
+
 ```python
 import numpy as np
 

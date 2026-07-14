@@ -35,6 +35,8 @@ The contract has four layers: resource model, request schema, response schema, a
 
 ## Executed Artifact
 
+This snippet defines a Pydantic request contract, prints the valid serialized payload and required fields, and shows validation errors for a malformed payload.
+
 ```python
 from typing import Literal
 from pydantic import BaseModel, ConfigDict, ValidationError

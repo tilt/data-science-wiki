@@ -36,6 +36,8 @@ where $d$ is a document ID, $\operatorname{tf}_{t,d}$ is term frequency, and pos
 
 ## Worked example
 
+This snippet builds a positional inverted index for a tiny corpus and intersects postings lists for an AND query.
+
 ```python
 import re
 from collections import defaultdict

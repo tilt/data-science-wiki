@@ -44,6 +44,8 @@ in general. [Cross-entropy](cross-entropy.md) decomposes as $H(p,q)=H(p)+D_{\mat
 
 ## Executed demo
 
+This snippet computes $D_{KL}(p\|q)$ and the reverse $D_{KL}(q\|p)$ for two categorical distributions to show that KL divergence is directional.
+
 ```python
 import numpy as np
 

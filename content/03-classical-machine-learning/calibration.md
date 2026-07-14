@@ -39,6 +39,8 @@ Calibration is required when a probability drives a threshold, price, triage rul
 
 ## Worked example
 
+This snippet calibrates a random forest classifier with sigmoid calibration and reports probabilistic scores through Brier loss, log loss, and predicted-versus-observed positive rate.
+
 ```python
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.datasets import make_classification

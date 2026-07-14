@@ -43,6 +43,8 @@ The product says that a gradient from the final state must pass through every in
 
 ## Worked example
 
+This snippet runs a small recurrent update through a sequence and reports hidden-state norms plus the final hidden vector.
+
 ```python
 import torch
 

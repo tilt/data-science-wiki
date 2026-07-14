@@ -46,6 +46,8 @@ The first formula requires a dense $A$; the second names the observed set $\Omeg
 
 ## Worked example
 
+This snippet compares a rank-2 approximation after dense imputation with a rank-2 approximation after zero filling for the same missing rating.
+
 ```python
 import numpy as np
 dense = np.array([[5., 4., 1.], [4., 4., 1.], [1., 1., 5.]])

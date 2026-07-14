@@ -49,6 +49,8 @@ These are diagnostic tests, not moral axioms. Demographic parity ignores labels 
 
 ## Executed metric check
 
+This snippet computes group selection rates, true-positive rates, false-positive rates, and fairness gaps before and after a group-adjusted threshold.
+
 ```python
 import numpy as np
 

@@ -43,6 +43,8 @@ when spacings are in millimeters.
 
 ## Worked example
 
+This snippet compares a predicted 3D lesion mask with ground truth, reporting voxel counts, Dice score, and physical volume estimates.
+
 ```python
 import numpy as np
 

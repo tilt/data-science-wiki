@@ -37,6 +37,8 @@ $$
 
 ## Worked example
 
+This snippet ranks items by predicted score and computes top-3 precision, recall, and [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) against binary relevance labels.
+
 ```python
 import numpy as np
 from sklearn.metrics import ndcg_score

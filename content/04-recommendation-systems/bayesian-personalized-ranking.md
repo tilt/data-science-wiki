@@ -39,6 +39,8 @@ With [matrix factorization](matrix-factorization.md), $\hat x_{ui}=p_u^\top q_i$
 
 For one triple $(u,i,j)$, the important quantity is the margin $\hat x_{ui}-\hat x_{uj}$. If the margin is near zero, the model barely prefers the observed item. The BPR gradient increases the user vector's alignment with $q_i-q_j$, increases $q_i$ toward the user vector, and moves $q_j$ away from it.
 
+This snippet performs one Bayesian Personalized Ranking update and compares the positive-minus-negative item margin before and after the update.
+
 ```python
 import numpy as np
 rng = np.random.default_rng(5)

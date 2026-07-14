@@ -53,6 +53,8 @@ This mechanism is related to [truncated SVD](../04-recommendation-systems/trunca
 
 ## Executed demo
 
+This snippet forms rank-1 and rank-2 SVD reconstructions of a matrix and compares their Frobenius reconstruction errors.
+
 ```python
 import numpy as np
 

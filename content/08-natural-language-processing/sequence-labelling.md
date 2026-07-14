@@ -42,6 +42,8 @@ BIO tags encode span boundaries with labels like `B-LOC`, `I-LOC`, and `O`.
 
 ## Worked example
 
+This snippet evaluates token-level sequence labels with accuracy, macro-F1 excluding `O`, and a label-ordered confusion matrix.
+
 ```python
 import numpy as np
 from sklearn.metrics import accuracy_score, confusion_matrix, f1_score

@@ -45,6 +45,8 @@ where $s_d$ is the sample standard deviation of the differences. For win/loss/ti
 
 ## Worked calculation
 
+This snippet evaluates paired old-versus-new scores with mean delta, paired $t$-test, confidence interval, and a sign test.
+
 ```python
 import numpy as np
 from scipy import stats

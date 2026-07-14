@@ -41,6 +41,8 @@ with input size $L$, padding $p$, dilation $d$, kernel size $k$, and stride $s$.
 
 ## Worked example
 
+This snippet runs a convolutional layer on an image-shaped tensor and computes the receptive field and effective stride after two layers.
+
 ```python
 import torch
 

@@ -28,6 +28,8 @@ Data quality is not a dashboard of vague health indicators. It is a set of execu
 
 I ran these checks against a small payments table with one null amount, one duplicate payment id, and one unexpected currency:
 
+This snippet runs SQL quality checks for missing values, duplicate keys, and invalid ranges against an in-memory table.
+
 ```python
 import sqlite3
 

@@ -43,6 +43,8 @@ Bias terms can be added, but the mechanism is the same: move factors so observed
 
 ## Worked example
 
+This snippet applies one gradient update to a Funk-SVD user and item vector, then compares squared error and the resulting dot-product prediction.
+
 ```python
 import numpy as np
 rng = np.random.default_rng(9)

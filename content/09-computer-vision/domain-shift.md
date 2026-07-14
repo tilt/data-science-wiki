@@ -35,6 +35,8 @@ Covariate shift changes $P(X)$ while the labeling rule is stable; label shift ch
 
 ## Worked example
 
+This snippet trains a classifier in one feature distribution and evaluates it on a shifted distribution to show accuracy and positive-rate drift.
+
 ```python
 import numpy as np
 from sklearn.linear_model import LogisticRegression

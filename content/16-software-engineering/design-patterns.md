@@ -30,6 +30,8 @@ In data and AI products, Strategy is common when the same request path may use B
 
 ## Executed Artifact
 
+This snippet implements a scorer strategy interface and swaps keyword and freshness scorers without changing the ranking function.
+
 ```python
 from dataclasses import dataclass
 from typing import Protocol

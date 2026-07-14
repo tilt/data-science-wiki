@@ -42,6 +42,8 @@ and reports perplexity as $\exp(\mathcal L/N)$ for $N$ predicted tokens. An $n$-
 
 ## Worked example
 
+This snippet estimates add-one-smoothed bigram probabilities, computes perplexity for a short sequence, and lists likely continuations after `the`.
+
 ```python
 import math, numpy as np
 from collections import Counter

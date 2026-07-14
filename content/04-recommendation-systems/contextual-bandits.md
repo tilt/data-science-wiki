@@ -42,6 +42,8 @@ The second term is uncertainty, linking directly to [exploration versus exploita
 
 ## Worked example
 
+This snippet evaluates LinUCB scores for candidate arms from a context vector and selects the arm with the largest upper confidence bound.
+
 ```python
 import numpy as np
 alpha = .7; x = np.array([1., .4])

@@ -36,6 +36,8 @@ where $x$ may be TF-IDF features from [text preprocessing](text-preprocessing.md
 
 ## Worked example
 
+This snippet trains a TF-IDF logistic-regression topic classifier, reports held-out predictions and macro-F1, and prints the strongest words per class.
+
 ```python
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer

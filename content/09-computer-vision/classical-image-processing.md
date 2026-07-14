@@ -46,6 +46,8 @@ Edges become large responses because neighboring intensities differ strongly; fl
 
 ## Worked example
 
+This snippet applies a Sobel-style horizontal edge filter to a toy image and reports the gradient response and maximum edge magnitude.
+
 ```python
 import numpy as np
 from scipy.signal import convolve2d

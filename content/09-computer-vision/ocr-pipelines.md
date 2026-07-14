@@ -36,6 +36,8 @@ where $I'$ is the cleaned image, $r_i$ are text regions, $\hat t_i$ are recogniz
 
 ## Worked example
 
+This snippet computes edit-distance based character error rate and word error rate for an OCR hypothesis against a reference transcription.
+
 ```python
 import numpy as np
 

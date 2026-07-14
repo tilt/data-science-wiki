@@ -47,6 +47,8 @@ Horn-Schunck instead adds a global smoothness penalty so neighboring flow vector
 
 ## Worked example
 
+This snippet creates two shifted frames and estimates a constant optical-flow vector by solving the brightness-constancy equations on a local mask.
+
 ```python
 import warnings
 import numpy as np

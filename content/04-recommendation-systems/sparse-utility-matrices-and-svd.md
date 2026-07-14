@@ -47,6 +47,8 @@ where $Z_{ui}=0$ for every missing pair. That objective treats unobserved pairs 
 
 ## Worked example
 
+This snippet zero-fills a sparse utility matrix and applies rank-1 SVD reconstruction to show how missing entries can be distorted by ordinary SVD.
+
 ```python
 import numpy as np
 R = np.array([[5., 0., 0., 0.], [0., 0., 4., 0.], [0., 0., 5., 4.]])

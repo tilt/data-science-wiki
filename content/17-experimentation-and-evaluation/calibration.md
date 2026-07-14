@@ -46,6 +46,8 @@ Always pair these with bin counts and [coverage](coverage.md), because sparse bi
 
 ## Worked calculation
 
+This snippet computes a Brier score and binned calibration table, then aggregates the bin gaps into expected calibration error.
+
 ```python
 import numpy as np
 from sklearn.metrics import brier_score_loss

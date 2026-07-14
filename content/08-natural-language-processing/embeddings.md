@@ -42,6 +42,8 @@ Contextual encoders replace the table lookup with a function $h_i=f_\theta(t_{1:
 
 ## Worked example
 
+This snippet builds a PPMI co-occurrence representation, compares cosine similarities, and lists the strongest contexts for `cat`.
+
 ```python
 import numpy as np
 

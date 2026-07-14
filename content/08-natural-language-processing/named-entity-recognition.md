@@ -42,6 +42,8 @@ Evaluation usually requires exact span and type agreement, because confusing `Pa
 
 ## Worked example
 
+This snippet extracts BIO entity spans from gold and predicted tags, then computes span-level precision, recall, and F1.
+
 ```python
 import numpy as np
 

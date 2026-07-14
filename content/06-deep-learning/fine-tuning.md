@@ -77,6 +77,8 @@ The small footprint is not magic compression of the original model. It is a mode
 
 ## Worked example
 
+This snippet freezes a base network, trains only a small head, and checks that the base weights do not change during the update.
+
 ```python
 import torch
 import torch.nn.functional as F

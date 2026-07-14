@@ -39,6 +39,8 @@ Interpretability is not decoration after [evaluation metrics](evaluation-metrics
 
 ## Worked example
 
+This snippet fits a random forest on Iris data and uses permutation importance to estimate which features the fitted model relies on most.
+
 ```python
 from sklearn.datasets import load_iris
 from sklearn.ensemble import RandomForestClassifier

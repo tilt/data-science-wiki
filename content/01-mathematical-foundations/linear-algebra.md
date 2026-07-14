@@ -42,6 +42,8 @@ The fundamental questions are geometric: what directions are stretched, which di
 
 ## Executed demo
 
+This snippet multiplies a rectangular matrix by a vector and computes the matrix rank, illustrating shape compatibility and independent columns.
+
 ```python
 import numpy as np
 

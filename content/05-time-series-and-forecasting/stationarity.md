@@ -34,6 +34,8 @@ Stationarity is often pursued through transformations rather than assumed in raw
 
 ## Executed example
 
+This snippet compares summary statistics for a stationary-looking series and a trending series, including an Augmented Dickey-Fuller style stationarity check.
+
 ```python
 import numpy as np
 from scipy import stats

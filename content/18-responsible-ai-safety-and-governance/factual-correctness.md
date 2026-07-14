@@ -50,6 +50,8 @@ The atomic claim is the unit of review. A paragraph can be mostly correct but st
 
 I ran a deterministic toy checker over four claims and cited snippets:
 
+This snippet checks cited claims against evidence passages with a simple token-support heuristic and flags unsupported or contradicted claims for review.
+
 ```python
 import re
 

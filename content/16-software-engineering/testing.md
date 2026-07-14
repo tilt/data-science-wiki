@@ -34,6 +34,8 @@ Unit tests isolate deterministic logic. Integration tests exercise a real bounda
 
 ## Executed Artifact
 
+This snippet defines unit, integration, and property-style pytest tests for checkout logic and shows the expected test run result.
+
 ```python
 import pytest
 

@@ -41,6 +41,8 @@ Gradients through convolution are still handled by [backpropagation](backpropaga
 
 ## Worked example
 
+This snippet applies a small convolutional filter to a toy image and reports the output alongside the receptive field after two $3\times3$ layers.
+
 ```python
 import torch
 import torch.nn.functional as F

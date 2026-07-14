@@ -36,6 +36,8 @@ with temperature $T>0$. Greedy decoding is $\arg\max_i z_i$. Top-k sets all but 
 
 ## Executed artifact
 
+This snippet applies greedy, temperature, top-k, and nucleus decoding to the same logits and compares the resulting token probabilities and entropy.
+
 ```python
 import numpy as np
 

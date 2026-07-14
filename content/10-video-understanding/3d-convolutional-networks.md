@@ -37,6 +37,8 @@ The temporal kernel size controls the motion horizon visible to one layer. Stack
 
 ## Worked example
 
+This snippet applies a 3D convolution over time, height, and width and checks that the output shape follows the manual convolution-size formula.
+
 ```python
 import torch
 

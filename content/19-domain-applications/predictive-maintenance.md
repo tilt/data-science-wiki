@@ -36,6 +36,8 @@ The NASA C-MAPSS turbofan benchmark is a canonical public artifact: NASA says th
 
 This synthetic rare-failure classifier checks why PR-AUC is more informative than accuracy when the maintenance queue can only inspect the riskiest assets.
 
+This snippet trains a failure-risk model on imbalanced synthetic sensor features and compares average precision with a prior-only baseline plus top-20 capture.
+
 ```python
 import numpy as np
 from sklearn.datasets import make_classification

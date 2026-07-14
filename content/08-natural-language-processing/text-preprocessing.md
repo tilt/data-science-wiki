@@ -36,6 +36,8 @@ where $g$ is the normalization policy, $t_j$ is a token type, and $c$ counts or 
 
 ## Worked example
 
+This snippet normalizes small text examples before vectorization and compares the raw and normalized vocabulary sizes and features.
+
 ```python
 import numpy as np, re
 from sklearn.feature_extraction.text import CountVectorizer

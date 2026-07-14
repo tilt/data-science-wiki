@@ -39,6 +39,8 @@ Training loss asks "can this model fit the sample?" Validation asks "which model
 
 ## Worked example
 
+This snippet performs grid search over logistic-regression regularization strengths and reports the selected $C$, cross-validated AUC, and candidate scores.
+
 ```python
 from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression

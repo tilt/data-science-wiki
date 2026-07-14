@@ -30,6 +30,8 @@ Degradation monitoring compares current behavior with an approved baseline by mo
 
 ## Executed Delayed-Label Check
 
+This snippet compares reference and degraded prediction scores with AUC and log loss to show performance decay without changing labels.
+
 ```python
 import numpy as np
 from sklearn.metrics import log_loss, roc_auc_score

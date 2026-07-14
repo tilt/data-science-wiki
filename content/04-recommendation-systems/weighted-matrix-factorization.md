@@ -47,6 +47,8 @@ For fixed item factors, each user update is a weighted ridge solve, closely rela
 
 ## Worked example
 
+This snippet solves a confidence-weighted user-factor update and scores all items against the learned user vector.
+
 ```python
 import numpy as np
 r = np.array([3., 0., 1.])

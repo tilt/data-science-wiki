@@ -42,6 +42,8 @@ Unconstrained differentiable optima satisfy the first-order stationarity conditi
 
 ## Executed demo
 
+This snippet uses SciPy to minimize a convex quadratic and prints the recovered minimizer, final objective value, and iteration count.
+
 ```python
 import numpy as np
 from scipy import optimize

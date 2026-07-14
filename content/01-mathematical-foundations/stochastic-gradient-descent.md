@@ -44,6 +44,8 @@ The mini-batch gradient is an unbiased estimate of the full gradient when sample
 
 ## Executed demo
 
+This snippet runs stochastic gradient updates on a noiseless one-dimensional linear regression problem and reports the learned slope, intercept, and MSE.
+
 ```python
 import numpy as np
 

@@ -32,6 +32,8 @@ A backend request path should validate input, authenticate and authorize, call d
 
 ## Executed Artifact
 
+This snippet defines a small FastAPI endpoint and uses a test client to compare the authorized response with the forbidden response.
+
 ```python
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.testclient import TestClient

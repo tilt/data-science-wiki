@@ -37,6 +37,8 @@ QR uses orthonormal columns for least squares; Cholesky $A=LL^\top$ applies to s
 
 ## Executed demo
 
+This snippet performs Cholesky and QR decompositions, then checks reconstruction error for Cholesky and orthonormality for the QR basis.
+
 ```python
 import numpy as np
 

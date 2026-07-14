@@ -45,6 +45,8 @@ A supervised model is not learning labels in the abstract. It is learning a reus
 
 ## Worked example
 
+This snippet trains a linear regression model with a train-test split and reports test $R^2$ plus the learned feature coefficients.
+
 ```python
 from sklearn.datasets import make_regression
 from sklearn.linear_model import LinearRegression

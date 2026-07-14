@@ -46,6 +46,8 @@ A distance is often induced by a norm, $d(x,y)=\lVert x-y\rVert$. The Euclidean 
 
 ## Executed demo
 
+This snippet computes $L_1$, $L_2$, and $L_\infty$ norms for one vector, then checks a Euclidean distance and the triangle inequality gap.
+
 ```python
 import numpy as np
 

@@ -48,6 +48,8 @@ This is the chain rule from [gradients](../01-mathematical-foundations/gradients
 
 ## Worked example
 
+This snippet lets PyTorch differentiate a two-layer network and compares selected gradients with a manual backpropagation calculation.
+
 ```python
 import torch
 

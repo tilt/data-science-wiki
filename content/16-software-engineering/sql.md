@@ -39,6 +39,8 @@ Application SQL should use parameter binding, explicit authorization predicates,
 
 ## Executed Artifact
 
+This snippet uses parameterized SQLite queries to block injection-like input and demonstrates transaction rollback after a simulated failure.
+
 ```python
 import sqlite3
 

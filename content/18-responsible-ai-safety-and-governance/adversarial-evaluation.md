@@ -41,6 +41,8 @@ NIST's Generative AI Profile treats red-teaming as context-dependent and notes t
 
 ## Executed perturbation check
 
+This snippet runs a small adversarial test suite through a toy guard and reports expected versus observed allow/block/abstain decisions.
+
 ```python
 import re
 

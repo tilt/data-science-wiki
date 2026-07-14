@@ -41,6 +41,8 @@ so the expected activation scale is preserved during training and dropout is dis
 
 ## Worked example
 
+This snippet contrasts dropout in training and evaluation modes and adds an $L_2$ penalty to a data loss.
+
 ```python
 import torch
 

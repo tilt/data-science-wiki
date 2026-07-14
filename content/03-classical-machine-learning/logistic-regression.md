@@ -59,6 +59,8 @@ A coefficient is an additive effect on log-odds: increasing feature $x_j$ by one
 
 ## Worked example
 
+This snippet trains a standardized logistic regression classifier and reports accuracy, log loss, the confusion matrix, and example predicted probabilities.
+
 ```python
 from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression

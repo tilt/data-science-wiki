@@ -49,6 +49,8 @@ The useful representation is not necessarily the one that preserves every bit of
 
 ## Worked example
 
+This snippet trains a tiny autoencoder for one step and reports reconstruction loss before and after along with one latent vector.
+
 ```python
 import torch
 import torch.nn.functional as F

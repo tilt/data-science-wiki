@@ -46,6 +46,8 @@ Batch normalization usually estimates $\mu,\sigma^2$ across the minibatch and sp
 
 ## Worked example
 
+This snippet applies batch normalization and layer normalization to the same tensor and prints the moments each normalization controls.
+
 ```python
 import torch
 

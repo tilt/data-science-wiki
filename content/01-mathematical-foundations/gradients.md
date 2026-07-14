@@ -54,6 +54,8 @@ This formula is the small local object that becomes batched matrix expressions i
 
 ## Executed demo
 
+This snippet computes the gradient of a squared-error loss analytically and checks it against a centered finite-difference approximation.
+
 ```python
 import numpy as np
 

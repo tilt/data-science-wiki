@@ -53,6 +53,8 @@ That length preservation is why orthogonal bases are numerically convenient in [
 
 ## Executed demo
 
+This snippet builds an orthonormal basis with QR decomposition and verifies orthogonality through $Q^TQ$ and a column dot product.
+
 ```python
 import numpy as np
 

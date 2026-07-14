@@ -37,6 +37,8 @@ An index changes how candidates are found, not the meaning of the similarity fun
 
 ## Worked example
 
+This snippet compares exact cosine similarities with similarities after coarse vector quantization to show how indexing approximations can change neighbours.
+
 ```python
 import numpy as np
 

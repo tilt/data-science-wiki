@@ -47,6 +47,8 @@ Trends and seasonality can create misleading autocorrelation. Difference or detr
 
 ## Executed example
 
+This snippet computes early autocorrelations and partial autocorrelations for a synthetic series so the lag structure can be read numerically.
+
 ```python
 import numpy as np
 

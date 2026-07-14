@@ -65,6 +65,8 @@ The plot shows why PCA is a projection method rather than feature selection. The
 
 ## Worked example
 
+This snippet standardizes Iris features, fits two principal components, and reports the component directions, explained variance ratios, and one projected score vector.
+
 ```python
 from sklearn.datasets import load_iris
 from sklearn.decomposition import PCA

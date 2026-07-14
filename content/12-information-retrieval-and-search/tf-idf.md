@@ -47,6 +47,8 @@ then L2-normalizes rows so cosine similarity is just a dot product between query
 
 ## Worked example
 
+This snippet vectorizes documents with TF-IDF, scores them against a query, and prints the resulting ranked order.
+
 ```python
 from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np

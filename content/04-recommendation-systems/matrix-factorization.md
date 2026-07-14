@@ -49,6 +49,8 @@ The plot shows the geometric view of the dot product. User factors and item fact
 
 ## Worked example
 
+This snippet factorizes a small partially observed rating matrix, reports observed-entry RMSE, and prints the completed score matrix used for recommendations.
+
 ```python
 import numpy as np
 rng = np.random.default_rng(7)

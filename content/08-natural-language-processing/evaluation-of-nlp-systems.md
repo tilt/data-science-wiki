@@ -47,6 +47,8 @@ where $p_n$ is modified $n$-gram precision, $w_n$ is the weight for each order, 
 
 ## Worked example
 
+This snippet computes macro-F1 for a small classifier, bootstraps a confidence interval, and reports per-label F1 scores.
+
 ```python
 import numpy as np
 from sklearn.metrics import f1_score

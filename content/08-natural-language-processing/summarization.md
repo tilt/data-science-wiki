@@ -42,6 +42,8 @@ then decode a summary sequence. The key evaluation question is whether the outpu
 
 ## Worked example
 
+This snippet scores sentences with TF-IDF similarity to the document centroid and selects the highest-scoring sentences for an extractive summary.
+
 ```python
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer

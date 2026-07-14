@@ -35,6 +35,8 @@ Patch-based models reshape an image into $P$ flattened patches $X_p\in\mathbb R^
 
 ## Worked example
 
+This snippet converts an image array into channel-first tensor form, extracts flattened patches, and reports channel means and a patch summary.
+
 ```python
 import numpy as np
 

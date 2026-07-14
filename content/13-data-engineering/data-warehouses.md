@@ -28,6 +28,8 @@ A data warehouse stores integrated, historical, queryable data for analytics. It
 
 Warehouses separate raw landing data from curated analytical models. A common flow is raw orders -> cleaned staging -> facts and dimensions from [dimensional-modelling](dimensional-modelling.md). I ran this SQLite aggregate as the final mart layer:
 
+This snippet aggregates paid raw orders into daily warehouse-style revenue rows with SQL grouping.
+
 ```python
 import sqlite3
 

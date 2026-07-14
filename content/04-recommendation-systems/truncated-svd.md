@@ -46,6 +46,8 @@ The matrix below can be read as four users or documents over four item/term feat
 | 2 | Features 2 and 3 active. |
 | 3 | Features 1 and 3 active. |
 
+This snippet applies `TruncatedSVD` to sparse user-item rows and reports explained variance plus the first row embedding.
+
 ```python
 import numpy as np
 from sklearn.decomposition import TruncatedSVD

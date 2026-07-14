@@ -46,6 +46,8 @@ The scenario names policy behavior, not implementation classes. That makes it su
 
 ## Executed Artifact
 
+This snippet runs behavior-style examples against a small shipping-fee rule and prints whether each scenario matches the expected outcome.
+
 ```python
 def route_feed(opted_out: bool, available_features: set[str]) -> str:
     if opted_out and "user_click_history" in available_features:

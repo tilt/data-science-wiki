@@ -69,6 +69,8 @@ Use self-supervised pretraining when labels are scarce, categories change, or do
 
 ## Worked example
 
+This snippet computes a contrastive similarity matrix for augmented views and the resulting NT-Xent loss.
+
 ```python
 import torch
 import torch.nn.functional as F

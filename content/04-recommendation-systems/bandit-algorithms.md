@@ -36,6 +36,8 @@ The bonus is larger for under-sampled arms, which formalizes [exploration versus
 
 ## Worked example
 
+This simulation runs a simple exploration strategy over arms and reports pulls, empirical click-through rates, and total clicks.
+
 ```python
 import numpy as np
 rng = np.random.default_rng(12)

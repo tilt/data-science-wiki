@@ -43,6 +43,8 @@ where $M$ is the set of masked positions. [Tokenization](tokenization.md) define
 
 ## Worked example
 
+This snippet computes bidirectional self-attention weights for token embeddings and shows that the first token can attend to later positions.
+
 ```python
 import math, torch
 

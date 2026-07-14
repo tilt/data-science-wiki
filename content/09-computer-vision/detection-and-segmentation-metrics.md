@@ -53,6 +53,8 @@ Average precision summarizes the precision-recall curve; COCO-style reporting av
 
 ## Worked example
 
+This snippet computes mask IoUs, assigns detections by score, and derives precision-recall points plus average precision.
+
 ```python
 import numpy as np
 from sklearn.metrics import average_precision_score

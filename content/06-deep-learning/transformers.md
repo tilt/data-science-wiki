@@ -46,6 +46,8 @@ Encoder blocks usually use bidirectional self-attention. Decoder language models
 
 ## Worked example
 
+This snippet builds a causal attention mask and feed-forward block output to show how decoder attention excludes future tokens.
+
 ```python
 import math, torch
 

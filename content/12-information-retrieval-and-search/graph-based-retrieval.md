@@ -36,6 +36,8 @@ For citation or web graphs, link analysis variants propagate authority through e
 
 ## Worked example
 
+This snippet expands a citation-style graph two hops from a seed paper and reports candidate papers with their shared neighbours.
+
 ```python
 import networkx as nx
 

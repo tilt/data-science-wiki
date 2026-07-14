@@ -43,6 +43,8 @@ This connects to [low-rank approximation](../01-mathematical-foundations/low-ran
 
 ## Worked example
 
+This snippet computes the SVD of a dense rating matrix and forms a rank-2 reconstruction, reporting singular values, error, and one reconstructed row.
+
 ```python
 import numpy as np
 A = np.array([[5., 4., 1.], [4., 4., 1.], [1., 1., 5.], [1., 0., 4.]])

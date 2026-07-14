@@ -51,6 +51,8 @@ Linear models are strong baselines because they ask whether the representation a
 
 ## Worked example
 
+This snippet fits ordinary least squares and Ridge regression on correlated features, comparing coefficients and $R^2$ to show shrinkage under multicollinearity.
+
 ```python
 from sklearn.datasets import make_regression
 from sklearn.linear_model import LinearRegression, Ridge

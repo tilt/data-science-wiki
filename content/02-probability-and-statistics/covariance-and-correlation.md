@@ -53,6 +53,8 @@ $$
 \rho_{X,Y}=\frac{1.8}{\sqrt{4}\sqrt{1}}=0.9.
 $$
 
+This snippet draws a bivariate normal sample with known covariance and compares the sample covariance and correlation with the theoretical correlation.
+
 ```python
 import numpy as np
 

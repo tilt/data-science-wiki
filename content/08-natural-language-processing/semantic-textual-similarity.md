@@ -36,6 +36,8 @@ A cross-encoder instead scores a concatenated pair, $s(a,b)=g_\theta([a;b])$, wh
 
 ## Worked example
 
+This snippet uses TF-IDF cosine similarity to compare three short utterances and identify the nearest sentence to a cancellation request.
+
 ```python
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer

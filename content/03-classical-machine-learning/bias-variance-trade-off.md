@@ -39,6 +39,8 @@ Bias is being consistently wrong. Variance is being differently wrong depending 
 
 ## Worked example
 
+This snippet fits a shallow and an unlimited-depth decision tree to the same noisy regression data to contrast underfitting with high-variance overfitting.
+
 ```python
 from sklearn.datasets import make_regression
 from sklearn.metrics import mean_squared_error

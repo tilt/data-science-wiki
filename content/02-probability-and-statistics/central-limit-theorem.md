@@ -38,6 +38,8 @@ A skewed observation can have a long right tail, but an average is a sum of many
 
 ## Worked simulation
 
+This simulation draws sample means from an exponential distribution at increasing sample sizes and reports how their standardized skew and quantiles move toward a normal distribution.
+
 ```python
 import numpy as np
 from scipy import stats

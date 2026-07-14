@@ -37,6 +37,8 @@ A simple symmetric random walk has $X_i\in\{-1,1\}$ with equal probability. It i
 
 ## Worked simulation
 
+This simulation runs many symmetric random walks, checks that final-position variance is near the number of steps, and estimates the chance of hitting level 20.
+
 ```python
 import numpy as np
 

@@ -47,6 +47,8 @@ $$
 
 ## Worked example
 
+This snippet trains a TF-IDF logistic-regression text classifier and reports predictions, accuracy, and the confusion matrix on held-out examples.
+
 ```python
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer

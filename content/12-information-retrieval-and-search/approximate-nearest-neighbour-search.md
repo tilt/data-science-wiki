@@ -44,6 +44,8 @@ HNSW does this with greedy routing over a layered proximity graph; partitioning 
 
 ## Worked example
 
+This snippet compares exact nearest neighbours with a coarse cell-restricted candidate search to show the speed-recall tradeoff in approximate retrieval.
+
 ```python
 import numpy as np
 

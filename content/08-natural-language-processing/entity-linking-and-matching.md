@@ -36,6 +36,8 @@ The representation $\phi$ can be character n-grams, sparse TF-IDF, [embeddings](
 
 ## Worked example
 
+This snippet vectorizes entity mentions and candidates with TF-IDF, then links each mention to the candidate with highest cosine similarity.
+
 ```python
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer

@@ -39,6 +39,8 @@ A tree builds axis-aligned if-then rules. Each split asks for the single questio
 
 ## Worked example
 
+This snippet trains a depth-limited Iris decision tree and reports accuracy, feature importances, and the feature-threshold split used at the root.
+
 ```python
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split

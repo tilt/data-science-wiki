@@ -35,6 +35,8 @@ where $b_i$ is a box, $m_i\in\{0,1\}^{H\times W}$ is an instance mask, $c_i$ is 
 
 ## Worked example
 
+This snippet computes an instance-mask IoU matrix and greedily matches predictions to ground-truth instances above a threshold.
+
 ```python
 import numpy as np
 

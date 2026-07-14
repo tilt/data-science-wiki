@@ -30,6 +30,8 @@ Characterization tests are the safety net when the existing code has unclear int
 
 ## Executed Artifact
 
+This snippet compares a legacy order-total function with a refactored version across golden cases to verify behavior stayed unchanged.
+
 ```python
 def legacy_total(order):
     total = 0

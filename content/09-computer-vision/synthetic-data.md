@@ -35,6 +35,8 @@ then evaluates on real $(x_r,y_r)$. Domain randomization samples many $a$ values
 
 ## Worked example
 
+This snippet trains a threshold-like classifier on synthetic pixel intensities and evaluates how well it transfers to a shifted real-intensity distribution.
+
 ```python
 import numpy as np
 from sklearn.linear_model import LogisticRegression

@@ -49,6 +49,8 @@ The multiplier says how much the optimum would change if the constraint moved. I
 
 ## Executed demo
 
+This snippet solves the quadratic problem $\min x^2+y^2$ subject to $x+y=1$ and reports both the optimum and the constraint check.
+
 ```python
 import numpy as np
 from scipy import optimize

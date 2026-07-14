@@ -40,6 +40,8 @@ $$
 
 ## Worked example
 
+This snippet computes character and word edit distances between a gold transcript and OCR output, then converts them to CER and WER.
+
 ```python
 import numpy as np
 

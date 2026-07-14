@@ -36,6 +36,8 @@ Here $\pi_q$ is the produced ranking and $y_q$ is the relevance judgment set. Th
 
 ## Worked example
 
+This snippet computes per-query and mean recall@2 plus mean reciprocal rank for two toy ranked result lists.
+
 ```python
 import numpy as np
 

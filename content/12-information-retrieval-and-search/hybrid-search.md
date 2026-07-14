@@ -45,6 +45,8 @@ RRF avoids score calibration; weighted sums give more control when a labelled de
 
 ## Worked example
 
+This snippet combines sparse and dense rankings with reciprocal-rank fusion and prints the fused document order.
+
 ```python
 from collections import defaultdict
 

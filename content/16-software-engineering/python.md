@@ -30,6 +30,8 @@ Keep notebook exploration outside importable library code. Put reusable transfor
 
 ## Executed Artifact
 
+This snippet parses a typed dataclass configuration and raises a validation error when the feature window is invalid.
+
 ```python
 from dataclasses import dataclass
 

@@ -40,6 +40,8 @@ $$
 
 ## Worked example
 
+This snippet trains a classifier head on frozen features and reports head accuracy before and after while confirming the feature tensor does not require gradients.
+
 ```python
 import torch
 import torch.nn.functional as F

@@ -37,6 +37,8 @@ where $s(x)$ is the hidden target derived from the same example. Contrastive sel
 
 ## Worked example
 
+This snippet trains a small predictor to reconstruct masked features from visible features and reports the loss change plus learned weights.
+
 ```python
 import torch
 import torch.nn.functional as F

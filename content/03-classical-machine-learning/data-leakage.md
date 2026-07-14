@@ -33,6 +33,8 @@ Leakage gives the model an answer key or a proxy for it. The model may look exce
 
 ## Worked example
 
+This snippet compares cross-validation accuracy with clean features against accuracy after adding a target-derived leaky feature.
+
 ```python
 import numpy as np
 from sklearn.datasets import make_classification

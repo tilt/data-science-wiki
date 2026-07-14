@@ -45,6 +45,8 @@ The $\sqrt{d_k}$ divisor keeps dot-product logits from growing with key dimensio
 
 ## Worked example
 
+This snippet computes scaled dot-product attention weights from queries and keys, then forms the context vector as the weighted sum of values.
+
 ```python
 import math, torch
 

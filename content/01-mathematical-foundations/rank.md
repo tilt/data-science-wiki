@@ -43,6 +43,8 @@ Rank controls solvability and identifiability. If a regression design matrix lac
 
 ## Executed demo
 
+This snippet computes the rank and singular values of a matrix with one dependent row, then shows a zero determinant for a dependent submatrix.
+
 ```python
 import numpy as np
 

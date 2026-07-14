@@ -44,6 +44,8 @@ turns vectors into geometry: it defines angles, [orthogonality](orthogonality.md
 
 ## Executed demo
 
+This snippet computes a vector self-dot product, a matrix-vector product, and the first row of an outer product to distinguish the common operations.
+
 ```python
 import numpy as np
 

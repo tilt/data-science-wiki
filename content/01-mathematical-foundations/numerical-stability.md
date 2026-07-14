@@ -43,6 +43,8 @@ Choosing $c=\max_j z_j$ prevents the largest exponent from exceeding $1$. The sa
 
 ## Executed demo
 
+This snippet contrasts a naive softmax on very large logits with the max-shifted stable version that avoids overflow.
+
 ```python
 import numpy as np
 

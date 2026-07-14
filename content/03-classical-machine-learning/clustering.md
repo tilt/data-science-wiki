@@ -33,6 +33,8 @@ K-means looks for compact spherical groups around centroids. If the real structu
 
 ## Worked example
 
+This snippet standardizes Iris features, fits $k$-means with three clusters, and reports inertia, silhouette score, and cluster sizes.
+
 ```python
 from sklearn.cluster import KMeans
 from sklearn.datasets import load_iris

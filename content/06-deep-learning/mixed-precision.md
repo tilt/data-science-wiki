@@ -78,6 +78,8 @@ The reason is mathematical, not cosmetic. A matrix multiply performs many multip
 
 ## Executed Demo
 
+This snippet demonstrates float16 underflow for a tiny gradient, then shows how loss scaling recovers the value and how float16 rounds a decimal input.
+
 ```python
 import numpy as np
 import torch

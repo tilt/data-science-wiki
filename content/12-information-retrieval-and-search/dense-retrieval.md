@@ -46,6 +46,8 @@ Document vectors can be precomputed and stored in [vector indexes](vector-indexe
 
 ## Worked example
 
+This snippet builds toy dense embeddings with synonym-like vectors and ranks documents by query-document cosine similarity.
+
 ```python
 import re
 import numpy as np

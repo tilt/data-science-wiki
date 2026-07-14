@@ -40,6 +40,8 @@ $$
 
 ## Worked example
 
+This snippet horizontally flips an image bounding box and mixes two labels, showing how augmentations must transform labels consistently with pixels.
+
 ```python
 import numpy as np
 

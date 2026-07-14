@@ -40,6 +40,8 @@ Regularization encodes skepticism. A large coefficient, deep tree, or late boost
 
 ## Worked example
 
+This snippet compares linear regression, Ridge, and Lasso on the same regression split, reporting RMSE and how many coefficients remain nonzero.
+
 ```python
 from sklearn.datasets import make_regression
 from sklearn.linear_model import LinearRegression, Ridge, Lasso

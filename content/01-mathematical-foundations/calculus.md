@@ -42,6 +42,8 @@ Multivariable calculus replaces $f'(x)$ with [gradients](gradients.md), [Jacobia
 
 ## Executed demo
 
+This snippet compares a central-difference derivative of $f(x)=\sin(x)e^{-0.2x}$ with the analytic derivative at $x=0.7$, then reports the absolute numerical error.
+
 ```python
 import numpy as np
 

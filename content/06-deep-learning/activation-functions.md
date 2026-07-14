@@ -47,6 +47,8 @@ Sigmoid and tanh saturate for large magnitudes; ReLU keeps a unit derivative on 
 
 ## Worked example
 
+This snippet evaluates common activation functions on the same input grid and prints both activations and gradients for comparison.
+
 ```python
 import torch
 import torch.nn.functional as F

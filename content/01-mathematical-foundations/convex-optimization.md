@@ -49,6 +49,8 @@ is convex when both conditions hold. For differentiable $f$, $f(y)\ge f(x)+\nabl
 
 ## Executed demo
 
+This snippet evaluates Jensen's inequality for $f(x)=x^2$ by comparing the function at a weighted mean with the weighted mean of function values.
+
 ```python
 import numpy as np
 

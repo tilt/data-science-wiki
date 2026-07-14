@@ -47,6 +47,8 @@ If $A$ is symmetric, its eigenvectors can be chosen [orthogonal](orthogonality.m
 
 ## Executed demo
 
+This snippet computes the eigenpairs of a symmetric matrix and verifies each pair by measuring the residual norm $\|Av-\lambda v\|$.
+
 ```python
 import numpy as np
 

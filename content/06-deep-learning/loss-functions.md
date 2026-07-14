@@ -47,6 +47,8 @@ $$
 
 ## Worked example
 
+This snippet computes cross-entropy, softmax probabilities, cross-entropy gradients, and a regression MSE on small tensors.
+
 ```python
 import torch
 import torch.nn.functional as F

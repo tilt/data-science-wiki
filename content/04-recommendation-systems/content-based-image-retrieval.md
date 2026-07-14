@@ -36,6 +36,8 @@ At scale the vectors are stored in [vector indexes](../12-information-retrieval-
 
 ## Worked example
 
+This snippet computes cosine similarity between a query image descriptor and candidate descriptors, then returns the nearest image index.
+
 ```python
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity

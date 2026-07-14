@@ -44,6 +44,8 @@ $$
 
 ## Worked example
 
+This snippet alternates user and item least-squares updates on an observed rating matrix and reports how RMSE and user-0 predictions change.
+
 ```python
 import numpy as np
 rng = np.random.default_rng(4)

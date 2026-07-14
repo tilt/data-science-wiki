@@ -31,6 +31,8 @@ for a one-sided upper-tail test, with analogous two-sided forms. This is a proba
 
 ## Worked computation
 
+This snippet draws two normal samples with different means and applies Welch's two-sample $t$-test to report the mean difference, statistic, and p-value.
+
 ```python
 import numpy as np
 from scipy import stats
