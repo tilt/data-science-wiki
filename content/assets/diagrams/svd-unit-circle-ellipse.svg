@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">SVD maps orthogonal input directions to stretched output directions</title>
+  <desc id="desc">A unit circle with orthogonal right singular directions is mapped by a matrix to an ellipse with principal axes scaled by singular values.</desc>
+  <style>
+    .fg { fill: #111827; }
+    .muted { fill: #4b5563; }
+    .grid { stroke: #e5e7eb; stroke-width: 1; }
+    .axis { stroke: #111827; stroke-width: 1.5; }
+    .panel { fill: #f8fafc; stroke: #e5e7eb; stroke-width: 1; }
+    .unit-circle { stroke: #64748b; }
+    .blue-stroke { stroke: #2563eb; }
+    .orange-stroke { stroke: #f97316; }
+    .teal-stroke { stroke: #14b8a6; }
+    .blue-fill { fill: #2563eb; }
+    .orange-fill { fill: #f97316; }
+    .teal-fill { fill: #14b8a6; }
+    .blue-text { fill: #1d4ed8; }
+    .orange-text { fill: #c2410c; }
+    .teal-area { fill: #14b8a6; opacity: 0.15; }
+    text { font-family: Arial, sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      .fg { fill: #f8fafc; }
+      .muted { fill: #d1d5db; }
+      .grid { stroke: #4b5563; }
+      .axis { stroke: #e5e7eb; }
+      .panel { fill: #1f2937; stroke: #4b5563; }
+      .unit-circle { stroke: #cbd5e1; }
+      .blue-stroke { stroke: #8ab4ff; }
+      .orange-stroke { stroke: #fb923c; }
+      .teal-stroke { stroke: #5eead4; }
+      .blue-fill { fill: #8ab4ff; }
+      .orange-fill { fill: #fb923c; }
+      .teal-fill { fill: #5eead4; }
+      .blue-text { fill: #bfdbfe; }
+      .orange-text { fill: #fed7aa; }
+      .teal-area { fill: #5eead4; opacity: 0.20; }
+    }
+  </style>
+
+  <rect x="0" y="0" width="760" height="460" fill="transparent"/>
+  <text x="380" y="38" text-anchor="middle" font-size="23" font-weight="700" class="fg">SVD separates rotation, stretching, and rotation</text>
+  <text x="380" y="64" text-anchor="middle" font-size="14" class="muted">Right singular directions enter the matrix; singular values set the ellipse axis lengths.</text>
+
+  <g transform="translate(0,8)">
+    <rect x="60" y="92" width="275" height="265" rx="8" class="panel"/>
+    <rect x="425" y="92" width="275" height="265" rx="8" class="panel"/>
+    <text x="198" y="121" text-anchor="middle" font-size="16" font-weight="700" class="fg">input space</text>
+    <text x="562" y="121" text-anchor="middle" font-size="16" font-weight="700" class="fg">output space after A</text>
+
+    <g transform="translate(198,228)">
+      <line x1="-105" y1="0" x2="105" y2="0" class="grid"/>
+      <line x1="0" y1="-105" x2="0" y2="105" class="grid"/>
+      <circle cx="0" cy="0" r="82" fill="none" class="unit-circle" stroke-width="2"/>
+      <line x1="0" y1="0" x2="76" y2="-32" class="blue-stroke" stroke-width="4" marker-end="url(#arrow-blue)"/>
+      <line x1="0" y1="0" x2="32" y2="76" class="orange-stroke" stroke-width="4" marker-end="url(#arrow-orange)"/>
+      <circle cx="0" cy="0" r="3" class="fg"/>
+      <text x="82" y="-36" font-size="14" class="blue-text">v1</text>
+      <text x="39" y="90" font-size="14" class="orange-text">v2</text>
+      <text x="0" y="121" text-anchor="middle" font-size="13" class="muted">orthogonal unit directions</text>
+    </g>
+
+    <g transform="translate(562,228)">
+      <line x1="-125" y1="0" x2="125" y2="0" class="grid"/>
+      <line x1="0" y1="-105" x2="0" y2="105" class="grid"/>
+      <ellipse cx="0" cy="0" rx="116" ry="48" transform="rotate(-22)" class="teal-area teal-stroke" stroke-width="2.5"/>
+      <line x1="0" y1="0" x2="108" y2="-44" class="blue-stroke" stroke-width="4" marker-end="url(#arrow-blue)"/>
+      <line x1="0" y1="0" x2="19" y2="44" class="orange-stroke" stroke-width="4" marker-end="url(#arrow-orange)"/>
+      <circle cx="0" cy="0" r="3" class="fg"/>
+      <text x="106" y="-51" font-size="14" class="blue-text">sigma1 times u1</text>
+      <text x="27" y="60" font-size="14" class="orange-text">sigma2 times u2</text>
+      <text x="0" y="121" text-anchor="middle" font-size="13" class="muted">larger singular value means more stretch</text>
+    </g>
+
+    <path d="M354 222 C380 198, 402 198, 428 222" fill="none" class="axis" stroke-width="2" marker-end="url(#arrow-fg)"/>
+    <text x="391" y="194" text-anchor="middle" font-size="14" font-weight="700" class="fg">apply A</text>
+  </g>
+
+  <text x="380" y="425" text-anchor="middle" font-size="13" class="fg">Truncating SVD keeps the longest output axes and discards shorter directions first.</text>
+
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" class="blue-fill"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" class="orange-fill"/>
+    </marker>
+    <marker id="arrow-fg" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" class="fg"/>
+    </marker>
+  </defs>
+</svg>

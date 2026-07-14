@@ -63,6 +63,12 @@ scores [1.038, 0.335, 0.804]
 
 The item with three interactions has higher confidence and pulls the user factor most strongly. [Bayesian personalized ranking](bayesian-personalized-ranking.md) instead trains pairwise orderings from positive and sampled negative items.
 
+| Item | Interaction count $r$ | Preference $p$ | Confidence $c=1+4r$ | Effect |
+| --- | ---: | ---: | ---: | --- |
+| 0 | 3 | 1 | 13 | Strong pull toward item 0's factor. |
+| 1 | 0 | 0 | 1 | Weak evidence; not a confident dislike. |
+| 2 | 1 | 1 | 5 | Positive pull, but less than item 0. |
+
 ## Caveats
 
 The confidence formula is a modeling choice, not a fact about preference. Counts can reflect exposure, autoplay, bots, or interface placement. Tune $\alpha$, regularization, and negative treatment against top-k [evaluation](evaluation-of-recommenders.md), and inspect long-tail coverage so popularity does not dominate every factor.

@@ -53,6 +53,14 @@ mean_diff 0.5646 t_stat 2.4319 p_value 0.0173
 
 The simulated mean difference is `0.5646`, and the Welch t-statistic is `2.4319`, producing `p_value 0.0173`. That is evidence against equal means under the test assumptions, but the decision should still consider effect size, cost, and [statistical significance](../17-experimentation-and-evaluation/statistical-significance.md) in context.
 
+| Testing component | In the example |
+| --- | --- |
+| Null model | The two groups have equal population means. |
+| Alternative | The group means differ. |
+| Statistic | Welch's t-statistic compares the observed mean difference with its estimated standard error. |
+| Reference distribution | Approximate t distribution with unequal-variance degrees of freedom. |
+| Reported result | A mean difference of `0.5646` and p-value `0.0173`, not a probability that the null is true. |
+
 ## Caveats
 
 Optional stopping, multiple comparisons, peeking at segments, and using the wrong unit of analysis can make p-values anti-conservative. A non-significant result is not evidence of no effect unless the test had enough power for a meaningful effect size.

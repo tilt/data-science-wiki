@@ -26,29 +26,25 @@ Reproducibility in data engineering means a table, file set, or feature dataset 
 
 ## Manifest mechanism
 
-I generated a deterministic manifest string and hash for a curated orders output:
+A reproducibility manifest should be deterministic and human-reviewable:
 
-```python
-import hashlib, json
-
-manifest = {
+```json
+{
   "code_sha": "9f31a2c",
   "input_snapshot": "s3://lake/orders/dt=2026-01-01",
   "params": {"currency": "USD"},
-  "output": "s3://lake/marts/orders/v=20260102",
+  "output": "s3://lake/marts/orders/v=20260102"
 }
-print(json.dumps(manifest, sort_keys=True))
-print(hashlib.sha256(json.dumps(manifest, sort_keys=True).encode()).hexdigest()[:12])
 ```
 
-Observed output:
+| Manifest field | Reproducibility role |
+| --- | --- |
+| `code_sha` | Pins the transformation logic. |
+| `input_snapshot` | Pins the source data version or partition. |
+| `params` | Captures business choices that affect output. |
+| `output` | Names the immutable result location or table version. |
 
-```text
-{"code_sha": "9f31a2c", "input_snapshot": "s3://lake/orders/dt=2026-01-01", "output": "s3://lake/marts/orders/v=20260102", "params": {"currency": "USD"}}
-1a76b0241df9
-```
-
-That hash is useful only if the input path is immutable or versioned. [Cloud-storage](cloud-storage.md) prefixes such as `latest/` undermine reproducibility unless object version IDs or table snapshots are captured.
+A hash of this manifest is useful only if the input path is immutable or versioned. [Cloud-storage](cloud-storage.md) prefixes such as `latest/` undermine reproducibility unless object version IDs or table snapshots are captured.
 
 ## Architecture
 

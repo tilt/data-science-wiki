@@ -42,28 +42,20 @@ The feature vector might be [TF-IDF](../12-information-retrieval-and-search/tf-i
 
 ## Worked example
 
-```python
-import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
-items = np.array([[1,1,0,0], [1,0,1,0], [0,0,1,1], [0,1,0,1]], dtype=float)
-liked = [0, 1]
-profile = items[liked].mean(axis=0)
-scores = cosine_similarity([profile], items)[0]
-scores[liked] = -1
-print("profile", np.round(profile, 2).tolist())
-print("scores", np.round(scores, 3).tolist())
-print("top_item", int(np.argmax(scores)))
-```
+If a user liked items with feature vectors $(1,1,0,0)$ and $(1,0,1,0)$, the profile is their average:
 
-Observed output:
+$$
+p_u=(1,0.5,0.5,0).
+$$
 
-```text
-profile [1.0, 0.5, 0.5, 0.0]
-scores [-1.0, -1.0, 0.289, 0.289]
-top_item 2
-```
+| Item | Feature vector | Already liked? | Cosine to profile | Interpretation |
+| --- | --- | --- | ---: | --- |
+| 0 | $(1,1,0,0)$ | yes | filtered | Used to build the profile. |
+| 1 | $(1,0,1,0)$ | yes | filtered | Used to build the profile. |
+| 2 | $(0,0,1,1)$ | no | 0.289 | Shares one profile feature. |
+| 3 | $(0,1,0,1)$ | no | 0.289 | Shares a different profile feature. |
 
-The profile averages the two liked items and retrieves a partially overlapping unseen item. [Hybrid recommenders](hybrid-recommenders.md) combine this with behavioral signals when both are available.
+Items 2 and 3 tie because each overlaps with half of the learned profile. [Hybrid recommenders](hybrid-recommenders.md) combine this with behavioral signals when both are available.
 
 ## Caveats
 

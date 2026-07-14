@@ -39,27 +39,16 @@ $$
 
 ## Worked example
 
-```python
-import numpy as np
+With torso scale $s=20$ and threshold $\alpha=0.2$, a keypoint is correct when its Euclidean error is at most $4$ pixels.
 
-true = np.array([[10,10],[20,10],[20,25],[np.nan,np.nan]])
-pred = np.array([[11,10],[23,12],[18,30],[15,15]], float)
-visible = ~np.isnan(true[:,0])
-d = np.linalg.norm(pred[visible] - true[visible], axis=1)
-torso = 20
-pck = (d / torso <= .2).mean()
-print("normalized_errors", np.round(d / torso, 3).tolist())
-print("pck_at_0.2", round(float(pck), 3), "visible_keypoints", int(visible.sum()))
-```
+| Keypoint | True point | Predicted point | Normalized error | Counted correct? |
+| --- | --- | --- | ---: | --- |
+| Shoulder | $(10,10)$ | $(11,10)$ | 0.050 | yes |
+| Elbow | $(20,10)$ | $(23,12)$ | 0.180 | yes |
+| Wrist | $(20,25)$ | $(18,30)$ | 0.269 | no |
+| Hand tip | occluded | $(15,15)$ | excluded | not evaluated |
 
-Observed output:
-
-```text
-normalized_errors [0.05, 0.18, 0.269]
-pck_at_0.2 0.667 visible_keypoints 3
-```
-
-Two visible keypoints fall within the 0.2 normalized-error threshold. The occluded keypoint is excluded, which must match the annotation policy.
+Two of the three visible keypoints fall within the threshold, so $\mathrm{PCK}_{0.2}=2/3\approx0.667$. The occluded keypoint is excluded, which must match the annotation policy.
 
 ## Caveats
 

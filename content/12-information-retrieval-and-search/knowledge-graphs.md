@@ -36,28 +36,23 @@ A SPARQL-like graph pattern retrieves subjects that satisfy joins over triples. 
 
 ## Worked example
 
-```python
-triples = [
-    ("paperA", "uses", "bm25"),
-    ("paperA", "evaluated_on", "msmarco"),
-    ("paperB", "uses", "dense_retrieval"),
-    ("paperB", "evaluated_on", "msmarco"),
-]
-answers = sorted(
-    s for s, p, o in triples
-    if p == "evaluated_on" and o == "msmarco"
-    and any(s == s2 and p2 == "uses" and o2 == "bm25" for s2, p2, o2 in triples)
-)
-print("triples", len(triples), "query_result", answers)
+| Subject | Predicate | Object |
+| --- | --- | --- |
+| `paperA` | `uses` | `bm25` |
+| `paperA` | `evaluated_on` | `msmarco` |
+| `paperB` | `uses` | `dense_retrieval` |
+| `paperB` | `evaluated_on` | `msmarco` |
+
+A graph query for "papers that use BM25 and are evaluated on MS MARCO" requires both edges to share the same subject:
+
+```sparql
+SELECT ?paper WHERE {
+  ?paper uses bm25 .
+  ?paper evaluated_on msmarco .
+}
 ```
 
-Observed output:
-
-```text
-triples 4 query_result ['paperA']
-```
-
-Lexical search could find both papers for `MS MARCO`, but the graph query enforces the relation pattern: the same paper must both use BM25 and be evaluated on the dataset.
+The result is `paperA`. Lexical search could find both papers for `MS MARCO`, but the graph query enforces the relation pattern: the same paper must both use BM25 and be evaluated on the dataset.
 
 ## Where it fits
 

@@ -42,26 +42,16 @@ This is often a fast [candidate generation](candidate-generation.md) source befo
 
 ## Worked example
 
-```python
-import numpy as np
-from sklearn.metrics.pairwise import cosine_similarity
-X = np.array([[1,1,0,0], [1,1,1,0], [0,0,1,1], [1,0,0,1]])
-item_sim = cosine_similarity(X.T)
-user = np.array([1,0,0,1])
-scores = item_sim @ user
-scores[user > 0] = -1
-print("item0_similarities", np.round(item_sim[0], 3).tolist())
-print("recommend_item", int(np.argmax(scores)), "score", round(float(scores.max()), 3))
-```
+Assume the target user already consumed items 0 and 3. Candidate scores sum item-item similarities from the consumed set and then filter already-seen items:
 
-Observed output:
+| Candidate item | Similarity to item 0 | Similarity to item 3 | Unseen score | Decision |
+| --- | ---: | ---: | ---: | --- |
+| Item 0 | 1.000 | 0.408 | filtered | already consumed |
+| Item 1 | 0.816 | 0.000 | 0.816 | candidate |
+| Item 2 | 0.408 | 0.500 | 0.908 | top candidate |
+| Item 3 | 0.408 | 1.000 | filtered | already consumed |
 
-```text
-item0_similarities [1.0, 0.816, 0.408, 0.408]
-recommend_item 2 score 0.908
-```
-
-The user has items 0 and 3; item 2 receives similarity from item 3 and becomes the top unseen recommendation. [Matrix factorization](matrix-factorization.md) can compress a similar item-item structure into latent factors.
+Item 2 receives support from both consumed items and becomes the top unseen recommendation. [Matrix factorization](matrix-factorization.md) can compress a similar item-item structure into latent factors.
 
 ## Caveats
 

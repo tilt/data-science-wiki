@@ -1,6 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
   <title id="title">Matrix factorization animation poster</title>
   <desc id="desc">A static fallback showing a ratings matrix approximated by user and item factor matrices.</desc>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      text { fill: #f8fafc !important; }
+    }
+  </style>
   <rect width="640" height="360" fill="#151719"/>
   <text x="42" y="60" fill="#f5f1e8" font-family="Arial" font-size="28">R approx P Q^T</text>
   <g fill="#59b7b4">

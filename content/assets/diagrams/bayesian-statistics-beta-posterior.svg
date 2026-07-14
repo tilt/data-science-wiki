@@ -32,6 +32,21 @@
   --plot-fill-opacity: 0.85;
   --plot-fill-stroke-opacity: 0.85;
 }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --plot-fg: #f8fafc;
+    --plot-muted: #d1d5db;
+    --plot-annotation: #e5e7eb;
+    --plot-grid: #64748b;
+    --plot-blue: #8ab4ff;
+    --plot-blue-dark: #bfdbfe;
+    --plot-red: #f87171;
+    --plot-fill-blue: #1e3a8a;
+    --plot-fill-opacity: 0.42;
+    --plot-fill-stroke-opacity: 0.85;
+  }
+}
 ]]></style>
  </defs>
  <g id="figure_1">

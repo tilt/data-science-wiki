@@ -59,6 +59,13 @@ mean_count_by_1000 166.289 count_per_time 0.1663
 
 The simulated mean interarrival time is `6.0013`, close to the modeled mean 6, so the theoretical renewal rate is about `0.1667`. The observed count per unit time, `0.1663`, is close to $1/\mathbb E[S]$.
 
+| Object | Role |
+| --- | --- |
+| Interarrival time $S_i$ | Time between event $i-1$ and event $i$. |
+| Arrival time $T_n$ | Sum of the first $n$ waiting times. |
+| Count $N(t)$ | Number of arrivals observed by horizon $t$. |
+| Long-run rate $1/\mathbb E[S]$ | Expected event frequency after transient effects average out. |
+
 ## Caveats
 
 The renewal assumption fails when events change future risk, when waiting times depend on covariates, or when the system does not reset after an event. A Poisson process is only the exponential-waiting-time special case and is also a continuous-time [Markov chain](markov-chains.md).

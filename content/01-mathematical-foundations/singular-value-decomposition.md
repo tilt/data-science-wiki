@@ -22,6 +22,10 @@ related:
   - rank.md
   - norms-and-distances.md
   - ../03-classical-machine-learning/pca.md
+  - ../04-recommendation-systems/classical-svd.md
+  - ../04-recommendation-systems/truncated-svd.md
+  - ../04-recommendation-systems/svd-versus-matrix-factorization.md
+  - ../04-recommendation-systems/sparse-utility-matrices-and-svd.md
   - ../04-recommendation-systems/matrix-factorization.md
 historical_context: false
 last_reviewed: 2026-07-11
@@ -53,7 +57,11 @@ $$
 \lVert A-A_k\rVert_F=\sqrt{\sum_{i=k+1}^r\sigma_i^2}.
 $$
 
-This Eckart-Young result is the reason SVD is a clean mathematical baseline for compression, denoising, latent semantic analysis, and the distinction between classical SVD and learned recommender [matrix factorization](../04-recommendation-systems/matrix-factorization.md).
+This Eckart-Young result is the reason SVD is a clean mathematical baseline for compression, denoising, latent semantic analysis, [PCA](../03-classical-machine-learning/pca.md), [classical SVD recommenders](../04-recommendation-systems/classical-svd.md), and [truncated SVD](../04-recommendation-systems/truncated-svd.md). It is also the baseline for understanding why sparse recommender pages distinguish [ordinary SVD on sparse utility matrices](../04-recommendation-systems/sparse-utility-matrices-and-svd.md) from learned [matrix factorization](../04-recommendation-systems/matrix-factorization.md).
+
+![SVD geometry: a unit circle with orthogonal input directions maps through a matrix to an ellipse whose axes are scaled by singular values.](../assets/diagrams/svd-unit-circle-ellipse.svg)
+
+Geometrically, $V^\top$ chooses orthogonal input coordinates, $\Sigma$ stretches them by singular values, and $U$ rotates the stretched axes into the output space. Truncating the SVD keeps the longest axes first, which is why the discarded singular values determine the low-rank approximation error.
 
 ## Executed demo
 
@@ -79,6 +87,16 @@ tail_singular_fro 4.2426
 ```
 
 The exact reconstruction error is numerically zero, and the rank-1 truncation error equals the Frobenius norm of the discarded singular values. Numerically tiny singular values should be interpreted relative to scale, as in [rank](rank.md), not by exact equality to zero.
+
+## Connections
+
+| Page | How it uses SVD |
+| --- | --- |
+| [PCA](../03-classical-machine-learning/pca.md) | Applies SVD to centered data; right singular vectors become principal axes and squared singular values determine explained variance. |
+| [Low-rank approximation](low-rank-approximation.md) | Uses the Eckart-Young theorem to quantify the best rank-$k$ reconstruction error. |
+| [Classical SVD](../04-recommendation-systems/classical-svd.md) | Applies SVD to a complete dense matrix in recommender examples. |
+| [Truncated SVD](../04-recommendation-systems/truncated-svd.md) | Computes only leading singular components for compact representations. |
+| [SVD versus matrix factorization](../04-recommendation-systems/svd-versus-matrix-factorization.md) | Contrasts decomposing a complete matrix with learning factors from sparse observed entries. |
 
 ## References
 

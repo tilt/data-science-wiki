@@ -1,6 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="860" height="390" viewBox="0 0 860 390" role="img" aria-labelledby="title desc">
   <title id="title">Video transformer token cost</title>
   <desc id="desc">As patch size shrinks from 8 to 4 to 2 pixels, token count grows from 16 to 64 to 256 and full attention score count grows from 256 to 4096 to 65536.</desc>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      text { fill: #f8fafc !important; }
+      [fill="#111827"], [fill="#1f2937"], [fill="#374151"], [fill="#4b5563"], [fill="#0f172a"], [fill="#020617"], [fill="#000000"] { fill: #f8fafc !important; }
+      [stroke="#111827"], [stroke="#1f2937"], [stroke="#374151"], [stroke="#4b5563"], [stroke="#0f172a"], [stroke="#020617"], [stroke="#000000"] { stroke: #e5e7eb !important; }
+    }
+  </style>
   <rect width="860" height="390" fill="transparent"/>
   <text x="430" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#111827">Patch detail raises attention cost quadratically</text>
   <text x="430" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="15" fill="#4b5563">For fixed frames and tubelet length, smaller patches create more tokens and many more pairwise scores.</text>

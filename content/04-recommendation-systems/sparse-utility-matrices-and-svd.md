@@ -69,6 +69,12 @@ rank1_reconstruction
 
 The first user's only positive rating disappears from the rank-1 reconstruction because the dense zero pattern overwhelms it. [SVD versus matrix factorization](svd-versus-matrix-factorization.md) is the canonical comparison page for this distinction.
 
+| Modeling choice | Consequence |
+| --- | --- |
+| Treat missing entries as zero | The objective rewards reconstructing the many zeros. |
+| Fit only observed entries | The model focuses on known ratings or interactions. |
+| Weight implicit feedback by confidence | Missing pairs remain low-confidence rather than hard negatives. |
+
 ## Caveats
 
 Zero-filled SVD can still be a deliberate baseline, especially when zeros truly mean non-consumption after exposure. But most logs lack full exposure data, so treating unknown as negative injects position, popularity, and catalogue-size bias. Prefer observed-entry objectives or confidence-weighted losses, then evaluate top-k [ranking](ranking.md) behavior.

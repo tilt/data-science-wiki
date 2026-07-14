@@ -1,6 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="860" height="430" viewBox="0 0 860 430" role="img" aria-labelledby="title desc">
   <title id="title">Generative AI harness architecture</title>
   <desc id="desc">A harness flows from frozen cases and fixtures through a runner, system adapter, trace recorder, graders, and reports.</desc>
+  <style>
+    @media (prefers-color-scheme: dark) {
+      text { fill: #f8fafc !important; }
+      [fill="#111827"], [fill="#1f2937"], [fill="#374151"], [fill="#4b5563"], [fill="#0f172a"], [fill="#020617"], [fill="#000000"] { fill: #f8fafc !important; }
+      [stroke="#111827"], [stroke="#1f2937"], [stroke="#374151"], [stroke="#4b5563"], [stroke="#0f172a"], [stroke="#020617"], [stroke="#000000"] { stroke: #e5e7eb !important; }
+    }
+  </style>
   <rect x="0" y="0" width="860" height="430" fill="transparent"/>
   <text x="430" y="36" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#111827">A harness makes generative-AI runs reproducible and gradable</text>
   <text x="430" y="62" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#4b5563">Freeze cases and fixtures, run the system adapter, record traces, grade behavior, and report regressions.</text>

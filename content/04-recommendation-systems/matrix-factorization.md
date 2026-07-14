@@ -43,6 +43,10 @@ Some production variants add biases, $\hat r_{ui}=\mu+b_u+b_i+p_u^\top q_i$, whi
 
 The model compresses repeated co-preference patterns. If users who like quiet documentaries also like long-form interviews, the two item factors can land near the same direction, and a user factor aligned with that direction will score both highly. The factor dimensions are not guaranteed to be interpretable, but they are useful because they share statistical strength across sparse rows and columns.
 
+![A two-dimensional latent factor space where users and items form two preference clusters; aligned user-item vectors have high scores and opposite clusters score low.](../assets/diagrams/matrix-factorization-latent-space.svg)
+
+The plot shows the geometric view of the dot product. User factors and item factors live in the same latent coordinate system: nearby or directionally aligned points score high, while points on opposite sides of the space score low. This is why the model can infer missing cells from shared structure rather than filling missing ratings with zeros before fitting.
+
 ## Worked example
 
 ```python
