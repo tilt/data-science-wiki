@@ -33,6 +33,10 @@ npm run quartz -- build
 
 The deployment workflows use this sequence after plugin installation.
 
+## Build shows an esbuild direct-eval warning
+
+Run `npm run patch-plugins` and rebuild. The note-properties patch rewrites a bundled `gray-matter` direct eval so esbuild does not warn during the Quartz build.
+
 ## Mermaid diagrams are clipped or unstable
 
 Run `npm run patch-plugins` and confirm it reports that the Mermaid config patch is applied or already present. Then rebuild with `npm run quartz -- build`.
