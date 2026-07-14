@@ -31,6 +31,8 @@ $$
 \mathrm{Dice}=\frac{2|M\cap \hat M|}{|M|+|\hat M|}.
 $$
 
+Here $M$ is the reference mask, $\hat M$ is the predicted mask, and $|\cdot|$ counts voxels in the selected structure. The numerator doubles the overlapping voxels; the denominator totals the predicted and reference sizes, so Dice rewards overlap while penalizing both missed voxels and false positives.
+
 Physical volume uses voxel spacing:
 
 $$

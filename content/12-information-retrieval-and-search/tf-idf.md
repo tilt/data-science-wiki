@@ -35,6 +35,8 @@ w_{t,d}=\operatorname{tf}_{t,d}\cdot \operatorname{idf}_t,
 \operatorname{idf}_t=\log\frac{N}{\operatorname{df}_t}.
 $$
 
+Here $w_{t,d}$ is the weight for term $t$ in document $d$, $\operatorname{tf}_{t,d}$ is the term frequency inside that document, $N$ is the number of documents in the corpus, and $\operatorname{df}_t$ is the number of documents containing the term. A term gets a high weight when it appears in the document but not in many other documents.
+
 Many implementations smooth and normalize. scikit-learn's default `TfidfVectorizer` uses smoothed IDF,
 
 $$

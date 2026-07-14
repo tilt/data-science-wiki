@@ -33,15 +33,21 @@ $$
 \operatorname{sim}(a,b)=\frac{x_a^\top x_b}{\lVert x_a\rVert_2\lVert x_b\rVert_2}.
 $$
 
+Here $x_a$ and $x_b$ are interaction vectors for two users or two items, depending on the method. The numerator counts aligned behavior, while the denominator normalizes for activity level so a heavy user is not similar to everyone merely because they interacted with many items.
+
 A simple user-based score aggregates neighbor interactions:
 
 $$
 s(u,i)=\sum_{v\ne u}\operatorname{sim}(u,v)x_{vi}.
 $$
 
+The score $s(u,i)$ estimates how strongly user $u$ may like item $i$. Each neighbor $v$ contributes only if $v$ interacted with item $i$, and the contribution is weighted by similarity to $u$.
+
 This operates on a [utility matrix](utility-and-interaction-matrices.md); factor models replace explicit neighbors with learned latent coordinates.
 
 ## Worked example
+
+The code below constructs four user interaction vectors, computes user 0's cosine similarity to the others, and scores unseen items by similarity-weighted neighbor interactions. It is useful here because the recommended item comes from neighbor geometry, not from item content.
 
 ```python
 import numpy as np

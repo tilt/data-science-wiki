@@ -33,6 +33,8 @@ $$
 \operatorname{ReLU}(x)=\max(0,x).
 $$
 
+The scalar $x$ is one pre-activation value from an affine layer. Sigmoid maps it to $(0,1)$, tanh maps it to $(-1,1)$, and ReLU keeps positive values while zeroing negative values.
+
 Their derivatives show the training behavior:
 
 $$

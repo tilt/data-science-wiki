@@ -33,11 +33,15 @@ $$
 A_k=U_k\Sigma_kV_k^\top.
 $$
 
+Here $U_k$ contains the first $k$ left singular vectors, $V_k$ contains the first $k$ right singular vectors, and $\Sigma_k$ keeps the largest $k$ singular values. The approximation keeps the directions with the most matrix energy and removes the remaining singular directions.
+
 The Eckart-Young theorem says this is optimal in Frobenius norm:
 
 $$
 A_k=\arg\min_{\operatorname{rank}(B)\le k}\lVert A-B\rVert_F.
 $$
+
+The candidate matrix $B$ ranges over all matrices with rank at most $k$, and $\lVert\cdot\rVert_F$ measures entrywise squared reconstruction error. The theorem says truncated SVD is not just a convenient compression rule; it is the best rank-$k$ reconstruction under this norm.
 
 The error is exactly the energy in discarded singular values,
 

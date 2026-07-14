@@ -33,11 +33,15 @@ $$
 Av=\lambda v.
 $$
 
+Here $A$ is a square matrix, $v$ is a nonzero direction vector, and $\lambda$ is the scalar factor applied along that direction. The equation says that applying $A$ changes the length and possibly sign of $v$, but not its direction.
+
 The scalar $\lambda$ is an eigenvalue, found from
 
 $$
 \det(A-\lambda I)=0.
 $$
+
+The determinant becomes zero exactly when $A-\lambda I$ loses an independent direction, which means there is a nonzero vector $v$ satisfying $Av=\lambda v$.
 
 If $A$ is symmetric, its eigenvectors can be chosen [orthogonal](orthogonality.md), giving $A=Q\Lambda Q^\top$. This special structure is why covariance eigendecomposition and [PCA](../03-classical-machine-learning/pca.md) are stable for symmetric matrices. [SVD](singular-value-decomposition.md) extends related geometry to rectangular or non-normal matrices by using eigenvectors of $A^\top A$.
 

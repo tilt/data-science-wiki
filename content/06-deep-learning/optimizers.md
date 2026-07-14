@@ -31,11 +31,15 @@ $$
 \theta_{t+1}=\theta_t-\eta g_t.
 $$
 
+Here $\theta_t$ is the parameter vector at step $t$, $g_t=\nabla_\theta \ell(\theta_t)$ is the current gradient of the training loss, and $\eta$ is the learning rate. The formula says "move opposite the slope"; it says nothing about past gradients.
+
 Momentum keeps a velocity:
 
 $$
 v_t=\mu v_{t-1}+g_t,\qquad \theta_{t+1}=\theta_t-\eta v_t.
 $$
+
+The coefficient $\mu\in[0,1)$ controls how much previous velocity is retained. Momentum therefore smooths noisy gradients and can keep moving through shallow regions where a single mini-batch gradient is weak.
 
 Adam uses bias-corrected moments:
 
@@ -48,7 +52,13 @@ $$
 \theta_{t+1}=\theta_t-\eta\frac{\hat m_t}{\sqrt{\hat v_t}+\epsilon}.
 $$
 
+In Adam, $m_t$ tracks the average signed gradient and $v_t$ tracks the average squared gradient, both elementwise. The corrected terms $\hat m_t$ and $\hat v_t$ remove early-step initialization bias, and $\epsilon$ prevents division by zero. Parameters with consistently large squared gradients get smaller normalized steps than parameters with small recent gradients.
+
 [Mixed precision](mixed-precision.md) often changes the optimizer implementation because master weights, scaling, and fused kernels affect numerical behavior.
+
+The difference is visible even in one dimension: SGD reacts only to the current gradient, momentum overshoots less once velocity points toward the basin, and Adam adapts the step scale from recent gradient magnitude.
+
+![SGD, momentum, and Adam follow different update paths on the same one-dimensional loss curve.](../assets/diagrams/optimizer-update-trajectories.svg)
 
 ## Worked example
 

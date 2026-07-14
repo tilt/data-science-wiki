@@ -2,10 +2,10 @@
 
 This repository can deploy the Quartz site to GitLab Pages with `.gitlab-ci.yml`.
 
-Expected default Pages URL for this project:
+Current GitLab Pages URL for this project:
 
 ```text
-https://tillt.gitlab.io/data-science-wiki/
+https://data-science-wiki-5e0a3b.gitlab.io/
 ```
 
 GitLab can also assign a unique Pages domain or use a custom domain. Treat the URL shown under **Deploy > Pages** and the `CI_PAGES_URL` value in the deployment job as authoritative.

@@ -33,11 +33,15 @@ $$
 x^\top y=0.
 $$
 
+Here $x^\top y$ is the dot product. A zero dot product means the signed component of $x$ in the direction of $y$ cancels out, so neither vector carries length along the other direction.
+
 A matrix $Q$ has orthonormal columns when
 
 $$
 Q^\top Q=I.
 $$
+
+The columns of $Q$ are the basis vectors, and $I$ is the identity matrix. Diagonal ones mean each column has unit length; off-diagonal zeros mean different columns are mutually orthogonal.
 
 Then multiplication by $Q$ preserves Euclidean lengths inside its column space:
 

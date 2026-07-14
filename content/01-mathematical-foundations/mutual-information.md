@@ -34,11 +34,15 @@ $$
 I(X;Y)=\sum_{x,y}p(x,y)\log_2\frac{p(x,y)}{p(x)p(y)}.
 $$
 
+Here $p(x,y)$ is the joint probability of a pair of outcomes, while $p(x)$ and $p(y)$ are the marginal probabilities each variable would have on its own. The ratio compares the observed joint probability with what independence would predict; the log term is zero when the two match and nonzero when knowing one variable changes expectations about the other.
+
 Equivalently, using [entropy](entropy.md),
 
 $$
 I(X;Y)=H(X)-H(X\mid Y)=H(Y)-H(Y\mid X).
 $$
+
+This form says mutual information is uncertainty removed: $H(X)$ is the uncertainty in $X$ before seeing $Y$, and $H(X\mid Y)$ is the remaining uncertainty after $Y$ is known.
 
 The first formula shows mutual information as a [KL divergence](kl-divergence.md):
 

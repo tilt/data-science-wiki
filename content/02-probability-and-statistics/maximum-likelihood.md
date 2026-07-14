@@ -28,11 +28,15 @@ L(\theta)=\prod_{i=1}^n p(x_i\mid\theta), \qquad
 \hat\theta_{\mathrm{MLE}}=\arg\max_\theta L(\theta).
 $$
 
+Here $x_i$ is the $i$th observed data point, $\theta$ is the unknown model parameter, and $p(x_i\mid\theta)$ is the probability mass or density assigned by the model. The product appears because the observations are assumed independent; maximizing it chooses the parameter value that makes the whole observed sample most plausible.
+
 The log-likelihood is usually optimized:
 
 $$
 \ell(\theta)=\sum_{i=1}^n \log p(x_i\mid\theta).
 $$
+
+The logarithm turns the product into a sum without changing the maximizer, which is numerically more stable and easier to differentiate.
 
 This connects [common distributions](common-distributions.md) to losses: Gaussian regression uses squared error, while [logistic regression](../03-classical-machine-learning/logistic-regression.md) uses Bernoulli negative log-likelihood. [MAP estimation](maximum-a-posteriori-estimation.md) adds a prior term to the same likelihood.
 

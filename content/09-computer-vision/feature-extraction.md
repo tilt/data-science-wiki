@@ -31,13 +31,19 @@ $$
 \phi:\mathbb R^{C\times H\times W}\rightarrow\mathbb R^d.
 $$
 
+The input has $C$ channels, height $H$, and width $W$; the output is a $d$-dimensional feature vector. The map $\phi$ can be a fixed descriptor, a CNN trunk, a vision-transformer encoder, or a task-specific embedding model.
+
 For classical gradient features, $\phi$ may summarize local derivative magnitudes and orientations. For learned retrieval, $\phi(x)$ is usually normalized and compared by cosine similarity:
 
 $$
 \mathrm{sim}(x,q)=\frac{\phi(x)^\top\phi(q)}{\lVert\phi(x)\rVert_2\lVert\phi(q)\rVert_2}.
 $$
 
+Here $x$ is a candidate image and $q$ is the query image. Cosine similarity compares the angle between feature vectors, so two images can be close even if their raw pixel values differ.
+
 ## Worked example
+
+This small example uses gradient magnitude as a hand-designed feature. It shows the principle, not a modern production extractor: pixels are converted into edge-strength measurements and then summarized into histogram counts.
 
 ```python
 import numpy as np

@@ -32,11 +32,15 @@ $$
 \sigma^2=\frac{1}{m}\sum_i(x_i-\mu)^2,
 $$
 
+Here the $m$ values are the activations in whichever axis is being normalized: a batch-feature column for batch norm, or the feature coordinates of one example for layer norm. The mean $\mu$ recenters those values and $\sigma^2$ measures their spread.
+
 then returns
 
 $$
 y_i=\gamma\frac{x_i-\mu}{\sqrt{\sigma^2+\epsilon}}+\beta.
 $$
+
+The normalized value is scaled by trainable $\gamma$ and shifted by trainable $\beta$, so the layer can recover a useful activation scale instead of forcing every downstream feature to stay standardized. The small $\epsilon$ prevents division by zero.
 
 Batch normalization usually estimates $\mu,\sigma^2$ across the minibatch and spatial positions, common in [convolutional networks](convolutional-neural-networks.md). Layer normalization estimates them across a single example's feature dimension, so train and inference use the same statistics.
 

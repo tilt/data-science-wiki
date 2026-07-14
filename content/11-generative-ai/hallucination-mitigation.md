@@ -45,6 +45,8 @@ Mitigation can happen before generation through better retrieval, during generat
 }
 ```
 
+The artifact separates policy, checks, and failure handling. `source_id_seen` prevents fabricated citations, `claim_has_citation` prevents unsupported assertions from passing silently, and `citation_support` checks whether the cited passage actually entails the claim. In the example, the generated claim says "two days" while the source says "up to five business days", so the correct action is revision or abstention.
+
 ## Caveats
 
 Retrieval can introduce false evidence. A fluent answer with citations can still be wrong if the cited passage is irrelevant, stale, or contradicted elsewhere. Reducing hallucination is therefore a system property, not a prompt trick.

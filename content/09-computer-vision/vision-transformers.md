@@ -32,11 +32,15 @@ $$
 Z_0=[x_1E;\ldots;x_NE]+E_{\mathrm{pos}}.
 $$
 
+Here $P$ is the patch width and height, $x_j$ is the flattened vector for patch $j$, $E$ is the learned projection into token space, and $E_{\mathrm{pos}}$ adds position information so the transformer can distinguish where each patch came from. The initial token sequence $Z_0$ is therefore an ordered grid of visual patch embeddings.
+
 Each attention head computes
 
 $$
 \mathrm{Attention}(Q,K,V)=\mathrm{softmax}\left(\frac{QK^\top}{\sqrt d}\right)V.
 $$
+
+The query, key, and value matrices $Q$, $K$, and $V$ are linear projections of the patch tokens, and $d$ is the key dimension used to scale dot products. Attention turns patch-to-patch similarity into weights, then mixes value vectors from all patches.
 
 Patch size controls spatial granularity: a large patch lowers compute but makes small details harder to represent.
 
