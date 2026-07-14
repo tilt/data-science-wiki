@@ -27,15 +27,21 @@ $$
 T_n=\sum_{i=1}^n S_i, \qquad N(t)=\max\{n:T_n\le t\}.
 $$
 
+Here $S_i$ is the waiting time before event $i$, $T_n$ is the time of the $n$th event, and $N(t)$ is the number of events observed by time horizon $t$. The process renews because each new waiting time has the same distribution and does not depend on the past.
+
 The elementary renewal theorem gives the long-run rate:
 
 $$
 \frac{\mathbb E[N(t)]}{t}\to \frac{1}{\mathbb E[S_1]}.
 $$
 
+The left side is the expected count per unit time. The right side is the reciprocal of the mean waiting time, so events become less frequent when average interarrival times are longer.
+
 This is a counting-process version of the [law of large numbers](law-of-large-numbers.md). [Markov renewal processes](markov-renewal-processes.md) add state-dependent transition and holding-time structure.
 
 ## Worked simulation
+
+The code simulates many renewal processes with Gamma-distributed interarrival times and compares the observed count rate to the theorem's $1/\mathbb E[S]$ prediction.
 
 ```python
 import numpy as np

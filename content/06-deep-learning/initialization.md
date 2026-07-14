@@ -41,6 +41,8 @@ The goal is not a magic distribution; it is keeping forward activations and back
 
 ## Worked example
 
+The experiment sends the same random activations through six ReLU layers under two initializations, so the printed variances isolate the effect of weight scale.
+
 ```python
 import math, torch
 import torch.nn.functional as F

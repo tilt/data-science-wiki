@@ -33,6 +33,8 @@ A simple model can only use what the representation makes visible. If the target
 
 ## Worked example
 
+The code uses a target that is quadratic in one raw feature. It compares a plain linear model with the same model after adding a degree-2 polynomial feature.
+
 ```python
 import numpy as np
 from sklearn.linear_model import LinearRegression

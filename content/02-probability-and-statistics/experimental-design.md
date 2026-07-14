@@ -29,7 +29,11 @@ $$
 
 where $T_i$ is assigned by the design, not chosen after observing $Y_i$. Randomization supports unbiased comparisons; blocking and pairing reduce noise; pre-specified [hypothesis tests](hypothesis-testing.md) and [confidence intervals](confidence-intervals.md) keep uncertainty statements interpretable. In product work, this is the statistical core of [A/B testing](../17-experimentation-and-evaluation/a-b-testing.md).
 
+In this formula, $Y_i$ is the outcome for unit $i$, $T_i$ marks treatment assignment, $\tau$ is the treatment effect being estimated, and $\epsilon_i$ is unexplained variation. The design matters because it determines whether differences in $Y_i$ can be attributed to $T_i$ rather than confounding.
+
 ## Worked simulation
+
+The simulation compares an unpaired estimate with a blocked paired estimate when each treatment-control pair shares the same baseline variation.
 
 ```python
 import numpy as np

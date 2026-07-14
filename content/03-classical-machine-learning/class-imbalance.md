@@ -47,6 +47,8 @@ If fraud is 1 percent of transactions, predicting "not fraud" gets 99 percent ac
 
 ## Worked example
 
+The snippet compares the same imbalanced dataset with and without class weighting. The point is not that weighting is always better; it is that it changes the precision-recall tradeoff.
+
 ```python
 from sklearn.datasets import make_classification
 from sklearn.linear_model import LogisticRegression

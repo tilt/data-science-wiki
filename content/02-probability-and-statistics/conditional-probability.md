@@ -35,6 +35,8 @@ Conditioning discards outcomes outside $B$ and renormalizes the remaining mass t
 
 ## Worked computation
 
+The simulation below repeats the disease-testing base-rate scenario from [Bayes' theorem](bayes-theorem.md) and compares the simulated conditional probability with the exact calculation.
+
 ```python
 import numpy as np
 

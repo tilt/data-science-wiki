@@ -39,6 +39,8 @@ High-dimensional data often contains redundancy. A good lower-dimensional repres
 
 ## Worked example
 
+The code standardizes the Iris measurements and projects them to two PCA coordinates, so the output reports both the reduced shape and how much variance those two coordinates retain.
+
 ```python
 from sklearn.datasets import load_iris
 from sklearn.decomposition import PCA

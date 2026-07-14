@@ -27,11 +27,15 @@ $$
 h=\phi(xW+b),
 $$
 
+Here $x$ is the input row or batch, $W$ and $b$ are learned weights and biases, $\phi$ is the activation function, and $h$ is the hidden representation passed to the next layer.
+
 and a stack composes those maps:
 
 $$
 f_\theta(x)=f_L(f_{L-1}(\cdots f_1(x))).
 $$
+
+The parameter set $\theta$ contains the weights and biases across all layers. The composition means each layer transforms the representation produced by the previous layer.
 
 The nonlinearity is what makes the model more than a linear projection; without [activation functions](activation-functions.md), any stack of dense layers collapses to one affine layer. Training chooses parameters $\theta$ by minimizing a [loss function](loss-functions.md), usually with gradients from [backpropagation](backpropagation.md) and updates from an [optimizer](optimizers.md).
 
@@ -40,6 +44,8 @@ The nonlinearity is what makes the model more than a linear projection; without 
 Hidden layers learn intermediate coordinates that make the target easier to predict. In vision those coordinates may resemble edges or parts; in tabular data they may be interactions that were not manually encoded. The same mechanism also creates the usual risks: a high-capacity network can memorize small data, and a bad loss or initialization can make the optimization problem look harder than the prediction problem really is.
 
 ## Worked example
+
+The code trains a tiny network on XOR, a four-point problem that requires a hidden nonlinear representation. It is a compact demonstration of why the activation layer matters.
 
 ```python
 import torch

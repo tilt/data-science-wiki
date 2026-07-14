@@ -32,7 +32,7 @@ For a predicted segment $\hat s=[\hat t_1,\hat t_2]$ and ground truth $s=[t_1,t_
 $$
 \operatorname{tIoU}(\hat s,s)=
 \frac{\max(0,\min(\hat t_2,t_2)-\max(\hat t_1,t_1))}
-\max(\hat t_2,t_2)-\min(\hat t_1,t_1)}.
+{\max(\hat t_2,t_2)-\min(\hat t_1,t_1)}.
 $$
 
 Detectors score candidate segments, then evaluate mean average precision at one or more tIoU thresholds. [Sliding-window inference](sliding-window-inference.md) is the simplest proposal mechanism; modern [video transformers](video-transformers.md) can predict sparse temporal proposals directly.

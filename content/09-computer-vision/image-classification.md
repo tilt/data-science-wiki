@@ -31,15 +31,21 @@ $$
 p_k=\frac{\exp(z_k)}{\sum_{j=1}^K\exp(z_j)}.
 $$
 
+Here $x$ is the image, $f_\theta$ is the model, $K$ is the number of classes, and $z_k$ is the unnormalized score for class $k$. Softmax converts all logits into probabilities that sum to one, so increasing one class probability necessarily lowers others.
+
 Training usually minimizes cross-entropy,
 
 $$
 L(x,y)=-\log p_y.
 $$
 
+The label $y$ names the correct class and $p_y$ is the probability assigned to it. The loss is small only when the model puts high probability on the correct class.
+
 The same contract can be implemented by a [CNN architecture](cnn-architectures.md), a [vision transformer](vision-transformers.md), or frozen [feature extraction](feature-extraction.md) plus a smaller classifier.
 
 ## Worked example
+
+The code treats handwritten digits as small images, fits a simple classifier, and reports both probability quality and class confusions rather than only top-line accuracy.
 
 ```python
 from sklearn.datasets import load_digits

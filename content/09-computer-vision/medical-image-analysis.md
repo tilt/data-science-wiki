@@ -42,6 +42,8 @@ $$
 \hat p=P(Y=1\mid X),
 $$
 
+Here $X$ is the image or study, $Y=1$ denotes the clinically positive class, and $\hat p$ is the model's estimated probability for that class. The probability is not the action by itself; the action depends on the threshold and workflow.
+
 then a threshold $\tau$ turns probability into action. Sensitivity and specificity are
 
 $$
@@ -49,9 +51,13 @@ $$
 \mathrm{specificity}=\frac{TN}{TN+FP}.
 $$
 
+Here $TP$ and $FN$ count positive cases correctly caught or missed, while $TN$ and $FP$ count negative cases correctly dismissed or falsely flagged. Sensitivity measures how many true positives are caught; specificity measures how many true negatives are left alone.
+
 Patient-level splitting is part of the mechanism, not a bookkeeping detail: slices or studies from the same patient cannot be treated as independent test examples.
 
 ## Worked example
+
+The code below holds the same ten cases fixed and changes only the triage threshold. It is valuable because the output shows that a threshold is a clinical operating point, not an afterthought after model training.
 
 ```python
 import numpy as np
@@ -75,6 +81,10 @@ threshold 0.7 sensitivity 0.5 specificity 1.0 positives 2
 ```
 
 Raising the threshold reduces false alarms here but also misses another positive case. That tradeoff should be chosen with the clinical use case, not by accuracy alone.
+
+The same decision appears visually as a threshold tradeoff: moving the threshold right usually increases specificity but can reduce sensitivity.
+
+![Sensitivity falls and specificity rises as the triage threshold becomes stricter.](../assets/diagrams/medical-threshold-tradeoff.svg)
 
 ## Caveats
 

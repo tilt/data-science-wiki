@@ -33,11 +33,15 @@ $$
 p_{ui}=\mathbf 1\{r_{ui}>0\},\qquad c_{ui}=1+\alpha r_{ui}.
 $$
 
+Here $r_{ui}$ is the observed implicit interaction count or strength for user $u$ and item $i$. The binary preference $p_{ui}$ records whether any positive evidence exists, while confidence $c_{ui}$ increases with interaction strength; $\alpha$ controls how fast confidence grows.
+
 The objective is
 
 $$
 \min_{X,Y}\sum_{u,i}c_{ui}(p_{ui}-x_u^\top y_i)^2+\lambda(\lVert x_u\rVert^2+\lVert y_i\rVert^2).
 $$
+
+The user factor $x_u$ and item factor $y_i$ produce a preference score by dot product. The confidence term makes errors on observed, repeated interactions count more than errors on missing entries, and $\lambda$ regularizes factor sizes.
 
 For fixed item factors, each user update is a weighted ridge solve, closely related to [ALS](alternating-least-squares.md).
 

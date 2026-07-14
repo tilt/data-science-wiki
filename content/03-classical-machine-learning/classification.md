@@ -34,6 +34,8 @@ Classification turns a continuous score into an action. The model ranking may be
 
 ## Worked example
 
+The example contrasts a majority-class baseline with a logistic classifier, making clear why accuracy alone is a weak classification summary.
+
 ```python
 from sklearn.datasets import make_classification
 from sklearn.dummy import DummyClassifier

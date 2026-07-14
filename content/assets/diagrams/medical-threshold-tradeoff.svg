@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-labelledby="title desc">
+  <title id="title">Medical threshold tradeoff</title>
+  <desc id="desc">A line chart showing sensitivity decreasing and specificity increasing as a medical triage threshold rises.</desc>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --text: #111827;
+      --muted: #4b5563;
+      --grid: #d8dee9;
+      --axis: #1f2937;
+      --sens: #2563eb;
+      --spec: #dc2626;
+      --band: #eef2ff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #181a1b;
+        --panel: #181a1b;
+        --text: #f8fafc;
+        --muted: #d1d5db;
+        --grid: #334155;
+        --axis: #e5e7eb;
+        --sens: #8ab4ff;
+        --spec: #f87171;
+        --band: #1e293b;
+      }
+    }
+    text { fill: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: var(--muted); }
+  </style>
+  <rect width="900" height="500" rx="16" fill="var(--bg)"/>
+  <text x="450" y="42" text-anchor="middle" font-size="28" font-weight="700">Threshold choice changes the clinical operating point</text>
+  <text x="450" y="72" text-anchor="middle" font-size="17" class="muted">Higher thresholds reduce alerts, but can miss positives.</text>
+  <rect x="80" y="100" width="650" height="310" rx="10" fill="var(--panel)" stroke="var(--grid)"/>
+
+  <g stroke="var(--grid)" stroke-width="1">
+    <line x1="130" y1="360" x2="700" y2="360"/>
+    <line x1="130" y1="300" x2="700" y2="300"/>
+    <line x1="130" y1="240" x2="700" y2="240"/>
+    <line x1="130" y1="180" x2="700" y2="180"/>
+    <line x1="130" y1="120" x2="700" y2="120"/>
+    <line x1="244" y1="120" x2="244" y2="380"/>
+    <line x1="358" y1="120" x2="358" y2="380"/>
+    <line x1="472" y1="120" x2="472" y2="380"/>
+    <line x1="586" y1="120" x2="586" y2="380"/>
+  </g>
+  <line x1="130" y1="380" x2="700" y2="380" stroke="var(--axis)" stroke-width="2"/>
+  <line x1="130" y1="120" x2="130" y2="380" stroke="var(--axis)" stroke-width="2"/>
+
+  <text x="415" y="455" text-anchor="middle" font-size="18" class="muted">decision threshold tau</text>
+  <text x="34" y="250" text-anchor="middle" transform="rotate(-90 34 250)" font-size="18" class="muted">metric value</text>
+  <g font-size="14" class="muted">
+    <text x="116" y="384" text-anchor="end">0</text>
+    <text x="116" y="304" text-anchor="end">0.5</text>
+    <text x="116" y="124" text-anchor="end">1.0</text>
+    <text x="130" y="405" text-anchor="middle">0.0</text>
+    <text x="358" y="405" text-anchor="middle">0.4</text>
+    <text x="586" y="405" text-anchor="middle">0.8</text>
+  </g>
+
+  <path d="M130 132 L244 132 L358 192 L472 252 L586 312 L700 372" fill="none" stroke="var(--sens)" stroke-width="5"/>
+  <path d="M130 372 L244 312 L358 252 L472 192 L586 132 L700 132" fill="none" stroke="var(--spec)" stroke-width="5"/>
+  <g fill="var(--sens)">
+    <circle cx="130" cy="132" r="6"/>
+    <circle cx="244" cy="132" r="6"/>
+    <circle cx="358" cy="192" r="6"/>
+    <circle cx="472" cy="252" r="6"/>
+    <circle cx="586" cy="312" r="6"/>
+    <circle cx="700" cy="372" r="6"/>
+  </g>
+  <g fill="var(--spec)">
+    <rect x="124" y="366" width="12" height="12" rx="2"/>
+    <rect x="238" y="306" width="12" height="12" rx="2"/>
+    <rect x="352" y="246" width="12" height="12" rx="2"/>
+    <rect x="466" y="186" width="12" height="12" rx="2"/>
+    <rect x="580" y="126" width="12" height="12" rx="2"/>
+    <rect x="694" y="126" width="12" height="12" rx="2"/>
+  </g>
+
+  <rect x="752" y="142" width="120" height="108" rx="8" fill="var(--band)" stroke="var(--grid)"/>
+  <circle cx="776" cy="176" r="7" fill="var(--sens)"/>
+  <text x="794" y="182" font-size="16">sensitivity</text>
+  <rect x="769" y="208" width="14" height="14" rx="2" fill="var(--spec)"/>
+  <text x="794" y="221" font-size="16">specificity</text>
+  <text x="752" y="304" font-size="15" class="muted">Low threshold:</text>
+  <text x="752" y="326" font-size="15" class="muted">catch more positives.</text>
+  <text x="752" y="360" font-size="15" class="muted">High threshold:</text>
+  <text x="752" y="382" font-size="15" class="muted">raise fewer alerts.</text>
+</svg>

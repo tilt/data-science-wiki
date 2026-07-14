@@ -36,6 +36,8 @@ After learning merges, tokenization usually applies them greedily to new text. T
 
 ## Worked example
 
+This small BPE loop learns merges from a toy corpus, so the output shows how repeated character pairs become reusable subword tokens.
+
 ```python
 import numpy as np
 from collections import Counter

@@ -32,15 +32,21 @@ $$
 b=(c_x,c_y,w,h,\theta),
 $$
 
+Here $(c_x,c_y)$ is the box center, $w$ and $h$ are width and height, and $\theta$ is the rotation angle under the dataset's convention. This parameterization is compact, but the convention must be explicit because several parameter tuples can represent the same physical rectangle.
+
 or by four corner points. Evaluation uses the same matching as [detection and segmentation metrics](detection-and-segmentation-metrics.md), but IoU is polygon overlap rather than axis-aligned rectangle overlap:
 
 $$
 \mathrm{IoU}_{rot}(A,B)=\frac{\mathrm{area}(A\cap B)}{\mathrm{area}(A\cup B)}.
 $$
 
+The sets $A$ and $B$ are the predicted and reference rotated boxes interpreted as polygons. The numerator is their shared area; the denominator is the total area covered by either box.
+
 Angle conventions matter because $\theta$, $\theta+\pi$, and swapped width/height can describe the same physical box.
 
 ## Worked example
+
+The code rasterizes two oriented rectangles onto a fine grid and approximates rotated IoU by counting overlapping grid cells. It is useful here because it makes angle error visible without requiring a geometry library.
 
 ```python
 import numpy as np

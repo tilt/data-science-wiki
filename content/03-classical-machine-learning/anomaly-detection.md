@@ -33,6 +33,8 @@ An anomaly is not just a rare point. It is rare under the model of normal behavi
 
 ## Worked example
 
+This example creates a normal two-dimensional cloud plus a small separated outlier cluster, then checks whether Isolation Forest flags the separated points at the requested contamination rate.
+
 ```python
 import numpy as np
 from sklearn.ensemble import IsolationForest

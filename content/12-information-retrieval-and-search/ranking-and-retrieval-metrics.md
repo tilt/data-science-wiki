@@ -56,6 +56,7 @@ $$
 ## Worked example
 
 For ranked graded relevance labels $[3,0,2,1,0]$, binary relevance appears at ranks 1, 3, and 4.
+The table calculates several metrics on the same ranking so the differences are visible: some metrics care only about the first relevant hit, while others reward multiple relevant or highly graded results.
 
 | Metric | Calculation | Value |
 | --- | --- | ---: |

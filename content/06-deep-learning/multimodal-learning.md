@@ -43,6 +43,8 @@ Training often uses cross-entropy in both directions so matched pairs have high 
 
 ## Worked example
 
+The example constructs paired image and text embeddings with a deliberately shuffled text order, then checks whether similarity recovers the intended cross-modal matches.
+
 ```python
 import torch
 import torch.nn.functional as F

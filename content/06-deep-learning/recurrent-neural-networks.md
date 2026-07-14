@@ -31,13 +31,15 @@ $$
 h_t=\phi(W_xx_t+W_hh_{t-1}+b), \qquad y_t=g(W_yh_t).
 $$
 
+Here $x_t$ is the input at time step $t$, $h_t$ is the hidden state after seeing that input, and $y_t$ is the output or prediction for that step. The matrices $W_x$, $W_h$, and $W_y$ are shared across all time steps; $\phi$ is the recurrent nonlinearity, such as tanh, and $g$ is the output mapping.
+
 Training uses backpropagation through time: unfold the recurrence over $T$ steps and apply [backpropagation](backpropagation.md) through the shared copies of $W_x,W_h,W_y$. Gradients include products of recurrent Jacobians,
 
 $$
 \frac{\partial h_T}{\partial h_t}=\prod_{k=t+1}^{T}\frac{\partial h_k}{\partial h_{k-1}},
 $$
 
-which explains vanishing or exploding gradients when those products repeatedly shrink or amplify norms.
+The product says that a gradient from the final state must pass through every intermediate transition between $t$ and $T$. If the factors repeatedly have norms below one, the gradient vanishes; if they repeatedly have norms above one, it can explode.
 
 ## Worked example
 

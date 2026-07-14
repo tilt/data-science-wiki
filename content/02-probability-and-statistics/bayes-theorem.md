@@ -28,11 +28,15 @@ $$
 P(H\mid E)=\frac{P(E\mid H)P(H)}{P(E)}.
 $$
 
+Here $H$ is the hypothesis or event being updated, and $E$ is the observed evidence. The prior $P(H)$ is multiplied by the likelihood $P(E\mid H)$, then divided by the evidence probability $P(E)$ so the posterior $P(H\mid E)$ is properly normalized.
+
 For a partition $\{H_i\}$, the denominator expands to
 
 $$
 P(E)=\sum_i P(E\mid H_i)P(H_i).
 $$
+
+The events $H_i$ are mutually exclusive possibilities that cover the sample space. The denominator is the total probability of seeing the evidence under all possible hypotheses, weighted by their priors.
 
 That normalization is what prevents a high likelihood from overwhelming a low base rate. The theorem is the algebra behind [Bayesian statistics](bayesian-statistics.md), [MAP estimation](maximum-a-posteriori-estimation.md), and many diagnostic calculations built from [conditional probability](conditional-probability.md).
 

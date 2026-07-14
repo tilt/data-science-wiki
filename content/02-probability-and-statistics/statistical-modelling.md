@@ -29,9 +29,13 @@ Y_i=x_i^\top\beta+\epsilon_i,\qquad
 \epsilon_i\sim\mathcal N(0,\sigma^2).
 $$
 
+Here $Y_i$ is the response for observation $i$, $x_i$ is its covariate vector, $\beta$ is the parameter vector, and $\epsilon_i$ is residual noise. The normal assumption says residuals are modeled as centered Gaussian variation with variance $\sigma^2$.
+
 This is more than a prediction formula: it names a response, covariates, parameters, error distribution, independence assumptions, and a likelihood for [maximum likelihood](maximum-likelihood.md) or Bayesian fitting. Compared with [regression](../03-classical-machine-learning/regression.md), the statistical-model view puts uncertainty and assumptions first.
 
 ## Worked computation
+
+The code generates data from the stated Gaussian linear model, fits the coefficients by least squares, and evaluates the Gaussian log-likelihood under the fitted noise scale.
 
 ```python
 import numpy as np

@@ -43,6 +43,8 @@ In [convex optimization](convex-optimization.md), suitable step sizes can provid
 
 ## Executed demo
 
+The snippet applies the update to a one-dimensional quadratic so the step-size effect is visible without optimizer boilerplate.
+
 ```python
 x = 6.0
 eta = 0.2
@@ -60,6 +62,10 @@ f_after_12 0.00011846
 ```
 
 Starting from $6$, the iterates nearly reach the minimizer $x=1$ after twelve steps. The remaining error follows the contraction factor $1-2\eta=0.6$.
+
+The path on the loss curve shows the same contraction geometrically: each step moves left toward the minimum and the vertical loss value shrinks rapidly.
+
+![Gradient descent iterates move down a quadratic objective toward the minimizer.](../assets/diagrams/gradient-descent-quadratic-path.svg)
 
 ## Caveats
 

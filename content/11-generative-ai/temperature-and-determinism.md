@@ -34,9 +34,13 @@ $$
 p_i(T)=\frac{\exp(z_i/T)}{\sum_j\exp(z_j/T)}.
 $$
 
+Here $z_i$ is the logit for token $i$, $T$ is the temperature, and $p_i(T)$ is the sampling probability after rescaling. Dividing by a smaller $T$ widens logit gaps before softmax; dividing by a larger $T$ compresses them.
+
 Lower $T$ sharpens the distribution; higher $T$ flattens it. At the limit toward zero, decoding approaches greedy selection.
 
 ## Executed artifact
+
+The code keeps the logits fixed and changes only temperature, so the output isolates how temperature changes probability mass and entropy.
 
 ```python
 import numpy as np
@@ -68,6 +72,10 @@ temperature=1.5 [('alpha', 0.468), ('beta', 0.225), ('gamma', 0.141), ('delta', 
 ```
 
 Higher temperature nearly doubles entropy in the toy distribution, from 1.141 bits at $T=0.7$ to 2.063 bits at $T=1.5$. The top token `alpha` falls from 0.756 to 0.468, so more probability mass is available for lower-ranked tokens even though the ranking itself has not changed.
+
+The plot shows the same effect: high temperature leaves the top token first, but it spreads probability across the tail.
+
+![Higher temperature spreads probability mass from the top token to lower-ranked tokens.](../assets/diagrams/temperature-probability-spread.svg)
 
 ## Caveats
 

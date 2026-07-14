@@ -36,6 +36,8 @@ The cost matrix $C$ encodes the operational policy. That separates language evid
 
 ## Worked example
 
+The example trains a tiny text classifier and then applies a cost matrix, showing that the final urgency action can differ from the highest-probability label.
+
 ```python
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer

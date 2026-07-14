@@ -32,11 +32,15 @@ $$
 z_q=f_\theta(q), \qquad z_d=g_\theta(d),
 $$
 
+Here $q$ is the query text, $d$ is a document or passage, and $f_\theta,g_\theta$ are the query and document encoders. The resulting vectors $z_q$ and $z_d$ live in the same embedding space so they can be compared quickly.
+
 then scores candidates with dot product or cosine similarity:
 
 $$
 s(q,d)=\frac{z_q^\top z_d}{\lVert z_q\rVert_2\lVert z_d\rVert_2}.
 $$
+
+The score $s(q,d)$ is high when the two vectors point in a similar direction. Length normalization makes the score a cosine rather than a raw dot product, which reduces the effect of embedding magnitude.
 
 Document vectors can be precomputed and stored in [vector indexes](vector-indexes.md); query vectors are computed at request time. This is cheaper than a cross-encoder [reranking](reranking.md) model because it does not jointly encode every query-document pair.
 

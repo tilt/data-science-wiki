@@ -39,6 +39,8 @@ $$
 s(d)=\lambda s_{\text{BM25}}(d)+(1-\lambda)s_{\text{dense}}(d).
 $$
 
+Here $s(d)$ is the fused score for document $d$, and $\lambda\in[0,1]$ sets the lexical-versus-dense tradeoff. This formula is meaningful only when the component scores are normalized onto compatible scales.
+
 RRF avoids score calibration; weighted sums give more control when a labelled development set is available.
 
 ## Worked example

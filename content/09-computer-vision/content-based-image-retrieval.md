@@ -31,9 +31,13 @@ $$
 s_i=\frac{v_i^\top q}{\lVert v_i\rVert_2\lVert q\rVert_2}.
 $$
 
+Here $v_i$ is the stored embedding for image $i$, $q$ is the query embedding, and $s_i$ is the similarity score used for ranking. The denominator normalizes vector lengths, so ranking depends on direction in embedding space rather than raw magnitude.
+
 Classical systems may use color histograms or local descriptors; modern systems often use pretrained visual embeddings from [self-supervised visual learning](self-supervised-visual-learning.md) or multimodal models.
 
 ## Worked example
+
+The code below builds four toy image embeddings and ranks them by cosine similarity to a query. It illustrates the retrieval contract without needing a full image model: nearest neighbors are selected by embedding geometry.
 
 ```python
 import numpy as np

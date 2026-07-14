@@ -28,6 +28,8 @@ $$
 p(\theta\mid D)=\frac{p(D\mid\theta)p(\theta)}{p(D)},
 $$
 
+Here $D$ is the observed dataset, $\theta$ is the unknown parameter, $p(D\mid\theta)$ is the likelihood, and $p(\theta)$ is the prior. The posterior $p(\theta\mid D)$ is the updated distribution over parameter values after seeing the data.
+
 so the denominator can be ignored for optimization:
 
 $$
@@ -35,6 +37,8 @@ $$
 =\arg\max_\theta p(\theta\mid D)
 =\arg\max_\theta p(D\mid\theta)p(\theta).
 $$
+
+The evidence term $p(D)$ does not depend on $\theta$, so it changes the scale of the posterior but not the parameter value that maximizes it.
 
 It is [maximum likelihood](maximum-likelihood.md) plus a prior. In many ML objectives, the log-prior acts like [regularization](../03-classical-machine-learning/regularization.md): a Gaussian prior on weights yields an $L_2$ penalty.
 

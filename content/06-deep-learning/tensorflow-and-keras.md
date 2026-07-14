@@ -33,11 +33,15 @@ $$
 z=xW+b,\qquad p=\operatorname{softmax}(z),
 $$
 
+Here $x$ is a batch of input features, $W$ and $b$ are learned dense-layer parameters, $z$ is the vector of class logits, and $p$ is the resulting probability vector after softmax. The framework hides some plumbing, but this is still the computation being differentiated.
+
 then minimizes a [loss](loss-functions.md), often cross-entropy:
 
 $$
 L=-\log p_y.
 $$
+
+The target class is $y$, so $p_y$ is the predicted probability assigned to the correct class. Minimizing $L$ increases that probability.
 
 Keras `compile(optimizer=..., loss=...)` binds that objective to an [optimizer](optimizers.md); `fit()` repeatedly batches data, records gradients, and applies updates. Lower-level TensorFlow uses `tf.GradientTape` for custom loops.
 

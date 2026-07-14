@@ -32,6 +32,8 @@ $$
 s(u,i)=f_\theta(x_{u,i})-\lambda\,\operatorname{age}(i),
 $$
 
+Here $u$ is the user or request context, $i$ is a candidate item, $x_{u,i}$ contains user-item features, and $f_\theta$ is the learned relevance model. The penalty weight $\lambda$ controls how strongly stale items are pushed down through the item age term.
+
 then sort by $s$. A list-level postprocessor can add constraints such as author diversity or inventory caps. [Evaluation of recommenders](evaluation-of-recommenders.md) then uses top-k metrics such as [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) or recall.
 
 ## Worked example

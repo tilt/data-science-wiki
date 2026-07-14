@@ -28,6 +28,8 @@ Quantization stores model values in lower precision, commonly int8 or 4-bit form
 
 Uniform symmetric int8 quantization can use scale $s=\max |x|/127$, quantized value $q=\operatorname{round}(x/s)$, and reconstruction $\hat x=sq$. The error $x-\hat x$ affects logits, attention, and sometimes tool-routing reliability.
 
+Here $x$ is a real-valued weight or activation, $q$ is the stored integer, and $s$ maps between integer units and the original numeric scale. The constant 127 is the largest positive signed int8 value, so the largest magnitude in the tensor sets the scale for all other values under per-tensor symmetric quantization.
+
 ## Worked example
 
 For values $x=(-1.25,-0.10,0,0.80,1.70)$, the largest magnitude is $1.70$, so symmetric int8 quantization uses

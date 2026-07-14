@@ -38,6 +38,8 @@ $$
 
 ## Worked computation
 
+The simulation below repeatedly draws samples from a distribution whose true mean and variance are known. It checks whether the sample mean is approximately unbiased and whether its variance matches the theoretical $\sigma^2/n$ rule.
+
 ```python
 import numpy as np
 

@@ -62,6 +62,8 @@ The difference is visible even in one dimension: SGD reacts only to the current 
 
 ## Worked example
 
+The code applies the same three scalar gradients to SGD, momentum, and Adam so the final parameter values can be compared without architecture or data effects.
+
 ```python
 import torch
 

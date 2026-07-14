@@ -32,13 +32,19 @@ h_t=\phi(x_t),\qquad
 \hat p=\sigma\left(w^\top \mathrm{pool}(h_1,\ldots,h_T)+b\right).
 $$
 
+Here $x_t$ is slice or volume crop $t$, $\phi$ is the image encoder, $h_t$ is its embedding, and `pool` aggregates embeddings across the study. The final sigmoid $\sigma$ produces a binary probability $\hat p$ from the pooled study representation; multiclass problems would use a softmax head instead.
+
 Pooling may be mean, max, attention, or sequence modeling. The split must group by patient or study:
 
 $$
 \mathrm{patient}(i)\notin \mathrm{patients}_{train}\quad\text{for all test examples }i.
 $$
 
+This condition means no test example may come from a patient seen during training. It prevents the classifier from exploiting patient-specific anatomy or acquisition artifacts instead of learning transferable disease signal.
+
 ## Worked example
+
+The simulation below deliberately includes a patient-identity feature. It shows why random slice splits can look strong while patient-group splits give a more honest estimate.
 
 ```python
 import numpy as np

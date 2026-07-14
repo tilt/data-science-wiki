@@ -36,6 +36,8 @@ A SPARQL-like graph pattern retrieves subjects that satisfy joins over triples. 
 
 ## Worked example
 
+The table below is a tiny graph: each row is one subject-predicate-object edge. The example then asks for a conjunctive graph pattern rather than a keyword match.
+
 | Subject | Predicate | Object |
 | --- | --- | --- |
 | `paperA` | `uses` | `bm25` |

@@ -39,6 +39,8 @@ Boosting is functional gradient descent. Instead of changing a coefficient vecto
 
 ## Worked example
 
+The snippet fits a small gradient-boosted tree model and inspects staged predictions, which expose the additive sequence of learners rather than only the final score.
+
 ```python
 from sklearn.datasets import make_classification
 from sklearn.ensemble import GradientBoostingClassifier
