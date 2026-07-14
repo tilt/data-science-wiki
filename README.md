@@ -8,6 +8,10 @@ A production-oriented Markdown wiki for data science, machine learning, and AI. 
 
 The canonical wiki entry point is [content/index.md](content/index.md). From there, the main sections, learning paths, interview-preparation pages, and reference material can all be browsed as plain Markdown.
 
+Published site:
+
+- GitLab Pages: <https://tillt.gitlab.io/data-science-wiki/>
+
 ## What Is Included
 
 - A numbered top-level taxonomy under [content/](content/) for stable Obsidian and Quartz ordering.
@@ -124,7 +128,8 @@ For GitLab Pages:
 
 1. Push the repository to GitLab.
 2. Make sure CI/CD is enabled.
-3. Push to the default branch.
+3. Make the project and Pages access public if the site should be reachable without signing in.
+4. Push to the default branch.
 
 The GitLab pipeline validates the wiki, builds Quartz, and publishes `public/` through GitLab Pages. For first-time project setup, base URL handling, and custom domains, see [docs/GITLAB_PAGES_DEPLOYMENT.md](docs/GITLAB_PAGES_DEPLOYMENT.md).
 
