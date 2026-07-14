@@ -25,6 +25,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Matrix Factorization for Recommender Systems
 
 Matrix factorization represents each user and item with learned vectors, then scores a pair by their dot product. In [collaborative filtering](collaborative-filtering.md), this turns a sparse [utility matrix](utility-and-interaction-matrices.md) into dense latent coordinates: two users can look similar because their factors point toward the same item factors, even if they have rated few identical items.

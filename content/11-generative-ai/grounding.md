@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Grounding
 
 Grounding ties generation to external evidence. In [RAG](rag.md), that evidence is retrieved text; in agents it may be tool output or environment state. [Citations](citations.md) are the visible surface of grounding, while [hallucination mitigation](hallucination-mitigation.md) tests unsupported claims.
@@ -28,12 +29,12 @@ Grounding ties generation to external evidence. In [RAG](rag.md), that evidence 
 
 A grounded answer contract has three parts: source selection, claim generation, and support checking. Each factual claim should be derivable from a source span or tool observation included by [context construction](context-construction.md). If no source supports the answer, the model should say so rather than fill gaps from parametric memory.
 
-| Layer | Question | Example failure |
-| --- | --- | --- |
-| Retrieval | did the system fetch the right evidence? | correct policy exists but was not retrieved |
-| Context construction | was the evidence visible to the model? | relevant span was truncated or buried |
-| Generation | did the answer stay within the evidence? | model adds a condition not present in sources |
-| Verification | can each claim be traced to a span? | citation points to a related but non-supporting passage |
+| Layer                | Question                                 | Example failure                                         |
+| -------------------- | ---------------------------------------- | ------------------------------------------------------- |
+| Retrieval            | did the system fetch the right evidence? | correct policy exists but was not retrieved             |
+| Context construction | was the evidence visible to the model?   | relevant span was truncated or buried                   |
+| Generation           | did the answer stay within the evidence? | model adds a condition not present in sources           |
+| Verification         | can each claim be traced to a span?      | citation points to a related but non-supporting passage |
 
 Grounding is stronger than adding citations after the fact. The citation should be a support relationship between a claim and evidence, not a decorative link to a broadly relevant document.
 

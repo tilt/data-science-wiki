@@ -29,6 +29,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Software Engineering
 
 Software engineering in this wiki focuses on the contracts that make data and AI systems maintainable: tested behavior, stable APIs, reviewable architecture, safe production integration, and operational documentation.
@@ -37,12 +38,12 @@ For AI work, software quality is not separate from model quality. A good model c
 
 ## Engineering Route
 
-| Need | Start with | Then read |
-| --- | --- | --- |
-| Write reliable implementation code | [Python](python.md), [SQL](sql.md) | [Testing](testing.md), [Code Review](code-review.md) |
-| Design service boundaries | [Software Architecture](software-architecture.md), [API Design](api-design.md) | [Web Backends](web-backends.md), [Production Integration](production-integration.md) |
-| Keep systems maintainable | [Refactoring](refactoring.md), [Design Patterns](design-patterns.md) | [Documentation](documentation.md), [Technical Decision Records](technical-decision-records.md) |
-| Align product and engineering behavior | [Requirements Engineering](requirements-engineering.md) | [Behaviour Driven Development](behaviour-driven-development.md) |
+| Need                                   | Start with                                                                     | Then read                                                                                      |
+| -------------------------------------- | ------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| Write reliable implementation code     | [Python](python.md), [SQL](sql.md)                                             | [Testing](testing.md), [Code Review](code-review.md)                                           |
+| Design service boundaries              | [Software Architecture](software-architecture.md), [API Design](api-design.md) | [Web Backends](web-backends.md), [Production Integration](production-integration.md)           |
+| Keep systems maintainable              | [Refactoring](refactoring.md), [Design Patterns](design-patterns.md)           | [Documentation](documentation.md), [Technical Decision Records](technical-decision-records.md) |
+| Align product and engineering behavior | [Requirements Engineering](requirements-engineering.md)                        | [Behaviour Driven Development](behaviour-driven-development.md)                                |
 
 ## Subtopics
 

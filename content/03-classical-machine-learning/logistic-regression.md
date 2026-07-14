@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Logistic Regression
 
 Logistic regression is a [linear model](linear-models.md) for class probability, not a regression model for continuous targets. Compared with [regression](regression.md), it keeps the linear score but replaces squared error on $y\in\mathbb R$ with Bernoulli likelihood and cross-entropy on $y\in\{0,1\}$.

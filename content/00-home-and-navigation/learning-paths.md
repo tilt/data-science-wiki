@@ -14,13 +14,14 @@ aliases:
 prerequisites: []
 related:
   - "01-mathematical-foundations/index.md"
-  - "21-interview-preparation/index.md"
+  - "technical-answer-patterns.md"
 historical_context: false
 last_reviewed: 2026-07-10
 ---
+
 # Learning Paths
 
-Use these paths when the goal is guided study rather than browsing the full taxonomy. Each path starts with prerequisites, moves to core concepts, and ends with evaluation or production concerns.
+Use these paths when the goal is guided study rather than browsing the full taxonomy. Each path starts with prerequisites, moves to core concepts, and ends with evaluation, production concerns, or concise explanation practice.
 
 ## Foundations
 
@@ -42,9 +43,9 @@ Use these paths when the goal is guided study rather than browsing the full taxo
 
 [ML System Lifecycle](../14-ml-engineering-and-mlops/ml-system-lifecycle.md) -> [Training Pipelines](../14-ml-engineering-and-mlops/training-pipelines.md) -> [Model Serving](../14-ml-engineering-and-mlops/model-serving.md) -> [Monitoring](../14-ml-engineering-and-mlops/monitoring.md) -> [Production Incident Response](../14-ml-engineering-and-mlops/production-incident-response.md)
 
-## Interview preparation
+## Focused Review And Explanation
 
-[Answer Patterns](../21-interview-preparation/answer-patterns.md) -> [Prototype Answers](../21-interview-preparation/prototype-answers.md) -> [Interview Examples](../21-interview-preparation/interview-examples.md) -> [Recommendation Systems](../21-interview-preparation/recommendation-systems.md) -> [Generative AI](../21-interview-preparation/generative-ai.md) -> [Evaluation](../21-interview-preparation/evaluation.md)
+[Technical Answer Patterns](technical-answer-patterns.md) -> [Recommendation Systems](../04-recommendation-systems/index.md) -> [Generative AI](../11-generative-ai/index.md) -> [Experimentation and Evaluation](../17-experimentation-and-evaluation/index.md) -> [Time-Series Forecasting](../05-time-series-and-forecasting/index.md)
 
 ## How to study a path
 

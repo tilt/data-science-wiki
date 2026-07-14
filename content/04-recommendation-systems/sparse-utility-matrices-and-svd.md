@@ -25,6 +25,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Sparse Utility Matrices and Ordinary SVD
 
 Ordinary [classical SVD](classical-svd.md) requires a complete matrix. A recommender [utility matrix](utility-and-interaction-matrices.md) is sparse because most user-item pairs were never observed, not because the user assigned a numeric zero. This difference is why direct zero filling can dominate the signal.
@@ -71,10 +72,10 @@ rank1_reconstruction
 
 The first user's only positive rating disappears from the rank-1 reconstruction because the dense zero pattern overwhelms it. [SVD versus matrix factorization](svd-versus-matrix-factorization.md) is the canonical comparison page for this distinction.
 
-| Modeling choice | Consequence |
-| --- | --- |
-| Treat missing entries as zero | The objective rewards reconstructing the many zeros. |
-| Fit only observed entries | The model focuses on known ratings or interactions. |
+| Modeling choice                        | Consequence                                                     |
+| -------------------------------------- | --------------------------------------------------------------- |
+| Treat missing entries as zero          | The objective rewards reconstructing the many zeros.            |
+| Fit only observed entries              | The model focuses on known ratings or interactions.             |
 | Weight implicit feedback by confidence | Missing pairs remain low-confidence rather than hard negatives. |
 
 ## Caveats

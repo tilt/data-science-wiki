@@ -1,27 +1,29 @@
 ---
-title: Historical Document and Museum Label Analysis
-slug: computer-vision/historical-document-and-museum-label-analysis
-description: "Extracting text, dates, names, materials, and entities from archival documents and museum labels."
+title: Document Image Analysis and Field Extraction
+slug: computer-vision/document-image-analysis-and-field-extraction
+description: "Extracting text, fields, dates, names, materials, and entities from scanned or photographed documents."
 area: computer-vision
 topics:
-  - historical-document-and-museum-label-analysis
+  - document-image-analysis-and-field-extraction
 level: foundational
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - Historical Document and Museum Label Analysis
 prerequisites:
   - index.md
 related:
   - ocr-pipelines.md
   - classical-image-processing.md
   - content-based-image-retrieval.md
-  - ../19-domain-applications/museum-label-text-extraction-and-entity-matching.md
+  - ../19-domain-applications/cultural-heritage-document-extraction-and-entity-matching.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
-# Historical Document and Museum Label Analysis
 
-Historical document and museum-label analysis turns archival images into usable text and structured metadata: people, dates, titles, materials, places, and collection identifiers. It builds on [OCR pipelines](ocr-pipelines.md), but the final objective is often entity correctness rather than generic text accuracy.
+# Document Image Analysis and Field Extraction
+
+Document image analysis turns scanned or photographed documents into usable text and structured metadata: people, dates, titles, materials, invoice fields, places, identifiers, or authority links. It builds on [OCR pipelines](ocr-pipelines.md), but the final objective is often field correctness rather than generic text accuracy.
 
 ## Defining mechanism
 
@@ -31,7 +33,7 @@ $$
 I \rightarrow \text{regions} \rightarrow \text{OCR text} \rightarrow \text{normalized fields} \rightarrow \text{entity links}.
 $$
 
-Field normalization constrains raw OCR to domain vocabularies: artist names, date formats, material terms, and collection authority files. Visual similarity from [content-based image retrieval](content-based-image-retrieval.md) can help find related objects, but text fields need separate validation.
+Field normalization constrains raw OCR to domain vocabularies: names, date formats, material terms, invoice codes, product names, and authority files. Visual similarity from [content-based image retrieval](content-based-image-retrieval.md) can help find related objects, but text fields need separate validation.
 
 ## Worked example
 
@@ -68,7 +70,7 @@ Small OCR errors are recoverable when the field has a strong dictionary or schem
 
 ## Caveats
 
-Old typography, stains, multilingual labels, handwriting, and skewed photographs make [classical image processing](classical-image-processing.md) brittle. Entity linking can introduce confident historical errors when outdated names or uncertain attributions are forced into a modern authority record.
+Old typography, stains, multilingual layouts, handwriting, and skewed photographs make [classical image processing](classical-image-processing.md) brittle. Entity linking can introduce confident errors when outdated names, uncertain attributions, or ambiguous identifiers are forced into a modern authority record.
 
 ## References
 

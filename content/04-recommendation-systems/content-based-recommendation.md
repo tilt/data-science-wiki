@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Content-Based Recommendation
 
 Content-based recommendation scores items from their attributes: text, tags, categories, prices, image embeddings, or metadata. It is useful when [collaborative filtering](collaborative-filtering.md) is sparse, especially for [cold-start](cold-start-problem.md) items that have content but no interactions.
@@ -48,12 +49,12 @@ $$
 p_u=(1,0.5,0.5,0).
 $$
 
-| Item | Feature vector | Already liked? | Cosine to profile | Interpretation |
-| --- | --- | --- | ---: | --- |
-| 0 | $(1,1,0,0)$ | yes | filtered | Used to build the profile. |
-| 1 | $(1,0,1,0)$ | yes | filtered | Used to build the profile. |
-| 2 | $(0,0,1,1)$ | no | 0.289 | Shares one profile feature. |
-| 3 | $(0,1,0,1)$ | no | 0.289 | Shares a different profile feature. |
+| Item | Feature vector | Already liked? | Cosine to profile | Interpretation                      |
+| ---- | -------------- | -------------- | ----------------: | ----------------------------------- |
+| 0    | $(1,1,0,0)$    | yes            |          filtered | Used to build the profile.          |
+| 1    | $(1,0,1,0)$    | yes            |          filtered | Used to build the profile.          |
+| 2    | $(0,0,1,1)$    | no             |             0.289 | Shares one profile feature.         |
+| 3    | $(0,1,0,1)$    | no             |             0.289 | Shares a different profile feature. |
 
 Items 2 and 3 tie because each overlaps with half of the learned profile. [Hybrid recommenders](hybrid-recommenders.md) combine this with behavioral signals when both are available.
 

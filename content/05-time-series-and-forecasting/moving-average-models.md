@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Moving Average Models
 
 A formal moving-average model is not the same thing as a rolling average smoother. A rolling average replaces an observation with an average of neighboring observations. An MA model describes the series as a weighted sum of current and past innovations, which are the unpredictable shocks left after forecasting.

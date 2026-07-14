@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Video-Language Models
 
 Video-language models connect video evidence to language inputs or outputs: captions, question answering, retrieval, instruction following, and dialogue over temporal content. They usually start from a [video representation](video-representation.md), project visual tokens into a language-model-compatible space, and use cross-attention or token concatenation. This makes them different from [V-JEPA](v-jepa.md), whose central objective is latent visual prediction rather than text generation.
@@ -39,11 +40,11 @@ The pooled context $c$ can condition a decoder or classifier. Larger systems use
 
 For three frame tokens $v_t$ and a text query $q$, the raw alignment score is $q^\top v_t$. The softmax turns those scores into attention weights:
 
-| frame | token $v_t$ | score $q^\top v_t$ | attention weight |
-|---:|---:|---:|---:|
-| 1 | $(1.0,0.0,0.2)$ | 0.04 | 0.160 |
-| 2 | $(0.1,0.8,0.1)$ | 0.82 | 0.349 |
-| 3 | $(0.0,1.1,0.3)$ | 1.16 | 0.491 |
+| frame |     token $v_t$ | score $q^\top v_t$ | attention weight |
+| ----: | --------------: | -----------------: | ---------------: |
+|     1 | $(1.0,0.0,0.2)$ |               0.04 |            0.160 |
+|     2 | $(0.1,0.8,0.1)$ |               0.82 |            0.349 |
+|     3 | $(0.0,1.1,0.3)$ |               1.16 |            0.491 |
 
 The pooled token is therefore
 

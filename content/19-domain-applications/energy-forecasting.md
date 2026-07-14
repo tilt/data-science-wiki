@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Energy Forecasting
 
 Energy forecasting predicts load, consumption, generation, or price over horizons from minutes to years. Inputs include historical load, weather forecasts, calendar effects, tariffs, outages, distributed generation, and known industrial schedules. The target is decision-specific: hour-ahead balancing needs low-latency point forecasts, day-ahead operations need peak-aware load forecasts, and planning needs uncertainty bands around electrification or solar adoption.

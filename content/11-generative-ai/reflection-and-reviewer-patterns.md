@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Reflection and Reviewer Patterns
 
 Reflection and reviewer patterns add a critique step after a draft. The reviewer can be the same model, another model, deterministic validators, or a human. In [multi-agent systems](multi-agent-systems.md), this is the simplest useful role split.
@@ -28,12 +29,12 @@ Reflection and reviewer patterns add a critique step after a draft. The reviewer
 
 The safe pattern gives the reviewer the draft, task, rubric, and evidence, then asks for structured defects rather than vague advice. [LLM-as-judge](llm-as-judge.md) can identify unsupported claims, while deterministic validators check schemas and citations. The [agentic systems](agentic-systems.md) loop decides whether to revise, escalate, or stop.
 
-| Step | Input | Output |
-| --- | --- | --- |
-| Draft | user request, context, tools | candidate answer or action plan |
-| Review | draft, rubric, trusted evidence | specific defects with locations |
-| Repair | draft plus defects | revised answer or tool call |
-| Gate | validators, risk policy, human review rules | release, retry, or escalate |
+| Step   | Input                                       | Output                          |
+| ------ | ------------------------------------------- | ------------------------------- |
+| Draft  | user request, context, tools                | candidate answer or action plan |
+| Review | draft, rubric, trusted evidence             | specific defects with locations |
+| Repair | draft plus defects                          | revised answer or tool call     |
+| Gate   | validators, risk policy, human review rules | release, retry, or escalate     |
 
 The reviewer should be asked for falsifiable checks: unsupported claim, missing citation, schema mismatch, unsafe tool call, contradiction, or incomplete answer. A vague prompt such as "reflect on your answer" often produces style edits rather than evidence-based corrections.
 
@@ -41,7 +42,9 @@ The reviewer should be asked for falsifiable checks: unsupported claim, missing 
 
 ```json
 {
-  "defects": [{"type": "unsupported_claim", "claim": "shipping is two days", "source_id": "policy-9"}],
+  "defects": [
+    { "type": "unsupported_claim", "claim": "shipping is two days", "source_id": "policy-9" }
+  ],
   "action": "revise"
 }
 ```

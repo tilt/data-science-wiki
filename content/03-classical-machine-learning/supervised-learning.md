@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Supervised Learning
 
 Supervised learning estimates a function $f: \mathcal X \to \mathcal Y$ from labeled examples $(x_i, y_i)$. The target may be continuous, as in [regression](regression.md), or discrete, as in [classification](classification.md); the shared contract is that future examples are judged against labels drawn from the same deployment problem.

@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Model Benchmarking
 
 Computer-vision benchmarking compares models under the same data, preprocessing, metrics, and deployment constraints. It should connect task scores from [detection and segmentation metrics](detection-and-segmentation-metrics.md) to practical constraints such as latency, memory, calibration, and [domain shift](domain-shift.md).
@@ -38,16 +39,16 @@ where $D_{\mathrm{test}}$ is a frozen dataset, $M$ is the metric set, $S$ is the
 On a 10-image binary benchmark with 5 positives, compare two candidate models:
 
 | model | correct predictions | true positives found | false positives | latency |
-|---|---:|---:|---:|---:|
-| fast | 7 of 10 | 3 of 5 | 1 | 12 ms |
-| slow | 9 of 10 | 4 of 5 | 0 | 47 ms |
+| ----- | ------------------: | -------------------: | --------------: | ------: |
+| fast  |             7 of 10 |               3 of 5 |               1 |   12 ms |
+| slow  |             9 of 10 |               4 of 5 |               0 |   47 ms |
 
 The resulting metrics are
 
-| model | accuracy | recall | false positives | latency |
-|---|---:|---:|---:|---:|
-| fast | $7/10=0.700$ | $3/5=0.600$ | 1 | 12 ms |
-| slow | $9/10=0.900$ | $4/5=0.800$ | 0 | 47 ms |
+| model |     accuracy |      recall | false positives | latency |
+| ----- | -----------: | ----------: | --------------: | ------: |
+| fast  | $7/10=0.700$ | $3/5=0.600$ |               1 |   12 ms |
+| slow  | $9/10=0.900$ | $4/5=0.800$ |               0 |   47 ms |
 
 The slow model is better on accuracy, recall, and false positives, but it is almost four times slower. If the product needs sub-20 ms inference, the fast model may still be the deployable choice even though its task metrics are worse.
 

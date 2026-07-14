@@ -25,6 +25,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Ranking and Retrieval Metrics
 
 Ranking metrics measure whether useful results appear early enough. They are the feedback loop for [BM25](bm25.md), [hybrid search](hybrid-search.md), [reranking](reranking.md), and RAG retrieval. The right metric depends on the task: one good result, many relevant results, or graded evidence quality.
@@ -58,12 +59,12 @@ $$
 For ranked graded relevance labels $[3,0,2,1,0]$, binary relevance appears at ranks 1, 3, and 4.
 The table calculates several metrics on the same ranking so the differences are visible: some metrics care only about the first relevant hit, while others reward multiple relevant or highly graded results.
 
-| Metric | Calculation | Value |
-| --- | --- | ---: |
-| $P@3$ | two relevant results in the top three | 0.667 |
-| $R@3$ | two of three known relevant results found | 0.667 |
-| $AP$ | $(1/1+2/3+3/4)/3$ | 0.806 |
-| $RR$ | first relevant result at rank 1 | 1.000 |
+| Metric   | Calculation                                                  | Value |
+| -------- | ------------------------------------------------------------ | ----: |
+| $P@3$    | two relevant results in the top three                        | 0.667 |
+| $R@3$    | two of three known relevant results found                    | 0.667 |
+| $AP$     | $(1/1+2/3+3/4)/3$                                            | 0.806 |
+| $RR$     | first relevant result at rank 1                              | 1.000 |
 | $NDCG@5$ | graded gain discounted by rank and normalized by ideal order | 0.930 |
 
 The first result is relevant, so reciprocal rank is perfect. $R@3$ is not perfect because one relevant item is still below rank 3.

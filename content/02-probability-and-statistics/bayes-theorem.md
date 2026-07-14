@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Bayes Theorem
 
 Bayes' theorem is conditional probability rearranged so evidence can update belief. For events $H$ and $E$ with $P(E)>0$,

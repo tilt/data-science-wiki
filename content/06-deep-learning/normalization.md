@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Normalization
 
 Normalization layers standardize intermediate activations and then apply trainable scale and shift. They reduce sensitivity to [initialization](initialization.md) and learning rate, but the axis being normalized matters: batch norm couples examples in a minibatch, while layer norm normalizes features within each example and is therefore natural in [transformers](transformers.md).

@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Dimensionality Reduction
 
 Dimensionality reduction maps $x\in\mathbb R^p$ to $z\in\mathbb R^d$ with $d<p$. The preserved structure depends on the method: [PCA](pca.md) preserves variance in a linear subspace, manifold methods preserve neighborhoods, and supervised reductions preserve label-relevant directions.

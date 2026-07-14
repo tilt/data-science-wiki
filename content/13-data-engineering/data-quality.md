@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Data Quality
 
 Data quality is not a dashboard of vague health indicators. It is a set of executable expectations tied to a dataset's intended use: schema validity, completeness, uniqueness, freshness, referential integrity, and semantic constraints.

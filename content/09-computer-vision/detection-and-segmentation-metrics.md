@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Detection and Segmentation Metrics
 
 Detection and segmentation metrics answer two different questions: did the model choose the right object, and did it localize the object tightly enough? They sit between [object detection](object-detection.md), [semantic segmentation](semantic-segmentation.md), [instance segmentation](instance-segmentation.md), and practical [model benchmarking](model-benchmarking.md), because the same visual error can look good or bad depending on the metric.

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Contextual Bandits
 
 Contextual bandits choose actions using features available at decision time: user segment, device, query, location, item age, or content embedding. They are bandits because only the chosen action's reward is observed, but they can personalize exploration instead of treating every user the same.

@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Production Integration
 
 Production integration is the work of connecting a prototype to real product traffic. The mechanism is a launch contract: interface, authentication, data freshness, rollout path, telemetry, fallback, owner, and rollback. For ML systems this is where notebook assumptions meet [web backends](web-backends.md), latency budgets, authorization, and [monitoring](../14-ml-engineering-and-mlops/monitoring.md).
@@ -34,13 +35,13 @@ Before launch, name the upstream dependencies, downstream consumers, schema vers
 
 Suppose a launch contract says to roll back when the canary error rate exceeds 5 percent or the overall p95 latency exceeds 250 ms. A five-request smoke sample contains:
 
-| path | ok? | latency ms |
-| --- | --- | ---: |
-| shadow | yes | 83 |
-| shadow | yes | 91 |
-| canary | yes | 104 |
-| canary | no | 260 |
-| control | yes | 72 |
+| path    | ok? | latency ms |
+| ------- | --- | ---------: |
+| shadow  | yes |         83 |
+| shadow  | yes |         91 |
+| canary  | yes |        104 |
+| canary  | no  |        260 |
+| control | yes |         72 |
 
 One of two canary requests failed, so the canary error rate is 0.50. The inclusive p95 latency over all five requests is 228.8 ms, below the latency threshold, but the error-rate guardrail alone triggers rollback. The numbers are intentionally small, but the contract is real: define thresholds before launch and automate the decision path. A [software architecture](software-architecture.md) that has no rollback path is not production-ready, even if the model looks good offline.
 

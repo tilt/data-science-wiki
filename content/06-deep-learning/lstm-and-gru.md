@@ -25,6 +25,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # LSTM and GRU
 
 LSTMs and GRUs are gated variants of [recurrent neural networks](recurrent-neural-networks.md). A vanilla RNN keeps one hidden state and repeatedly overwrites it. LSTMs and GRUs add learned gates so the model can preserve, erase, or expose information over time instead of forcing every new input through the same update.
@@ -82,12 +83,12 @@ $$
 
 The gates have separate roles:
 
-| LSTM part | Range | Role |
-| --- | --- | --- |
-| Forget gate $f_t$ | $0$ to $1$ | keeps or erases old cell memory |
-| Input gate $i_t$ | $0$ to $1$ | controls how much candidate memory is written |
-| Candidate $\tilde c_t$ | $-1$ to $1$ | proposes new content for the cell |
-| Output gate $o_t$ | $0$ to $1$ | controls how much memory is exposed as hidden state |
+| LSTM part              | Range       | Role                                                |
+| ---------------------- | ----------- | --------------------------------------------------- |
+| Forget gate $f_t$      | $0$ to $1$  | keeps or erases old cell memory                     |
+| Input gate $i_t$       | $0$ to $1$  | controls how much candidate memory is written       |
+| Candidate $\tilde c_t$ | $-1$ to $1$ | proposes new content for the cell                   |
+| Output gate $o_t$      | $0$ to $1$  | controls how much memory is exposed as hidden state |
 
 If $f_t=0.95$ and $i_t=0.05$ for one memory dimension, the LSTM mostly preserves old information. If $f_t=0.1$ and $i_t=0.9$, it mostly overwrites that dimension with new evidence. These values are learned from data; they are not hand-coded rules.
 
@@ -135,13 +136,13 @@ Gating does not make long-range learning free. It gives gradients a better path 
 
 Gated RNNs and [transformers](transformers.md) learn temporal structure in different ways:
 
-| Question | LSTM / GRU | Transformer |
-| --- | --- | --- |
-| How does information move? | sequential hidden-state update | direct attention between token positions |
-| Can training parallelize across time? | limited, because $h_t$ depends on $h_{t-1}$ | yes within a layer, because token states are updated together |
-| Main bottleneck | fixed-size recurrent state and long credit assignment | attention cost and context-window limits |
-| Natural deployment mode | streaming, low-latency, one step at a time | batch processing over a context window |
-| Long-range access | carried through memory gates | retrieved by attention weights over visible positions |
+| Question                              | LSTM / GRU                                            | Transformer                                                   |
+| ------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------------- |
+| How does information move?            | sequential hidden-state update                        | direct attention between token positions                      |
+| Can training parallelize across time? | limited, because $h_t$ depends on $h_{t-1}$           | yes within a layer, because token states are updated together |
+| Main bottleneck                       | fixed-size recurrent state and long credit assignment | attention cost and context-window limits                      |
+| Natural deployment mode               | streaming, low-latency, one step at a time            | batch processing over a context window                        |
+| Long-range access                     | carried through memory gates                          | retrieved by attention weights over visible positions         |
 
 An LSTM reading tokens left to right must carry old evidence forward through its state. A transformer can let token $t$ attend directly to token $3$ if the mask allows it. That direct path is a major reason transformers displaced RNNs for large-scale language modeling. Gated RNNs still fit streaming sensor, speech, time-series, and edge deployments where incremental state updates are cheaper than recomputing attention over a long context.
 

@@ -18,6 +18,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Classical Machine Learning
 
 Classical machine learning is the part of statistical learning where the model class, loss, validation protocol, and diagnostic quantities are usually explicit. This section is organized around the questions a practitioner actually has to answer: what is being predicted or discovered, what objective is optimized, how the model fails, and how the result should be measured.

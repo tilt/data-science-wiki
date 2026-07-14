@@ -30,6 +30,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Probability and Statistics
 
 This section links the mathematical language of uncertainty to statistical inference and modelling. Start with the probability foundations, then use the limit theorems to understand estimation error, intervals, tests, and process models.

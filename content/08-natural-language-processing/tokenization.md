@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Tokenization
 
 Tokenization chooses the units consumed by NLP models. A word tokenizer is natural for sparse [text classification](text-classification.md); subword or byte tokenizers are essential for [bert-style encoders](bert-style-encoders.md), [decoder-only transformers](decoder-only-transformers.md), and open-vocabulary [language modelling](language-modelling.md). The tokenizer defines vocabulary size, sequence length, and which errors are even representable.

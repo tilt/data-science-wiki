@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Transformer-Based Forecasting
 
 Transformer forecasters adapt [attention](../06-deep-learning/attention.md) to temporal data. Instead of carrying a recurrent state, the model forms query, key, and value representations for time steps or patches and combines history through attention weights:

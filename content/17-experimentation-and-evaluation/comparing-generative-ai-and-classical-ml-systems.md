@@ -25,6 +25,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Comparing Generative AI and Classical ML Systems
 
 Compare systems by the user decision and failure cost, not by whether the output is a label or text. A classifier may produce a calibrated fraud risk; a RAG assistant may produce a cited explanation for the same case. Both need [offline evaluation](offline-evaluation.md), but the generative system also needs evidence checks, refusal quality, and often [LLM-as-judge](llm-as-judge.md) audits.
@@ -33,12 +34,12 @@ Compare systems by the user decision and failure cost, not by whether the output
 
 Use shared metrics where the task overlaps, then add system-specific failure modes:
 
-| Axis | Classical ML system | Generative AI system |
-| --- | --- | --- |
-| Output | score, class, rank, forecast | text, citation, structured object, tool call, refusal |
-| Shared checks | accuracy, cost, calibration, latency | same when decisions match |
-| Extra checks | threshold fit, feature drift, class balance | groundedness, citation support, schema validity, unsafe action |
-| Risk unit | wrong class or score | unsupported claim, wrong source, malformed action |
+| Axis          | Classical ML system                         | Generative AI system                                           |
+| ------------- | ------------------------------------------- | -------------------------------------------------------------- |
+| Output        | score, class, rank, forecast                | text, citation, structured object, tool call, refusal          |
+| Shared checks | accuracy, cost, calibration, latency        | same when decisions match                                      |
+| Extra checks  | threshold fit, feature drift, class balance | groundedness, citation support, schema validity, unsafe action |
+| Risk unit     | wrong class or score                        | unsupported claim, wrong source, malformed action              |
 
 The common reporting layer should include [calibration](calibration.md), [abstention](abstention.md), severe-error rate, and practical cost.
 
@@ -46,10 +47,10 @@ The common reporting layer should include [calibration](calibration.md), [absten
 
 Score eight shared cases with severity levels `ok = 0`, `minor = 1`, `major = 2`, `critical = 3`, and risk weights `0, 1, 3, 10`:
 
-| system | severities | mean severity | weighted error | severe rate |
-| --- | --- | ---: | ---: | ---: |
-| classical | 0, 1, 0, 2, 0, 1, 0, 0 | 0.500 | 5 | 0.125 |
-| generative | 0, 0, 1, 3, 0, 2, 0, 1 | 0.875 | 15 | 0.250 |
+| system     | severities             | mean severity | weighted error | severe rate |
+| ---------- | ---------------------- | ------------: | -------------: | ----------: |
+| classical  | 0, 1, 0, 2, 0, 1, 0, 0 |         0.500 |              5 |       0.125 |
+| generative | 0, 0, 1, 3, 0, 2, 0, 1 |         0.875 |             15 |       0.250 |
 
 The generative system has a worse risk profile despite only eight examples: more severe errors and triple the weighted error. That should block a launch even if user preference or fluency looked better in a [paired evaluation](paired-evaluation.md).
 

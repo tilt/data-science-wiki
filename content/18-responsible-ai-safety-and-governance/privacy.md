@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Privacy
 
 Privacy governs how personal data is collected, used, exposed, retained, and deleted. In AI systems, the privacy boundary includes prompts, retrieved documents, embeddings, fine-tuning data, evaluation sets, logs, traces, human review queues, and vendor calls. The operational failure often appears as [PII leakage](pii-leakage.md), but the root cause is usually poor data-flow governance.

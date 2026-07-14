@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Cost and Latency Optimization
 
 Cost and latency optimization should target successful task completion, not the cheapest single model call. A [model serving](model-serving.md) plan must include retrieval, [context construction](context-construction.md), retries, validation, and user-visible streaming.
@@ -30,13 +31,13 @@ For one request, latency is approximately critical-path time: $L=L_{queue}+L_{re
 
 ## Worked budget table
 
-| Step | Tokens | Share of total |
-| --- | ---: | ---: |
-| Plan | 120 | 7.3% |
-| Search | 350 | 21.2% |
-| Read | 500 | 30.3% |
-| Write | 420 | 25.5% |
-| Verify | 260 | 15.8% |
+| Step   | Tokens | Share of total |
+| ------ | -----: | -------------: |
+| Plan   |    120 |           7.3% |
+| Search |    350 |          21.2% |
+| Read   |    500 |          30.3% |
+| Write  |    420 |          25.5% |
+| Verify |    260 |          15.8% |
 
 The trace totals 1,650 tokens across five steps, with `read` alone consuming 500 tokens. Optimizing `read` first has the largest single-step opportunity because it is about 30 percent of the token budget before generation even starts.
 

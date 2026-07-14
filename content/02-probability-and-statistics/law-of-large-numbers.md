@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Law of Large Numbers
 
 The law of large numbers says that sample averages stabilize around their expected value. For independent copies $X_1,X_2,\ldots$ with $\mathbb E[|X_1|]<\infty$,

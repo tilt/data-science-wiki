@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Information Theory
 
 Information theory measures uncertainty, surprise, compression, and dependence. In machine learning it appears whenever probabilities become objectives: [cross-entropy](cross-entropy.md) losses, [KL divergence](kl-divergence.md) regularizers, mutual-information criteria, calibration, and generative-model likelihoods.

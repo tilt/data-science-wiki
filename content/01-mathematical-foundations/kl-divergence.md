@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # KL Divergence
 
 KL divergence measures the extra expected log loss from using distribution $q$ when the data follow $p$. It is central to [information theory](information-theory.md), maximum-likelihood training, variational inference, language modeling, and regularized objectives.

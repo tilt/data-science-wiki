@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Semantic Segmentation
 
 Semantic segmentation assigns a class to every pixel. Unlike [instance segmentation](instance-segmentation.md), it does not separate two touching objects of the same class; unlike [image classification](image-classification.md), its output preserves spatial shape.
@@ -44,11 +45,11 @@ $$
 
 Intersection-over-union computes overlap per class:
 
-| class | intersection | union | IoU |
-|---:|---:|---:|---:|
-| 0 | 3 | 5 | 0.600 |
-| 1 | 4 | 6 | 0.667 |
-| 2 | 2 | 4 | 0.500 |
+| class | intersection | union |   IoU |
+| ----: | -----------: | ----: | ----: |
+|     0 |            3 |     5 | 0.600 |
+|     1 |            4 |     6 | 0.667 |
+|     2 |            2 |     4 | 0.500 |
 
 The mean IoU is $(0.600+0.667+0.500)/3=0.589$. It is lower than pixel accuracy because class-wise overlap punishes false regions and missed regions directly instead of letting easy background pixels dominate the score.
 

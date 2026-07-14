@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Approximate Nearest Neighbour Search
 
 Approximate nearest-neighbour search returns vectors that are close to a query without proving they are the exact nearest vectors. It is what lets [vector indexes](vector-indexes.md) serve [dense retrieval](dense-retrieval.md) over millions or billions of embeddings under interactive latency.

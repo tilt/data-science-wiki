@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Rollbacks
 
 A rollback restores the last acceptable production behavior after a release, retrain, threshold change, or dependency update causes unacceptable risk. In ML systems, "behavior" includes [model-versioning](model-versioning.md), feature definitions, thresholds, prompts, retrieval indexes, and routing, not just application code.

@@ -59,11 +59,11 @@ When models estimate several quantiles independently, they can produce invalid o
 For $\tau=0.9$, use $L_\tau=\max(0.9e,-0.1e)$ where $e=y-\hat q$:
 
 | $y$ | 0.9-quantile forecast | Error $e$ | Pinball loss |
-| ---: | ---: | ---: | ---: |
-| 2 | 4 | -2 | 0.2 |
-| 5 | 6 | -1 | 0.1 |
-| 8 | 9 | -1 | 0.1 |
-| 10 | 13 | -3 | 0.3 |
+| --: | --------------------: | --------: | -----------: |
+|   2 |                     4 |        -2 |          0.2 |
+|   5 |                     6 |        -1 |          0.1 |
+|   8 |                     9 |        -1 |          0.1 |
+|  10 |                    13 |        -3 |          0.3 |
 
 The mean 0.9-quantile loss is $(0.2+0.1+0.1+0.3)/4=0.175$. For the median forecasts $3,4,7,12$, the mean $\tau=0.5$ pinball loss is $0.625$. At $\tau=0.9$, underpredicting is penalized nine times as much as overpredicting by the same amount, which is why high quantiles are useful for service-level decisions.
 

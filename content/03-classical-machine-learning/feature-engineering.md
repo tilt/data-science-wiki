@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Feature Engineering
 
 Feature engineering changes the representation $x\mapsto\phi(x)$ so a model can express the relevant relationship. It is especially important for [linear models](linear-models.md), where the model may be simple but the features can encode nonlinearities, interactions, lags, bins, or domain aggregates.

@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Scalability
 
 Scalability is the ability to handle more load by adding resources, partitioning state, reducing work, or changing the workload contract. It is not the same as speed: a service can be fast at low traffic and fail to scale because a single queue, database partition, model endpoint, or object prefix saturates. In ML systems, [batch and online inference](../14-ml-engineering-and-mlops/batch-and-online-inference.md) often scale through different mechanisms.
@@ -50,10 +51,10 @@ $$
 \text{pods}=\left\lceil\frac{\text{rps}\times\text{p95 seconds}}{\text{per-pod concurrency}\times\text{target utilization}}\right\rceil.
 $$
 
-| Workload | In-flight requests | Capacity denominator | Required pods |
-| --- | ---: | ---: | ---: |
-| 240 rps, 0.12 s p95, cap 20, util 0.70 | 28.8 | 14.0 | 3 |
-| 1000 rps, 0.08 s p95, cap 50, util 0.65 | 80.0 | 32.5 | 3 |
+| Workload                                | In-flight requests | Capacity denominator | Required pods |
+| --------------------------------------- | -----------------: | -------------------: | ------------: |
+| 240 rps, 0.12 s p95, cap 20, util 0.70  |               28.8 |                 14.0 |             3 |
+| 1000 rps, 0.08 s p95, cap 50, util 0.65 |               80.0 |                 32.5 |             3 |
 
 The second workload has more traffic but shorter service time and larger safe concurrency, so it still needs three pods. Real autoscalers add stabilization windows, metric lag, startup time, and min/max bounds; the calculation is the baseline to compare against observed HPA or Cloud Run behavior.
 

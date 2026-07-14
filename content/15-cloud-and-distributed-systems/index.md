@@ -28,6 +28,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-10
 ---
+
 # Cloud and Distributed Systems
 
 ## Summary
@@ -38,12 +39,12 @@ Use this section when a model or data pipeline stops being a notebook problem an
 
 ## Study Route
 
-| Need | Start with | Then read |
-| --- | --- | --- |
-| Choose cloud primitives | [AWS Fundamentals](aws-fundamentals.md), [Google Cloud Fundamentals](google-cloud-fundamentals.md) | [Managed Compute](managed-compute.md), [Managed Storage](managed-storage.md) |
-| Scale data workloads | [Distributed Data Processing](distributed-data-processing.md) | [Scalability](scalability.md), [Reliability](reliability.md) |
-| Train or serve large models | [GPU Systems](gpu-systems.md) | [Distributed Model Training](distributed-model-training.md), [Storage and Decoding Bottlenecks](storage-and-decoding-bottlenecks.md) |
-| Control production spend | [Cost Management](cost-management.md) | [Managed Compute](managed-compute.md), [Managed Storage](managed-storage.md) |
+| Need                        | Start with                                                                                         | Then read                                                                                                                            |
+| --------------------------- | -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Choose cloud primitives     | [AWS Fundamentals](aws-fundamentals.md), [Google Cloud Fundamentals](google-cloud-fundamentals.md) | [Managed Compute](managed-compute.md), [Managed Storage](managed-storage.md)                                                         |
+| Scale data workloads        | [Distributed Data Processing](distributed-data-processing.md)                                      | [Scalability](scalability.md), [Reliability](reliability.md)                                                                         |
+| Train or serve large models | [GPU Systems](gpu-systems.md)                                                                      | [Distributed Model Training](distributed-model-training.md), [Storage and Decoding Bottlenecks](storage-and-decoding-bottlenecks.md) |
+| Control production spend    | [Cost Management](cost-management.md)                                                              | [Managed Compute](managed-compute.md), [Managed Storage](managed-storage.md)                                                         |
 
 ## Subtopics
 

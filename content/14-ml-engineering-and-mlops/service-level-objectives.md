@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Service Level Objectives
 
 A service level objective is a measurable target for user-visible reliability. In ML systems, SLOs should cover both service delivery and decision usefulness: latency, availability, feature freshness, prediction coverage, fallback rate, and delayed label quality where labels exist.

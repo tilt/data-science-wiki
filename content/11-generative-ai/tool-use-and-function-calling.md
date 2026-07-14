@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Tool Use and Function Calling
 
 A language model does not execute tools internally. It emits a structured request, usually a tool name plus JSON arguments. Application code validates the request, checks authorization, executes the tool, and returns the result to the model or user. This is the action layer for [agent loops](agent-loops.md).
@@ -37,7 +38,11 @@ The model sees available [tool schemas](tool-schemas.md), task context, and prio
   "model_output": {
     "tool_call": {
       "name": "search_refund_policy",
-      "arguments": {"query": "enterprise refund threshold", "policy_version": "2026-07", "top_k": 3}
+      "arguments": {
+        "query": "enterprise refund threshold",
+        "policy_version": "2026-07",
+        "top_k": 3
+      }
     }
   },
   "orchestrator_checks": {
@@ -46,7 +51,7 @@ The model sees available [tool schemas](tool-schemas.md), task context, and prio
     "tool_available": true,
     "side_effect": false
   },
-  "tool_result": {"chunk_ids": ["refunds-007", "approvals-014"]}
+  "tool_result": { "chunk_ids": ["refunds-007", "approvals-014"] }
 }
 ```
 

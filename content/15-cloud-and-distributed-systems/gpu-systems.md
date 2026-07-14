@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # GPU Systems
 
 GPU systems are useful when a workload has enough tensor arithmetic to amortize data movement. For ML, the hard limits are usually not "has a GPU" but HBM capacity, HBM bandwidth, PCIe or NVLink movement, kernel launch overhead, and whether the model can use lower precision safely through [mixed precision](../06-deep-learning/mixed-precision.md). A deployment choice in [managed compute](managed-compute.md) therefore has to name the accelerator type, memory size, interconnect, driver stack, and serving batch shape.
@@ -39,14 +40,14 @@ Arithmetic intensity is FLOPs per byte moved from memory. A transformer prefill 
 
 For a 7B-parameter model, the weight footprint depends directly on bytes per parameter:
 
-| footprint | estimate |
-| --- | ---: |
-| fp32 weights | 26.08 GiB |
-| fp16/bf16 weights | 13.04 GiB |
-| int8 weights | 6.52 GiB |
-| Adam training state | 104.31 GiB |
-| 8-way FSDP state per rank | 13.04 GiB |
-| 32-layer, 2048-token fp16 KV cache for one request | 1.00 GiB |
+| footprint                                          |   estimate |
+| -------------------------------------------------- | ---------: |
+| fp32 weights                                       |  26.08 GiB |
+| fp16/bf16 weights                                  |  13.04 GiB |
+| int8 weights                                       |   6.52 GiB |
+| Adam training state                                | 104.31 GiB |
+| 8-way FSDP state per rank                          |  13.04 GiB |
+| 32-layer, 2048-token fp16 KV cache for one request |   1.00 GiB |
 
 For an NVIDIA A100 80GB SXM, NVIDIA's published 312 TFLOP/s FP16 Tensor Core peak and 2,039 GB/s memory bandwidth imply a roofline threshold of about $312\text{e}12 / 2039\text{e}9 = 153.0$ FLOP/byte. A kernel with arithmetic intensity 32 is memory-bound under that roofline, while one at 256 can be compute-bound. A 7B model's fp16 weights fit on one 40GB GPU, but a naive Adam training state does not fit even on 80GB without sharding, offload, or recomputation. During inference, KV cache can dominate capacity: this 32-layer, hidden-size-4096, 2048-token, fp16 example uses about 1 GiB per active request before batching overhead.
 

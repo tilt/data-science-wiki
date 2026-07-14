@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Representation Learning
 
 Representation learning is the practice of learning features instead of hand-designing them. A network maps raw input $x$ to a latent vector $z=f_\theta(x)$ that should make reconstruction, classification, retrieval, or [transfer learning](transfer-learning.md) easier. It is the shared substrate behind [autoencoders](autoencoders.md), [self-supervised learning](self-supervised-learning.md), and [contrastive learning](contrastive-learning.md).

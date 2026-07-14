@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Cross Entropy
 
 Cross-entropy measures the expected negative log probability assigned by model distribution $q$ to events generated from true distribution $p$. In classification, it is the mathematical form behind multinomial log loss and many deep-learning [loss functions](../06-deep-learning/loss-functions.md).

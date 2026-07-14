@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Managed Compute
 
 Managed compute is the set of cloud services that run code while the provider operates part of the underlying fleet. The useful distinction is not "serverless versus servers"; it is startup latency, concurrency model, runtime limit, state, accelerator access, network control, and operational ownership. A [model serving](../14-ml-engineering-and-mlops/model-serving.md) API, a nightly batch job, and a GPU trainer have different compute shapes even if all run containers.
@@ -49,10 +50,10 @@ $$
 $$
 
 | Per-instance concurrency | Required instances |
-| ---: | ---: |
-| 1 | 78 |
-| 8 | 10 |
-| 80 | 1 |
+| -----------------------: | -----------------: |
+|                        1 |                 78 |
+|                        8 |                 10 |
+|                       80 |                  1 |
 
 Cloud Run documentation explicitly treats concurrency as a scaling and cost control. The table is not a recommendation to set concurrency to 80 blindly; CPU-bound Python code or shared mutable state can require a lower setting. That is a [scalability](scalability.md) test, not a console default.
 

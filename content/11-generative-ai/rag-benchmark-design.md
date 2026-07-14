@@ -27,9 +27,10 @@ related:
 historical_context: false
 last_reviewed: 2026-07-12
 ---
+
 # RAG Benchmark Design
 
-A RAG benchmark is a collection of representative questions with expected evidence and answer characteristics, used to compare systems on the same footing. It generalizes a [golden dataset](../17-experimentation-and-evaluation/golden-datasets.md) to the RAG setting by labelling *both* the evidence a system should retrieve and the facts its answer should contain. Without labelled evidence, retrieval failures and generation failures are indistinguishable.
+A RAG benchmark is a collection of representative questions with expected evidence and answer characteristics, used to compare systems on the same footing. It generalizes a [golden dataset](../17-experimentation-and-evaluation/golden-datasets.md) to the RAG setting by labelling _both_ the evidence a system should retrieve and the facts its answer should contain. Without labelled evidence, retrieval failures and generation failures are indistinguishable.
 
 ## Benchmark item schema
 
@@ -38,16 +39,16 @@ Each item pins down the question, the evidence that should support it, and what 
 ```yaml
 - id: q001
   question: "What is the configured limit for parameter X?"
-  expected_sources:      # evidence handles that should be retrieved
+  expected_sources: # evidence handles that should be retrieved
     - source_a
     - source_b
-  expected_facts:        # atomic claims a correct answer must contain
+  expected_facts: # atomic claims a correct answer must contain
     - "limit is 100"
     - "applies per request"
-  unsupported: false     # true when the corpus should NOT be able to answer
+  unsupported: false # true when the corpus should NOT be able to answer
   category: configuration
   difficulty: easy
-  retrieval_type: mixed  # lexical | semantic | mixed
+  retrieval_type: mixed # lexical | semantic | mixed
 ```
 
 Include `unsupported: true` items on purpose: a system that answers a question the corpus cannot support is failing even if the text sounds fluent, and abstention is the correct behaviour.
@@ -56,16 +57,16 @@ Include `unsupported: true` items on purpose: a system that answers a question t
 
 Good evaluation covers retrieval and answer quality separately, plus the trace and the operational envelope.
 
-| Group | Metrics |
-| --- | --- |
-| Retrieval | expected sources in top-k; rank of first expected source; source recall@k; evidence precision when labelled; whether retrieved evidence is sufficient for synthesis |
-| Answer | expected facts present; unsupported claims absent; citations present; citations correspond to retrieved evidence; abstains when evidence is missing; language and format compliance |
-| Trace / audit | tool calls captured; retrieved chunks captured; final answer linked to evidence; duplicate or repeated searches avoided; context expansions recorded |
-| Operational | latency; number of model calls; number of retrieval calls; index build time; storage size; embedding-model dependency; failure modes |
+| Group         | Metrics                                                                                                                                                                             |
+| ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Retrieval     | expected sources in top-k; rank of first expected source; source recall@k; evidence precision when labelled; whether retrieved evidence is sufficient for synthesis                 |
+| Answer        | expected facts present; unsupported claims absent; citations present; citations correspond to retrieved evidence; abstains when evidence is missing; language and format compliance |
+| Trace / audit | tool calls captured; retrieved chunks captured; final answer linked to evidence; duplicate or repeated searches avoided; context expansions recorded                                |
+| Operational   | latency; number of model calls; number of retrieval calls; index build time; storage size; embedding-model dependency; failure modes                                                |
 
 Rank of first expected source is the 1-based position of the earliest retrieved source that appears in `expected_sources`; if no expected source appears, the value is undefined or set to a fixed miss sentinel before aggregation.
 
-Retrieval and answer metrics are complementary: source recall@k explains *whether the evidence was available*, while the answer metrics explain *whether the model used it faithfully*. Citation-correspondence and [grounding](grounding.md) checks connect the two — a fact should trace to a retrieved source, verified against the labelled evidence rather than judged on tone. Where a rubric judgment is needed, an [LLM-as-judge](../17-experimentation-and-evaluation/llm-as-judge.md) can score fact presence, but it should compare against the labelled `expected_facts`, not grade freely.
+Retrieval and answer metrics are complementary: source recall@k explains _whether the evidence was available_, while the answer metrics explain _whether the model used it faithfully_. Citation-correspondence and [grounding](grounding.md) checks connect the two — a fact should trace to a retrieved source, verified against the labelled evidence rather than judged on tone. Where a rubric judgment is needed, an [LLM-as-judge](../17-experimentation-and-evaluation/llm-as-judge.md) can score fact presence, but it should compare against the labelled `expected_facts`, not grade freely.
 
 ## Comparison procedure
 

@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Markov Renewal Processes
 
 A Markov renewal process extends a [Markov chain](markov-chains.md) by attaching a holding time to each state transition. With states $X_n$ and jump times $T_n$, the kernel is a [conditional probability](conditional-probability.md) distribution over both destination and elapsed time:

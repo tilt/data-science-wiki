@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Self-Supervised Learning
 
 Self-supervised learning creates a training signal from unlabeled data: predict masked content, match two augmented views, order frames, or reconstruct missing features. The goal is usually a reusable [representation](representation-learning.md) that can be adapted by [transfer learning](transfer-learning.md), not the pretext task itself. [Autoencoders](autoencoders.md) and [contrastive learning](contrastive-learning.md) are two major families.

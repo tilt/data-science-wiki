@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Reranking
 
 Reranking reorders candidates after a fast first-stage retriever. It lets [retrieval pipelines](retrieval-pipelines.md) use cheap lexical or vector search for recall, then a more expensive model for precision before [RAG](rag.md) context is packed.
@@ -36,11 +37,11 @@ $$
 s_{\text{final}}(q,d)=0.3\,s_{\text{first}}(q,d)+0.7\,s_{\text{cross}}(q,d).
 $$
 
-| document | first-stage score | cross-score | final score |
-|---:|---:|---:|---:|
-| 0 | 0.78 | 0.20 | $0.3(0.78)+0.7(0.20)=0.374$ |
-| 1 | 0.74 | 0.95 | $0.3(0.74)+0.7(0.95)=0.887$ |
-| 2 | 0.70 | 0.50 | $0.3(0.70)+0.7(0.50)=0.560$ |
+| document | first-stage score | cross-score |                 final score |
+| -------: | ----------------: | ----------: | --------------------------: |
+|        0 |              0.78 |        0.20 | $0.3(0.78)+0.7(0.20)=0.374$ |
+|        1 |              0.74 |        0.95 | $0.3(0.74)+0.7(0.95)=0.887$ |
+|        2 |              0.70 |        0.50 | $0.3(0.70)+0.7(0.50)=0.560$ |
 
 The reranked order is therefore document 1, document 2, document 0. The first-stage winner falls to last because the cross-score judges it weak after seeing the full query-document pair.
 

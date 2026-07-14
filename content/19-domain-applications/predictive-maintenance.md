@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Predictive Maintenance
 
 Predictive maintenance turns equipment telemetry into a maintenance decision: inspect now, schedule during the next planned stop, or keep running. A well-posed case names the asset population, the sensor stream, the target, and the action latency. For rotating machinery, inputs may be vibration spectra, temperatures, operating regime, recent repair history, and usage hours; targets may be remaining useful life (RUL), failure within the next $h$ hours, or anomaly triage. This is the applied framing around the forecasting concept page on [predictive maintenance](../05-time-series-and-forecasting/predictive-maintenance.md), but the operational cost model is usually more important than the model family.

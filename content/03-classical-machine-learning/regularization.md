@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Regularization
 
 Regularization changes the training problem so a model must buy fit with complexity. In [linear models](linear-models.md) this usually means shrinking coefficients; in [gradient boosting](gradient-boosting.md) it means small learning rates, shallow trees, subsampling, and early stopping.

@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Stochastic Gradient Descent
 
 Stochastic gradient descent updates parameters using one example or a mini-batch instead of the full dataset. The update is noisier than batch [gradient descent](gradient-descent.md), but each step is cheaper and the noise can help large-scale learning move through flat regions.

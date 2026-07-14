@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Random Walks
 
 A random walk accumulates random steps. In one dimension,

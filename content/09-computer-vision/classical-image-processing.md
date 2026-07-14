@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Classical Image Processing
 
 Classical image processing uses fixed operations such as convolution, thresholding, morphology, and geometric transforms. It is not obsolete: it is often the most auditable part of an [OCR pipeline](ocr-pipelines.md), a preprocessing step before [feature extraction](feature-extraction.md), or a sanity baseline for [semantic segmentation](semantic-segmentation.md).

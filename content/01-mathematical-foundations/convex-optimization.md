@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Convex Optimization
 
 Convex optimization studies problems where the feasible set and objective have no hidden local traps. This is why least squares, regularized linear models, and [logistic regression](../03-classical-machine-learning/logistic-regression.md) are easier to reason about than general neural-network training.

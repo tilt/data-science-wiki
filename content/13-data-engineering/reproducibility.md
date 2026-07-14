@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Reproducibility
 
 Reproducibility in data engineering means a table, file set, or feature dataset can be rebuilt from pinned inputs, transformation code, parameters, and environment. It is stricter than "the job usually reruns" because mutable sources and changing business rules can produce different outputs under the same name.
@@ -32,17 +33,17 @@ A reproducibility manifest should be deterministic and human-reviewable:
 {
   "code_sha": "9f31a2c",
   "input_snapshot": "s3://lake/orders/dt=2026-01-01",
-  "params": {"currency": "USD"},
+  "params": { "currency": "USD" },
   "output": "s3://lake/marts/orders/v=20260102"
 }
 ```
 
-| Manifest field | Reproducibility role |
-| --- | --- |
-| `code_sha` | Pins the transformation logic. |
-| `input_snapshot` | Pins the source data version or partition. |
-| `params` | Captures business choices that affect output. |
-| `output` | Names the immutable result location or table version. |
+| Manifest field   | Reproducibility role                                  |
+| ---------------- | ----------------------------------------------------- |
+| `code_sha`       | Pins the transformation logic.                        |
+| `input_snapshot` | Pins the source data version or partition.            |
+| `params`         | Captures business choices that affect output.         |
+| `output`         | Names the immutable result location or table version. |
 
 A hash of this manifest is useful only if the input path is immutable or versioned. [Cloud-storage](cloud-storage.md) prefixes such as `latest/` undermine reproducibility unless object version IDs or table snapshots are captured.
 

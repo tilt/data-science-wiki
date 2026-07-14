@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Energy Consumption Forecasting
 
 Energy consumption forecasting predicts future electricity, gas, heat, or cooling load. It is a demand-forecasting problem with unusually strong calendar and weather structure. Hour of day, weekday, holidays, temperature, humidity, daylight, occupancy, tariffs, and operational schedules can all change the load curve.
@@ -33,13 +34,13 @@ Evaluation should be segmented. Average error can hide failures during heat wave
 
 ## Feature and Evaluation Map
 
-| Driver | Modeling role | Failure mode to check |
-| --- | --- | --- |
-| Hour, weekday, and holiday flags | Capture repeating human schedules. | Holiday calendars and daylight-saving changes can shift load abruptly. |
-| Temperature and humidity | Explain heating, cooling, and nonlinear weather response. | Extreme temperatures may be rare in training data but dominate operational risk. |
-| Tariffs and demand-response events | Represent price-driven consumption changes. | Policy changes can break historical relationships. |
-| Occupancy or production schedules | Explain building or industrial load independent of weather. | Missing schedule updates can look like model drift. |
-| Meter outages and corrections | Distinguish true demand from measurement artifacts. | Training on uncorrected outages teaches impossible low-load patterns. |
+| Driver                             | Modeling role                                               | Failure mode to check                                                            |
+| ---------------------------------- | ----------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Hour, weekday, and holiday flags   | Capture repeating human schedules.                          | Holiday calendars and daylight-saving changes can shift load abruptly.           |
+| Temperature and humidity           | Explain heating, cooling, and nonlinear weather response.   | Extreme temperatures may be rare in training data but dominate operational risk. |
+| Tariffs and demand-response events | Represent price-driven consumption changes.                 | Policy changes can break historical relationships.                               |
+| Occupancy or production schedules  | Explain building or industrial load independent of weather. | Missing schedule updates can look like model drift.                              |
+| Meter outages and corrections      | Distinguish true demand from measurement artifacts.         | Training on uncorrected outages teaches impossible low-load patterns.            |
 
 Evaluation slices should mirror these drivers: horizon, meter group, temperature band, calendar type, and peak-load windows. That makes the forecast useful for operations instead of only producing a low average error.
 

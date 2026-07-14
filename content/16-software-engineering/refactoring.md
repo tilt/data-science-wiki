@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Refactoring
 
 Refactoring changes internal structure without intentionally changing external behavior. It is not cleanup as a side quest; it is a controlled change with a behavior contract. The usual loop is capture current behavior, make one small structural move, run checks, then continue. [Code review](code-review.md) should reject refactors that smuggle in product changes without tests.

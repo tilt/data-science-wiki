@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Markov Chains
 
 A Markov chain is a sequence of states whose future depends on the present state, not the full past. For a time-homogeneous discrete chain,

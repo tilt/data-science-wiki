@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Governance of Model and Knowledge Base Changes
 
 Governance of model and knowledge base changes controls behavior changes that may bypass ordinary application-code review. A model swap, prompt edit, threshold move, retrieval-index refresh, tool schema change, or safety policy update can change user outcomes as much as a code deployment, so it needs the same level of evidence as [model versioning](../14-ml-engineering-and-mlops/model-versioning.md) and [auditability](auditability.md).
@@ -56,12 +57,12 @@ The rollback plan must include non-code artifacts. Restoring the old application
 
 NIST AI RMF separates mapping, measuring, and managing risks across the AI lifecycle. A release record can mirror that:
 
-| RMF function | Release evidence |
-| --- | --- |
-| Map | Intended use, affected users, data sources, deployment context |
-| Measure | [Adversarial evaluation](adversarial-evaluation.md), [factual correctness](factual-correctness.md), fairness, privacy, security tests |
-| Manage | Go/no-go decision, risk treatment, monitoring owner, rollback plan |
-| Govern | Approval policy, roles, versioned documentation, escalation path |
+| RMF function | Release evidence                                                                                                                      |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Map          | Intended use, affected users, data sources, deployment context                                                                        |
+| Measure      | [Adversarial evaluation](adversarial-evaluation.md), [factual correctness](factual-correctness.md), fairness, privacy, security tests |
+| Manage       | Go/no-go decision, risk treatment, monitoring owner, rollback plan                                                                    |
+| Govern       | Approval policy, roles, versioned documentation, escalation path                                                                      |
 
 ## Caveats
 

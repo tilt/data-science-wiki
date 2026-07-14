@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Demand Forecasting
 
 Demand forecasting predicts future customer need so an organization can plan inventory, replenishment, staffing, logistics, or capacity. The hard part is often not the model family but the target definition. Sales are not always demand: stockouts, substitutions, throttling, store closures, and backorders can censor the demand signal.

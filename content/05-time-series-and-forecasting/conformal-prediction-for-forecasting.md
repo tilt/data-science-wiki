@@ -84,13 +84,13 @@ If horizon 1 has residual quantile 8 and horizon 14 has residual quantile 31, th
 For six calibration forecasts, the absolute residuals are:
 
 | Observation | Forecast | Absolute residual |
-| ---: | ---: | ---: |
-| 10 | 9 | 1 |
-| 12 | 11 | 1 |
-| 13 | 14 | 1 |
-| 15 | 14 | 1 |
-| 18 | 16 | 2 |
-| 21 | 22 | 1 |
+| ----------: | -------: | ----------------: |
+|          10 |        9 |                 1 |
+|          12 |       11 |                 1 |
+|          13 |       14 |                 1 |
+|          15 |       14 |                 1 |
+|          18 |       16 |                 2 |
+|          21 |       22 |                 1 |
 
 With $\alpha=0.2$, the conformal rank is $\lceil(6+1)(1-0.2)\rceil=\lceil5.6\rceil=6$, so the selected residual radius is the largest calibration score, $q=2$. Future point forecasts of 20 and 25 become intervals $[18,22]$ and $[23,27]$. Time-series use needs calibration windows that respect temporal ordering.
 

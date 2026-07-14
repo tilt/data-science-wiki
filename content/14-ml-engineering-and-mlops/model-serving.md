@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Model Serving
 
 Model serving is the production runtime that loads a versioned artifact, applies the expected preprocessing, validates requests, executes inference, and returns a stable response schema. It is narrower than the whole ML system lifecycle but broader than `model.predict`: serving owns latency, resource limits, rollout compatibility, and telemetry.

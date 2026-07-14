@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Classical SVD
 
 Classical singular value decomposition factorizes a complete numeric matrix. In recommender systems it supplies the low-rank vocabulary used by [matrix factorization](matrix-factorization.md), but it is not by itself a correct treatment of missing ratings.

@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Synthetic Data
 
 Synthetic data is generated rather than collected from the deployment environment. In computer vision it can provide exact masks, boxes, depth, pose, or rare scenarios for [object detection](object-detection.md), [pose estimation](pose-estimation.md), and segmentation. Its central risk is the simulation-to-real gap, a specific form of [domain shift](domain-shift.md).

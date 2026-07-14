@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Model Degradation
 
 Model degradation is a measured decline in production behavior: worse ranking, calibration, cost-weighted error, coverage, or human override rate. It is an outcome, not a cause. The cause may be [data drift](data-drift.md), [concept drift](concept-drift.md), a feature pipeline bug, feedback loops, or a changed business process.

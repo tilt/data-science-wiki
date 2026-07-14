@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Alternating Least Squares
 
 Alternating least squares trains [matrix factorization](matrix-factorization.md) by freezing one side of the model and solving the other side exactly. With item factors fixed, each user factor is a small ridge regression; with user factors fixed, each item factor is the symmetric ridge problem. This is why ALS is a natural fit for sparse [utility matrices](utility-and-interaction-matrices.md) and distributed computation.

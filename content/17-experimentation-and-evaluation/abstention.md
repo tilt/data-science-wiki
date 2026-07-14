@@ -25,6 +25,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Abstention
 
 Abstention is the decision not to answer, classify, retrieve, or take an action when evidence or confidence is insufficient. It is a first-class outcome, not a fallback message. In generative systems it overlaps with refusals and [guardrails](../11-generative-ai/guardrails.md); in classifiers it is selective prediction based on score thresholds.
@@ -50,11 +51,11 @@ The threshold should be chosen with [calibration](calibration.md), [coverage](co
 For ten examples with confidences `0.98, 0.91, 0.84, 0.79, 0.73, 0.68, 0.61, 0.55, 0.49, 0.42`, suppose the correct answered examples are the first, second, third, fifth, and eighth cases. The threshold trade-off is:
 
 | threshold | answered cases | coverage | answered errors | answered error rate | abstained |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| 0.5 | 8 | 0.80 | 3 | 0.38 | 2 |
-| 0.7 | 5 | 0.50 | 1 | 0.20 | 5 |
-| 0.8 | 3 | 0.30 | 0 | 0.00 | 7 |
-| 0.9 | 2 | 0.20 | 0 | 0.00 | 8 |
+| --------- | -------------: | -------: | --------------: | ------------------: | --------: |
+| 0.5       |              8 |     0.80 |               3 |                0.38 |         2 |
+| 0.7       |              5 |     0.50 |               1 |                0.20 |         5 |
+| 0.8       |              3 |     0.30 |               0 |                0.00 |         7 |
+| 0.9       |              2 |     0.20 |               0 |                0.00 |         8 |
 
 Raising the threshold removes errors here because the wrong cases sit below 0.8, but it answers far fewer cases. If the unanswered cases are support tickets, the cost is human queue load; if they are medical questions, the cost may be preferable to unsupported advice.
 

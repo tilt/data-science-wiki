@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Training Pipelines
 
 Training pipelines automate the steps that turn versioned data into an evaluated model artifact. They are not just scheduled notebooks: they must make inputs, parameters, outputs, and approval evidence reproducible.

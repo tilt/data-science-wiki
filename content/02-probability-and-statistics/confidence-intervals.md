@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Confidence Intervals
 
 A confidence interval is a random interval produced by a procedure with a target long-run coverage rate. For an approximately normal estimator,
@@ -64,12 +65,12 @@ coverage 0.9499 avg_width 1.4796 tcrit 2.0452
 
 Across repeated samples, the 95 percent t-interval covers the fixed mean `0.9499` of the time, close to the nominal 0.95 target. The average width, `1.4796`, reflects the sample size, noise scale, and $t$ critical value `2.0452`.
 
-| Quantity | Meaning in the simulation |
-| --- | --- |
-| `coverage` | Fraction of repeated intervals that contain the fixed true mean. |
-| `avg_width` | Typical uncertainty width produced by the procedure. |
-| `tcrit` | Critical value that widens the interval for finite samples and unknown variance. |
-| One realized interval | A random output of the procedure; it either contains $\mu$ or it does not. |
+| Quantity              | Meaning in the simulation                                                        |
+| --------------------- | -------------------------------------------------------------------------------- |
+| `coverage`            | Fraction of repeated intervals that contain the fixed true mean.                 |
+| `avg_width`           | Typical uncertainty width produced by the procedure.                             |
+| `tcrit`               | Critical value that widens the interval for finite samples and unknown variance. |
+| One realized interval | A random output of the procedure; it either contains $\mu$ or it does not.       |
 
 ## Caveats
 

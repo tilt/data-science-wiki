@@ -23,6 +23,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Online Experiments
 
 Online experiments expose randomized traffic to a live product change and measure what users actually do. They are downstream of [offline evaluation](offline-evaluation.md): an offline win makes a launch plausible, while an online experiment estimates product impact under latency, feedback loops, user choice, and production logging.

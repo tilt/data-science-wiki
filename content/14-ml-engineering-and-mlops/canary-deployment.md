@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Canary Deployment
 
 A canary deployment routes a small, controlled share of production traffic to a new [model-serving](model-serving.md) version before full release. It reduces blast radius while exposing the candidate to real request shapes, dependencies, and latency pressure.
@@ -32,10 +33,10 @@ Canaries need three contracts: traffic assignment, guardrail metrics, and rollba
 
 Suppose the baseline path sees 37 errors in 50,000 requests and the canary path sees 9 errors in 5,000 requests:
 
-| path | requests | errors | error rate |
-| --- | ---: | ---: | ---: |
-| baseline | 50,000 | 37 | 0.00074 |
-| canary | 5,000 | 9 | 0.00180 |
+| path     | requests | errors | error rate |
+| -------- | -------: | -----: | ---------: |
+| baseline |   50,000 |     37 |    0.00074 |
+| canary   |    5,000 |      9 |    0.00180 |
 
 The canary error rate is more than twice the baseline rate. A one-sided normal approximation gives $z=1.733$ and $p=0.0416$, so at a 5% one-sided guardrail this canary is high enough to stop the ramp. A real rollout would also check [service-level objectives](service-level-objectives.md), segment mix, and output drift in [monitoring](monitoring.md).
 
@@ -46,11 +47,11 @@ strategy:
   canary:
     steps:
       - setWeight: 5
-      - pause: {duration: 30m}
+      - pause: { duration: 30m }
       - analysis:
           templates: [fraud-error-rate, p95-latency]
       - setWeight: 25
-      - pause: {duration: 2h}
+      - pause: { duration: 2h }
 ```
 
 ## Failure Modes

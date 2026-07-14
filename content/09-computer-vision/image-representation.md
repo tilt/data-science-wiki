@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Image Representation
 
 Image representation defines the contract between visual data and algorithms: pixel grid, channel semantics, dtype, scale, metadata, patches, feature maps, or embeddings. Most failures in [image classification](image-classification.md), [classical image processing](classical-image-processing.md), and [vision transformers](vision-transformers.md) become harder to debug when this contract is implicit.

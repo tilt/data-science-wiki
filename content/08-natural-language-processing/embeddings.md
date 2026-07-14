@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Embeddings
 
 Embeddings represent linguistic objects as vectors so that distances, dot products, and downstream models can operate on text. Static word embeddings assign one vector per token type; contextual [bert-style encoders](bert-style-encoders.md) compute different vectors for the same token in different contexts. Sentence and document embeddings power [semantic textual similarity](semantic-textual-similarity.md), clustering, [text classification](text-classification.md), and dense retrieval.

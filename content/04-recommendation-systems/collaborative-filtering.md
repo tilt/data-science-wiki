@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Collaborative Filtering
 
 Collaborative filtering recommends from collective behavior rather than item content alone. It assumes that users with similar histories, or items consumed by similar users, carry useful preference signal. The main families are [user-based collaborative filtering](user-based-collaborative-filtering.md), [item-based collaborative filtering](item-based-collaborative-filtering.md), and model-based methods such as [matrix factorization](matrix-factorization.md).

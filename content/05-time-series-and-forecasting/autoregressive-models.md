@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Autoregressive Models
 
 An autoregressive model predicts a value from earlier values of the same series. It is the simplest mathematical expression of temporal persistence: if the recent past is above its long-run mean, the near future is likely to remain above the mean, but the strength and decay of that persistence are learned from data.

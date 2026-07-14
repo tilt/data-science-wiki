@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Rotated Object Detection
 
 Rotated object detection predicts oriented boxes instead of axis-aligned boxes. It matters when angle is part of localization: aerial ships, text lines, shelves, industrial parts, and long objects where ordinary [object detection](object-detection.md) boxes include too much background.

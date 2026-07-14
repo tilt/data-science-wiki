@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Cost Management
 
 Cost management is the feedback loop that connects architecture choices to spend. It is not just "make it cheaper": an SLO, a [reliability](reliability.md) target, a [GPU systems](gpu-systems.md) memory requirement, and a [scalability](scalability.md) target can all be valid reasons to pay more. The important mechanism is attribution: every material cost should have an owner, workload, environment, and unit driver.
@@ -40,11 +41,11 @@ For systems work, the practical unit is more useful than the bill total: dollars
 
 Using AWS-published S3 example rates for inter-region transfer, Multi-Region Access Point routing, and internet egress:
 
-| Driver | Usage | Rate | Cost |
-| --- | ---: | ---: | ---: |
-| Cross-region replication | 2,000 GB | $0.0200/GB | $40.00 |
-| Multi-Region Access Point routing | 500 GB | $0.0033/GB | $1.65 |
-| Internet egress | 20 GB | $0.0900/GB | $1.80 |
+| Driver                            |    Usage |       Rate |   Cost |
+| --------------------------------- | -------: | ---------: | -----: |
+| Cross-region replication          | 2,000 GB | $0.0200/GB | $40.00 |
+| Multi-Region Access Point routing |   500 GB | $0.0033/GB |  $1.65 |
+| Internet egress                   |    20 GB | $0.0900/GB |  $1.80 |
 
 The total is $40.00+$1.65+$1.80=$43.45. The small routing line is not the point; the 2 TB replication line is. Cost review should follow data movement and retention, not only instance size. A `CostCenter=search`, `Environment=prod`, `Workload=rag-ingestion` tag set is only useful if budgets and Cost Explorer reports group by those labels.
 

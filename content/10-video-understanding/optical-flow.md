@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Optical Flow
 
 Optical flow estimates the apparent 2D motion field between nearby frames. It is lower-level than [temporal action recognition](temporal-action-recognition.md): instead of naming the action, it asks how local image intensity is moving. That motion field can be fed to [two-stream models](two-stream-models.md), used as a cue in [person tracking and track aggregation](person-tracking-and-track-aggregation.md), or treated as one component of broader [spatial and temporal modelling](spatial-and-temporal-modelling.md).
@@ -96,4 +97,4 @@ Brightness constancy breaks under lighting changes, specularities, motion blur, 
 ## References
 
 - [Lucas and Kanade, 1981, An iterative image registration technique with an application to stereo vision](https://www.ri.cmu.edu/pub_files/pub3/lucas_bruce_d_1981_1/lucas_bruce_d_1981_1.pdf)
-- [Horn and Schunck, 1981, Determining optical flow](https://doi.org/10.1016/0004-3702(81)90024-2)
+- [Horn and Schunck, 1981, Determining optical flow](<https://doi.org/10.1016/0004-3702(81)90024-2>)

@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Monitoring
 
 Monitoring watches known signals and alerts when they violate a defined expectation. ML monitoring must cover service health, data health, model behavior, and delayed outcomes. A model API can be up while stale features or shifted populations make its decisions wrong.

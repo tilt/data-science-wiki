@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Pose Estimation
 
 Pose estimation predicts keypoints such as joints, hands, faces, animal landmarks, or object parts. It often follows [object detection](object-detection.md) because the person or object crop constrains the keypoint search, and it feeds downstream video tasks such as [gesture recognition](../10-video-understanding/gesture-recognition.md).
@@ -42,11 +43,11 @@ $$
 With torso scale $s=20$ and threshold $\alpha=0.2$, a keypoint is correct when its Euclidean error is at most $4$ pixels.
 
 | Keypoint | True point | Predicted point | Normalized error | Counted correct? |
-| --- | --- | --- | ---: | --- |
-| Shoulder | $(10,10)$ | $(11,10)$ | 0.050 | yes |
-| Elbow | $(20,10)$ | $(23,12)$ | 0.180 | yes |
-| Wrist | $(20,25)$ | $(18,30)$ | 0.269 | no |
-| Hand tip | occluded | $(15,15)$ | excluded | not evaluated |
+| -------- | ---------- | --------------- | ---------------: | ---------------- |
+| Shoulder | $(10,10)$  | $(11,10)$       |            0.050 | yes              |
+| Elbow    | $(20,10)$  | $(23,12)$       |            0.180 | yes              |
+| Wrist    | $(20,25)$  | $(18,30)$       |            0.269 | no               |
+| Hand tip | occluded   | $(15,15)$       |         excluded | not evaluated    |
 
 Two of the three visible keypoints fall within the threshold, so $\mathrm{PCK}_{0.2}=2/3\approx0.667$. The occluded keypoint is excluded, which must match the annotation policy.
 

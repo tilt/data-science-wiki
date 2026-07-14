@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Text Preprocessing
 
 Text preprocessing is the contract that turns messy strings into the representation a model will actually see. It can include Unicode normalization, casing, punctuation handling, redaction, de-duplication, and domain-specific replacement such as mapping dollar amounts to `MONEY`. It sits before [tokenization](tokenization.md), changes the feature space used by [text classification](text-classification.md), and can either preserve or destroy evidence needed by [information extraction](information-extraction.md).

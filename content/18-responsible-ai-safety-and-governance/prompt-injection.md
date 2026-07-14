@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Prompt Injection
 
 Prompt injection is an attack or failure mode where text supplied by a user, document, website, email, image, or tool output tries to change the model's instructions or misuse its capabilities. This page is the governance/security view; the generative-AI mechanics are cross-linked in [prompt injection](../11-generative-ai/prompt-injection.md).

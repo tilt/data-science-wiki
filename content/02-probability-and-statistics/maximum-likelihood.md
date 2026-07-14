@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Maximum Likelihood
 
 Maximum likelihood estimation chooses model parameters that assign high probability or density to the observed data. For independent observations $x_1,\ldots,x_n$ from $p(x\mid\theta)$,

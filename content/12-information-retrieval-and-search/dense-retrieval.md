@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Dense Retrieval
 
 Dense retrieval embeds queries and documents into continuous vectors, then ranks documents by vector similarity. It is the semantic counterpart to [sparse retrieval](sparse-retrieval.md): exact token overlap is no longer required, but quality depends heavily on the embedding model and training data.

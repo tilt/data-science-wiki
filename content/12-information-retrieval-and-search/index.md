@@ -31,6 +31,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Information Retrieval and Search
 
 Information retrieval is the engineering and measurement discipline behind finding useful material in a collection. This section moves from lexical indexes and ranking formulas to vector retrieval, hybrid systems, graph retrieval, and evaluation.

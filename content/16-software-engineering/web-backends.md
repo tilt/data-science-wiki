@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Web Backends
 
 Web backends expose product behavior through HTTP APIs, persistence, queues, background jobs, and integration services. In AI products they also coordinate retrieval, model calls, streaming responses, authorization, audit logs, and [model serving](../14-ml-engineering-and-mlops/model-serving.md). The backend is where client intent becomes an enforceable system contract.

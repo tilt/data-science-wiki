@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Statistical Modelling
 
 A statistical model specifies a family of probability laws for data. A simple Gaussian linear model writes
@@ -63,13 +64,13 @@ beta_hat [1.0462, 1.9582] sigma_hat 0.7355 loglik -88.934
 
 The fitted coefficients `[1.0462,1.9582]` are close to the generating values `[1.0,2.0]`, and the fitted noise scale is `0.7355` for data generated with scale 0.7. The log-likelihood `-88.934` is meaningful only under the Gaussian error and independence assumptions.
 
-| Model element | Question it answers |
-| --- | --- |
-| Response $Y_i$ | What quantity is being modeled? |
-| Covariates $x_i$ | Which observed drivers are allowed to explain variation? |
-| Parameters $\beta$ | Which effects are estimated from data? |
-| Error model $\epsilon_i$ | What residual variation remains after the covariates? |
-| Likelihood | How plausible are the observed data under a parameter setting? |
+| Model element            | Question it answers                                            |
+| ------------------------ | -------------------------------------------------------------- |
+| Response $Y_i$           | What quantity is being modeled?                                |
+| Covariates $x_i$         | Which observed drivers are allowed to explain variation?       |
+| Parameters $\beta$       | Which effects are estimated from data?                         |
+| Error model $\epsilon_i$ | What residual variation remains after the covariates?          |
+| Likelihood               | How plausible are the observed data under a parameter setting? |
 
 ## Caveats
 

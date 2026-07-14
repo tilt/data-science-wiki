@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Language Model Architecture
 
 A modern language model usually tokenizes text, embeds tokens and positions, applies stacks of masked self-attention and feed-forward blocks, then projects hidden states to vocabulary logits for [sampling and decoding](sampling-and-decoding.md). The core mechanism is the transformer [attention](../06-deep-learning/attention.md) block.
@@ -38,21 +39,21 @@ where mask $M$ sets future positions to $-\infty$. [Pretraining](pretraining.md)
 
 For a three-token prefix, causal masking permits only the lower-triangular part of the attention matrix:
 
-| Query position | Can attend to token 1 | Can attend to token 2 | Can attend to token 3 | Reason |
-| --- | ---: | ---: | ---: | --- |
-| Token 1 | yes | no | no | No future context is available. |
-| Token 2 | yes | yes | no | The model may use the prefix seen so far. |
-| Token 3 | yes | yes | yes | All positions up to the current token are visible. |
+| Query position | Can attend to token 1 | Can attend to token 2 | Can attend to token 3 | Reason                                             |
+| -------------- | --------------------: | --------------------: | --------------------: | -------------------------------------------------- |
+| Token 1        |                   yes |                    no |                    no | No future context is available.                    |
+| Token 2        |                   yes |                   yes |                    no | The model may use the prefix seen so far.          |
+| Token 3        |                   yes |                   yes |                   yes | All positions up to the current token are visible. |
 
 With unmasked scores $(2,1,0)$ at every row, the masked softmax weights become roughly $(1,0,0)$ for token 1, $(0.731,0.269,0)$ for token 2, and $(0.665,0.245,0.090)$ for token 3. The values differ by row because the denominator only includes visible positions. Without this mask, next-token training would leak future labels.
 
-| Component | Function |
-| --- | --- |
-| Token embedding | Converts token IDs into vectors. |
-| Positional information | Tells attention where each token sits in the sequence. |
-| Masked self-attention | Routes information from earlier visible tokens. |
-| Feed-forward block | Applies a position-wise nonlinear transformation. |
-| Vocabulary projection | Converts the final hidden state into next-token logits. |
+| Component              | Function                                                |
+| ---------------------- | ------------------------------------------------------- |
+| Token embedding        | Converts token IDs into vectors.                        |
+| Positional information | Tells attention where each token sits in the sequence.  |
+| Masked self-attention  | Routes information from earlier visible tokens.         |
+| Feed-forward block     | Applies a position-wise nonlinear transformation.       |
+| Vocabulary projection  | Converts the final hidden state into next-token logits. |
 
 ## Caveats
 

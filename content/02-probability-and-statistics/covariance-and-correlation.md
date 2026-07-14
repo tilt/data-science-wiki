@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Covariance and Correlation
 
 Covariance measures whether two [random variables](random-variables.md) tend to be above or below their means together:

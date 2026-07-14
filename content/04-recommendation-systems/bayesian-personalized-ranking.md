@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Bayesian Personalized Ranking
 
 Bayesian Personalized Ranking trains recommenders from triples: user $u$, observed positive item $i$, and sampled unobserved item $j$. Instead of predicting a rating, it pushes $i$ above $j$, which fits [implicit feedback](implicit-feedback.md) where missing data is not a reliable negative label.

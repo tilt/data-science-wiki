@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Video Transformers
 
 Video transformers tokenize a clip into frame patches or tubelets and let attention route information across space and time. Compared with [3D convolutional networks](3d-convolutional-networks.md), they are less tied to local kernels; compared with [two-stream models](two-stream-models.md), they learn motion interactions inside the same token system that carries appearance. Their core operation is the same scaled dot-product [attention](../06-deep-learning/attention.md) used in language models.
@@ -45,11 +46,11 @@ $$
 
 Changing only the patch size changes the cost quickly:
 
-| patch size | token count $N$ | full-attention score count $N^2$ | interpretation |
-|---:|---:|---:|---|
-| $8\times8$ | 16 | 256 | cheap, coarse hand/object detail |
-| $4\times4$ | 64 | 4096 | four times more tokens, sixteen times more scores |
-| $2\times2$ | 256 | 65536 | fine detail, expensive full attention |
+| patch size | token count $N$ | full-attention score count $N^2$ | interpretation                                    |
+| ---------: | --------------: | -------------------------------: | ------------------------------------------------- |
+| $8\times8$ |              16 |                              256 | cheap, coarse hand/object detail                  |
+| $4\times4$ |              64 |                             4096 | four times more tokens, sixteen times more scores |
+| $2\times2$ |             256 |                            65536 | fine detail, expensive full attention             |
 
 This quadratic score growth is why real clips quickly make token count the dominant memory and latency constraint, especially for [real-time video understanding](real-time-video-understanding.md).
 
@@ -59,14 +60,14 @@ This quadratic score growth is why real clips quickly make token count the domin
 
 Patch size is a budget knob. Smaller patches preserve small objects such as hands, fingers, tools, and signs, but increase token count and attention cost. Larger patches reduce compute but can erase the motion detail needed for fine-grained gestures.
 
-| design choice | effect |
-|---|---|
-| Smaller spatial patch | More hand detail, more tokens, higher attention cost. |
-| Larger spatial patch | Cheaper inference, coarser hand and object geometry. |
-| Tubelets | Fewer temporal tokens, but each token already mixes adjacent frames. |
-| Person RoI crop before the backbone | Keeps the actor and nearby context while removing other people and background. |
-| Hand RoI crop before the backbone | More pixels allocated to the hand, less body and object context. |
-| RoI token keep inside the backbone | Lower token budget while preserving the original frame, if positions are handled correctly. |
+| design choice                       | effect                                                                                      |
+| ----------------------------------- | ------------------------------------------------------------------------------------------- |
+| Smaller spatial patch               | More hand detail, more tokens, higher attention cost.                                       |
+| Larger spatial patch                | Cheaper inference, coarser hand and object geometry.                                        |
+| Tubelets                            | Fewer temporal tokens, but each token already mixes adjacent frames.                        |
+| Person RoI crop before the backbone | Keeps the actor and nearby context while removing other people and background.              |
+| Hand RoI crop before the backbone   | More pixels allocated to the hand, less body and object context.                            |
+| RoI token keep inside the backbone  | Lower token budget while preserving the original frame, if positions are handled correctly. |
 
 This is why comparing full-frame, static-crop, tracking-crop, and token-keep variants can reveal more about input-domain alignment than about the model family alone.
 

@@ -26,6 +26,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-14
 ---
+
 # Generative Adversarial Networks
 
 A generative adversarial network trains two models against each other. The generator maps random noise or conditioning variables to a synthetic sample. The discriminator tries to tell real training samples from generated samples. Training improves the generator by making the discriminator's job harder.
@@ -51,22 +52,22 @@ The discriminator is trained to output high scores for real data and low scores 
 
 GAN training is not ordinary supervised minimization. The target changes while the model learns:
 
-| Component | Learns to | Failure if it wins too easily |
-| --- | --- | --- |
-| Discriminator | detect generated samples | generator gradients become weak or unhelpful |
-| Generator | fool the discriminator | discriminator becomes unable to give useful feedback |
+| Component     | Learns to                | Failure if it wins too easily                        |
+| ------------- | ------------------------ | ---------------------------------------------------- |
+| Discriminator | detect generated samples | generator gradients become weak or unhelpful         |
+| Generator     | fool the discriminator   | discriminator becomes unable to give useful feedback |
 
 The useful training region is a balance. If the discriminator is too weak, it accepts poor samples. If it is too strong, the generator may receive little signal. This moving-target game explains why GANs are more fragile than reconstruction or maximum-likelihood objectives.
 
 ## Common Failure Modes
 
-| Failure mode | What it looks like | Why it happens |
-| --- | --- | --- |
-| Mode collapse | generator produces limited varieties of samples | a few outputs fool the discriminator well enough |
-| Training oscillation | quality improves and then regresses | generator and discriminator chase each other |
-| Discriminator overfitting | generated samples degrade on small datasets | discriminator memorizes real examples |
-| Artifact learning | samples contain texture or aliasing artifacts | generator exploits architecture and upsampling shortcuts |
-| Evaluation mismatch | samples look sharp but are not useful | perceptual realism differs from task quality or diversity |
+| Failure mode              | What it looks like                              | Why it happens                                            |
+| ------------------------- | ----------------------------------------------- | --------------------------------------------------------- |
+| Mode collapse             | generator produces limited varieties of samples | a few outputs fool the discriminator well enough          |
+| Training oscillation      | quality improves and then regresses             | generator and discriminator chase each other              |
+| Discriminator overfitting | generated samples degrade on small datasets     | discriminator memorizes real examples                     |
+| Artifact learning         | samples contain texture or aliasing artifacts   | generator exploits architecture and upsampling shortcuts  |
+| Evaluation mismatch       | samples look sharp but are not useful           | perceptual realism differs from task quality or diversity |
 
 Techniques such as adaptive discriminator augmentation, StyleGAN-style architectures, spectral normalization, careful data augmentation, and better evaluation reduce these problems but do not remove the adversarial nature of the objective.
 
@@ -74,14 +75,14 @@ Techniques such as adaptive discriminator augmentation, StyleGAN-style architect
 
 GANs are especially useful when perceptual realism matters and a discriminator can learn a better loss than hand-written pixel error:
 
-| Application | Why GANs fit |
-| --- | --- |
-| Domain-specific image synthesis | fast sampling and high visual fidelity within a narrow distribution |
-| Image-to-image translation | conditional GANs learn mappings such as edges-to-photo or label-map-to-scene |
-| Unpaired translation | cycle-consistency plus adversarial loss maps one domain to another without paired examples |
-| Super-resolution and restoration | adversarial loss encourages perceptually sharp outputs |
-| Data augmentation and simulation | synthetic samples can expand rare visual conditions when validated carefully |
-| Representation and domain adaptation | adversarial losses can align feature distributions |
+| Application                          | Why GANs fit                                                                               |
+| ------------------------------------ | ------------------------------------------------------------------------------------------ |
+| Domain-specific image synthesis      | fast sampling and high visual fidelity within a narrow distribution                        |
+| Image-to-image translation           | conditional GANs learn mappings such as edges-to-photo or label-map-to-scene               |
+| Unpaired translation                 | cycle-consistency plus adversarial loss maps one domain to another without paired examples |
+| Super-resolution and restoration     | adversarial loss encourages perceptually sharp outputs                                     |
+| Data augmentation and simulation     | synthetic samples can expand rare visual conditions when validated carefully               |
+| Representation and domain adaptation | adversarial losses can align feature distributions                                         |
 
 GAN-generated media also creates safety and provenance issues. Photorealistic faces, voices, or scenes can be used for harmless simulation or harmful deception, so deployment needs provenance, consent, and abuse controls.
 
@@ -93,12 +94,12 @@ That does not make GANs obsolete. They remain relevant when one-pass sampling sp
 
 ## GANs Versus Autoencoders and Diffusion
 
-| Model family | Training signal | Sampling | Main strength | Main weakness |
-| --- | --- | --- | --- | --- |
-| Autoencoder | reconstruct input | encode then decode | representation, compression, denoising | reconstruction can preserve nuisance detail |
-| VAE | reconstruct plus latent prior | sample latent then decode | smooth probabilistic latent space | samples can be blurry |
-| GAN | fool discriminator | one generator pass | sharp samples and learned perceptual loss | unstable training and mode collapse |
-| Diffusion or flow | denoise or transport noise to data | iterative, unless distilled | scalable, controllable generation | slower sampling and high training cost |
+| Model family      | Training signal                    | Sampling                    | Main strength                             | Main weakness                               |
+| ----------------- | ---------------------------------- | --------------------------- | ----------------------------------------- | ------------------------------------------- |
+| Autoencoder       | reconstruct input                  | encode then decode          | representation, compression, denoising    | reconstruction can preserve nuisance detail |
+| VAE               | reconstruct plus latent prior      | sample latent then decode   | smooth probabilistic latent space         | samples can be blurry                       |
+| GAN               | fool discriminator                 | one generator pass          | sharp samples and learned perceptual loss | unstable training and mode collapse         |
+| Diffusion or flow | denoise or transport noise to data | iterative, unless distilled | scalable, controllable generation         | slower sampling and high training cost      |
 
 ## Caveats
 

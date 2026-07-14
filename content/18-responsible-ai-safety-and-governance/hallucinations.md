@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Hallucinations
 
 Hallucinations are generated statements that are unsupported, fabricated, or misleading relative to the task evidence. The governance problem is not that a model "sounds creative"; it is that users may treat fluent unsupported text as fact. The control surface overlaps with [factual correctness](factual-correctness.md), [prompt injection](prompt-injection.md), and [hallucination mitigation](../11-generative-ai/hallucination-mitigation.md).
@@ -29,13 +30,13 @@ Hallucinations are generated statements that are unsupported, fabricated, or mis
 
 A hallucination review should classify each unsupported output by where the failure entered:
 
-| Failure point | Example | Likely fix |
-| --- | --- | --- |
-| Retrieval miss | Correct document absent from context | Improve [grounding](../11-generative-ai/grounding.md) and retrieval tests |
-| Context misuse | Evidence present but ignored | Prompt and decoding regression tests |
-| Unsupported synthesis | Model combines facts into an unstated conclusion | Claim-level citation checks |
-| Knowledge boundary failure | Model answers when source is silent | Abstention policy |
-| Attack-induced claim | Retrieved text instructs model to lie | [Adversarial evaluation](adversarial-evaluation.md) |
+| Failure point              | Example                                          | Likely fix                                                                |
+| -------------------------- | ------------------------------------------------ | ------------------------------------------------------------------------- |
+| Retrieval miss             | Correct document absent from context             | Improve [grounding](../11-generative-ai/grounding.md) and retrieval tests |
+| Context misuse             | Evidence present but ignored                     | Prompt and decoding regression tests                                      |
+| Unsupported synthesis      | Model combines facts into an unstated conclusion | Claim-level citation checks                                               |
+| Knowledge boundary failure | Model answers when source is silent              | Abstention policy                                                         |
+| Attack-induced claim       | Retrieved text instructs model to lie            | [Adversarial evaluation](adversarial-evaluation.md)                       |
 
 This is why "use RAG" is not a complete hallucination control. Retrieval can reduce uncertainty, but the answer still needs claim-level support and an abstention path.
 
@@ -43,12 +44,12 @@ This is why "use RAG" is not a complete hallucination control. Retrieval can red
 
 A four-question review compares a baseline answer policy with an abstention policy:
 
-| question type | baseline supported? | abstention policy supported? |
-| --- | ---: | ---: |
-| refund window | yes | yes |
-| dental surgery coverage | no | yes, abstains |
-| fax cancellation | no | yes, abstains |
-| admin MFA | yes | yes |
+| question type           | baseline supported? | abstention policy supported? |
+| ----------------------- | ------------------: | ---------------------------: |
+| refund window           |                 yes |                          yes |
+| dental surgery coverage |                  no |                yes, abstains |
+| fax cancellation        |                  no |                yes, abstains |
+| admin MFA               |                 yes |                          yes |
 
 The baseline has 2 unsupported claims out of 4 answers, so its unsupported-claim rate is 0.50. The abstention policy has 0 unsupported claims out of 4 reviewed outputs because it replaces two guesses with "I cannot determine..." responses. That improves factuality but may reduce apparent helpfulness, so the metric should be reported beside coverage and user escalation rates in the [error taxonomy](error-taxonomies.md).
 

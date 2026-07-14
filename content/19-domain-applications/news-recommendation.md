@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # News Recommendation
 
 News recommendation ranks articles for readers under freshness, personalization, editorial, source-diversity, and public-interest constraints. Inputs include article text, section, entities, source, publish time, geography, reading history, subscriptions, device, and session context. Targets may be click, dwell, save, complaint, subscription retention, or editorially defined exposure.
@@ -36,13 +37,13 @@ MIND is a canonical public news recommendation artifact. The project page says i
 
 This toy ranking checks [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) and [source coverage](../17-experimentation-and-evaluation/coverage.md) for five candidate articles:
 
-| rank | article gain | source |
-| ---: | ---: | --- |
-| 1 | 3 | local |
-| 2 | 2 | local |
-| 3 | 2 | wire |
-| 4 | 1 | opinion |
-| 5 | 0 | wire |
+| rank | article gain | source  |
+| ---: | -----------: | ------- |
+|    1 |            3 | local   |
+|    2 |            2 | local   |
+|    3 |            2 | wire    |
+|    4 |            1 | opinion |
+|    5 |            0 | wire    |
 
 The ranked gains are already in ideal order, so [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md)@5 is 1.0. The list covers three unique sources, but local and wire each appear twice. That is acceptable only if the editorial policy allows it; a real news ranker should report diversity and coverage beside relevance.
 

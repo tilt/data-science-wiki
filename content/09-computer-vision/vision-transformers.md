@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Vision Transformers
 
 Vision transformers treat image patches as tokens and process them with transformer blocks. They replace the hard-coded locality of [CNN architectures](cnn-architectures.md) with learned attention over patch sequences, using the same core mechanism as [attention](../06-deep-learning/attention.md).

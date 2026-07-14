@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Data Leakage
 
 Data leakage occurs when training or validation uses information that would not be available at prediction time. It is not a minor hygiene issue; it changes the estimand of [supervised learning](supervised-learning.md) and makes [evaluation metrics](evaluation-metrics.md) optimistic.

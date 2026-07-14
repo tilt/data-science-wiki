@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Constrained Optimization
 
 Constrained optimization minimizes an [optimization](optimization.md) objective only over allowed solutions. The constraint may encode physics, budgets, fairness rules, simplex probabilities, or margins as in [support vector machines](../03-classical-machine-learning/support-vector-machines.md).

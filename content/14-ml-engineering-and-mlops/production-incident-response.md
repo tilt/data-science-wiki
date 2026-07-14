@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Production Incident Response
 
 Production incident response coordinates detection, triage, mitigation, communication, and learning when a live ML system behaves unsafely or unreliably. ML incidents include ordinary outages, but also wrong model behavior with green infrastructure metrics.

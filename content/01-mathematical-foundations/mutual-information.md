@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Mutual Information
 
 Mutual information measures how much knowing one variable reduces uncertainty about another. It is zero exactly when the variables are independent, and positive when their joint distribution carries structure beyond separate marginals in the sense of [conditional probability](../02-probability-and-statistics/conditional-probability.md).

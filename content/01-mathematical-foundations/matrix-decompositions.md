@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Matrix Decompositions
 
 A matrix decomposition rewrites a matrix as a product of simpler matrices. The point is not cosmetic: the factors can expose [rank](rank.md), [orthogonality](orthogonality.md), curvature, covariance axes, or a computational path that is more stable than operating on the original matrix directly.

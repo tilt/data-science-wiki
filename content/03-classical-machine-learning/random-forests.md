@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Random Forests
 
 A random forest averages many noisy [decision trees](decision-trees.md). Each tree is trained on a bootstrap sample, and each split considers only a random subset of features. The goal is to reduce variance without increasing bias as much as a single shallow tree would.
@@ -53,7 +54,7 @@ for est in [DecisionTreeClassifier(random_state=6),
 Observed output:
 
 ```text
-DecisionTreeClassifier test_acc 0.733 
+DecisionTreeClassifier test_acc 0.733
 RandomForestClassifier test_acc 0.827  oob 0.742
 ```
 

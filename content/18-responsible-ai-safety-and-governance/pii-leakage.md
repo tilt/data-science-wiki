@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # PII Leakage
 
 PII leakage occurs when an AI system exposes personally identifiable information to a user, model provider, tool, log sink, retrieval result, analyst, or downstream system that should not receive it. It is both a [privacy](privacy.md) failure and a [security](security.md) failure because leakage often happens through permission gaps, prompt injection, or overly broad logging.
@@ -29,13 +30,13 @@ PII leakage occurs when an AI system exposes personally identifiable information
 
 Common leakage paths in AI systems include:
 
-| Path | Example | Control |
-| --- | --- | --- |
-| Prompt input | User pastes a benefits form with SSN | Client-side warning, redaction, retention policy |
-| Retrieval | HR document returned to unauthorized user | Permission-aware retrieval |
-| Generation | Model repeats another user's account detail | Output filter and access check |
-| Logs/traces | Raw prompt copied into analytics | Redacted observability schema |
-| Tool call | Agent sends private data to external API | [Policy enforcement](policy-enforcement.md) and allowlisted tools |
+| Path         | Example                                     | Control                                                           |
+| ------------ | ------------------------------------------- | ----------------------------------------------------------------- |
+| Prompt input | User pastes a benefits form with SSN        | Client-side warning, redaction, retention policy                  |
+| Retrieval    | HR document returned to unauthorized user   | Permission-aware retrieval                                        |
+| Generation   | Model repeats another user's account detail | Output filter and access check                                    |
+| Logs/traces  | Raw prompt copied into analytics            | Redacted observability schema                                     |
+| Tool call    | Agent sends private data to external API    | [Policy enforcement](policy-enforcement.md) and allowlisted tools |
 
 NIST SP 800-122 treats PII confidentiality as context-dependent: the same field can have different risk depending on linkability, sensitivity, and exposure. For generative systems, [prompt injection](prompt-injection.md) can turn latent access into active exfiltration.
 

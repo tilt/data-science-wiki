@@ -27,6 +27,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-14
 ---
+
 # Autoencoders
 
 An autoencoder learns to copy an input through a constrained intermediate representation. The model has an encoder that maps an input to a latent code and a decoder that reconstructs the input from that code. The useful part is not the copying itself; it is the representation forced through the bottleneck, corruption process, sparsity penalty, or probabilistic latent space.
@@ -59,14 +60,14 @@ That does not automatically mean the code is semantic. A plain autoencoder can s
 
 ## Important Variants
 
-| Variant | Training signal | What it encourages |
-| --- | --- | --- |
-| Undercomplete autoencoder | reconstruct from a smaller latent code | compression and dimensionality reduction |
-| Denoising autoencoder | reconstruct clean input from corrupted input | robustness to noise and missing features |
-| Sparse autoencoder | reconstruct while penalizing active units | interpretable or factorized latent features |
-| Variational autoencoder | reconstruct while matching a latent prior | smooth latent sampling and probabilistic generation |
-| Masked autoencoder | reconstruct hidden patches or tokens | scalable self-supervised representation learning |
-| Latent autoencoder | compress data before another generative model | efficient generation in a learned latent space |
+| Variant                   | Training signal                               | What it encourages                                  |
+| ------------------------- | --------------------------------------------- | --------------------------------------------------- |
+| Undercomplete autoencoder | reconstruct from a smaller latent code        | compression and dimensionality reduction            |
+| Denoising autoencoder     | reconstruct clean input from corrupted input  | robustness to noise and missing features            |
+| Sparse autoencoder        | reconstruct while penalizing active units     | interpretable or factorized latent features         |
+| Variational autoencoder   | reconstruct while matching a latent prior     | smooth latent sampling and probabilistic generation |
+| Masked autoencoder        | reconstruct hidden patches or tokens          | scalable self-supervised representation learning    |
+| Latent autoencoder        | compress data before another generative model | efficient generation in a learned latent space      |
 
 ## Variational Autoencoders
 
@@ -85,15 +86,15 @@ The reconstruction term asks the decoder to explain the data. The KL term keeps 
 
 Autoencoders are useful when the objective is compression, reconstruction, anomaly detection, imputation, or representation pretraining:
 
-| Application | How the autoencoder is used |
-| --- | --- |
-| Dimensionality reduction | replace high-dimensional inputs with compact latent codes |
-| Denoising | reconstruct clean images, audio, or sensor readings from corrupted inputs |
-| Anomaly detection | flag examples with unusually high reconstruction error |
-| Missing-data imputation | infer masked features from visible context |
-| Self-supervised pretraining | train encoders with reconstruction before fine-tuning |
-| Generative modeling | sample from a VAE latent prior or decode latents from another model |
-| Latent diffusion | compress images into a latent space before denoising, as in [Stable Diffusion](../11-generative-ai/stable-diffusion.md) |
+| Application                 | How the autoencoder is used                                                                                             |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Dimensionality reduction    | replace high-dimensional inputs with compact latent codes                                                               |
+| Denoising                   | reconstruct clean images, audio, or sensor readings from corrupted inputs                                               |
+| Anomaly detection           | flag examples with unusually high reconstruction error                                                                  |
+| Missing-data imputation     | infer masked features from visible context                                                                              |
+| Self-supervised pretraining | train encoders with reconstruction before fine-tuning                                                                   |
+| Generative modeling         | sample from a VAE latent prior or decode latents from another model                                                     |
+| Latent diffusion            | compress images into a latent space before denoising, as in [Stable Diffusion](../11-generative-ai/stable-diffusion.md) |
 
 ## Relevance After Transformers
 

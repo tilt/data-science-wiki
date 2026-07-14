@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # PCA
 
 Principal component analysis finds orthogonal directions of maximum variance in centered numeric data. It is a specific [dimensionality reduction](dimensionality-reduction.md) method, not a generic feature-selection algorithm. It is usually used inside [unsupervised learning](unsupervised-learning.md) workflows, but its linear projection geometry is closest in spirit to [linear models](linear-models.md), [eigendecomposition](../01-mathematical-foundations/eigenvalues-and-eigenvectors.md), and [singular value decomposition](../01-mathematical-foundations/singular-value-decomposition.md).
@@ -94,12 +95,12 @@ first_row_scores [[-2.265  0.48 ]]
 
 The first component loads positively on three standardized Iris features and negatively on the second. Component signs are arbitrary; flipping all signs gives the same subspace.
 
-| Quantity | Interpretation |
-| --- | --- |
-| `components_` | Rows are principal axes in standardized feature space. |
-| `explained_variance_ratio_` | Fraction of total variance captured by each axis. |
-| `transform(X)` | Coordinates of samples after projection onto the component axes. |
-| Component sign | Arbitrary; multiplying one component and its scores by `-1` preserves the same subspace. |
+| Quantity                    | Interpretation                                                                           |
+| --------------------------- | ---------------------------------------------------------------------------------------- |
+| `components_`               | Rows are principal axes in standardized feature space.                                   |
+| `explained_variance_ratio_` | Fraction of total variance captured by each axis.                                        |
+| `transform(X)`              | Coordinates of samples after projection onto the component axes.                         |
+| Component sign              | Arbitrary; multiplying one component and its scores by `-1` preserves the same subspace. |
 
 In this run, the first two components retain about `0.73 + 0.229 = 0.959` of standardized Iris variance. That makes a two-dimensional plot informative, but it does not prove that every classification or clustering task should discard the remaining components.
 

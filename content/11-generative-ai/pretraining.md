@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Pretraining
 
 Pretraining is the large-scale self-supervised stage that gives [foundation models](foundation-models.md) broad linguistic or multimodal capability. For decoder language models, it trains the [language model architecture](language-model-architecture.md) to predict the next token from previous [tokenization](tokenization.md) outputs.
@@ -44,12 +45,12 @@ If the correct token receives probability $0.77$, its loss is $-\log(0.77)\appro
 
 ## Training Pipeline
 
-| Stage | Why it matters |
-| --- | --- |
-| Data filtering and deduplication | Removes obvious noise, duplicates, and evaluation contamination. |
-| Tokenization | Converts text or multimodal inputs into the units the model consumes. |
-| Distributed optimization | Trains on many accelerators with checkpointing, learning-rate schedules, and loss monitoring. |
-| Evaluation slices | Tracks domain, language, safety, and memorization behavior instead of relying on aggregate loss alone. |
+| Stage                            | Why it matters                                                                                         |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Data filtering and deduplication | Removes obvious noise, duplicates, and evaluation contamination.                                       |
+| Tokenization                     | Converts text or multimodal inputs into the units the model consumes.                                  |
+| Distributed optimization         | Trains on many accelerators with checkpointing, learning-rate schedules, and loss monitoring.          |
+| Evaluation slices                | Tracks domain, language, safety, and memorization behavior instead of relying on aggregate loss alone. |
 
 ## Caveats
 

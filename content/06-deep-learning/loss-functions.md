@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Loss Functions
 
 A loss function defines what training means. It converts model outputs and targets into a scalar that [backpropagation](backpropagation.md) can differentiate. The same architecture can behave very differently under mean squared error, binary cross-entropy, or multiclass [cross-entropy](../01-mathematical-foundations/cross-entropy.md).

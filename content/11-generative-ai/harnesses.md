@@ -27,6 +27,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # Harnesses
 
 A harness is the controlled wrapper around a generative-AI system. It fixes inputs, prompts, model settings, retrieval fixtures, tool fixtures, graders, metrics, and reporting so runs can be compared. Without a harness, an evaluation result is often just a transcript: useful for debugging one case, but too under-specified to reproduce or trust as a regression signal.
@@ -37,13 +38,13 @@ Harnesses are especially important for [RAG evaluation](rag-evaluation.md), [age
 
 At minimum, a harness has five parts:
 
-| part | responsibility | common failure if missing |
-|---|---|---|
-| Case set | Frozen tasks, expected evidence, user context, and slice labels | The benchmark drifts when examples are edited ad hoc. |
+| part           | responsibility                                                                    | common failure if missing                                                      |
+| -------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Case set       | Frozen tasks, expected evidence, user context, and slice labels                   | The benchmark drifts when examples are edited ad hoc.                          |
 | System adapter | Calls the prompt, RAG pipeline, agent loop, or model endpoint with fixed settings | The runner cannot compare versions because each system is invoked differently. |
-| Fixtures | Stubbed tools, retrieval indexes, permission state, clocks, and external APIs | Results change because live dependencies change. |
-| Graders | Deterministic checks, rubric checks, model judges, and human review queues | The suite grades style but misses unsupported claims or unsafe tool calls. |
-| Reporter | Stores traces, metrics, costs, latency, failures, and release comparisons | Failures cannot be debugged or linked to code/prompt changes. |
+| Fixtures       | Stubbed tools, retrieval indexes, permission state, clocks, and external APIs     | Results change because live dependencies change.                               |
+| Graders        | Deterministic checks, rubric checks, model judges, and human review queues        | The suite grades style but misses unsupported claims or unsafe tool calls.     |
+| Reporter       | Stores traces, metrics, costs, latency, failures, and release comparisons         | Failures cannot be debugged or linked to code/prompt changes.                  |
 
 The harness should produce a trace record, not only a score. For one case $i$, a practical pass predicate is
 
@@ -118,14 +119,14 @@ The spec freezes the model settings, retrieval snapshot, tool replay data, case 
 
 A harness should store one trace per case with enough detail to replay or debug the run:
 
-| trace field | why it matters |
-|---|---|
-| `case_id`, prompt version, model version | Ties a result to the tested artifact. |
-| Retrieved source IDs and ranks | Separates retrieval failure from generation failure. |
+| trace field                                                      | why it matters                                                     |
+| ---------------------------------------------------------------- | ------------------------------------------------------------------ |
+| `case_id`, prompt version, model version                         | Ties a result to the tested artifact.                              |
+| Retrieved source IDs and ranks                                   | Separates retrieval failure from generation failure.               |
 | Tool call names, arguments, authorization decisions, and results | Catches schema errors, permission failures, and forbidden actions. |
-| Final answer, citations, abstention decision | Supports answer-level grading. |
-| Token counts, latency, retries, and cost | Makes budget regressions visible. |
-| Grader outputs and rationales | Makes failures auditable without rerunning the whole suite. |
+| Final answer, citations, abstention decision                     | Supports answer-level grading.                                     |
+| Token counts, latency, retries, and cost                         | Makes budget regressions visible.                                  |
+| Grader outputs and rationales                                    | Makes failures auditable without rerunning the whole suite.        |
 
 For [agentic systems](agentic-systems.md), traces should also include loop steps, stop reasons, and side-effect boundaries. A final answer can be correct even if the agent used a forbidden tool or exceeded the intended budget.
 
@@ -133,15 +134,15 @@ For [agentic systems](agentic-systems.md), traces should also include loop steps
 
 Freeze anything that can otherwise move between runs:
 
-| moving part | freeze or record |
-|---|---|
-| Prompt text and system instructions | Versioned prompt artifact. |
-| Model identity and decoding settings | Model name, endpoint, temperature, top-p, max tokens, seed if supported. |
-| Retrieval corpus and chunking | Snapshot ID, chunker version, embedding model, index version. |
-| Tool behavior | Replay fixtures for offline tests; explicit sandbox for integration tests. |
-| User permissions and tenant state | Synthetic permission fixtures or fixed test accounts. |
-| Time | Fixed clock for date-sensitive answers. |
-| Grader rubric | Versioned deterministic code and judge prompt. |
+| moving part                          | freeze or record                                                           |
+| ------------------------------------ | -------------------------------------------------------------------------- |
+| Prompt text and system instructions  | Versioned prompt artifact.                                                 |
+| Model identity and decoding settings | Model name, endpoint, temperature, top-p, max tokens, seed if supported.   |
+| Retrieval corpus and chunking        | Snapshot ID, chunker version, embedding model, index version.              |
+| Tool behavior                        | Replay fixtures for offline tests; explicit sandbox for integration tests. |
+| User permissions and tenant state    | Synthetic permission fixtures or fixed test accounts.                      |
+| Time                                 | Fixed clock for date-sensitive answers.                                    |
+| Grader rubric                        | Versioned deterministic code and judge prompt.                             |
 
 This is the harness connection to [determinism and reproducibility](determinism-and-reproducibility.md). Generative systems may still have nondeterminism, but the harness should remove avoidable environmental drift.
 
@@ -169,14 +170,14 @@ Model judges should be calibrated against human-labelled examples and protected 
 
 A harness should report more than a single average. Useful slices include:
 
-| slice | examples |
-|---|---|
-| Answerability | answerable, unanswerable, ambiguous, stale-source cases. |
-| Retrieval difficulty | exact keyword, paraphrase, multi-hop, conflicting sources. |
-| Risk | low-risk FAQ, policy-sensitive, financial, safety, privacy. |
-| Tool behavior | no tool needed, read-only tool, side-effecting tool, tool unavailable. |
-| User context | permitted user, unauthorized user, missing profile, conflicting permissions. |
-| Prompt attack | benign, injected retrieved text, malicious user instruction. |
+| slice                | examples                                                                     |
+| -------------------- | ---------------------------------------------------------------------------- |
+| Answerability        | answerable, unanswerable, ambiguous, stale-source cases.                     |
+| Retrieval difficulty | exact keyword, paraphrase, multi-hop, conflicting sources.                   |
+| Risk                 | low-risk FAQ, policy-sensitive, financial, safety, privacy.                  |
+| Tool behavior        | no tool needed, read-only tool, side-effecting tool, tool unavailable.       |
+| User context         | permitted user, unauthorized user, missing profile, conflicting permissions. |
+| Prompt attack        | benign, injected retrieved text, malicious user instruction.                 |
 
 Slice reporting prevents a model upgrade from passing the mean while regressing on the exact cases that matter.
 
@@ -184,12 +185,12 @@ Slice reporting prevents a model upgrade from passing the mean while regressing 
 
 Not every harness belongs in every CI job:
 
-| cadence | harness type | goal |
-|---|---|---|
-| Pull request | Small deterministic smoke suite | Catch broken schemas, prompt syntax, and obvious regressions quickly. |
-| Nightly | Larger offline replay suite | Track quality, cost, and latency against frozen cases. |
-| Release candidate | Full benchmark plus adversarial slices | Decide whether to ship a model, prompt, retriever, or tool change. |
-| Production monitoring | Sampled live traces with privacy controls | Catch drift that offline fixtures miss. |
+| cadence               | harness type                              | goal                                                                  |
+| --------------------- | ----------------------------------------- | --------------------------------------------------------------------- |
+| Pull request          | Small deterministic smoke suite           | Catch broken schemas, prompt syntax, and obvious regressions quickly. |
+| Nightly               | Larger offline replay suite               | Track quality, cost, and latency against frozen cases.                |
+| Release candidate     | Full benchmark plus adversarial slices    | Decide whether to ship a model, prompt, retriever, or tool change.    |
+| Production monitoring | Sampled live traces with privacy controls | Catch drift that offline fixtures miss.                               |
 
 The same case can move through these layers. Start with a deterministic replay case, then promote important failures into release-gating slices.
 

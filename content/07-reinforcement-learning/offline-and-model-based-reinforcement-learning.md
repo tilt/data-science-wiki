@@ -27,6 +27,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # Offline and Model-Based Reinforcement Learning
 
 Online RL learns by trying actions in the environment. Many real systems cannot do that freely: a vehicle, medical workflow, recommender, or robot may have safety, cost, or user-impact constraints. Offline and model-based RL reduce direct exploration by learning from logged data, learned dynamics, simulators, or planning models.
@@ -41,12 +42,12 @@ $$
 
 collected by one or more behavior policies. The central risk is extrapolation: the learner may assign high value to actions that are rare or absent in the dataset because it has no reliable evidence about their consequences.
 
-| Problem | Why it appears | Typical control |
-| --- | --- | --- |
-| Out-of-distribution actions | learned policy chooses actions unlike the logged policy | constrain policy close to data support |
-| Value overestimation | bootstrapping amplifies uncertain high values | conservative value penalties or ensembles |
-| Confounding | logged actions came from a nonrandom policy | careful logging, counterfactual evaluation, domain knowledge |
-| Deployment shift | new policy changes the state distribution | staged rollout and monitoring |
+| Problem                     | Why it appears                                          | Typical control                                              |
+| --------------------------- | ------------------------------------------------------- | ------------------------------------------------------------ |
+| Out-of-distribution actions | learned policy chooses actions unlike the logged policy | constrain policy close to data support                       |
+| Value overestimation        | bootstrapping amplifies uncertain high values           | conservative value penalties or ensembles                    |
+| Confounding                 | logged actions came from a nonrandom policy             | careful logging, counterfactual evaluation, domain knowledge |
+| Deployment shift            | new policy changes the state distribution               | staged rollout and monitoring                                |
 
 ## Model-Based RL
 

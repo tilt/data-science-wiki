@@ -37,7 +37,6 @@ const areaNames = new Map([
   ["responsible-ai-safety-and-governance", "responsible AI"],
   ["domain-applications", "applied machine learning"],
   ["history-of-ai-and-machine-learning", "AI and ML history"],
-  ["interview-preparation", "interview preparation"],
   ["references-and-glossary", "reference material"],
 ])
 
@@ -69,7 +68,7 @@ const rules = [
   {
     re: /navigation|knowledge map|learning paths/i,
     summary:
-      "Navigation pages explain how to move through the wiki without treating the numbered taxonomy as the only possible order. They connect subject indexes, learning paths, interview prompts, experience maps, tags, and backlinks.",
+      "Navigation pages explain how to move through the wiki without treating the numbered taxonomy as the only possible order. They connect subject indexes, learning paths, technical answer patterns, experience maps, tags, and backlinks.",
     core: [
       "Use area indexes when learning a subject from first principles.",
       "Use learning paths when preparing for a concrete goal such as recommender systems, forecasting, or generative AI.",
@@ -79,9 +78,9 @@ const rules = [
       "To study recommender systems, start at the recommendation index, read collaborative filtering and matrix factorization, jump to linear algebra for SVD prerequisites, then return through evaluation and online experimentation.",
   },
   {
-    re: /answer patterns|knowledge gaps|interview preparation/i,
+    re: /answer patterns|knowledge gaps|focused review/i,
     summary:
-      "Interview-preparation pages turn wiki concepts into concise, defensible answers. They emphasize definitions, assumptions, trade-offs, examples, and failure modes rather than memorized one-liners.",
+      "Focused-review pages turn wiki concepts into concise, defensible technical explanations. They emphasize definitions, assumptions, trade-offs, examples, and failure modes rather than memorized one-liners.",
     core: [
       "Start with a direct answer before adding nuance.",
       "Name the modelling assumption or system boundary that makes the answer true.",
@@ -105,7 +104,7 @@ const rules = [
   {
     re: /experience|background/i,
     summary:
-      "Experience-map pages connect professional project themes to canonical wiki concepts without exposing confidential employer, client, or system details. They are useful for interview preparation because they turn broad experience into reusable evidence.",
+      "Experience-map pages connect professional project themes to canonical wiki concepts without exposing confidential employer, client, or system details. They turn broad experience into reusable evidence without making the wiki depend on a single person's CV.",
     core: [
       "Map each experience theme to public, general concepts rather than private implementation details.",
       "Separate evidence, decisions, trade-offs, failure modes, and measurable outcomes.",

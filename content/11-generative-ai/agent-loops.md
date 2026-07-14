@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Agent Loops
 
 An agent loop repeatedly observes state, chooses an action, receives an observation, and decides whether to continue. It is the runtime skeleton under [agentic systems](agentic-systems.md), combining [planning](planning.md), [tool use](tool-use-and-function-calling.md), stopping rules, and sometimes [memory](memory.md).
@@ -52,7 +53,7 @@ The application owns the loop invariants: maximum steps, available tools, retry 
   "max_steps": 6,
   "allowed_tools": ["search_docs", "create_ticket"],
   "stop_on": ["final_answer", "blocked", "policy_violation"],
-  "retry": {"tool_timeout": 1, "invalid_schema": 0},
+  "retry": { "tool_timeout": 1, "invalid_schema": 0 },
   "requires_confirmation": ["send_email", "issue_refund"],
   "trace_fields": ["step", "state_hash", "tool_call", "observation_hash", "decision"]
 }

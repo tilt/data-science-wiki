@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Managed Storage
 
 Managed storage is selected by access pattern: object storage for immutable blobs and datasets, block storage for attached disks, file storage for POSIX-like shared paths, warehouses for analytical tables, databases for serving state, and caches for repeated low-latency reads. The wrong abstraction creates both performance and [cost management](cost-management.md) problems.

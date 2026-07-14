@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # MRI Segmentation
 
 MRI segmentation assigns labels to voxels or pixels for anatomy, lesions, tumor regions, edema, or organs. It is a volumetric specialization of [semantic segmentation](semantic-segmentation.md), and it often supplies measurements for [medical image analysis](medical-image-analysis.md) rather than just pictures.

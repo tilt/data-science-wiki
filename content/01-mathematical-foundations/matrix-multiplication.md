@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Matrix Multiplication
 
 Matrix multiplication is the operation that lets one linear map follow another. In data science it also computes many dot products at once: scores, projections, attention logits, and neural-network layer outputs are all variations on $XW$.

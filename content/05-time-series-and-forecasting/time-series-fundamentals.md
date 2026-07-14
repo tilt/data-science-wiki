@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Time Series Fundamentals
 
 A time series is a sequence of observations indexed by time. Forecasting differs from ordinary supervised prediction because order is part of the data-generating process: nearby observations can be dependent, seasonal positions can repeat, and future information is unavailable when the forecast is made.

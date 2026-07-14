@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Optimization
 
 Optimization is the task of choosing variables that make an objective small or large. In machine learning the variables are often parameters, the objective is a loss plus regularization, and the algorithm may be a deterministic solver, [gradient descent](gradient-descent.md), or a stochastic optimizer.

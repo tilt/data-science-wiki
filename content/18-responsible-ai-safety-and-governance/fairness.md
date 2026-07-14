@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Fairness
 
 Fairness asks whether an AI system creates unjustified differences in benefits, burdens, or errors across affected groups. In model work it is measured with explicit group metrics; in governance it is tied to [compliance](compliance.md), appeal routes, and [human oversight](human-oversight.md) because a metric gap alone does not decide what outcome is justified.

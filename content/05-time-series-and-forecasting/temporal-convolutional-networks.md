@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Temporal Convolutional Networks
 
 Temporal convolutional networks forecast with one-dimensional convolutions that respect time order. A causal convolution computes each hidden value from the current and previous inputs only, never future inputs. Dilated convolutions skip positions so the receptive field grows quickly without very deep recurrence.

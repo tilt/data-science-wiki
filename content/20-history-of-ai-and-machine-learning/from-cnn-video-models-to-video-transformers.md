@@ -21,18 +21,19 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # From CNN Video Models to Video Transformers
 
 Video understanding had to solve a problem image classification could avoid: actions are defined by change over time. The field moved from hand-engineered motion and [optical flow](../10-video-understanding/optical-flow.md), to CNNs over frames and clips, to attention over space-time tokens.
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 2014 | Simonyan and Zisserman introduced two-stream convolutional networks for action recognition. | A spatial stream captured appearance while a temporal stream used optical flow, matching the fact that actions need both objects and motion. |
+| Year      | Milestone                                                                                                  | Why it followed                                                                                                                                                                   |
+| --------- | ---------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2014      | Simonyan and Zisserman introduced two-stream convolutional networks for action recognition.                | A spatial stream captured appearance while a temporal stream used optical flow, matching the fact that actions need both objects and motion.                                      |
 | 2014/2015 | Tran, Bourdev, Fergus, Torresani, and Paluri introduced C3D, a 3D convolutional feature learner for video. | Instead of computing motion separately, [3D convolutional networks](../10-video-understanding/3d-convolutional-networks.md) learned local space-time filters directly from clips. |
-| 2021 | Bertasius, Wang, and Torresani introduced TimeSformer, a convolution-free video transformer. | After image and language transformers scaled, video researchers tested whether divided spatial and temporal attention could model longer clips. |
-| 2021 | Liu and coauthors introduced Video Swin Transformer. | Global space-time attention was expensive, so shifted local windows reintroduced locality for a better speed-accuracy trade-off. |
+| 2021      | Bertasius, Wang, and Torresani introduced TimeSformer, a convolution-free video transformer.               | After image and language transformers scaled, video researchers tested whether divided spatial and temporal attention could model longer clips.                                   |
+| 2021      | Liu and coauthors introduced Video Swin Transformer.                                                       | Global space-time attention was expensive, so shifted local windows reintroduced locality for a better speed-accuracy trade-off.                                                  |
 
 ## Historical mechanism
 

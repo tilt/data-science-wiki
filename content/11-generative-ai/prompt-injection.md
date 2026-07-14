@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Prompt Injection
 
 Prompt injection happens when untrusted text tries to control the model or surrounding tools. It is common in [RAG](rag.md), where retrieved documents enter [context construction](context-construction.md), and in [tool use](tool-use-and-function-calling.md), where malicious text may try to trigger actions or reveal hidden data.

@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Instruction Tuning
 
 Instruction tuning trains a pretrained model on instruction-response pairs so it follows natural-language tasks more reliably. It sits between [pretraining](pretraining.md) and [alignment](alignment.md), and can reduce prompt burden for [structured output](structured-output.md) or domain-specific workflows.
@@ -32,17 +33,28 @@ Given demonstrations $(x,y)$, supervised instruction tuning minimizes token cros
 
 The training row needs to specify more than the target text. It should make the task, input evidence, response format, and refusal boundary explicit enough that the model learns a reusable behavior instead of memorizing a surface phrase.
 
-| Component | Role in the example |
-| --- | --- |
-| User instruction | Describes the extraction task in natural language. |
-| Source text | Supplies the value `12.40 EUR` that the answer must preserve. |
-| Target response | Encodes the expected machine-readable fields and numeric type. |
-| Held-out checks | Test the same behavior on unseen merchants, currencies, missing values, and malformed receipts. |
+| Component        | Role in the example                                                                             |
+| ---------------- | ----------------------------------------------------------------------------------------------- |
+| User instruction | Describes the extraction task in natural language.                                              |
+| Source text      | Supplies the value `12.40 EUR` that the answer must preserve.                                   |
+| Target response  | Encodes the expected machine-readable fields and numeric type.                                  |
+| Held-out checks  | Test the same behavior on unseen merchants, currencies, missing values, and malformed receipts. |
 
 ## Concrete artifact
 
 ```jsonl
-{"messages":[{"role":"user","content":"Extract total and currency: Paid 12.40 EUR"}],"response":{"total":12.4,"currency":"EUR"}}
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Extract total and currency: Paid 12.40 EUR"
+    }
+  ],
+  "response": {
+    "total": 12.4,
+    "currency": "EUR"
+  }
+}
 ```
 
 This row teaches the model to map evidence into a JSON-like structure. It should not be used to store fast-changing policy facts that belong in [RAG](rag.md): a new refund limit should live in retrieved context, while a durable extraction format can live in instruction-tuning data.

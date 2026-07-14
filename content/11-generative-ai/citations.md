@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Citations
 
 Citations are evidence pointers, not decorations. A cited source must support the specific claim made by the answer. They are strongest when [grounding](grounding.md), [context construction](context-construction.md), and [RAG evaluation](rag-evaluation.md) all operate on stable passage IDs.
@@ -30,12 +31,12 @@ A citation contract can require each factual claim to carry `{claim, source_id, 
 
 ## Worked support check
 
-| Generated claim | Cited passage | Verdict | Reason |
-| --- | --- | --- | --- |
-| Manager approval is required above 500 EUR. | Manager approval is required above 500 EUR. | Supported | The threshold, actor, and requirement match. |
-| Standard shipping is two days. | Standard shipping is five days. | Contradicted | The citation is about the right topic but gives a different duration. |
-| Premium members always receive refunds. | Premium members may request refund review. | Not supported | The claim is stronger than the passage. |
-| The policy changed in 2026. | No retrieved span mentions a policy-change date. | Missing evidence | A citation cannot support a fact that is absent from the retrieved text. |
+| Generated claim                             | Cited passage                                    | Verdict          | Reason                                                                   |
+| ------------------------------------------- | ------------------------------------------------ | ---------------- | ------------------------------------------------------------------------ |
+| Manager approval is required above 500 EUR. | Manager approval is required above 500 EUR.      | Supported        | The threshold, actor, and requirement match.                             |
+| Standard shipping is two days.              | Standard shipping is five days.                  | Contradicted     | The citation is about the right topic but gives a different duration.    |
+| Premium members always receive refunds.     | Premium members may request refund review.       | Not supported    | The claim is stronger than the passage.                                  |
+| The policy changed in 2026.                 | No retrieved span mentions a policy-change date. | Missing evidence | A citation cannot support a fact that is absent from the retrieved text. |
 
 Lexical overlap would score the shipping example highly because both strings share "standard shipping" and "days." Citation support is stricter: the cited span must entail the generated claim at the right granularity.
 

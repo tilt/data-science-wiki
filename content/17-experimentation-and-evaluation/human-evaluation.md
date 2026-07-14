@@ -23,6 +23,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Human Evaluation
 
 Human evaluation uses trained reviewers when the target behavior is open-ended, subjective, safety-sensitive, or not fully captured by automatic labels. It is central for summaries, support answers, refusal quality, and severity labels in [risk-weighted error taxonomies](risk-weighted-error-taxonomies.md). It also provides the audit sample for [LLM-as-judge](llm-as-judge.md).
@@ -47,12 +48,12 @@ The rubric should define observable criteria, examples, tie-breaking rules, and 
 
 Two reviewers label twelve examples as pass or fail:
 
-| result | count |
-| --- | ---: |
-| both pass | 6 |
-| both fail | 3 |
-| reviewer 1 pass, reviewer 2 fail | 2 |
-| reviewer 1 fail, reviewer 2 pass | 1 |
+| result                           | count |
+| -------------------------------- | ----: |
+| both pass                        |     6 |
+| both fail                        |     3 |
+| reviewer 1 pass, reviewer 2 fail |     2 |
+| reviewer 1 fail, reviewer 2 pass |     1 |
 
 Raw agreement is $(6+3)/12=0.750$. The label margins imply substantial chance agreement, so Cohen's kappa drops to 0.500. The three disagreement cases should be reviewed against the rubric before treating the labels as a stable [golden dataset](golden-datasets.md).
 

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # ARMA
 
 An ARMA model describes a stationary time series using two sources of short-memory dependence: previous values of the series and previous innovations. It is the stationary core inside [ARIMA](arima.md), but without differencing. If a level, trend, or seasonal pattern remains, the series is not ready for ARMA; first revisit [stationarity](stationarity.md), decomposition, or a seasonal model.

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # User-Based Collaborative Filtering
 
 User-based collaborative filtering finds users whose rows in the [utility matrix](utility-and-interaction-matrices.md) resemble the target user's row, then recommends what those neighbors liked. It is the most literal form of [collaborative filtering](collaborative-filtering.md): "people with histories like yours also liked this."
@@ -38,12 +39,12 @@ For binary interactions, the numerator is often just a weighted sum of neighbor 
 
 For target user U0 with ratings $(5,4,0,0)$, cosine similarity compares U0's rating vector with each other user's vector:
 
-| User | Ratings | Similarity to U0 | Contribution to unseen items |
-| --- | --- | ---: | --- |
-| U0 | $(5,4,0,0)$ | 1.000 | Target user; already-seen items are filtered. |
-| U1 | $(4,5,1,0)$ | 0.964 | Strong neighbor; contributes to item 2. |
-| U2 | $(0,1,5,4)$ | 0.096 | Weak neighbor; contributes little. |
-| U3 | $(0,0,4,5)$ | 0.000 | No overlap with U0's rated items. |
+| User | Ratings     | Similarity to U0 | Contribution to unseen items                  |
+| ---- | ----------- | ---------------: | --------------------------------------------- |
+| U0   | $(5,4,0,0)$ |            1.000 | Target user; already-seen items are filtered. |
+| U1   | $(4,5,1,0)$ |            0.964 | Strong neighbor; contributes to item 2.       |
+| U2   | $(0,1,5,4)$ |            0.096 | Weak neighbor; contributes little.            |
+| U3   | $(0,0,4,5)$ |            0.000 | No overlap with U0's rated items.             |
 
 After filtering items 0 and 1, item 2 receives the strongest neighbor-weighted support because the nearest user rated it. [Matrix factorization](matrix-factorization.md) can be viewed as replacing this local neighbor lookup with a global low-rank model.
 

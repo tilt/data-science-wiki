@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Topic Classification
 
 Topic classification is [text classification](text-classification.md) where labels name subject matter: finance, cooking, machine learning, policy, support area, or product line. It is usually less time-sensitive than [urgency classification](urgency-classification.md), but it is more exposed to vocabulary drift because topics are often recognized by words, names, and phrases.

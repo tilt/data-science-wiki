@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # JavaScript Application Architecture
 
 JavaScript application architecture separates rendering, state, domain logic, network clients, and side effects so product behavior can evolve without turning every component into a special case. For AI products, this boundary has to handle streaming tokens, cancellation, citation state, partial failure, telemetry, and retry decisions from [web backends](web-backends.md).
@@ -33,26 +34,28 @@ A practical layout is: UI components render state and emit events; a state store
 
 ```javascript
 class ChatStore {
-  constructor() { this.state = {status: "idle", tokens: []}; }
+  constructor() {
+    this.state = { status: "idle", tokens: [] }
+  }
   start(requestId) {
-    this.controller = new AbortController();
-    this.state = {status: "pending", requestId, tokens: []};
+    this.controller = new AbortController()
+    this.state = { status: "pending", requestId, tokens: [] }
   }
   receive(token) {
-    this.state = {...this.state, status: "receiving", tokens: [...this.state.tokens, token]};
+    this.state = { ...this.state, status: "receiving", tokens: [...this.state.tokens, token] }
   }
   cancel() {
-    this.controller.abort();
-    this.state = {...this.state, status: "cancelled"};
+    this.controller.abort()
+    this.state = { ...this.state, status: "cancelled" }
   }
 }
 
-const store = new ChatStore();
-store.start("req-7");
-store.receive("hello");
-store.cancel();
-console.log(store.state);
-console.log("aborted", store.controller.signal.aborted);
+const store = new ChatStore()
+store.start("req-7")
+store.receive("hello")
+store.cancel()
+console.log(store.state)
+console.log("aborted", store.controller.signal.aborted)
 ```
 
 Observed `node -e` output:

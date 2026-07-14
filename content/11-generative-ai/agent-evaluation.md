@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Agent Evaluation
 
 Agent evaluation measures the whole control loop, not just a final answer. A useful suite checks whether [agent loops](agent-loops.md) call the right tools, obey [guardrails](guardrails.md), preserve evidence from [RAG evaluation](rag-evaluation.md), and stop within budget.
@@ -36,11 +37,11 @@ $$
 
 ## Worked trace check
 
-| Trace event | Succeeded? | Required? | Forbidden? |
-| --- | --- | --- | --- |
-| `search_docs` | yes | yes | no |
-| `refund_payment` | no | no | yes |
-| `final_answer` | yes | yes | no |
+| Trace event      | Succeeded? | Required? | Forbidden? |
+| ---------------- | ---------- | --------- | ---------- |
+| `search_docs`    | yes        | yes       | no         |
+| `refund_payment` | no         | no        | yes        |
+| `final_answer`   | yes        | yes       | no         |
 
 The required successful events are present: `search_docs` and `final_answer`. The trace still fails because a forbidden `refund_payment` action appeared at all, even though it did not succeed. That is the kind of failure final-answer grading misses.
 

@@ -30,6 +30,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-10
 ---
+
 # Recommendation Systems and Personalization
 
 ## Summary
@@ -40,13 +41,13 @@ This section connects [linear algebra](../01-mathematical-foundations/linear-alg
 
 ## System Map
 
-| Problem | Start with | Why it matters |
-| --- | --- | --- |
-| Represent interactions | [Utility and Interaction Matrices](utility-and-interaction-matrices.md), [Explicit Versus Implicit Feedback](explicit-versus-implicit-feedback.md) | defines what the model treats as preference |
-| Collaborative signal | [Collaborative Filtering](collaborative-filtering.md), [User Based Collaborative Filtering](user-based-collaborative-filtering.md), [Item Based Collaborative Filtering](item-based-collaborative-filtering.md) | uses patterns across users and items |
-| Latent factors | [Matrix Factorization](matrix-factorization.md), [Funk SVD](funk-svd.md), [Weighted Matrix Factorization](weighted-matrix-factorization.md) | handles sparse interaction data |
-| Retrieval and ranking | [Candidate Generation](candidate-generation.md), [Ranking](ranking.md), [Retrieval and Ranking Architectures](retrieval-and-ranking-architectures.md) | separates recall from final ordering |
-| Online behavior | [Feedback Loops](feedback-loops.md), [Bandit Algorithms](bandit-algorithms.md), [Exploration Versus Exploitation](exploration-versus-exploitation.md) | controls learning under changing exposure |
+| Problem                | Start with                                                                                                                                                                                                      | Why it matters                              |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| Represent interactions | [Utility and Interaction Matrices](utility-and-interaction-matrices.md), [Explicit Versus Implicit Feedback](explicit-versus-implicit-feedback.md)                                                              | defines what the model treats as preference |
+| Collaborative signal   | [Collaborative Filtering](collaborative-filtering.md), [User Based Collaborative Filtering](user-based-collaborative-filtering.md), [Item Based Collaborative Filtering](item-based-collaborative-filtering.md) | uses patterns across users and items        |
+| Latent factors         | [Matrix Factorization](matrix-factorization.md), [Funk SVD](funk-svd.md), [Weighted Matrix Factorization](weighted-matrix-factorization.md)                                                                     | handles sparse interaction data             |
+| Retrieval and ranking  | [Candidate Generation](candidate-generation.md), [Ranking](ranking.md), [Retrieval and Ranking Architectures](retrieval-and-ranking-architectures.md)                                                           | separates recall from final ordering        |
+| Online behavior        | [Feedback Loops](feedback-loops.md), [Bandit Algorithms](bandit-algorithms.md), [Exploration Versus Exploitation](exploration-versus-exploitation.md)                                                           | controls learning under changing exposure   |
 
 ## Subtopics
 

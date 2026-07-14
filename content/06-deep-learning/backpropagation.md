@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Backpropagation
 
 Backpropagation is reverse-mode automatic differentiation applied to a network's computational graph. A forward pass records intermediate values; the backward pass reuses them to push an error signal from the [loss function](loss-functions.md) through parameters, nonlinear [activation functions](activation-functions.md), and earlier layers. It supplies gradients; [optimizers](optimizers.md) decide how parameters move.

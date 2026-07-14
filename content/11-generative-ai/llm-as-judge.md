@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # LLM-as-Judge
 
 LLM-as-judge uses a model to grade outputs for qualities such as helpfulness, citation support, rubric fit, safety compliance, or task completion. It can accelerate [agent evaluation](agent-evaluation.md) and [rag evaluation](rag-evaluation.md), but it is still a model call that needs calibration against human labels.

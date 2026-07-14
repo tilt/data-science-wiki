@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Tool Schemas
 
 Tool schemas define the callable surface exposed to a model: tool name, description, argument object, required fields, allowed values, and sometimes side-effect warnings. They sit between model reasoning and application code. A model may propose a call, but the application owns validation, authorization, execution, and result handling.
@@ -37,9 +38,9 @@ A useful schema does two jobs. First, it gives the model enough semantic guidanc
   "parameters": {
     "type": "object",
     "properties": {
-      "query": {"type": "string", "minLength": 3},
-      "policy_version": {"type": "string", "pattern": "^20[0-9]{2}-[0-9]{2}$"},
-      "top_k": {"type": "integer", "minimum": 1, "maximum": 10}
+      "query": { "type": "string", "minLength": 3 },
+      "policy_version": { "type": "string", "pattern": "^20[0-9]{2}-[0-9]{2}$" },
+      "top_k": { "type": "integer", "minimum": 1, "maximum": 10 }
     },
     "required": ["query", "policy_version"],
     "additionalProperties": false

@@ -30,6 +30,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-10
 ---
+
 # Natural Language Processing
 
 ## Summary
@@ -40,13 +41,13 @@ The practical distinction is output shape. Text classification predicts document
 
 ## Task Map
 
-| Output needed | Start with | Typical evaluation concern |
-| --- | --- | --- |
-| Clean text representation | [Text Preprocessing](text-preprocessing.md), [Tokenization](tokenization.md), [Embeddings](embeddings.md) | normalization and vocabulary choices |
-| Document or message labels | [Text Classification](text-classification.md), [Topic Classification](topic-classification.md), [Urgency Classification](urgency-classification.md) | class imbalance and thresholding |
-| Entities and spans | [Named Entity Recognition](named-entity-recognition.md), [Sequence Labelling](sequence-labelling.md) | span boundaries and partial matches |
-| Matching and retrieval features | [Semantic Textual Similarity](semantic-textual-similarity.md), [Entity Linking and Matching](entity-linking-and-matching.md) | hard negatives and ambiguity |
-| Structured documents | [OCR and Handwritten Text Recognition](ocr-and-handwritten-text-recognition.md), [Document Understanding](document-understanding.md) | layout errors and extraction confidence |
+| Output needed                   | Start with                                                                                                                                          | Typical evaluation concern              |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Clean text representation       | [Text Preprocessing](text-preprocessing.md), [Tokenization](tokenization.md), [Embeddings](embeddings.md)                                           | normalization and vocabulary choices    |
+| Document or message labels      | [Text Classification](text-classification.md), [Topic Classification](topic-classification.md), [Urgency Classification](urgency-classification.md) | class imbalance and thresholding        |
+| Entities and spans              | [Named Entity Recognition](named-entity-recognition.md), [Sequence Labelling](sequence-labelling.md)                                                | span boundaries and partial matches     |
+| Matching and retrieval features | [Semantic Textual Similarity](semantic-textual-similarity.md), [Entity Linking and Matching](entity-linking-and-matching.md)                        | hard negatives and ambiguity            |
+| Structured documents            | [OCR and Handwritten Text Recognition](ocr-and-handwritten-text-recognition.md), [Document Understanding](document-understanding.md)                | layout errors and extraction confidence |
 
 ## Subtopics
 

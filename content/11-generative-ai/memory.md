@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Memory
 
 Memory is persisted state used beyond the current prompt. It can be explicit profile fields, conversation summaries, vector-retrieved notes, task state, or tool results inside [agentic systems](agentic-systems.md). It differs from ordinary [context construction](context-construction.md) because it survives the request that created it.

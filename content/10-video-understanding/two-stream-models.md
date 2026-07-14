@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Two-Stream Models
 
 Two-stream video models split recognition into an appearance stream and a motion stream. The appearance stream usually consumes RGB frames; the motion stream consumes [optical flow](optical-flow.md) or stacked frame differences. This design made action recognition practical before end-to-end [3D convolutional networks](3d-convolutional-networks.md) and [video transformers](video-transformers.md) became common.
@@ -42,11 +43,11 @@ $$
 z=0.45(1.2,0.1,-0.4)+0.55(0.0,1.4,-0.2)=(0.54,0.815,-0.29).
 $$
 
-| stream | class 0 probability | class 1 probability | class 2 probability | predicted class |
-|---|---:|---:|---:|---:|
-| RGB only | 0.652 | 0.217 | 0.132 | 0 |
-| flow only | 0.170 | 0.690 | 0.139 | 1 |
-| fused | 0.363 | 0.478 | 0.158 | 1 |
+| stream    | class 0 probability | class 1 probability | class 2 probability | predicted class |
+| --------- | ------------------: | ------------------: | ------------------: | --------------: |
+| RGB only  |               0.652 |               0.217 |               0.132 |               0 |
+| flow only |               0.170 |               0.690 |               0.139 |               1 |
+| fused     |               0.363 |               0.478 |               0.158 |               1 |
 
 The fused prediction is class 1 because the motion evidence is strong and slightly upweighted. The table is also the failure mode: if optical flow is noisy, late fusion can confidently move the prediction away from the RGB evidence.
 

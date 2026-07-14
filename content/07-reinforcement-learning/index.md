@@ -28,6 +28,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # Reinforcement Learning
 
 Reinforcement learning studies agents that choose actions, observe consequences, and improve a policy from reward feedback. Unlike supervised learning, the training signal is delayed and action-dependent: the data distribution changes when the policy changes.

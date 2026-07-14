@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Self Supervised Visual Learning
 
 Self-supervised visual learning trains an encoder from images without manual task labels. It is usually used to produce transferable [feature extraction](feature-extraction.md) backbones for [image classification](image-classification.md), [content-based image retrieval](content-based-image-retrieval.md), segmentation, detection, and low-label domains such as [medical image analysis](medical-image-analysis.md).
@@ -56,14 +57,14 @@ The difference matters. Contrastive learning defines invariances through augment
 
 ## Method Families
 
-| family | representative idea | what it is good for | main risk |
-|---|---|---|---|
-| Contrastive learning | Pull augmented views together and push other images apart. | Retrieval, nearest-neighbor search, general image embeddings. | Augmentation shortcuts and dependence on negative-pair construction. |
-| Non-contrastive self-distillation | Predict a stop-gradient or momentum target representation from another view. | Strong backbones without explicit negatives. | Collapse unless the architecture and normalization prevent trivial constant embeddings. |
-| Masked autoencoding | Hide image patches and reconstruct pixels or patch targets. | Scalable [vision transformers](vision-transformers.md) and low-label transfer. | Reconstruction may overemphasize texture if the task is too local. |
-| Self-supervised ViT features | Use self-distillation or masking with transformer patch tokens. | Dense object-like features, segmentation transfer, k-nearest-neighbor classification. | Patch size, crop policy, and dataset bias strongly shape the representation. |
-| Vision-language contrastive pretraining | Match image embeddings to paired text embeddings. | Zero-shot classification, image-text retrieval, promptable visual concepts. | Noisy captions and web data bias can become model behavior. |
-| JEPA-style latent prediction | Predict target-region representations from context regions. | Semantic image features without pixel reconstruction or hand-crafted negative pairs. | The target feature space and masking strategy define what can be learned. |
+| family                                  | representative idea                                                          | what it is good for                                                                   | main risk                                                                               |
+| --------------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| Contrastive learning                    | Pull augmented views together and push other images apart.                   | Retrieval, nearest-neighbor search, general image embeddings.                         | Augmentation shortcuts and dependence on negative-pair construction.                    |
+| Non-contrastive self-distillation       | Predict a stop-gradient or momentum target representation from another view. | Strong backbones without explicit negatives.                                          | Collapse unless the architecture and normalization prevent trivial constant embeddings. |
+| Masked autoencoding                     | Hide image patches and reconstruct pixels or patch targets.                  | Scalable [vision transformers](vision-transformers.md) and low-label transfer.        | Reconstruction may overemphasize texture if the task is too local.                      |
+| Self-supervised ViT features            | Use self-distillation or masking with transformer patch tokens.              | Dense object-like features, segmentation transfer, k-nearest-neighbor classification. | Patch size, crop policy, and dataset bias strongly shape the representation.            |
+| Vision-language contrastive pretraining | Match image embeddings to paired text embeddings.                            | Zero-shot classification, image-text retrieval, promptable visual concepts.           | Noisy captions and web data bias can become model behavior.                             |
+| JEPA-style latent prediction            | Predict target-region representations from context regions.                  | Semantic image features without pixel reconstruction or hand-crafted negative pairs.  | The target feature space and masking strategy define what can be learned.               |
 
 Use self-supervised pretraining when labels are scarce, categories change, or downstream tasks share visual structure. Use supervised pretraining when the target label space is stable and labeled data is abundant. In practice, many visual foundation models mix these ideas with weak labels, captions, filtering, or synthetic data.
 

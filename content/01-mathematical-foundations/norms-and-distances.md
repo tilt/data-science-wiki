@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Norms and Distances
 
 A norm measures the size of a vector or matrix; a distance measures separation between two objects. These choices decide what "near", "small error", and "best approximation" mean in optimization, [clustering](../03-classical-machine-learning/clustering.md), and [low-rank approximation](low-rank-approximation.md).

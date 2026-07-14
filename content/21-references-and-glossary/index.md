@@ -1,6 +1,6 @@
 ---
 title: References and Glossary
-slug: 22-references-and-glossary
+slug: 21-references-and-glossary
 description: Index and learning map for References and Glossary.
 area: references-and-glossary
 topics:

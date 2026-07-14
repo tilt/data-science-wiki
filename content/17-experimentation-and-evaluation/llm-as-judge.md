@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # LLM-as-Judge
 
 LLM-as-judge evaluation uses a model to score, classify, critique, or compare outputs from another system. It can scale qualitative review for [RAG evaluation](../11-generative-ai/rag-evaluation.md), but it is not ground truth. The judge prompt, candidate order, rubric, model version, and sampling settings are part of the evaluation artifact.
@@ -42,12 +43,12 @@ This audit should sit next to [human evaluation](human-evaluation.md), not repla
 
 On a twelve-example audit, the human and judge labels compare as follows:
 
-| audit statistic | value |
-| --- | ---: |
-| exact agreements | 10 of 12 |
-| raw agreement | 0.833 |
-| Cohen's kappa | 0.733 |
-| judge A-share after removing ties | 0.500 |
+| audit statistic                   |    value |
+| --------------------------------- | -------: |
+| exact agreements                  | 10 of 12 |
+| raw agreement                     |    0.833 |
+| Cohen's kappa                     |    0.733 |
+| judge A-share after removing ties |    0.500 |
 
 The judge agrees with the human labels on 10 of 12 examples and shows no A-side preference in this small audit. That is promising, but too small for a production claim; use [repeated sampling](repeated-sampling.md) and slice audits before trusting automated scores.
 

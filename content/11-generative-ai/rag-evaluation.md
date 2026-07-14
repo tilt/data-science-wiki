@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # RAG Evaluation
 
 RAG evaluation separates retrieval quality from generation quality. A good final answer can hide weak retrieval, and a bad answer can occur despite perfect retrieved evidence. Evaluate [retrieval pipelines](retrieval-pipelines.md), [grounding](grounding.md), [citations](citations.md), and abstention separately.
@@ -29,15 +30,15 @@ RAG evaluation separates retrieval quality from generation quality. A good final
 
 Useful retrieval metrics include context recall, precision@k, [nDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md), and filter correctness. Useful generation metrics include answer support, citation precision, citation coverage, abstention quality, and task success. [LLM-as-judge](llm-as-judge.md) can grade semantic support, but source IDs, retrieved chunk membership, and citation presence should be deterministic checks.
 
-| Metric | Definition |
-| ------ | ---------- |
-| Context recall | Fraction of labelled evidence sources or chunks recovered into the retrieval context. |
+| Metric             | Definition                                                                                              |
+| ------------------ | ------------------------------------------------------------------------------------------------------- |
+| Context recall     | Fraction of labelled evidence sources or chunks recovered into the retrieval context.                   |
 | Citation precision | Fraction of cited sources that actually support the cited claim or belong to the expected evidence set. |
-| Citation coverage | Fraction of answer claims or required facts that carry a citation. |
-| Answer support | Whether generated claims are entailed by, or at least directly backed by, retrieved evidence. |
-| Claim support rate | Fraction of checked claims that are supported by the retrieved evidence. |
-| Abstention quality | Whether the system refuses answerless or unsafe cases while still answering supported cases. |
-| Task success | Whether the final answer satisfies the benchmark's task-specific acceptance criteria. |
+| Citation coverage  | Fraction of answer claims or required facts that carry a citation.                                      |
+| Answer support     | Whether generated claims are entailed by, or at least directly backed by, retrieved evidence.           |
+| Claim support rate | Fraction of checked claims that are supported by the retrieved evidence.                                |
+| Abstention quality | Whether the system refuses answerless or unsafe cases while still answering supported cases.            |
+| Task success       | Whether the final answer satisfies the benchmark's task-specific acceptance criteria.                   |
 
 With expected evidence $E$, retrieved context $C$, cited claims $Q_c$, and all checked claims $Q$, common deterministic summaries are:
 
@@ -59,11 +60,11 @@ The evaluation set should include answerable questions, unanswerable questions, 
 
 Suppose the gold evidence set is `{leave-eligibility, manager-approval}`. The retriever returns `leave-eligibility`, `parking`, and `manager-approval`, and the answer cites only `leave-eligibility`.
 
-| Check | Calculation | Result |
-| --- | --- | ---: |
-| Context recall | $2/2$ gold chunks retrieved | 1.0 |
-| Citation precision | $1/1$ cited sources are gold evidence | 1.0 |
-| Claim support rate | $2/3$ answer claims supported | 0.667 |
+| Check              | Calculation                           | Result |
+| ------------------ | ------------------------------------- | -----: |
+| Context recall     | $2/2$ gold chunks retrieved           |    1.0 |
+| Citation precision | $1/1$ cited sources are gold evidence |    1.0 |
+| Claim support rate | $2/3$ answer claims supported         |  0.667 |
 
 The retriever found both gold chunks and the citation points to a gold source, but only two of three answer claims were supported.
 

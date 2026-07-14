@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Recommendation System Overview
 
 A recommendation system chooses items for users from a catalog under sparse feedback, changing inventory, eligibility rules, and product objectives. The usual production shape is a pipeline: log interactions, build features, retrieve candidates, rank them, apply constraints, expose results, and evaluate the consequences.
@@ -39,10 +40,10 @@ where $C_u$ is a small candidate set drawn from the full item catalog $\mathcal 
 A tiny log with three users and four items becomes this implicit-feedback matrix:
 
 | User | Item 0 | Item 1 | Item 2 | Item 3 |
-| ---: | ---: | ---: | ---: | ---: |
-| 0 | 1 | 1 | 0 | 0 |
-| 1 | 0 | 0 | 1 | 0 |
-| 2 | 0 | 1 | 0 | 1 |
+| ---: | -----: | -----: | -----: | -----: |
+|    0 |      1 |      1 |      0 |      0 |
+|    1 |      0 |      0 |      1 |      0 |
+|    2 |      0 |      1 |      0 |      1 |
 
 The item popularity vector is $[1,2,1,1]$. User 0 has already seen items 0 and 1, so the popularity fallback can only recommend unseen items 2 and 3; they tie at popularity 1. This toy pipeline builds a [utility matrix](utility-and-interaction-matrices.md), removes seen items, and returns popularity candidates. Real systems add [collaborative filtering](collaborative-filtering.md), content, diversity, and online logging.
 

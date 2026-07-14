@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Person Tracking and Track Aggregation
 
 Person tracking links detections of the same person across frames. Track aggregation then turns frame-level detections, poses, logits, or embeddings into person-level evidence. This is essential when [gesture recognition](gesture-recognition.md) or [temporal action recognition](temporal-action-recognition.md) must answer "which person did it?" rather than only "did it happen?"

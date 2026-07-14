@@ -23,6 +23,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Real-Time Action Recognition
 
 Real-time action recognition classifies or detects actions in a live video stream before the full event is necessarily complete. Inputs include recent frames, optical flow or learned video features, tracked people or objects, timestamps, and device constraints. Targets can be current action class, event onset, event end, or an alert. The decision may be safety monitoring, sports tagging, assistive interaction, or industrial workflow detection.
@@ -38,15 +39,15 @@ UCF101 is a classic public action-recognition benchmark: the paper describes 101
 This toy stream smooths ten frame-level action probabilities with a three-frame window and triggers above 0.55:
 
 | frame window | mean probability |
-| --- | ---: |
-| 0-2 | 0.083 |
-| 1-3 | 0.170 |
-| 2-4 | 0.327 |
-| 3-5 | 0.527 |
-| 4-6 | 0.680 |
-| 5-7 | 0.703 |
-| 6-8 | 0.597 |
-| 7-9 | 0.400 |
+| ------------ | ---------------: |
+| 0-2          |            0.083 |
+| 1-3          |            0.170 |
+| 2-4          |            0.327 |
+| 3-5          |            0.527 |
+| 4-6          |            0.680 |
+| 5-7          |            0.703 |
+| 6-8          |            0.597 |
+| 7-9          |            0.400 |
 
 The first window above 0.55 is frames 4-6, so the trigger is emitted at frame 6. If the assumed onset is frame 4, the detection delay is 2 frames, and the peak smoothed probability is 0.703. That delay may be acceptable for video tagging and unacceptable for a safety stop, so evaluation belongs with [real-time video understanding](../10-video-understanding/real-time-video-understanding.md), not just offline clip accuracy.
 

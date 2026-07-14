@@ -25,6 +25,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # API Design
 
 API design is the discipline of making a software boundary explicit enough that clients can depend on it. In AI systems the boundary may be an HTTP endpoint, a Python package function, a model-serving request, or a tool schema used by [tool use and function calling](../11-generative-ai/tool-use-and-function-calling.md). A good API says what fields mean, what errors are stable, which operations are idempotent, and which changes require a version.

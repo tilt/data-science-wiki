@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Trigger Point Prediction
 
 Trigger-point prediction decides when enough streaming evidence has arrived to fire an action. It is not retrospective [temporal localization](temporal-localization.md): the system must choose now, under uncertainty, with latency and false-trigger costs. Gesture interfaces, safety alerts, and sports-event clipping all need this form of decision.
@@ -38,9 +39,9 @@ More careful systems add hysteresis, minimum duration, or cost-sensitive stoppin
 
 With threshold $\theta=0.70$, the first frame whose streaming probability crosses the threshold is frame 5:
 
-| frame | 0 | 1 | 2 | 3 | 4 | 5 | 6 |
-|---:|---:|---:|---:|---:|---:|---:|---:|
-| $p_t$ | 0.08 | 0.12 | 0.22 | 0.41 | 0.62 | 0.74 | 0.81 |
+|    frame |    0 |    1 |    2 |    3 |    4 |       5 |                 6 |
+| -------: | ---: | ---: | ---: | ---: | ---: | ------: | ----------------: |
+|    $p_t$ | 0.08 | 0.12 | 0.22 | 0.41 | 0.62 |    0.74 |              0.81 |
 | decision | wait | wait | wait | wait | wait | trigger | already triggered |
 
 If the event began at frame 3, the trigger fires two frames later with $p_5=0.74$. That delay may be acceptable for review queues but too slow for direct manipulation in [gesture recognition](gesture-recognition.md). A lower threshold would fire earlier, but it would also make ordinary pre-event motion more likely to trigger.

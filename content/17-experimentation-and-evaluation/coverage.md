@@ -23,6 +23,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Coverage
 
 Coverage asks what an evaluation actually reaches: languages, domains, classes, source documents, risk categories, thresholds, fallbacks, and user segments. It is different from quality. A slice can be covered and fail badly; an uncovered slice makes the aggregate score silent. This is why [golden datasets](golden-datasets.md) need metadata, not just inputs and labels.
@@ -47,12 +48,12 @@ $$
 
 Suppose the required launch claim spans four languages and two domains. The evaluation set contains English billing, English legal, German billing, German legal, and Spanish billing examples:
 
-| language | billing | legal |
-| --- | ---: | ---: |
-| English | covered | covered |
-| German | covered | covered |
-| Spanish | covered | missing |
-| French | missing | missing |
+| language | billing |   legal |
+| -------- | ------: | ------: |
+| English  | covered | covered |
+| German   | covered | covered |
+| Spanish  | covered | missing |
+| French   | missing | missing |
 
 The set covers 5 of 8 required language-domain cells, so slice coverage is $5/8=0.625$. Aggregate accuracy from this set says nothing about French, and it only tests Spanish billing. That gap should block claims about broad launch readiness even if [offline evaluation](offline-evaluation.md) looks strong.
 

@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Unsupervised Learning
 
 Unsupervised learning fits structure from $X$ without observed target labels. The output may be clusters, components, density estimates, embeddings, or anomaly scores. Because there is no direct $y$, validation depends more heavily on assumptions and downstream utility than in [supervised learning](supervised-learning.md).

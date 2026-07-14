@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Python
 
 Python is the dominant language in data science because it connects numerical libraries, notebooks, orchestration, and service code. Production Python needs stronger boundaries than exploratory work: isolated environments, typed interfaces, deterministic functions, explicit configuration, and [testing](testing.md) around data and service contracts.

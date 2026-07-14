@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Model Selection
 
 Model selection chooses the model class, preprocessing, hyperparameters, and sometimes thresholds. It is where [regularization](regularization.md), the [bias-variance trade-off](bias-variance-trade-off.md), and [evaluation metrics](evaluation-metrics.md) meet.

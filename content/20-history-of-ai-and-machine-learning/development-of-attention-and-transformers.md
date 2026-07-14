@@ -21,19 +21,20 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # Development of Attention and Transformers
 
 Attention and transformers grew out of a concrete translation problem: early neural sequence-to-sequence systems could map one sequence to another, but they compressed the whole source sentence into a fixed vector. That made long-range information hard to preserve even when [recurrent neural networks](../06-deep-learning/recurrent-neural-networks.md) and LSTMs were strong enough to train.
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 2014 | Sutskever, Vinyals, and Le published "Sequence to Sequence Learning with Neural Networks," an encoder-decoder LSTM translation model. | It showed that neural translation could be trained end to end, but the fixed-length encoded vector was still a narrow communication channel. |
-| 2014/2015 | Bahdanau, Cho, and Bengio introduced neural machine translation with learned soft alignment. | The decoder no longer had to rely only on one compressed sentence vector; at each step it could attend to relevant source positions. |
-| 2017 | Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin introduced the Transformer in "Attention Is All You Need." | If attention was the useful routing mechanism, self-attention could replace recurrence in the main sequence operation and make training much more parallel. |
-| 2018 | Devlin, Chang, Lee, and Toutanova introduced BERT as a bidirectional Transformer encoder for language understanding. | Once self-attention made contextual representation scalable, masked-token pretraining turned unlabeled text into supervision for [BERT-style encoders](../08-natural-language-processing/bert-style-encoders.md). |
-| 2018-2020 | GPT-style decoder-only Transformers scaled autoregressive next-token prediction from GPT to GPT-3. | The same [transformer](../06-deep-learning/transformers.md) block, with a causal mask, became a general-purpose generator for [language-model architectures](../11-generative-ai/language-model-architecture.md). |
+| Year      | Milestone                                                                                                                             | Why it followed                                                                                                                                                                                                   |
+| --------- | ------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2014      | Sutskever, Vinyals, and Le published "Sequence to Sequence Learning with Neural Networks," an encoder-decoder LSTM translation model. | It showed that neural translation could be trained end to end, but the fixed-length encoded vector was still a narrow communication channel.                                                                      |
+| 2014/2015 | Bahdanau, Cho, and Bengio introduced neural machine translation with learned soft alignment.                                          | The decoder no longer had to rely only on one compressed sentence vector; at each step it could attend to relevant source positions.                                                                              |
+| 2017      | Vaswani, Shazeer, Parmar, Uszkoreit, Jones, Gomez, Kaiser, and Polosukhin introduced the Transformer in "Attention Is All You Need."  | If attention was the useful routing mechanism, self-attention could replace recurrence in the main sequence operation and make training much more parallel.                                                       |
+| 2018      | Devlin, Chang, Lee, and Toutanova introduced BERT as a bidirectional Transformer encoder for language understanding.                  | Once self-attention made contextual representation scalable, masked-token pretraining turned unlabeled text into supervision for [BERT-style encoders](../08-natural-language-processing/bert-style-encoders.md). |
+| 2018-2020 | GPT-style decoder-only Transformers scaled autoregressive next-token prediction from GPT to GPT-3.                                    | The same [transformer](../06-deep-learning/transformers.md) block, with a causal mask, became a general-purpose generator for [language-model architectures](../11-generative-ai/language-model-architecture.md). |
 
 ## Historical mechanism
 

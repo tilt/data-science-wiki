@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Data Warehouses
 
 A data warehouse stores integrated, historical, queryable data for analytics. Its core promise is not "large tables"; it is consistent semantics: the same order, customer, and revenue definition should support dashboards, analysis, and downstream [feature-pipelines](feature-pipelines.md).

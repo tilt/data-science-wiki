@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Technical Decision Records
 
 Technical decision records preserve why a choice was made, not just what the code now does. They are most valuable when the decision is expensive to reverse, changes operational risk, affects multiple teams, or sets a precedent for future [software architecture](software-architecture.md).
@@ -38,19 +39,23 @@ A small ADR usually has status, context, decision, alternatives, consequences, a
 Status: Accepted, 2026-07-11
 
 Context:
+
 - Expected launch traffic: 20 requests/minute, p95 retrieval budget 350 ms.
 - Privacy review allows provider processing for support-ticket text with PII masking.
 - The team has no GPU serving owner before launch.
 
 Decision:
+
 - Use the hosted embedding API behind the retrieval service interface.
 - Store embedding_model, embedding_version, document_version, and trace_id with each indexed chunk.
 
 Alternatives:
+
 - Self-host small embedding model: lower provider dependency, higher operations burden.
 - Delay semantic retrieval: lower risk, worse answer quality for paraphrased questions.
 
 Consequences:
+
 - Add provider timeout and fallback to keyword search in production integration.
 - Reconsider self-hosting when traffic exceeds 200 requests/minute for four consecutive weeks.
 ```

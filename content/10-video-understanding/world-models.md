@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # World Models
 
 World models learn a latent state and transition model that supports prediction, planning, or control. In video understanding, this means representing how scenes evolve, not only recognizing a label. The topic overlaps with [video representation](video-representation.md), [self-supervised video representation learning](self-supervised-video-representation-learning.md), and [V-JEPA 2](v-jepa-2.md).
@@ -44,12 +45,12 @@ $$
 
 the rollout is:
 
-| step | latent state |
-|---:|---:|
-| 0 | $(1.000,0.500)$ |
-| 1 | $(1.100,0.450)$ |
-| 2 | $(1.190,0.405)$ |
-| 3 | $(1.271,0.364)$ |
+| step |    latent state |
+| ---: | --------------: |
+|    0 | $(1.000,0.500)$ |
+|    1 | $(1.100,0.450)$ |
+|    2 | $(1.190,0.405)$ |
+|    3 | $(1.271,0.364)$ |
 
 The first coordinate grows because it receives $0.2$ times the second coordinate at each step; the second coordinate decays by a factor of $0.9$. Real learned world models replace this hand-coded matrix with neural dynamics trained from video or interaction.
 

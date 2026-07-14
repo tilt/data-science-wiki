@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Calculus
 
 Calculus turns functions into local rates of change and accumulated quantities. In machine learning, the most common use is differential: approximate how a loss changes when inputs, weights, or logits move a small amount.

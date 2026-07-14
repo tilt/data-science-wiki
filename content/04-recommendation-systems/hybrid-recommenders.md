@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Hybrid Recommenders
 
 Hybrid recommenders combine signals that fail in different ways: [collaborative filtering](collaborative-filtering.md) captures collective taste, [content-based recommendation](content-based-recommendation.md) handles item attributes, and contextual or business rules handle eligibility. Most production recommenders are hybrid even when one model family dominates.
@@ -39,11 +40,11 @@ with weights tuned offline and online. More complex systems use a ranker that co
 
 Suppose a late-fusion recommender uses 65% collaborative score and 35% content score:
 
-| Item | Collaborative score | Content score | Hybrid score |
-| --- | ---: | ---: | ---: |
-| 0 | 0.95 | 0.30 | $0.65(0.95)+0.35(0.30)=0.722$ |
-| 1 | 0.20 | 0.90 | $0.65(0.20)+0.35(0.90)=0.445$ |
-| 2 | 0.55 | 0.50 | $0.65(0.55)+0.35(0.50)=0.532$ |
+| Item | Collaborative score | Content score |                  Hybrid score |
+| ---- | ------------------: | ------------: | ----------------------------: |
+| 0    |                0.95 |          0.30 | $0.65(0.95)+0.35(0.30)=0.722$ |
+| 1    |                0.20 |          0.90 | $0.65(0.20)+0.35(0.90)=0.445$ |
+| 2    |                0.55 |          0.50 | $0.65(0.55)+0.35(0.50)=0.532$ |
 
 The ranking is therefore item 0, item 2, then item 1. The collaborative favorite remains first, while content rescues item 2 above item 1. Visual hybrids follow the same pattern in [image-based recommendation](image-based-recommendation.md).
 

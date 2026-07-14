@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Attention
 
 Attention computes a context-dependent weighted average of value vectors. A query asks what it needs, keys decide which positions match, and values provide the information to mix. This is the central mechanism in [transformers](transformers.md), a bridge away from [recurrent networks](recurrent-neural-networks.md), and a common alignment mechanism in [multimodal learning](multimodal-learning.md).

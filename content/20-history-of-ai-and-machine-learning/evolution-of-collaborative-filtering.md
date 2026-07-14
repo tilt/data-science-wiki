@@ -21,19 +21,20 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # Evolution of Collaborative Filtering
 
 Collaborative filtering began with a powerful observation: users can help filter information for one another even when item content is unavailable. Its history is the movement from neighborhood similarity over sparse ratings toward latent factors, implicit behavior, and multi-stage [retrieval and ranking architectures](../04-recommendation-systems/retrieval-and-ranking-architectures.md).
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 1994 | Resnick, Iacovou, Suchak, Bergstrom, and Riedl published GroupLens for collaborative filtering of Netnews. | The web made information overload visible; ratings from similar readers could predict what a new reader might value. |
-| 2001 | Sarwar, Karypis, Konstan, and Riedl studied item-based collaborative filtering at web scale. | [User-based collaborative filtering](../04-recommendation-systems/user-based-collaborative-filtering.md) was expensive and unstable when users changed quickly; item similarities were often more reusable. |
-| 2003 | Linden, Smith, and York described Amazon's item-to-item collaborative filtering. | Production recommenders needed fast online serving, so precomputed [item-based collaborative filtering](../04-recommendation-systems/item-based-collaborative-filtering.md) fit the latency constraint. |
-| 2008-2009 | Hu, Koren, and Volinsky modeled implicit feedback; Koren, Bell, and Volinsky summarized matrix-factorization techniques. | Ratings were sparse, but clicks, views, purchases, and confidence weights made [implicit feedback](../04-recommendation-systems/implicit-feedback.md) usable at larger scale. |
-| 2010s | Recommenders blended collaborative signals with content, context, bandits, and learned rankers. | Pure collaborative filtering could not solve cold start, exploration, business constraints, or feedback-loop effects alone. |
+| Year      | Milestone                                                                                                                | Why it followed                                                                                                                                                                                             |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1994      | Resnick, Iacovou, Suchak, Bergstrom, and Riedl published GroupLens for collaborative filtering of Netnews.               | The web made information overload visible; ratings from similar readers could predict what a new reader might value.                                                                                        |
+| 2001      | Sarwar, Karypis, Konstan, and Riedl studied item-based collaborative filtering at web scale.                             | [User-based collaborative filtering](../04-recommendation-systems/user-based-collaborative-filtering.md) was expensive and unstable when users changed quickly; item similarities were often more reusable. |
+| 2003      | Linden, Smith, and York described Amazon's item-to-item collaborative filtering.                                         | Production recommenders needed fast online serving, so precomputed [item-based collaborative filtering](../04-recommendation-systems/item-based-collaborative-filtering.md) fit the latency constraint.     |
+| 2008-2009 | Hu, Koren, and Volinsky modeled implicit feedback; Koren, Bell, and Volinsky summarized matrix-factorization techniques. | Ratings were sparse, but clicks, views, purchases, and confidence weights made [implicit feedback](../04-recommendation-systems/implicit-feedback.md) usable at larger scale.                               |
+| 2010s     | Recommenders blended collaborative signals with content, context, bandits, and learned rankers.                          | Pure collaborative filtering could not solve cold start, exploration, business constraints, or feedback-loop effects alone.                                                                                 |
 
 ## Historical mechanism
 

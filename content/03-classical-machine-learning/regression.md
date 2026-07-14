@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Regression
 
 Regression estimates a numeric target $y \in \mathbb R$ from features $x$. In the standard linear case, [linear models](linear-models.md) estimate the conditional mean $\mathbb E[Y\mid X=x]$ by minimizing residual error; [logistic regression](logistic-regression.md) uses a similar linear score but changes the target from a continuous value to a class probability and changes the loss from squared error to cross-entropy.

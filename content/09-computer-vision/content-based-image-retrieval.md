@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Content-Based Image Retrieval
 
 Content-based image retrieval finds images by visual similarity rather than only text metadata. The core dependency is [feature extraction](feature-extraction.md): the retrieval system can only rank by what the descriptor or embedding preserves. It connects directly to vector search in [vector indexes](../12-information-retrieval-and-search/vector-indexes.md).
@@ -63,7 +64,7 @@ The query is closest to item 1 because its direction in embedding space is most 
 
 ## Caveats
 
-Nearest neighbors expose embedding bias quickly: results may cluster by background, lighting, crop style, or digitization source rather than semantic content. A museum archive should evaluate retrieval alongside [historical document and museum label analysis](historical-document-and-museum-label-analysis.md), because visual similarity and catalog-entity similarity are different signals.
+Nearest neighbors expose embedding bias quickly: results may cluster by background, lighting, crop style, or digitization source rather than semantic content. A museum archive should evaluate retrieval alongside [document image analysis and field extraction](document-image-analysis-and-field-extraction.md), because visual similarity and catalog-entity similarity are different signals.
 
 ## References
 

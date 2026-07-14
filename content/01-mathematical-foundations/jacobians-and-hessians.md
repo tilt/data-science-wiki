@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Jacobians and Hessians
 
 Jacobians organize first derivatives of vector-valued functions. Hessians organize second derivatives of scalar functions. They are the matrix form of local change, so they connect [calculus](calculus.md) to optimization, curvature, and chain-rule computation.

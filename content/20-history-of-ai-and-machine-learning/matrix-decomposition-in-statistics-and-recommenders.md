@@ -21,18 +21,19 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # Matrix Decomposition in Statistics and Recommenders
 
 Matrix decomposition became a modeling language because many high-dimensional datasets have lower-dimensional structure. The same idea appears as principal components in statistics, truncated SVD in information retrieval, and latent user-item factors in recommender systems.
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 1901 | Karl Pearson published "On Lines and Planes of Closest Fit to Systems of Points in Space," an early PCA formulation. | Multivariate data needed low-dimensional summaries of variation. |
-| 1936 | Eckart and Young published the low-rank matrix approximation theorem. | It gave a precise optimality result: truncated decompositions are best approximations under common norms. |
-| 1990 | Deerwester, Dumais, Furnas, Landauer, and Harshman published latent semantic analysis. | Term-document matrices were sparse and lexical; truncated SVD could reveal latent associations beyond exact word overlap. |
-| 2006-2009 | Netflix Prize-era recommenders popularized low-rank user-item factor models; Koren, Bell, and Volinsky summarized matrix factorization in 2009. | Sparse ratings could be explained by shared latent taste and item dimensions rather than only neighbor similarity. |
+| Year      | Milestone                                                                                                                                       | Why it followed                                                                                                           |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| 1901      | Karl Pearson published "On Lines and Planes of Closest Fit to Systems of Points in Space," an early PCA formulation.                            | Multivariate data needed low-dimensional summaries of variation.                                                          |
+| 1936      | Eckart and Young published the low-rank matrix approximation theorem.                                                                           | It gave a precise optimality result: truncated decompositions are best approximations under common norms.                 |
+| 1990      | Deerwester, Dumais, Furnas, Landauer, and Harshman published latent semantic analysis.                                                          | Term-document matrices were sparse and lexical; truncated SVD could reveal latent associations beyond exact word overlap. |
+| 2006-2009 | Netflix Prize-era recommenders popularized low-rank user-item factor models; Koren, Bell, and Volinsky summarized matrix factorization in 2009. | Sparse ratings could be explained by shared latent taste and item dimensions rather than only neighbor similarity.        |
 
 ## Historical mechanism
 

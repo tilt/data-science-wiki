@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Weighted Matrix Factorization
 
 Weighted matrix factorization is the standard [implicit feedback](implicit-feedback.md) adaptation of factor models: an interaction says "some preference evidence exists," while its count or strength says how confident the system should be. It avoids treating every missing pair as a strong negative.
@@ -69,11 +70,11 @@ scores [1.038, 0.335, 0.804]
 
 The item with three interactions has higher confidence and pulls the user factor most strongly. [Bayesian personalized ranking](bayesian-personalized-ranking.md) instead trains pairwise orderings from positive and sampled negative items.
 
-| Item | Interaction count $r$ | Preference $p$ | Confidence $c=1+4r$ | Effect |
-| --- | ---: | ---: | ---: | --- |
-| 0 | 3 | 1 | 13 | Strong pull toward item 0's factor. |
-| 1 | 0 | 0 | 1 | Weak evidence; not a confident dislike. |
-| 2 | 1 | 1 | 5 | Positive pull, but less than item 0. |
+| Item | Interaction count $r$ | Preference $p$ | Confidence $c=1+4r$ | Effect                                  |
+| ---- | --------------------: | -------------: | ------------------: | --------------------------------------- |
+| 0    |                     3 |              1 |                  13 | Strong pull toward item 0's factor.     |
+| 1    |                     0 |              0 |                   1 | Weak evidence; not a confident dislike. |
+| 2    |                     1 |              1 |                   5 | Positive pull, but less than item 0.    |
 
 ## Caveats
 

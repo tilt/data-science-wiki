@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Microservices
 
 In ML systems, microservices split responsibilities such as feature retrieval, model scoring, policy decisions, and feedback collection into independently deployable services. The pattern helps when ownership and scaling boundaries are real; it hurts when a single prediction path becomes a chain of poorly observed network calls.

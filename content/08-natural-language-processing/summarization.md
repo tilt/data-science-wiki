@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Summarization
 
 Summarization condenses one or more texts for a purpose: incident handoff, meeting recap, article abstract, legal brief, or search-result snippet. Extractive summarization selects source spans; abstractive summarization uses [language modelling](language-modelling.md) to generate new text. [Decoder-only transformers](decoder-only-transformers.md) are common generators, while [semantic textual similarity](semantic-textual-similarity.md) helps detect redundancy.

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Evaluation Datasets
 
 Evaluation datasets are curated examples used to measure model behavior before release and during regression checks. They are broader than [golden datasets](golden-datasets.md): an evaluation set may be large and statistical, while a golden set is usually small, trusted, and inspectable.

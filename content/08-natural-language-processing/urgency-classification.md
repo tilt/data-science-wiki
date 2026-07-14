@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Urgency Classification
 
 Urgency classification predicts how quickly a text needs action: low, normal, urgent, safety-critical, or escalation-worthy. It is a [text classification](text-classification.md) task, but unlike [topic classification](topic-classification.md), the loss is asymmetric: missing a true outage is usually worse than over-escalating a harmless typo.

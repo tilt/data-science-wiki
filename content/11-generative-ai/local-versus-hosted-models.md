@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Local Versus Hosted Models
 
 Local models run in infrastructure you control; hosted models run behind a provider API. The choice affects [model serving](model-serving.md), [data privacy](data-privacy.md), observability, upgrade cadence, and [cost and latency optimization](cost-and-latency-optimization.md).
@@ -30,12 +31,12 @@ Compare the full workload: input/output volume, latency target, privacy class, r
 
 The decision is rarely a single-model choice. Many systems route requests by sensitivity and quality requirement:
 
-| Requirement | Local model tends to help when... | Hosted model tends to help when... |
-| --- | --- | --- |
-| Data control | Inputs cannot leave a controlled network, or retention rules are strict. | Provider contracts, encryption, and logging controls satisfy the risk model. |
-| Capability | A smaller specialized model is enough or fine-tuned local weights matter. | Frontier reasoning, multimodality, long context, or managed tools are required. |
-| Operations | The team can run GPU capacity, batching, rollback, and monitoring. | The team prefers managed scaling, faster model upgrades, and provider SLAs. |
-| Cost | Traffic is steady enough to amortize hardware and utilization is high. | Traffic is bursty, caching is effective, or only some calls need large models. |
+| Requirement  | Local model tends to help when...                                         | Hosted model tends to help when...                                              |
+| ------------ | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| Data control | Inputs cannot leave a controlled network, or retention rules are strict.  | Provider contracts, encryption, and logging controls satisfy the risk model.    |
+| Capability   | A smaller specialized model is enough or fine-tuned local weights matter. | Frontier reasoning, multimodality, long context, or managed tools are required. |
+| Operations   | The team can run GPU capacity, batching, rollback, and monitoring.        | The team prefers managed scaling, faster model upgrades, and provider SLAs.     |
+| Cost         | Traffic is steady enough to amortize hardware and utilization is high.    | Traffic is bursty, caching is effective, or only some calls need large models.  |
 
 ## Concrete artifact
 

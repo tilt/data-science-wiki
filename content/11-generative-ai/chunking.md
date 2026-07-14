@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Chunking
 
 Chunking decides the unit that [retrieval pipelines](retrieval-pipelines.md) can find and [context construction](context-construction.md) can pass to a model. In [RAG](rag.md), chunk boundaries often determine whether [citations](citations.md) support the generated claim.
@@ -32,10 +33,10 @@ A chunker maps a document $D$ into ordered spans $(c_i, m_i)$, where $m_i$ store
 
 For a two-section policy document, heading-aware chunking keeps each heading with the paragraph it governs:
 
-| Chunk | Text | Why this boundary helps |
-| ---: | --- | --- |
-| 1 | `# Refunds Refunds require receipt. Manager approval is required above 500 EUR.` | A later answer can cite the approval rule with the refund heading attached. |
-| 2 | `# Shipping Standard shipping is five days.` | Shipping facts do not contaminate refund retrieval. |
+| Chunk | Text                                                                             | Why this boundary helps                                                     |
+| ----: | -------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+|     1 | `# Refunds Refunds require receipt. Manager approval is required above 500 EUR.` | A later answer can cite the approval rule with the refund heading attached. |
+|     2 | `# Shipping Standard shipping is five days.`                                     | Shipping facts do not contaminate refund retrieval.                         |
 
 This boundary is more useful than a fixed window that might split the refund heading from the approval rule or merge refund and shipping facts into one retrieved passage.
 

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Text Classification
 
 Text classification maps a text unit to one or more labels: a support ticket to a queue, a review to sentiment, a contract paragraph to a clause type. It is the supervised core behind [topic classification](topic-classification.md) and [urgency classification](urgency-classification.md), but the hard part is usually the label policy: what counts as billing, bug, abuse, or urgent must be annotated consistently before model choice matters.

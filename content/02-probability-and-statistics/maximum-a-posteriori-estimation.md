@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Maximum A Posteriori Estimation
 
 MAP estimation chooses the mode of the posterior distribution. By [Bayes' theorem](bayes-theorem.md),

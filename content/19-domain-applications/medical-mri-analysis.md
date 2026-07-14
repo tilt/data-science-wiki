@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Medical MRI Analysis
 
 Medical MRI analysis applies computer vision to volumetric scans for tumor segmentation, lesion detection, organ measurement, classification, registration, and longitudinal change tracking. Inputs include one or more MRI sequences, scanner metadata, acquisition protocol, patient-level context, and prior scans. Targets may be voxel masks, exam-level labels, lesion counts, or measurements for radiologist review. The model supports triage or measurement assistance; it does not replace clinical adjudication.
@@ -34,11 +35,11 @@ Brain tumor work often uses [MRI segmentation](../09-computer-vision/mri-segment
 
 This toy mask illustrates why a high Dice score can still miss a clinically important small lesion:
 
-| region | true positive voxels | missed voxels | false-positive voxels |
-| --- | ---: | ---: | ---: |
-| main tumor | 9 | 0 | 0 |
-| tiny lesion | 0 | 1 | 0 |
-| nearby false alarm | 0 | 0 | 1 |
+| region             | true positive voxels | missed voxels | false-positive voxels |
+| ------------------ | -------------------: | ------------: | --------------------: |
+| main tumor         |                    9 |             0 |                     0 |
+| tiny lesion        |                    0 |             1 |                     0 |
+| nearby false alarm |                    0 |             0 |                     1 |
 
 The true mask has 10 positive voxels and the predicted mask has 10 positive voxels. Their overlap is 9 voxels, so Dice is $2\cdot 9/(10+10)=0.90$. The score is high because the large region overlaps well, but the isolated lesion is missed and one nearby false positive is added. That is why [medical image analysis](../09-computer-vision/medical-image-analysis.md) evaluation should include lesion-level recall and reader review, not just aggregate voxel overlap.
 

@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Decision Trees
 
 A decision tree predicts by routing an example through feature-threshold tests until it reaches a leaf. It is the base learner behind [random forests](random-forests.md) and most classical [gradient boosting](gradient-boosting.md) systems.

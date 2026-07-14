@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Explainability
 
 Explainability is the production of decision evidence that a specific audience can use. It is broader than model [interpretability](../03-classical-machine-learning/interpretability.md): a transparent [logistic regression](../03-classical-machine-learning/logistic-regression.md) coefficient can help, but governance often needs local reasons, counterfactuals, data lineage, and human-readable policy evidence.

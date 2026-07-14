@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Image-Based Recommendation
 
 Image-based recommendation uses visual features to personalize or filter recommendations. It differs from pure [content-based image retrieval](content-based-image-retrieval.md): the goal is not just "looks similar," but "visually and behaviorally plausible for this user."
@@ -39,10 +40,10 @@ where $p_u^\top q_i$ is collaborative preference, $f(i)$ is an image embedding, 
 Blend a visual similarity score with a collaborative score:
 
 | Item | Visual score | Collaborative score | Blend $0.55v+0.45c$ |
-| --- | ---: | ---: | ---: |
-| 0 | 0.92 | 0.20 | 0.596 |
-| 1 | 0.88 | 0.75 | 0.822 |
-| 2 | 0.15 | 0.80 | 0.443 |
+| ---- | -----------: | ------------------: | ------------------: |
+| 0    |         0.92 |                0.20 |               0.596 |
+| 1    |         0.88 |                0.75 |               0.822 |
+| 2    |         0.15 |                0.80 |               0.443 |
 
 Item 0 is most visually similar, but item 1 wins after collaborative evidence is included. This is the same design principle as [hybrid recommenders](hybrid-recommenders.md): combine complementary signals rather than trusting one modality.
 

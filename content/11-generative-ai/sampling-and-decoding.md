@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Sampling and Decoding
 
 Sampling and decoding turn a language model's next-token logits into actual output. The model architecture supplies a score vector; the decoder chooses whether to take the highest score, rescale the distribution, truncate unlikely tokens, or enforce a contract such as [structured output](structured-output.md). This page is the parent concept for [temperature and determinism](temperature-and-determinism.md) and [top-k and top-p sampling](top-k-and-top-p-sampling.md).

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Documentation
 
 Documentation is a product interface for future maintainers. It should preserve contracts, operating knowledge, and decisions that code alone cannot explain. The best format depends on the job: tutorials teach a path, how-to guides solve a task, reference docs define complete contracts, and explanations preserve the model behind a system.
@@ -32,14 +33,14 @@ Useful engineering documentation has an owner, a source of truth, and a freshnes
 
 For a feature document, a reviewer can check a small contract instead of reading free-form prose:
 
-| required field | example value |
-| --- | --- |
-| owner | `search-platform` |
-| source table | `events.ticket_views` |
-| refresh | hourly at minute 10 |
+| required field | example value                                    |
+| -------------- | ------------------------------------------------ |
+| owner          | `search-platform`                                |
+| source table   | `events.ticket_views`                            |
+| refresh        | hourly at minute 10                              |
 | null semantics | missing `user_id` means no personalized features |
-| backfill | recompute by `event_date`, maximum 31 days |
-| consumers | `ticket-triage-v2`, `agent-assist-v1` |
+| backfill       | recompute by `event_date`, maximum 31 days       |
+| consumers      | `ticket-triage-v2`, `agent-assist-v1`            |
 
 No required fields are missing, and two consumers are named. This is a documentation contract, not just prose. The same idea supports [testing](testing.md): a fixture can assert that a contract file contains required fields.
 

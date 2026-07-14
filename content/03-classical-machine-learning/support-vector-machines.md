@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Support Vector Machines
 
 Support vector machines learn a decision boundary with a large margin. Unlike [logistic regression](logistic-regression.md), an SVM is not primarily a probability model; it optimizes margin violations through hinge loss. Kernels make the boundary nonlinear while preserving a linear separator in an implicit feature space.

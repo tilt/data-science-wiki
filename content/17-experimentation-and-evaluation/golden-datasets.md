@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Golden Datasets
 
 A golden dataset is a trusted, versioned set of inputs, expected behavior, labels, evidence, and risk metadata. It is not necessarily large; its value is that teams can rerun [offline evaluation](offline-evaluation.md) on the same decision cases and know what changed. The MLOps duplicate should usually point here for evaluation design, while [evaluation datasets](../14-ml-engineering-and-mlops/evaluation-datasets.md) covers storage and pipeline ownership.
@@ -32,14 +33,14 @@ A golden dataset is a trusted, versioned set of inputs, expected behavior, label
 
 For a support assistant, one row should identify the user query, source document ID, acceptable-answer criteria, refusal rule, slice tags, severity, reviewer owner, and version. A minimal acceptance contract is:
 
-| field | example |
-| --- | --- |
-| `case_id` | `SUP-legal-0042` |
-| `input` | "Can I export customer data to a vendor spreadsheet?" |
-| `evidence_id` | `policy/privacy/export-controls#2026-03` |
-| `expected_behavior` | refuse unsafe export; cite approved workflow |
-| `risk` | `critical` |
-| `slice` | `legal/privacy` |
+| field               | example                                               |
+| ------------------- | ----------------------------------------------------- |
+| `case_id`           | `SUP-legal-0042`                                      |
+| `input`             | "Can I export customer data to a vendor spreadsheet?" |
+| `evidence_id`       | `policy/privacy/export-controls#2026-03`              |
+| `expected_behavior` | refuse unsafe export; cite approved workflow          |
+| `risk`              | `critical`                                            |
+| `slice`             | `legal/privacy`                                       |
 
 The dataset should deliberately include common cases, rare cases, regressions, and high-severity failures from [risk-weighted error taxonomies](risk-weighted-error-taxonomies.md).
 
@@ -47,13 +48,13 @@ The dataset should deliberately include common cases, rare cases, regressions, a
 
 For a ten-case regression gate, a deliberately curated inventory might look like this:
 
-| slice | common | rare | highest risk represented |
-| --- | ---: | ---: | --- |
-| account | 1 | 1 | high |
-| billing | 1 | 1 | medium |
-| legal | 1 | 1 | critical |
-| returns | 1 | 1 | medium |
-| security | 1 | 1 | critical |
+| slice    | common | rare | highest risk represented |
+| -------- | -----: | ---: | ------------------------ |
+| account  |      1 |    1 | high                     |
+| billing  |      1 |    1 | medium                   |
+| legal    |      1 |    1 | critical                 |
+| returns  |      1 |    1 | medium                   |
+| security |      1 |    1 | critical                 |
 
 The risk counts are 3 low, 2 medium, 3 high, and 2 critical, so the critical share is $2/10=0.20$. That would be wrong for population accuracy but right for a regression gate that must exercise rare dangerous behavior.
 

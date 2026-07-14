@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # SARIMA
 
 SARIMA extends [ARIMA](arima.md) by adding seasonal autoregressive, differencing, and moving-average terms at a known period $m$. It is designed for series where dependence repeats at regular seasonal lags: month 12 resembles month 0, hour 24 resembles hour 0, or week 52 resembles week 0.

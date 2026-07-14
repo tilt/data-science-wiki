@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Statistical Significance
 
 Statistical significance asks whether an observed effect is surprising under a null model. In an [A/B test](a-b-testing.md), the null is usually "treatment and control have the same conversion rate"; in [paired evaluation](paired-evaluation.md), it is usually "the mean paired difference is zero." It is an uncertainty statement, not a claim that the effect is useful, causal without a valid design, or safe to launch.
@@ -49,14 +50,14 @@ The same logic appears in [online experiments](online-experiments.md), but produ
 
 Suppose the control arm has 492 conversions from 10,000 users and the treatment arm has 548 conversions from 10,000 users:
 
-| quantity | value |
-| --- | ---: |
-| control rate | 0.0492 |
-| treatment rate | 0.0548 |
-| absolute lift | 0.0056 |
-| pooled null rate | 0.0520 |
-| z-score | 1.783 |
-| two-sided p-value | 0.0745 |
+| quantity                       |             value |
+| ------------------------------ | ----------------: |
+| control rate                   |            0.0492 |
+| treatment rate                 |            0.0548 |
+| absolute lift                  |            0.0056 |
+| pooled null rate               |            0.0520 |
+| z-score                        |             1.783 |
+| two-sided p-value              |            0.0745 |
 | 95 percent confidence interval | [-0.0006, 0.0118] |
 
 The treatment is 0.56 percentage points higher, but the 95 percent interval still includes a small negative effect. This is not statistically significant at a 5 percent two-sided threshold because $p=0.0745$ is larger than 0.05. It could still be worth a follow-up if a 0.5 point lift is commercially meaningful, or irrelevant if the minimum practical lift was 1.5 points.

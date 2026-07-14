@@ -43,12 +43,12 @@ This section connects statistical testing from [Probability and Statistics](../0
 
 ## Evaluation Route
 
-| Situation | Start with | Watch for |
-| --- | --- | --- |
-| Model selection before launch | [Offline Evaluation](offline-evaluation.md), [Golden Datasets](golden-datasets.md) | leakage, stale labels, slice regressions |
-| Product or policy change | [Online Experiments](online-experiments.md), [A/B Testing](a-b-testing.md) | interference, novelty effects, underpowered tests |
-| Generative or subjective outputs | [Human Evaluation](human-evaluation.md), [LLM-as-Judge](llm-as-judge.md), [Paired Evaluation](paired-evaluation.md) | rubric drift, order bias, judge bias |
-| Safety-sensitive systems | [Risk Weighted Error Taxonomies](risk-weighted-error-taxonomies.md), [Abstention](abstention.md), [Coverage](coverage.md) | hidden high-cost errors |
+| Situation                        | Start with                                                                                                                | Watch for                                         |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| Model selection before launch    | [Offline Evaluation](offline-evaluation.md), [Golden Datasets](golden-datasets.md)                                        | leakage, stale labels, slice regressions          |
+| Product or policy change         | [Online Experiments](online-experiments.md), [A/B Testing](a-b-testing.md)                                                | interference, novelty effects, underpowered tests |
+| Generative or subjective outputs | [Human Evaluation](human-evaluation.md), [LLM-as-Judge](llm-as-judge.md), [Paired Evaluation](paired-evaluation.md)       | rubric drift, order bias, judge bias              |
+| Safety-sensitive systems         | [Risk Weighted Error Taxonomies](risk-weighted-error-taxonomies.md), [Abstention](abstention.md), [Coverage](coverage.md) | hidden high-cost errors                           |
 
 ## Subtopics
 

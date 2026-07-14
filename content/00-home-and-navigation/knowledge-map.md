@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Knowledge Map
 
 ## Summary
@@ -32,7 +33,7 @@ The knowledge map shows how the wiki's major areas depend on each other. It is a
 
 ## Learning route
 
-A practical route is: foundations, modeling, modality-specific systems, retrieval and generative AI, then production and governance. [Learning paths](learning-paths.md) turn that dependency map into study sequences, while interview and experience-map sections sit outside the core taxonomy and point back to canonical concepts.
+A practical route is: foundations, modeling, modality-specific systems, retrieval and generative AI, then production and governance. [Learning paths](learning-paths.md) turn that dependency map into study sequences, while [technical answer patterns](technical-answer-patterns.md) help turn canonical concepts into concise explanations.
 
 ## Example
 

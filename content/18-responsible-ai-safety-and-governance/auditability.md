@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Auditability
 
 Auditability is the ability to reconstruct what an AI system did, which artifacts were in force, why the action was allowed, and who approved the relevant controls. It connects operational [observability](../14-ml-engineering-and-mlops/observability.md) with [compliance](compliance.md): logs are useful only if they answer a later accountability question.
@@ -40,7 +41,7 @@ For high-risk systems, the EU AI Act includes record-keeping and logging obligat
   "input_hash": "sha256:9ef...",
   "output_hash": "sha256:a41...",
   "reason_codes": ["recent_delinquency_count", "utilization_ratio"],
-  "human_review": {"required": true, "reviewer_id": "risk_ops_17", "outcome": "approved"},
+  "human_review": { "required": true, "reviewer_id": "risk_ops_17", "outcome": "approved" },
   "retention_class": "regulated_decision_7y"
 }
 ```

@@ -21,19 +21,20 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # Statistical Pattern Recognition to Modern Machine Learning
 
 Modern machine learning inherits much of its vocabulary from statistical pattern recognition: features, classes, decision boundaries, training data, held-out error, and generalization. The later field added scalable optimization, benchmark culture, ensembles, representation learning, and deployment feedback loops.
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 1936 | Ronald Fisher published linear discriminant analysis for taxonomic measurements. | It formalized classification as separating groups using measured features. |
-| 1973 | Duda and Hart's "Pattern Classification and Scene Analysis" consolidated statistical pattern-recognition methods. | Engineering systems needed a common language for features, classifiers, and decision rules. |
-| 1995 | Cortes and Vapnik published support-vector networks. | Statistical learning theory and kernels made margin-based [support vector machines](../03-classical-machine-learning/support-vector-machines.md) a practical classifier family. |
-| 2001 | Breiman published random forests, and Friedman published gradient boosting. | Ensembles improved predictive performance by averaging or sequentially correcting weak learners. |
-| 2010s | Deep learning shifted feature construction into learned representations. | The same [classification](../03-classical-machine-learning/classification.md) and [evaluation metrics](../03-classical-machine-learning/evaluation-metrics.md) concerns remained, but features were increasingly trained end to end. |
+| Year  | Milestone                                                                                                         | Why it followed                                                                                                                                                                                                                      |
+| ----- | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1936  | Ronald Fisher published linear discriminant analysis for taxonomic measurements.                                  | It formalized classification as separating groups using measured features.                                                                                                                                                           |
+| 1973  | Duda and Hart's "Pattern Classification and Scene Analysis" consolidated statistical pattern-recognition methods. | Engineering systems needed a common language for features, classifiers, and decision rules.                                                                                                                                          |
+| 1995  | Cortes and Vapnik published support-vector networks.                                                              | Statistical learning theory and kernels made margin-based [support vector machines](../03-classical-machine-learning/support-vector-machines.md) a practical classifier family.                                                      |
+| 2001  | Breiman published random forests, and Friedman published gradient boosting.                                       | Ensembles improved predictive performance by averaging or sequentially correcting weak learners.                                                                                                                                     |
+| 2010s | Deep learning shifted feature construction into learned representations.                                          | The same [classification](../03-classical-machine-learning/classification.md) and [evaluation metrics](../03-classical-machine-learning/evaluation-metrics.md) concerns remained, but features were increasingly trained end to end. |
 
 ## Historical mechanism
 

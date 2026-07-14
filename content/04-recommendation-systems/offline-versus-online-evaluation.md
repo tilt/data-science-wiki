@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Offline Versus Online Evaluation
 
 Offline evaluation replays or splits historical data. Online evaluation measures behavior under actual exposure, usually through experiments. Recommenders need both because recommendations change what users see and therefore change future labels.
@@ -45,13 +46,13 @@ This is different from ordinary [evaluation of recommenders](evaluation-of-recom
 Replay evaluation keeps only rows where the candidate policy chose the same action as the logged policy:
 
 | Event | Logged action | Reward | Candidate action | Replay? |
-| ---: | ---: | ---: | ---: | --- |
-| 1 | 0 | 1 | 0 | yes |
-| 2 | 1 | 0 | 0 | no |
-| 3 | 0 | 0 | 0 | yes |
-| 4 | 2 | 1 | 2 | yes |
-| 5 | 1 | 1 | 2 | no |
-| 6 | 2 | 0 | 2 | yes |
+| ----: | ------------: | -----: | ---------------: | ------- |
+|     1 |             0 |      1 |                0 | yes     |
+|     2 |             1 |      0 |                0 | no      |
+|     3 |             0 |      0 |                0 | yes     |
+|     4 |             2 |      1 |                2 | yes     |
+|     5 |             1 |      1 |                2 | no      |
+|     6 |             2 |      0 |                2 | yes     |
 
 Only four events can be replayed because rewards for unshown actions are missing. Among the matched rows, rewards are $1,0,1,0$, so the replay CTR is $2/4=0.5$. [Bandit algorithms](bandit-algorithms.md) require this partial-feedback discipline.
 

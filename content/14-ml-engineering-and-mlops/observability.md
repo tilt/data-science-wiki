@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Observability
 
 Observability is the ability to explain what happened inside a system from emitted evidence. [Monitoring](monitoring.md) asks whether known conditions are healthy; observability lets an engineer diagnose why a specific decision, latency spike, or data anomaly occurred.

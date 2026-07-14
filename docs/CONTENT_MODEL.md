@@ -28,7 +28,7 @@ When `references` is present, `make validate` verifies that every key exists in 
 
 ## Page types
 
-`area-index`, `topic-index`, `concept`, `algorithm`, `model`, `implementation`, `system-design`, `comparison`, `history`, `interview-question`, `reference`.
+`area-index`, `topic-index`, `concept`, `algorithm`, `model`, `implementation`, `system-design`, `comparison`, `case-study`, `history`, `reference`.
 
 ## Status values
 

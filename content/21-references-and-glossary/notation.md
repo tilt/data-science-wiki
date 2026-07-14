@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Notation
 
 ## Summary
@@ -27,18 +28,18 @@ Notation keeps formulas readable across mathematical foundations, probability, m
 
 ## Common symbols
 
-| Symbol | Typical meaning |
-| ------ | --------------- |
-| $x$ | Feature vector, observation, or input. |
-| $X$ | Data matrix or random variable, depending on context. |
-| $y$ | Target label or observed outcome. |
-| $\\hat{y}$ | Prediction. |
-| $\\theta$ | Model parameters. |
-| $w, b$ | Linear-model weights and bias. |
-| $p(y\\mid x)$ | Conditional probability of outcome $y$ given input $x$. |
-| $\\mathcal{D}$ | Dataset or data-generating distribution. |
-| $\\Omega$ | Observed entries in a sparse matrix. |
-| $\\lambda$ | Regularization strength or generic rate parameter. |
+| Symbol         | Typical meaning                                         |
+| -------------- | ------------------------------------------------------- |
+| $x$            | Feature vector, observation, or input.                  |
+| $X$            | Data matrix or random variable, depending on context.   |
+| $y$            | Target label or observed outcome.                       |
+| $\\hat{y}$     | Prediction.                                             |
+| $\\theta$      | Model parameters.                                       |
+| $w, b$         | Linear-model weights and bias.                          |
+| $p(y\\mid x)$  | Conditional probability of outcome $y$ given input $x$. |
+| $\\mathcal{D}$ | Dataset or data-generating distribution.                |
+| $\\Omega$      | Observed entries in a sparse matrix.                    |
+| $\\lambda$     | Regularization strength or generic rate parameter.      |
 
 ## Matrix notation
 

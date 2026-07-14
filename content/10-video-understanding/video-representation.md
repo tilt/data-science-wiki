@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Video Representation
 
 A video representation is the form in which a system stores evidence from frames over time: raw clips, [optical-flow](optical-flow.md) fields, tubelet tokens, per-frame embeddings, object tracks, or pooled clip vectors. It determines what information is easy to use later. A representation built from frame means may support retrieval, while a track-level representation is better for [person tracking and track aggregation](person-tracking-and-track-aggregation.md).
@@ -37,12 +38,12 @@ This is not a universal best representation; it shows the contract. The first te
 
 For four frame embeddings
 
-| frame | embedding |
-|---:|---:|
-| 1 | $(1.0,0.0)$ |
-| 2 | $(0.8,0.2)$ |
-| 3 | $(0.2,0.9)$ |
-| 4 | $(-0.1,1.0)$ |
+| frame |    embedding |
+| ----: | -----------: |
+|     1 |  $(1.0,0.0)$ |
+|     2 |  $(0.8,0.2)$ |
+|     3 |  $(0.2,0.9)$ |
+|     4 | $(-0.1,1.0)$ |
 
 the mean embedding is
 

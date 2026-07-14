@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Neural Network Fundamentals
 
 A neural network is a differentiable function assembled from affine maps and nonlinearities. The simplest dense layer computes

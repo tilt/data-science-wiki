@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Query Rewriting
 
 Query rewriting converts a user request into one or more search queries for [retrieval pipelines](retrieval-pipelines.md). It helps [RAG](rag.md) when the user uses pronouns, conversational context, task language, or partial identifiers that differ from source documents.
@@ -40,7 +41,7 @@ The rewrite should be logged beside the original request. If evaluation only see
     "enterprise refund approval threshold 700 EUR",
     "manager approval refund policy enterprise account"
   ],
-  "filters": {"document_type": "policy", "policy_version": "2026-07"},
+  "filters": { "document_type": "policy", "policy_version": "2026-07" },
   "must_preserve": ["amount", "customer_type", "approval_action"]
 }
 ```

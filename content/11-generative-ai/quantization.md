@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Quantization
 
 Quantization stores model values in lower precision, commonly int8 or 4-bit formats, to reduce memory bandwidth and serving cost. It matters most for [model serving](model-serving.md) of local models, [cost and latency optimization](cost-and-latency-optimization.md), and [local versus hosted models](local-versus-hosted-models.md) decisions.
@@ -38,22 +39,22 @@ $$
 s=\frac{1.70}{127}\approx0.01339.
 $$
 
-| Value $x$ | Quantized $q=\operatorname{round}(x/s)$ | Reconstructed $\hat x=sq$ | Error |
-| ---: | ---: | ---: | ---: |
-| -1.25 | -93 | -1.245 | -0.005 |
-| -0.10 | -7 | -0.094 | -0.006 |
-| 0.00 | 0 | 0.000 | 0.000 |
-| 0.80 | 60 | 0.803 | -0.003 |
-| 1.70 | 127 | 1.700 | 0.000 |
+| Value $x$ | Quantized $q=\operatorname{round}(x/s)$ | Reconstructed $\hat x=sq$ |  Error |
+| --------: | --------------------------------------: | ------------------------: | -----: |
+|     -1.25 |                                     -93 |                    -1.245 | -0.005 |
+|     -0.10 |                                      -7 |                    -0.094 | -0.006 |
+|      0.00 |                                       0 |                     0.000 |  0.000 |
+|      0.80 |                                      60 |                     0.803 | -0.003 |
+|      1.70 |                                     127 |                     1.700 |  0.000 |
 
 The endpoint maps exactly to 127 by construction. Intermediate values absorb rounding error, so real models need layer-wise and task-level evaluation after quantization rather than relying on memory savings alone.
 
-| Choice | Trade-off |
-| --- | --- |
-| Weight-only quantization | Reduces model memory with fewer activation changes. |
+| Choice                             | Trade-off                                                 |
+| ---------------------------------- | --------------------------------------------------------- |
+| Weight-only quantization           | Reduces model memory with fewer activation changes.       |
 | Weight-and-activation quantization | Can improve throughput but is more sensitive to outliers. |
-| Per-tensor scale | Simpler metadata, worse fit for heterogeneous channels. |
-| Per-channel scale | More metadata, often lower reconstruction error. |
+| Per-tensor scale                   | Simpler metadata, worse fit for heterogeneous channels.   |
+| Per-channel scale                  | More metadata, often lower reconstruction error.          |
 
 ## Caveats
 

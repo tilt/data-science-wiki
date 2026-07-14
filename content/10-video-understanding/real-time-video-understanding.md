@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Real-Time Video Understanding
 
 Real-time video understanding turns a model into a streaming system. The question is not only whether the model is accurate, but whether it can sample, buffer, infer, aggregate, and fire before the deadline. It connects directly to [sliding-window inference](sliding-window-inference.md), [trigger-point prediction](trigger-point-prediction.md), and [person tracking and track aggregation](person-tracking-and-track-aggregation.md).
@@ -44,12 +45,12 @@ $$
 
 clips per second, so each clip has a compute budget of $1000/10=100$ ms before the system falls behind. If the model takes 42 ms, it has throughput headroom. Latency is different:
 
-| component | value |
-|---|---:|
+| component                |                    value |
+| ------------------------ | -----------------------: |
 | 8-frame buffer at 30 fps | $8\cdot1000/30=266.7$ ms |
-| model inference | 42.0 ms |
-| end-to-end subtotal | 308.7 ms |
-| deadline | 500.0 ms |
+| model inference          |                  42.0 ms |
+| end-to-end subtotal      |                 308.7 ms |
+| deadline                 |                 500.0 ms |
 
 The setup meets a 500 ms deadline, but the buffer contributes far more latency than the model. Reducing model time alone would not help much unless the buffering policy also changes.
 

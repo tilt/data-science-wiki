@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Evaluation Metrics
 
 Evaluation metrics are loss or scoring functions used after fitting to estimate usefulness. The metric must match the prediction type and decision cost: RMSE belongs to [regression](regression.md), precision and recall to [classification](classification.md), and Brier/log loss to probability quality and [calibration](calibration.md).

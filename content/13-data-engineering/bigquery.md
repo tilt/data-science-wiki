@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # BigQuery
 
 BigQuery is a managed analytical [data-warehouse](data-warehouses.md): users submit GoogleSQL, while Google manages storage, execution, and scaling. For data engineering, the design surface is table layout, query semantics, access policy, and cost control by bytes processed.

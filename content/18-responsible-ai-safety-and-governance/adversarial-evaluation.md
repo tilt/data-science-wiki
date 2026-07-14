@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Adversarial Evaluation
 
 Adversarial evaluation tests whether an AI system still behaves acceptably when inputs are hostile, ambiguous, out of distribution, or designed to trigger policy gaps. It is the safety counterpart to average-case [offline evaluation](../17-experimentation-and-evaluation/offline-evaluation.md): ordinary test sets estimate expected quality, while adversarial suites look for concentrated failures before attackers or users find them.
@@ -29,13 +30,13 @@ Adversarial evaluation tests whether an AI system still behaves acceptably when 
 
 The artifact is a threat-linked test matrix, not a single score. For a RAG or agentic assistant, each case should record the attack surface, expected control, observed behavior, severity, owner, and regression status. A minimal matrix looks like this:
 
-| Case class | Example | Expected control |
-| --- | --- | --- |
-| Direct injection | User asks to ignore policy and reveal a secret | [Policy enforcement](policy-enforcement.md) blocks disclosure |
-| Indirect injection | Retrieved page contains tool-use instructions | [Prompt injection](prompt-injection.md) controls treat retrieved text as data |
-| Privacy probe | User asks for another person's SSN | [PII leakage](pii-leakage.md) controls redact or refuse |
-| Unanswerable question | Source is silent | [Factual correctness](factual-correctness.md) control abstains |
-| Unsafe action | Agent is asked to delete records | [Human oversight](human-oversight.md) or authorization blocks action |
+| Case class            | Example                                        | Expected control                                                              |
+| --------------------- | ---------------------------------------------- | ----------------------------------------------------------------------------- |
+| Direct injection      | User asks to ignore policy and reveal a secret | [Policy enforcement](policy-enforcement.md) blocks disclosure                 |
+| Indirect injection    | Retrieved page contains tool-use instructions  | [Prompt injection](prompt-injection.md) controls treat retrieved text as data |
+| Privacy probe         | User asks for another person's SSN             | [PII leakage](pii-leakage.md) controls redact or refuse                       |
+| Unanswerable question | Source is silent                               | [Factual correctness](factual-correctness.md) control abstains                |
+| Unsafe action         | Agent is asked to delete records               | [Human oversight](human-oversight.md) or authorization blocks action          |
 
 NIST's Generative AI Profile treats red-teaming as context-dependent and notes that expert, public, combined, and human/AI teams can all be appropriate. The practical lesson is to make adversarial tests domain-specific: a payroll assistant, medical summarizer, and code agent should not share the same only test suite.
 

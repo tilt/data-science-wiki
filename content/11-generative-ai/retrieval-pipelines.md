@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Retrieval Pipelines
 
 A retrieval pipeline turns a changing corpus into ranked evidence for a model. In [RAG](rag.md), it spans ingestion, [chunking](chunking.md), embedding, lexical indexing, metadata filters, query rewriting, [hybrid retrieval](hybrid-retrieval.md), [reranking](reranking.md), context packing, and citation validation.
@@ -36,14 +37,12 @@ Those logs make failures diagnosable. A bad answer can come from missing ingesti
 {
   "trace_id": "ret-2026-07-12-1842",
   "query": "refund approval threshold for enterprise accounts",
-  "filters": {"acl": "support", "policy_version": "2026-07"},
+  "filters": { "acl": "support", "policy_version": "2026-07" },
   "candidate_sets": {
-    "bm25": [{"chunk_id": "refunds-007", "score": 13.8}],
-    "dense": [{"chunk_id": "refunds-011", "score": 0.78}]
+    "bm25": [{ "chunk_id": "refunds-007", "score": 13.8 }],
+    "dense": [{ "chunk_id": "refunds-011", "score": 0.78 }]
   },
-  "reranked": [
-    {"chunk_id": "refunds-007", "rank": 1, "score": 0.92}
-  ],
+  "reranked": [{ "chunk_id": "refunds-007", "rank": 1, "score": 0.92 }],
   "selected_for_context": ["refunds-007"]
 }
 ```

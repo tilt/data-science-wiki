@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Exponential Smoothing
 
 Exponential smoothing forecasts by maintaining a small set of states - usually level, optionally trend and seasonality - and updating them recursively when each new observation arrives. It is not just a smoothing trick for plots. ETS models turn those recursions into a statistical forecasting family with error, trend, and seasonal components.
@@ -39,15 +40,15 @@ The intuition is state updating. Each observation is partly signal and partly no
 With observations $20,21,19,22,24,23,25,26$ and $\alpha=0.4$, the level update is $\ell_t=0.4y_t+0.6\ell_{t-1}$:
 
 | Time | Observation | Smoothed level |
-| ---: | ---: | ---: |
-| 1 | 20 | 20.00 |
-| 2 | 21 | 20.40 |
-| 3 | 19 | 19.84 |
-| 4 | 22 | 20.70 |
-| 5 | 24 | 22.02 |
-| 6 | 23 | 22.41 |
-| 7 | 25 | 23.45 |
-| 8 | 26 | 24.47 |
+| ---: | ----------: | -------------: |
+|    1 |          20 |          20.00 |
+|    2 |          21 |          20.40 |
+|    3 |          19 |          19.84 |
+|    4 |          22 |          20.70 |
+|    5 |          24 |          22.02 |
+|    6 |          23 |          22.41 |
+|    7 |          25 |          23.45 |
+|    8 |          26 |          24.47 |
 
 The level moves toward new observations without jumping all the way to them. The one-step forecast from simple exponential smoothing is the latest level, so the next forecast is 24.47.
 

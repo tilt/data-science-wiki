@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Risk-Weighted Error Taxonomies
 
 A risk-weighted error taxonomy classifies what went wrong and how much it matters. It prevents harmless formatting issues from being averaged together with unsupported medical, legal, financial, privacy, or safety-critical claims. The taxonomy should be part of the [golden dataset](golden-datasets.md) schema and the [human evaluation](human-evaluation.md) rubric.
@@ -43,11 +44,11 @@ with weights chosen before evaluation. A production gate might allow minor forma
 For ten reviewed outputs, suppose the severity counts and weights are:
 
 | severity | count | weight | contribution |
-| --- | ---: | ---: | ---: |
-| ok | 3 | 0 | 0 |
-| minor | 3 | 1 | 3 |
-| major | 2 | 5 | 10 |
-| critical | 2 | 20 | 40 |
+| -------- | ----: | -----: | -----------: |
+| ok       |     3 |      0 |            0 |
+| minor    |     3 |      1 |            3 |
+| major    |     2 |      5 |           10 |
+| critical |     2 |     20 |           40 |
 
 The raw error rate is $(3+2+2)/10=0.70$, the severe-error rate is $(2+2)/10=0.40$, and the risk-weighted total is $3+10+40=53$. The raw error rate is bad, but the more important signal is the two critical failures. A system with lower average score but zero critical errors may be preferable in the comparison frame for [generative AI and classical ML systems](comparing-generative-ai-and-classical-ml-systems.md).
 

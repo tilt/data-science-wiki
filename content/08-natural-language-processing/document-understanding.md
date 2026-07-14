@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Document Understanding
 
 Document understanding extracts meaning from pages where text alone is incomplete: forms, receipts, contracts, tables, scans, handwriting, stamps, and layout. It often starts with [OCR and handwritten text recognition](ocr-and-handwritten-text-recognition.md), then applies [information extraction](information-extraction.md), [named entity recognition](named-entity-recognition.md), table parsing, and validation rules.

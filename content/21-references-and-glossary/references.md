@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # References
 
 ## Summary
@@ -32,12 +33,12 @@ References connect topic pages to source material. The wiki uses human-readable 
 - Use official documentation for product or API usage.
 - Use secondary explanations only as supporting context, not as the sole source for technical claims.
 
-| Claim type | Best source | Why |
-| --- | --- | --- |
-| Algorithm definition or theorem | Original paper, textbook, or standard reference | Avoids inherited simplifications or changed notation. |
-| Library/API behavior | Official documentation for the exact project | Behavior can change across versions and providers. |
+| Claim type                           | Best source                                           | Why                                                             |
+| ------------------------------------ | ----------------------------------------------------- | --------------------------------------------------------------- |
+| Algorithm definition or theorem      | Original paper, textbook, or standard reference       | Avoids inherited simplifications or changed notation.           |
+| Library/API behavior                 | Official documentation for the exact project          | Behavior can change across versions and providers.              |
 | Benchmark result or model capability | Paper, technical report, or benchmark card with dates | Prevents stale leaderboard claims from becoming timeless prose. |
-| Governance or safety control | Standard, regulator, or recognized framework | Keeps policy claims tied to an auditable authority. |
+| Governance or safety control         | Standard, regulator, or recognized framework          | Keeps policy claims tied to an auditable authority.             |
 
 ## Page-level references
 

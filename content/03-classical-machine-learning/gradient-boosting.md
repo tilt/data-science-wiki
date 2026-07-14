@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Gradient Boosting
 
 Gradient boosting builds an additive model by fitting each new learner to the direction that most reduces the current loss. In tabular classical ML, the weak learner is usually a small [decision tree](decision-trees.md), giving a sequence of trees rather than the parallel averaging used by [random forests](random-forests.md).

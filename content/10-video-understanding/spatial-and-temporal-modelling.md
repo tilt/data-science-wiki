@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Spatial and Temporal Modelling
 
 Spatial modelling asks what is visible in each frame; temporal modelling asks how that evidence changes. A single frame may show a raised hand, but the sequence distinguishes waving, pointing, throwing, and stretching. This distinction runs through [video representation](video-representation.md), [3D convolutional networks](3d-convolutional-networks.md), [video transformers](video-transformers.md), and [optical flow](optical-flow.md).
@@ -38,14 +39,14 @@ A spatial-only model can treat frames independently or average them; a temporal 
 
 Two clips can have the same spatial summary and opposite temporal meaning:
 
-| frame | clip A feature | clip B feature |
-|---:|---:|---:|
-| 1 | 0 | 3 |
-| 2 | 1 | 2 |
-| 3 | 2 | 1 |
-| 4 | 3 | 0 |
-| mean | 1.5 | 1.5 |
-| successive differences | $(+1,+1,+1)$ | $(-1,-1,-1)$ |
+|                  frame | clip A feature | clip B feature |
+| ---------------------: | -------------: | -------------: |
+|                      1 |              0 |              3 |
+|                      2 |              1 |              2 |
+|                      3 |              2 |              1 |
+|                      4 |              3 |              0 |
+|                   mean |            1.5 |            1.5 |
+| successive differences |   $(+1,+1,+1)$ |   $(-1,-1,-1)$ |
 
 The frame average is identical for both clips, so a spatial-only pooling representation cannot distinguish them. The temporal derivative tells the actual story: clip A is increasing over time, while clip B is decreasing. This is why temporal models keep order-sensitive evidence instead of reducing every frame to one pooled statistic too early.
 

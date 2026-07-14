@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Random Variables
 
 A random variable is a function from outcomes to values, not the realized value itself. Given a [probability space](probability-spaces.md) $(\Omega,\mathcal F,P)$, a real-valued random variable is a measurable map $X:\Omega\to\mathbb R$. Its distribution is the induced probability law
@@ -38,13 +39,13 @@ The same outcome can feed many random variables. For two dice, one variable migh
 Let $X$ be the maximum of two fair dice. For $X=k$, at least one die must show $k$ and neither die can exceed $k$. The count is therefore $k^2-(k-1)^2=2k-1$ out of 36 ordered outcomes.
 
 | $k$ | Count | $P(X=k)$ |
-| --- | ---: | ---: |
-| 1 | 1 | $1/36$ |
-| 2 | 3 | $3/36$ |
-| 3 | 5 | $5/36$ |
-| 4 | 7 | $7/36$ |
-| 5 | 9 | $9/36$ |
-| 6 | 11 | $11/36$ |
+| --- | ----: | -------: |
+| 1   |     1 |   $1/36$ |
+| 2   |     3 |   $3/36$ |
+| 3   |     5 |   $5/36$ |
+| 4   |     7 |   $7/36$ |
+| 5   |     9 |   $9/36$ |
+| 6   |    11 |  $11/36$ |
 
 The expectation is
 

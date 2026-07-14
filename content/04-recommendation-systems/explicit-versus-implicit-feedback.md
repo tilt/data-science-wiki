@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Explicit Versus Implicit Feedback
 
 Explicit feedback is a stated judgment: stars, thumbs, survey answers, or direct preferences. [Implicit feedback](implicit-feedback.md) is behavioral evidence: clicks, plays, purchases, dwell time, or skips. Recommenders often have much more implicit data, but explicit data has clearer semantics.
@@ -46,10 +47,10 @@ which is used by [weighted matrix factorization](weighted-matrix-factorization.m
 Compare three explicit ratings with three implicit event counts:
 
 | Item | Explicit rating | Implicit count | Preference $p_{ui}$ | Confidence $1+2\log(1+r_{ui})$ |
-| --- | ---: | ---: | ---: | ---: |
-| A | 5 | 20 | 1 | 7.09 |
-| B | 4 | 2 | 1 | 3.20 |
-| C | 1 | 0 | 0 | 1.00 |
+| ---- | --------------: | -------------: | ------------------: | -----------------------------: |
+| A    |               5 |             20 |                   1 |                           7.09 |
+| B    |               4 |              2 |                   1 |                           3.20 |
+| C    |               1 |              0 |                   0 |                           1.00 |
 
 The explicit mean rating is $(5+4+1)/3=3.333$, and the one-star rating is a negative signal. The implicit conversion only knows that two items were engaged with and one was not, so it must be evaluated differently in [ranking](ranking.md) and [recommender evaluation](evaluation-of-recommenders.md).
 

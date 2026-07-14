@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Demand Prediction in Logistics
 
 Demand prediction in logistics forecasts future units, parcels, pallets, or trips so inventory, labor, vehicles, and warehouse slots are available at the right place and time. Inputs are usually historical shipments, orders, calendar features, price and promotion signals, stockouts, lead times, weather, and lane constraints. The target must be tied to a decision: item-store units for replenishment, depot volume for labor scheduling, or origin-destination demand for vehicle routing.

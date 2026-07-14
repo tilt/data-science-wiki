@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Security
 
 AI security protects models, data, prompts, tools, outputs, and users from misuse or compromise. It includes ordinary application security plus AI-specific risks: [prompt injection](prompt-injection.md), data poisoning, model extraction, sensitive information disclosure, excessive agency, unsafe tool use, and corrupted retrieval content.

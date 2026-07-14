@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Image Classification
 
 Image classification maps an entire image to one or more labels. It is appropriate when the image-level category is the deliverable; if the user needs object location, use [object detection](object-detection.md) or [semantic segmentation](semantic-segmentation.md) instead.

@@ -1,7 +1,7 @@
 ---
 title: Navigation
 slug: home-and-navigation/navigation
-description: "Task-oriented routes through the wiki for learning, interviewing, project storytelling, and reference lookup."
+description: "Task-oriented routes through the wiki for learning, focused review, project explanation, and reference lookup."
 area: home-and-navigation
 topics:
   - navigation
@@ -15,7 +15,7 @@ related:
   - index.md
   - knowledge-map.md
   - learning-paths.md
-  - ../21-interview-preparation/index.md
+  - technical-answer-patterns.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -24,15 +24,15 @@ last_reviewed: 2026-07-11
 
 ## Summary
 
-Navigation explains how to move through the wiki by task: learning, interview preparation, production design, or reference lookup. It complements the numbered taxonomy.
+Navigation explains how to move through the wiki by task: learning, focused review, production design, or reference lookup. It complements the numbered taxonomy.
 
 ## Routes
 
-Use subject indexes when studying a domain from first principles. Use [learning paths](learning-paths.md) for sequenced study and [interview preparation](../21-interview-preparation/index.md) when preparing concise answers. Use the [references and glossary](../22-references-and-glossary/index.md) pages when looking up terminology.
+Use subject indexes when studying a domain from first principles. Use [learning paths](learning-paths.md) for sequenced study and [technical answer patterns](technical-answer-patterns.md) when preparing concise explanations. Use the [references and glossary](../21-references-and-glossary/index.md) pages when looking up terminology.
 
 ## Example
 
-If preparing for a recommendation-system interview, start at the interview page, follow links to candidate generation and ranking, then use evaluation and online-experiment pages to strengthen the production answer. If starting from an unfamiliar topic, use the [knowledge map](knowledge-map.md) first to identify prerequisites.
+If preparing to explain recommendation systems, start at the recommender learning path, follow links to candidate generation and ranking, then use evaluation and online-experiment pages to strengthen the production answer. If starting from an unfamiliar topic, use the [knowledge map](knowledge-map.md) first to identify prerequisites.
 
 ## Maintenance rule
 

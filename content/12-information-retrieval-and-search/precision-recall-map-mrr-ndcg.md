@@ -23,6 +23,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Precision, Recall, MAP, MRR, and NDCG
 
 These metrics summarize different user promises made by a ranked retrieval system. This page is the compact glossary; [Ranking and Retrieval Metrics](ranking-and-retrieval-metrics.md) is the more detailed reference.

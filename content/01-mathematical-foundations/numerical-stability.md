@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Numerical Stability
 
 Numerical stability is about whether an algorithm preserves useful accuracy under finite-precision arithmetic. Two formulas can be algebraically identical but behave differently when exponentials overflow, nearly equal numbers subtract, or a matrix is ill-conditioned.

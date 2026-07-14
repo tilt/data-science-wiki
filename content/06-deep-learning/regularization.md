@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Regularization
 
 Regularization changes the training problem so a neural network is less free to memorize. In deep learning this can be explicit penalties in the [loss](loss-functions.md), stochastic training behavior such as dropout, data augmentation, early stopping, or freezing layers during [fine-tuning](fine-tuning.md). It overlaps with but is not identical to [classical regularization](../03-classical-machine-learning/regularization.md).

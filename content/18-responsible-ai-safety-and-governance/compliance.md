@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Compliance
 
 Compliance is the workflow that maps an AI system to obligations and evidence. It is not a launch checkbox: it starts with [risk classification](risk-classification.md), then turns law, standards, contracts, and internal policy into controls that can be tested, approved, monitored, and audited.
@@ -29,12 +30,12 @@ Compliance is the workflow that maps an AI system to obligations and evidence. I
 
 A compliance register should be concrete enough that an engineer can produce the evidence:
 
-| Obligation source | Trigger | Required evidence | Linked control |
-| --- | --- | --- | --- |
-| EU AI Act | Use case falls in high-risk area or prohibited practice review | Risk classification, data governance, testing, logging, human oversight | [auditability](auditability.md), [human oversight](human-oversight.md) |
-| GDPR | Personal data processed in prompts, retrieval, training, logs, or review queues | Purpose, lawful basis, minimization, retention, DPIA where high risk | [privacy](privacy.md), [PII leakage](pii-leakage.md) |
-| NIST AI RMF | Organization adopts AI risk management controls | Map/measure/manage artifacts, risk treatment owners | [policy enforcement](policy-enforcement.md) |
-| Internal release policy | Model, threshold, prompt, or KB behavior changes | Change ticket, evaluation evidence, approval, rollback plan | [governance of model and knowledge base changes](governance-of-model-and-knowledge-base-changes.md) |
+| Obligation source       | Trigger                                                                         | Required evidence                                                       | Linked control                                                                                      |
+| ----------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| EU AI Act               | Use case falls in high-risk area or prohibited practice review                  | Risk classification, data governance, testing, logging, human oversight | [auditability](auditability.md), [human oversight](human-oversight.md)                              |
+| GDPR                    | Personal data processed in prompts, retrieval, training, logs, or review queues | Purpose, lawful basis, minimization, retention, DPIA where high risk    | [privacy](privacy.md), [PII leakage](pii-leakage.md)                                                |
+| NIST AI RMF             | Organization adopts AI risk management controls                                 | Map/measure/manage artifacts, risk treatment owners                     | [policy enforcement](policy-enforcement.md)                                                         |
+| Internal release policy | Model, threshold, prompt, or KB behavior changes                                | Change ticket, evaluation evidence, approval, rollback plan             | [governance of model and knowledge base changes](governance-of-model-and-knowledge-base-changes.md) |
 
 The register should include jurisdiction, product owner, evidence owner, review cadence, and residual risk. For example, a hiring recommender needs [fairness](fairness.md) evidence, reviewer instructions, appeal handling, and records of any automated ranking effect on applicants.
 

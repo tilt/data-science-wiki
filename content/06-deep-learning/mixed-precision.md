@@ -29,6 +29,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-14
 ---
+
 # Mixed Precision
 
 Mixed precision trains or serves neural networks with more than one floating-point format. Throughput-heavy operations such as matrix multiplies run in lower precision, while numerically sensitive pieces stay in FP32 or accumulate into FP32. The goal is higher accelerator throughput and lower memory traffic without silently changing the optimization problem.
@@ -39,12 +40,12 @@ Mixed precision is closely tied to [numerical stability](../01-mathematical-foun
 
 A floating-point number stores a sign, an exponent, and a significand, often called the mantissa. The exponent controls dynamic range: how large or tiny a value can be before overflow or underflow. The mantissa controls precision: how many nearby values can be distinguished.
 
-| Format | Exponent bits | Mantissa bits | Practical meaning |
-| --- | ---: | ---: | --- |
-| FP32 | 8 | 23 | baseline training precision with wide range and good per-value precision |
-| FP16 | 5 | 10 | faster and smaller, but limited exponent range makes gradient underflow/overflow more likely |
-| BF16 | 8 | 7 | FP32-like exponent range with coarser mantissa; often robust without aggressive loss scaling |
-| TF32 | 8 | 10 | NVIDIA tensor-core compute format for FP32 inputs; range like FP32, precision closer to FP16 mantissa |
+| Format | Exponent bits | Mantissa bits | Practical meaning                                                                                     |
+| ------ | ------------: | ------------: | ----------------------------------------------------------------------------------------------------- |
+| FP32   |             8 |            23 | baseline training precision with wide range and good per-value precision                              |
+| FP16   |             5 |            10 | faster and smaller, but limited exponent range makes gradient underflow/overflow more likely          |
+| BF16   |             8 |             7 | FP32-like exponent range with coarser mantissa; often robust without aggressive loss scaling          |
+| TF32   |             8 |            10 | NVIDIA tensor-core compute format for FP32 inputs; range like FP32, precision closer to FP16 mantissa |
 
 FP16 and BF16 are both 16-bit formats, but they spend those bits differently. FP16 keeps more mantissa bits than BF16, so it can represent nearby numbers more finely around moderate magnitudes. BF16 keeps the same exponent width as FP32, so it can represent very large and very small magnitudes across a much wider range. That is why BF16 often needs less loss scaling than FP16, even though each individual BF16 value is rounded more coarsely.
 
@@ -66,13 +67,13 @@ Dynamic loss scaling automates this. It increases the scale when training is sta
 
 Automatic mixed precision systems choose dtypes per operation. They do not simply cast the whole model to FP16 or BF16.
 
-| Operation family | Common mixed-precision behavior | Reason |
-| --- | --- | --- |
-| Matrix multiply and convolution | run in FP16, BF16, or TF32 with higher-precision accumulation where supported | tensor cores make these operations much faster and memory efficient |
-| Softmax, log-sum-exp, and cross-entropy internals | often use FP32 for reductions or exponentials | exponentials and sums are sensitive to overflow and cancellation |
-| Layer norm and batch norm statistics | often keep reductions/statistics in FP32 | mean and variance estimates can lose accuracy when summed in low precision |
-| Optimizer state | often stored in FP32 | momentum, variance estimates, and weight updates accumulate many small changes |
-| Model weights | may keep FP32 master copy, lower-precision working copy, or sharded mixed states | balances update accuracy, memory, and distributed communication cost |
+| Operation family                                  | Common mixed-precision behavior                                                  | Reason                                                                         |
+| ------------------------------------------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| Matrix multiply and convolution                   | run in FP16, BF16, or TF32 with higher-precision accumulation where supported    | tensor cores make these operations much faster and memory efficient            |
+| Softmax, log-sum-exp, and cross-entropy internals | often use FP32 for reductions or exponentials                                    | exponentials and sums are sensitive to overflow and cancellation               |
+| Layer norm and batch norm statistics              | often keep reductions/statistics in FP32                                         | mean and variance estimates can lose accuracy when summed in low precision     |
+| Optimizer state                                   | often stored in FP32                                                             | momentum, variance estimates, and weight updates accumulate many small changes |
+| Model weights                                     | may keep FP32 master copy, lower-precision working copy, or sharded mixed states | balances update accuracy, memory, and distributed communication cost           |
 
 The reason is mathematical, not cosmetic. A matrix multiply performs many multiply-adds and can tolerate lower input precision if accumulation is handled well. A softmax denominator sums exponentials, so overflow, underflow, or cancellation can change probabilities directly. That connects mixed precision to stable softmax and [cross-entropy](../01-mathematical-foundations/cross-entropy.md) implementations.
 
@@ -109,13 +110,13 @@ FP16 can be efficient and accurate, but it is more sensitive to scale. Training 
 
 This distinction explains common behavior:
 
-| Observation | Explanation |
-| --- | --- |
-| FP16 gradients can become zero | values below the representable range underflow |
-| FP16 training may produce `inf` gradients | large intermediate values exceed the exponent range |
-| BF16 often trains without loss scaling | its exponent range is close to FP32 |
-| BF16 may be noisier for tiny value differences | fewer mantissa bits mean coarser rounding |
-| FP32 master weights can still help | small optimizer updates accumulate more faithfully in FP32 |
+| Observation                                    | Explanation                                                |
+| ---------------------------------------------- | ---------------------------------------------------------- |
+| FP16 gradients can become zero                 | values below the representable range underflow             |
+| FP16 training may produce `inf` gradients      | large intermediate values exceed the exponent range        |
+| BF16 often trains without loss scaling         | its exponent range is close to FP32                        |
+| BF16 may be noisier for tiny value differences | fewer mantissa bits mean coarser rounding                  |
+| FP32 master weights can still help             | small optimizer updates accumulate more faithfully in FP32 |
 
 ## Caveats
 

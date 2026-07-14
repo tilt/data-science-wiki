@@ -28,6 +28,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-12
 ---
+
 # RAG Architecture Comparison
 
 [RAG](rag.md) is a pattern, not a single design. The same goal — answer from external evidence with citations — can be built as several architectures that trade auditability, recall, latency, and operational cost differently. This page compares three families along one axis: how much retrieval machinery sits between the question and the evidence. They range from a retrieve-first loop with no index, through an indexed hybrid retriever, to a two-phase design that separates evidence curation from answer synthesis.
@@ -71,7 +72,7 @@ flowchart TD
   K --> L[Answer with citations]
 ```
 
-Rank fusion is what makes the pair robust: BM25 and dense scores are on incompatible scales, so fusing by *rank* rather than raw score avoids calibration. For retrievers $R$ and a rank constant $k$, $\operatorname{RRF}(d)=\sum_{r\in R} 1/(k+\operatorname{rank}_r(d))$ — chunks found by both methods rise, while a strong single-method hit stays eligible.
+Rank fusion is what makes the pair robust: BM25 and dense scores are on incompatible scales, so fusing by _rank_ rather than raw score avoids calibration. For retrievers $R$ and a rank constant $k$, $\operatorname{RRF}(d)=\sum_{r\in R} 1/(k+\operatorname{rank}_r(d))$ — chunks found by both methods rise, while a strong single-method hit stays eligible.
 
 - **Strengths:** BM25 handles exact terms, identifiers, codes, and numbers; dense embeddings handle paraphrase and concept-level matches; RRF avoids comparing incompatible scores; evidence stays auditable at chunk level. A good default for medium-sized corpora.
 - **Limitations:** needs an indexing pipeline and an available embedding model; the index must be refreshed when source data changes; dense retrieval is less interpretable than lexical; and chunking mistakes degrade both retrieval and citation quality.
@@ -100,15 +101,15 @@ flowchart TD
 
 ## Comparison
 
-| Dimension | Loop agent | Hybrid RAG agent | Context-curation agent |
-| --- | --- | --- | --- |
-| Retrieval method | Exact search / read tools | BM25 + dense + RRF | BM25 + dense + RRF, plus curation |
-| Index required | No | Yes | Yes |
-| Embeddings required | No | Yes | Yes |
-| Handles paraphrase | Weak | Good | Good |
-| Auditability | Very high | High | Very high |
-| Latency | Low to medium | Medium | Higher |
-| Best use | Baseline, debugging, small corpora | Default production candidate | Complex multi-evidence questions |
+| Dimension           | Loop agent                         | Hybrid RAG agent             | Context-curation agent            |
+| ------------------- | ---------------------------------- | ---------------------------- | --------------------------------- |
+| Retrieval method    | Exact search / read tools          | BM25 + dense + RRF           | BM25 + dense + RRF, plus curation |
+| Index required      | No                                 | Yes                          | Yes                               |
+| Embeddings required | No                                 | Yes                          | Yes                               |
+| Handles paraphrase  | Weak                               | Good                         | Good                              |
+| Auditability        | Very high                          | High                         | Very high                         |
+| Latency             | Low to medium                      | Medium                       | Higher                            |
+| Best use            | Baseline, debugging, small corpora | Default production candidate | Complex multi-evidence questions  |
 
 ## Choosing an architecture
 

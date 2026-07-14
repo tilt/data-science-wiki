@@ -26,6 +26,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # Policy Gradients and Actor-Critic Methods
 
 Policy-gradient methods optimize the policy directly. Instead of learning only which action has the highest value, they adjust the parameters of $\pi_\theta(a\mid s)$ so actions that led to high return become more likely.
@@ -53,9 +54,9 @@ where $A^\pi(s,a)=Q^\pi(s,a)-V^\pi(s)$ is the advantage. Positive advantage mean
 
 Actor-critic methods split the work:
 
-| Part | Learns | Role |
-| --- | --- | --- |
-| Actor | $\pi_\theta(a\mid s)$ | chooses actions |
+| Part   | Learns                       | Role                                  |
+| ------ | ---------------------------- | ------------------------------------- |
+| Actor  | $\pi_\theta(a\mid s)$        | chooses actions                       |
 | Critic | $V_\psi(s)$ or $Q_\psi(s,a)$ | estimates future return and advantage |
 
 The critic reduces variance because the actor no longer treats every sampled return as equally informative. The actor still learns from sampled experience, but the critic supplies a shaped learning signal.

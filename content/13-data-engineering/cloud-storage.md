@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Cloud Storage
 
 Cloud object storage is the durable file layer behind many lakes, warehouses, exports, and model datasets. In data engineering it is usually not a filesystem replacement; it is an object namespace with explicit paths, metadata, lifecycle policy, and access controls.

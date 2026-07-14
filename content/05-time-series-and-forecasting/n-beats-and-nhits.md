@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # N-BEATS and N-HiTS
 
 N-BEATS and N-HiTS are neural forecasting architectures built around direct multi-step forecasts from fixed history windows. They are not generic sequence encoders like [RNN and LSTM forecasting](rnn-and-lstm-forecasting.md) or attention models. Their distinctive idea is to stack blocks that repeatedly explain part of the input history and contribute part of the forecast.

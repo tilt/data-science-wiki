@@ -21,19 +21,20 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # Early Neural Networks to Deep Learning
 
 Deep learning was not just the rediscovery of neural networks. The old idea of learned weighted units became practical only when [backpropagation](../06-deep-learning/backpropagation.md), larger datasets, GPUs, better nonlinearities, initialization, regularization, and software ecosystems aligned.
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 1958 | Frank Rosenblatt published the perceptron as a trainable model for pattern recognition. | It made learning weights from examples concrete, but single-layer perceptrons had limited representational power. |
-| 1986 | Rumelhart, Hinton, and Williams published "Learning representations by back-propagating errors." | The chain rule gave multi-layer networks an efficient training procedure, linking credit assignment to differentiable computation. |
-| 2006 | Hinton, Osindero, and Teh published a fast learning algorithm for deep belief nets. | Layer-wise pretraining helped revive interest in deep architectures when direct optimization was still difficult. |
-| 2012 | Krizhevsky, Sutskever, and Hinton's AlexNet won large-scale ImageNet recognition with a deep CNN trained on GPUs. | [Convolutional neural networks](../06-deep-learning/convolutional-neural-networks.md), data scale, and GPU throughput showed that deep models could beat hand-engineered vision pipelines. |
-| 2010s | ReLU activations, dropout, batch normalization, residual networks, and large frameworks made deep training routine. | The bottleneck shifted from whether deep networks could train to which architecture, data mixture, and compute budget would generalize. |
+| Year  | Milestone                                                                                                           | Why it followed                                                                                                                                                                            |
+| ----- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 1958  | Frank Rosenblatt published the perceptron as a trainable model for pattern recognition.                             | It made learning weights from examples concrete, but single-layer perceptrons had limited representational power.                                                                          |
+| 1986  | Rumelhart, Hinton, and Williams published "Learning representations by back-propagating errors."                    | The chain rule gave multi-layer networks an efficient training procedure, linking credit assignment to differentiable computation.                                                         |
+| 2006  | Hinton, Osindero, and Teh published a fast learning algorithm for deep belief nets.                                 | Layer-wise pretraining helped revive interest in deep architectures when direct optimization was still difficult.                                                                          |
+| 2012  | Krizhevsky, Sutskever, and Hinton's AlexNet won large-scale ImageNet recognition with a deep CNN trained on GPUs.   | [Convolutional neural networks](../06-deep-learning/convolutional-neural-networks.md), data scale, and GPU throughput showed that deep models could beat hand-engineered vision pipelines. |
+| 2010s | ReLU activations, dropout, batch normalization, residual networks, and large frameworks made deep training routine. | The bottleneck shifted from whether deep networks could train to which architecture, data mixture, and compute budget would generalize.                                                    |
 
 ## Historical mechanism
 

@@ -17,7 +17,6 @@ const pageTypes = new Set([
   "comparison",
   "case-study",
   "history",
-  "interview-question",
   "reference",
 ])
 const required = [
@@ -56,8 +55,7 @@ const expectedAreas = [
   "18-responsible-ai-safety-and-governance",
   "19-domain-applications",
   "20-history-of-ai-and-machine-learning",
-  "21-interview-preparation",
-  "22-references-and-glossary",
+  "21-references-and-glossary",
 ]
 const bibliographyPath = path.join(root, "references", "bibliography.yml")
 const bibliography = fs.existsSync(bibliographyPath)
@@ -102,6 +100,24 @@ const warn = (msg) => {
 for (const area of expectedAreas) {
   const index = path.join(content, area, "index.md")
   if (!fs.existsSync(index)) fail("missing top-level index " + path.relative(root, index))
+}
+
+const expectedAreaSet = new Set(expectedAreas)
+const topLevelAreas = fs
+  .readdirSync(content, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && /^\d{2}-/.test(entry.name))
+  .map((entry) => entry.name)
+  .sort()
+
+for (const area of topLevelAreas) {
+  if (!expectedAreaSet.has(area)) fail("unexpected top-level area " + area)
+}
+
+for (const [index, area] of expectedAreas.entries()) {
+  const prefix = String(index).padStart(2, "0") + "-"
+  if (!area.startsWith(prefix)) {
+    fail(`top-level area numbering is not sequential: expected ${prefix} but found ${area}`)
+  }
 }
 
 for (const [key, entry] of Object.entries(bibliography || {})) {

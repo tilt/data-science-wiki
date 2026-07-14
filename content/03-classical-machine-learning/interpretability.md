@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Interpretability
 
 Interpretability connects a fitted model's behavior to features, examples, and decisions. A [decision tree](decision-trees.md) is directly readable as rules; a [linear model](linear-models.md) exposes coefficients; a [random forest](random-forests.md) usually needs post-hoc tools such as permutation importance or partial dependence.

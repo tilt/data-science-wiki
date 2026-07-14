@@ -24,6 +24,7 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # SVD versus Matrix Factorization
 
 [Classical SVD](classical-svd.md) decomposes a complete matrix. Recommender [matrix factorization](matrix-factorization.md) learns a predictive model from sparse observed or weighted interactions. They share low-rank geometry, but their objectives encode different assumptions about missing values.

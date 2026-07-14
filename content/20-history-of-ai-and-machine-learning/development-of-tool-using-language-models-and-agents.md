@@ -21,18 +21,19 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # Development of Tool-Using Language Models and Agents
 
 Tool use developed because fluent language models still failed at tasks that ordinary software handles cleanly: arithmetic, search, database lookup, code execution, and transactions. The historical move was from asking a model to answer directly toward wrapping it in [tool schemas](../11-generative-ai/tool-schemas.md), execution policies, and [agent loops](../11-generative-ai/agent-loops.md).
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 2022 | Karpas and coauthors described MRKL systems: modular language-model systems connected to external knowledge and reasoning modules. | The paper framed tool use as a systems architecture problem, not a single-model capability. |
-| 2022 | Yao and coauthors introduced ReAct, prompting language models to interleave reasoning traces with actions. | Chain-of-thought helped planning, but actions let the model inspect environments or retrieve facts before continuing. |
-| 2023 | Schick and coauthors introduced Toolformer, training a model to decide which API calls to insert and how to use results. | Tool calls moved from hand-written demonstrations toward self-supervised data creation for API use. |
-| 2020s | Application stacks standardized structured calls, permission checks, retrieval tools, code tools, and stopping rules. | The hard part became [tool routing](../11-generative-ai/tool-routing.md): selecting the right action, validating arguments, and deciding when the task is done. |
+| Year  | Milestone                                                                                                                          | Why it followed                                                                                                                                                 |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2022  | Karpas and coauthors described MRKL systems: modular language-model systems connected to external knowledge and reasoning modules. | The paper framed tool use as a systems architecture problem, not a single-model capability.                                                                     |
+| 2022  | Yao and coauthors introduced ReAct, prompting language models to interleave reasoning traces with actions.                         | Chain-of-thought helped planning, but actions let the model inspect environments or retrieve facts before continuing.                                           |
+| 2023  | Schick and coauthors introduced Toolformer, training a model to decide which API calls to insert and how to use results.           | Tool calls moved from hand-written demonstrations toward self-supervised data creation for API use.                                                             |
+| 2020s | Application stacks standardized structured calls, permission checks, retrieval tools, code tools, and stopping rules.              | The hard part became [tool routing](../11-generative-ai/tool-routing.md): selecting the right action, validating arguments, and deciding when the task is done. |
 
 ## Historical mechanism
 

@@ -30,6 +30,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-10
 ---
+
 # Mathematical Foundations
 
 ## Summary
@@ -40,13 +41,13 @@ The goal is not abstract proof for its own sake. Each page should answer a model
 
 ## Study Route
 
-| Need | Start with | Then read |
-| --- | --- | --- |
-| Understand model inputs and weights | [Vectors and Matrices](vectors-and-matrices.md), [Matrix Multiplication](matrix-multiplication.md) | [Rank](rank.md), [Orthogonality](orthogonality.md), [Norms and Distances](norms-and-distances.md) |
-| Understand embeddings and compression | [Singular Value Decomposition](singular-value-decomposition.md) | [Low-Rank Approximation](low-rank-approximation.md), [Matrix Decompositions](matrix-decompositions.md) |
-| Understand training | [Calculus](calculus.md), [Gradients](gradients.md) | [Gradient Descent](gradient-descent.md), [Stochastic Gradient Descent](stochastic-gradient-descent.md), [Optimization](optimization.md) |
-| Understand losses and distributions | [Entropy](entropy.md), [Cross Entropy](cross-entropy.md) | [KL Divergence](kl-divergence.md), [Mutual Information](mutual-information.md) |
-| Understand implementation risk | [Numerical Stability](numerical-stability.md) | [Constrained Optimization](constrained-optimization.md), [Convex Optimization](convex-optimization.md) |
+| Need                                  | Start with                                                                                         | Then read                                                                                                                               |
+| ------------------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Understand model inputs and weights   | [Vectors and Matrices](vectors-and-matrices.md), [Matrix Multiplication](matrix-multiplication.md) | [Rank](rank.md), [Orthogonality](orthogonality.md), [Norms and Distances](norms-and-distances.md)                                       |
+| Understand embeddings and compression | [Singular Value Decomposition](singular-value-decomposition.md)                                    | [Low-Rank Approximation](low-rank-approximation.md), [Matrix Decompositions](matrix-decompositions.md)                                  |
+| Understand training                   | [Calculus](calculus.md), [Gradients](gradients.md)                                                 | [Gradient Descent](gradient-descent.md), [Stochastic Gradient Descent](stochastic-gradient-descent.md), [Optimization](optimization.md) |
+| Understand losses and distributions   | [Entropy](entropy.md), [Cross Entropy](cross-entropy.md)                                           | [KL Divergence](kl-divergence.md), [Mutual Information](mutual-information.md)                                                          |
+| Understand implementation risk        | [Numerical Stability](numerical-stability.md)                                                      | [Constrained Optimization](constrained-optimization.md), [Convex Optimization](convex-optimization.md)                                  |
 
 ## Subtopics
 

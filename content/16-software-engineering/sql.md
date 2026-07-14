@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # SQL
 
 SQL in software engineering is an application contract: which records a user may see, which transaction boundary protects a change, and which query shape stays stable under load. The deeper SQL-language and warehouse-pattern discussion belongs in [data engineering SQL](../13-data-engineering/sql.md); this page focuses on using SQL safely from services.
@@ -29,13 +30,13 @@ SQL in software engineering is an application contract: which records a user may
 
 Application SQL should use parameter binding, explicit authorization predicates, pagination, indexes aligned with access paths, and transaction scopes around multi-step changes. Query success is not enough: the returned rows must be authorized and semantically correct for the [API design](api-design.md) contract.
 
-| Concern | Good service SQL practice | Failure it prevents |
-| --- | --- | --- |
-| Injection | bind parameters instead of concatenating strings | user input becoming executable SQL |
-| Authorization | include server-side tenant or owner predicates | returning records the user should not see |
-| Consistency | wrap multi-step writes in transactions | partial updates after downstream failures |
-| Performance | design indexes for access paths and pagination | queries that pass tests but fail under load |
-| Evolvability | keep migrations backward compatible during deploys | old code reading a half-migrated schema |
+| Concern       | Good service SQL practice                          | Failure it prevents                         |
+| ------------- | -------------------------------------------------- | ------------------------------------------- |
+| Injection     | bind parameters instead of concatenating strings   | user input becoming executable SQL          |
+| Authorization | include server-side tenant or owner predicates     | returning records the user should not see   |
+| Consistency   | wrap multi-step writes in transactions             | partial updates after downstream failures   |
+| Performance   | design indexes for access paths and pagination     | queries that pass tests but fail under load |
+| Evolvability  | keep migrations backward compatible during deploys | old code reading a half-migrated schema     |
 
 ## Executed Artifact
 

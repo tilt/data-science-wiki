@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Reliability
 
 Cloud reliability is the ability of a workload to keep its promised behavior while components fail, slow down, or recover. In this section, reliability is infrastructure-facing: zones, dependencies, retries, backups, quotas, and failover. For model-specific production reliability, cross-reference the MLOps page on [reliability](../14-ml-engineering-and-mlops/reliability.md) and [service-level objectives](../14-ml-engineering-and-mlops/service-level-objectives.md).
@@ -42,11 +43,11 @@ The architecture then maps dependencies and failure domains. A user request migh
 A 30-day month has 43,200 minutes, so common availability targets imply these monthly error budgets:
 
 | Availability target | Monthly error budget |
-| ---: | ---: |
-| 99.00% | 432.0 minutes |
-| 99.90% | 43.2 minutes |
-| 99.95% | 21.6 minutes |
-| 99.99% | 4.3 minutes |
+| ------------------: | -------------------: |
+|              99.00% |        432.0 minutes |
+|              99.90% |         43.2 minutes |
+|              99.95% |         21.6 minutes |
+|              99.99% |          4.3 minutes |
 
 Three required 99.9% dependencies in series have approximate availability
 

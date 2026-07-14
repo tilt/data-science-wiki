@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Requirements Engineering
 
 Requirements engineering turns stakeholder needs, constraints, and risks into a testable description of what should be built. A goal says why the work matters; a requirement says what behavior, quality, interface, or constraint the system must satisfy. For data products, requirements must include data availability, workflow fit, acceptable error, latency, privacy, and auditability before [software architecture](software-architecture.md) is chosen.
@@ -32,10 +33,10 @@ A useful requirement has an actor, condition, system response, fit criterion, ow
 
 Two requirements can be reviewed as requirements rather than aspirations:
 
-| id | statement | fit criterion | owner | testable? |
-| --- | --- | --- | --- | --- |
-| REQ-1 | Route German billing tickets automatically | precision >= 0.94 on `golden_de_billing_v3` | support-ops | yes |
-| REQ-2 | Human override is always available | override button visible for 100% of auto-routed tickets | product | yes |
+| id    | statement                                  | fit criterion                                           | owner       | testable? |
+| ----- | ------------------------------------------ | ------------------------------------------------------- | ----------- | --------- |
+| REQ-1 | Route German billing tickets automatically | precision >= 0.94 on `golden_de_billing_v3`             | support-ops | yes       |
+| REQ-2 | Human override is always available         | override button visible for 100% of auto-routed tickets | product     | yes       |
 
 The artifact is intentionally small: it distinguishes requirements from aspirations. Once a requirement carries a fit criterion, [code review](code-review.md) can ask whether the implementation and [documentation](documentation.md) updated the same contract.
 

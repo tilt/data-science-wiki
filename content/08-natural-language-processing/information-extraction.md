@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Information Extraction
 
 Information extraction (IE) converts text into structured records: entities, fields, relations, events, or table rows. [Named entity recognition](named-entity-recognition.md) finds typed spans; IE adds schema constraints such as invoice id, total, due date, buyer, supplier, and source offsets. It connects naturally to [document understanding](document-understanding.md) when layout matters.
@@ -40,10 +41,10 @@ Field exact match is the indicator $\mathbf 1\{\hat v_f=v_f\}$ for one schema fi
 
 For two invoice snippets, an IE system should return typed fields with evidence, not just highlighted text:
 
-| source text | extracted id | extracted total | extracted due date |
-|---|---:|---:|---:|
-| `Invoice 104 total $42.10 due 2026-08-01` | `104` | `$42.10` | `2026-08-01` |
-| `Invoice 105 total $17.00 due 2026-08-09` | `105` | `$17.00` | `2026-08-09` |
+| source text                               | extracted id | extracted total | extracted due date |
+| ----------------------------------------- | -----------: | --------------: | -----------------: |
+| `Invoice 104 total $42.10 due 2026-08-01` |        `104` |        `$42.10` |       `2026-08-01` |
+| `Invoice 105 total $17.00 due 2026-08-09` |        `105` |        `$17.00` |       `2026-08-09` |
 
 There are 2 records and 3 required fields per record, so field exact accuracy is $6/6=1.0$ here. The example is deliberately narrow, but it shows the artifact IE must produce: a schema-conformant record that downstream systems can validate.
 

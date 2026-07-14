@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Reranking
 
 Reranking reorders a small candidate set after first-stage retrieval. [BM25](bm25.md), [dense retrieval](dense-retrieval.md), or [hybrid search](hybrid-search.md) tries to avoid missing plausible candidates; the reranker spends more compute to improve the final order shown to the user or passed to a RAG context builder.

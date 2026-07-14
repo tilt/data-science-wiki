@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Temperature and Determinism
 
 Temperature rescales logits before sampling. It is one control inside [sampling and decoding](sampling-and-decoding.md), but [determinism and reproducibility](determinism-and-reproducibility.md) also depend on model version, retrieval, tools, seeds, serving, and post-processing.

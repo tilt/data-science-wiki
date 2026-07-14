@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Dimensional Modelling
 
 Dimensional modelling organizes analytics around facts and dimensions. A fact table records measurements at a declared grain, such as one row per order line. Dimension tables describe the context used to slice those facts, such as customer segment, product, or calendar date.

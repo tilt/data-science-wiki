@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Central Limit Theorem
 
 The central limit theorem explains why averages become easier to model than individual observations. If $X_1,\ldots,X_n$ are independent copies of a [random variable](random-variables.md) with finite mean $\mu$ and variance $\sigma^2>0$, then the standardized sample mean converges in distribution:

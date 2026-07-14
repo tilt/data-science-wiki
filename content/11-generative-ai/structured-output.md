@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Structured Output
 
 Structured output asks the model to return data in a parseable shape, usually JSON matching a schema. It is essential when output feeds [tool use](tool-use-and-function-calling.md), databases, workflows, or [model serving](model-serving.md) validators.
@@ -35,9 +36,9 @@ The schema defines fields, types, required keys, enums, and whether extra proper
   "type": "object",
   "required": ["merchant", "total", "currency"],
   "properties": {
-    "merchant": {"type": "string"},
-    "total": {"type": "number"},
-    "currency": {"type": "string", "enum": ["EUR", "USD", "GBP"]}
+    "merchant": { "type": "string" },
+    "total": { "type": "number" },
+    "currency": { "type": "string", "enum": ["EUR", "USD", "GBP"] }
   },
   "additionalProperties": false
 }
@@ -45,12 +46,12 @@ The schema defines fields, types, required keys, enums, and whether extra proper
 
 For the record `{"merchant":"Miro Cafe","total":12.4,"currency":"EUR"}`, all required fields are present, the amount is numeric, and the currency is allowed. The record `{"merchant":"Miro Cafe","total":"12.40"}` fails even though it is parseable JSON: `total` is a string, `currency` is missing, and a downstream payment or accounting system should reject it before business logic runs.
 
-| Check | Catches |
-| --- | --- |
-| JSON parsing | Broken syntax. |
-| Schema validation | Missing fields, wrong types, invalid enums, unexpected fields. |
-| Source-grounding validation | Values not supported by the input document. |
-| Business-rule validation | Impossible totals, unsupported currencies, duplicate records, or policy violations. |
+| Check                       | Catches                                                                             |
+| --------------------------- | ----------------------------------------------------------------------------------- |
+| JSON parsing                | Broken syntax.                                                                      |
+| Schema validation           | Missing fields, wrong types, invalid enums, unexpected fields.                      |
+| Source-grounding validation | Values not supported by the input document.                                         |
+| Business-rule validation    | Impossible totals, unsupported currencies, duplicate records, or policy violations. |
 
 ## Caveats
 

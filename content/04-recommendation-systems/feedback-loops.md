@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Feedback Loops
 
 A recommender feedback loop occurs when the system's exposures shape the interactions used to train the next system. If popular items get more exposure, they get more clicks, which can make them appear even better. This is a central risk for [implicit feedback](implicit-feedback.md).
@@ -38,11 +39,11 @@ where $e_i$ is exposure share and $q_i$ is click probability. Even when a niche 
 
 Start with item A receiving 90% exposure and item B receiving 10%. A has click probability $0.06$; B is actually better with click probability $0.12$.
 
-| Step | A exposure | B exposure | A expected clicks | B expected clicks |
-| --- | ---: | ---: | ---: | ---: |
-| Before update | 90.0 | 10.0 | 5.4 | 1.2 |
-| After one click-based update | 81.8 | 18.2 | 4.9 | 2.2 |
-| After three updates | 52.9 | 47.1 | 3.2 | 5.7 |
+| Step                         | A exposure | B exposure | A expected clicks | B expected clicks |
+| ---------------------------- | ---------: | ---------: | ----------------: | ----------------: |
+| Before update                |       90.0 |       10.0 |               5.4 |               1.2 |
+| After one click-based update |       81.8 |       18.2 |               4.9 |               2.2 |
+| After three updates          |       52.9 |       47.1 |               3.2 |               5.7 |
 
 The better item gains share only after repeated updates. With harsher exploitation, weaker initial exposure, or noisy short windows, it might never surface. This is why [offline evaluation](offline-versus-online-evaluation.md) needs exposure-aware logs.
 

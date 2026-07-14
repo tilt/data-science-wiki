@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Hallucination Mitigation
 
 Hallucination mitigation reduces unsupported claims; it does not make a model know truth in the abstract. The strongest controls combine [grounding](grounding.md), [citations](citations.md), constrained answer formats, abstention, and targeted evaluation.

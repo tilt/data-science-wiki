@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Hypothesis Testing
 
 Hypothesis testing compares data with a null model. A test defines $H_0$, $H_1$, a statistic $T(X)$, and a reference distribution under $H_0$. The p-value is
@@ -55,13 +56,13 @@ mean_diff 0.5646 t_stat 2.4319 p_value 0.0173
 
 The simulated mean difference is `0.5646`, and the Welch t-statistic is `2.4319`, producing `p_value 0.0173`. That is evidence against equal means under the test assumptions, but the decision should still consider effect size, cost, and [statistical significance](../17-experimentation-and-evaluation/statistical-significance.md) in context.
 
-| Testing component | In the example |
-| --- | --- |
-| Null model | The two groups have equal population means. |
-| Alternative | The group means differ. |
-| Statistic | Welch's t-statistic compares the observed mean difference with its estimated standard error. |
-| Reference distribution | Approximate t distribution with unequal-variance degrees of freedom. |
-| Reported result | A mean difference of `0.5646` and p-value `0.0173`, not a probability that the null is true. |
+| Testing component      | In the example                                                                               |
+| ---------------------- | -------------------------------------------------------------------------------------------- |
+| Null model             | The two groups have equal population means.                                                  |
+| Alternative            | The group means differ.                                                                      |
+| Statistic              | Welch's t-statistic compares the observed mean difference with its estimated standard error. |
+| Reference distribution | Approximate t distribution with unequal-variance degrees of freedom.                         |
+| Reported result        | A mean difference of `0.5646` and p-value `0.0173`, not a probability that the null is true. |
 
 ## Caveats
 

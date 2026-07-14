@@ -23,6 +23,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Calibration
 
 Calibration evaluation checks whether confidence scores mean what downstream decisions assume. The canonical modelling concept is [classical ML calibration](../03-classical-machine-learning/calibration.md); this page focuses on how to report reliability in an evaluation suite. Calibration matters when confidence drives [abstention](abstention.md), triage, pricing, or expected-cost decisions.

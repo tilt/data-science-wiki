@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # V-JEPA 2
 
 V-JEPA 2 is a scaled self-supervised video model in the JEPA family. The paper frames it around video understanding, prediction, and planning, including a latent action-conditioned variant for robot planning. It should be read as a [world models](world-models.md) research direction, not as proof that the model has complete physical understanding.
@@ -99,9 +100,9 @@ RoPE does not detect motion by itself. It gives attention access to relative tem
 
 Two operations are easy to confuse:
 
-| operation | when it happens | what it means |
-|---|---|---|
-| JEPA target masking | Self-supervised pretraining | Hide target tubelets and predict their target-encoder latent representations from visible context. |
+| operation                 | when it happens                     | what it means                                                                                                   |
+| ------------------------- | ----------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| JEPA target masking       | Self-supervised pretraining         | Hide target tubelets and predict their target-encoder latent representations from visible context.              |
 | Inference-time token keep | Downstream adaptation or efficiency | Physically keep a subset of tokens, such as person- or hand-region tubelets, before later attention or probing. |
 
 The first is a learning objective. The second is an input-domain or compute-budget choice. If RoI tokens are kept after patch embedding, the kept tokens still need positional encodings based on their original video-grid indices. Replacing original indices with dense post-gather indices can make two physically different tubelets look artificially adjacent.
@@ -114,11 +115,11 @@ For a frozen checkpoint, a probe head is a measurement instrument. If a lightwei
 
 A latent planner scores candidate actions by rolling them one step forward and comparing the predicted latent state with a goal latent. With current state $z_t=(1.0,0.0)$, goal $z_{goal}=(1.4,0.2)$, and simple transition $\hat z_{t+1}=z_t+0.5a$, the candidate costs are:
 
-| action $a$ | predicted next latent $\hat z_{t+1}$ | squared distance to goal |
-|---:|---:|---:|
-| $(1,0)$ | $(1.5,0.0)$ | $(1.5-1.4)^2+(0.0-0.2)^2=0.05$ |
-| $(0,1)$ | $(1.0,0.5)$ | $(1.0-1.4)^2+(0.5-0.2)^2=0.25$ |
-| $(-1,0)$ | $(0.5,0.0)$ | $(0.5-1.4)^2+(0.0-0.2)^2=0.85$ |
+| action $a$ | predicted next latent $\hat z_{t+1}$ |       squared distance to goal |
+| ---------: | -----------------------------------: | -----------------------------: |
+|    $(1,0)$ |                          $(1.5,0.0)$ | $(1.5-1.4)^2+(0.0-0.2)^2=0.05$ |
+|    $(0,1)$ |                          $(1.0,0.5)$ | $(1.0-1.4)^2+(0.5-0.2)^2=0.25$ |
+|   $(-1,0)$ |                          $(0.5,0.0)$ | $(0.5-1.4)^2+(0.0-0.2)^2=0.85$ |
 
 The action that moves right has the lowest latent cost, so it would be selected. Real V-JEPA 2-style planning uses learned latents and learned dynamics rather than this hand-coded transition.
 

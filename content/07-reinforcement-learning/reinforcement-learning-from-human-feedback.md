@@ -26,6 +26,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # Reinforcement Learning from Human Feedback
 
 Reinforcement learning from human feedback (RLHF) trains models from preferences rather than only from gold labels. For language models, humans or AI judges compare candidate responses. A reward model learns which responses are preferred, and the policy is optimized to produce higher-reward responses while staying close to a reference model.
@@ -59,11 +60,11 @@ The reward term pushes the model toward preferred responses. The KL penalty keep
 
 ## Typical LLM Training Stage
 
-| Stage | Data | Objective | Role |
-| --- | --- | --- | --- |
-| Supervised fine-tuning | demonstrations | next-token loss on target response | teaches instruction following |
-| Preference modeling | chosen/rejected pairs | pairwise reward loss | estimates which response is preferred |
-| RLHF policy update | prompts and sampled responses | reward minus KL penalty | improves preference reward while limiting drift |
+| Stage                  | Data                          | Objective                          | Role                                            |
+| ---------------------- | ----------------------------- | ---------------------------------- | ----------------------------------------------- |
+| Supervised fine-tuning | demonstrations                | next-token loss on target response | teaches instruction following                   |
+| Preference modeling    | chosen/rejected pairs         | pairwise reward loss               | estimates which response is preferred           |
+| RLHF policy update     | prompts and sampled responses | reward minus KL penalty            | improves preference reward while limiting drift |
 
 This is why RLHF belongs both to [reinforcement learning](index.md) and [LLM training](../11-generative-ai/llm-training.md).
 

@@ -27,6 +27,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-14
 ---
+
 # Contrastive Learning
 
 Contrastive learning trains an embedding space by comparing examples. A positive pair should land close together; negative examples should land farther away. In [self-supervised learning](self-supervised-learning.md), positives are often two augmentations of the same item. In [multimodal learning](multimodal-learning.md), positives can be paired image-text examples. The learned vectors are useful for [dense retrieval](../12-information-retrieval-and-search/dense-retrieval.md), clustering, transfer learning, and downstream classifiers.
@@ -78,12 +79,12 @@ Even though the positive is the most similar item, the loss is not zero because 
 
 ## Positive and Negative Construction
 
-| Setting | Positive pair | Negative candidates | What the model is pushed to learn |
-| --- | --- | --- | --- |
-| SimCLR-style vision | two augmentations of the same image | other images in the batch | invariance to crop, color, blur, and augmentation choices |
-| CLIP-style multimodal training | matched image and text | other images or texts in the batch | cross-modal semantic alignment |
-| Retrieval fine-tuning | query and relevant document | irrelevant or less relevant documents | task-specific ranking geometry |
-| Instance discrimination | two views of the same instance | other instances | instance-level separation |
+| Setting                        | Positive pair                       | Negative candidates                   | What the model is pushed to learn                         |
+| ------------------------------ | ----------------------------------- | ------------------------------------- | --------------------------------------------------------- |
+| SimCLR-style vision            | two augmentations of the same image | other images in the batch             | invariance to crop, color, blur, and augmentation choices |
+| CLIP-style multimodal training | matched image and text              | other images or texts in the batch    | cross-modal semantic alignment                            |
+| Retrieval fine-tuning          | query and relevant document         | irrelevant or less relevant documents | task-specific ranking geometry                            |
+| Instance discrimination        | two views of the same instance      | other instances                       | instance-level separation                                 |
 
 False negatives are the central risk. Two different images of the same class, or two documents that answer the same query, may be treated as negatives if the batch labels do not know they are semantically related. The loss will then push useful neighbors apart.
 

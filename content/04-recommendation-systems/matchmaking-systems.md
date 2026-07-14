@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Matchmaking Systems
 
 Matchmaking systems recommend pairs where both sides matter: dating, hiring, mentoring, marketplaces, or team formation. Unlike one-sided [ranking](ranking.md), a high score from side A to side B is insufficient if side B would reject or be overloaded.
@@ -38,14 +39,14 @@ The geometric mean penalizes one-sided interest. A serving system still uses [ca
 
 Suppose two people on side A are being matched to three people on side B. Directional scores alone would overvalue one-sided interest, so the reciprocal score uses the geometric mean:
 
-| Pair | $s_{A\to B}$ | $s_{B\to A}$ | $\sqrt{s_{A\to B}s_{B\to A}}$ | Interpretation |
-| --- | ---: | ---: | ---: | --- |
-| A0-B0 | 0.90 | 0.70 | 0.794 | Strong mutual match. |
-| A0-B1 | 0.40 | 0.60 | 0.490 | Moderate from both sides. |
-| A0-B2 | 0.20 | 0.20 | 0.200 | Weak from both sides. |
-| A1-B0 | 0.30 | 0.50 | 0.387 | One side is not very interested. |
-| A1-B1 | 0.80 | 0.90 | 0.849 | Best reciprocal match. |
-| A1-B2 | 0.60 | 0.80 | 0.693 | Good but not top. |
+| Pair  | $s_{A\to B}$ | $s_{B\to A}$ | $\sqrt{s_{A\to B}s_{B\to A}}$ | Interpretation                   |
+| ----- | -----------: | -----------: | ----------------------------: | -------------------------------- |
+| A0-B0 |         0.90 |         0.70 |                         0.794 | Strong mutual match.             |
+| A0-B1 |         0.40 |         0.60 |                         0.490 | Moderate from both sides.        |
+| A0-B2 |         0.20 |         0.20 |                         0.200 | Weak from both sides.            |
+| A1-B0 |         0.30 |         0.50 |                         0.387 | One side is not very interested. |
+| A1-B1 |         0.80 |         0.90 |                         0.849 | Best reciprocal match.           |
+| A1-B2 |         0.60 |         0.80 |                         0.693 | Good but not top.                |
 
 Pair A1-B1 wins because both sides score each other highly. A one-sided recommender might over-contact the same popular candidate and create a [feedback loop](feedback-loops.md).
 

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Elasticsearch
 
 Elasticsearch is a distributed search engine built on Lucene. It exposes [inverted indexes](inverted-indexes.md), [BM25](bm25.md)-style text scoring, filters, aggregations, and vector search through JSON APIs. It is a search platform, not just a ranking formula: mappings, analyzers, shards, refreshes, and operational limits shape relevance and latency.

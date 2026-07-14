@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Self-Supervised Video Representation Learning
 
 Self-supervised video representation learning trains encoders without manual clip labels. The supervision comes from the video itself: predict hidden tubelets, match augmented views, align video with text or audio, order frames, or predict future latent states. The output is a reusable [video representation](video-representation.md) for recognition, retrieval, anticipation, localization, or [V-JEPA](v-jepa.md)-style latent prediction.
@@ -30,11 +31,11 @@ The modern state of the art is not one objective. Strong video foundation models
 
 Self-supervised learning creates targets from the clip itself. Three common objectives are:
 
-| objective family | target made from the video | what the encoder is pushed to learn |
-|---|---|---|
-| Contrastive or matching | Another augmented view, a paired caption, or an audio segment. | Invariance to harmless changes and alignment across views or modalities. |
-| Masked video modeling | Hidden patches or tubelets, reconstructed as pixels, tokens, or features. | Spatiotemporal structure that makes missing content predictable. |
-| Latent feature prediction | Target-encoder representations of masked or future regions. | Semantic and motion-sensitive features without reconstructing every pixel. |
+| objective family          | target made from the video                                                | what the encoder is pushed to learn                                        |
+| ------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Contrastive or matching   | Another augmented view, a paired caption, or an audio segment.            | Invariance to harmless changes and alignment across views or modalities.   |
+| Masked video modeling     | Hidden patches or tubelets, reconstructed as pixels, tokens, or features. | Spatiotemporal structure that makes missing content predictable.           |
+| Latent feature prediction | Target-encoder representations of masked or future regions.               | Semantic and motion-sensitive features without reconstructing every pixel. |
 
 A contrastive objective makes two views of the same clip close and other clips far. With similarity score $s(\cdot,\cdot)$ and temperature $\tau$:
 
@@ -69,13 +70,13 @@ Here $\operatorname{sg}$ means stop-gradient: the target encoder supplies the la
 
 ## Current Method Families
 
-| family | representative direction | state-of-the-art detail | tradeoff |
-|---|---|---|---|
-| Contrastive and cross-view learning | Match two augmented clips or video-text pairs. | Still useful for retrieval and multimodal alignment, especially when captions or audio are available. | Negative sampling and augmentations can create shortcuts or erase temporal order. |
-| Masked video autoencoding | Hide tubelets and reconstruct pixels or token targets. | VideoMAE showed that very high video masking ratios can work because adjacent frames are redundant; VideoMAE V2 adds dual masking to scale masked pretraining efficiently. | Pixel reconstruction can spend capacity on texture unless the masking and decoder are designed carefully. |
-| Latent feature prediction | Predict target-encoder features for masked or future regions. | V-JEPA trains from video feature prediction without text, negatives, or pixel reconstruction; V-JEPA 2 scales this idea for understanding, anticipation, and planning-oriented representations. | The learned representation is only as useful as the target features and downstream evaluation reveal. |
-| Dense latent prediction | Apply self-supervision across more spatial and temporal positions or intermediate layers. | Recent V-JEPA 2.1 work focuses on dense features for spatial grounding, temporal consistency, and robot-relevant transfer. | Denser targets improve grounding but increase implementation complexity and compute. |
-| Multimodal video foundation pretraining | Combine masked video modeling, video-text/audio contrastive learning, and language losses. | InternVideo2 uses progressive training that combines masked video modeling, cross-modal contrastive learning, and next-token prediction at large scale. | Better language-facing ability, but the representation may reflect caption bias and data curation choices. |
+| family                                  | representative direction                                                                   | state-of-the-art detail                                                                                                                                                                         | tradeoff                                                                                                   |
+| --------------------------------------- | ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Contrastive and cross-view learning     | Match two augmented clips or video-text pairs.                                             | Still useful for retrieval and multimodal alignment, especially when captions or audio are available.                                                                                           | Negative sampling and augmentations can create shortcuts or erase temporal order.                          |
+| Masked video autoencoding               | Hide tubelets and reconstruct pixels or token targets.                                     | VideoMAE showed that very high video masking ratios can work because adjacent frames are redundant; VideoMAE V2 adds dual masking to scale masked pretraining efficiently.                      | Pixel reconstruction can spend capacity on texture unless the masking and decoder are designed carefully.  |
+| Latent feature prediction               | Predict target-encoder features for masked or future regions.                              | V-JEPA trains from video feature prediction without text, negatives, or pixel reconstruction; V-JEPA 2 scales this idea for understanding, anticipation, and planning-oriented representations. | The learned representation is only as useful as the target features and downstream evaluation reveal.      |
+| Dense latent prediction                 | Apply self-supervision across more spatial and temporal positions or intermediate layers.  | Recent V-JEPA 2.1 work focuses on dense features for spatial grounding, temporal consistency, and robot-relevant transfer.                                                                      | Denser targets improve grounding but increase implementation complexity and compute.                       |
+| Multimodal video foundation pretraining | Combine masked video modeling, video-text/audio contrastive learning, and language losses. | InternVideo2 uses progressive training that combines masked video modeling, cross-modal contrastive learning, and next-token prediction at large scale.                                         | Better language-facing ability, but the representation may reflect caption bias and data curation choices. |
 
 The practical lesson is to choose the pretraining signal based on the downstream contract. Retrieval and captioning benefit from video-text alignment. Motion recognition and anticipation need temporal perturbations that preserve ordering. Planning or world-model-style transfer benefits from latent prediction and evaluation on dynamics-sensitive tasks rather than only static image recognition.
 

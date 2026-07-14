@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # SQL
 
 SQL is the contract language of warehouse-centric data engineering: tables expose named columns, queries declare the result set, and engines decide the physical plan. In this section it means analytical SQL over modeled data, while [software-engineering SQL](../16-software-engineering/sql.md) focuses on application safety, transactions, and parameterization.

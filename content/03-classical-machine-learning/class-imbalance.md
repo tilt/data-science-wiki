@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Class Imbalance
 
 Class imbalance means the class prior $P(Y=k)$ is highly uneven. The problem is not rarity by itself; it is that default training objectives, thresholds, and [evaluation metrics](evaluation-metrics.md) may optimize the majority class while missing the decision that matters.

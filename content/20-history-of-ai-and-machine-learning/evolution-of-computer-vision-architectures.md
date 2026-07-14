@@ -21,19 +21,20 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # Evolution of Computer Vision Architectures
 
 Computer vision architecture history is a sequence of changing bottlenecks. Early systems depended on hand-designed features and geometric matching; CNNs learned hierarchical visual features; residual networks made depth practical; vision transformers reduced the built-in locality assumptions when enough data and compute were available.
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 1999/2004 | David Lowe introduced and later fully described SIFT, a scale-invariant local feature method. | [Classical image processing](../09-computer-vision/classical-image-processing.md) needed repeatable descriptors for matching objects across scale, rotation, and viewpoint changes. |
-| 2012 | Krizhevsky, Sutskever, and Hinton's AlexNet won ImageNet with a deep convolutional network. | Learned [feature extraction](../09-computer-vision/feature-extraction.md) became competitive when large labels, GPUs, and data augmentation met CNN inductive bias. |
-| 2015 | He, Zhang, Ren, and Sun introduced deep residual learning. | Very deep CNNs were hard to optimize; residual connections let layers learn corrections relative to an identity path. |
-| 2020 | Dosovitskiy and coauthors introduced the Vision Transformer (ViT). | After NLP transformers scaled, vision researchers tested whether image patches could be treated as tokens with less convolutional structure. |
-| 2020s | Vision-language and segmentation foundation models reused pretrained visual backbones across tasks. | The engineering focus moved from single-task architectures toward transferable representations for classification, [object detection](../09-computer-vision/object-detection.md), and [semantic segmentation](../09-computer-vision/semantic-segmentation.md). |
+| Year      | Milestone                                                                                           | Why it followed                                                                                                                                                                                                                                                |
+| --------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1999/2004 | David Lowe introduced and later fully described SIFT, a scale-invariant local feature method.       | [Classical image processing](../09-computer-vision/classical-image-processing.md) needed repeatable descriptors for matching objects across scale, rotation, and viewpoint changes.                                                                            |
+| 2012      | Krizhevsky, Sutskever, and Hinton's AlexNet won ImageNet with a deep convolutional network.         | Learned [feature extraction](../09-computer-vision/feature-extraction.md) became competitive when large labels, GPUs, and data augmentation met CNN inductive bias.                                                                                            |
+| 2015      | He, Zhang, Ren, and Sun introduced deep residual learning.                                          | Very deep CNNs were hard to optimize; residual connections let layers learn corrections relative to an identity path.                                                                                                                                          |
+| 2020      | Dosovitskiy and coauthors introduced the Vision Transformer (ViT).                                  | After NLP transformers scaled, vision researchers tested whether image patches could be treated as tokens with less convolutional structure.                                                                                                                   |
+| 2020s     | Vision-language and segmentation foundation models reused pretrained visual backbones across tasks. | The engineering focus moved from single-task architectures toward transferable representations for classification, [object detection](../09-computer-vision/object-detection.md), and [semantic segmentation](../09-computer-vision/semantic-segmentation.md). |
 
 ## Historical mechanism
 

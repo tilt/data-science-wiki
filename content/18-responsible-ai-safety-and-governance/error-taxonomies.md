@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Error Taxonomies
 
 An error taxonomy turns failures into structured evidence. Instead of reporting that "the assistant was wrong," reviewers label what failed, why it likely failed, who was affected, and how severe the outcome was. That makes [factual correctness](factual-correctness.md), [hallucinations](hallucinations.md), [fairness](fairness.md), and [adversarial evaluation](adversarial-evaluation.md) comparable across releases.
@@ -47,14 +48,14 @@ The label `wrong_answer` is too broad to drive action. `wrong_entity` points tow
 
 A six-failure review inventory can be aggregated directly:
 
-| error | symptom | likely cause | severity |
-| --- | --- | --- | ---: |
-| E01 | unsupported_claim | generation | 4 |
-| E02 | retrieval_miss | retrieval | 3 |
-| E03 | wrong_entity | retrieval | 5 |
-| E04 | pii_leak | policy | 5 |
-| E05 | unsafe_tool_call | agent | 5 |
-| E06 | format_violation | interface | 1 |
+| error | symptom           | likely cause | severity |
+| ----- | ----------------- | ------------ | -------: |
+| E01   | unsupported_claim | generation   |        4 |
+| E02   | retrieval_miss    | retrieval    |        3 |
+| E03   | wrong_entity      | retrieval    |        5 |
+| E04   | pii_leak          | policy       |        5 |
+| E05   | unsafe_tool_call  | agent        |        5 |
+| E06   | format_violation  | interface    |        1 |
 
 The total severity is $4+3+5+5+5+1=23$. The important output is not the count of six; it is the split by cause. Retrieval owns two failures, while policy and agent controls own separate high-severity failures. That distinction is what lets [governance of model and knowledge base changes](governance-of-model-and-knowledge-base-changes.md) assign the next fix to the right owner.
 

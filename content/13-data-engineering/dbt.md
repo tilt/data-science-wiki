@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # dbt
 
 dbt turns warehouse [SQL](sql.md) files into a dependency graph of models, tests, documentation, and build commands. It is most useful in ELT systems where raw data lands first and reviewed transformations publish marts in a [data-warehouse](data-warehouses.md).

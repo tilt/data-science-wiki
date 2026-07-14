@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # RNN and LSTM Forecasting
 
 RNN forecasters process a sequence one time step at a time while carrying a hidden state. For a simple recurrent model,

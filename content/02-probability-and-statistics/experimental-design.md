@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Experimental Design
 
 Experimental design fixes how units are assigned, measured, and analyzed before outcomes are known. The core mechanism is control of variation:

@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Alignment
 
 Alignment is not one switch. It combines training, preference optimization, prompting, [guardrails](guardrails.md), [data privacy](data-privacy.md), and evaluation so a model follows intended behavior under realistic pressure.
@@ -32,12 +33,12 @@ Instruction-tuned systems often start with supervised demonstrations and then us
 
 One common preference-learning signal is pairwise: for the same prompt, the training data says that $y_w$ is preferred to $y_l$. The optimizer should raise the relative score of the chosen response without simply making every response longer or more agreeable. In production, that learned preference is only one layer:
 
-| Layer | What it controls |
-| --- | --- |
-| Supervised instruction data | Basic task following, response style, and refusal patterns. |
-| Preference optimization | Ranking chosen answers above rejected answers for comparable prompts. |
-| System prompt and tool policy | Runtime boundaries, allowed actions, and required evidence. |
-| Validators and audits | Schema validity, citation support, privacy checks, and regression tests. |
+| Layer                         | What it controls                                                         |
+| ----------------------------- | ------------------------------------------------------------------------ |
+| Supervised instruction data   | Basic task following, response style, and refusal patterns.              |
+| Preference optimization       | Ranking chosen answers above rejected answers for comparable prompts.    |
+| System prompt and tool policy | Runtime boundaries, allowed actions, and required evidence.              |
+| Validators and audits         | Schema validity, citation support, privacy checks, and regression tests. |
 
 ## Concrete artifact
 

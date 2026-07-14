@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Design Patterns
 
 Design patterns are named boundaries for recurring design problems. The useful part is not the name; it is the dependency direction the pattern creates. Strategy separates interchangeable algorithms, Adapter hides incompatible interfaces, Factory centralizes construction, Repository isolates persistence, and Facade gives callers a smaller API over a complex subsystem.

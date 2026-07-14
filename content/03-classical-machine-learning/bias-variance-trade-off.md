@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Bias-Variance Trade-Off
 
 The bias-variance trade-off explains why a model can fail by being too rigid or too sensitive. High-bias models underfit because the function class misses real structure; high-variance models overfit because small changes in the training data change the fitted function. [Regularization](regularization.md), [model selection](model-selection.md), and ensembling all manipulate this trade-off.

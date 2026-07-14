@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Human Oversight
 
 Human oversight defines when people review, approve, override, stop, or appeal AI-assisted outcomes. It is only meaningful if the human has authority, time, evidence, and a clear decision boundary. Otherwise it becomes a rubber stamp attached to [risk classification](risk-classification.md) rather than a real control.
@@ -29,12 +30,12 @@ Human oversight defines when people review, approve, override, stop, or appeal A
 
 The EU AI Act's high-risk system requirements include human oversight, and OWASP's agent guidance also recommends human approval for high-impact actions. A practical oversight matrix looks like this:
 
-| Risk/action | Automation | Human role | Evidence shown |
-| --- | --- | --- | --- |
-| Low-risk routing | Automatic | Retrospective sampling | Input, route, confidence, error label |
-| Benefit denial recommendation | Human-in-the-loop | Must approve before user impact | Policy text, source data, reason codes, model confidence |
-| Tool action with external effect | Human approval | Confirm before send/delete/pay | Requested tool, arguments, recipient, policy decision |
-| Incident or appeal | Human review board | Override and corrective action | Audit trail, similar cases, [fairness](fairness.md) metrics |
+| Risk/action                      | Automation         | Human role                      | Evidence shown                                              |
+| -------------------------------- | ------------------ | ------------------------------- | ----------------------------------------------------------- |
+| Low-risk routing                 | Automatic          | Retrospective sampling          | Input, route, confidence, error label                       |
+| Benefit denial recommendation    | Human-in-the-loop  | Must approve before user impact | Policy text, source data, reason codes, model confidence    |
+| Tool action with external effect | Human approval     | Confirm before send/delete/pay  | Requested tool, arguments, recipient, policy decision       |
+| Incident or appeal               | Human review board | Override and corrective action  | Audit trail, similar cases, [fairness](fairness.md) metrics |
 
 The page for [human-in-the-loop systems](../14-ml-engineering-and-mlops/human-in-the-loop-systems.md) covers operational design; here the governance focus is whether the review changes outcomes and leaves evidence in [auditability](auditability.md).
 

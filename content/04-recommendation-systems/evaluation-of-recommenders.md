@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Evaluation of Recommenders
 
 Recommender evaluation asks whether ranked lists are useful, robust, and healthy for users and inventory. Accuracy metrics such as recall@k and [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) are necessary, but they miss novelty, diversity, coverage, calibration, and long-term [feedback loops](feedback-loops.md).

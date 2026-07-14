@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Foundation Models
 
 A foundation model is pretrained broadly enough to serve as a base for many tasks. In this section, [pretraining](pretraining.md) creates the base distribution, [instruction tuning](instruction-tuning.md) adapts behavior, and [fine tuning versus RAG](fine-tuning-versus-rag.md) decides how applications specialize it.
@@ -30,13 +31,13 @@ For language models, the base objective is often next-token prediction: maximize
 
 The "foundation" property comes from reuse, not from size alone. A model becomes a platform when the same pretrained representation supports several adaptation paths:
 
-| Adaptation path | What changes | Typical use |
-| --- | --- | --- |
-| Prompting | Only the input context changes. | Fast task steering without weight updates. |
-| [RAG](rag.md) | The context is filled with retrieved evidence. | Current or auditable facts. |
-| [Instruction tuning](instruction-tuning.md) | Model weights learn instruction-response behavior. | Stable task style and output formats. |
-| [Alignment](alignment.md) | Preferences and policies shape behavior. | Safer assistant behavior under ambiguity. |
-| Tool wrapper | Application code gives controlled actions. | Search, calculation, database lookup, or workflow execution. |
+| Adaptation path                             | What changes                                       | Typical use                                                  |
+| ------------------------------------------- | -------------------------------------------------- | ------------------------------------------------------------ |
+| Prompting                                   | Only the input context changes.                    | Fast task steering without weight updates.                   |
+| [RAG](rag.md)                               | The context is filled with retrieved evidence.     | Current or auditable facts.                                  |
+| [Instruction tuning](instruction-tuning.md) | Model weights learn instruction-response behavior. | Stable task style and output formats.                        |
+| [Alignment](alignment.md)                   | Preferences and policies shape behavior.           | Safer assistant behavior under ambiguity.                    |
+| Tool wrapper                                | Application code gives controlled actions.         | Search, calculation, database lookup, or workflow execution. |
 
 ## Concrete artifact
 

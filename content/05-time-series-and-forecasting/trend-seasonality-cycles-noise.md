@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Trend Seasonality Cycles Noise
 
 Trend, seasonality, cycles, and noise are a vocabulary for separating different kinds of temporal structure. A common additive view is

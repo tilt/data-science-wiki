@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Model Versioning
 
 Model versioning records the complete behavior that may be served or audited: artifact, code, data, preprocessing, thresholds, environment, evaluation evidence, approval status, and deployment target. Versioning only the weight file is not enough for [rollbacks](rollbacks.md).

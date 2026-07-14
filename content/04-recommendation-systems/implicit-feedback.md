@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Implicit Feedback Recommendation
 
 Implicit feedback uses events such as clicks, plays, purchases, dwell time, or skips as indirect preference evidence. Unlike [explicit feedback](explicit-versus-implicit-feedback.md), the user did not state a rating; the recommender must decide how behavior maps to preference, confidence, and exposure.
@@ -40,12 +41,12 @@ where $p_{ui}$ is binary preference and $c_{ui}$ is confidence. [Weighted matrix
 
 With $\alpha=5$, three plays imply stronger confidence than one play, but a zero still means "unobserved or not exposed," not "disliked."
 
-| User-item count $r_{ui}$ | Preference $p_{ui}$ | Confidence $c_{ui}=1+5r_{ui}$ | Interpretation |
-| ---: | ---: | ---: | --- |
-| 0 | 0 | 1 | No positive event; keep confidence low. |
-| 1 | 1 | 6 | Some evidence of interest. |
-| 3 | 1 | 16 | Stronger evidence, but still not a five-star rating. |
-| 4 | 1 | 21 | High-confidence positive behavior. |
+| User-item count $r_{ui}$ | Preference $p_{ui}$ | Confidence $c_{ui}=1+5r_{ui}$ | Interpretation                                       |
+| -----------------------: | ------------------: | ----------------------------: | ---------------------------------------------------- |
+|                        0 |                   0 |                             1 | No positive event; keep confidence low.              |
+|                        1 |                   1 |                             6 | Some evidence of interest.                           |
+|                        3 |                   1 |                            16 | Stronger evidence, but still not a five-star rating. |
+|                        4 |                   1 |                            21 | High-confidence positive behavior.                   |
 
 The zero cells are not hard dislikes; they receive low confidence. This distinction is central to [sparse utility matrices](sparse-utility-matrices-and-svd.md) and to offline replay in [online versus offline evaluation](offline-versus-online-evaluation.md).
 

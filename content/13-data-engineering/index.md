@@ -33,6 +33,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Data Engineering
 
 Data engineering builds reliable paths from source events and operational records to analytical tables, features, and governed datasets. The useful through-line is contract first: what is the grain, who owns it, how is it tested, and can it be rebuilt?

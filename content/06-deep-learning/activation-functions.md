@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Activation Functions
 
 Activation functions turn affine layers into nonlinear [neural networks](neural-network-fundamentals.md). They also decide how much gradient reaches earlier layers during [backpropagation](backpropagation.md), so activation choice is inseparable from [initialization](initialization.md) and sometimes [normalization](normalization.md).

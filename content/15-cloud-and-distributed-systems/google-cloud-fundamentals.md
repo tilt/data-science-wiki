@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Google Cloud Fundamentals
 
 Google Cloud organizes work around resources in a hierarchy: organization, folders, projects, and then service resources. A project is the common operational boundary for APIs, IAM bindings, quotas, labels, and billing attribution. Compared with [AWS fundamentals](aws-fundamentals.md), the first design question is often "which project owns this workload?" rather than "which account owns it?"

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Item-Based Collaborative Filtering
 
 Item-based collaborative filtering computes similarity between item columns, then recommends items similar to those a user already consumed. Compared with [user-based collaborative filtering](user-based-collaborative-filtering.md), item similarities can be more stable because item catalogs often change slower than user histories.
@@ -44,12 +45,12 @@ This is often a fast [candidate generation](candidate-generation.md) source befo
 
 Assume the target user already consumed items 0 and 3. Candidate scores sum item-item similarities from the consumed set and then filter already-seen items:
 
-| Candidate item | Similarity to item 0 | Similarity to item 3 | Unseen score | Decision |
-| --- | ---: | ---: | ---: | --- |
-| Item 0 | 1.000 | 0.408 | filtered | already consumed |
-| Item 1 | 0.816 | 0.000 | 0.816 | candidate |
-| Item 2 | 0.408 | 0.500 | 0.908 | top candidate |
-| Item 3 | 0.408 | 1.000 | filtered | already consumed |
+| Candidate item | Similarity to item 0 | Similarity to item 3 | Unseen score | Decision         |
+| -------------- | -------------------: | -------------------: | -----------: | ---------------- |
+| Item 0         |                1.000 |                0.408 |     filtered | already consumed |
+| Item 1         |                0.816 |                0.000 |        0.816 | candidate        |
+| Item 2         |                0.408 |                0.500 |        0.908 | top candidate    |
+| Item 3         |                0.408 |                1.000 |     filtered | already consumed |
 
 Item 2 receives support from both consumed items and becomes the top unseen recommendation. [Matrix factorization](matrix-factorization.md) can compress a similar item-item structure into latent factors.
 

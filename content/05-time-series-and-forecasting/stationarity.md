@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Stationarity
 
 Stationarity means the probabilistic behavior of a time series does not change with calendar time. In weak stationarity, the mean is constant, the variance is finite and constant, and covariance depends only on lag, not on the absolute timestamp:

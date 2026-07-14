@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Graph Based Retrieval
 
 Graph-based retrieval uses edges between documents, entities, authors, citations, topics, or permissions as retrieval evidence. It complements [BM25](bm25.md) and [dense retrieval](dense-retrieval.md) when relationships matter more than shared words or embedding distance.

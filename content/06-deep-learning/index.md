@@ -44,6 +44,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Deep Learning
 
 Deep learning studies neural networks as trainable function approximators: layers define the computation, losses define the target, gradients move parameters, and architecture choices determine what structure is easy to learn. Use this section as a mechanism-first path rather than a catalogue.

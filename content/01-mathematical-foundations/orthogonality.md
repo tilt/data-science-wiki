@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Orthogonality
 
 Orthogonality means two directions have zero dot product. It is the algebraic version of perpendicularity and is what lets projections, [SVD](singular-value-decomposition.md), QR decomposition, and [PCA](../03-classical-machine-learning/pca.md) separate variation into non-overlapping directions.

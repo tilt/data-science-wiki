@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Decoder-Only Transformers
 
 Decoder-only transformers are causal sequence models: at position $i$, the hidden state may use tokens $1,\ldots,i$ but not future tokens. That makes them natural for [language modelling](language-modelling.md), completion, chat, and generative [summarization](summarization.md). They share attention machinery with [bert-style encoders](bert-style-encoders.md), but the mask changes what information can flow.

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Reliability
 
 Reliability is the ability of a model-backed system to keep delivering acceptable behavior despite code bugs, data delays, dependency failures, traffic spikes, and model drift. It extends cloud reliability with data and decision correctness: a service can return `200 OK` while serving stale or harmful predictions.

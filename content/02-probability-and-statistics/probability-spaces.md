@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Probability Spaces
 
 A probability space is the formal container for randomness. It specifies possible outcomes, which outcome sets count as events, and how probability is assigned before [random variables](random-variables.md), [conditional probability](conditional-probability.md), or [expectation](expectation-and-variance.md) can be defined.
@@ -46,11 +47,11 @@ For finite sample spaces, $\mathcal F$ is often the power set. For continuous sp
 
 For two fair dice, the sample space has $6\times 6=36$ equally likely ordered outcomes. Let $A$ be the event "sum is at least 10" and $B$ be the event "the dice are doubles." The event $A$ contains six outcomes:
 
-| Sum | Outcomes |
-| --- | --- |
-| 10 | $(4,6),(5,5),(6,4)$ |
-| 11 | $(5,6),(6,5)$ |
-| 12 | $(6,6)$ |
+| Sum | Outcomes            |
+| --- | ------------------- |
+| 10  | $(4,6),(5,5),(6,4)$ |
+| 11  | $(5,6),(6,5)$       |
+| 12  | $(6,6)$             |
 
 So $P(A)=6/36=1/6$. The doubles event has six outcomes, so $P(B)=6/36=1/6$. Their intersection contains $(5,5)$ and $(6,6)$, hence $P(A\cap B)=2/36=1/18$. Therefore
 

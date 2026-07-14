@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Golden Datasets
 
 Golden datasets are small, trusted, versioned examples that serve as acceptance references for model, prompt, retrieval, or pipeline changes. They complement larger [evaluation datasets](evaluation-datasets.md): a golden set is meant to be inspected and defended case by case.

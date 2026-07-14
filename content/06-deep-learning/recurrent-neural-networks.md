@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Recurrent Neural Networks
 
 A recurrent neural network processes a sequence by carrying a hidden state forward. The same transition function is reused at every step, so an RNN can accept variable-length inputs while sharing parameters. [LSTM and GRU](lstm-and-gru.md) add gates to this basic recurrence; [attention](attention.md) and [transformers](transformers.md) replace the single state bottleneck with direct pairwise interactions.

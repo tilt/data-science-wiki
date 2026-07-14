@@ -27,6 +27,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # Stable Diffusion
 
 Stable Diffusion is a family of text-conditioned image-generation models built around latent diffusion. Instead of denoising full-resolution pixels directly, the model compresses an image into a lower-dimensional latent representation, denoises that latent under text conditioning, and decodes the final latent back to pixels. That latent-space design is the practical reason Stable Diffusion-style systems can produce high-resolution images with less compute than pixel-space diffusion.
@@ -85,12 +86,12 @@ Here $w$ is the guidance scale. Larger $w$ usually makes the image follow the pr
 
 ## Architecture Variants
 
-| component | classic latent-diffusion Stable Diffusion | later variants |
-|---|---|---|
-| Image space | Autoencoder compresses pixels into a spatial latent and decodes final latents back to pixels. | The latent-space principle remains common, though autoencoder details change. |
-| Denoiser | U-Net with residual blocks, attention, timestep embedding, and cross-attention to text. | Larger U-Nets in SDXL; diffusion-transformer or rectified-flow backbones in newer systems. |
-| Conditioning | Text encoder produces prompt embeddings exposed through cross-attention. | Multiple text encoders, richer conditioning, image conditioning, control maps, or multimodal token mixing. |
-| Sampler | Iterative denoising schedule over timesteps. | Faster samplers, distillation, consistency-style methods, or rectified-flow trajectories. |
+| component    | classic latent-diffusion Stable Diffusion                                                     | later variants                                                                                             |
+| ------------ | --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| Image space  | Autoencoder compresses pixels into a spatial latent and decodes final latents back to pixels. | The latent-space principle remains common, though autoencoder details change.                              |
+| Denoiser     | U-Net with residual blocks, attention, timestep embedding, and cross-attention to text.       | Larger U-Nets in SDXL; diffusion-transformer or rectified-flow backbones in newer systems.                 |
+| Conditioning | Text encoder produces prompt embeddings exposed through cross-attention.                      | Multiple text encoders, richer conditioning, image conditioning, control maps, or multimodal token mixing. |
+| Sampler      | Iterative denoising schedule over timesteps.                                                  | Faster samplers, distillation, consistency-style methods, or rectified-flow trajectories.                  |
 
 The important conceptual point is stable across variants: generation is an iterative denoising process in a learned visual latent space, steered by a conditioning signal.
 
@@ -98,13 +99,13 @@ The important conceptual point is stable across variants: generation is an itera
 
 For a prompt such as "a watercolor sketch of a glass greenhouse at sunrise," the system follows this path:
 
-| stage | representation | role |
-|---|---|---|
-| Prompt encoding | Text embeddings $c$ | Encodes concepts such as watercolor, greenhouse, glass, and sunrise. |
-| Initial latent | Random noise $z_T$ | Provides stochastic variation; different seeds start from different noise. |
-| Denoising loop | Latents $z_t$ | Repeatedly removes noise while cross-attention steers the latent toward the prompt. |
-| Guidance | $\epsilon_{cfg}$ | Trades prompt adherence against diversity and artifact risk. |
-| Decoding | Image $\hat x=D(\hat z_0)$ | Converts the final latent into RGB pixels. |
+| stage           | representation             | role                                                                                |
+| --------------- | -------------------------- | ----------------------------------------------------------------------------------- |
+| Prompt encoding | Text embeddings $c$        | Encodes concepts such as watercolor, greenhouse, glass, and sunrise.                |
+| Initial latent  | Random noise $z_T$         | Provides stochastic variation; different seeds start from different noise.          |
+| Denoising loop  | Latents $z_t$              | Repeatedly removes noise while cross-attention steers the latent toward the prompt. |
+| Guidance        | $\epsilon_{cfg}$           | Trades prompt adherence against diversity and artifact risk.                        |
+| Decoding        | Image $\hat x=D(\hat z_0)$ | Converts the final latent into RGB pixels.                                          |
 
 Image-to-image and inpainting use the same mechanism with a different starting point: encode an existing image, add a controlled amount of noise, and denoise under the prompt or mask constraints. More noise gives the model more freedom; less noise preserves more of the original image.
 

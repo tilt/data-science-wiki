@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Multi-Armed Bandits
 
 A multi-armed bandit repeatedly chooses one action and observes reward only for that action. In recommendation, an arm can be a headline, module, notification, or item bucket. The missing labels for unchosen arms are the key difference from ordinary supervised [ranking](ranking.md).
@@ -46,10 +47,10 @@ $$
 After 55 total pulls, a UCB policy combines the empirical win rate with an uncertainty bonus:
 
 | Arm | Wins / pulls | Empirical rate | Exploration bonus | UCB score |
-| --- | ---: | ---: | ---: | ---: |
-| 0 | 4 / 40 | 0.100 | 0.448 | 0.548 |
-| 1 | 2 / 10 | 0.200 | 0.895 | 1.095 |
-| 2 | 0 / 5 | 0.000 | 1.266 | 1.266 |
+| --- | -----------: | -------------: | ----------------: | --------: |
+| 0   |       4 / 40 |          0.100 |             0.448 |     0.548 |
+| 1   |       2 / 10 |          0.200 |             0.895 |     1.095 |
+| 2   |        0 / 5 |          0.000 |             1.266 |     1.266 |
 
 Arm 2 has no wins, but its low count gives it the largest exploration bonus, so it is chosen next. This is the mechanism behind [exploration versus exploitation](exploration-versus-exploitation.md).
 

@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Statistical Estimation
 
 Statistical estimation turns sampled data into claims about a target quantity. The estimand is the quantity of interest, the estimator is the rule, and the estimate is the realized number. For example, the sample mean estimates $\mu=\mathbb E[X]$ with

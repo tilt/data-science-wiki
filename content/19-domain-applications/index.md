@@ -8,16 +8,17 @@ topics:
   - "autonomous-driving"
   - "news-recommendation"
   - "matchmaking"
-  - "marketing-text-categorization"
+  - "business-message-classification"
   - "autonomous-driving-model-evaluation"
   - "demand-prediction-in-logistics"
   - "energy-forecasting"
   - "predictive-maintenance"
   - "medical-mri-analysis"
-  - "museum-label-text-extraction-and-entity-matching"
-  - "video-gesture-recognition"
+  - "cultural-heritage-document-extraction-and-entity-matching"
+  - "gesture-based-interaction"
+  - "gesture-recognition"
   - "real-time-action-recognition"
-  - "street-scene-segmentation-and-pose-detection"
+  - "road-scene-perception"
 level: foundational
 status: draft
 page_type: area-index
@@ -27,10 +28,11 @@ prerequisites:
   - "03-classical-machine-learning/index.md"
   - "14-ml-engineering-and-mlops/index.md"
 related:
-  - "21-interview-preparation/index.md"
+  - "../00-home-and-navigation/technical-answer-patterns.md"
 historical_context: false
 last_reviewed: 2026-07-10
 ---
+
 # Domain Applications
 
 ## Summary
@@ -39,27 +41,27 @@ Domain applications show how the wiki's modeling, evaluation, and engineering co
 
 Use these pages as integration examples: they show which canonical methods matter in a domain, what the real output contract is, what can go wrong, and which evaluation slices matter.
 
-| cluster | pages |
-|---|---|
-| Mobility and physical systems | [Autonomous Driving](autonomous-driving.md), [Autonomous Driving Model Evaluation](autonomous-driving-model-evaluation.md), [Street Scene Segmentation and Pose Detection](street-scene-segmentation-and-pose-detection.md), [Real Time Action Recognition](real-time-action-recognition.md), [Video Gesture Recognition](video-gesture-recognition.md) |
-| Healthcare and clinical imaging | [Medical MRI Analysis](medical-mri-analysis.md) |
-| Forecasting and operations | [Demand Prediction in Logistics](demand-prediction-in-logistics.md), [Energy Forecasting](energy-forecasting.md), [Predictive Maintenance](predictive-maintenance.md) |
-| Recommendation and matching | [News Recommendation](news-recommendation.md), [Matchmaking](matchmaking.md) |
-| Text, document, and security workflows | [Marketing Text Categorization](marketing-text-categorization.md), [Museum Label Text Extraction and Entity Matching](museum-label-text-extraction-and-entity-matching.md), [Malware Classification and Clustering](malware-classification-and-clustering.md) |
+| cluster                                | pages                                                                                                                                                                                                                                                                                                                           |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Mobility and physical systems          | [Autonomous Driving](autonomous-driving.md), [Autonomous Driving Model Evaluation](autonomous-driving-model-evaluation.md), [Road Scene Perception](road-scene-perception.md), [Real Time Action Recognition](real-time-action-recognition.md), [Gesture-Based Interaction / Gesture Recognition](gesture-based-interaction.md) |
+| Healthcare and clinical imaging        | [Medical MRI Analysis](medical-mri-analysis.md)                                                                                                                                                                                                                                                                                 |
+| Forecasting and operations             | [Demand Prediction in Logistics](demand-prediction-in-logistics.md), [Energy Forecasting](energy-forecasting.md), [Predictive Maintenance](predictive-maintenance.md)                                                                                                                                                           |
+| Recommendation and matching            | [News Recommendation](news-recommendation.md), [Matchmaking](matchmaking.md)                                                                                                                                                                                                                                                    |
+| Text, document, and security workflows | [Business Message Classification](business-message-classification.md), [Cultural Heritage Document Extraction and Entity Matching](cultural-heritage-document-extraction-and-entity-matching.md), [Malware Classification and Clustering](malware-classification-and-clustering.md)                                             |
 
 ## Subtopics
 
 - [News Recommendation](news-recommendation.md)
 - [Matchmaking](matchmaking.md)
-- [Marketing Text Categorization](marketing-text-categorization.md)
+- [Business Message Classification](business-message-classification.md)
 - [Autonomous Driving](autonomous-driving.md)
 - [Autonomous Driving Model Evaluation](autonomous-driving-model-evaluation.md)
 - [Demand Prediction in Logistics](demand-prediction-in-logistics.md)
 - [Energy Forecasting](energy-forecasting.md)
 - [Predictive Maintenance](predictive-maintenance.md)
 - [Medical MRI Analysis](medical-mri-analysis.md)
-- [Museum Label Text Extraction and Entity Matching](museum-label-text-extraction-and-entity-matching.md)
-- [Video Gesture Recognition](video-gesture-recognition.md)
+- [Cultural Heritage Document Extraction and Entity Matching](cultural-heritage-document-extraction-and-entity-matching.md)
+- [Gesture-Based Interaction / Gesture Recognition](gesture-based-interaction.md)
 - [Real Time Action Recognition](real-time-action-recognition.md)
-- [Street Scene Segmentation and Pose Detection](street-scene-segmentation-and-pose-detection.md)
+- [Road Scene Perception](road-scene-perception.md)
 - [Malware Classification and Clustering](malware-classification-and-clustering.md)

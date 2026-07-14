@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # ELK Stack
 
 The ELK stack combines Logstash ingest pipelines, [Elasticsearch](elasticsearch.md) indexing/search, and Kibana exploration. Its retrieval problem is operational: find the right events, traces, or logs quickly enough during debugging or incident response. That makes field extraction and time filters as important as [BM25](bm25.md)-style text scoring.

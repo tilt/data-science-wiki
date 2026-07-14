@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Data Drift
 
 Data drift means production inputs no longer follow the reference distribution used for training, validation, or release approval. It concerns $P(X)$, while [concept drift](concept-drift.md) concerns $P(Y\mid X)$. Data drift can be harmless, but it is often the earliest observable sign that [model degradation](model-degradation.md) may follow.

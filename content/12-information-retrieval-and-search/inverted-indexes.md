@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Inverted Indexes
 
 An inverted index maps each term to the documents that contain it. It is the storage mechanism that makes [sparse retrieval](sparse-retrieval.md), [TF-IDF](tf-idf.md), and [BM25](bm25.md) practical: a query only touches postings for its terms instead of scanning every document.

@@ -29,6 +29,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # LLM Training
 
 LLM training is a staged process. A base model first learns a broad next-token distribution from large text or multimodal corpora. Post-training then turns that base model into a usable assistant or domain model through supervised demonstrations, [preference optimization](../07-reinforcement-learning/reinforcement-learning-from-human-feedback.md), safety data, and evaluation.
@@ -90,12 +91,12 @@ Serving constraints feed back into training choices. Context length, quantizatio
 
 Evaluate each stage separately:
 
-| Stage | Useful checks |
-| --- | --- |
-| Pretraining | loss curves, held-out perplexity, contamination audits, capability benchmarks |
-| Instruction tuning | task-following tests, format adherence, regression sets |
+| Stage                   | Useful checks                                                                                                     |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Pretraining             | loss curves, held-out perplexity, contamination audits, capability benchmarks                                     |
+| Instruction tuning      | task-following tests, format adherence, regression sets                                                           |
 | Preference optimization | win-rate studies, reward-model audits, [KL](../01-mathematical-foundations/kl-divergence.md) drift, safety checks |
-| Deployment | latency, cost, grounding quality, privacy, human review outcomes |
+| Deployment              | latency, cost, grounding quality, privacy, human review outcomes                                                  |
 
 Training loss is not enough. A lower next-token loss can coexist with worse instruction behavior, and a higher preference score can hide reward hacking or over-refusal.
 

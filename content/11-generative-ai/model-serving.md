@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Model Serving
 
 Model serving is the runtime layer that turns application requests into model responses. It handles routing, rate limits, streaming, batching, retries, fallbacks, validation, and observability across [local versus hosted models](local-versus-hosted-models.md).
@@ -43,7 +44,8 @@ validation:
   response_schema: support_answer.schema.json
   on_schema_fail: retry_once_then_escalate
 observability:
-  log_fields: [model, prompt_hash, context_hash, input_tokens, output_tokens, latency_ms, validator_result]
+  log_fields:
+    [model, prompt_hash, context_hash, input_tokens, output_tokens, latency_ms, validator_result]
 ```
 
 This record supports [determinism and reproducibility](determinism-and-reproducibility.md): if an answer changes, the team can tell whether the model, prompt, context, schema, or serving route changed.

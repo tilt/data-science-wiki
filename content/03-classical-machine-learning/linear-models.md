@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Linear Models
 
 A linear model predicts through a score $\eta = \beta_0 + x^\top\beta$. What changes across [regression](regression.md), [logistic regression](logistic-regression.md), and linear margin classifiers is the link from $\eta$ to the output and the loss used for fitting.

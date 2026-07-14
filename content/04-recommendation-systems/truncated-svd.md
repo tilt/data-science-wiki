@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Truncated SVD
 
 Truncated SVD computes only the largest singular components of a matrix. It is useful for compression, latent semantic indexing, and baseline recommender representations, but it inherits the input-matrix assumptions of [classical SVD](classical-svd.md).
@@ -39,12 +40,12 @@ where $k\ll\min(m,n)$. In information retrieval, this can compress a [TF-IDF](..
 
 The matrix below can be read as four users or documents over four item/term features:
 
-| Row | Feature pattern |
-| --- | --- |
-| 0 | Features 0 and 1 active. |
-| 1 | Features 0 and 2 active. |
-| 2 | Features 2 and 3 active. |
-| 3 | Features 1 and 3 active. |
+| Row | Feature pattern          |
+| --- | ------------------------ |
+| 0   | Features 0 and 1 active. |
+| 1   | Features 0 and 2 active. |
+| 2   | Features 2 and 3 active. |
+| 3   | Features 1 and 3 active. |
 
 This snippet applies `TruncatedSVD` to sparse user-item rows and reports explained variance plus the first row embedding.
 

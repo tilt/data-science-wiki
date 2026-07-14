@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # World Models and JEPA
 
 JEPA connects to [world models](world-models.md) through prediction in representation space. A pixel-prediction model tries to generate future sensory detail; a JEPA-style model tries to predict the latent features that matter for understanding or planning. This makes [V-JEPA](v-jepa.md) and [V-JEPA 2](v-jepa-2.md) natural examples in video understanding.
@@ -40,11 +41,11 @@ Training lowers energy for the true target and keeps alternatives higher, either
 
 Suppose the predicted future latent is $\hat z=(1.1,0.6)$. Compare it with the true target and two alternatives:
 
-| candidate latent | energy $E(\hat z,z)=\lVert \hat z-z\rVert_2^2$ | rank |
-|---:|---:|---:|
-| true target $(1.2,0.55)$ | $(1.1-1.2)^2+(0.6-0.55)^2=0.013$ | 1 |
-| alternative $(1.8,-0.3)$ | $(1.1-1.8)^2+(0.6+0.3)^2=1.300$ | 2 |
-| alternative $(0.2,1.4)$ | $(1.1-0.2)^2+(0.6-1.4)^2=1.450$ | 3 |
+|         candidate latent | energy $E(\hat z,z)=\lVert \hat z-z\rVert_2^2$ | rank |
+| -----------------------: | ---------------------------------------------: | ---: |
+| true target $(1.2,0.55)$ |               $(1.1-1.2)^2+(0.6-0.55)^2=0.013$ |    1 |
+| alternative $(1.8,-0.3)$ |                $(1.1-1.8)^2+(0.6+0.3)^2=1.300$ |    2 |
+|  alternative $(0.2,1.4)$ |                $(1.1-0.2)^2+(0.6-1.4)^2=1.450$ |    3 |
 
 The true target has the lowest energy, so the latent prediction is closer to the actual future than to the two alternatives. In JEPA-style training, learning pushes true future or masked-target latents toward low energy without forcing the model to reconstruct every pixel.
 

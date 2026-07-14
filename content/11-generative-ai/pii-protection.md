@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # PII Protection
 
 PII protection reduces exposure of personal data in prompts, retrieval, logs, [memory](memory.md), and outputs. It is a control inside broader [data privacy](data-privacy.md) and [guardrails](guardrails.md), not a guarantee by itself.
@@ -30,22 +31,22 @@ A practical pipeline classifies fields, redacts or masks high-risk patterns, min
 
 Use the least destructive control that satisfies the privacy requirement. Some tasks need redaction before the model call. Others should keep private fields out of the prompt and fetch them through a permissioned tool only when needed. Logs should avoid raw prompts unless the retention and access policy explicitly allows them.
 
-| Control | Best for | Tradeoff |
-| --- | --- | --- |
-| Redaction | removing direct identifiers before model calls | can destroy information needed for the task |
-| Masking with typed placeholders | preserving task structure without raw identifiers | placeholders can still reveal sensitive context |
-| Tokenization or pseudonymization | linking repeated entities across a workflow | mapping table becomes sensitive infrastructure |
-| Permissioned retrieval/tooling | using private data only after an access check | more engineering complexity and audit requirements |
-| Log minimization | reducing breach impact and retention risk | weaker debugging unless traces keep safe metadata |
+| Control                          | Best for                                          | Tradeoff                                           |
+| -------------------------------- | ------------------------------------------------- | -------------------------------------------------- |
+| Redaction                        | removing direct identifiers before model calls    | can destroy information needed for the task        |
+| Masking with typed placeholders  | preserving task structure without raw identifiers | placeholders can still reveal sensitive context    |
+| Tokenization or pseudonymization | linking repeated entities across a workflow       | mapping table becomes sensitive infrastructure     |
+| Permissioned retrieval/tooling   | using private data only after an access check     | more engineering complexity and audit requirements |
+| Log minimization                 | reducing breach impact and retention risk         | weaker debugging unless traces keep safe metadata  |
 
 ## Worked redaction example
 
 Before sending support text to a model, deterministic recognizers can replace high-risk fields with typed placeholders:
 
-| input span | recognizer | replacement |
-|---|---|---|
-| `ana@example.com` | email pattern | `[EMAIL]` |
-| `1234-5678-9012-3456` | card-shaped digit pattern | `[CARD]` |
+| input span            | recognizer                | replacement |
+| --------------------- | ------------------------- | ----------- |
+| `ana@example.com`     | email pattern             | `[EMAIL]`   |
+| `1234-5678-9012-3456` | card-shaped digit pattern | `[CARD]`    |
 
 The prompt fragment
 
@@ -65,14 +66,14 @@ Typed placeholders preserve the task shape while removing direct identifiers. Th
 
 PII controls should appear before, during, and after generation:
 
-| Stage | Control question |
-| --- | --- |
-| Input intake | does the user request contain unnecessary personal data? |
-| Retrieval | is the requesting user allowed to access the retrieved record? |
-| Prompt construction | can the model solve the task with placeholders or aggregates? |
-| Tool use | are private fields fetched through audited permission checks? |
-| Output | does the answer leak identifiers that were not needed? |
-| Logging | are raw prompts, sources, and outputs retained safely or minimized? |
+| Stage               | Control question                                                    |
+| ------------------- | ------------------------------------------------------------------- |
+| Input intake        | does the user request contain unnecessary personal data?            |
+| Retrieval           | is the requesting user allowed to access the retrieved record?      |
+| Prompt construction | can the model solve the task with placeholders or aggregates?       |
+| Tool use            | are private fields fetched through audited permission checks?       |
+| Output              | does the answer leak identifiers that were not needed?              |
+| Logging             | are raw prompts, sources, and outputs retained safely or minimized? |
 
 The safest design is often data minimization rather than clever redaction: never place private fields in the model context unless the task requires them.
 

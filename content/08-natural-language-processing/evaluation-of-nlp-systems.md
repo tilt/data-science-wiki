@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Evaluation of NLP Systems
 
 NLP evaluation asks whether a text system does the task correctly under the ambiguity, noise, and cost structure of its use case. A [text classification](text-classification.md) router, [sequence labelling](sequence-labelling.md) tagger, [named entity recognition](named-entity-recognition.md) model, [summarization](summarization.md) system, and [urgency classification](urgency-classification.md) policy need different metrics and examples.

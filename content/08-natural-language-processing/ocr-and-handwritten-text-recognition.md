@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # OCR and Handwritten Text Recognition
 
 OCR and handwritten text recognition convert page images into machine-readable text. In an NLP pipeline, OCR output becomes input to [text preprocessing](text-preprocessing.md), [tokenization](tokenization.md), [document understanding](document-understanding.md), and [information extraction](information-extraction.md). The recognition problem is visual, but the downstream errors are linguistic and structured.

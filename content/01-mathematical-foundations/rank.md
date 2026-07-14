@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Rank
 
 Rank is the number of independent directions in a matrix. It tells how many dimensions a linear map can preserve, how many independent columns a design matrix has, and how many factors a [low-rank approximation](low-rank-approximation.md) is allowed to use.

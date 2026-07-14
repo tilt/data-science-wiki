@@ -23,6 +23,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Offline Evaluation
 
 Offline evaluation measures a system on fixed historical or curated data before it reaches live users. It is a deployment gate, not a product-impact estimate. A recommender, classifier, RAG system, and extraction model can all pass offline checks and still need [online experiments](online-experiments.md) because real users change exposure, feedback, and cost.
@@ -43,9 +44,9 @@ The metric is only meaningful if relevance labels, candidate generation, and tim
 Compare two rankings with graded gains:
 
 | system | top-five gains | [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md)@3 | relevant items in top 3 |
-| --- | --- | ---: | ---: |
-| A | 3, 0, 2, 1, 0 | 0.905 | 2 of 3 |
-| B | 2, 3, 1, 0, 0 | 0.843 | 3 of 3 |
+| ------ | -------------- | --------------------------------------------------------------------------------: | ----------------------: |
+| A      | 3, 0, 2, 1, 0  |                                                                             0.905 |                  2 of 3 |
+| B      | 2, 3, 1, 0, 0  |                                                                             0.843 |                  3 of 3 |
 
 System B retrieves more relevant items in the first three slots, but system A puts the highest-gain item first and therefore wins [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md)@3. The decision depends on whether the product values the first slot, any relevant result, or a downstream action.
 

@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Rolling Origin Validation
 
 Rolling-origin validation evaluates a forecaster by moving the training cutoff forward through history. At cutoff $t_i$, the model is trained only on observations up to $t_i$ and evaluated on one or more future horizons:

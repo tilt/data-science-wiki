@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Optimizers
 
 An optimizer consumes gradients from [backpropagation](backpropagation.md) and changes parameters. Plain SGD follows the local slope; momentum accumulates a velocity; Adam rescales updates with running first and second moments. These rules are usually more consequential than small architecture changes when the [loss](loss-functions.md) is noisy or sparse.

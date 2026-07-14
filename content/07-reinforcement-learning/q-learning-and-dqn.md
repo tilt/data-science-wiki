@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # Q-Learning and DQN
 
 Q-learning is a value-based control method. It learns $Q(s,a)$, the expected return after taking action $a$ in state $s$ and then acting well afterward. A policy can then choose the action with the largest estimated value.
@@ -66,12 +67,12 @@ $$
 
 where $\theta^-$ are target-network parameters held fixed for several updates. DQN also uses experience replay: transitions are stored and sampled later so training batches are less correlated.
 
-| Mechanism | Why it helps |
-| --- | --- |
-| Replay buffer | reuses transitions and reduces correlation between adjacent samples |
-| Target network | makes the bootstrap target less volatile |
-| $\epsilon$-greedy exploration | sometimes tries non-greedy actions to discover better returns |
-| Value output per action | turns action selection into an argmax over predicted values |
+| Mechanism                     | Why it helps                                                        |
+| ----------------------------- | ------------------------------------------------------------------- |
+| Replay buffer                 | reuses transitions and reduces correlation between adjacent samples |
+| Target network                | makes the bootstrap target less volatile                            |
+| $\epsilon$-greedy exploration | sometimes tries non-greedy actions to discover better returns       |
+| Value output per action       | turns action selection into an argmax over predicted values         |
 
 ## Caveats
 

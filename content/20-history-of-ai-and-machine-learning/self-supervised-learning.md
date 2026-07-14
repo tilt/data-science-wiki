@@ -21,19 +21,20 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # Self-Supervised Learning
 
 Self-supervised learning became central when researchers realized that labels could be generated from the data itself. Text supplies missing-token and next-token targets; images supply transformed views or masked patches; video supplies temporal prediction. This history page complements the modeling page on [self-supervised learning](../06-deep-learning/self-supervised-learning.md).
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 2013 | Mikolov, Chen, Corrado, and Dean introduced efficient word-vector training methods. | Predicting nearby words from raw text made large-scale representation learning practical without manual labels. |
-| 2018 | Devlin, Chang, Lee, and Toutanova introduced BERT with masked language modeling. | Bidirectional [pretraining](../11-generative-ai/pretraining.md) turned unlabeled text into task-transferable contextual representations. |
-| 2020 | Chen, Kornblith, Norouzi, and Hinton introduced SimCLR for contrastive visual representation learning. | Augmentations defined positive pairs, making [contrastive learning](../06-deep-learning/contrastive-learning.md) a scalable vision pretext task. |
-| 2020 | Grill and coauthors introduced BYOL, a non-contrastive self-supervised method. | The field tested whether useful invariances could be learned without explicit negative pairs. |
-| 2021 | He, Chen, Xie, Li, Dollar, and Girshick introduced masked autoencoders for scalable vision learning. | Masked reconstruction made [self-supervised visual learning](../09-computer-vision/self-supervised-visual-learning.md) align naturally with ViT-style patch representations. |
+| Year | Milestone                                                                                              | Why it followed                                                                                                                                                              |
+| ---- | ------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2013 | Mikolov, Chen, Corrado, and Dean introduced efficient word-vector training methods.                    | Predicting nearby words from raw text made large-scale representation learning practical without manual labels.                                                              |
+| 2018 | Devlin, Chang, Lee, and Toutanova introduced BERT with masked language modeling.                       | Bidirectional [pretraining](../11-generative-ai/pretraining.md) turned unlabeled text into task-transferable contextual representations.                                     |
+| 2020 | Chen, Kornblith, Norouzi, and Hinton introduced SimCLR for contrastive visual representation learning. | Augmentations defined positive pairs, making [contrastive learning](../06-deep-learning/contrastive-learning.md) a scalable vision pretext task.                             |
+| 2020 | Grill and coauthors introduced BYOL, a non-contrastive self-supervised method.                         | The field tested whether useful invariances could be learned without explicit negative pairs.                                                                                |
+| 2021 | He, Chen, Xie, Li, Dollar, and Girshick introduced masked autoencoders for scalable vision learning.   | Masked reconstruction made [self-supervised visual learning](../09-computer-vision/self-supervised-visual-learning.md) align naturally with ViT-style patch representations. |
 
 ## Historical mechanism
 

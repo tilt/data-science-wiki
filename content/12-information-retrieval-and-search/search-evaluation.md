@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Search Evaluation
 
 Search evaluation checks whether retrieval satisfies real information needs, not whether a component looks elegant. A useful evaluation set has queries, candidate results, relevance labels, metrics, and slices for query classes such as exact identifiers, broad topics, paraphrases, and permission-filtered searches.

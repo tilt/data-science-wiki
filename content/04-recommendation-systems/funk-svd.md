@@ -22,6 +22,7 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # Funk SVD
 
 Funk SVD is the informal name for SGD-trained recommender [matrix factorization](matrix-factorization.md) popularized during the Netflix Prize. Despite the name, it is not [classical SVD](classical-svd.md): it does not decompose a complete matrix with orthogonal singular vectors. It learns user and item factors directly from observed ratings.

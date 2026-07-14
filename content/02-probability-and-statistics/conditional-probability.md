@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Conditional Probability
 
 Conditional probability changes the reference population. For events $A$ and $B$ in a [probability space](probability-spaces.md), with $P(B)>0$,

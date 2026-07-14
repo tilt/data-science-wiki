@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Clustering
 
 Clustering assigns examples to groups using features alone. The result is not a discovered truth by default; it is the partition implied by a chosen similarity definition. K-means uses Euclidean distance, DBSCAN uses density connectivity, and mixture models use likelihood.

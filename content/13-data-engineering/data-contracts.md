@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Data Contracts
 
 A data contract is an explicit agreement between a producer and consumers about what a dataset means and how it may change. It extends [relational-modelling](relational-modelling.md) constraints with ownership, freshness, allowed values, compatibility rules, and [data-quality](data-quality.md) gates.
@@ -45,10 +46,10 @@ quality:
 change_policy: backward-compatible unless consumers approve
 ```
 
-| Record | Currency rule | Amount rule | Verdict |
-| --- | --- | --- | --- |
-| `{payment_id: p1, amount_cents: 1200, currency: USD}` | allowed | non-negative | pass |
-| `{payment_id: p2, amount_cents: -5, currency: GBP}` | `GBP` is not allowed | `-5` is below minimum | fail |
+| Record                                                | Currency rule        | Amount rule           | Verdict |
+| ----------------------------------------------------- | -------------------- | --------------------- | ------- |
+| `{payment_id: p1, amount_cents: 1200, currency: USD}` | allowed              | non-negative          | pass    |
+| `{payment_id: p2, amount_cents: -5, currency: GBP}`   | `GBP` is not allowed | `-5` is below minimum | fail    |
 
 The second record violates both a semantic domain rule and a numeric rule. A real contract should also name freshness expectations, expected consumers, and escalation behavior when a breaking change is needed.
 

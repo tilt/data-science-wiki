@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Policy Enforcement
 
 Policy enforcement turns rules about allowed behavior into runtime controls. In AI systems, policies can be checked before input, during retrieval, before tool execution, after generation, and during [human oversight](human-oversight.md). A prompt instruction is not an enforcement boundary; high-risk decisions should be mediated by code, permissions, or a policy engine.

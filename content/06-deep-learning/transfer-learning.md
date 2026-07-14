@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Transfer Learning
 
 Transfer learning starts from a model or [representation](representation-learning.md) learned elsewhere and adapts it to a new task. The simplest version freezes the base and trains a small head; [fine-tuning](fine-tuning.md) updates some or all pretrained weights. It works best when the source task learned features that remain useful in the target domain, including features learned by [self-supervised learning](self-supervised-learning.md).

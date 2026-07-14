@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # In-Context Learning
 
 In-context learning is the model's ability to infer a task pattern from examples in the prompt. It is a [prompting](prompting.md) technique, not weight training. Compared with [fine tuning versus RAG](fine-tuning-versus-rag.md), it is fast to change but limited by [context construction](context-construction.md).
@@ -32,21 +33,21 @@ A prompt supplies examples $(x_i,y_i)$ followed by a new input $x_*$. The model 
 
 Few-shot examples teach a pattern only if they disambiguate the input space:
 
-| Example input | Label | Signal |
-| --- | --- | --- |
-| `invoice overdue` | billing | `invoice` points to billing. |
-| `refund status` | support | `refund` points to support. |
-| `rain tomorrow` | weather | Weather is clearly separate. |
-| New input: `refund invoice` | ? | Contains one cue for each of two labels. |
+| Example input               | Label   | Signal                                   |
+| --------------------------- | ------- | ---------------------------------------- |
+| `invoice overdue`           | billing | `invoice` points to billing.             |
+| `refund status`             | support | `refund` points to support.              |
+| `rain tomorrow`             | weather | Weather is clearly separate.             |
+| New input: `refund invoice` | ?       | Contains one cue for each of two labels. |
 
 The new input is ambiguous because it combines `refund` and `invoice`. A model may choose either label depending on example order, wording, and prior knowledge. Better in-context examples would include refund invoices explicitly, or the prompt should ask a clarifying question when examples conflict.
 
-| Prompt design lever | Why it matters |
-| --- | --- |
-| Balanced labels | Prevents the model from overusing the majority example. |
-| Boundary examples | Shows what to do when cues conflict. |
-| Output format examples | Teaches stable structure without fine-tuning. |
-| Fallback instruction | Reduces confident guesses on ambiguous inputs. |
+| Prompt design lever    | Why it matters                                          |
+| ---------------------- | ------------------------------------------------------- |
+| Balanced labels        | Prevents the model from overusing the majority example. |
+| Boundary examples      | Shows what to do when cues conflict.                    |
+| Output format examples | Teaches stable structure without fine-tuning.           |
+| Fallback instruction   | Reduces confident guesses on ambiguous inputs.          |
 
 ## Caveats
 

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # State Space Models
 
 A state-space model separates the hidden process from the noisy measurements. Instead of modeling only $y_t$, it introduces a latent state vector $\alpha_t$ that evolves over time and emits observations. The linear Gaussian form is

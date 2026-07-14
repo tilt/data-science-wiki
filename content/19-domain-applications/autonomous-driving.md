@@ -16,7 +16,7 @@ prerequisites:
   - index.md
 related:
   - autonomous-driving-model-evaluation.md
-  - street-scene-segmentation-and-pose-detection.md
+  - road-scene-perception.md
   - real-time-action-recognition.md
   - ../09-computer-vision/object-detection.md
   - ../09-computer-vision/semantic-segmentation.md
@@ -26,6 +26,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # Autonomous Driving
 
 Autonomous driving is a domain application where perception, prediction, planning, control, mapping, simulation, and safety evaluation must work as one real-time system. The model is not judged only by object-detection accuracy: it must produce a safe trajectory inside an operational design domain, under latency, uncertainty, legal, and human-interaction constraints.
@@ -36,29 +37,29 @@ The field spans two deployment families. Driver-assistance systems keep a human 
 
 A classical autonomous-driving stack decomposes the problem into modules:
 
-| layer | output | common techniques |
-|---|---|---|
-| Sensor ingestion | Synchronized camera, lidar, radar, GNSS/IMU, map, and ego-motion streams. | Calibration, timestamp alignment, sensor fusion, rolling-buffer processing. |
-| Perception | Objects, lanes, free space, traffic lights, signs, occupancy, and semantic scene state. | [Object detection](../09-computer-vision/object-detection.md), [semantic segmentation](../09-computer-vision/semantic-segmentation.md), 3D detection, BEV transformers, occupancy networks. |
-| Tracking and prediction | Actor identities, velocities, interaction state, and future trajectory distributions. | Kalman/particle filters, graph neural networks, transformers, diffusion or mixture trajectory predictors. |
-| Mapping and localization | Ego pose, local drivable graph, lanes, crosswalks, route, and construction changes. | HD maps, online map learning, vector-map prediction, SLAM-like localization, map-change detection. |
-| Planning | Candidate ego trajectories with collision, comfort, rule, and route costs. | Rule-based planners, optimization, model predictive control, imitation learning, reinforcement learning, end-to-end planners. |
-| Control | Steering, throttle, brake, and actuation commands. | PID/LQR/MPC control, learned low-level policies, redundancy and fault handling. |
-| Evaluation and safety | Scenario pass/fail, collision risk, rule compliance, interventions, and residual risk. | [Risk-weighted error taxonomies](../17-experimentation-and-evaluation/risk-weighted-error-taxonomies.md), simulation, replay, closed-loop testing, safety cases. |
+| layer                    | output                                                                                  | common techniques                                                                                                                                                                           |
+| ------------------------ | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sensor ingestion         | Synchronized camera, lidar, radar, GNSS/IMU, map, and ego-motion streams.               | Calibration, timestamp alignment, sensor fusion, rolling-buffer processing.                                                                                                                 |
+| Perception               | Objects, lanes, free space, traffic lights, signs, occupancy, and semantic scene state. | [Object detection](../09-computer-vision/object-detection.md), [semantic segmentation](../09-computer-vision/semantic-segmentation.md), 3D detection, BEV transformers, occupancy networks. |
+| Tracking and prediction  | Actor identities, velocities, interaction state, and future trajectory distributions.   | Kalman/particle filters, graph neural networks, transformers, diffusion or mixture trajectory predictors.                                                                                   |
+| Mapping and localization | Ego pose, local drivable graph, lanes, crosswalks, route, and construction changes.     | HD maps, online map learning, vector-map prediction, SLAM-like localization, map-change detection.                                                                                          |
+| Planning                 | Candidate ego trajectories with collision, comfort, rule, and route costs.              | Rule-based planners, optimization, model predictive control, imitation learning, reinforcement learning, end-to-end planners.                                                               |
+| Control                  | Steering, throttle, brake, and actuation commands.                                      | PID/LQR/MPC control, learned low-level policies, redundancy and fault handling.                                                                                                             |
+| Evaluation and safety    | Scenario pass/fail, collision risk, rule compliance, interventions, and residual risk.  | [Risk-weighted error taxonomies](../17-experimentation-and-evaluation/risk-weighted-error-taxonomies.md), simulation, replay, closed-loop testing, safety cases.                            |
 
 ## State-of-the-Art Method Families
 
 Modern research no longer centers only on separate 2D object detectors. Several representation and training families now matter:
 
-| family | state-of-the-art idea | why it matters |
-|---|---|---|
-| Bird's-eye-view perception | Multi-camera transformers such as BEVFormer aggregate image features into a top-down spatial grid with temporal memory. | BEV is a common interface for 3D detection, lane reasoning, free-space reasoning, and planning. |
-| 3D occupancy prediction | Occupancy benchmarks estimate which voxels are occupied and often what semantic class they contain. | Occupancy represents generic obstacles and geometry better than boxes alone, including unusual or open-set objects. |
-| Online vector-map learning | Models such as VectorMapNet predict lane boundaries, dividers, crossings, and road elements as polylines. | Vector maps are closer to what planners need than raster segmentation masks. |
-| Planning-oriented multi-task models | UniAD and similar systems connect perception, tracking, prediction, mapping, occupancy, and planning with shared queries. | Optimizing intermediate tasks toward planning can reduce module mismatch and accumulated errors. |
-| End-to-end vectorized planners | VAD-style systems use agent and map vectors as structured planning constraints. | They avoid dense raster bottlenecks and make actor/map instances explicit for planning. |
-| Foundation-model and VLM approaches | EMMA and DriveLM-style work adapts multimodal or language-facing models to driving outputs or scene reasoning. | They may improve long-tail reasoning and interactivity, but current systems remain expensive and hard to validate for safety. |
-| Closed-loop simulation and reactive agents | nuPlan-style evaluation and newer reactive-agent benchmarks test how planners behave when other agents respond. | Open-loop trajectory error is not enough; the planner changes the future it is evaluated in. |
+| family                                     | state-of-the-art idea                                                                                                     | why it matters                                                                                                                |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| Bird's-eye-view perception                 | Multi-camera transformers such as BEVFormer aggregate image features into a top-down spatial grid with temporal memory.   | BEV is a common interface for 3D detection, lane reasoning, free-space reasoning, and planning.                               |
+| 3D occupancy prediction                    | Occupancy benchmarks estimate which voxels are occupied and often what semantic class they contain.                       | Occupancy represents generic obstacles and geometry better than boxes alone, including unusual or open-set objects.           |
+| Online vector-map learning                 | Models such as VectorMapNet predict lane boundaries, dividers, crossings, and road elements as polylines.                 | Vector maps are closer to what planners need than raster segmentation masks.                                                  |
+| Planning-oriented multi-task models        | UniAD and similar systems connect perception, tracking, prediction, mapping, occupancy, and planning with shared queries. | Optimizing intermediate tasks toward planning can reduce module mismatch and accumulated errors.                              |
+| End-to-end vectorized planners             | VAD-style systems use agent and map vectors as structured planning constraints.                                           | They avoid dense raster bottlenecks and make actor/map instances explicit for planning.                                       |
+| Foundation-model and VLM approaches        | EMMA and DriveLM-style work adapts multimodal or language-facing models to driving outputs or scene reasoning.            | They may improve long-tail reasoning and interactivity, but current systems remain expensive and hard to validate for safety. |
+| Closed-loop simulation and reactive agents | nuPlan-style evaluation and newer reactive-agent benchmarks test how planners behave when other agents respond.           | Open-loop trajectory error is not enough; the planner changes the future it is evaluated in.                                  |
 
 This page is intentionally architecture-neutral. A production system may remain modular for inspectability and safety certification, use learned modules inside a structured stack, or train a more end-to-end model. The main engineering question is not "modular or end-to-end?" but "which interfaces are reliable enough to validate, debug, and constrain?"
 
@@ -89,13 +90,13 @@ Learned planners may not expose this exact hand-written cost, but the same trade
 
 Consider an urban left turn with an occluded crosswalk, a cyclist approaching from behind, and a temporary lane closure:
 
-| subsystem | failure-prone question | useful signal |
-|---|---|---|
-| Perception | Is the partially visible pedestrian a real vulnerable road user or background clutter? | Camera/lidar fusion, occupancy, semantic segmentation, uncertainty. |
-| Prediction | Will the cyclist pass on the left before the ego vehicle turns? | Track history, map context, interaction-aware trajectory prediction. |
-| Mapping | Is the construction cone changing the drivable corridor? | Online vector-map update and lane-boundary evidence. |
-| Planning | Should the vehicle creep, yield, reroute, or commit? | Collision risk, route cost, rule compliance, comfort, and occlusion penalty. |
-| Evaluation | Does the model handle this in rain, night, glare, and different cities? | Scenario tags, closed-loop simulation, replay, and [autonomous-driving model evaluation](autonomous-driving-model-evaluation.md). |
+| subsystem  | failure-prone question                                                                 | useful signal                                                                                                                     |
+| ---------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Perception | Is the partially visible pedestrian a real vulnerable road user or background clutter? | Camera/lidar fusion, occupancy, semantic segmentation, uncertainty.                                                               |
+| Prediction | Will the cyclist pass on the left before the ego vehicle turns?                        | Track history, map context, interaction-aware trajectory prediction.                                                              |
+| Mapping    | Is the construction cone changing the drivable corridor?                               | Online vector-map update and lane-boundary evidence.                                                                              |
+| Planning   | Should the vehicle creep, yield, reroute, or commit?                                   | Collision risk, route cost, rule compliance, comfort, and occlusion penalty.                                                      |
+| Evaluation | Does the model handle this in rain, night, glare, and different cities?                | Scenario tags, closed-loop simulation, replay, and [autonomous-driving model evaluation](autonomous-driving-model-evaluation.md). |
 
 This scenario illustrates why autonomous driving is an application rather than a single model. The relevant output is not a label; it is a defensible action under uncertainty with traceable evidence.
 
@@ -103,12 +104,12 @@ This scenario illustrates why autonomous driving is an application rather than a
 
 Evaluate at several levels:
 
-| level | examples |
-|---|---|
-| Perception | 3D detection, segmentation, occupancy IoU, map-element precision, calibration, rare-class recall. |
-| Prediction | Multi-modal future accuracy, interaction consistency, miss rate for vulnerable road users. |
-| Planning | Collision rate, drivable-area compliance, comfort, route progress, red-light and right-of-way violations. |
-| System | Intervention rate, disengagement review, closed-loop simulation, scenario coverage, latency and fallback behavior. |
+| level       | examples                                                                                                                 |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Perception  | 3D detection, segmentation, occupancy IoU, map-element precision, calibration, rare-class recall.                        |
+| Prediction  | Multi-modal future accuracy, interaction consistency, miss rate for vulnerable road users.                               |
+| Planning    | Collision rate, drivable-area compliance, comfort, route progress, red-light and right-of-way violations.                |
+| System      | Intervention rate, disengagement review, closed-loop simulation, scenario coverage, latency and fallback behavior.       |
 | Safety case | Operational design domain, residual-risk argument, audit trail, software update process, monitoring and incident review. |
 
 The existing [Autonomous Driving Model Evaluation](autonomous-driving-model-evaluation.md) page goes deeper on scenario slices and risk-weighted evaluation.

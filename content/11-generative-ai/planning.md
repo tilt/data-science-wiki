@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Planning
 
 Planning decomposes a goal into actions before execution or replans after observations. In [agent loops](agent-loops.md), a plan is useful only when it improves tool choice, dependency ordering, evidence gathering, or stopping behavior. It is not valuable as hidden prose that cannot be inspected.
@@ -36,9 +37,9 @@ Planning can happen once at the beginning, incrementally after each observation,
 {
   "goal": "answer refund approval question",
   "steps": [
-    {"id": "s1", "action": "search_refund_policy", "needs": ["policy_version"]},
-    {"id": "s2", "action": "read approval threshold", "depends_on": ["s1"]},
-    {"id": "s3", "action": "answer_with_citation", "depends_on": ["s2"]}
+    { "id": "s1", "action": "search_refund_policy", "needs": ["policy_version"] },
+    { "id": "s2", "action": "read approval threshold", "depends_on": ["s1"] },
+    { "id": "s3", "action": "answer_with_citation", "depends_on": ["s2"] }
   ],
   "risk_gates": ["do_not_issue_refund", "cite_policy_span"],
   "done_when": "answer cites policy span or abstains"

@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Anomaly Detection
 
 Anomaly detection ranks or flags observations that look unusual relative to a reference distribution. It is often [unsupervised learning](unsupervised-learning.md), but evaluation usually becomes supervised once analysts label true incidents. Compared with [clustering](clustering.md), the goal is not to assign every point to a group; compared with [class imbalance](class-imbalance.md), the rare class may not be labeled at training time.

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Data Privacy
 
 Data privacy in generative systems is a boundary problem. Sensitive data can leak through prompts, [memory](memory.md), retrieval indexes, [tool use](tool-use-and-function-calling.md), logs, citations, or generated outputs. [PII protection](pii-protection.md) is one control, not the whole privacy program.

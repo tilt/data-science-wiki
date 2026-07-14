@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Feature Pipelines
 
 Feature pipelines compute model inputs from operational or analytical data. Their special contract is point-in-time correctness: training features must include only information available before the label or prediction timestamp, while serving features must use the same definitions under lower latency.

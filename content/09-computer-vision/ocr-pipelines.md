@@ -15,11 +15,12 @@ prerequisites:
 related:
   - classical-image-processing.md
   - rotated-object-detection.md
-  - historical-document-and-museum-label-analysis.md
+  - document-image-analysis-and-field-extraction.md
   - image-representation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # OCR Pipelines
 
 An OCR pipeline converts document images into text and structured fields. It combines [classical image processing](classical-image-processing.md), page or text-region detection, recognition, language correction, layout reconstruction, and downstream extraction. For skewed labels and text lines, [rotated object detection](rotated-object-detection.md) may be the localization step.
@@ -66,7 +67,7 @@ Three character substitutions make every token wrong under exact word matching, 
 
 ## Caveats
 
-Deskew and binarization can improve clean scans but damage faint ink. Recognition errors are not independent: one layout miss can delete an entire paragraph. In [historical document and museum label analysis](historical-document-and-museum-label-analysis.md), entity linking may matter more than raw character error rate.
+Deskew and binarization can improve clean scans but damage faint ink. Recognition errors are not independent: one layout miss can delete an entire paragraph. In [document image analysis and field extraction](document-image-analysis-and-field-extraction.md), entity linking may matter more than raw character error rate.
 
 ## References
 

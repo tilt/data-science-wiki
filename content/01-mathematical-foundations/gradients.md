@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Gradients
 
 The gradient of a scalar function is the vector of partial derivatives. It gives the local direction of steepest increase under the Euclidean norm, so its negative is the basic descent direction used by [gradient descent](gradient-descent.md) and neural-network [backpropagation](../06-deep-learning/backpropagation.md).

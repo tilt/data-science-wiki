@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Batch Versus Streaming
 
 Batch processing runs over bounded inputs: a date partition, snapshot, or file set. Streaming processing runs over unbounded event streams and must decide how long to wait for late data. The difference is not just latency; it changes the correctness contract for [data-pipelines](data-pipelines.md), [feature-pipelines](feature-pipelines.md), and quality checks.
@@ -29,10 +30,10 @@ Batch processing runs over bounded inputs: a date partition, snapshot, or file s
 A batch job can wait until a partition is complete and recompute it. A streaming job needs event time, processing time, a window, and a lateness policy. In a 10-minute event-time window ending at 10:10, these events behave differently:
 
 | Event | Event time | Arrival time | Batch count? | Stream count with 5-minute allowed lateness? |
-| --- | --- | --- | --- | --- |
-| e1 | 10:00 | 10:01 | yes | yes |
-| e2 | 10:04 | 10:12 | yes | no |
-| e3 | 10:08 | 10:09 | yes | no |
+| ----- | ---------- | ------------ | ------------ | -------------------------------------------- |
+| e1    | 10:00      | 10:01        | yes          | yes                                          |
+| e2    | 10:04      | 10:12        | yes          | no                                           |
+| e3    | 10:08      | 10:09        | yes          | no                                           |
 
 Batch counts all three records when it recomputes the partition. A stream that closes the window at 10:05 only counts e1, because both e2 and e3 arrive after that completeness cutoff. The streaming number is lower because the completeness decision was made before all event-time records arrived. That may be acceptable for fraud alerts but unacceptable for financial reporting in a [data-warehouse](data-warehouses.md).
 

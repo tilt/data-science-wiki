@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Fine Tuning Versus RAG
 
 Fine-tuning changes model behavior or parameters. [RAG](rag.md) changes the evidence available at request time. They are complementary: [instruction tuning](instruction-tuning.md) can teach format and domain behavior, while [retrieval pipelines](retrieval-pipelines.md) supply current or private facts. Parameter-efficient adapters such as [LoRA](../06-deep-learning/fine-tuning.md#lora-footprint) reduce the training and storage footprint by freezing the base model and training a small low-rank update.
@@ -30,12 +31,12 @@ Use fine-tuning when the failure is stable behavior: style, output shape, classi
 
 ## Concrete artifact
 
-| Symptom | Better first lever |
-| --- | --- |
+| Symptom                                 | Better first lever             |
+| --------------------------------------- | ------------------------------ |
 | Wrong JSON shape despite clear evidence | Fine-tune or structured output |
-| Missing latest policy clause | RAG/index update |
-| Needs citations | RAG |
-| Refuses domain-specific phrasing | Fine-tune/instruction data |
+| Missing latest policy clause            | RAG/index update               |
+| Needs citations                         | RAG                            |
+| Refuses domain-specific phrasing        | Fine-tune/instruction data     |
 
 ## Caveats
 

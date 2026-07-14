@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Code Review
 
 Code review is a change-control mechanism for catching defects that automated checks do not understand yet. In data and ML systems, that includes feature semantics, leakage risk, metric definitions, rollout behavior, and operational ownership. A reviewer should read the intent first, then inspect contracts, tests, data assumptions, and failure handling before style details.
@@ -31,11 +32,11 @@ A useful review separates blockers from preferences. Block on wrong behavior, mi
 
 This review case reproduces a semantic issue: a feature changed from rolling 24 hours to UTC calendar day. With `now = 2026-07-11 12:00 UTC`, the three events are:
 
-| event time | included in rolling 24 hours? | included in UTC calendar day? |
-| --- | ---: | ---: |
-| 2026-07-10 13:00 UTC | yes | no |
-| 2026-07-10 23:30 UTC | yes | no |
-| 2026-07-11 08:00 UTC | yes | yes |
+| event time           | included in rolling 24 hours? | included in UTC calendar day? |
+| -------------------- | ----------------------------: | ----------------------------: |
+| 2026-07-10 13:00 UTC |                           yes |                            no |
+| 2026-07-10 23:30 UTC |                           yes |                            no |
+| 2026-07-11 08:00 UTC |                           yes |                           yes |
 
 The rolling window counts 3 events, while the calendar-day version counts 1. The diff might look like a harmless SQL cleanup, but the product behavior changed. Review should ask for an updated [documentation](documentation.md) contract, a [testing](testing.md) fixture for the boundary condition, and a separate [refactoring](refactoring.md) commit if cleanup is mixed with behavior change.
 

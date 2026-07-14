@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Initialization
 
 Initialization sets the starting point for optimization and the scale of signals before any learning has happened. Poorly scaled weights can make activations explode or shrink layer by layer, leaving [backpropagation](backpropagation.md) with unstable gradients. Good initializers are matched to the [activation function](activation-functions.md) and sometimes made less critical by [normalization](normalization.md).

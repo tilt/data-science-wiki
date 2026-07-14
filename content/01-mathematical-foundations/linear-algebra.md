@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Linear Algebra
 
 Linear algebra studies vector spaces and linear maps between them. In data science, it is the shared language for feature matrices, least-squares projections, embeddings, covariance geometry, neural layers, [PCA](../03-classical-machine-learning/pca.md), and recommendation factors.

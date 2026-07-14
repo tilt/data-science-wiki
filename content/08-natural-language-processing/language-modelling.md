@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Language Modelling
 
 Language modelling assigns probabilities to token sequences. Autoregressive models predict the next token and drive [decoder-only transformers](decoder-only-transformers.md); masked language models predict hidden tokens and pretrain [bert-style encoders](bert-style-encoders.md). The same probability machinery affects [summarization](summarization.md), autocomplete, speech recognition, and generation.

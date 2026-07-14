@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Temporal Localization
 
 Temporal localization marks when an event starts and ends in an untrimmed video. [Temporal action recognition](temporal-action-recognition.md) may say "goal attempt"; localization must output a segment such as 12.0s to 22.0s. This is the bridge from clip classification to usable timelines, alerts, and search indexes.
@@ -41,10 +42,10 @@ Detectors score candidate segments, then evaluate mean average precision at one 
 
 For ground truth $s=[12,22]$, compare two proposed segments:
 
-| segment | interval | intersection | union span | tIoU | boundary error |
-|---|---:|---:|---:|---:|---:|
-| good proposal | $[10,21]$ | $21-12=9$ | $22-10=12$ | $9/12=0.75$ | start $-2$s, end $-1$s |
-| bad proposal | $[0,10]$ | $0$ | $22-0=22$ | $0/22=0$ | no overlap |
+| segment       |  interval | intersection | union span |        tIoU |         boundary error |
+| ------------- | --------: | -----------: | ---------: | ----------: | ---------------------: |
+| good proposal | $[10,21]$ |    $21-12=9$ | $22-10=12$ | $9/12=0.75$ | start $-2$s, end $-1$s |
+| bad proposal  |  $[0,10]$ |          $0$ |  $22-0=22$ |    $0/22=0$ |             no overlap |
 
 The good segment overlaps substantially but starts two seconds early and ends one second early. For a highlight reel that may be fine; for a safety trigger it may not.
 

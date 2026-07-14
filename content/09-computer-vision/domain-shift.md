@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Domain Shift
 
 Domain shift occurs when deployment images differ from training images. In vision this often comes from sensors, lighting, geography, weather, hospital, scanner protocol, annotation policy, or time. It is the reason [model benchmarking](model-benchmarking.md) must report slices, not only a random validation split.

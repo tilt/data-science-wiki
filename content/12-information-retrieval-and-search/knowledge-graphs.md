@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Knowledge Graphs
 
 A knowledge graph stores entities and typed relations as a graph. In search, it supplies structure that text alone cannot: aliases, entity disambiguation, typed filters, relation traversal, and explanations. It is a natural partner for [graph-based retrieval](graph-based-retrieval.md) and [hybrid search](hybrid-search.md).
@@ -38,12 +39,12 @@ A SPARQL-like graph pattern retrieves subjects that satisfy joins over triples. 
 
 The table below is a tiny graph: each row is one subject-predicate-object edge. The example then asks for a conjunctive graph pattern rather than a keyword match.
 
-| Subject | Predicate | Object |
-| --- | --- | --- |
-| `paperA` | `uses` | `bm25` |
-| `paperA` | `evaluated_on` | `msmarco` |
-| `paperB` | `uses` | `dense_retrieval` |
-| `paperB` | `evaluated_on` | `msmarco` |
+| Subject  | Predicate      | Object            |
+| -------- | -------------- | ----------------- |
+| `paperA` | `uses`         | `bm25`            |
+| `paperA` | `evaluated_on` | `msmarco`         |
+| `paperB` | `uses`         | `dense_retrieval` |
+| `paperB` | `evaluated_on` | `msmarco`         |
 
 A graph query for "papers that use BM25 and are evaluated on MS MARCO" requires both edges to share the same subject:
 

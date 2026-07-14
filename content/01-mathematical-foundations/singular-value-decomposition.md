@@ -30,6 +30,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Singular Value Decomposition
 
 Singular value decomposition writes any real matrix as orthogonal input directions, nonnegative gains, and orthogonal output directions. Unlike [eigenvalues and eigenvectors](eigenvalues-and-eigenvectors.md), it applies to rectangular matrices and does not require the matrix to preserve a single space.
@@ -92,13 +93,13 @@ The exact reconstruction error is numerically zero, and the rank-1 truncation er
 
 ## Connections
 
-| Page | How it uses SVD |
-| --- | --- |
-| [PCA](../03-classical-machine-learning/pca.md) | Applies SVD to centered data; right singular vectors become principal axes and squared singular values determine explained variance. |
-| [Low-rank approximation](low-rank-approximation.md) | Uses the Eckart-Young theorem to quantify the best rank-$k$ reconstruction error. |
-| [Classical SVD](../04-recommendation-systems/classical-svd.md) | Applies SVD to a complete dense matrix in recommender examples. |
-| [Truncated SVD](../04-recommendation-systems/truncated-svd.md) | Computes only leading singular components for compact representations. |
-| [SVD versus matrix factorization](../04-recommendation-systems/svd-versus-matrix-factorization.md) | Contrasts decomposing a complete matrix with learning factors from sparse observed entries. |
+| Page                                                                                               | How it uses SVD                                                                                                                      |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| [PCA](../03-classical-machine-learning/pca.md)                                                     | Applies SVD to centered data; right singular vectors become principal axes and squared singular values determine explained variance. |
+| [Low-rank approximation](low-rank-approximation.md)                                                | Uses the Eckart-Young theorem to quantify the best rank-$k$ reconstruction error.                                                    |
+| [Classical SVD](../04-recommendation-systems/classical-svd.md)                                     | Applies SVD to a complete dense matrix in recommender examples.                                                                      |
+| [Truncated SVD](../04-recommendation-systems/truncated-svd.md)                                     | Computes only leading singular components for compact representations.                                                               |
+| [SVD versus matrix factorization](../04-recommendation-systems/svd-versus-matrix-factorization.md) | Contrasts decomposing a complete matrix with learning factors from sparse observed entries.                                          |
 
 ## References
 

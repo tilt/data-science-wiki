@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Agentic Systems
 
 An agentic system gives a model conditional control over a workflow. The model may choose when to search, call tools, ask for clarification, or stop, while application code enforces [tool routing](tool-routing.md), [guardrails](guardrails.md), and traceable [agent evaluation](agent-evaluation.md).
@@ -43,17 +44,24 @@ flowchart LR
 
 An agent loop should make each transition auditable:
 
-| Step | Model responsibility | Deterministic responsibility |
-| --- | --- | --- |
-| Interpret goal | Propose next intent or missing information. | Attach policy, identity, budget, and relevant context. |
-| Choose action | Select a tool call, ask a question, or stop. | Validate schema, permission, rate limit, and cost. |
+| Step           | Model responsibility                                         | Deterministic responsibility                                       |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------------ |
+| Interpret goal | Propose next intent or missing information.                  | Attach policy, identity, budget, and relevant context.             |
+| Choose action  | Select a tool call, ask a question, or stop.                 | Validate schema, permission, rate limit, and cost.                 |
 | Observe result | Incorporate the returned observation into the next decision. | Log the call, redact sensitive data, and preserve source metadata. |
-| Terminate | Produce final answer or completion state. | Check success criteria and escalation rules. |
+| Terminate      | Produce final answer or completion state.                    | Check success criteria and escalation rules.                       |
 
 ## Concrete artifact
 
 ```json
-{"decision":{"type":"tool_call","name":"search_docs","arguments":{"query":"refund approval limit"}},"state":{"step":2,"remaining_steps":4}}
+{
+  "decision": {
+    "type": "tool_call",
+    "name": "search_docs",
+    "arguments": { "query": "refund approval limit" }
+  },
+  "state": { "step": 2, "remaining_steps": 4 }
+}
 ```
 
 The action is only a proposal until the orchestrator validates name, schema, user permission, and budget. This separation keeps autonomy useful without letting the model silently bypass product controls.

@@ -21,18 +21,19 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # World Models and JEPA Background
 
 World-model research asks whether an agent can learn an internal predictive model of its environment and use that model for planning, representation, or control. JEPA-style work narrows the prediction target: predict latent representations of missing or future observations rather than reconstructing every pixel.
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 2018 | Ha and Schmidhuber published "World Models," training agents with compressed visual and temporal models of reinforcement-learning environments. | Model-based agents needed a learned simulator-like representation so policies could be trained or evaluated beyond direct environment interaction. |
-| 2022 | Yann LeCun's "A Path Towards Autonomous Machine Intelligence" argued for predictive world models and joint-embedding predictive architectures. | Purely reactive pattern recognition was not enough for planning; agents needed abstract predictions about the world. |
-| 2023 | Assran and coauthors introduced I-JEPA for self-supervised image representation learning. | Predicting representations of masked image regions tested whether latent prediction could learn semantics without pixel reconstruction or hand-crafted augmentations. |
-| 2024 | Bardes and coauthors introduced V-JEPA for video feature prediction. | Video supplied the temporal structure needed for [self-supervised video representation learning](../10-video-understanding/self-supervised-video-representation-learning.md) and predictive world-model evaluation. |
+| Year | Milestone                                                                                                                                       | Why it followed                                                                                                                                                                                                     |
+| ---- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 2018 | Ha and Schmidhuber published "World Models," training agents with compressed visual and temporal models of reinforcement-learning environments. | Model-based agents needed a learned simulator-like representation so policies could be trained or evaluated beyond direct environment interaction.                                                                  |
+| 2022 | Yann LeCun's "A Path Towards Autonomous Machine Intelligence" argued for predictive world models and joint-embedding predictive architectures.  | Purely reactive pattern recognition was not enough for planning; agents needed abstract predictions about the world.                                                                                                |
+| 2023 | Assran and coauthors introduced I-JEPA for self-supervised image representation learning.                                                       | Predicting representations of masked image regions tested whether latent prediction could learn semantics without pixel reconstruction or hand-crafted augmentations.                                               |
+| 2024 | Bardes and coauthors introduced V-JEPA for video feature prediction.                                                                            | Video supplied the temporal structure needed for [self-supervised video representation learning](../10-video-understanding/self-supervised-video-representation-learning.md) and predictive world-model evaluation. |
 
 ## Historical mechanism
 

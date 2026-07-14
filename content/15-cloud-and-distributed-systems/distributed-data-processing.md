@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Distributed Data Processing
 
 Distributed data processing splits a dataset into partitions, runs tasks near those partitions, and coordinates the shuffle steps that move records by key. It is the systems layer behind many [data pipelines](../13-data-engineering/data-pipelines.md), feature builds, backfills, and offline evaluation jobs. The design question is not just "can it run on a cluster?" but "which stage repartitions data, which key can become hot, and what side effects are safe to retry?"

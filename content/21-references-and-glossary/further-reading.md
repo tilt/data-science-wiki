@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Further Reading
 
 ## Summary
@@ -35,7 +36,7 @@ Further reading routes point from wiki overviews to deeper material. Use them af
 
 ## How to choose sources
 
-Choose primary papers when you need the original formulation, official documentation when implementing an API, and textbooks or standards when learning stable foundations. For fast interview preparation, read the wiki page first, then one primary or authoritative source.
+Choose primary papers when you need the original formulation, official documentation when implementing an API, and textbooks or standards when learning stable foundations. For fast review, read the wiki page first, then one primary or authoritative source.
 
 ## Maintenance
 

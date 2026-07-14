@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Hybrid Retrieval
 
 Hybrid retrieval combines lexical matching with dense [embeddings](embeddings.md). It is useful in [retrieval pipelines](retrieval-pipelines.md) because exact names, numbers, and codes often matter while semantic similarity still recovers paraphrases. [Reranking](reranking.md) can then read the merged candidates more carefully.
@@ -40,19 +41,19 @@ Lexical scores may come from BM25; dense scores from vector search in [vector da
 
 After score normalization, combine lexical and dense scores with $\lambda=0.55$:
 
-| Document | Lexical signal | Dense signal | Hybrid score | Interpretation |
-| --- | ---: | ---: | ---: | --- |
-| 0 | strongest | medium | 0.475 | Exact evidence dominates without losing semantic relevance. |
-| 1 | weak | strongest | -0.034 | Semantically close, but lexical evidence is thin. |
-| 2 | medium | weakest | -0.440 | Neither signal is strong enough. |
+| Document | Lexical signal | Dense signal | Hybrid score | Interpretation                                              |
+| -------- | -------------: | -----------: | -----------: | ----------------------------------------------------------- |
+| 0        |      strongest |       medium |        0.475 | Exact evidence dominates without losing semantic relevance. |
+| 1        |           weak |    strongest |       -0.034 | Semantically close, but lexical evidence is thin.           |
+| 2        |         medium |      weakest |       -0.440 | Neither signal is strong enough.                            |
 
 Document 0 wins after fusion because its lexical score is strongest and its dense score is not weak enough to offset that advantage. Document 1 has the best dense score but ranks second after its low lexical match is included, illustrating why hybrid retrieval can favor exact evidence over pure semantic similarity.
 
-| Retrieval pattern | When it helps |
-| --- | --- |
-| Lexical-only | Exact product codes, names, legal terms, and identifiers. |
-| Dense-only | Paraphrases, conceptual questions, and vocabulary mismatch. |
-| Hybrid | Workflows that need both semantic recall and exact support. |
+| Retrieval pattern     | When it helps                                                        |
+| --------------------- | -------------------------------------------------------------------- |
+| Lexical-only          | Exact product codes, names, legal terms, and identifiers.            |
+| Dense-only            | Paraphrases, conceptual questions, and vocabulary mismatch.          |
+| Hybrid                | Workflows that need both semantic recall and exact support.          |
 | Hybrid plus reranking | High-value answers where the system can afford a slower second pass. |
 
 ## Caveats

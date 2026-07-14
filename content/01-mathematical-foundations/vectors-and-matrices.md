@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Vectors and Matrices
 
 A vector is an ordered list of numbers used as a point, direction, feature row, coefficient set, or embedding. A matrix is a rectangular array that can store a dataset, a batch of vectors, or a linear map applied through [matrix multiplication](matrix-multiplication.md).

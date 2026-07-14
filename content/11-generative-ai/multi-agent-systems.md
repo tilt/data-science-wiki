@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Multi-Agent Systems
 
 A multi-agent system uses more than one model role or policy loop, such as researcher, planner, coder, reviewer, and coordinator. It extends [agentic systems](agentic-systems.md), but it also increases coordination cost and [agent evaluation](agent-evaluation.md) complexity.
@@ -37,7 +38,10 @@ Shared evidence matters more than role labels. If the researcher passes unsource
   "handoff": "researcher_to_writer",
   "payload": {
     "claims": [
-      {"text": "Enterprise refunds above 500 EUR require manager approval.", "source_id": "policy-7"}
+      {
+        "text": "Enterprise refunds above 500 EUR require manager approval.",
+        "source_id": "policy-7"
+      }
     ],
     "open_questions": ["Does the customer have enterprise status?"]
   },

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # CI/CD for ML
 
 CI/CD for ML extends ordinary software delivery with checks for data contracts, training reproducibility, model quality, serving compatibility, and rollback metadata. A green unit-test suite is not enough to promote a model that was trained on the wrong snapshot.

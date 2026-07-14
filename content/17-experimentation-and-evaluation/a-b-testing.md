@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # A/B Testing
 
 A/B testing is a randomized experiment comparing a control experience with one or more variants. This page is the evaluation concept; the production lifecycle counterpart is [MLOps A/B testing](../14-ml-engineering-and-mlops/a-b-testing.md). A valid test needs a named decision, a randomization unit, primary and guardrail metrics, a minimum meaningful effect, and an analysis plan before traffic is exposed.

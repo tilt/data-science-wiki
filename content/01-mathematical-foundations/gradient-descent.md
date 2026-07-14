@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Gradient Descent
 
 Gradient descent minimizes a differentiable objective by repeatedly moving opposite the [gradient](gradients.md). It is the simplest first-order optimizer and the conceptual base for stochastic and adaptive deep-learning [optimizers](../06-deep-learning/optimizers.md).

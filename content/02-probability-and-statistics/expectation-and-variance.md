@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Expectation and Variance
 
 Expectation is the probability-weighted average of a [random variable](random-variables.md); variance is the expected squared distance from that average. For a discrete variable,
@@ -41,11 +42,11 @@ is often easier to compute. These quantities define the parameters of many [comm
 Consider a discrete variable with values $0,1,2,5$ and probabilities $0.50,0.30,0.15,0.05$.
 
 | $x$ | $P(X=x)$ | $xP(X=x)$ | $x^2P(X=x)$ |
-| ---: | ---: | ---: | ---: |
-| 0 | 0.50 | 0.00 | 0.00 |
-| 1 | 0.30 | 0.30 | 0.30 |
-| 2 | 0.15 | 0.30 | 0.60 |
-| 5 | 0.05 | 0.25 | 1.25 |
+| --: | -------: | --------: | ----------: |
+|   0 |     0.50 |      0.00 |        0.00 |
+|   1 |     0.30 |      0.30 |        0.30 |
+|   2 |     0.15 |      0.30 |        0.60 |
+|   5 |     0.05 |      0.25 |        1.25 |
 
 The mean is $\mathbb E[X]=0.00+0.30+0.30+0.25=0.85$. The second moment is $\mathbb E[X^2]=2.15$, so
 

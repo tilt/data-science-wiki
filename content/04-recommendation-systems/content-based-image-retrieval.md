@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Content-Based Image Retrieval
 
 Content-based image retrieval represents images as feature vectors and returns nearby vectors for a query image. In recommendation systems, it is often a retrieval source for visually similar products, artworks, recipes, or media thumbnails before [ranking](ranking.md) applies personalization and constraints.

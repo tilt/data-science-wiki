@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Vision-Language Models
 
 Vision-language models condition text generation or scoring on visual input. They are a [multimodal models](multimodal-models.md) subtype used for image QA, captioning, screenshot understanding, document extraction, and visual grounding.
@@ -32,12 +33,12 @@ A VLM usually encodes an image into visual tokens or features, aligns them with 
 
 For document and screenshot tasks, the model must combine at least three signals: visual appearance, spatial layout, and language. A receipt total is not just a word sequence; it is a value near labels, line items, currency symbols, and page regions. This is why VLM prompts should name the evidence requirement, not only the desired answer.
 
-| Task | Evidence the VLM must use | Common failure |
-| --- | --- | --- |
+| Task                     | Evidence the VLM must use              | Common failure                        |
+| ------------------------ | -------------------------------------- | ------------------------------------- |
 | Image question answering | objects, attributes, spatial relations | answers from priors instead of pixels |
-| Document extraction | text, layout, field labels, tables | plausible fields from wrong region |
-| Screenshot understanding | UI hierarchy, visible state, icons | hallucinated invisible controls |
-| Video-frame reasoning | sampled frames and temporal order | missed short event or wrong ordering |
+| Document extraction      | text, layout, field labels, tables     | plausible fields from wrong region    |
+| Screenshot understanding | UI hierarchy, visible state, icons     | hallucinated invisible controls       |
+| Video-frame reasoning    | sampled frames and temporal order      | missed short event or wrong ordering  |
 
 ## Concrete artifact
 
@@ -46,7 +47,7 @@ For document and screenshot tasks, the model must combine at least three signals
   "task": "invoice_extraction",
   "visual_input": "scan.png",
   "required_evidence": ["supplier region", "total amount region"],
-  "output": {"supplier": "string", "total": "number", "currency": "string"}
+  "output": { "supplier": "string", "total": "number", "currency": "string" }
 }
 ```
 

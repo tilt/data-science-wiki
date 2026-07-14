@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Human-in-the-Loop Systems
 
 Human-in-the-loop systems route selected model decisions to people for review, correction, escalation, or labeling. They are not a vague safety blanket; they are an operational queue with eligibility rules, reviewer instructions, latency targets, audit logs, and feedback paths.

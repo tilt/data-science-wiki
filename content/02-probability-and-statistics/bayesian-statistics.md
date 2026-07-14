@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Bayesian Statistics
 
 Bayesian statistics treats unknown parameters as quantities with probability distributions. A prior $p(\theta)$ and likelihood $p(D\mid\theta)$ produce a posterior

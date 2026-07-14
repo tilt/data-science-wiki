@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Latent Factor Models
 
 A latent factor model maps users and items to hidden coordinates and scores compatibility from those coordinates. In recommender systems, [matrix factorization](matrix-factorization.md) is the canonical example, but factor models can also include side features, biases, context, or neural encoders.
@@ -44,11 +45,11 @@ The factors are "latent" because no column is pre-labeled as genre, price sensit
 
 For a user vector $p_u=[1.2,-0.4]$, score each item by a dot product:
 
-| Item | Item vector $q_i$ | Score $p_u^\top q_i$ |
-| --- | --- | ---: |
-| 0 | $[1.0,-0.2]$ | $1.2(1.0)-0.4(-0.2)=1.28$ |
-| 1 | $[-0.3,1.1]$ | $1.2(-0.3)-0.4(1.1)=-0.80$ |
-| 2 | $[0.8,-0.5]$ | $1.2(0.8)-0.4(-0.5)=1.16$ |
+| Item | Item vector $q_i$ |       Score $p_u^\top q_i$ |
+| ---- | ----------------- | -------------------------: |
+| 0    | $[1.0,-0.2]$      |  $1.2(1.0)-0.4(-0.2)=1.28$ |
+| 1    | $[-0.3,1.1]$      | $1.2(-0.3)-0.4(1.1)=-0.80$ |
+| 2    | $[0.8,-0.5]$      |  $1.2(0.8)-0.4(-0.5)=1.16$ |
 
 Item 0 is the top recommendation because it has the largest dot product. Item 0 and item 2 align with the user vector; item 1 points in the opposite direction. [Hybrid recommenders](hybrid-recommenders.md) often combine these latent scores with content features to reduce [cold-start](cold-start-problem.md) damage.
 

@@ -25,6 +25,7 @@ last_reviewed: 2026-07-10
 references:
   - "box-jenkins-reinsel-ljung-2015-time-series"
 ---
+
 # ARIMA
 
 ARIMA means autoregressive integrated moving average. It takes a nonseasonal univariate series, differences it until the remaining process is approximately stationary, then models that differenced process with [autoregressive models](autoregressive-models.md) and [moving-average models](moving-average-models.md). That is the main distinction from [ARMA](arma.md): ARMA assumes the modeled series is already stationary, while ARIMA includes the differencing operator that turns a drifting level series into changes.

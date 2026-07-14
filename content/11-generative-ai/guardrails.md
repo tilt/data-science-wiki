@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Guardrails
 
 Guardrails are runtime controls around a model. They include input filtering, [prompt injection](prompt-injection.md) defenses, [structured output](structured-output.md) validation, [tool schemas](tool-schemas.md), permission checks, output policy checks, and human escalation. They complement [alignment](alignment.md); they do not replace model training or product-level risk design.

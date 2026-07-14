@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Classification
 
 Classification predicts a discrete label $y\in\{1,\dots,K\}$. Some classifiers estimate probabilities, as [logistic regression](logistic-regression.md) does; others produce scores or margins, as [support vector machines](support-vector-machines.md) do.

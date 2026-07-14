@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Active Learning
 
 Active learning selects unlabeled examples for annotation because the model expects those labels to improve learning more than random labels would. It is an ML operations loop: model scores a pool, a selection policy creates a labeling batch, [human-in-the-loop systems](human-in-the-loop-systems.md) collect labels, and a fixed [evaluation dataset](evaluation-datasets.md) checks whether the loop actually helped.
@@ -32,13 +33,13 @@ Uncertainty sampling selects examples with small margin between the top two pred
 
 With uncertainty sampling, compute the margin between the top two class probabilities and label the smallest margins first:
 
-| Example | Class probabilities | Top-two margin | Selected? | Reason |
-| --- | --- | ---: | --- | --- |
-| 0 | $(0.52,0.48,0.00)$ | 0.04 | yes | Borderline between two classes. |
-| 1 | $(0.91,0.09,0.00)$ | 0.82 | no | Model is already confident. |
-| 2 | $(0.34,0.33,0.33)$ | 0.01 | yes | Nearly tied across all classes. |
-| 3 | $(0.65,0.25,0.10)$ | 0.40 | no | Less ambiguous than the selected cases. |
-| 4 | $(0.41,0.39,0.20)$ | 0.02 | yes | Borderline between the top two classes. |
+| Example | Class probabilities | Top-two margin | Selected? | Reason                                  |
+| ------- | ------------------- | -------------: | --------- | --------------------------------------- |
+| 0       | $(0.52,0.48,0.00)$  |           0.04 | yes       | Borderline between two classes.         |
+| 1       | $(0.91,0.09,0.00)$  |           0.82 | no        | Model is already confident.             |
+| 2       | $(0.34,0.33,0.33)$  |           0.01 | yes       | Nearly tied across all classes.         |
+| 3       | $(0.65,0.25,0.10)$  |           0.40 | no        | Less ambiguous than the selected cases. |
+| 4       | $(0.41,0.39,0.20)$  |           0.02 | yes       | Borderline between the top two classes. |
 
 Examples 2, 4, and 0 are most uncertain. The batch should still be deduplicated, source-balanced, and recorded through [dataset versioning](dataset-versioning.md), otherwise later [model degradation](model-degradation.md) analysis cannot tell which labels came from the active-learning policy.
 

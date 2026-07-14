@@ -36,8 +36,7 @@ related:
   - "18-responsible-ai-safety-and-governance"
   - "19-domain-applications"
   - "20-history-of-ai-and-machine-learning"
-  - "21-interview-preparation"
-  - "22-references-and-glossary"
+  - "21-references-and-glossary"
 historical_context: false
 last_reviewed: 2026-07-10
 ---
@@ -48,7 +47,7 @@ last_reviewed: 2026-07-10
 
 - [Browse by subject](00-home-and-navigation/index.md)
 - [Browse by learning path](00-home-and-navigation/learning-paths.md)
-- [Browse by interview question](21-interview-preparation/index.md)
+- [Browse by technical answer pattern](00-home-and-navigation/technical-answer-patterns.md)
 - [Browse by mathematical prerequisite](01-mathematical-foundations/index.md)
 - [Browse by production lifecycle](14-ml-engineering-and-mlops/index.md)
 - Browse by tags through Quartz tag pages
@@ -77,8 +76,7 @@ last_reviewed: 2026-07-10
 - [Responsible AI, Safety, and Governance](18-responsible-ai-safety-and-governance/index.md)
 - [Domain Applications](19-domain-applications/index.md)
 - [History of AI and Machine Learning](20-history-of-ai-and-machine-learning/index.md)
-- [Interview Preparation](21-interview-preparation/index.md)
-- [References and Glossary](22-references-and-glossary/index.md)
+- [References and Glossary](21-references-and-glossary/index.md)
 
 ## Authoring policy
 

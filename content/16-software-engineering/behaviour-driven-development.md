@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Behaviour Driven Development
 
 Behaviour-driven development turns a requirement into examples of externally visible behavior. The mechanism is the Given-When-Then scenario: initial state, action, expected result. It sits between [requirements engineering](requirements-engineering.md) and [testing](testing.md): stakeholders can read it before code exists, and engineers can later automate the example.

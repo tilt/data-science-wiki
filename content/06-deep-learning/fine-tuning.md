@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Fine-Tuning
 
 Fine-tuning adapts a pretrained model to a target task by updating selected parameters. It is a specific form of [transfer learning](transfer-learning.md): start from a useful representation, then decide which layers or adapters should learn. In generative systems it should be separated from [fine-tuning versus RAG](../11-generative-ai/fine-tuning-versus-rag.md), because retrieval can solve knowledge injection without changing weights.
@@ -66,12 +67,12 @@ LoRA achieves a small footprint because the large pretrained matrix stays frozen
 
 This has three practical consequences:
 
-| Aspect | Full fine-tuning | LoRA-style adapter tuning |
-| --- | --- | --- |
-| Trainable weights | all selected base weights | only low-rank adapter matrices |
-| Optimizer state | large, because Adam-style state tracks trained weights | small, because state tracks adapter weights |
-| Task storage | often a full model copy or large delta | compact adapter checkpoint |
-| Base model sharing | each task may need separate weights | many adapters can share one frozen base |
+| Aspect             | Full fine-tuning                                       | LoRA-style adapter tuning                   |
+| ------------------ | ------------------------------------------------------ | ------------------------------------------- |
+| Trainable weights  | all selected base weights                              | only low-rank adapter matrices              |
+| Optimizer state    | large, because Adam-style state tracks trained weights | small, because state tracks adapter weights |
+| Task storage       | often a full model copy or large delta                 | compact adapter checkpoint                  |
+| Base model sharing | each task may need separate weights                    | many adapters can share one frozen base     |
 
 The small footprint is not magic compression of the original model. It is a modeling assumption: the task-specific update can be well approximated by a low-rank matrix. If the target task needs broad changes across many directions, too small a rank can underfit.
 

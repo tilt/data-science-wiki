@@ -32,6 +32,7 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # History of AI and Machine Learning
 
 This section is a sourced chronology map. Each page explains which technical bottleneck came first, which paper or system changed the path, and how that history connects to the wiki's canonical concept pages.
@@ -40,12 +41,12 @@ Use the history pages to understand why today’s defaults look the way they do.
 
 ## Reading Routes
 
-| Theme | Start with | Connects to |
-| --- | --- | --- |
-| Classical ML to deep learning | [Statistical Pattern Recognition to Modern Machine Learning](statistical-pattern-recognition-to-modern-machine-learning.md), [Early Neural Networks to Deep Learning](early-neural-networks-to-deep-learning.md) | [Classical Machine Learning](../03-classical-machine-learning/index.md), [Deep Learning](../06-deep-learning/index.md) |
-| Recommenders and matrix methods | [Matrix Decomposition in Statistics and Recommenders](matrix-decomposition-in-statistics-and-recommenders.md), [Evolution of Collaborative Filtering](evolution-of-collaborative-filtering.md) | [Recommendation Systems](../04-recommendation-systems/index.md) |
-| Language and agents | [From N-Gram Language Models to Transformers](from-ngram-language-models-to-transformers.md), [Development of RAG](development-of-rag.md), [Development of Tool-Using Language Models and Agents](development-of-tool-using-language-models-and-agents.md) | [Generative AI](../11-generative-ai/index.md) |
-| Vision and video | [Evolution of Computer Vision Architectures](evolution-of-computer-vision-architectures.md), [From CNN Video Models to Video Transformers](from-cnn-video-models-to-video-transformers.md) | [Computer Vision](../09-computer-vision/index.md), [Video Understanding](../10-video-understanding/index.md) |
+| Theme                           | Start with                                                                                                                                                                                                                                                 | Connects to                                                                                                            |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Classical ML to deep learning   | [Statistical Pattern Recognition to Modern Machine Learning](statistical-pattern-recognition-to-modern-machine-learning.md), [Early Neural Networks to Deep Learning](early-neural-networks-to-deep-learning.md)                                           | [Classical Machine Learning](../03-classical-machine-learning/index.md), [Deep Learning](../06-deep-learning/index.md) |
+| Recommenders and matrix methods | [Matrix Decomposition in Statistics and Recommenders](matrix-decomposition-in-statistics-and-recommenders.md), [Evolution of Collaborative Filtering](evolution-of-collaborative-filtering.md)                                                             | [Recommendation Systems](../04-recommendation-systems/index.md)                                                        |
+| Language and agents             | [From N-Gram Language Models to Transformers](from-ngram-language-models-to-transformers.md), [Development of RAG](development-of-rag.md), [Development of Tool-Using Language Models and Agents](development-of-tool-using-language-models-and-agents.md) | [Generative AI](../11-generative-ai/index.md)                                                                          |
+| Vision and video                | [Evolution of Computer Vision Architectures](evolution-of-computer-vision-architectures.md), [From CNN Video Models to Video Transformers](from-cnn-video-models-to-video-transformers.md)                                                                 | [Computer Vision](../09-computer-vision/index.md), [Video Understanding](../10-video-understanding/index.md)           |
 
 ## Subtopics
 

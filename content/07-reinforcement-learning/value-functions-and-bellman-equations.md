@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # Value Functions and Bellman Equations
 
 Value functions turn delayed reward into a prediction problem. They answer "how much future return should I expect if I start here?" or "how much future return should I expect if I take this action first?"

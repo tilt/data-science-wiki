@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # A/B Testing
 
 A/B testing compares model or product variants by randomly assigning eligible units to control and treatment. In MLOps, it answers a different question than [evaluation datasets](evaluation-datasets.md): did the deployed system improve the production outcome for randomized traffic?
@@ -38,10 +39,10 @@ The experimentation section has the canonical stats treatment in [A/B testing](.
 
 For a production experiment with 12,000 control users and 11,850 treatment users:
 
-| arm | users | conversions | rate |
-| --- | ---: | ---: | ---: |
-| control | 12,000 | 984 | 0.0820 |
-| treatment | 11,850 | 1,055 | 0.0890 |
+| arm       |  users | conversions |   rate |
+| --------- | -----: | ----------: | -----: |
+| control   | 12,000 |         984 | 0.0820 |
+| treatment | 11,850 |       1,055 | 0.0890 |
 
 The absolute lift is 0.7 percentage points. Using the pooled-rate z-test gives $z=1.941$ and a two-sided $p=0.0522$, so the observed lift is positive but misses a conventional 5% two-sided threshold. A release decision should also inspect guardrails such as [model degradation](model-degradation.md), latency, complaint rate, and segment harm. A [canary deployment](canary-deployment.md) can precede the experiment, but it is not a substitute for randomized impact measurement.
 

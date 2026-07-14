@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Shadow Deployment
 
 A shadow deployment sends production requests to the current service and copies the same requests to a candidate model whose response is logged but not shown to users. It tests [model-serving](model-serving.md) integration, latency, resource use, and output distributions before a [canary deployment](canary-deployment.md) exposes users.

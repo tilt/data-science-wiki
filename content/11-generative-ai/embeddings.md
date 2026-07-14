@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Embeddings
 
 Embeddings map text, images, or other objects into vectors so nearby points represent model-learned similarity. In this section they power [vector databases](vector-databases.md), [retrieval pipelines](retrieval-pipelines.md), [hybrid retrieval](hybrid-retrieval.md), and sometimes agent [memory](memory.md).
@@ -38,19 +39,19 @@ The training objective determines what similarity means; a search embedding is n
 
 Suppose a query embedding points mostly toward the "refund" direction, with some "billing" component and no "weather" component. Cosine similarity ranks documents by vector angle:
 
-| Candidate | Vector intuition | Cosine to query | Retrieval meaning |
-| --- | --- | ---: | --- |
-| A refund policy | Strong refund component, small billing component. | 0.992 | Best semantic match. |
-| B invoice payment | Strong billing component, weak refund component. | 0.409 | Related business topic, but weaker. |
-| C weekend forecast | Weather component unrelated to the query. | 0.031 | Semantically off-topic. |
+| Candidate          | Vector intuition                                  | Cosine to query | Retrieval meaning                   |
+| ------------------ | ------------------------------------------------- | --------------: | ----------------------------------- |
+| A refund policy    | Strong refund component, small billing component. |           0.992 | Best semantic match.                |
+| B invoice payment  | Strong billing component, weak refund component.  |           0.409 | Related business topic, but weaker. |
+| C weekend forecast | Weather component unrelated to the query.         |           0.031 | Semantically off-topic.             |
 
 The query vector points toward the refund document, so vector search retrieves it first. A [reranking](reranking.md) step can still change the order after reading full query-document pairs, especially when exact dates, names, or policy constraints matter.
 
-| Design choice | Effect |
-| --- | --- |
-| Normalize embeddings before cosine search | Makes angle rather than vector length drive ranking. |
-| Use a domain-tuned embedding model | Improves similarity for local jargon and document structure. |
-| Keep metadata filters with vectors | Prevents semantically similar but unauthorized or stale passages from entering context. |
+| Design choice                             | Effect                                                                                  |
+| ----------------------------------------- | --------------------------------------------------------------------------------------- |
+| Normalize embeddings before cosine search | Makes angle rather than vector length drive ranking.                                    |
+| Use a domain-tuned embedding model        | Improves similarity for local jargon and document structure.                            |
+| Keep metadata filters with vectors        | Prevents semantically similar but unauthorized or stale passages from entering context. |
 
 ## Caveats
 

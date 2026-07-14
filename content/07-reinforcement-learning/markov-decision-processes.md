@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-13
 ---
+
 # Markov Decision Processes
 
 A Markov decision process models sequential choice under uncertainty. At time $t$, an agent observes state $S_t$, chooses action $A_t$, receives reward $R_{t+1}$, and moves to a new state $S_{t+1}$.
@@ -30,13 +31,13 @@ A Markov decision process models sequential choice under uncertainty. At time $t
 
 An MDP is usually written as $(\mathcal{S},\mathcal{A},P,R,\gamma)$:
 
-| Component | Meaning |
-| --- | --- |
-| $\mathcal{S}$ | possible states |
-| $\mathcal{A}$ | possible actions |
-| $P(s'\mid s,a)$ | transition probability from state $s$ to next state $s'$ after action $a$ |
-| $R(s,a,s')$ | expected immediate reward for that transition |
-| $\gamma\in[0,1]$ | discount factor for future rewards |
+| Component        | Meaning                                                                   |
+| ---------------- | ------------------------------------------------------------------------- |
+| $\mathcal{S}$    | possible states                                                           |
+| $\mathcal{A}$    | possible actions                                                          |
+| $P(s'\mid s,a)$  | transition probability from state $s$ to next state $s'$ after action $a$ |
+| $R(s,a,s')$      | expected immediate reward for that transition                             |
+| $\gamma\in[0,1]$ | discount factor for future rewards                                        |
 
 The Markov assumption says the next transition depends on the current state and action, not on the full history:
 
@@ -62,11 +63,11 @@ If $\gamma=0.9$, a reward one step away keeps full weight, a reward two steps aw
 
 In a lane-change decision, the state might include ego speed, adjacent-lane occupancy, distance to the lead vehicle, and road geometry. The actions are not labels; they change the future. Choosing "change left" affects the next state, which changes whether future acceleration is safe and whether the final route objective can be met.
 
-| Time | State summary | Action | Immediate reward | Future implication |
-| --- | --- | --- | ---: | --- |
-| $t$ | slow lead car, left lane clear | move left | small lane-change cost | opens a faster lane |
-| $t+1$ | centered in left lane | accelerate | speed reward | increases following distance risk |
-| $t+2$ | faster speed, vehicle ahead | hold speed | comfort reward | avoids hard braking |
+| Time  | State summary                  | Action     |       Immediate reward | Future implication                |
+| ----- | ------------------------------ | ---------- | ---------------------: | --------------------------------- |
+| $t$   | slow lead car, left lane clear | move left  | small lane-change cost | opens a faster lane               |
+| $t+1$ | centered in left lane          | accelerate |           speed reward | increases following distance risk |
+| $t+2$ | faster speed, vehicle ahead    | hold speed |         comfort reward | avoids hard braking               |
 
 The decision is sequential because the best action at $t$ depends on expected future rewards, not just the immediate reward.
 

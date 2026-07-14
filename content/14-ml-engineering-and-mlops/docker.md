@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Docker
 
 Docker packages application code, Python dependencies, native libraries, and a startup command into an image. In MLOps, the image is the runtime envelope for [training pipelines](training-pipelines.md), batch scoring jobs, and [model-serving](model-serving.md) processes; the model artifact still needs its own version.

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Kalman Filters
 
 A Kalman filter estimates a hidden state over time by alternating prediction and correction. It is the recursive inference engine for many [state-space models](state-space-models.md): the model predicts how the latent state should evolve, observes a noisy measurement, then updates the state according to the relative uncertainty of the prediction and the measurement.

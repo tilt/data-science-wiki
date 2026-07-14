@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Cold Start Problem
 
 Cold start occurs when a recommender lacks enough interaction history for a new user, item, market, or context. Pure [collaborative filtering](collaborative-filtering.md) cannot infer much from an empty row or column, so systems use content, priors, onboarding, or exploration until behavior arrives.
@@ -38,11 +39,11 @@ For a new item, $s_{\text{content}}$ might come from metadata or image embedding
 
 A new user profile $[0.8,0.2,0.0]$ can still score new items from content features and a popularity prior:
 
-| Item | Content vector | Content score | Popularity prior | Blend $0.75s_{\text{content}}+0.25s_{\text{prior}}$ |
-| --- | --- | ---: | ---: | ---: |
-| 0 | $[0.9,0.1,0.0]$ | 0.74 | 0.30 | 0.630 |
-| 1 | $[0.1,0.2,0.9]$ | 0.12 | 0.70 | 0.265 |
-| 2 | $[0.5,0.5,0.0]$ | 0.50 | 0.40 | 0.475 |
+| Item | Content vector  | Content score | Popularity prior | Blend $0.75s_{\text{content}}+0.25s_{\text{prior}}$ |
+| ---- | --------------- | ------------: | ---------------: | --------------------------------------------------: |
+| 0    | $[0.9,0.1,0.0]$ |          0.74 |             0.30 |                                               0.630 |
+| 1    | $[0.1,0.2,0.9]$ |          0.12 |             0.70 |                                               0.265 |
+| 2    | $[0.5,0.5,0.0]$ |          0.50 |             0.40 |                                               0.475 |
 
 The rank is item 0, item 2, then item 1. The first new item wins because content aligns with the user profile, even before collaborative data exists. [Exploration versus exploitation](exploration-versus-exploitation.md) controls how aggressively cold items are exposed for learning.
 

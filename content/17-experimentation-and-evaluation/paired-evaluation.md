@@ -23,6 +23,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Paired Evaluation
 
 Paired evaluation compares systems on the same examples. It is stronger than comparing two unrelated averages because hard examples, ambiguous labels, and domain mix affect both systems. The pattern is useful for model-score comparisons, [human evaluation](human-evaluation.md), and [LLM-as-judge](llm-as-judge.md) preference tests.

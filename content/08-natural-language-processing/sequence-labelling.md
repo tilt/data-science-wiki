@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Sequence Labelling
 
 Sequence labelling assigns an output tag to each token. [Named entity recognition](named-entity-recognition.md), part-of-speech tagging, slot filling, and some [information extraction](information-extraction.md) pipelines are sequence labelling tasks. The labels depend on [tokenization](tokenization.md), so the model predicts over model tokens even when humans annotate words or spans.

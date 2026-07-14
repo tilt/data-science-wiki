@@ -21,19 +21,20 @@ related:
 historical_context: true
 last_reviewed: 2026-07-11
 ---
+
 # Development of RAG
 
 Retrieval-augmented generation did not appear as a chatbot trick. It joined an older [information retrieval](../12-information-retrieval-and-search/bm25.md) tradition with neural language generation so that a model could answer from an updateable corpus instead of only from parametric memory.
 
 ## Verified chronology
 
-| Year | Milestone | Why it followed |
-|---|---|---|
-| 1970s-2000s | Sparse retrieval systems matured around inverted indexes, TF-IDF, and later BM25-style ranking. | Search could find documents reliably, but it returned evidence rather than synthesized answers. |
-| 2020 | Guu, Lee, Tung, Pasupat, and Chang introduced REALM, a retrieval-augmented language-model pretraining method. | It attacked the problem that factual knowledge stored only in parameters is hard to inspect or update. |
-| 2020 | Karpukhin and coauthors introduced Dense Passage Retrieval (DPR) for open-domain question answering. | Learned dual encoders made [dense retrieval](../12-information-retrieval-and-search/dense-retrieval.md) competitive with strong sparse baselines for question-passage matching. |
-| 2020 | Lewis and coauthors introduced Retrieval-Augmented Generation (RAG) for knowledge-intensive NLP tasks. | A seq2seq generator could condition on retrieved Wikipedia passages, combining parametric generation with non-parametric memory. |
-| 2020s | Production RAG systems added chunking, reranking, query rewriting, citations, and evaluation. | The research model became a [retrieval pipeline](../11-generative-ai/retrieval-pipelines.md) problem: retrieve the right context, fit it into the prompt, and verify the answer. |
+| Year        | Milestone                                                                                                     | Why it followed                                                                                                                                                                  |
+| ----------- | ------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1970s-2000s | Sparse retrieval systems matured around inverted indexes, TF-IDF, and later BM25-style ranking.               | Search could find documents reliably, but it returned evidence rather than synthesized answers.                                                                                  |
+| 2020        | Guu, Lee, Tung, Pasupat, and Chang introduced REALM, a retrieval-augmented language-model pretraining method. | It attacked the problem that factual knowledge stored only in parameters is hard to inspect or update.                                                                           |
+| 2020        | Karpukhin and coauthors introduced Dense Passage Retrieval (DPR) for open-domain question answering.          | Learned dual encoders made [dense retrieval](../12-information-retrieval-and-search/dense-retrieval.md) competitive with strong sparse baselines for question-passage matching.  |
+| 2020        | Lewis and coauthors introduced Retrieval-Augmented Generation (RAG) for knowledge-intensive NLP tasks.        | A seq2seq generator could condition on retrieved Wikipedia passages, combining parametric generation with non-parametric memory.                                                 |
+| 2020s       | Production RAG systems added chunking, reranking, query rewriting, citations, and evaluation.                 | The research model became a [retrieval pipeline](../11-generative-ai/retrieval-pipelines.md) problem: retrieve the right context, fit it into the prompt, and verify the answer. |
 
 ## Historical mechanism
 

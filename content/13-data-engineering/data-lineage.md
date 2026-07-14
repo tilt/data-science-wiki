@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Data Lineage
 
 Data lineage records how datasets are produced and consumed. Good lineage answers impact questions: if `raw.orders` changed, which [dbt](dbt.md) models, dashboards, [feature-pipelines](feature-pipelines.md), and audits are affected?
@@ -39,12 +40,12 @@ OpenLineage models jobs, runs, and datasets. A minimal lineage event names the j
 
 The event is small, but it captures the essential graph edge: one job version read two input datasets and produced one output dataset. [Airflow](airflow.md) can emit task-level runs; dbt can emit model-level dependencies; [data-pipelines](data-pipelines.md) need both when debugging production incidents.
 
-| Field | Why it matters during an incident |
-| --- | --- |
-| `job` | Identifies the transformation that created the downstream dataset. |
-| `inputs` | Shows which upstream tables, partitions, or files may have caused the issue. |
-| `outputs` | Shows which datasets, dashboards, features, or audits may be affected. |
-| `code_sha` | Ties the data edge to the exact transformation version that ran. |
+| Field      | Why it matters during an incident                                            |
+| ---------- | ---------------------------------------------------------------------------- |
+| `job`      | Identifies the transformation that created the downstream dataset.           |
+| `inputs`   | Shows which upstream tables, partitions, or files may have caused the issue. |
+| `outputs`  | Shows which datasets, dashboards, features, or audits may be affected.       |
+| `code_sha` | Ties the data edge to the exact transformation version that ran.             |
 
 ## Architecture
 

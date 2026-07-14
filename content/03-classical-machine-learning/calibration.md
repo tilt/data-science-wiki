@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Calibration
 
 Calibration asks whether predicted probabilities mean what they say. Among examples assigned probability 0.8, roughly 80 percent should be positive. This is different from discrimination: a [classification](classification.md) model can rank cases well and still give overconfident probabilities. The same predictions should be judged with [evaluation metrics](evaluation-metrics.md), and imbalance can make reliability look different across classes as described in [class imbalance](class-imbalance.md).

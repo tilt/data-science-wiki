@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Entropy
 
 Entropy is the expected surprise of a random variable. A concentrated distribution has low entropy because outcomes are predictable; a uniform distribution has higher entropy because more outcomes remain plausible.

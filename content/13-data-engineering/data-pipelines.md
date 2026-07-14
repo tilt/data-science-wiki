@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Data Pipelines
 
 A data pipeline is a repeatable path from source data to a named output dataset. The pipeline contract includes inputs, transformation code, scheduling, quality gates, lineage, and replay behavior. That is broader than [Airflow](airflow.md), which orchestrates tasks, or [dbt](dbt.md), which usually handles warehouse SQL transforms.

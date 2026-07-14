@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Ranking
 
 Ranking orders candidate items for a user or context. In a recommender, the ranker usually combines predicted relevance with freshness, diversity, eligibility, risk, and product constraints. It sits after [candidate generation](candidate-generation.md) in most [retrieval and ranking architectures](retrieval-and-ranking-architectures.md).
@@ -41,11 +42,11 @@ then sort by $s$. A list-level postprocessor can add constraints such as author 
 Apply a freshness penalty of $0.03$ per age unit, then enforce author diversity in the top two:
 
 | Item | Relevance | Age | Author | Score $rel-0.03\,age$ |
-| --- | ---: | ---: | ---: | ---: |
-| 0 | 0.90 | 1 | 0 | 0.87 |
-| 1 | 0.85 | 10 | 0 | 0.55 |
-| 2 | 0.70 | 2 | 1 | 0.64 |
-| 3 | 0.60 | 0 | 1 | 0.60 |
+| ---- | --------: | --: | -----: | --------------------: |
+| 0    |      0.90 |   1 |      0 |                  0.87 |
+| 1    |      0.85 |  10 |      0 |                  0.55 |
+| 2    |      0.70 |   2 |      1 |                  0.64 |
+| 3    |      0.60 |   0 |      1 |                  0.60 |
 
 The raw score order is item 0, item 2, item 3, then item 1. Item 1 has high base relevance but is stale and from the same author as item 0, so item 2 enters the top list. This connects ranking directly to [diversity, novelty, coverage, and serendipity](diversity-novelty-coverage-serendipity.md).
 

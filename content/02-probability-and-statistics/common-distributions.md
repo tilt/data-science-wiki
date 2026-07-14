@@ -19,6 +19,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Common Distributions
 
 A probability distribution assigns mass or density to the values of a [random variable](random-variables.md). The useful part is not the name; it is the data-generating mechanism. Bernoulli and binomial laws describe independent yes/no trials, Poisson laws describe counts under a constant rate, normal laws describe symmetric additive noise, and gamma or exponential laws describe positive waiting-time-like quantities.
@@ -62,11 +63,11 @@ Distribution choice directly affects [maximum likelihood](maximum-likelihood.md)
 
 The distribution should match the mechanism and the support. Use a binomial model when there is a fixed number of independent opportunities, such as 20 users each either clicking or not clicking. Use a Poisson model when counting events over a fixed exposure window, such as support tickets arriving in one hour under a roughly constant rate. Use a gamma model for positive continuous amounts or waiting-time-like quantities, such as time until a multi-step repair completes.
 
-| distribution | what it models | mean | variance | support |
-|---|---|---:|---:|---|
-| $\operatorname{Binomial}(n,p)$ | successes in $n$ independent yes/no trials | $np$ | $np(1-p)$ | integers $0,\ldots,n$ |
-| $\operatorname{Poisson}(\lambda)$ | event count in a fixed interval at rate $\lambda$ | $\lambda$ | $\lambda$ | integers $0,1,\ldots$ |
-| $\operatorname{Gamma}(\alpha,\theta)$ | positive waiting-time-like quantity | $\alpha\theta$ | $\alpha\theta^2$ | real values $x>0$ |
+| distribution                          | what it models                                    |           mean |         variance | support               |
+| ------------------------------------- | ------------------------------------------------- | -------------: | ---------------: | --------------------- |
+| $\operatorname{Binomial}(n,p)$        | successes in $n$ independent yes/no trials        |           $np$ |        $np(1-p)$ | integers $0,\ldots,n$ |
+| $\operatorname{Poisson}(\lambda)$     | event count in a fixed interval at rate $\lambda$ |      $\lambda$ |        $\lambda$ | integers $0,1,\ldots$ |
+| $\operatorname{Gamma}(\alpha,\theta)$ | positive waiting-time-like quantity               | $\alpha\theta$ | $\alpha\theta^2$ | real values $x>0$     |
 
 ![Binomial, Poisson, and Gamma distributions compared by shape, support, and tail spread.](../assets/diagrams/common-distributions-shapes.svg)
 

@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Bandit Algorithms
 
 Bandit algorithms choose recommendations while learning from the rewards they cause. They are useful when a system must balance short-term performance with information gathering, especially for [cold-start](cold-start-problem.md) items and changing content.

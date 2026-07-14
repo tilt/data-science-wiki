@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Predictive Maintenance
 
 Predictive maintenance uses time-series signals to forecast failure risk, degradation state, or remaining useful life. The forecast is valuable only if it creates enough lead time for an action: inspection, part replacement, load reduction, or planned shutdown.

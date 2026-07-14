@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Vector Indexes
 
 A vector index stores embeddings so [dense retrieval](dense-retrieval.md) can find nearest neighbors quickly. Small corpora can use exact matrix multiplication; large corpora usually need [approximate nearest-neighbour search](approximate-nearest-neighbour-search.md), quantization, sharding, or hardware-aware batching.

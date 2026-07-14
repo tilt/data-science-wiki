@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Determinism and Reproducibility
 
 Determinism means identical inputs and execution conditions produce identical outputs. Reproducibility means a run can be reconstructed closely enough to debug drift. In generative systems, this spans [sampling and decoding](sampling-and-decoding.md), [context construction](context-construction.md), retrieval, tools, serving, and validators.
@@ -30,20 +31,20 @@ A run record should include model identifier, prompt messages, decoding paramete
 
 Reproducibility fails whenever an unrecorded dependency changes. In a RAG system, the same prompt can produce a different answer after chunking, embedding, reranking, or source documents change. In an agent, a tool response, clock, permission state, or retry path can change the final answer even when the model settings are fixed.
 
-| Layer | What to record | Why it matters |
-| --- | --- | --- |
-| Model | provider, model id, version or deployment name | hosted models can change behind stable names |
-| Decoding | temperature, top-p, seed, max tokens | controls stochastic output choices |
-| Prompt and context | messages, retrieved chunks, ordering, truncation | defines the actual input distribution |
-| Tools | schema versions, arguments, outputs, errors | tool state can dominate the result |
-| Validators | schema, citation, safety, and policy versions | post-processing can accept or reject outputs |
+| Layer              | What to record                                   | Why it matters                               |
+| ------------------ | ------------------------------------------------ | -------------------------------------------- |
+| Model              | provider, model id, version or deployment name   | hosted models can change behind stable names |
+| Decoding           | temperature, top-p, seed, max tokens             | controls stochastic output choices           |
+| Prompt and context | messages, retrieved chunks, ordering, truncation | defines the actual input distribution        |
+| Tools              | schema versions, arguments, outputs, errors      | tool state can dominate the result           |
+| Validators         | schema, citation, safety, and policy versions    | post-processing can accept or reject outputs |
 
 ## Concrete artifact
 
 ```json
 {
   "model": "provider-model-version",
-  "decoding": {"temperature": 0, "top_p": 1},
+  "decoding": { "temperature": 0, "top_p": 1 },
   "retrieved_chunk_ids": ["policy-7", "policy-9"],
   "tool_schema_hash": "sha256:...",
   "validator": "citation_support_v3"

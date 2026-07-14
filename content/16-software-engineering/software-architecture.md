@@ -25,6 +25,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Software Architecture
 
 Software architecture is the set of structural decisions that make a system easier or harder to change, operate, secure, and scale. It is not the diagram itself; it is the set of boundaries and trade-offs the diagram records. In ML and AI systems, architecture must include data contracts, model versions, evaluation gates, [production integration](production-integration.md), observability, privacy, and rollback.

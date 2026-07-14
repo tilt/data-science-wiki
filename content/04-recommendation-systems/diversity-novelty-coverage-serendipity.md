@@ -23,6 +23,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Diversity, Novelty, Coverage, and Serendipity
 
 These metrics measure qualities that relevance alone misses in [evaluation of recommenders](evaluation-of-recommenders.md). Diversity asks whether a list contains varied items; novelty asks whether items are not already obvious; coverage asks how much catalog or user space the system reaches; serendipity asks whether recommendations are both unexpected and useful.

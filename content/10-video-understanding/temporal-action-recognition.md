@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Temporal Action Recognition
 
 Temporal action recognition assigns a label to a clip or stream segment by using appearance, motion, and ordering. It is weaker than [temporal localization](temporal-localization.md), which must also find boundaries, but stronger than image classification because the label may depend on change over time. A serve, fall, swipe, or handshake is often a trajectory, not a single pose.
@@ -38,13 +39,13 @@ The aggregator may be temporal averaging, max pooling, a recurrent model, [3D co
 
 Suppose a five-frame clip has class logits for three possible actions:
 
-| frame | class 0 | class 1 | class 2 | strongest cue |
-|---:|---:|---:|---:|---|
-| 1 | 0.2 | 0.1 | 0.0 | weak background evidence |
-| 2 | 0.3 | 0.2 | 0.1 | weak background evidence |
-| 3 | 0.1 | 1.6 | 0.2 | action cue appears |
-| 4 | 0.0 | 1.8 | 0.1 | action cue peaks |
-| 5 | 0.2 | 1.0 | 0.0 | action cue fades |
+| frame | class 0 | class 1 | class 2 | strongest cue            |
+| ----: | ------: | ------: | ------: | ------------------------ |
+|     1 |     0.2 |     0.1 |     0.0 | weak background evidence |
+|     2 |     0.3 |     0.2 |     0.1 | weak background evidence |
+|     3 |     0.1 |     1.6 |     0.2 | action cue appears       |
+|     4 |     0.0 |     1.8 |     0.1 | action cue peaks         |
+|     5 |     0.2 |     1.0 |     0.0 | action cue fades         |
 
 Mean pooling gives logits $(0.16,0.94,0.08)$ and softmax probabilities $(0.244,0.531,0.225)$, so class 1 wins. Max pooling gives logits $(0.3,1.8,0.2)$ and probabilities $(0.157,0.702,0.142)$, so class 1 wins more confidently because one brief interval was highly discriminative. That behavior is helpful for short actions and dangerous when a single noisy frame can spike a class logit.
 

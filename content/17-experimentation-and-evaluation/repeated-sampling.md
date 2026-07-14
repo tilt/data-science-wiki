@@ -23,6 +23,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Repeated Sampling
 
 Repeated sampling turns one evaluation number into a distribution. It can resample examples from a fixed [golden dataset](golden-datasets.md), rerun stochastic generation, vary random seeds, or split live traffic into repeated windows. It is especially useful when [paired evaluation](paired-evaluation.md) shows an improvement but the example set is small.

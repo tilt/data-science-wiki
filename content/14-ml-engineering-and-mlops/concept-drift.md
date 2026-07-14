@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Concept Drift
 
 Concept drift is a change in the conditional relationship a model is meant to learn: $P_t(Y\mid X)$ differs from the relationship seen during training or validation. It is different from [data drift](data-drift.md), which only says $P_t(X)$ moved. A feature distribution can move while the decision boundary is still valid, and the feature distribution can look stable while fraud tactics, user intent, or labeling policy changes make the old boundary wrong.

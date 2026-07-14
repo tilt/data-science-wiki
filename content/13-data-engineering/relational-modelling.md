@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Relational Modelling
 
 Relational modelling chooses tables, keys, and constraints so facts are stored once and relationships are enforced by the database. It is the integrity layer beneath [SQL](sql.md), [data-warehouses](data-warehouses.md), and many [data-contracts](data-contracts.md).

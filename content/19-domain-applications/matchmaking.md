@@ -22,6 +22,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Matchmaking
 
 Matchmaking recommends people, teams, mentors, jobs, or peers where the recommended "item" can accept, reject, or be harmed by exposure. Inputs include explicit preferences, behavior, availability, geography, eligibility, safety filters, and interaction history. Targets include reciprocal reply, accepted match, retained relationship, or successful outcome after the match. The output is usually a ranked set with capacity and fairness constraints, not a single prediction.

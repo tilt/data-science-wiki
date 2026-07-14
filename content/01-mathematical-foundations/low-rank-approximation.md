@@ -21,6 +21,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Low-Rank Approximation
 
 Low-rank approximation replaces a matrix with another matrix that has fewer independent directions. It is a compression and denoising idea: preserve the strongest shared structure and discard smaller directions, measured by a chosen [norm](norms-and-distances.md).

@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # V-JEPA 2 versus Vision-Language Models
 
 [V-JEPA 2](v-jepa-2.md) and [video-language models](video-language-models.md) answer different engineering questions. V-JEPA 2 asks whether latent video prediction can produce reusable visual dynamics and planning-oriented features. A vision-language model asks whether visual tokens can be aligned with language for captioning, question answering, retrieval, or chat. The comparison is objective and interface, not a universal ranking.
@@ -48,10 +49,10 @@ The first produces predictive visual representations; the second produces langua
 
 The difference is easiest to see by comparing what each objective scores:
 
-| model family | prediction | target | score being optimized |
-|---|---:|---:|---:|
-| V-JEPA-style latent prediction | $\hat z=(0.95,0.25)$ | $z=(1.0,0.3)$ | $\frac{(0.95-1.0)^2+(0.25-0.3)^2}{2}=0.0025$ |
-| language-facing VLM | caption logits $(0.2,1.1,-0.4)$ | answer token/class 1 | softmax probabilities $(0.249,0.614,0.137)$ |
+| model family                   |                      prediction |               target |                        score being optimized |
+| ------------------------------ | ------------------------------: | -------------------: | -------------------------------------------: |
+| V-JEPA-style latent prediction |            $\hat z=(0.95,0.25)$ |        $z=(1.0,0.3)$ | $\frac{(0.95-1.0)^2+(0.25-0.3)^2}{2}=0.0025$ |
+| language-facing VLM            | caption logits $(0.2,1.1,-0.4)$ | answer token/class 1 |  softmax probabilities $(0.249,0.614,0.137)$ |
 
 The latent objective grades prediction accuracy in representation space; the language objective grades a text-facing answer distribution. A product may need both: visual dynamics for anticipation or planning, and language alignment for captions, retrieval, or question answering.
 

@@ -24,6 +24,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Testing
 
 Testing is executable evidence about a system boundary. In ordinary software that boundary may be a function, HTTP contract, database transaction, or browser workflow. In ML and AI systems it also includes data validation, prompt and retrieval fixtures, model-version behavior, and [golden datasets](../17-experimentation-and-evaluation/golden-datasets.md). The point is not to have many tests; it is to make important regressions cheap to detect before [production integration](production-integration.md).

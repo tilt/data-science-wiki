@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Vector Databases
 
 Vector databases store [embeddings](embeddings.md) together with document metadata so a query embedding can retrieve semantically nearby records. In [RAG](rag.md), the vector store is not the whole retrieval system; it is one stage between ingestion, filtering, [hybrid retrieval](hybrid-retrieval.md), [reranking](reranking.md), and context packing.

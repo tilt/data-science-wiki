@@ -20,6 +20,7 @@ related:
 historical_context: false
 last_reviewed: 2026-07-11
 ---
+
 # Airflow
 
 Airflow is an orchestrator: it decides when tasks should run, in what dependency order, with what retries and metadata. It does not make bad [SQL](sql.md) correct or turn an unreliable source into a contract; it gives [data-pipelines](data-pipelines.md) a schedulable control plane.
