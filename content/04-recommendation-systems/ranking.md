@@ -16,7 +16,7 @@ related:
   - retrieval-and-ranking-architectures.md
   - evaluation-of-recommenders.md
   - diversity-novelty-coverage-serendipity.md
-  - ../11-information-retrieval-and-search/ranking-and-retrieval-metrics.md
+  - ../12-information-retrieval-and-search/ranking-and-retrieval-metrics.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -32,7 +32,7 @@ $$
 s(u,i)=f_\theta(x_{u,i})-\lambda\,\operatorname{age}(i),
 $$
 
-then sort by $s$. A list-level postprocessor can add constraints such as author diversity or inventory caps. [Evaluation of recommenders](evaluation-of-recommenders.md) then uses top-k metrics such as [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) or recall.
+then sort by $s$. A list-level postprocessor can add constraints such as author diversity or inventory caps. [Evaluation of recommenders](evaluation-of-recommenders.md) then uses top-k metrics such as [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) or recall.
 
 ## Worked example
 

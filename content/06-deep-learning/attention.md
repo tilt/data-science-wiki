@@ -15,7 +15,7 @@ related:
   - transformers.md
   - recurrent-neural-networks.md
   - multimodal-learning.md
-  - ../10-generative-ai/language-model-architecture.md
+  - ../11-generative-ai/language-model-architecture.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -41,7 +41,7 @@ $$
 \operatorname{MHA}(Q,K,V)=\operatorname{Concat}(\operatorname{head}_1,\ldots,\operatorname{head}_h)W^O.
 $$
 
-The $\sqrt{d_k}$ divisor keeps dot-product logits from growing with key dimension. Masks can forbid future tokens or padded positions, which is essential in [language-model architectures](../10-generative-ai/language-model-architecture.md).
+The $\sqrt{d_k}$ divisor keeps dot-product logits from growing with key dimension. Masks can forbid future tokens or padded positions, which is essential in [language-model architectures](../11-generative-ai/language-model-architecture.md).
 
 ## Worked example
 

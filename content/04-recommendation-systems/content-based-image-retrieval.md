@@ -15,8 +15,8 @@ related:
   - image-based-recommendation.md
   - content-based-recommendation.md
   - candidate-generation.md
-  - ../11-information-retrieval-and-search/vector-indexes.md
-  - ../11-information-retrieval-and-search/dense-retrieval.md
+  - ../12-information-retrieval-and-search/vector-indexes.md
+  - ../12-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -32,7 +32,7 @@ $$
 s(q,i)=\frac{f(q)^\top f(i)}{\lVert f(q)\rVert\lVert f(i)\rVert}.
 $$
 
-At scale the vectors are stored in [vector indexes](../11-information-retrieval-and-search/vector-indexes.md), similar to [dense retrieval](../11-information-retrieval-and-search/dense-retrieval.md).
+At scale the vectors are stored in [vector indexes](../12-information-retrieval-and-search/vector-indexes.md), similar to [dense retrieval](../12-information-retrieval-and-search/dense-retrieval.md).
 
 ## Worked example
 

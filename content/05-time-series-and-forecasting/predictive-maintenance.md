@@ -16,7 +16,7 @@ related:
   - concept-drift-in-forecasting.md
   - energy-consumption-forecasting.md
   - prediction-intervals.md
-  - ../18-domain-applications/predictive-maintenance.md
+  - ../19-domain-applications/predictive-maintenance.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -34,7 +34,7 @@ Production maintenance models need drift checks because sensors are recalibrated
 
 ## Connections
 
-Predictive maintenance turns sensor histories into forecasts of failure risk or remaining useful life. The broader domain workflow is covered in [predictive maintenance](../18-domain-applications/predictive-maintenance.md), while forecast uncertainty and monitoring connect back to [prediction intervals](prediction-intervals.md) and [forecast monitoring](forecast-monitoring.md).
+Predictive maintenance turns sensor histories into forecasts of failure risk or remaining useful life. The broader domain workflow is covered in [predictive maintenance](../19-domain-applications/predictive-maintenance.md), while forecast uncertainty and monitoring connect back to [prediction intervals](prediction-intervals.md) and [forecast monitoring](forecast-monitoring.md).
 
 ## References
 

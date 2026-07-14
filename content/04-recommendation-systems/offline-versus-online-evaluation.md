@@ -16,7 +16,7 @@ related:
   - bandit-algorithms.md
   - contextual-bandits.md
   - feedback-loops.md
-  - ../16-experimentation-and-evaluation/online-experiments.md
+  - ../17-experimentation-and-evaluation/online-experiments.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -57,7 +57,7 @@ Only four events can be replayed because rewards for unshown actions are missing
 
 ## Caveats
 
-Offline ranking metrics are cheap and reproducible but can overfit historical exposure. Online tests measure real behavior but are slower, riskier, and sensitive to interference. Use offline gates to reject bad candidates, then confirm important changes with [online experiments](../16-experimentation-and-evaluation/online-experiments.md).
+Offline ranking metrics are cheap and reproducible but can overfit historical exposure. Online tests measure real behavior but are slower, riskier, and sensitive to interference. Use offline gates to reject bad candidates, then confirm important changes with [online experiments](../17-experimentation-and-evaluation/online-experiments.md).
 
 ## References
 

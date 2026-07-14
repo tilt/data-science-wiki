@@ -23,7 +23,7 @@ related:
   - self-supervised-learning.md
   - contrastive-learning.md
   - neural-network-fundamentals.md
-  - ../10-generative-ai/stable-diffusion.md
+  - ../11-generative-ai/stable-diffusion.md
 historical_context: false
 last_reviewed: 2026-07-14
 ---
@@ -93,7 +93,7 @@ Autoencoders are useful when the objective is compression, reconstruction, anoma
 | Missing-data imputation | infer masked features from visible context |
 | Self-supervised pretraining | train encoders with reconstruction before fine-tuning |
 | Generative modeling | sample from a VAE latent prior or decode latents from another model |
-| Latent diffusion | compress images into a latent space before denoising, as in [Stable Diffusion](../10-generative-ai/stable-diffusion.md) |
+| Latent diffusion | compress images into a latent space before denoising, as in [Stable Diffusion](../11-generative-ai/stable-diffusion.md) |
 
 ## Relevance After Transformers
 
@@ -110,7 +110,7 @@ Reconstruction quality can reward the wrong information. A model can reconstruct
 - [Representation Learning](representation-learning.md) gives the broader framing for learned latent spaces.
 - [Self-Supervised Learning](self-supervised-learning.md) covers masked, denoising, and predictive objectives.
 - [Contrastive Learning](contrastive-learning.md) is a different self-supervised family based on similarity comparisons rather than reconstruction.
-- [Stable Diffusion](../10-generative-ai/stable-diffusion.md) uses an autoencoder latent space before diffusion denoising.
+- [Stable Diffusion](../11-generative-ai/stable-diffusion.md) uses an autoencoder latent space before diffusion denoising.
 
 ## References
 

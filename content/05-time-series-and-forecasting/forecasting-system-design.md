@@ -22,7 +22,7 @@ related:
   - forecast-monitoring.md
   - cold-start-forecasting.md
   - backtesting.md
-  - ../13-ml-engineering-and-mlops/model-serving.md
+  - ../14-ml-engineering-and-mlops/model-serving.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -119,7 +119,7 @@ Useful tables include training rows, forecast rows, backtest forecasts, componen
 
 ## Connections
 
-System design connects [forecasting problem formulation](forecasting-problem-formulation.md), [forecasting data and covariates](forecasting-data-and-covariates.md), and production [forecast monitoring](forecast-monitoring.md). It must also encode [cold-start forecasting](cold-start-forecasting.md) and the same serving constraints covered by MLOps [model serving](../13-ml-engineering-and-mlops/model-serving.md).
+System design connects [forecasting problem formulation](forecasting-problem-formulation.md), [forecasting data and covariates](forecasting-data-and-covariates.md), and production [forecast monitoring](forecast-monitoring.md). It must also encode [cold-start forecasting](cold-start-forecasting.md) and the same serving constraints covered by MLOps [model serving](../14-ml-engineering-and-mlops/model-serving.md).
 
 ## References
 

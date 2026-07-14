@@ -21,8 +21,8 @@ related:
   - autoencoders.md
   - representation-learning.md
   - multimodal-learning.md
-  - ../10-generative-ai/stable-diffusion.md
-  - ../08-computer-vision/image-representation.md
+  - ../11-generative-ai/stable-diffusion.md
+  - ../09-computer-vision/image-representation.md
 historical_context: false
 last_reviewed: 2026-07-14
 ---
@@ -108,8 +108,8 @@ GAN evaluation needs both quality and diversity. A generator can improve a visua
 
 - [Autoencoders](autoencoders.md) reconstruct inputs directly, while GANs learn from discriminator feedback.
 - [Representation Learning](representation-learning.md) explains how latent spaces can be useful beyond generation.
-- [Stable Diffusion](../10-generative-ai/stable-diffusion.md) covers the diffusion family that displaced GANs for many broad text-to-image workflows.
-- [Image Representation](../08-computer-vision/image-representation.md) gives the pixel/tensor background needed for image generators.
+- [Stable Diffusion](../11-generative-ai/stable-diffusion.md) covers the diffusion family that displaced GANs for many broad text-to-image workflows.
+- [Image Representation](../09-computer-vision/image-representation.md) gives the pixel/tensor background needed for image generators.
 
 ## References
 

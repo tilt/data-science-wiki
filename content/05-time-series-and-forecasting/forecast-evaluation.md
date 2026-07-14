@@ -20,7 +20,7 @@ related:
   - rolling-origin-validation.md
   - forecast-calibration.md
   - forecasting-pitfalls-and-worked-examples.md
-  - ../16-experimentation-and-evaluation/offline-evaluation.md
+  - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -63,7 +63,7 @@ Model selection should consider absolute accuracy, relative accuracy, bias, tail
 
 ## Connections
 
-Forecast evaluation joins [backtesting](backtesting.md), [rolling-origin validation](rolling-origin-validation.md), [forecast error metrics](forecast-error-metrics.md), and [forecast calibration](forecast-calibration.md). It also overlaps with general [offline evaluation](../16-experimentation-and-evaluation/offline-evaluation.md) when comparing deployed model candidates.
+Forecast evaluation joins [backtesting](backtesting.md), [rolling-origin validation](rolling-origin-validation.md), [forecast error metrics](forecast-error-metrics.md), and [forecast calibration](forecast-calibration.md). It also overlaps with general [offline evaluation](../17-experimentation-and-evaluation/offline-evaluation.md) when comparing deployed model candidates.
 
 ## References
 

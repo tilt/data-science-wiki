@@ -15,14 +15,14 @@ related:
   - attention.md
   - normalization.md
   - recurrent-neural-networks.md
-  - ../07-natural-language-processing/bert-style-encoders.md
-  - ../10-generative-ai/language-model-architecture.md
+  - ../08-natural-language-processing/bert-style-encoders.md
+  - ../11-generative-ai/language-model-architecture.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Transformers
 
-Transformers replace recurrent state updates with stacks of [attention](attention.md), feed-forward networks, residual paths, and [normalization](normalization.md). They process tokens, patches, or other items in parallel, then use attention masks and positional information to control what each position can use. This is why they sit behind modern [BERT-style encoders](../07-natural-language-processing/bert-style-encoders.md) and autoregressive [language models](../10-generative-ai/language-model-architecture.md).
+Transformers replace recurrent state updates with stacks of [attention](attention.md), feed-forward networks, residual paths, and [normalization](normalization.md). They process tokens, patches, or other items in parallel, then use attention masks and positional information to control what each position can use. This is why they sit behind modern [BERT-style encoders](../08-natural-language-processing/bert-style-encoders.md) and autoregressive [language models](../11-generative-ai/language-model-architecture.md).
 
 ## Defining math
 

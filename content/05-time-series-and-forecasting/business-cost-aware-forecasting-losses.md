@@ -22,7 +22,7 @@ related:
   - prediction-intervals.md
   - forecast-error-metrics.md
   - forecast-evaluation.md
-  - ../16-experimentation-and-evaluation/risk-weighted-error-taxonomies.md
+  - ../17-experimentation-and-evaluation/risk-weighted-error-taxonomies.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---

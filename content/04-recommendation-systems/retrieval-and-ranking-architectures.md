@@ -16,14 +16,14 @@ related:
   - candidate-generation.md
   - ranking.md
   - hybrid-recommenders.md
-  - ../11-information-retrieval-and-search/vector-indexes.md
-  - ../11-information-retrieval-and-search/reranking.md
+  - ../12-information-retrieval-and-search/vector-indexes.md
+  - ../12-information-retrieval-and-search/reranking.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Retrieval and Ranking Architectures
 
-Retrieval-and-ranking architectures split recommendation into fast broad recall and slower precise ordering. This is the recommender analogue of [dense retrieval](../11-information-retrieval-and-search/dense-retrieval.md) followed by [reranking](../11-information-retrieval-and-search/reranking.md): retrieve thousands, rank hundreds, display a few.
+Retrieval-and-ranking architectures split recommendation into fast broad recall and slower precise ordering. This is the recommender analogue of [dense retrieval](../12-information-retrieval-and-search/dense-retrieval.md) followed by [reranking](../12-information-retrieval-and-search/reranking.md): retrieve thousands, rank hundreds, display a few.
 
 ## Defining mechanism
 
@@ -51,7 +51,7 @@ The retrieval stage recalls items 0, 2, and 3; item 1 is never seen by the ranke
 
 ## Caveats
 
-Retrieval and ranking must be evaluated separately. A ranker with excellent [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) cannot fix low candidate recall, and a high-recall generator can still overload serving latency. Keep eligibility, freshness, deduplication, and exploration decisions visible in logs.
+Retrieval and ranking must be evaluated separately. A ranker with excellent [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) cannot fix low candidate recall, and a high-recall generator can still overload serving latency. Keep eligibility, freshness, deduplication, and exploration decisions visible in logs.
 
 ## References
 

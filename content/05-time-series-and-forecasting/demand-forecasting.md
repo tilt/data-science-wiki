@@ -17,7 +17,7 @@ related:
   - business-cost-aware-forecasting-losses.md
   - hierarchical-forecasting.md
   - forecasting-system-design.md
-  - ../18-domain-applications/demand-prediction-in-logistics.md
+  - ../19-domain-applications/demand-prediction-in-logistics.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -35,7 +35,7 @@ Good demand systems evaluate by segment: stockout periods, promotion periods, la
 
 ## Connections
 
-Demand forecasting combines [forecasting data and covariates](forecasting-data-and-covariates.md), [forecasting-system-design](forecasting-system-design.md), and domain constraints. The logistics application is expanded in [demand prediction in logistics](../18-domain-applications/demand-prediction-in-logistics.md).
+Demand forecasting combines [forecasting data and covariates](forecasting-data-and-covariates.md), [forecasting-system-design](forecasting-system-design.md), and domain constraints. The logistics application is expanded in [demand prediction in logistics](../19-domain-applications/demand-prediction-in-logistics.md).
 
 ## References
 

@@ -20,7 +20,7 @@ related:
   - online-learning-for-forecasting.md
   - backtesting.md
   - forecasting-pitfalls-and-worked-examples.md
-  - ../13-ml-engineering-and-mlops/concept-drift.md
+  - ../14-ml-engineering-and-mlops/concept-drift.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -65,7 +65,7 @@ Responses include retraining, shortening training windows, adding recent-weighte
 
 ## Connections
 
-Forecast drift is visible through [forecast monitoring](forecast-monitoring.md), tested through fresh [backtesting](backtesting.md), and sometimes handled with [online learning for forecasting](online-learning-for-forecasting.md). It is the forecasting-specific form of MLOps [concept drift](../13-ml-engineering-and-mlops/concept-drift.md).
+Forecast drift is visible through [forecast monitoring](forecast-monitoring.md), tested through fresh [backtesting](backtesting.md), and sometimes handled with [online learning for forecasting](online-learning-for-forecasting.md). It is the forecasting-specific form of MLOps [concept drift](../14-ml-engineering-and-mlops/concept-drift.md).
 
 ## References
 

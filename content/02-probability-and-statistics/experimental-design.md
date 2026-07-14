@@ -15,7 +15,7 @@ related:
   - hypothesis-testing.md
   - confidence-intervals.md
   - statistical-modelling.md
-  - ../16-experimentation-and-evaluation/a-b-testing.md
+  - ../17-experimentation-and-evaluation/a-b-testing.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -27,7 +27,7 @@ $$
 Y_i=\alpha+\tau T_i+\epsilon_i,
 $$
 
-where $T_i$ is assigned by the design, not chosen after observing $Y_i$. Randomization supports unbiased comparisons; blocking and pairing reduce noise; pre-specified [hypothesis tests](hypothesis-testing.md) and [confidence intervals](confidence-intervals.md) keep uncertainty statements interpretable. In product work, this is the statistical core of [A/B testing](../16-experimentation-and-evaluation/a-b-testing.md).
+where $T_i$ is assigned by the design, not chosen after observing $Y_i$. Randomization supports unbiased comparisons; blocking and pairing reduce noise; pre-specified [hypothesis tests](hypothesis-testing.md) and [confidence intervals](confidence-intervals.md) keep uncertainty statements interpretable. In product work, this is the statistical core of [A/B testing](../17-experimentation-and-evaluation/a-b-testing.md).
 
 ## Worked simulation
 

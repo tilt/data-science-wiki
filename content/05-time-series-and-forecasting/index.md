@@ -41,9 +41,9 @@ prerequisites:
 related:
   - "03-classical-machine-learning/index.md"
   - "06-deep-learning/index.md"
-  - "13-ml-engineering-and-mlops/index.md"
-  - "16-experimentation-and-evaluation/index.md"
-  - "18-domain-applications/index.md"
+  - "14-ml-engineering-and-mlops/index.md"
+  - "17-experimentation-and-evaluation/index.md"
+  - "19-domain-applications/index.md"
 historical_context: false
 last_reviewed: 2026-07-10
 ---

@@ -16,7 +16,7 @@ related:
   - navigation.md
   - learning-paths.md
   - ../01-mathematical-foundations/index.md
-  - ../10-generative-ai/index.md
+  - ../11-generative-ai/index.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -28,7 +28,7 @@ The knowledge map shows how the wiki's major areas depend on each other. It is a
 
 ## How to read it
 
-[Mathematical foundations](../01-mathematical-foundations/index.md) support probability, statistics, optimization, and linear algebra. Those support classical ML, deep learning, NLP, computer vision, recommenders, forecasting, retrieval, and [generative AI](../10-generative-ai/index.md). Engineering, MLOps, cloud, evaluation, and governance cut across every applied area.
+[Mathematical foundations](../01-mathematical-foundations/index.md) support probability, statistics, optimization, and linear algebra. Those support classical ML, deep learning, NLP, computer vision, recommenders, forecasting, retrieval, and [generative AI](../11-generative-ai/index.md). Engineering, MLOps, cloud, evaluation, and governance cut across every applied area.
 
 ## Learning route
 

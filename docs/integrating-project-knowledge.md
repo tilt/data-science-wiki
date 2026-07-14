@@ -3,7 +3,7 @@
 How to turn findings from a real project (pitch, workshop, engagement) into generic, reusable wiki
 knowledge. The goal is durable concepts that help any reader, with **no** trace of the originating
 client, corpus, or codebase. The RAG architecture pages
-(`content/10-generative-ai/rag-architecture-comparison.md`, `rag-benchmark-design.md`) are the worked
+(`content/11-generative-ai/rag-architecture-comparison.md`, `rag-benchmark-design.md`) are the worked
 example of this process.
 
 ## Method
@@ -17,18 +17,18 @@ example of this process.
    evaluation protocols, trade-offs, failure modes — and phrase it as a pattern, not a war story. If
    a sentence would only be true for the original project, it does not belong.
 3. **Place it in the owning numbered section.** Do not create a new top-level directory for a project.
-   Find the section that already owns the topic (e.g. RAG lives in `10-generative-ai/`, retrieval
-   primitives in `11-information-retrieval-and-search/`) and add or extend pages there. Cross-link
+   Find the section that already owns the topic (e.g. RAG lives in `11-generative-ai/`, retrieval
+   primitives in `12-information-retrieval-and-search/`) and add or extend pages there. Cross-link
    between sections rather than duplicating.
 4. **Reuse existing page types.** A cross-architecture or option comparison is `page_type: comparison`;
-   an applied, end-to-end account is `page_type: case-study` (see `18-domain-applications/`); a single
+   an applied, end-to-end account is `page_type: case-study` (see `19-domain-applications/`); a single
    design is `page_type: system-design`. No new page type is needed.
 5. **Do not duplicate — cross-link.** Before writing, check whether the concept already exists
    (e.g. reciprocal rank fusion is fully documented in
-   `11-information-retrieval-and-search/hybrid-search.md`). Link to the canonical page and add the
+   `12-information-retrieval-and-search/hybrid-search.md`). Link to the canonical page and add the
    genuinely new material only.
 6. **Follow the house style.** Match the frontmatter convention (model page:
-   `content/11-information-retrieval-and-search/bm25.md`), weave ≥3 lateral cross-links into prose and
+   `content/12-information-retrieval-and-search/bm25.md`), weave ≥3 lateral cross-links into prose and
    mirror them in `related:` frontmatter (the `plugins/related-links` component renders them and feeds
    the graph), include one concrete artifact per page (a table, a Mermaid diagram, an executed example,
    or a cited fact — see `docs/authoring-style.md`), and cite only real, public sources.

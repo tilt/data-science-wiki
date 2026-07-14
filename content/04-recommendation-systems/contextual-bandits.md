@@ -66,7 +66,7 @@ The policy chooses arm 0 because its predicted reward plus uncertainty is highes
 
 ## Caveats
 
-Contextual bandits need logged propensities or randomization for valid replay. Features can leak post-treatment information if they are computed after exposure. They optimize immediate reward unless long-term outcomes are included in the reward or evaluated through [online experiments](../16-experimentation-and-evaluation/online-experiments.md).
+Contextual bandits need logged propensities or randomization for valid replay. Features can leak post-treatment information if they are computed after exposure. They optimize immediate reward unless long-term outcomes are included in the reward or evaluated through [online experiments](../17-experimentation-and-evaluation/online-experiments.md).
 
 ## References
 

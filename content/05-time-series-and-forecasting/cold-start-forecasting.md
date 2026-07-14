@@ -21,7 +21,7 @@ related:
   - intermittent-demand.md
   - demand-forecasting.md
   - forecast-ensembling.md
-  - ../18-domain-applications/demand-prediction-in-logistics.md
+  - ../19-domain-applications/demand-prediction-in-logistics.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---

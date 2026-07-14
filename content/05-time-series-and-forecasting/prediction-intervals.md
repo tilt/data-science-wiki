@@ -21,7 +21,7 @@ related:
   - conformal-prediction-for-forecasting.md
   - forecast-calibration.md
   - forecast-error-metrics.md
-  - ../16-experimentation-and-evaluation/coverage.md
+  - ../17-experimentation-and-evaluation/coverage.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---

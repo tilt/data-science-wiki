@@ -25,8 +25,8 @@ prerequisites:
   - "01-mathematical-foundations/index.md"
   - "03-classical-machine-learning/index.md"
 related:
-  - "11-information-retrieval-and-search/index.md"
-  - "16-experimentation-and-evaluation/index.md"
+  - "12-information-retrieval-and-search/index.md"
+  - "17-experimentation-and-evaluation/index.md"
 historical_context: false
 last_reviewed: 2026-07-10
 ---

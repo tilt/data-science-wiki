@@ -14,7 +14,7 @@ aliases:
 prerequisites: []
 related:
   - "01-mathematical-foundations/index.md"
-  - "20-interview-preparation/index.md"
+  - "21-interview-preparation/index.md"
 historical_context: false
 last_reviewed: 2026-07-10
 ---
@@ -36,15 +36,15 @@ Use these paths when the goal is guided study rather than browsing the full taxo
 
 ## Generative AI systems
 
-[Generative AI](../10-generative-ai/index.md) -> [Tool Use and Function Calling](../10-generative-ai/tool-use-and-function-calling.md) -> [RAG Evaluation](../10-generative-ai/rag-evaluation.md) -> [Responsible AI](../17-responsible-ai-safety-and-governance/index.md)
+[Generative AI](../11-generative-ai/index.md) -> [Tool Use and Function Calling](../11-generative-ai/tool-use-and-function-calling.md) -> [RAG Evaluation](../11-generative-ai/rag-evaluation.md) -> [Responsible AI](../18-responsible-ai-safety-and-governance/index.md)
 
 ## Production ML
 
-[ML System Lifecycle](../13-ml-engineering-and-mlops/ml-system-lifecycle.md) -> [Training Pipelines](../13-ml-engineering-and-mlops/training-pipelines.md) -> [Model Serving](../13-ml-engineering-and-mlops/model-serving.md) -> [Monitoring](../13-ml-engineering-and-mlops/monitoring.md) -> [Production Incident Response](../13-ml-engineering-and-mlops/production-incident-response.md)
+[ML System Lifecycle](../14-ml-engineering-and-mlops/ml-system-lifecycle.md) -> [Training Pipelines](../14-ml-engineering-and-mlops/training-pipelines.md) -> [Model Serving](../14-ml-engineering-and-mlops/model-serving.md) -> [Monitoring](../14-ml-engineering-and-mlops/monitoring.md) -> [Production Incident Response](../14-ml-engineering-and-mlops/production-incident-response.md)
 
 ## Interview preparation
 
-[Answer Patterns](../20-interview-preparation/answer-patterns.md) -> [Prototype Answers](../20-interview-preparation/prototype-answers.md) -> [Interview Examples](../20-interview-preparation/interview-examples.md) -> [Recommendation Systems](../20-interview-preparation/recommendation-systems.md) -> [Generative AI](../20-interview-preparation/generative-ai.md) -> [Evaluation](../20-interview-preparation/evaluation.md)
+[Answer Patterns](../21-interview-preparation/answer-patterns.md) -> [Prototype Answers](../21-interview-preparation/prototype-answers.md) -> [Interview Examples](../21-interview-preparation/interview-examples.md) -> [Recommendation Systems](../21-interview-preparation/recommendation-systems.md) -> [Generative AI](../21-interview-preparation/generative-ai.md) -> [Evaluation](../21-interview-preparation/evaluation.md)
 
 ## How to study a path
 

@@ -16,13 +16,13 @@ related:
   - transfer-learning.md
   - regularization.md
   - optimizers.md
-  - ../10-generative-ai/fine-tuning-versus-rag.md
+  - ../11-generative-ai/fine-tuning-versus-rag.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Fine-Tuning
 
-Fine-tuning adapts a pretrained model to a target task by updating selected parameters. It is a specific form of [transfer learning](transfer-learning.md): start from a useful representation, then decide which layers or adapters should learn. In generative systems it should be separated from [fine-tuning versus RAG](../10-generative-ai/fine-tuning-versus-rag.md), because retrieval can solve knowledge injection without changing weights.
+Fine-tuning adapts a pretrained model to a target task by updating selected parameters. It is a specific form of [transfer learning](transfer-learning.md): start from a useful representation, then decide which layers or adapters should learn. In generative systems it should be separated from [fine-tuning versus RAG](../11-generative-ai/fine-tuning-versus-rag.md), because retrieval can solve knowledge injection without changing weights.
 
 ## Defining math
 

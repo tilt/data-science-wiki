@@ -21,7 +21,7 @@ related:
   - quantile-loss.md
   - conformal-prediction-for-forecasting.md
   - forecast-evaluation.md
-  - ../16-experimentation-and-evaluation/calibration.md
+  - ../17-experimentation-and-evaluation/calibration.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -78,7 +78,7 @@ Recalibration data must be separate from the final evaluation period. Otherwise 
 
 ## Connections
 
-Calibration is the reliability check for [probabilistic forecasting](probabilistic-forecasting.md). It complements [prediction intervals](prediction-intervals.md), [quantile loss](quantile-loss.md), [conformal prediction for forecasting](conformal-prediction-for-forecasting.md), and the broader evaluation notion of [calibration](../16-experimentation-and-evaluation/calibration.md).
+Calibration is the reliability check for [probabilistic forecasting](probabilistic-forecasting.md). It complements [prediction intervals](prediction-intervals.md), [quantile loss](quantile-loss.md), [conformal prediction for forecasting](conformal-prediction-for-forecasting.md), and the broader evaluation notion of [calibration](../17-experimentation-and-evaluation/calibration.md).
 
 ## References
 

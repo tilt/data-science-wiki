@@ -17,7 +17,7 @@ related:
   - forecast-evaluation.md
   - hyperparameter-optimization-for-forecasting.md
   - forecasting-pitfalls-and-worked-examples.md
-  - ../16-experimentation-and-evaluation/offline-evaluation.md
+  - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---

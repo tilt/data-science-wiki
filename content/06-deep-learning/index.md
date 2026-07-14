@@ -38,9 +38,9 @@ prerequisites:
   - ../01-mathematical-foundations/index.md
   - ../03-classical-machine-learning/index.md
 related:
-  - ../07-natural-language-processing/index.md
-  - ../08-computer-vision/index.md
-  - ../10-generative-ai/index.md
+  - ../08-natural-language-processing/index.md
+  - ../09-computer-vision/index.md
+  - ../11-generative-ai/index.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---

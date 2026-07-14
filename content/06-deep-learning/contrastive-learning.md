@@ -23,13 +23,13 @@ related:
   - representation-learning.md
   - multimodal-learning.md
   - ../01-mathematical-foundations/cross-entropy.md
-  - ../11-information-retrieval-and-search/dense-retrieval.md
+  - ../12-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
 last_reviewed: 2026-07-14
 ---
 # Contrastive Learning
 
-Contrastive learning trains an embedding space by comparing examples. A positive pair should land close together; negative examples should land farther away. In [self-supervised learning](self-supervised-learning.md), positives are often two augmentations of the same item. In [multimodal learning](multimodal-learning.md), positives can be paired image-text examples. The learned vectors are useful for [dense retrieval](../11-information-retrieval-and-search/dense-retrieval.md), clustering, transfer learning, and downstream classifiers.
+Contrastive learning trains an embedding space by comparing examples. A positive pair should land close together; negative examples should land farther away. In [self-supervised learning](self-supervised-learning.md), positives are often two augmentations of the same item. In [multimodal learning](multimodal-learning.md), positives can be paired image-text examples. The learned vectors are useful for [dense retrieval](../12-information-retrieval-and-search/dense-retrieval.md), clustering, transfer learning, and downstream classifiers.
 
 ![Contrastive learning embedding geometry](../assets/diagrams/contrastive-learning-embedding-geometry.svg)
 
@@ -103,7 +103,7 @@ Contrastive learning does not discover "semantic similarity" in the abstract. It
 - [Autoencoders](autoencoders.md) learn by reconstructing inputs or masked content instead of comparing positives and negatives.
 - [Representation Learning](representation-learning.md) explains why embedding quality matters for transfer.
 - [Multimodal Learning](multimodal-learning.md) uses contrastive losses to align representations from different modalities.
-- [Dense Retrieval](../11-information-retrieval-and-search/dense-retrieval.md) turns embedding similarity into a search system.
+- [Dense Retrieval](../12-information-retrieval-and-search/dense-retrieval.md) turns embedding similarity into a search system.
 
 ## References
 

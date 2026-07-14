@@ -17,7 +17,7 @@ related:
   - trend-seasonality-cycles-noise.md
   - sarima.md
   - transformer-based-forecasting.md
-  - ../18-domain-applications/energy-forecasting.md
+  - ../19-domain-applications/energy-forecasting.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -33,7 +33,7 @@ Evaluation should be segmented. Average error can hide failures during heat wave
 
 ## Connections
 
-Energy forecasting is a high-seasonality case of [demand forecasting](demand-forecasting.md). Weather and calendar fields belong in [forecasting data and covariates](forecasting-data-and-covariates.md), while repeated structure connects to [trend-seasonality-cycles-noise](trend-seasonality-cycles-noise.md) and the applied page on [energy forecasting](../18-domain-applications/energy-forecasting.md).
+Energy forecasting is a high-seasonality case of [demand forecasting](demand-forecasting.md). Weather and calendar fields belong in [forecasting data and covariates](forecasting-data-and-covariates.md), while repeated structure connects to [trend-seasonality-cycles-noise](trend-seasonality-cycles-noise.md) and the applied page on [energy forecasting](../19-domain-applications/energy-forecasting.md).
 
 ## References
 

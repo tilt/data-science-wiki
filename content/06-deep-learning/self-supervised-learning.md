@@ -17,7 +17,7 @@ related:
   - contrastive-learning.md
   - representation-learning.md
   - transfer-learning.md
-  - ../09-video-understanding/self-supervised-video-representation-learning.md
+  - ../10-video-understanding/self-supervised-video-representation-learning.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---

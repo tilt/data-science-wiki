@@ -24,7 +24,7 @@ aliases:
 prerequisites:
   - ../01-mathematical-foundations/index.md
 related:
-  - ../16-experimentation-and-evaluation/index.md
+  - ../17-experimentation-and-evaluation/index.md
   - ../05-time-series-and-forecasting/index.md
   - ../03-classical-machine-learning/index.md
 historical_context: false

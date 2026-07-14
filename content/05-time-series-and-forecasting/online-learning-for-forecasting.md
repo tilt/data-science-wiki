@@ -20,7 +20,7 @@ related:
   - forecast-monitoring.md
   - machine-learning-forecasting.md
   - backtesting.md
-  - ../13-ml-engineering-and-mlops/batch-and-online-inference.md
+  - ../14-ml-engineering-and-mlops/batch-and-online-inference.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---

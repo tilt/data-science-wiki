@@ -16,7 +16,7 @@ related:
   - ranking.md
   - item-based-collaborative-filtering.md
   - content-based-recommendation.md
-  - ../11-information-retrieval-and-search/dense-retrieval.md
+  - ../12-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---

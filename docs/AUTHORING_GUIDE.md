@@ -39,4 +39,4 @@ Before adding project-derived forecasting notes, generalize identifiers, package
 
 ## Integrating project knowledge
 
-The rule above applies to any project-derived content, not only forecasting. To turn findings from a pitch, workshop, or engagement into generic wiki knowledge — sanitize, generalize, place in the owning numbered section, reuse existing page types, cross-link instead of duplicating — follow [Integrating Project Knowledge](integrating-project-knowledge.md). The RAG architecture pages under `content/10-generative-ai/` are the worked example.
+The rule above applies to any project-derived content, not only forecasting. To turn findings from a pitch, workshop, or engagement into generic wiki knowledge — sanitize, generalize, place in the owning numbered section, reuse existing page types, cross-link instead of duplicating — follow [Integrating Project Knowledge](integrating-project-knowledge.md). The RAG architecture pages under `content/11-generative-ai/` are the worked example.

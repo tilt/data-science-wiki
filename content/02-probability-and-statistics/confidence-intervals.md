@@ -15,7 +15,7 @@ related:
   - central-limit-theorem.md
   - statistical-estimation.md
   - hypothesis-testing.md
-  - ../16-experimentation-and-evaluation/statistical-significance.md
+  - ../17-experimentation-and-evaluation/statistical-significance.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -64,7 +64,7 @@ Across repeated samples, the 95 percent t-interval covers the fixed mean `0.9499
 
 ## Caveats
 
-One realized interval either contains the parameter or it does not. Coverage can fail under biased sampling, dependence, optional stopping, nonresponse, or variance formulas that ignore clustering. In experiments, pair intervals with effect size and [statistical significance](../16-experimentation-and-evaluation/statistical-significance.md), not only a binary decision.
+One realized interval either contains the parameter or it does not. Coverage can fail under biased sampling, dependence, optional stopping, nonresponse, or variance formulas that ignore clustering. In experiments, pair intervals with effect size and [statistical significance](../17-experimentation-and-evaluation/statistical-significance.md), not only a binary decision.
 
 ## References
 

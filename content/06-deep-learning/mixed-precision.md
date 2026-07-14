@@ -25,7 +25,7 @@ related:
   - initialization.md
   - backpropagation.md
   - ../01-mathematical-foundations/numerical-stability.md
-  - ../14-cloud-and-distributed-systems/gpu-systems.md
+  - ../15-cloud-and-distributed-systems/gpu-systems.md
 historical_context: false
 last_reviewed: 2026-07-14
 ---
@@ -33,7 +33,7 @@ last_reviewed: 2026-07-14
 
 Mixed precision trains or serves neural networks with more than one floating-point format. Throughput-heavy operations such as matrix multiplies run in lower precision, while numerically sensitive pieces stay in FP32 or accumulate into FP32. The goal is higher accelerator throughput and lower memory traffic without silently changing the optimization problem.
 
-Mixed precision is closely tied to [numerical stability](../01-mathematical-foundations/numerical-stability.md), [optimizers](optimizers.md), [backpropagation](backpropagation.md), and [GPU systems](../14-cloud-and-distributed-systems/gpu-systems.md). It is not just a speed flag: it changes rounding, overflow, underflow, and sometimes which kernels the framework selects.
+Mixed precision is closely tied to [numerical stability](../01-mathematical-foundations/numerical-stability.md), [optimizers](optimizers.md), [backpropagation](backpropagation.md), and [GPU systems](../15-cloud-and-distributed-systems/gpu-systems.md). It is not just a speed flag: it changes rounding, overflow, underflow, and sometimes which kernels the framework selects.
 
 ## Floating-Point Formats
 
@@ -126,7 +126,7 @@ For inference, mixed precision has a different risk profile. There is no backwar
 - [Numerical Stability](../01-mathematical-foundations/numerical-stability.md) explains overflow, stable softmax, and mathematically equivalent computations that behave differently in finite precision.
 - [Optimizers](optimizers.md) explains why momentum and adaptive state are sensitive to small accumulated updates.
 - [Distributed Training](distributed-training.md) often combines mixed precision with sharding and communication compression to reduce memory and bandwidth.
-- [GPU Systems](../14-cloud-and-distributed-systems/gpu-systems.md) explains how tensor cores, memory bandwidth, and arithmetic intensity affect performance.
+- [GPU Systems](../15-cloud-and-distributed-systems/gpu-systems.md) explains how tensor cores, memory bandwidth, and arithmetic intensity affect performance.
 
 ## References
 

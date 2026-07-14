@@ -54,7 +54,7 @@ $$
 \operatorname{Serendipity}(L)=\frac{1}{k}\sum_{i\in L}\operatorname{rel}(i)\operatorname{unexpected}(i).
 $$
 
-These complement [ranking](ranking.md) metrics such as [NDCG](../11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md).
+These complement [ranking](ranking.md) metrics such as [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md).
 
 ## Worked example
 

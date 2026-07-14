@@ -15,14 +15,14 @@ related:
   - attention.md
   - contrastive-learning.md
   - representation-learning.md
-  - ../10-generative-ai/multimodal-models.md
-  - ../08-computer-vision/image-representation.md
+  - ../11-generative-ai/multimodal-models.md
+  - ../09-computer-vision/image-representation.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
 # Multimodal Learning
 
-Multimodal learning combines signals such as text, images, audio, video, tables, and actions. The model can align modalities in a shared embedding space, fuse them with [attention](attention.md), or condition generation in one modality on another. It connects deep [representation learning](representation-learning.md) with applied [multimodal models](../10-generative-ai/multimodal-models.md) and visual [image representations](../08-computer-vision/image-representation.md).
+Multimodal learning combines signals such as text, images, audio, video, tables, and actions. The model can align modalities in a shared embedding space, fuse them with [attention](attention.md), or condition generation in one modality on another. It connects deep [representation learning](representation-learning.md) with applied [multimodal models](../11-generative-ai/multimodal-models.md) and visual [image representations](../09-computer-vision/image-representation.md).
 
 ## Defining math
 

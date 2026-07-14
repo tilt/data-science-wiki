@@ -16,7 +16,7 @@ related:
   - classical-svd.md
   - svd-versus-matrix-factorization.md
   - sparse-utility-matrices-and-svd.md
-  - ../11-information-retrieval-and-search/tf-idf.md
+  - ../12-information-retrieval-and-search/tf-idf.md
   - ../01-mathematical-foundations/low-rank-approximation.md
 historical_context: false
 last_reviewed: 2026-07-11
@@ -33,7 +33,7 @@ $$
 A\approx U_k\Sigma_kV_k^\top,
 $$
 
-where $k\ll\min(m,n)$. In information retrieval, this can compress a [TF-IDF](../11-information-retrieval-and-search/tf-idf.md) matrix. In recommenders, it can compress a deliberately prepared item or interaction matrix, but [sparse utility matrices](sparse-utility-matrices-and-svd.md) still require careful missing-value semantics.
+where $k\ll\min(m,n)$. In information retrieval, this can compress a [TF-IDF](../12-information-retrieval-and-search/tf-idf.md) matrix. In recommenders, it can compress a deliberately prepared item or interaction matrix, but [sparse utility matrices](sparse-utility-matrices-and-svd.md) still require careful missing-value semantics.
 
 ## Worked example
 

@@ -15,7 +15,7 @@ aliases:
 prerequisites:
   - "None"
 related:
-  - "20-interview-preparation/index.md"
+  - "21-interview-preparation/index.md"
 historical_context: false
 last_reviewed: 2026-07-10
 ---

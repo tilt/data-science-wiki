@@ -42,22 +42,22 @@ const expectedAreas = [
   "04-recommendation-systems",
   "05-time-series-and-forecasting",
   "06-deep-learning",
-  "06a-reinforcement-learning",
-  "07-natural-language-processing",
-  "08-computer-vision",
-  "09-video-understanding",
-  "10-generative-ai",
-  "11-information-retrieval-and-search",
-  "12-data-engineering",
-  "13-ml-engineering-and-mlops",
-  "14-cloud-and-distributed-systems",
-  "15-software-engineering",
-  "16-experimentation-and-evaluation",
-  "17-responsible-ai-safety-and-governance",
-  "18-domain-applications",
-  "19-history-of-ai-and-machine-learning",
-  "20-interview-preparation",
-  "21-references-and-glossary",
+  "07-reinforcement-learning",
+  "08-natural-language-processing",
+  "09-computer-vision",
+  "10-video-understanding",
+  "11-generative-ai",
+  "12-information-retrieval-and-search",
+  "13-data-engineering",
+  "14-ml-engineering-and-mlops",
+  "15-cloud-and-distributed-systems",
+  "16-software-engineering",
+  "17-experimentation-and-evaluation",
+  "18-responsible-ai-safety-and-governance",
+  "19-domain-applications",
+  "20-history-of-ai-and-machine-learning",
+  "21-interview-preparation",
+  "22-references-and-glossary",
 ]
 const bibliographyPath = path.join(root, "references", "bibliography.yml")
 const bibliography = fs.existsSync(bibliographyPath)
@@ -174,9 +174,9 @@ for (const file of files) {
   if (raw.length < 250 && !rel.includes("_templates")) warn(rel + " is very short")
 
   const isMetricReferencePage =
-    rel.endsWith("content/11-information-retrieval-and-search/ranking-and-retrieval-metrics.md") ||
-    rel.endsWith("content/11-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md") ||
-    rel.endsWith("content/16-experimentation-and-evaluation/coverage.md")
+    rel.endsWith("content/12-information-retrieval-and-search/ranking-and-retrieval-metrics.md") ||
+    rel.endsWith("content/12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md") ||
+    rel.endsWith("content/17-experimentation-and-evaluation/coverage.md")
   if (!isMetricReferencePage) {
     // Only prose must link metric terms. Code identifiers (`ndcg`, `mrr`) and
     // LaTeX cannot hold Markdown links, so strip fenced code, inline code, and

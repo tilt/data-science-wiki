@@ -16,7 +16,7 @@ related:
   - hybrid-recommenders.md
   - cold-start-problem.md
   - content-based-image-retrieval.md
-  - ../11-information-retrieval-and-search/tf-idf.md
+  - ../12-information-retrieval-and-search/tf-idf.md
 historical_context: false
 last_reviewed: 2026-07-11
 ---
@@ -38,7 +38,7 @@ $$
 s(u,j)=\frac{p_u^\top x_j}{\lVert p_u\rVert\lVert x_j\rVert}.
 $$
 
-The feature vector might be [TF-IDF](../11-information-retrieval-and-search/tf-idf.md), a learned embedding, or structured metadata.
+The feature vector might be [TF-IDF](../12-information-retrieval-and-search/tf-idf.md), a learned embedding, or structured metadata.
 
 ## Worked example
 
