@@ -20,7 +20,7 @@ related:
   - orthogonality.md
   - ../06-deep-learning/neural-network-fundamentals.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Vectors and Matrices
@@ -43,29 +43,21 @@ $$
 
 turns vectors into geometry: it defines angles, [orthogonality](orthogonality.md), projections, and many [norms and distances](norms-and-distances.md). In machine learning, the same object can be read as either data or parameters; a row of $X$ is a sample, while a column of $W$ in a neural layer is a learned direction.
 
-## Executed demo
+## Worked example
 
-This snippet computes a vector self-dot product, a matrix-vector product, and the first row of an outer product to distinguish the common operations.
+Let $v=(2,-1,3)$ and $M=\begin{bmatrix}1&0&2\\0&-1&1\end{bmatrix}$. The self-dot product is the squared Euclidean length,
 
-```python
-import numpy as np
+$$
+v^\top v=2^2+(-1)^2+3^2=14=\lVert v\rVert_2^2,
+$$
 
-v = np.array([2., -1., 3.])
-M = np.array([[1., 0., 2.], [0., -1., 1.]])
-print("dot_vv", v @ v)
-print("Mv", M @ v)
-print("outer_first_row", np.outer(v, v)[0])
-```
+the matrix-vector product compresses three coordinates into two,
 
-Observed output:
+$$
+Mv=\begin{bmatrix}1(2)+0(-1)+2(3)\\0(2)+(-1)(-1)+1(3)\end{bmatrix}=\begin{bmatrix}8\\4\end{bmatrix},
+$$
 
-```text
-dot_vv 14.0
-Mv [8. 4.]
-outer_first_row [ 4. -2.  6.]
-```
-
-The dot product gives $\lVert v\rVert_2^2=14$, while $Mv$ compresses a three-dimensional vector into two coordinates. That same linear-map view underlies [linear algebra](linear-algebra.md), dense layers in [neural network fundamentals](../06-deep-learning/neural-network-fundamentals.md), and low-dimensional embeddings.
+and the first row of the outer product $vv^\top$ is $2\,v=(4,-2,6)$. That same linear-map view underlies [linear algebra](linear-algebra.md), dense layers in [neural network fundamentals](../06-deep-learning/neural-network-fundamentals.md), and low-dimensional embeddings.
 
 ## Caveats
 
@@ -74,7 +66,6 @@ Shape errors are semantic errors, not just syntax errors: a feature vector store
 ## References
 
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
-- [NumPy documentation: `numpy.linalg.norm`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html)
 
 > [!nav]
 > **Section** — [Mathematical Foundations](index.md)

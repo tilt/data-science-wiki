@@ -14,6 +14,9 @@ prerequisites:
 related:
   - sql.md
   - dimensional-modelling.md
+  - data-vault.md
+  - distributed-warehouse-modelling.md
+  - vendor-solutions.md
   - bigquery.md
   - dbt.md
   - etl-and-elt.md
@@ -59,7 +62,7 @@ The metric is only meaningful because the query encodes a status filter. In prod
 
 ## Architecture
 
-Warehouse layers usually separate `raw`, `staging`, `intermediate`, and `mart` schemas. [ETL and ELT](etl-and-elt.md) determines whether transforms run before or after loading, but modern cloud warehouses typically favor ELT because storage is cheap and SQL engines scale independently. [BigQuery](bigquery.md) adds partitioning and clustering so table layout can reduce scanned bytes for common predicates.
+Warehouse layers usually separate `raw`, `staging`, `intermediate`, and `mart` schemas. [ETL and ELT](etl-and-elt.md) determines whether transforms run before or after loading, but modern cloud warehouses typically favor ELT because storage is cheap and SQL engines scale independently. [Data Vault](data-vault.md) is one way to model the historical integration layer before publishing marts. [Distributed warehouse modelling](distributed-warehouse-modelling.md) separates the logical mart grain from the physical layout needed for partition pruning, clustering, and repeated query patterns. [Vendor solutions](vendor-solutions.md) such as Snowflake, Databricks, BigQuery, Redshift, and Fabric choose different boundaries for storage, compute, governance, and AI workloads.
 
 ```mermaid
 flowchart TD
@@ -82,4 +85,4 @@ Warehouses fail when multiple marts define the same metric differently, when raw
 > [!nav]
 > **Section** — [Data Engineering](index.md)
 >
-> [← Dimensional Modelling](dimensional-modelling.md) [BigQuery →](bigquery.md)
+> [← Dimensional Modelling](dimensional-modelling.md) [Data Vault →](data-vault.md)

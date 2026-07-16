@@ -20,7 +20,7 @@ related:
   - gradient-descent.md
   - ../03-classical-machine-learning/clustering.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Norms and Distances
@@ -45,33 +45,25 @@ $$
 
 A distance is often induced by a norm, $d(x,y)=\lVert x-y\rVert$. The Euclidean norm is tied to [orthogonality](orthogonality.md); $L_1$ often encourages sparse errors or coefficients; matrix Frobenius norm is the squared-entry analogue used in [singular value decomposition](singular-value-decomposition.md).
 
-## Executed demo
+## Worked example
 
-This snippet computes $L_1$, $L_2$, and $L_\infty$ norms for one vector, then checks a Euclidean distance and the triangle inequality gap.
+The same vector has different sizes under different norms. For $x=(3,4)$,
 
-```python
-import numpy as np
+$$
+\lVert x\rVert_1=|3|+|4|=7,\qquad
+\lVert x\rVert_2=\sqrt{3^2+4^2}=5,\qquad
+\lVert x\rVert_\infty=\max(3,4)=4.
+$$
 
-x = np.array([3., 4.])
-y = np.array([1., 1.])
-print("l1", np.linalg.norm(x, 1))
-print("l2", np.linalg.norm(x, 2))
-print("linf", np.linalg.norm(x, np.inf))
-print("distance_to_y", round(np.linalg.norm(x-y), 4))
-print("triangle_gap", round(np.linalg.norm(x)+np.linalg.norm(y)-np.linalg.norm(x+y), 4))
-```
+The Euclidean distance to $y=(1,1)$ is $\lVert x-y\rVert_2=\lVert(2,3)\rVert_2=\sqrt{13}\approx3.606$. The triangle inequality holds with a little room to spare:
 
-Observed output:
+$$
+\lVert x\rVert_2+\lVert y\rVert_2=5+\sqrt2\approx6.414
+\quad\ge\quad
+\lVert x+y\rVert_2=\lVert(4,5)\rVert_2=\sqrt{41}\approx6.403,
+$$
 
-```text
-l1 7.0
-l2 5.0
-linf 4.0
-distance_to_y 3.6056
-triangle_gap 0.0111
-```
-
-The same vector has different sizes under different norms: $7.0$ under $L_1$, $5.0$ under $L_2$, and $4.0$ under $L_\infty$. The positive triangle gap, $0.0111$, verifies that $\lVert x+y\rVert_2$ did not exceed $\lVert x\rVert_2+\lVert y\rVert_2$.
+a gap of about $0.011$.
 
 ## Caveats
 
@@ -79,7 +71,6 @@ Distances can be dominated by scale, irrelevant dimensions, or sparse high-dimen
 
 ## References
 
-- [NumPy documentation: `numpy.linalg.norm`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html)
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
 
 > [!nav]

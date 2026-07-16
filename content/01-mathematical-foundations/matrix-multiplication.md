@@ -19,7 +19,7 @@ related:
   - jacobians-and-hessians.md
   - ../06-deep-learning/backpropagation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Matrix Multiplication
@@ -38,30 +38,26 @@ The inner dimensions must match because each output entry is a dot product betwe
 
 This is why [gradients](gradients.md) in linear models contain terms like $X^\top(p-y)$ and why [backpropagation](../06-deep-learning/backpropagation.md) is full of matrix products and transposes. [Jacobians and Hessians](jacobians-and-hessians.md) generalize the same composition idea to derivatives.
 
-## Executed demo
+## Worked example
 
-This snippet multiplies two small matrices and separately recomputes one output entry as a row-column dot product.
+Take
 
-```python
-import numpy as np
+$$
+X=\begin{bmatrix}1&2&0\\0&1&1\end{bmatrix},\qquad
+W=\begin{bmatrix}2&-1\\0&1\\3&1\end{bmatrix}.
+$$
 
-X = np.array([[1., 2., 0.], [0., 1., 1.]])
-W = np.array([[2., -1.], [0., 1.], [3., 1.]])
-print("XW")
-print(X @ W)
-print("manual_entry_0_1", X[0] @ W[:, 1])
-```
+Each entry of $XW$ is one row of $X$ dotted with one column of $W$. Writing every entry as its row-by-column sum,
 
-Observed output:
+$$
+XW=\begin{bmatrix}
+1\cdot2+2\cdot0+0\cdot3 & 1(-1)+2\cdot1+0\cdot1\\
+0\cdot2+1\cdot0+1\cdot3 & 0(-1)+1\cdot1+1\cdot1
+\end{bmatrix}
+=\begin{bmatrix}2&1\\3&2\end{bmatrix}.
+$$
 
-```text
-XW
-[[2. 1.]
- [3. 2.]]
-manual_entry_0_1 1.0
-```
-
-The first row, second column equals $1(-1)+2(1)+0(1)=1$. Reading $X$ as two examples and $W$ as two coefficient vectors, $XW$ produces two scores for each example.
+The first row, second column is $1(-1)+2(1)+0(1)=1$. Reading $X$ as two examples and $W$ as two coefficient vectors, $XW$ produces two scores for each example.
 
 ## Caveats
 
@@ -70,7 +66,6 @@ The order of multiplication encodes meaning. $XW$ and $WX$ may both be valid in 
 ## References
 
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
-- [NumPy documentation: `numpy.linalg.norm`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html)
 
 > [!nav]
 > **Section** — [Mathematical Foundations](index.md)

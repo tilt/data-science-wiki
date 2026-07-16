@@ -15,6 +15,8 @@ related:
   - data-warehouses.md
   - sql.md
   - dimensional-modelling.md
+  - distributed-warehouse-modelling.md
+  - vendor-solutions.md
   - dbt.md
   - cloud-storage.md
 historical_context: false
@@ -23,7 +25,7 @@ last_reviewed: 2026-07-11
 
 # BigQuery
 
-BigQuery is a managed analytical [data-warehouse](data-warehouses.md): users submit GoogleSQL, while Google manages storage, execution, and scaling. For data engineering, the design surface is table layout, query semantics, access policy, and cost control by bytes processed.
+BigQuery is a managed analytical [data warehouse](data-warehouses.md): users submit GoogleSQL, while Google manages storage, execution, and scaling. For data engineering, the design surface is table layout, query semantics, access policy, and cost control by bytes processed. It is one concrete [vendor solution](vendor-solutions.md) for the broader [distributed warehouse modelling](distributed-warehouse-modelling.md) patterns of partition pruning, clustering, columnar scans, and materialized query surfaces.
 
 ## Table layout contract
 
@@ -61,4 +63,4 @@ Unpartitioned append-only event tables make routine date filters expensive. Part
 > [!nav]
 > **Section** — [Data Engineering](index.md)
 >
-> [← Data Warehouses](data-warehouses.md) [Cloud Storage →](cloud-storage.md)
+> [← Vendor Solutions](vendor-solutions.md) [Cloud Storage →](cloud-storage.md)

@@ -18,7 +18,7 @@ related:
   - singular-value-decomposition.md
   - ../03-classical-machine-learning/linear-models.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Linear Algebra
@@ -41,29 +41,16 @@ $$
 
 The fundamental questions are geometric: what directions are stretched, which directions collapse to zero, what subspace is reachable, and how far a vector is from a subspace. These questions become [rank](rank.md), [orthogonality](orthogonality.md), projections, [eigenvalues](eigenvalues-and-eigenvectors.md), and the [singular value decomposition](singular-value-decomposition.md).
 
-## Executed demo
+## Worked example
 
-This snippet multiplies a rectangular matrix by a vector and computes the matrix rank, illustrating shape compatibility and independent columns.
+Take $A=\begin{bmatrix}1&2\\3&4\\5&6\end{bmatrix}$ and $x=(0.5,-1)$. Applying the map sends a two-coordinate input to three coordinates:
 
-```python
-import numpy as np
+$$
+Ax=\begin{bmatrix}1(0.5)+2(-1)\\3(0.5)+4(-1)\\5(0.5)+6(-1)\end{bmatrix}
+=\begin{bmatrix}-1.5\\-2.5\\-3.5\end{bmatrix}.
+$$
 
-A = np.array([[1., 2.], [3., 4.], [5., 6.]])
-x = np.array([0.5, -1.])
-print("A_shape", A.shape)
-print("A_x", A @ x)
-print("column_rank", np.linalg.matrix_rank(A))
-```
-
-Observed output:
-
-```text
-A_shape (3, 2)
-A_x [-1.5 -2.5 -3.5]
-column_rank 2
-```
-
-The matrix maps a two-coordinate input into three coordinates, and its two columns are independent. That is why it can represent a two-dimensional plane inside $\mathbb R^3$, a useful picture for [linear models](../03-classical-machine-learning/linear-models.md) and projections.
+Its two columns $(1,3,5)$ and $(2,4,6)$ are independent, since neither is a scalar multiple of the other, so $A$ has rank $2$. That is why it can represent a two-dimensional plane inside $\mathbb R^3$, a useful picture for [linear models](../03-classical-machine-learning/linear-models.md) and projections.
 
 ## Caveats
 
@@ -72,7 +59,6 @@ Linear algebra gives exact identities over exact numbers, while machine computat
 ## References
 
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
-- [NumPy documentation: `numpy.linalg.matrix_rank`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.matrix_rank.html)
 
 > [!nav]
 > **Section** — [Mathematical Foundations](index.md)

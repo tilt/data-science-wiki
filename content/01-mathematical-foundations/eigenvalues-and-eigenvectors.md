@@ -19,7 +19,7 @@ related:
   - orthogonality.md
   - ../03-classical-machine-learning/pca.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Eigenvalues and Eigenvectors
@@ -46,30 +46,24 @@ The determinant becomes zero exactly when $A-\lambda I$ loses an independent dir
 
 If $A$ is symmetric, its eigenvectors can be chosen [orthogonal](orthogonality.md), giving $A=Q\Lambda Q^\top$. This special structure is why covariance eigendecomposition and [PCA](../03-classical-machine-learning/pca.md) are stable for symmetric matrices. [SVD](singular-value-decomposition.md) extends related geometry to rectangular or non-normal matrices by using eigenvectors of $A^\top A$.
 
-## Executed demo
+## Worked example
 
-This snippet computes the eigenpairs of a symmetric matrix and verifies each pair by measuring the residual norm $\|Av-\lambda v\|$.
+For $B=\begin{bmatrix}2&1\\1&2\end{bmatrix}$, solve $\det(B-\lambda I)=0$:
 
-```python
-import numpy as np
+$$
+\det\begin{bmatrix}2-\lambda&1\\1&2-\lambda\end{bmatrix}
+=(2-\lambda)^2-1=\lambda^2-4\lambda+3=(\lambda-3)(\lambda-1)=0,
+$$
 
-B = np.array([[2., 1.], [1., 2.]])
-w, v = np.linalg.eig(B)
-idx = np.argsort(w)[::-1]
-w, v = w[idx], v[:, idx]
-print("eigenvalues", np.round(w, 4))
-print("Av_minus_lambda_v_norms",
-      np.round([np.linalg.norm(B @ v[:, i] - w[i] * v[:, i]) for i in range(2)], 12))
-```
+so the eigenvalues are $\lambda=3$ and $\lambda=1$. Substituting each back into $(B-\lambda I)v=0$:
 
-Observed output:
+$$
+\lambda=3:\ \begin{bmatrix}-1&1\\1&-1\end{bmatrix}v=0\Rightarrow v\propto(1,1);
+\qquad
+\lambda=1:\ \begin{bmatrix}1&1\\1&1\end{bmatrix}v=0\Rightarrow v\propto(1,-1).
+$$
 
-```text
-eigenvalues [3. 1.]
-Av_minus_lambda_v_norms [0. 0.]
-```
-
-Both residual norms are zero to displayed precision, confirming $Bv=\lambda v$. The larger eigenvalue corresponds to the direction where the matrix amplifies most strongly.
+Both satisfy $Bv=\lambda v$ exactly. The larger eigenvalue $3$ corresponds to the direction $(1,1)$ where the matrix amplifies most strongly; along $(1,-1)$ it only scales by $1$.
 
 ## Caveats
 
@@ -77,7 +71,6 @@ Eigenvectors are scale-ambiguous: $v$ and $-v$ represent the same direction. Non
 
 ## References
 
-- [NumPy documentation: `numpy.linalg.eig`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html)
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
 
 > [!nav]

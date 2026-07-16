@@ -20,7 +20,7 @@ related:
   - information-theory.md
   - ../06-deep-learning/loss-functions.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # KL Divergence
@@ -43,27 +43,22 @@ $$
 
 in general. [Cross-entropy](cross-entropy.md) decomposes as $H(p,q)=H(p)+D_{\mathrm{KL}}(p\Vert q)$, and [mutual information](mutual-information.md) is a KL divergence between a joint distribution and the product of its marginals.
 
-## Executed demo
+## Worked example
 
-This snippet computes $D_{KL}(p\|q)$ and the reverse $D_{KL}(q\|p)$ for two categorical distributions to show that KL divergence is directional.
+Take $p=(0.7,0.2,0.1)$ and $q=(0.4,0.4,0.2)$. Summing $p(x)\log_2\frac{p(x)}{q(x)}$ term by term,
 
-```python
-import numpy as np
+$$
+D_{\mathrm{KL}}(p\Vert q)=0.7\log_2\tfrac{0.7}{0.4}+0.2\log_2\tfrac{0.2}{0.4}+0.1\log_2\tfrac{0.1}{0.2}
+=0.7(0.807)-0.2-0.1\approx0.265\ \text{bits}.
+$$
 
-p = np.array([0.7, 0.2, 0.1])
-q = np.array([0.4, 0.4, 0.2])
-print("KL_bits", round(np.sum(p*np.log2(p/q)), 4))
-print("reverse_KL_bits", round(np.sum(q*np.log2(q/p)), 4))
-```
+Swapping the roles of $p$ and $q$ gives the reverse divergence,
 
-Observed output:
+$$
+D_{\mathrm{KL}}(q\Vert p)=0.4\log_2\tfrac{0.4}{0.7}+0.4\log_2\tfrac{0.4}{0.2}+0.2\log_2\tfrac{0.2}{0.1}\approx0.277\ \text{bits},
+$$
 
-```text
-KL_bits 0.2651
-reverse_KL_bits 0.2771
-```
-
-The two directions differ on the same pair of distributions. That asymmetry matters: fitting $q$ to cover all mass of $p$ is not the same pressure as fitting $q$ to avoid placing mass where $p$ is small.
+a different value on the same pair of distributions. That asymmetry matters: fitting $q$ to cover all mass of $p$ is not the same pressure as fitting $q$ to avoid placing mass where $p$ is small.
 
 ## Caveats
 
@@ -71,7 +66,6 @@ KL divergence becomes infinite if $q(x)=0$ for an event with $p(x)>0$. Empirical
 
 ## References
 
-- [SciPy documentation: `scipy.special.rel_entr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.rel_entr.html)
 - [MacKay, Information Theory, Inference, and Learning Algorithms](https://www.inference.org.uk/itprnn/book.pdf)
 
 > [!nav]

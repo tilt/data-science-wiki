@@ -19,7 +19,7 @@ related:
   - singular-value-decomposition.md
   - ../03-classical-machine-learning/pca.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Orthogonality
@@ -52,35 +52,23 @@ $$
 
 That length preservation is why orthogonal bases are numerically convenient in [matrix decompositions](matrix-decompositions.md) and why residuals in least squares are orthogonal to fitted directions.
 
-## Executed demo
+## Worked example
 
-This snippet builds an orthonormal basis with QR decomposition and verifies orthogonality through $Q^TQ$ and a column dot product.
+The vectors $u=(1,1,0)$ and $v=(1,-1,0)$ are orthogonal because their dot product cancels:
 
-```python
-import numpy as np
+$$
+u^\top v=1\cdot1+1\cdot(-1)+0\cdot0=0.
+$$
 
-Q, _ = np.linalg.qr(np.array([[1., 1.], [1., 0.], [0., 1.]]))
-print("Q")
-print(np.round(Q, 4))
-print("QtQ")
-print(np.round(Q.T @ Q, 4))
-print("dot_columns", round(Q[:, 0] @ Q[:, 1], 12))
-```
+Each has length $\sqrt2$, so normalizing gives the orthonormal pair $\hat u=\tfrac1{\sqrt2}(1,1,0)$ and $\hat v=\tfrac1{\sqrt2}(1,-1,0)$. Stacking them as columns of $Q=[\hat u\ \hat v]$,
 
-Observed output:
+$$
+Q^\top Q=
+\begin{bmatrix}\hat u^\top\hat u&\hat u^\top\hat v\\\hat v^\top\hat u&\hat v^\top\hat v\end{bmatrix}
+=\begin{bmatrix}1&0\\0&1\end{bmatrix}=I,
+$$
 
-```text
-Q
-[[-0.7071  0.4082]
- [-0.7071 -0.4082]
- [-0.      0.8165]]
-QtQ
-[[1. 0.]
- [0. 1.]]
-dot_columns 0.0
-```
-
-The QR factorization turned two independent columns into an orthonormal basis. The off-diagonal zero in $Q^\top Q$ shows that the two learned basis directions do not overlap under the dot product.
+where the unit diagonal comes from the normalization and the zero off-diagonal from orthogonality. A QR decomposition of any two independent columns produces exactly such an orthonormal basis automatically.
 
 ## Caveats
 
@@ -89,7 +77,6 @@ Orthogonality depends on the inner product. Standard Euclidean orthogonality may
 ## References
 
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
-- [NumPy documentation: `numpy.linalg.qr`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html)
 
 > [!nav]
 > **Section** — [Mathematical Foundations](index.md)

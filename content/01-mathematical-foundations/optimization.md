@@ -18,7 +18,7 @@ related:
   - numerical-stability.md
   - ../06-deep-learning/optimizers.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Optimization
@@ -41,29 +41,17 @@ $$
 
 Unconstrained differentiable optima satisfy the first-order stationarity condition $\nabla f(x^\star)=0$, but that is only a candidate condition unless curvature or global structure is known. [Convex optimization](convex-optimization.md) is special because local minima are global minima.
 
-## Executed demo
+## Worked example
 
-This snippet uses SciPy to minimize a convex quadratic and prints the recovered minimizer, final objective value, and iteration count.
+Minimize $f(z)=(z_1-2)^2+(z_2+1)^2$. Applying the stationarity condition $\nabla f(z)=0$,
 
-```python
-import numpy as np
-from scipy import optimize
+$$
+\nabla f(z)=\begin{bmatrix}2(z_1-2)\\2(z_2+1)\end{bmatrix}=0
+\quad\Longrightarrow\quad
+z^\star=(2,-1),
+$$
 
-res = optimize.minimize(lambda z: (z[0]-2)**2 + (z[1]+1)**2, x0=np.array([0., 0.]))
-print("x_star", np.round(res.x, 6))
-print("objective", round(res.fun, 12))
-print("iterations", res.nit)
-```
-
-Observed output:
-
-```text
-x_star [ 2. -1.]
-objective 0.0
-iterations 2
-```
-
-The solver finds the bottom of a shifted quadratic. For nonconvex losses such as deep-network training, an optimizer may instead find a useful stationary point, which is why [optimizers](../06-deep-learning/optimizers.md) are judged empirically as well as mathematically.
+with objective $f(z^\star)=0$. The two coordinates decouple, so each squared term is minimized independently at its own center. For nonconvex losses such as deep-network training, an optimizer may instead find only a useful stationary point, which is why [optimizers](../06-deep-learning/optimizers.md) are judged empirically as well as mathematically.
 
 ## Caveats
 
@@ -71,7 +59,6 @@ The objective defines the behavior. A perfectly optimized proxy can still be mis
 
 ## References
 
-- [SciPy documentation: `scipy.optimize.minimize`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
 - [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
 
 > [!nav]

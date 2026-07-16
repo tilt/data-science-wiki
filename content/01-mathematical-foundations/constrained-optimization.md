@@ -19,7 +19,7 @@ related:
   - numerical-stability.md
   - ../03-classical-machine-learning/support-vector-machines.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Constrained Optimization
@@ -48,31 +48,16 @@ $$
 
 The multiplier says how much the optimum would change if the constraint moved. In [convex optimization](convex-optimization.md), additional KKT conditions can certify global optimality, while the stationarity equation is still written in terms of [gradients](gradients.md).
 
-## Executed demo
+## Worked example
 
-This snippet solves the quadratic problem $\min x^2+y^2$ subject to $x+y=1$ and reports both the optimum and the constraint check.
+Minimize $f(x,y)=x^2+y^2$ subject to $x+y=1$. The Lagrangian is $\mathcal L=x^2+y^2+\lambda(x+y-1)$, and stationarity in $x$ and $y$ gives
 
-```python
-import numpy as np
-from scipy import optimize
+$$
+\frac{\partial\mathcal L}{\partial x}=2x+\lambda=0,\qquad
+\frac{\partial\mathcal L}{\partial y}=2y+\lambda=0,
+$$
 
-cons = {"type": "eq", "fun": lambda z: z[0] + z[1] - 1}
-res = optimize.minimize(lambda z: z[0]**2 + z[1]**2,
-                        x0=np.array([2., -1.]), constraints=cons)
-print("x_star", np.round(res.x, 6))
-print("objective", round(res.fun, 6))
-print("constraint", round(res.x.sum(), 6))
-```
-
-Observed output:
-
-```text
-x_star [0.5 0.5]
-objective 0.5
-constraint 1.0
-```
-
-The unconstrained minimum of $x^2+y^2$ is $(0,0)$, but the line $x+y=1$ forces the closest feasible point to be $(0.5,0.5)$. The output confirms both the objective value, $0.5^2+0.5^2=0.5$, and the active constraint value, $0.5+0.5=1.0$.
+so $x=y=-\lambda/2$. The constraint $x+y=1$ then forces $x=y=\tfrac12$ (with $\lambda=-1$). The unconstrained minimum of $x^2+y^2$ is $(0,0)$, but the line $x+y=1$ pushes the closest feasible point to $(0.5,0.5)$, where the objective is $0.5^2+0.5^2=0.5$.
 
 ## Caveats
 
@@ -80,7 +65,6 @@ Constraints can make easy-looking objectives hard. Infeasible constraints, badly
 
 ## References
 
-- [SciPy documentation: `scipy.optimize.minimize`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
 - [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
 
 > [!nav]

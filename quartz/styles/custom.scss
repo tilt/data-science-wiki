@@ -119,6 +119,8 @@
 :root[saved-theme="dark"] .markdown-rendered img[src*="stable-diffusion-latent-pipeline.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="autonomous-driving-stack.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="reinforcement-learning-loop.svg"],
-:root[saved-theme="dark"] .markdown-rendered img[src*="llm-training-pipeline.svg"] {
+:root[saved-theme="dark"] .markdown-rendered img[src*="llm-training-pipeline.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="data-engineering-star-schema.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="data-engineering-normalized-schema.svg"] {
   filter: invert(1) hue-rotate(180deg) saturate(0.95) brightness(1.05);
 }

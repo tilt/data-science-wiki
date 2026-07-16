@@ -42,7 +42,7 @@ $$
 
 Since $H(p)$ does not depend on the model, minimizing cross-entropy over $q$ also minimizes [KL divergence](kl-divergence.md). For one-hot class labels, $p$ puts all mass on the true class, so the loss reduces to $-\log q(y)$.
 
-## Worked scenario
+## Worked example
 
 Suppose the true class distribution is $p=(0.7,0.2,0.1)$, but a model reports $q=(0.6,0.3,0.1)$. Cross-entropy asks how many bits are needed on average when examples arrive from $p$ but are encoded using probabilities from $q$: the first class contributes $-0.7\log_2(0.6)$, the second contributes $-0.2\log_2(0.3)$, and the third contributes $-0.1\log_2(0.1)$, for about $1.1955$ bits.
 

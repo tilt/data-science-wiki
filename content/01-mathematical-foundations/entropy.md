@@ -42,7 +42,7 @@ $$
 
 That identity explains why minimizing cross-entropy over $q$ is equivalent to minimizing [KL divergence](kl-divergence.md) from the data distribution when $p$ is fixed.
 
-## Worked scenario
+## Worked example
 
 Imagine a three-symbol source where $A$ appears half the time and $B$ and $C$ each appear one quarter of the time. Seeing $A$ carries $-\log_2(0.5)=1$ bit of surprise, while seeing either rarer symbol carries $-\log_2(0.25)=2$ bits. The expected surprise is therefore $0.5\cdot 1+0.25\cdot 2+0.25\cdot 2=1.5$ bits.
 

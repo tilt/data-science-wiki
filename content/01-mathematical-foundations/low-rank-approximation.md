@@ -19,7 +19,7 @@ related:
   - matrix-decompositions.md
   - ../04-recommendation-systems/truncated-svd.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Low-Rank Approximation
@@ -52,30 +52,15 @@ $$
 
 This mechanism is related to [truncated SVD](../04-recommendation-systems/truncated-svd.md), but learned recommender factors usually optimize observed entries rather than decomposing a fully observed matrix.
 
-## Executed demo
+## Worked example
 
-This snippet forms rank-1 and rank-2 SVD reconstructions of a matrix and compares their Frobenius reconstruction errors.
+Take the $4\times3$ matrix $A=\begin{bmatrix}3&1&1\\-1&3&1\\0&2&4\\2&0&2\end{bmatrix}$. Computed numerically, its singular values are $\sigma\approx(5.657,\ 3.742,\ 2.000)$. By the error formula above, the Frobenius error of the best rank-$k$ approximation is the energy in the discarded singular values.
 
-```python
-import numpy as np
+Keeping two singular directions discards only $\sigma_3=2.0$, so $\lVert A-A_2\rVert_F=2.0$. Keeping one direction discards $\sigma_2=3.742$ and $\sigma_3=2.0$, giving
 
-A = np.array([[3., 1., 1.], [-1., 3., 1.], [0., 2., 4.], [2., 0., 2.]])
-U, s, Vt = np.linalg.svd(A, full_matrices=False)
-for k in [1, 2]:
-    Ak = (U[:, :k] * s[:k]) @ Vt[:k]
-    print(f"rank{k}_error", round(np.linalg.norm(A-Ak, "fro"), 4))
-print("singular_values", np.round(s, 4))
-```
-
-Observed output:
-
-```text
-rank1_error 4.2426
-rank2_error 2.0
-singular_values [5.6569 3.7417 2.    ]
-```
-
-Keeping two singular directions leaves only the last singular value, $2.0$, as Frobenius error. Keeping one direction discards singular values $3.7417$ and $2.0$, giving $\sqrt{3.7417^2+2.0^2}\approx4.2426$.
+$$
+\lVert A-A_1\rVert_F=\sqrt{3.742^2+2.0^2}\approx4.243.
+$$
 
 ## Caveats
 
@@ -83,7 +68,6 @@ Low rank is an assumption. It can erase rare but important directions, and missi
 
 ## References
 
-- [NumPy documentation: `numpy.linalg.svd`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html)
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
 
 > [!nav]

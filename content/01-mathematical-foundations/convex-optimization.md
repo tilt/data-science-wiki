@@ -19,7 +19,7 @@ related:
   - jacobians-and-hessians.md
   - ../03-classical-machine-learning/logistic-regression.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Convex Optimization
@@ -48,31 +48,21 @@ $$
 
 is convex when both conditions hold. For differentiable $f$, $f(y)\ge f(x)+\nabla f(x)^\top(y-x)$ gives the supporting-hyperplane view. For twice-differentiable $f$, $\nabla^2 f(x)\succeq 0$ connects convexity to [Jacobians and Hessians](jacobians-and-hessians.md).
 
-## Executed demo
+## Worked example
 
-This snippet evaluates Jensen's inequality for $f(x)=x^2$ by comparing the function at a weighted mean with the weighted mean of function values.
+Take $f(x)=x^2$ with points $x=(-2,1,4)$ and weights $\theta=(0.2,0.5,0.3)$. The weighted mean and the function evaluated there are
 
-```python
-import numpy as np
+$$
+\bar x=0.2(-2)+0.5(1)+0.3(4)=1.3,\qquad f(\bar x)=1.3^2=1.69,
+$$
 
-xs = np.array([-2., 1., 4.])
-w = np.array([0.2, 0.5, 0.3])
-lhs = (w @ xs)**2
-rhs = w @ (xs**2)
-print("f(weighted_mean)", round(lhs, 4))
-print("weighted_f_mean", round(rhs, 4))
-print("gap", round(rhs-lhs, 4))
-```
+while the weighted mean of the function values is
 
-Observed output:
+$$
+0.2(-2)^2+0.5(1)^2+0.3(4)^2=0.8+0.5+4.8=6.1.
+$$
 
-```text
-f(weighted_mean) 1.69
-weighted_f_mean 6.1
-gap 4.41
-```
-
-For $f(x)=x^2$, Jensen's inequality holds with a positive gap: evaluating after averaging gives $1.69$, while averaging the evaluated points gives $6.1$. The gap of $4.41$ is the visible cost of spread under a curved convex function.
+Jensen's inequality holds with a positive gap of $6.1-1.69=4.41$ — the visible cost of spread under a curved convex function.
 
 ## Caveats
 

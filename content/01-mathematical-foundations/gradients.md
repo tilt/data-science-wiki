@@ -19,7 +19,7 @@ related:
   - stochastic-gradient-descent.md
   - ../06-deep-learning/backpropagation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Gradients
@@ -53,38 +53,15 @@ $$
 
 This formula is the small local object that becomes batched matrix expressions in [matrix multiplication](matrix-multiplication.md) and stochastic estimates in [stochastic gradient descent](stochastic-gradient-descent.md).
 
-## Executed demo
+## Worked example
 
-This snippet computes the gradient of a squared-error loss analytically and checks it against a centered finite-difference approximation.
+Take weights $w=(1.5,-0.5)$, input $x=(2,-1)$, and target $y=4$. The prediction is $x^\top w=2(1.5)+(-1)(-0.5)=3.5$, so the residual is $x^\top w-y=-0.5$ and the loss is $(-0.5)^2=0.25$. Substituting into $\nabla_w L=2(x^\top w-y)x$,
 
-```python
-import numpy as np
+$$
+\nabla_w L=2(-0.5)\begin{bmatrix}2\\-1\end{bmatrix}=\begin{bmatrix}-2\\1\end{bmatrix}.
+$$
 
-w = np.array([1.5, -0.5])
-x = np.array([2., -1.])
-y = 4.0
-pred = x @ w
-loss = (pred-y)**2
-grad = 2*(pred-y)*x
-eps = 1e-6
-fd = []
-for j in range(2):
-    e = np.zeros(2); e[j] = eps
-    fd.append((((x@(w+e)-y)**2) - ((x@(w-e)-y)**2))/(2*eps))
-print("loss", round(loss, 4))
-print("analytic_grad", np.round(grad, 4))
-print("finite_diff_grad", np.round(fd, 4))
-```
-
-Observed output:
-
-```text
-loss 0.25
-analytic_grad [-2.  1.]
-finite_diff_grad [-2.  1.]
-```
-
-The prediction is off by $-0.5$, so the squared loss is $0.25$ and the analytic gradient is $2(-0.5)[2,-1]=[-2,1]$. The finite-difference gradient prints the same vector, which is the same sanity test used when implementing custom derivatives.
+A centered finite-difference check, $\big(L(w+\epsilon e_j)-L(w-\epsilon e_j)\big)/2\epsilon$ for each coordinate $j$, reproduces the same vector — the standard sanity test when implementing custom derivatives.
 
 ## Caveats
 

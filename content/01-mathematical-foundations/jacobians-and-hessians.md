@@ -49,7 +49,7 @@ $$
 
 The Hessian describes local curvature. In unconstrained twice-differentiable [convex optimization](convex-optimization.md), $\nabla^2 g(x)\succeq 0$ everywhere is a curvature certificate.
 
-## Worked calculation
+## Worked example
 
 For
 

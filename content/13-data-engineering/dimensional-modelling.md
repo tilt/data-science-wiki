@@ -14,6 +14,7 @@ prerequisites:
 related:
   - relational-modelling.md
   - data-warehouses.md
+  - distributed-warehouse-modelling.md
   - sql.md
   - bigquery.md
   - dbt.md
@@ -59,7 +60,7 @@ The January order remains attributed to `startup` even though the current custom
 
 ## Warehouse use
 
-[Data-warehouses](data-warehouses.md) and [BigQuery](bigquery.md) marts often materialize dimensional models because dashboards need stable metric definitions and predictable joins. [dbt](dbt.md) is commonly used to encode staging, dimension, and fact models as versioned SQL.
+[Data-warehouses](data-warehouses.md) and [BigQuery](bigquery.md) marts often materialize dimensional models because dashboards need stable metric definitions and predictable joins. At large scale, [distributed-warehouse-modelling](distributed-warehouse-modelling.md) keeps the same star-schema grain while adding partitioning, clustering, and aggregate tables for common query patterns. [dbt](dbt.md) is commonly used to encode staging, dimension, and fact models as versioned SQL.
 
 ## Failure modes
 

@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" aria-labelledby="title desc">
+  <title id="title">Star schema with one fact table and surrounding dimensions</title>
+  <desc id="desc">A central fact_order_line table joins to customer, product, date, and store dimension tables. The fact table owns measures and foreign keys; dimensions own descriptive attributes.</desc>
+  <style>
+    text {
+      fill: #111827;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .bg { fill: #f8fafc; }
+    .muted { fill: #4b5563; }
+    .table-title { font-weight: 700; }
+    .field { font-size: 14px; }
+    .fact { fill: #eef2ff; stroke: #4f46e5; }
+    .fact-band { fill: #4f46e5; opacity: 0.18; }
+    .dimension { fill: #ecfdf5; stroke: #0f766e; }
+    .note { fill: #fff7ed; stroke: #f97316; }
+    .rule { stroke: #d8dee9; }
+    .link { stroke: #374151; }
+    .arrow-head { fill: #374151; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #f8fafc; }
+      .bg { fill: #181a1b; }
+      .muted { fill: #d1d5db; }
+      .fact { fill: #1e1b4b; stroke: #a5b4fc; }
+      .fact-band { fill: #a5b4fc; opacity: 0.2; }
+      .dimension { fill: #052e2b; stroke: #5eead4; }
+      .note { fill: #431407; stroke: #fb923c; }
+      .rule { stroke: #334155; }
+      .link { stroke: #e5e7eb; }
+      .arrow-head { fill: #e5e7eb; }
+    }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path class="arrow-head" d="M0,0 L0,6 L9,3 z"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" width="980" height="560" rx="16"/>
+  <text x="490" y="42" text-anchor="middle" font-size="26" font-weight="700">Star schema exposes an analytical grain</text>
+  <text x="490" y="72" text-anchor="middle" font-size="15" class="muted">Facts keep measurements and foreign keys; dimensions keep context for filtering and grouping.</text>
+
+  <g class="link" stroke-width="2.2" fill="none" marker-end="url(#arrow)">
+    <path d="M390 202 L266 166"/>
+    <path d="M590 202 L714 166"/>
+    <path d="M390 358 L266 394"/>
+    <path d="M590 358 L714 394"/>
+  </g>
+
+  <g>
+    <rect class="fact" x="360" y="180" width="260" height="200" rx="10" stroke-width="2.5"/>
+    <rect class="fact-band" x="360" y="180" width="260" height="44" rx="10"/>
+    <text x="490" y="208" text-anchor="middle" font-size="17" class="table-title">fact_order_line</text>
+    <line class="rule" x1="382" y1="236" x2="598" y2="236" stroke-width="1.4"/>
+    <text x="382" y="260" class="field">order_line_id</text>
+    <text x="382" y="284" class="field">customer_key, product_key</text>
+    <text x="382" y="308" class="field">date_key, store_key</text>
+    <text x="382" y="332" class="field">quantity</text>
+    <text x="382" y="356" class="field">extended_revenue</text>
+  </g>
+
+  <g>
+    <rect class="dimension" x="80" y="104" width="230" height="122" rx="9" stroke-width="2"/>
+    <text x="195" y="132" text-anchor="middle" font-size="16" class="table-title">dim_customer</text>
+    <line class="rule" x1="102" y1="146" x2="288" y2="146" stroke-width="1.2"/>
+    <text x="102" y="169" class="field">customer_key</text>
+    <text x="102" y="192" class="field">segment, region, tier</text>
+    <text x="102" y="214" class="field">effective dates</text>
+
+    <rect class="dimension" x="670" y="104" width="230" height="122" rx="9" stroke-width="2"/>
+    <text x="785" y="132" text-anchor="middle" font-size="16" class="table-title">dim_product</text>
+    <line class="rule" x1="692" y1="146" x2="878" y2="146" stroke-width="1.2"/>
+    <text x="692" y="169" class="field">product_key</text>
+    <text x="692" y="192" class="field">category, brand</text>
+    <text x="692" y="214" class="field">launch cohort</text>
+
+    <rect class="dimension" x="80" y="334" width="230" height="122" rx="9" stroke-width="2"/>
+    <text x="195" y="362" text-anchor="middle" font-size="16" class="table-title">dim_date</text>
+    <line class="rule" x1="102" y1="376" x2="288" y2="376" stroke-width="1.2"/>
+    <text x="102" y="399" class="field">date_key</text>
+    <text x="102" y="422" class="field">calendar date</text>
+    <text x="102" y="444" class="field">week, month, quarter</text>
+
+    <rect class="dimension" x="670" y="334" width="230" height="122" rx="9" stroke-width="2"/>
+    <text x="785" y="362" text-anchor="middle" font-size="16" class="table-title">dim_store</text>
+    <line class="rule" x1="692" y1="376" x2="878" y2="376" stroke-width="1.2"/>
+    <text x="692" y="399" class="field">store_key</text>
+    <text x="692" y="422" class="field">channel, country</text>
+    <text x="692" y="444" class="field">market cluster</text>
+  </g>
+
+  <rect class="note" x="150" y="486" width="680" height="46" rx="8" stroke-width="1.8"/>
+  <text x="490" y="514" text-anchor="middle" font-size="14" class="table-title">Query shape: fact table + a few dimension joins at declared grain</text>
+</svg>

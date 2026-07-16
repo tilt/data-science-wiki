@@ -53,7 +53,7 @@ $$
 
 That connection ties MI to [information theory](information-theory.md), feature selection, representation learning, and diagnostics for dependence beyond linear correlation. It is related to [cross-entropy](cross-entropy.md) through the same expected-log-probability algebra, but it compares dependence rather than predictive code length.
 
-## Worked scenario
+## Worked example
 
 Consider two binary variables whose joint table puts probability $0.4$ on matching outcomes $(0,0)$ and $(1,1)$, and probability $0.1$ on mismatches $(0,1)$ and $(1,0)$. Each marginal is still balanced at $0.5/0.5$, so independence would assign $0.25$ to every cell. The matching cells are therefore more likely than independence predicts, and the mismatch cells are less likely.
 

@@ -48,7 +48,7 @@ $$
 
 and [mutual information](mutual-information.md), $I(X;Y)=D_{\mathrm{KL}}(p(x,y)\Vert p(x)p(y))$. The log base sets units: base 2 gives bits; natural log gives nats.
 
-## Worked scenario
+## Worked example
 
 For a source with probabilities $(0.5,0.25,0.25)$, the most likely event carries $-\log_2(0.5)=1$ bit of surprisal. Each less likely event carries $-\log_2(0.25)=2$ bits because it takes one more yes/no distinction to isolate an outcome that happens only one quarter of the time.
 

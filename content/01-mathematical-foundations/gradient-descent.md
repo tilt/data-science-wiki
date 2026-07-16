@@ -19,7 +19,7 @@ related:
   - convex-optimization.md
   - ../06-deep-learning/optimizers.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-16
 ---
 
 # Gradient Descent
@@ -42,27 +42,15 @@ $$
 
 In [convex optimization](convex-optimization.md), suitable step sizes can provide convergence guarantees. In nonconvex learning, the same update is useful but no longer guarantees a global optimum.
 
-## Executed demo
+## Worked example
 
-The snippet applies the update to a one-dimensional quadratic so the step-size effect is visible without optimizer boilerplate.
+Minimize $f(x)=(x-1)^2$ from $x_0=6$ with $\eta=0.2$. The update $x_{t+1}=x_t-\eta\cdot2(x_t-1)$ turns, after subtracting the minimizer, into a geometric contraction with factor $1-2\eta=0.6$:
 
-```python
-x = 6.0
-eta = 0.2
-for _ in range(12):
-    x -= eta * 2*(x-1)
-print("x_after_12", round(x, 6))
-print("f_after_12", round((x-1)**2, 8))
-```
+$$
+x_t-1=(1-2\eta)^t(x_0-1)=0.6^t\cdot5.
+$$
 
-Observed output:
-
-```text
-x_after_12 1.010884
-f_after_12 0.00011846
-```
-
-Starting from $6$, the iterates nearly reach the minimizer $x=1$ after twelve steps. The remaining error follows the contraction factor $1-2\eta=0.6$.
+After twelve steps, $x_{12}-1=0.6^{12}\cdot5\approx0.0109$, so $x_{12}\approx1.0109$ and $f(x_{12})=(0.0109)^2\approx1.2\times10^{-4}$: the iterates nearly reach the minimizer, and the error shrinks by a factor of $0.6$ each step.
 
 The path on the loss curve shows the same contraction geometrically: each step moves left toward the minimum and the vertical loss value shrinks rapidly.
 
