@@ -74,4 +74,7 @@ Research libraries punish weak deduplication: one DOI with several PDFs, preprin
 - [Zotero Documentation: Adding Items to Zotero](https://www.zotero.org/support/adding_items_to_zotero)
 - [Crossref Documentation: REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api/)
 
-> **Section — [Information Retrieval and Search](index.md):** ← [Knowledge Graphs](knowledge-graphs.md) · [Search Evaluation](search-evaluation.md) →
+> [!nav]
+> **Section** — [Information Retrieval and Search](index.md)
+>
+> [← Knowledge Graphs](knowledge-graphs.md) [Search Evaluation →](search-evaluation.md)

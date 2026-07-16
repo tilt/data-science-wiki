@@ -80,4 +80,7 @@ Long sequences expose the product-of-Jacobians problem. Truncated backpropagatio
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 10: Sequence Modeling](https://www.deeplearningbook.org/contents/rnn.html)
 - [Hochreiter and Schmidhuber, 1997, Long Short-Term Memory](https://doi.org/10.1162/neco.1997.9.8.1735)
 
-> **Section — [Deep Learning](index.md):** ← [Convolutional Neural Networks](convolutional-neural-networks.md) · [LSTM and GRU](lstm-and-gru.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Convolutional Neural Networks](convolutional-neural-networks.md) [LSTM and GRU →](lstm-and-gru.md)

@@ -70,6 +70,11 @@ Forecast evaluation joins [backtesting](backtesting.md), [rolling-origin validat
 - [Hyndman & Athanasopoulos, FPP3: Evaluating point forecast accuracy](https://otexts.com/fpp3/accuracy.html)
 - [Hyndman & Athanasopoulos, FPP3: Time series cross-validation](https://otexts.com/fpp3/tscv.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [N-BEATS and N-HiTS](n-beats-and-nhits.md) · [Backtesting](backtesting.md) →
-
-> **Learning path — [Forecasting](../00-home-and-navigation/learning-paths.md#forecasting):** ← [Backtesting](backtesting.md)
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← N-BEATS and N-HiTS](n-beats-and-nhits.md) [Backtesting →](backtesting.md)
+>
+> **Learning path** — [Forecasting](../00-home-and-navigation/learning-paths.md#forecasting)
+>
+> [← Backtesting](backtesting.md)

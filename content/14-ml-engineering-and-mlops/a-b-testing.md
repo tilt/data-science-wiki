@@ -55,4 +55,7 @@ Peeking, assignment drift, sample-ratio mismatch, interference, and mid-test mod
 - [Larsen et al., Statistical Challenges in Online Controlled Experiments](https://arxiv.org/abs/2212.11366)
 - [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Rollbacks](rollbacks.md) · [Monitoring](monitoring.md) →
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Rollbacks](rollbacks.md) [Monitoring →](monitoring.md)

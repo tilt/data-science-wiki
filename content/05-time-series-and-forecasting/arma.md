@@ -53,4 +53,7 @@ ARMA combines [autoregressive models](autoregressive-models.md) and [moving-aver
 - [Hyndman & Athanasopoulos, FPP3: ARIMA models](https://otexts.com/fpp3/arima.html)
 - [statsmodels ARIMA API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima.model.ARIMA.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Moving Average Models](moving-average-models.md) · [ARIMA](arima.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Moving Average Models](moving-average-models.md) [ARIMA →](arima.md)

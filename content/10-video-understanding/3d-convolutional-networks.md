@@ -75,4 +75,7 @@ The snippet is an API example as much as a calculation: PyTorch `Conv3d` expects
 - [Carreira and Zisserman, 2017, Quo Vadis, Action Recognition?](https://arxiv.org/abs/1705.07750)
 - [PyTorch documentation: Conv3d](https://docs.pytorch.org/docs/stable/generated/torch.nn.Conv3d.html)
 
-> **Section — [Video Understanding](index.md):** ← [Optical Flow](optical-flow.md) · [Two-Stream Models](two-stream-models.md) →
+> [!nav]
+> **Section** — [Video Understanding](index.md)
+>
+> [← Optical Flow](optical-flow.md) [Two-Stream Models →](two-stream-models.md)

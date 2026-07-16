@@ -79,4 +79,7 @@ Warehouses fail when multiple marts define the same metric differently, when raw
 - [BigQuery documentation: Introduction to partitioned tables](https://cloud.google.com/bigquery/docs/partitioned-tables)
 - [dbt documentation: SQL models](https://docs.getdbt.com/docs/build/sql-models)
 
-> **Section — [Data Engineering](index.md):** ← [Dimensional Modelling](dimensional-modelling.md) · [BigQuery](bigquery.md) →
+> [!nav]
+> **Section** — [Data Engineering](index.md)
+>
+> [← Dimensional Modelling](dimensional-modelling.md) [BigQuery →](bigquery.md)

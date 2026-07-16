@@ -69,4 +69,7 @@ Bad demonstrations produce polished bad behavior. Keep held-out tasks, refusal e
 - [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)
 - [Hu et al., 2021, LoRA](https://arxiv.org/abs/2106.09685)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [LLM Training](llm-training.md) · [Alignment](alignment.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← LLM Training](llm-training.md) [Alignment →](alignment.md)

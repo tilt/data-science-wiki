@@ -84,4 +84,7 @@ Coefficient magnitude is not comparable across differently scaled features. Corr
 - [scikit-learn User Guide: Linear Models](https://scikit-learn.org/stable/modules/linear_model.html)
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Classification](classification.md) · [Logistic Regression](logistic-regression.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Classification](classification.md) [Logistic Regression →](logistic-regression.md)

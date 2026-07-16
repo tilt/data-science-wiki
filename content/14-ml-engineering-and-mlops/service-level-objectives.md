@@ -72,4 +72,7 @@ SLOs fail when they measure what is easy rather than what users experience. A 99
 - [Google SRE Workbook: Implementing SLOs](https://sre.google/workbook/implementing-slos/)
 - [Google SRE Workbook: Alerting on SLOs](https://sre.google/workbook/alerting-on-slos/)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Observability](observability.md) · [Reliability](reliability.md) →
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Observability](observability.md) [Reliability →](reliability.md)

@@ -65,4 +65,7 @@ Application pages connect canonical methods to domain-specific inputs, outputs, 
 
 Use the glossary when a term appears before its full explanation. For study, jump from the term to the relevant subject area: matrix terms usually live in mathematical foundations, recommender terms in recommendation systems, retrieval terms in search, and governance terms in responsible AI.
 
-> **Section — [References and Glossary](index.md):** [Acronyms](acronyms.md) →
+> [!nav]
+> **Section** — [References and Glossary](index.md)
+>
+> [Acronyms →](acronyms.md)

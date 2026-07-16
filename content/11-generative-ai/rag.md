@@ -59,6 +59,11 @@ RAG does not guarantee truth. Retrieval can miss the answer, stale indexes can r
 - [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)
 - [OpenAI API documentation: Embeddings](https://platform.openai.com/docs/guides/embeddings)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Structured Output](structured-output.md) · [Embeddings](embeddings.md) →
-
-> **Learning path — [Generative AI systems](../00-home-and-navigation/learning-paths.md#generative-ai-systems):** ← [Retrieval Pipelines](retrieval-pipelines.md) · [Tool Use and Function Calling](tool-use-and-function-calling.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Structured Output](structured-output.md) [Embeddings →](embeddings.md)
+>
+> **Learning path** — [Generative AI systems](../00-home-and-navigation/learning-paths.md#generative-ai-systems)
+>
+> [← Retrieval Pipelines](retrieval-pipelines.md) [Tool Use and Function Calling →](tool-use-and-function-calling.md)

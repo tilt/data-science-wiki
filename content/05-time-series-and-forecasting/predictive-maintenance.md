@@ -42,4 +42,7 @@ Predictive maintenance turns sensor histories into forecasts of failure risk or 
 - [NASA Prognostics Center of Excellence Data Repository](https://www.nasa.gov/content/prognostics-center-of-excellence-data-set-repository)
 - [Saxena et al., On Applying the Prognostic Performance Metrics](https://papers.phmsociety.org/index.php/phmconf/article/view/1621)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Energy Consumption Forecasting](energy-consumption-forecasting.md)
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Energy Consumption Forecasting](energy-consumption-forecasting.md)

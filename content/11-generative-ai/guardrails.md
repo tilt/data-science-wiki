@@ -63,4 +63,7 @@ Overbroad guardrails create false refusals and users route around them. Under-sp
 - [NIST AI Risk Management Framework 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 - [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Cost and Latency Optimization](cost-and-latency-optimization.md) · [Prompt Injection](prompt-injection.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Cost and Latency Optimization](cost-and-latency-optimization.md) [Prompt Injection →](prompt-injection.md)

@@ -56,4 +56,7 @@ Containers are not reproducibility magic. Mutable tags like `latest`, unpinned p
 - [Dockerfile reference](https://docs.docker.com/reference/dockerfile/)
 - [Docker build best practices](https://docs.docker.com/build/building/best-practices/)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Microservices](microservices.md) · [Shadow Deployment](shadow-deployment.md) →
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Microservices](microservices.md) [Shadow Deployment →](shadow-deployment.md)

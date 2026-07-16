@@ -38,6 +38,11 @@ A time-series workflow therefore starts by checking timestamp integrity, gaps, d
 - [Hyndman & Athanasopoulos, FPP3: Getting started](https://otexts.com/fpp3/intro.html)
 - [Hyndman & Athanasopoulos, FPP3: Time series graphics](https://otexts.com/fpp3/graphics.html)
 
-> **Section — [Time-Series Forecasting](index.md):** [Trend Seasonality Cycles Noise](trend-seasonality-cycles-noise.md) →
-
-> **Learning path — [Forecasting](../00-home-and-navigation/learning-paths.md#forecasting):** ← [Time-Series Forecasting](index.md) · [Stationarity](stationarity.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [Trend Seasonality Cycles Noise →](trend-seasonality-cycles-noise.md)
+>
+> **Learning path** — [Forecasting](../00-home-and-navigation/learning-paths.md#forecasting)
+>
+> [← Time-Series Forecasting](index.md) [Stationarity →](stationarity.md)

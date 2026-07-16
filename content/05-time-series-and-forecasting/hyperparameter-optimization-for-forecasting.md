@@ -103,4 +103,7 @@ Forecast hyperparameter search must sit inside [backtesting](backtesting.md) or 
 - [Hyndman & Athanasopoulos, FPP3: Time series cross-validation](https://otexts.com/fpp3/tscv.html)
 - [scikit-learn TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Forecast Ensembling](forecast-ensembling.md) · [Forecasting System Design](forecasting-system-design.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Forecast Ensembling](forecast-ensembling.md) [Forecasting System Design →](forecasting-system-design.md)

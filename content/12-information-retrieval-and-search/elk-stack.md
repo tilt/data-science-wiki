@@ -79,4 +79,7 @@ Parsing failures silently damage search. If `user.id`, `trace.id`, or `service.n
 - [Elasticsearch Reference: Match query](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-match-query)
 - [Kibana Reference](https://www.elastic.co/docs/reference/kibana)
 
-> **Section — [Information Retrieval and Search](index.md):** ← [Elasticsearch](elasticsearch.md) · [Graph Based Retrieval](graph-based-retrieval.md) →
+> [!nav]
+> **Section** — [Information Retrieval and Search](index.md)
+>
+> [← Elasticsearch](elasticsearch.md) [Graph Based Retrieval →](graph-based-retrieval.md)

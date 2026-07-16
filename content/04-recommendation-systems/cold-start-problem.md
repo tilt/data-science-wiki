@@ -56,4 +56,7 @@ Cold-start fixes can become popularity defaults that bury new inventory. Onboard
 - [Adomavicius and Tuzhilin, 2005, Toward the Next Generation of Recommender Systems](https://doi.org/10.1109/TKDE.2005.99)
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Bayesian Personalized Ranking](bayesian-personalized-ranking.md) · [Hybrid Recommenders](hybrid-recommenders.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Bayesian Personalized Ranking](bayesian-personalized-ranking.md) [Hybrid Recommenders →](hybrid-recommenders.md)

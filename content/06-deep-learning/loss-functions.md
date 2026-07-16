@@ -87,4 +87,7 @@ Losses are surrogate objectives. Cross-entropy rewards probability ranking and c
 - [PyTorch documentation: CrossEntropyLoss](https://docs.pytorch.org/docs/2.7/generated/torch.nn.CrossEntropyLoss.html)
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 8: Optimization for Training Deep Models](https://www.deeplearningbook.org/contents/optimization.html)
 
-> **Section — [Deep Learning](index.md):** ← [Activation Functions](activation-functions.md) · [Optimizers](optimizers.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Activation Functions](activation-functions.md) [Optimizers →](optimizers.md)

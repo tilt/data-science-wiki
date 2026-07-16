@@ -92,4 +92,7 @@ Attention weights are routing weights, not full explanations of a model decision
 - [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [PyTorch documentation: MultiheadAttention](https://docs.pytorch.org/docs/2.7/generated/torch.nn.MultiheadAttention.html)
 
-> **Section — [Deep Learning](index.md):** ← [LSTM and GRU](lstm-and-gru.md) · [Transformers](transformers.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← LSTM and GRU](lstm-and-gru.md) [Transformers →](transformers.md)

@@ -88,4 +88,7 @@ Very low top-p can collapse creativity. Very high top-k still admits bad tail to
 - [Holtzman et al., 2020, The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751)
 - [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Sampling and Decoding](sampling-and-decoding.md) · [Temperature and Determinism](temperature-and-determinism.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Sampling and Decoding](sampling-and-decoding.md) [Temperature and Determinism →](temperature-and-determinism.md)

@@ -72,6 +72,11 @@ Stationarity tests and plots are aids, not commands. Over-differencing can creat
 - [Hyndman & Athanasopoulos, FPP3: Stationarity and differencing](https://otexts.com/fpp3/stationarity.html)
 - [statsmodels Augmented Dickey-Fuller API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.adfuller.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Trend Seasonality Cycles Noise](trend-seasonality-cycles-noise.md) · [Autocorrelation and Partial Autocorrelation](autocorrelation-and-partial-autocorrelation.md) →
-
-> **Learning path — [Forecasting](../00-home-and-navigation/learning-paths.md#forecasting):** ← [Time Series Fundamentals](time-series-fundamentals.md) · [ARIMA](arima.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Trend Seasonality Cycles Noise](trend-seasonality-cycles-noise.md) [Autocorrelation and Partial Autocorrelation →](autocorrelation-and-partial-autocorrelation.md)
+>
+> **Learning path** — [Forecasting](../00-home-and-navigation/learning-paths.md#forecasting)
+>
+> [← Time Series Fundamentals](time-series-fundamentals.md) [ARIMA →](arima.md)

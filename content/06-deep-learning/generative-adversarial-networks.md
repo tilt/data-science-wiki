@@ -122,4 +122,7 @@ GAN evaluation needs both quality and diversity. A generator can improve a visua
 - [Wang et al., 2021, Real-ESRGAN](https://arxiv.org/abs/2107.10833)
 - [Rombach et al., 2021, High-Resolution Image Synthesis with Latent Diffusion Models](https://arxiv.org/abs/2112.10752)
 
-> **Section — [Deep Learning](index.md):** ← [Multimodal Learning](multimodal-learning.md) · [PyTorch](pytorch.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Multimodal Learning](multimodal-learning.md) [PyTorch →](pytorch.md)

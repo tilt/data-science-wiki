@@ -85,4 +85,7 @@ Weather forecast error propagates directly into load forecasts. Demand response,
 - [UCI Machine Learning Repository: Individual Household Electric Power Consumption](https://archive.ics.uci.edu/dataset/235/individual+household+electric+power+consumption)
 - [Gasparin, Lukovic, and Alippi, Deep Learning for Time Series Forecasting: The Electric Load Case](https://arxiv.org/abs/1907.09207)
 
-> **Section — [Domain Applications](index.md):** ← [Demand Prediction in Logistics](demand-prediction-in-logistics.md) · [Predictive Maintenance](predictive-maintenance.md) →
+> [!nav]
+> **Section** — [Domain Applications](index.md)
+>
+> [← Demand Prediction in Logistics](demand-prediction-in-logistics.md) [Predictive Maintenance →](predictive-maintenance.md)

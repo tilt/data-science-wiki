@@ -69,4 +69,7 @@ Surrogate keys without unique natural-key constraints allow duplicate entities. 
 - [PostgreSQL documentation: Constraints](https://www.postgresql.org/docs/current/ddl-constraints.html)
 - [SQLite documentation: Foreign Key Support](https://www.sqlite.org/foreignkeys.html)
 
-> **Section — [Data Engineering](index.md):** [SQL](sql.md) →
+> [!nav]
+> **Section** — [Data Engineering](index.md)
+>
+> [SQL →](sql.md)

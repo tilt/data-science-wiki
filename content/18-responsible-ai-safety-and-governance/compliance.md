@@ -70,4 +70,7 @@ Compliance fails when teams classify the model type instead of the use case. A t
 - [EUR-Lex: Regulation (EU) 2016/679, General Data Protection Regulation](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng)
 - [NIST AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 
-> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Human Oversight](human-oversight.md) · [Governance of Model and Knowledge Base Changes](governance-of-model-and-knowledge-base-changes.md) →
+> [!nav]
+> **Section** — [Responsible AI, Safety, and Governance](index.md)
+>
+> [← Human Oversight](human-oversight.md) [Governance of Model and Knowledge Base Changes →](governance-of-model-and-knowledge-base-changes.md)

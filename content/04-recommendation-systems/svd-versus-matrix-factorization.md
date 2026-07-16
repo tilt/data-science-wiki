@@ -80,6 +80,11 @@ SVD is excellent linear algebra; the mistake is applying it to a matrix whose en
 - [scikit-learn documentation: TruncatedSVD](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html)
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Sparse Utility Matrices and Ordinary SVD](sparse-utility-matrices-and-svd.md) · [Funk SVD](funk-svd.md) →
-
-> **Learning path — [Recommender systems](../00-home-and-navigation/learning-paths.md#recommender-systems):** ← [Matrix Factorization for Recommender Systems](matrix-factorization.md) · [Evaluation of Recommenders](evaluation-of-recommenders.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Sparse Utility Matrices and Ordinary SVD](sparse-utility-matrices-and-svd.md) [Funk SVD →](funk-svd.md)
+>
+> **Learning path** — [Recommender systems](../00-home-and-navigation/learning-paths.md#recommender-systems)
+>
+> [← Matrix Factorization for Recommender Systems](matrix-factorization.md) [Evaluation of Recommenders →](evaluation-of-recommenders.md)

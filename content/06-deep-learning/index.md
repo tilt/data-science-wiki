@@ -98,4 +98,7 @@ Read fundamentals and training mechanics, then architectures, representation lea
 - [Mathematical Foundations](../01-mathematical-foundations/index.md) supplies the gradients and linear algebra behind training.
 - [Natural Language Processing](../08-natural-language-processing/index.md), [Computer Vision](../09-computer-vision/index.md), and [Generative AI](../11-generative-ai/index.md) specialize these architectures to their modalities.
 
-> **Learning path — [Deep learning](../00-home-and-navigation/learning-paths.md#deep-learning):** [Neural Network Fundamentals](neural-network-fundamentals.md) →
+> [!nav]
+> **Learning path** — [Deep learning](../00-home-and-navigation/learning-paths.md#deep-learning)
+>
+> [Neural Network Fundamentals →](neural-network-fundamentals.md)

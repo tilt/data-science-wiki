@@ -119,4 +119,7 @@ Read foundation-model mechanics and generation control first, then retrieval, ag
 - [Deep Learning](../06-deep-learning/index.md) and [Natural Language Processing](../08-natural-language-processing/index.md) supply the architectures and language tasks underneath.
 - [Information Retrieval](../12-information-retrieval-and-search/index.md) provides the retrieval half of RAG, and [Responsible AI](../18-responsible-ai-safety-and-governance/index.md) governs deployed behavior.
 
-> **Learning path — [Generative AI systems](../00-home-and-navigation/learning-paths.md#generative-ai-systems):** [Foundation Models](foundation-models.md) →
+> [!nav]
+> **Learning path** — [Generative AI systems](../00-home-and-navigation/learning-paths.md#generative-ai-systems)
+>
+> [Foundation Models →](foundation-models.md)

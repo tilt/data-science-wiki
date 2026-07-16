@@ -88,4 +88,7 @@ Deep learning forecasting usually follows [machine learning forecasting](machine
 - [Salinas, Flunkert, and Gasthaus, DeepAR](https://arxiv.org/abs/1704.04110)
 - [Nixtla NeuralForecast documentation](https://nixtlaverse.nixtla.io/neuralforecast/docs/getting-started/introduction.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Machine Learning Forecasting](machine-learning-forecasting.md) · [RNN and LSTM Forecasting](rnn-and-lstm-forecasting.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Machine Learning Forecasting](machine-learning-forecasting.md) [RNN and LSTM Forecasting →](rnn-and-lstm-forecasting.md)

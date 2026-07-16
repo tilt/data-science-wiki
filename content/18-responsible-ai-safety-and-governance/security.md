@@ -68,4 +68,7 @@ Security fails when teams grant an agent broad credentials "temporarily," store 
 - [NIST AI 600-1: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
 - [NIST AI 100-2: Adversarial Machine Learning taxonomy](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-2e2023.pdf)
 
-> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Prompt Injection](prompt-injection.md) · [Privacy](privacy.md) →
+> [!nav]
+> **Section** — [Responsible AI, Safety, and Governance](index.md)
+>
+> [← Prompt Injection](prompt-injection.md) [Privacy →](privacy.md)

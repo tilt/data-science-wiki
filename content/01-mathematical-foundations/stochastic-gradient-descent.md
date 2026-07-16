@@ -81,4 +81,7 @@ SGD is sensitive to learning-rate schedules and batch construction. Non-shuffled
 - [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
 - [SciPy documentation: `scipy.optimize.minimize`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
 
-> **Section — [Mathematical Foundations](index.md):** ← [Gradient Descent](gradient-descent.md) · [Numerical Stability](numerical-stability.md) →
+> [!nav]
+> **Section** — [Mathematical Foundations](index.md)
+>
+> [← Gradient Descent](gradient-descent.md) [Numerical Stability →](numerical-stability.md)

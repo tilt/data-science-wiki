@@ -77,4 +77,7 @@ The memoryless assumption can be too strong when dwell time or earlier history m
 - [Markov chain](https://en.wikipedia.org/wiki/Markov_chain)
 - [SciPy statistics reference](https://docs.scipy.org/doc/scipy/reference/stats.html)
 
-> **Section — [Probability and Statistics](index.md):** ← [Central Limit Theorem](central-limit-theorem.md) · [Random Walks](random-walks.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Central Limit Theorem](central-limit-theorem.md) [Random Walks →](random-walks.md)

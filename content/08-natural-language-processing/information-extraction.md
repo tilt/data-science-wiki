@@ -57,4 +57,7 @@ Exact schemas are brittle. Real documents contain missing fields, repeated total
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
 - [Finkel, Grenager, and Manning, Incorporating Non-local Information into Information Extraction Systems](https://aclanthology.org/P05-1045/)
 
-> **Section — [Natural Language Processing](index.md):** ← [Named Entity Recognition](named-entity-recognition.md) · [Entity Linking and Matching](entity-linking-and-matching.md) →
+> [!nav]
+> **Section** — [Natural Language Processing](index.md)
+>
+> [← Named Entity Recognition](named-entity-recognition.md) [Entity Linking and Matching →](entity-linking-and-matching.md)

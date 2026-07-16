@@ -60,4 +60,7 @@ Do not change the primary metric after seeing results. Sample-ratio mismatch, de
 - [Larsen et al., Statistical Challenges in Online Controlled Experiments](https://arxiv.org/abs/2212.11366)
 - [SciPy documentation: scipy.stats.norm](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html)
 
-> **Section — [Experimentation and Evaluation](index.md):** ← [Online Experiments](online-experiments.md) · [Human Evaluation](human-evaluation.md) →
+> [!nav]
+> **Section** — [Experimentation and Evaluation](index.md)
+>
+> [← Online Experiments](online-experiments.md) [Human Evaluation →](human-evaluation.md)

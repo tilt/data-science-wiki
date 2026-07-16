@@ -104,4 +104,7 @@ Conformal forecasting wraps [prediction intervals](prediction-intervals.md) arou
 - [Romano, Patterson, and Candes, Conformalized Quantile Regression](https://arxiv.org/abs/1905.03222)
 - [Gibbs and Candes, Adaptive Conformal Inference Under Distribution Shift](https://arxiv.org/abs/2106.00170)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Forecast Calibration](forecast-calibration.md) · [Hierarchical Forecasting](hierarchical-forecasting.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Forecast Calibration](forecast-calibration.md) [Hierarchical Forecasting →](hierarchical-forecasting.md)

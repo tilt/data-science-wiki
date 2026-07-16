@@ -62,4 +62,7 @@ Human review fails when reviewers see no context, when queues overload during dr
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 - [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Production Incident Response](production-incident-response.md) · [Active Learning](active-learning.md) →
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Production Incident Response](production-incident-response.md) [Active Learning →](active-learning.md)

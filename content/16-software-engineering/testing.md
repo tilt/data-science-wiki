@@ -113,4 +113,7 @@ Slow suites get ignored, so keep fast deterministic checks close to the code and
 - [Python documentation: unittest](https://docs.python.org/3/library/unittest.html)
 - [Hypothesis documentation: quickstart](https://hypothesis.readthedocs.io/en/latest/quickstart.html)
 
-> **Section — [Software Engineering](index.md):** ← [SQL](sql.md) · [Code Review](code-review.md) →
+> [!nav]
+> **Section** — [Software Engineering](index.md)
+>
+> [← SQL](sql.md) [Code Review →](code-review.md)

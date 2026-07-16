@@ -67,4 +67,7 @@ Humans are poor safety controls when they see too many alerts, lack context, or 
 - [OWASP LLM06:2025 Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/)
 - [NIST AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 
-> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Risk Classification](risk-classification.md) · [Compliance](compliance.md) →
+> [!nav]
+> **Section** — [Responsible AI, Safety, and Governance](index.md)
+>
+> [← Risk Classification](risk-classification.md) [Compliance →](compliance.md)

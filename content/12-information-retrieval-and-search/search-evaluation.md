@@ -71,6 +71,11 @@ Judgment pools are incomplete: an unjudged document may be relevant. Query logs 
 - [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Evaluation](https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-in-information-retrieval-1.html)
 - [scikit-learn API: ndcg_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html)
 
-> **Section — [Information Retrieval and Search](index.md):** ← [Literature Management Search Systems](literature-management-search-systems.md) · [Ranking and Retrieval Metrics](ranking-and-retrieval-metrics.md) →
-
-> **Learning path — [Information retrieval and search](../00-home-and-navigation/learning-paths.md#information-retrieval-and-search):** ← [Hybrid Search](hybrid-search.md)
+> [!nav]
+> **Section** — [Information Retrieval and Search](index.md)
+>
+> [← Literature Management Search Systems](literature-management-search-systems.md) [Ranking and Retrieval Metrics →](ranking-and-retrieval-metrics.md)
+>
+> **Learning path** — [Information retrieval and search](../00-home-and-navigation/learning-paths.md#information-retrieval-and-search)
+>
+> [← Hybrid Search](hybrid-search.md)

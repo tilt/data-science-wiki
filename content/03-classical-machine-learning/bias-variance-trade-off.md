@@ -76,4 +76,7 @@ The decomposition above is exact for squared-error regression, but classificatio
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
 - [scikit-learn User Guide: validation curves](https://scikit-learn.org/stable/modules/learning_curve.html#validation-curve)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Regularization](regularization.md) · [Model Selection](model-selection.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Regularization](regularization.md) [Model Selection →](model-selection.md)

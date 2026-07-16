@@ -68,4 +68,7 @@ Abstention can hide poor performance if reports only show answered accuracy. Ref
 - [scikit-learn documentation: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 
-> **Section — [Experimentation and Evaluation](index.md):** ← [Coverage](coverage.md) · [Risk-Weighted Error Taxonomies](risk-weighted-error-taxonomies.md) →
+> [!nav]
+> **Section** — [Experimentation and Evaluation](index.md)
+>
+> [← Coverage](coverage.md) [Risk-Weighted Error Taxonomies →](risk-weighted-error-taxonomies.md)

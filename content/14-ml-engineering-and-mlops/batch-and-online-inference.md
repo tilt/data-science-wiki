@@ -75,4 +75,7 @@ Train-serving skew often begins when [training pipelines](training-pipelines.md)
 - [TensorFlow Serving RESTful API](https://www.tensorflow.org/tfx/serving/api_rest)
 - [Apache Airflow DAGs documentation](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Model Serving](model-serving.md) · [Microservices](microservices.md) →
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Model Serving](model-serving.md) [Microservices →](microservices.md)

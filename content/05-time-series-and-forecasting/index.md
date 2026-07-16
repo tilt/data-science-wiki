@@ -121,4 +121,7 @@ Read the fundamentals, then the model families, evaluation, uncertainty, reconci
 - [ML Engineering and MLOps](../14-ml-engineering-and-mlops/index.md) and [Experimentation and Evaluation](../17-experimentation-and-evaluation/index.md) cover the pipelines and tests forecasts run inside.
 - [Domain Applications](../19-domain-applications/index.md) shows these methods used end to end.
 
-> **Learning path — [Forecasting](../00-home-and-navigation/learning-paths.md#forecasting):** [Time Series Fundamentals](time-series-fundamentals.md) →
+> [!nav]
+> **Learning path** — [Forecasting](../00-home-and-navigation/learning-paths.md#forecasting)
+>
+> [Time Series Fundamentals →](time-series-fundamentals.md)

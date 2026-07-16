@@ -85,4 +85,7 @@ Exploration bonuses change the effective objective, so they should be annealed o
 - [Pathak et al., 2017, Curiosity-Driven Exploration by Self-Supervised Prediction](https://arxiv.org/abs/1705.05363)
 - [Osband et al., 2016, Deep Exploration via Bootstrapped DQN](https://arxiv.org/abs/1602.04621)
 
-> **Section — [Reinforcement Learning](index.md):** ← [Proximal Policy Optimization](proximal-policy-optimization.md) · [Reward Design and Shaping](reward-design-and-shaping.md) →
+> [!nav]
+> **Section** — [Reinforcement Learning](index.md)
+>
+> [← Proximal Policy Optimization](proximal-policy-optimization.md) [Reward Design and Shaping →](reward-design-and-shaping.md)

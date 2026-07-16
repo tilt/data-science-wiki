@@ -80,4 +80,7 @@ Refactors fail when they mix behavior changes with structure changes, expand sco
 - [Martin Fowler: Refactoring, second edition](https://martinfowler.com/books/refactoring.html)
 - [pytest documentation: assertions](https://docs.pytest.org/en/stable/how-to/assert.html)
 
-> **Section — [Software Engineering](index.md):** ← [Code Review](code-review.md) · [Software Architecture](software-architecture.md) →
+> [!nav]
+> **Section** — [Software Engineering](index.md)
+>
+> [← Code Review](code-review.md) [Software Architecture →](software-architecture.md)

@@ -122,4 +122,7 @@ Stable Diffusion is not a factual image database. It can invent details, reprodu
 - [Podell et al., 2023, SDXL: Improving Latent Diffusion Models for High-Resolution Image Synthesis](https://arxiv.org/abs/2307.01952)
 - [Esser et al., 2024, Scaling Rectified Flow Transformers for High-Resolution Image Synthesis](https://arxiv.org/abs/2403.03206)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Vision-Language Models](vision-language-models.md) · [Local Versus Hosted Models](local-versus-hosted-models.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Vision-Language Models](vision-language-models.md) [Local Versus Hosted Models →](local-versus-hosted-models.md)

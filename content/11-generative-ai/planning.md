@@ -56,4 +56,7 @@ Plans become harmful when the model follows an obsolete plan after tool output c
 - [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
 - [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Agentic Systems](agentic-systems.md) · [Memory](memory.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Agentic Systems](agentic-systems.md) [Memory →](memory.md)

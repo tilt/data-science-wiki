@@ -59,4 +59,7 @@ Capacity constraints, fairness, safety, and strategic behavior are central. Opti
 - [Adomavicius and Tuzhilin, 2005, Toward the Next Generation of Recommender Systems](https://doi.org/10.1109/TKDE.2005.99)
 - [Li et al., 2010, A Contextual-Bandit Approach to Personalized News Article Recommendation](https://arxiv.org/abs/1003.0146)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Contextual Bandits](contextual-bandits.md) · [Image-Based Recommendation](image-based-recommendation.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Contextual Bandits](contextual-bandits.md) [Image-Based Recommendation →](image-based-recommendation.md)

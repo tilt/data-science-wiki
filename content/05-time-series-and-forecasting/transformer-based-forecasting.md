@@ -49,4 +49,7 @@ Transformer forecasting adapts [transformers](../06-deep-learning/transformers.m
 - [Vaswani et al., Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [Nixtla NeuralForecast documentation](https://nixtlaverse.nixtla.io/neuralforecast/docs/getting-started/introduction.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Temporal Convolutional Networks](temporal-convolutional-networks.md) · [N-BEATS and N-HiTS](n-beats-and-nhits.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Temporal Convolutional Networks](temporal-convolutional-networks.md) [N-BEATS and N-HiTS →](n-beats-and-nhits.md)

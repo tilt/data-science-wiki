@@ -60,4 +60,7 @@ Vague tool names produce wrong calls. Broad string arguments move validation int
 - [JSON Schema documentation: object](https://json-schema.org/understanding-json-schema/reference/object)
 - [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Tool Use and Function Calling](tool-use-and-function-calling.md) · [Tool Routing](tool-routing.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Tool Use and Function Calling](tool-use-and-function-calling.md) [Tool Routing →](tool-routing.md)

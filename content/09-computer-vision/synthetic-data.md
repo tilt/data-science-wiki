@@ -70,4 +70,7 @@ Synthetic data can teach rendering artifacts, unrealistic textures, and simplifi
 - [Render for CNN: Viewpoint Estimation in Images Using CNNs Trained with Rendered 3D Model Views](https://arxiv.org/abs/1505.05641)
 - [Understanding Domain Randomization for Sim-to-real Transfer](https://arxiv.org/abs/2110.03239)
 
-> **Section — [Computer Vision](index.md):** ← [Domain Shift](domain-shift.md) · [Medical Image Analysis](medical-image-analysis.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [← Domain Shift](domain-shift.md) [Medical Image Analysis →](medical-image-analysis.md)

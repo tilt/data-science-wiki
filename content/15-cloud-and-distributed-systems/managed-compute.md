@@ -67,4 +67,7 @@ Managed compute still needs IAM, quotas, logs, rollbacks, and health checks. Col
 - [Amazon EC2 concepts](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html)
 - [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 
-> **Section — [Cloud and Distributed Systems](index.md):** ← [Google Cloud Fundamentals](google-cloud-fundamentals.md) · [Managed Storage](managed-storage.md) →
+> [!nav]
+> **Section** — [Cloud and Distributed Systems](index.md)
+>
+> [← Google Cloud Fundamentals](google-cloud-fundamentals.md) [Managed Storage →](managed-storage.md)

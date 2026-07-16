@@ -83,4 +83,7 @@ Read the probability foundations, then limits and processes, then inference and 
 - [Mathematical Foundations](../01-mathematical-foundations/index.md) supplies the calculus and linear algebra underneath these results.
 - [Classical Machine Learning](../03-classical-machine-learning/index.md) and [Experimentation and Evaluation](../17-experimentation-and-evaluation/index.md) turn estimation and testing into model fitting and decisions.
 
-> **Learning path — [Foundations](../00-home-and-navigation/learning-paths.md#foundations):** ← [Mathematical Foundations](../01-mathematical-foundations/index.md) · [Classical Machine Learning](../03-classical-machine-learning/index.md) →
+> [!nav]
+> **Learning path** — [Foundations](../00-home-and-navigation/learning-paths.md#foundations)
+>
+> [← Mathematical Foundations](../01-mathematical-foundations/index.md) [Classical Machine Learning →](../03-classical-machine-learning/index.md)

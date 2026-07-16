@@ -72,4 +72,7 @@ Most mistakes come from changing $\Omega$ mid-argument. Conditioning on "flagged
 - [Probability space](https://en.wikipedia.org/wiki/Probability_space)
 - [OpenStax Introductory Statistics 2e, Chapter 3 introduction](https://openstax.org/books/introductory-statistics-2e/pages/3-introduction)
 
-> **Section — [Probability and Statistics](index.md):** [Random Variables](random-variables.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [Random Variables →](random-variables.md)

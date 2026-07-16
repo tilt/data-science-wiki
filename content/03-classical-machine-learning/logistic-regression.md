@@ -104,4 +104,7 @@ Perfectly separable data makes the maximum-likelihood coefficients diverge; regu
 - [scikit-learn User Guide: Logistic regression](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression)
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Linear Models](linear-models.md) · [Support Vector Machines](support-vector-machines.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Linear Models](linear-models.md) [Support Vector Machines →](support-vector-machines.md)

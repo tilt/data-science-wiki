@@ -61,4 +61,7 @@ GPU utilization can be high while user latency is bad if batching hides queueing
 - [Amazon EC2 P4 instances](https://aws.amazon.com/ec2/instance-types/p4/)
 - [PyTorch CUDA semantics: memory management](https://docs.pytorch.org/docs/2.13/notes/cuda.html)
 
-> **Section — [Cloud and Distributed Systems](index.md):** ← [Managed Storage](managed-storage.md) · [Distributed Data Processing](distributed-data-processing.md) →
+> [!nav]
+> **Section** — [Cloud and Distributed Systems](index.md)
+>
+> [← Managed Storage](managed-storage.md) [Distributed Data Processing →](distributed-data-processing.md)

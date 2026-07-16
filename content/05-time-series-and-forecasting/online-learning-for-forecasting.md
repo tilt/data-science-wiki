@@ -79,4 +79,7 @@ Online learning is a response to [concept drift in forecasting](concept-drift-in
 - [Gibbs and Candes, Adaptive Conformal Inference Under Distribution Shift](https://arxiv.org/abs/2106.00170)
 - [scikit-learn TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Concept Drift in Forecasting](concept-drift-in-forecasting.md) · [Forecast Monitoring](forecast-monitoring.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Concept Drift in Forecasting](concept-drift-in-forecasting.md) [Forecast Monitoring →](forecast-monitoring.md)

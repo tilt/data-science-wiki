@@ -56,4 +56,7 @@ Golden sets become brittle when expected outputs are overspecified for cases wit
 - [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
 - [Great Expectations documentation](https://docs.greatexpectations.io/docs/core/introduction/try_gx/)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Evaluation Datasets](evaluation-datasets.md) · [Model Serving](model-serving.md) →
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Evaluation Datasets](evaluation-datasets.md) [Model Serving →](model-serving.md)

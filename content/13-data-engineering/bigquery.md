@@ -58,4 +58,7 @@ Unpartitioned append-only event tables make routine date filters expensive. Part
 - [BigQuery documentation: Introduction to partitioned tables](https://cloud.google.com/bigquery/docs/partitioned-tables)
 - [BigQuery documentation: Introduction to clustered tables](https://cloud.google.com/bigquery/docs/clustered-tables)
 
-> **Section — [Data Engineering](index.md):** ← [Data Warehouses](data-warehouses.md) · [Cloud Storage](cloud-storage.md) →
+> [!nav]
+> **Section** — [Data Engineering](index.md)
+>
+> [← Data Warehouses](data-warehouses.md) [Cloud Storage →](cloud-storage.md)

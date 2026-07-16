@@ -114,6 +114,11 @@ Pixel accuracy can be meaningless when background dominates a mask. IoU punishes
 - [scikit-learn documentation: `average_precision_score`](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.average_precision_score.html)
 - [Microsoft COCO: Common Objects in Context](https://arxiv.org/abs/1405.0312)
 
-> **Section — [Computer Vision](index.md):** ← [Instance Segmentation](instance-segmentation.md) · [CNN Architectures](cnn-architectures.md) →
-
-> **Learning path — [Computer vision](../00-home-and-navigation/learning-paths.md#computer-vision):** ← [Object Detection](object-detection.md) · [Vision Transformers](vision-transformers.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [← Instance Segmentation](instance-segmentation.md) [CNN Architectures →](cnn-architectures.md)
+>
+> **Learning path** — [Computer vision](../00-home-and-navigation/learning-paths.md#computer-vision)
+>
+> [← Object Detection](object-detection.md) [Vision Transformers →](vision-transformers.md)

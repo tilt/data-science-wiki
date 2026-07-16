@@ -81,4 +81,7 @@ Model fit is conditional on the chosen structure. Omitted variables, correlated 
 - [Statistical model](https://en.wikipedia.org/wiki/Statistical_model)
 - [SciPy statistics reference](https://docs.scipy.org/doc/scipy/reference/stats.html)
 
-> **Section — [Probability and Statistics](index.md):** ← [Hypothesis Testing](hypothesis-testing.md) · [Experimental Design](experimental-design.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Hypothesis Testing](hypothesis-testing.md) [Experimental Design →](experimental-design.md)

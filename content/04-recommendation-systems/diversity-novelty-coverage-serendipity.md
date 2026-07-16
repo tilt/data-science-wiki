@@ -94,4 +94,7 @@ Diversity is not randomization; irrelevant variety is bad. Novelty can overpromo
 - [Herlocker et al., 2004, Evaluating Collaborative Filtering Recommender Systems](https://doi.org/10.1145/963770.963772)
 - [scikit-learn documentation: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Offline Versus Online Evaluation](offline-versus-online-evaluation.md) · [Feedback Loops](feedback-loops.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Offline Versus Online Evaluation](offline-versus-online-evaluation.md) [Feedback Loops →](feedback-loops.md)

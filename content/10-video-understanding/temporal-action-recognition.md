@@ -58,4 +58,7 @@ Clip labels hide boundary errors: a model can classify a video correctly while f
 - [Kay et al., 2017, The Kinetics Human Action Video Dataset](https://arxiv.org/abs/1705.06950)
 - [Wang et al., 2016, Temporal Segment Networks](https://arxiv.org/abs/1608.00859)
 
-> **Section — [Video Understanding](index.md):** ← [Video Transformers](video-transformers.md) · [Temporal Localization](temporal-localization.md) →
+> [!nav]
+> **Section** — [Video Understanding](index.md)
+>
+> [← Video Transformers](video-transformers.md) [Temporal Localization →](temporal-localization.md)

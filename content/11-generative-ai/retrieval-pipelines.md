@@ -72,6 +72,11 @@ Do not tune retrieval only through final answer fluency. A model can answer from
 - [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)
 - [Faiss documentation](https://faiss.ai/)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Vector Databases](vector-databases.md) · [Hybrid Retrieval](hybrid-retrieval.md) →
-
-> **Learning path — [Generative AI systems](../00-home-and-navigation/learning-paths.md#generative-ai-systems):** ← [Foundation Models](foundation-models.md) · [RAG](rag.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Vector Databases](vector-databases.md) [Hybrid Retrieval →](hybrid-retrieval.md)
+>
+> **Learning path** — [Generative AI systems](../00-home-and-navigation/learning-paths.md#generative-ai-systems)
+>
+> [← Foundation Models](foundation-models.md) [RAG →](rag.md)

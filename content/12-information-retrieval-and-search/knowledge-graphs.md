@@ -70,4 +70,7 @@ Schema design is the hard part. Overly rigid ontologies slow ingestion; overly l
 - [W3C Recommendation: RDF 1.1 Concepts and Abstract Syntax](https://www.w3.org/TR/rdf11-concepts/)
 - [W3C Recommendation: SPARQL 1.1 Query Language](https://www.w3.org/TR/sparql11-query/)
 
-> **Section — [Information Retrieval and Search](index.md):** ← [Graph Based Retrieval](graph-based-retrieval.md) · [Literature Management Search Systems](literature-management-search-systems.md) →
+> [!nav]
+> **Section** — [Information Retrieval and Search](index.md)
+>
+> [← Graph Based Retrieval](graph-based-retrieval.md) [Literature Management Search Systems →](literature-management-search-systems.md)

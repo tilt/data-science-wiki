@@ -52,4 +52,7 @@ The historical caveat is that attention did not remove sequence modeling difficu
 - [Devlin et al., 2018, BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
 - [Brown et al., 2020, Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)
 
-> **Section — [History of AI and Machine Learning](index.md):** ← [From N-Gram Language Models to Transformers](from-ngram-language-models-to-transformers.md) · [Self-Supervised Learning](self-supervised-learning.md) →
+> [!nav]
+> **Section** — [History of AI and Machine Learning](index.md)
+>
+> [← From N-Gram Language Models to Transformers](from-ngram-language-models-to-transformers.md) [Self-Supervised Learning →](self-supervised-learning.md)

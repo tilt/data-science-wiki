@@ -83,4 +83,7 @@ Temporal reconciliation is the time-aggregation analogue of [hierarchical reconc
 - [Hyndman & Athanasopoulos, FPP3: Forecast reconciliation](https://otexts.com/fpp3/reconciliation.html)
 - [Nixtla HierarchicalForecast documentation](https://nixtlaverse.nixtla.io/hierarchicalforecast/index.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Hierarchical Reconciliation](hierarchical-reconciliation.md) · [Intermittent Demand](intermittent-demand.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Hierarchical Reconciliation](hierarchical-reconciliation.md) [Intermittent Demand →](intermittent-demand.md)

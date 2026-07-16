@@ -94,4 +94,7 @@ Redaction can break debugging, and debugging can break privacy. Store hashes, ID
 - [OWASP LLM02:2025 Sensitive Information Disclosure](https://genai.owasp.org/llmrisk/llm022025-sensitive-information-disclosure/)
 - [NIST AI 600-1: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
 
-> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Privacy](privacy.md) · [Policy Enforcement](policy-enforcement.md) →
+> [!nav]
+> **Section** — [Responsible AI, Safety, and Governance](index.md)
+>
+> [← Privacy](privacy.md) [Policy Enforcement →](policy-enforcement.md)

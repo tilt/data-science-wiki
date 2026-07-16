@@ -229,4 +229,7 @@ Forecast ensembling combines candidates from [statistical forecasting](statistic
 - [Hyndman & Athanasopoulos, FPP3: Forecast combinations](https://otexts.com/fpp3/combinations.html)
 - [Nixtla StatsForecast documentation](https://nixtla.github.io/statsforecast/)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Cold-Start Forecasting](cold-start-forecasting.md) · [Hyperparameter Optimization for Forecasting](hyperparameter-optimization-for-forecasting.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Cold-Start Forecasting](cold-start-forecasting.md) [Hyperparameter Optimization for Forecasting →](hyperparameter-optimization-for-forecasting.md)

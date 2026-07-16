@@ -74,4 +74,7 @@ Augmentation teaches invariances. Horizontal flips are wrong for laterality mark
 - [Torchvision transforms documentation](https://docs.pytorch.org/vision/stable/transforms.html)
 - [mixup: Beyond Empirical Risk Minimization](https://arxiv.org/abs/1710.09412)
 
-> **Section — [Computer Vision](index.md):** ← [Feature Extraction](feature-extraction.md) · [Image Classification](image-classification.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [← Feature Extraction](feature-extraction.md) [Image Classification →](image-classification.md)

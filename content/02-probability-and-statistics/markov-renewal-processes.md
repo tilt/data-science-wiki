@@ -76,4 +76,7 @@ Estimation is data-hungry because each origin-destination pair can have its own 
 - [Markov renewal process](https://en.wikipedia.org/wiki/Markov_renewal_process)
 - [Renewal theory](https://en.wikipedia.org/wiki/Renewal_theory)
 
-> **Section — [Probability and Statistics](index.md):** ← [Renewal Theory](renewal-theory.md) · [Statistical Estimation](statistical-estimation.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Renewal Theory](renewal-theory.md) [Statistical Estimation →](statistical-estimation.md)

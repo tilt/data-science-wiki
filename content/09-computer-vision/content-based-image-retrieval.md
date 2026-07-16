@@ -71,4 +71,7 @@ Nearest neighbors expose embedding bias quickly: results may cluster by backgrou
 - [Computer Vision: Algorithms and Applications, 2nd ed.](https://szeliski.org/Book/)
 - [scikit-learn documentation: Nearest Neighbors](https://scikit-learn.org/stable/modules/neighbors.html)
 
-> **Section — [Computer Vision](index.md):** ← [Self Supervised Visual Learning](self-supervised-visual-learning.md) · [OCR Pipelines](ocr-pipelines.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [← Self Supervised Visual Learning](self-supervised-visual-learning.md) [OCR Pipelines →](ocr-pipelines.md)

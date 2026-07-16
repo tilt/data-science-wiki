@@ -76,4 +76,7 @@ Agentic systems are inappropriate when a fixed pipeline is enough. Added autonom
 - [OpenAI API documentation: Function calling](https://platform.openai.com/docs/guides/function-calling)
 - [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Agent Loops](agent-loops.md) · [Planning](planning.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Agent Loops](agent-loops.md) [Planning →](planning.md)

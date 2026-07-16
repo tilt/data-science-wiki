@@ -89,4 +89,7 @@ Demand models often learn availability instead of demand when stockouts suppress
 - [Makridakis et al., The M5 uncertainty competition: Results, findings and conclusions](https://doi.org/10.1016/j.ijforecast.2021.10.009)
 - [Kaggle: M5 Forecasting - Accuracy](https://www.kaggle.com/competitions/m5-forecasting-accuracy)
 
-> **Section — [Domain Applications](index.md):** ← [Malware Classification and Clustering](malware-classification-and-clustering.md) · [Energy Forecasting](energy-forecasting.md) →
+> [!nav]
+> **Section** — [Domain Applications](index.md)
+>
+> [← Malware Classification and Clustering](malware-classification-and-clustering.md) [Energy Forecasting →](energy-forecasting.md)

@@ -60,4 +60,7 @@ Table-level lineage is too coarse when one column feeds a regulated metric or mo
 - [OpenLineage documentation: Object Model](https://openlineage.io/docs/spec/object-model/)
 - [dbt documentation: SQL models](https://docs.getdbt.com/docs/build/sql-models)
 
-> **Section — [Data Engineering](index.md):** ← [Data Contracts](data-contracts.md) · [Reproducibility](reproducibility.md) →
+> [!nav]
+> **Section** — [Data Engineering](index.md)
+>
+> [← Data Contracts](data-contracts.md) [Reproducibility →](reproducibility.md)

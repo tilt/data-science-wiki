@@ -82,4 +82,7 @@ Distances can be dominated by scale, irrelevant dimensions, or sparse high-dimen
 - [NumPy documentation: `numpy.linalg.norm`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html)
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
 
-> **Section — [Mathematical Foundations](index.md):** ← [Orthogonality](orthogonality.md) · [Eigenvalues and Eigenvectors](eigenvalues-and-eigenvectors.md) →
+> [!nav]
+> **Section** — [Mathematical Foundations](index.md)
+>
+> [← Orthogonality](orthogonality.md) [Eigenvalues and Eigenvectors →](eigenvalues-and-eigenvectors.md)

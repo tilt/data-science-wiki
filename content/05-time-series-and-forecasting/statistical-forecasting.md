@@ -143,4 +143,7 @@ Statistical forecasting collects [ARIMA](arima.md), [SARIMA](sarima.md), [expone
 - [Hyndman & Athanasopoulos, FPP3: The forecaster toolbox](https://otexts.com/fpp3/toolbox.html)
 - [Nixtla StatsForecast documentation](https://nixtla.github.io/statsforecast/)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Kalman Filters](kalman-filters.md) · [Machine Learning Forecasting](machine-learning-forecasting.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Kalman Filters](kalman-filters.md) [Machine Learning Forecasting →](machine-learning-forecasting.md)

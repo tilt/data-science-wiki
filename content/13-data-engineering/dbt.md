@@ -75,4 +75,7 @@ dbt commonly owns the transform layer inside [ETL and ELT](etl-and-elt.md): sour
 - [dbt documentation: About data tests property](https://docs.getdbt.com/reference/resource-properties/data-tests)
 - [dbt documentation: Sources](https://docs.getdbt.com/docs/build/sources)
 
-> **Section — [Data Engineering](index.md):** ← [Airflow](airflow.md) · [Data Quality](data-quality.md) →
+> [!nav]
+> **Section** — [Data Engineering](index.md)
+>
+> [← Airflow](airflow.md) [Data Quality →](data-quality.md)

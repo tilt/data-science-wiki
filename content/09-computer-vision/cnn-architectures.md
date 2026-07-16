@@ -81,4 +81,7 @@ Architecture comparisons are not meaningful unless resolution, augmentation, tra
 - [PyTorch documentation: `torch.nn.Conv2d`](https://docs.pytorch.org/docs/stable/generated/torch.nn.Conv2d.html)
 - [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
 
-> **Section — [Computer Vision](index.md):** ← [Detection and Segmentation Metrics](detection-and-segmentation-metrics.md) · [Vision Transformers](vision-transformers.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [← Detection and Segmentation Metrics](detection-and-segmentation-metrics.md) [Vision Transformers →](vision-transformers.md)

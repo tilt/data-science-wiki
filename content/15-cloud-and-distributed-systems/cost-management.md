@@ -59,4 +59,7 @@ Cutting observability, backups, or evaluation can make the bill smaller while in
 - [AWS Cost Explorer](https://docs.aws.amazon.com/cost-management/latest/userguide/ce-what-is.html)
 - [AWS Budgets](https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html)
 
-> **Section — [Cloud and Distributed Systems](index.md):** ← [Reliability](reliability.md)
+> [!nav]
+> **Section** — [Cloud and Distributed Systems](index.md)
+>
+> [← Reliability](reliability.md)

@@ -58,4 +58,7 @@ Do not store inferred sensitive traits as facts. Summaries can distort user inte
 - [OpenAI API documentation: Embeddings](https://platform.openai.com/docs/guides/embeddings)
 - [OpenAI platform documentation: Data controls](https://platform.openai.com/docs/guides/your-data)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Planning](planning.md) · [Reflection and Reviewer Patterns](reflection-and-reviewer-patterns.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Planning](planning.md) [Reflection and Reviewer Patterns →](reflection-and-reviewer-patterns.md)

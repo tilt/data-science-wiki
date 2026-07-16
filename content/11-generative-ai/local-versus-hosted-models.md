@@ -62,4 +62,7 @@ Local is not automatically private if logs, prompts, or vector indexes are misha
 - [OpenAI API documentation: Latency optimization](https://platform.openai.com/docs/guides/latency-optimization)
 - [OpenAI API documentation: Cost optimization](https://platform.openai.com/docs/guides/cost-optimization)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Stable Diffusion](stable-diffusion.md) · [Model Serving](model-serving.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Stable Diffusion](stable-diffusion.md) [Model Serving →](model-serving.md)

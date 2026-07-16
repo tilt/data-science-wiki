@@ -103,6 +103,11 @@ Adam's adaptivity is useful for sparse or poorly scaled gradients, but weight de
 - [PyTorch documentation: Adam](https://docs.pytorch.org/docs/2.7/generated/torch.optim.Adam.html)
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 8](https://www.deeplearningbook.org/contents/optimization.html)
 
-> **Section — [Deep Learning](index.md):** ← [Loss Functions](loss-functions.md) · [Initialization](initialization.md) →
-
-> **Learning path — [Deep learning](../00-home-and-navigation/learning-paths.md#deep-learning):** ← [Backpropagation](backpropagation.md) · [Transformers](transformers.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Loss Functions](loss-functions.md) [Initialization →](initialization.md)
+>
+> **Learning path** — [Deep learning](../00-home-and-navigation/learning-paths.md#deep-learning)
+>
+> [← Backpropagation](backpropagation.md) [Transformers →](transformers.md)

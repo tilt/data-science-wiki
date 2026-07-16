@@ -70,6 +70,11 @@ RGB/BGR swaps, missing alpha handling, lossy resizing, and wrong dtype ranges ca
 - [Torchvision transforms documentation](https://docs.pytorch.org/vision/stable/transforms.html)
 - [Computer Vision: Algorithms and Applications, 2nd ed.](https://szeliski.org/Book/)
 
-> **Section — [Computer Vision](index.md):** [Classical Image Processing](classical-image-processing.md) →
-
-> **Learning path — [Computer vision](../00-home-and-navigation/learning-paths.md#computer-vision):** ← [Computer Vision](index.md) · [Object Detection](object-detection.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [Classical Image Processing →](classical-image-processing.md)
+>
+> **Learning path** — [Computer vision](../00-home-and-navigation/learning-paths.md#computer-vision)
+>
+> [← Computer Vision](index.md) [Object Detection →](object-detection.md)

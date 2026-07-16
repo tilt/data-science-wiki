@@ -64,6 +64,11 @@ Common failures are unclear authority, delayed customer communication, overwritt
 - [Google SRE Book: Managing Incidents](https://sre.google/sre-book/managing-incidents/)
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Model Degradation](model-degradation.md) · [Human-in-the-Loop Systems](human-in-the-loop-systems.md) →
-
-> **Learning path — [Production ML](../00-home-and-navigation/learning-paths.md#production-ml):** ← [Monitoring](monitoring.md)
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Model Degradation](model-degradation.md) [Human-in-the-Loop Systems →](human-in-the-loop-systems.md)
+>
+> **Learning path** — [Production ML](../00-home-and-navigation/learning-paths.md#production-ml)
+>
+> [← Monitoring](monitoring.md)

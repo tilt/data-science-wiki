@@ -77,4 +77,7 @@ Boosting can overfit mislabeled examples because later stages focus on hard resi
 - [Friedman, 2001, Greedy Function Approximation: A Gradient Boosting Machine](https://doi.org/10.1214/aos/1013203451)
 - [scikit-learn User Guide: Gradient Tree Boosting](https://scikit-learn.org/stable/modules/ensemble.html#gradient-tree-boosting)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Random Forests](random-forests.md) · [Interpretability](interpretability.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Random Forests](random-forests.md) [Interpretability →](interpretability.md)

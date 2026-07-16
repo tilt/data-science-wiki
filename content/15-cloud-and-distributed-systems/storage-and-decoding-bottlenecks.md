@@ -95,4 +95,7 @@ Warm-cache benchmarks lie. Measure cold reads, list time, decode time, queue dep
 - [NVIDIA DALI image decoder](https://docs.nvidia.com/deeplearning/dali/user-guide/docs/operations/nvidia.dali.fn.decoders.image.html)
 - [PyTorch CUDA semantics: pinned memory and CUDA behavior](https://docs.pytorch.org/docs/2.13/notes/cuda.html)
 
-> **Section — [Cloud and Distributed Systems](index.md):** ← [Distributed Model Training](distributed-model-training.md) · [Scalability](scalability.md) →
+> [!nav]
+> **Section** — [Cloud and Distributed Systems](index.md)
+>
+> [← Distributed Model Training](distributed-model-training.md) [Scalability →](scalability.md)

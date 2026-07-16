@@ -58,4 +58,7 @@ Examples can teach the wrong pattern, leak sensitive labels, or crowd out retrie
 - [Brown et al., 2020, Language Models are Few-Shot Learners](https://arxiv.org/abs/2005.14165)
 - [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Alignment](alignment.md) · [Prompting](prompting.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Alignment](alignment.md) [Prompting →](prompting.md)

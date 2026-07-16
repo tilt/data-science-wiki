@@ -136,4 +136,7 @@ Problem formulation defines the target, horizon, cadence, and availability contr
 - [Hyndman & Athanasopoulos, FPP3: Determining what to forecast](https://otexts.com/fpp3/intro.html)
 - [sktime forecasting tutorial](https://www.sktime.net/docs/examples/forecasting/)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Autocorrelation and Partial Autocorrelation](autocorrelation-and-partial-autocorrelation.md) · [Forecasting Data and Covariates](forecasting-data-and-covariates.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Autocorrelation and Partial Autocorrelation](autocorrelation-and-partial-autocorrelation.md) [Forecasting Data and Covariates →](forecasting-data-and-covariates.md)

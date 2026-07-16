@@ -85,4 +85,7 @@ The confidence formula is a modeling choice, not a fact about preference. Counts
 - [Hu, Koren, and Volinsky, 2008, Collaborative Filtering for Implicit Feedback Datasets](https://doi.org/10.1109/ICDM.2008.22)
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Alternating Least Squares](alternating-least-squares.md) · [Implicit Feedback Recommendation](implicit-feedback.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Alternating Least Squares](alternating-least-squares.md) [Implicit Feedback Recommendation →](implicit-feedback.md)

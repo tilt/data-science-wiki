@@ -60,4 +60,7 @@ Live source tables, overwritten files, non-deterministic sampling, unpinned depe
 - [Amazon S3 documentation: Retaining multiple versions of objects with S3 Versioning](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html)
 - [OpenLineage documentation: Object Model](https://openlineage.io/docs/spec/object-model/)
 
-> **Section — [Data Engineering](index.md):** ← [Data Lineage](data-lineage.md) · [Feature Pipelines](feature-pipelines.md) →
+> [!nav]
+> **Section** — [Data Engineering](index.md)
+>
+> [← Data Lineage](data-lineage.md) [Feature Pipelines →](feature-pipelines.md)

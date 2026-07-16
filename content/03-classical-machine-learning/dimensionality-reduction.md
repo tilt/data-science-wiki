@@ -74,4 +74,7 @@ Dimensionality reduction can erase rare but important directions. Distances afte
 - [scikit-learn User Guide: Decomposition](https://scikit-learn.org/stable/modules/decomposition.html)
 - [scikit-learn User Guide: Unsupervised dimensionality reduction](https://scikit-learn.org/stable/modules/unsupervised_reduction.html)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Unsupervised Learning](unsupervised-learning.md) · [PCA](pca.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Unsupervised Learning](unsupervised-learning.md) [PCA →](pca.md)

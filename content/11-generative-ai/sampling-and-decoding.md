@@ -103,4 +103,7 @@ Greedy decoding can be repetitive because it repeatedly follows local maxima. Ve
 - [Holtzman et al., 2020, The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751)
 - [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Prompting](prompting.md) · [Top-k and Top-p Sampling](top-k-and-top-p-sampling.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Prompting](prompting.md) [Top-k and Top-p Sampling →](top-k-and-top-p-sampling.md)

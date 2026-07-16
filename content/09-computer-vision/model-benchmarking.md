@@ -61,4 +61,7 @@ Benchmark leakage is common: duplicate images, slices from the same patient, nea
 - [Speed/accuracy trade-offs for modern convolutional object detectors](https://arxiv.org/abs/1611.10012)
 - [Microsoft COCO: Common Objects in Context](https://arxiv.org/abs/1405.0312)
 
-> **Section — [Computer Vision](index.md):** ← [Document Image Analysis and Field Extraction](document-image-analysis-and-field-extraction.md) · [Domain Shift](domain-shift.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [← Document Image Analysis and Field Extraction](document-image-analysis-and-field-extraction.md) [Domain Shift →](domain-shift.md)

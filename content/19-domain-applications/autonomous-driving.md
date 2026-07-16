@@ -131,4 +131,7 @@ Benchmarks are necessary but insufficient. Public datasets cannot cover every ci
 - [Sima et al., 2023, DriveLM: Driving with Graph Visual Question Answering](https://arxiv.org/abs/2312.14150)
 - [Hwang et al., 2024, EMMA: End-to-End Multimodal Model for Autonomous Driving](https://arxiv.org/abs/2410.23262)
 
-> **Section — [Domain Applications](index.md):** ← [Road Scene Perception](road-scene-perception.md) · [Autonomous Driving Model Evaluation](autonomous-driving-model-evaluation.md) →
+> [!nav]
+> **Section** — [Domain Applications](index.md)
+>
+> [← Road Scene Perception](road-scene-perception.md) [Autonomous Driving Model Evaluation →](autonomous-driving-model-evaluation.md)

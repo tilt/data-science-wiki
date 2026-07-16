@@ -60,4 +60,7 @@ Grounding can fail when retrieval misses the right passage, when sources conflic
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
 - [Anthropic Claude docs: Reduce hallucinations](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Context Construction](context-construction.md) · [Citations](citations.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Context Construction](context-construction.md) [Citations →](citations.md)

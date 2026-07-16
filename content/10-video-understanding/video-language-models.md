@@ -64,4 +64,7 @@ Language fluency can hide weak temporal grounding. Sparse frame sampling may mis
 - [Wang et al., 2024, InternVideo2](https://arxiv.org/abs/2403.15377)
 - [Alayrac et al., 2022, Flamingo](https://arxiv.org/abs/2204.14198)
 
-> **Section — [Video Understanding](index.md):** ← [Self-Supervised Video Representation Learning](self-supervised-video-representation-learning.md) · [V-JEPA](v-jepa.md) →
+> [!nav]
+> **Section** — [Video Understanding](index.md)
+>
+> [← Self-Supervised Video Representation Learning](self-supervised-video-representation-learning.md) [V-JEPA →](v-jepa.md)

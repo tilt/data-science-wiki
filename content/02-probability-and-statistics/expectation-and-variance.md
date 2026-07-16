@@ -65,4 +65,7 @@ The mean is not necessarily a typical value; skewed and heavy-tailed distributio
 - [OpenStax Introductory Statistics 2e, Chapter 4 introduction](https://openstax.org/books/introductory-statistics-2e/pages/4-introduction)
 - [SciPy statistics reference](https://docs.scipy.org/doc/scipy/reference/stats.html)
 
-> **Section — [Probability and Statistics](index.md):** ← [Common Distributions](common-distributions.md) · [Conditional Probability](conditional-probability.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Common Distributions](common-distributions.md) [Conditional Probability →](conditional-probability.md)

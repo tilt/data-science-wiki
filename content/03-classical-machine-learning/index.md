@@ -71,4 +71,7 @@ Start with supervised prediction, then complexity control, tree ensembles, unsup
 - [Probability and Statistics](../02-probability-and-statistics/index.md) supplies the estimation and testing these methods rely on.
 - [Deep Learning](../06-deep-learning/index.md) generalizes these ideas to learned representations and larger models.
 
-> **Learning path — [Foundations](../00-home-and-navigation/learning-paths.md#foundations):** ← [Probability and Statistics](../02-probability-and-statistics/index.md) · [Supervised Learning](supervised-learning.md) →
+> [!nav]
+> **Learning path** — [Foundations](../00-home-and-navigation/learning-paths.md#foundations)
+>
+> [← Probability and Statistics](../02-probability-and-statistics/index.md) [Supervised Learning →](supervised-learning.md)

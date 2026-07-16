@@ -76,4 +76,7 @@ Slice-level splits leak patient anatomy. Resampling can change small lesions. Di
 - [U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/abs/1505.04597)
 - [Automated Design of Deep Learning Methods for Biomedical Image Segmentation](https://arxiv.org/abs/1904.08128)
 
-> **Section — [Computer Vision](index.md):** ← [Medical Image Analysis](medical-image-analysis.md) · [MRI Classification](mri-classification.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [← Medical Image Analysis](medical-image-analysis.md) [MRI Classification →](mri-classification.md)

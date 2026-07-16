@@ -104,6 +104,11 @@ The loss only sees logged data, so exposure bias, position bias, and popularity 
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
 - [Hu, Koren, and Volinsky, 2008, Collaborative Filtering for Implicit Feedback Datasets](https://doi.org/10.1109/ICDM.2008.22)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Item-Based Collaborative Filtering](item-based-collaborative-filtering.md) · [Latent Factor Models](latent-factor-models.md) →
-
-> **Learning path — [Recommender systems](../00-home-and-navigation/learning-paths.md#recommender-systems):** ← [Collaborative Filtering](collaborative-filtering.md) · [SVD versus Matrix Factorization](svd-versus-matrix-factorization.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Item-Based Collaborative Filtering](item-based-collaborative-filtering.md) [Latent Factor Models →](latent-factor-models.md)
+>
+> **Learning path** — [Recommender systems](../00-home-and-navigation/learning-paths.md#recommender-systems)
+>
+> [← Collaborative Filtering](collaborative-filtering.md) [SVD versus Matrix Factorization →](svd-versus-matrix-factorization.md)

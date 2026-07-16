@@ -92,6 +92,11 @@ Exact Bellman updates require known transition probabilities or enough samples t
 - [Bellman, 1957, Dynamic Programming](https://press.princeton.edu/books/paperback/9780691146683/dynamic-programming)
 - [Sutton and Barto, 2018, Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html)
 
-> **Section — [Reinforcement Learning](index.md):** ← [Markov Decision Processes](markov-decision-processes.md) · [Temporal-Difference Learning](temporal-difference-learning.md) →
-
-> **Learning path — [Reinforcement learning](../00-home-and-navigation/learning-paths.md#reinforcement-learning):** ← [Markov Decision Processes](markov-decision-processes.md) · [Temporal-Difference Learning](temporal-difference-learning.md) →
+> [!nav]
+> **Section** — [Reinforcement Learning](index.md)
+>
+> [← Markov Decision Processes](markov-decision-processes.md) [Temporal-Difference Learning →](temporal-difference-learning.md)
+>
+> **Learning path** — [Reinforcement learning](../00-home-and-navigation/learning-paths.md#reinforcement-learning)
+>
+> [← Markov Decision Processes](markov-decision-processes.md) [Temporal-Difference Learning →](temporal-difference-learning.md)

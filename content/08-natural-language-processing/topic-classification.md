@@ -92,4 +92,7 @@ Topics are rarely mutually exclusive. A product incident can be both billing and
 - [scikit-learn User Guide: Text feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction)
 - [scikit-learn documentation: classification metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)
 
-> **Section — [Natural Language Processing](index.md):** ← [Text Classification](text-classification.md) · [Urgency Classification](urgency-classification.md) →
+> [!nav]
+> **Section** — [Natural Language Processing](index.md)
+>
+> [← Text Classification](text-classification.md) [Urgency Classification →](urgency-classification.md)

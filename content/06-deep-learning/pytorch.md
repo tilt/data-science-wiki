@@ -84,4 +84,7 @@ Dynamic graphs are easy to debug but easy to mutate accidentally. In-place tenso
 - [PyTorch documentation: Autograd mechanics](https://docs.pytorch.org/docs/2.7/notes/autograd.html)
 - [PyTorch tutorial: Automatic Differentiation with torch.autograd](https://docs.pytorch.org/tutorials/beginner/basics/autogradqs_tutorial.html)
 
-> **Section — [Deep Learning](index.md):** ← [Generative Adversarial Networks](generative-adversarial-networks.md) · [TensorFlow and Keras](tensorflow-and-keras.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Generative Adversarial Networks](generative-adversarial-networks.md) [TensorFlow and Keras →](tensorflow-and-keras.md)

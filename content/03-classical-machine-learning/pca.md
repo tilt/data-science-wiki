@@ -113,4 +113,7 @@ PCA is scale-sensitive, so standardize features when units differ. Outliers can 
 - [scikit-learn User Guide: PCA](https://scikit-learn.org/stable/modules/decomposition.html#pca)
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Dimensionality Reduction](dimensionality-reduction.md) · [Clustering](clustering.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Dimensionality Reduction](dimensionality-reduction.md) [Clustering →](clustering.md)

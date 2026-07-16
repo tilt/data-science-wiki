@@ -76,4 +76,7 @@ Occlusion and crossing paths cause identity switches. Aggregating over a broken 
 - [Bewley et al., 2016, Simple Online and Realtime Tracking](https://arxiv.org/abs/1602.00763)
 - [Wojke et al., 2017, Simple Online and Realtime Tracking with a Deep Association Metric](https://arxiv.org/abs/1703.07402)
 
-> **Section — [Video Understanding](index.md):** ← [Trigger Point Prediction](trigger-point-prediction.md) · [Real-Time Video Understanding](real-time-video-understanding.md) →
+> [!nav]
+> **Section** — [Video Understanding](index.md)
+>
+> [← Trigger Point Prediction](trigger-point-prediction.md) [Real-Time Video Understanding →](real-time-video-understanding.md)

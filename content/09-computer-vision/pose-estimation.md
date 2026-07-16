@@ -60,4 +60,7 @@ Crowding, truncation, and occlusion create association errors, not just localiza
 - [OpenPose: Realtime Multi-Person 2D Pose Estimation using Part Affinity Fields](https://arxiv.org/abs/1812.08008)
 - [Microsoft COCO: Common Objects in Context](https://arxiv.org/abs/1405.0312)
 
-> **Section — [Computer Vision](index.md):** ← [Rotated Object Detection](rotated-object-detection.md) · [Semantic Segmentation](semantic-segmentation.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [← Rotated Object Detection](rotated-object-detection.md) [Semantic Segmentation →](semantic-segmentation.md)

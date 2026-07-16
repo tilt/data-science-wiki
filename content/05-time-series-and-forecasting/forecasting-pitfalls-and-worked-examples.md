@@ -133,4 +133,7 @@ Most forecasting pitfalls are failures of [backtesting](backtesting.md), [rollin
 - [Hyndman & Athanasopoulos, FPP3: Evaluating point forecast accuracy](https://otexts.com/fpp3/accuracy.html)
 - [Hyndman & Athanasopoulos, FPP3: Time series cross-validation](https://otexts.com/fpp3/tscv.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Business-Cost-Aware Forecasting Losses](business-cost-aware-forecasting-losses.md) · [Probabilistic Forecasting](probabilistic-forecasting.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Business-Cost-Aware Forecasting Losses](business-cost-aware-forecasting-losses.md) [Probabilistic Forecasting →](probabilistic-forecasting.md)

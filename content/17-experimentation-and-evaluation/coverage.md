@@ -66,4 +66,7 @@ Counting rows can exaggerate coverage when examples are near-duplicates. Source 
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 - [scikit-learn documentation: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
 
-> **Section — [Experimentation and Evaluation](index.md):** ← [Comparing Generative AI and Classical ML Systems](comparing-generative-ai-and-classical-ml-systems.md) · [Abstention](abstention.md) →
+> [!nav]
+> **Section** — [Experimentation and Evaluation](index.md)
+>
+> [← Comparing Generative AI and Classical ML Systems](comparing-generative-ai-and-classical-ml-systems.md) [Abstention →](abstention.md)

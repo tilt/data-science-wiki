@@ -65,4 +65,7 @@ Use these metrics inside [search evaluation](search-evaluation.md) slices, not o
 - [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Evaluation](https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-in-information-retrieval-1.html)
 - [scikit-learn API: ndcg_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html)
 
-> **Section — [Information Retrieval and Search](index.md):** ← [Ranking and Retrieval Metrics](ranking-and-retrieval-metrics.md)
+> [!nav]
+> **Section** — [Information Retrieval and Search](index.md)
+>
+> [← Ranking and Retrieval Metrics](ranking-and-retrieval-metrics.md)

@@ -68,4 +68,7 @@ Conditioning on a post-treatment event, selected sample, or model flag can intro
 - [ProbabilityCourse: Conditional Probability](https://www.probabilitycourse.com/chapter1/1_4_0_conditional_probability.php)
 - [OpenStax Introductory Statistics 2e, Chapter 3 introduction](https://openstax.org/books/introductory-statistics-2e/pages/3-introduction)
 
-> **Section — [Probability and Statistics](index.md):** ← [Expectation and Variance](expectation-and-variance.md) · [Bayes Theorem](bayes-theorem.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Expectation and Variance](expectation-and-variance.md) [Bayes Theorem →](bayes-theorem.md)

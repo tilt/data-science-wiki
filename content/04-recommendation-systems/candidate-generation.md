@@ -56,4 +56,7 @@ Candidate recall limits final quality: the ranker cannot recover items never ret
 - [Li et al., 2010, A Contextual-Bandit Approach to Personalized News Article Recommendation](https://arxiv.org/abs/1003.0146)
 - [scikit-learn documentation: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Hybrid Recommenders](hybrid-recommenders.md) · [Ranking](ranking.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Hybrid Recommenders](hybrid-recommenders.md) [Ranking →](ranking.md)

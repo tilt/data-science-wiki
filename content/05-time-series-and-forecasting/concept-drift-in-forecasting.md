@@ -72,4 +72,7 @@ Forecast drift is visible through [forecast monitoring](forecast-monitoring.md),
 - [Gibbs and Candes, Adaptive Conformal Inference Under Distribution Shift](https://arxiv.org/abs/2106.00170)
 - [scikit-learn TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Forecasting System Design](forecasting-system-design.md) · [Online Learning for Forecasting](online-learning-for-forecasting.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Forecasting System Design](forecasting-system-design.md) [Online Learning for Forecasting →](online-learning-for-forecasting.md)

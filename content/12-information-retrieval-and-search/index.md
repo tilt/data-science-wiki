@@ -79,4 +79,7 @@ Read lexical retrieval first, then dense and hybrid, indexes and systems, and fi
 - [Natural Language Processing](../08-natural-language-processing/index.md) supplies the embeddings and tokenization retrieval relies on.
 - [Recommendation Systems](../04-recommendation-systems/index.md) shares candidate generation and ranking, and [Generative AI](../11-generative-ai/index.md) uses this as the retrieval half of RAG.
 
-> **Learning path — [Information retrieval and search](../00-home-and-navigation/learning-paths.md#information-retrieval-and-search):** [Inverted Indexes](inverted-indexes.md) →
+> [!nav]
+> **Learning path** — [Information retrieval and search](../00-home-and-navigation/learning-paths.md#information-retrieval-and-search)
+>
+> [Inverted Indexes →](inverted-indexes.md)

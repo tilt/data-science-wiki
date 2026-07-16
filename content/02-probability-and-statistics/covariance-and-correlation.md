@@ -91,4 +91,7 @@ Correlation measures linear association, not causality. Nonlinear dependence can
 - [SciPy statistics reference](https://docs.scipy.org/doc/scipy/reference/stats.html)
 - [OpenStax Introductory Statistics 2e, Chapter 4 introduction](https://openstax.org/books/introductory-statistics-2e/pages/4-introduction)
 
-> **Section — [Probability and Statistics](index.md):** ← [Bayes Theorem](bayes-theorem.md) · [Law of Large Numbers](law-of-large-numbers.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Bayes Theorem](bayes-theorem.md) [Law of Large Numbers →](law-of-large-numbers.md)

@@ -71,4 +71,7 @@ Leakage often enters through [feature engineering](feature-engineering.md): aggr
 - [scikit-learn User Guide: Common pitfalls and recommended practices](https://scikit-learn.org/stable/common_pitfalls.html)
 - [scikit-learn User Guide: Pipelines and composite estimators](https://scikit-learn.org/stable/modules/compose.html)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Model Selection](model-selection.md) · [Feature Engineering](feature-engineering.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Model Selection](model-selection.md) [Feature Engineering →](feature-engineering.md)

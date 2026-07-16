@@ -121,4 +121,7 @@ Reconstruction quality can reward the wrong information. A model can reconstruct
 - [He et al., 2021, Masked Autoencoders Are Scalable Vision Learners](https://arxiv.org/abs/2111.06377)
 - [Rombach et al., 2021, High-Resolution Image Synthesis with Latent Diffusion Models](https://arxiv.org/abs/2112.10752)
 
-> **Section — [Deep Learning](index.md):** ← [Representation Learning](representation-learning.md) · [Self-Supervised Learning](self-supervised-learning.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Representation Learning](representation-learning.md) [Self-Supervised Learning →](self-supervised-learning.md)

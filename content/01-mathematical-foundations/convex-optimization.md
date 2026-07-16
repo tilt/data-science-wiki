@@ -83,4 +83,7 @@ Convexity is a property of the chosen variables and formulation. Reparameterizin
 - [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
 - [Stanford EE364a: Convex Optimization I](https://web.stanford.edu/class/ee364a/)
 
-> **Section — [Mathematical Foundations](index.md):** ← [Optimization](optimization.md) · [Constrained Optimization](constrained-optimization.md) →
+> [!nav]
+> **Section** — [Mathematical Foundations](index.md)
+>
+> [← Optimization](optimization.md) [Constrained Optimization →](constrained-optimization.md)

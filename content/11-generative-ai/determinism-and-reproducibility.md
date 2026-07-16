@@ -62,4 +62,7 @@ Caching can mask nondeterminism during tests and then disappear in production. C
 - [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
 - [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Temperature and Determinism](temperature-and-determinism.md) · [Structured Output](structured-output.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Temperature and Determinism](temperature-and-determinism.md) [Structured Output →](structured-output.md)

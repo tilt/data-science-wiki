@@ -72,4 +72,7 @@ More agents can amplify errors through plausible summaries. Use typed handoffs, 
 - [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
 - [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Reflection and Reviewer Patterns](reflection-and-reviewer-patterns.md) · [Harnesses](harnesses.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Reflection and Reviewer Patterns](reflection-and-reviewer-patterns.md) [Harnesses →](harnesses.md)

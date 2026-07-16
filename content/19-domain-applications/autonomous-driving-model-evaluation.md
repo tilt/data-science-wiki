@@ -55,4 +55,7 @@ Long-tail events dominate safety risk. Evaluation fails when logs overrepresent 
 - [Caesar et al., nuScenes: A multimodal dataset for autonomous driving](https://arxiv.org/abs/1903.11027)
 - [nuScenes dataset](https://www.nuscenes.org/)
 
-> **Section — [Domain Applications](index.md):** ← [Autonomous Driving](autonomous-driving.md)
+> [!nav]
+> **Section** — [Domain Applications](index.md)
+>
+> [← Autonomous Driving](autonomous-driving.md)

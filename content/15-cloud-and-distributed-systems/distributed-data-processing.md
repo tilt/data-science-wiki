@@ -84,4 +84,7 @@ More partitions are not always better; scheduler overhead and small-file writes 
 - [Apache Spark SQL performance tuning](https://spark.apache.org/docs/latest/sql-performance-tuning.html)
 - [Apache Beam programming guide](https://beam.apache.org/documentation/programming-guide/)
 
-> **Section — [Cloud and Distributed Systems](index.md):** ← [GPU Systems](gpu-systems.md) · [Distributed Model Training](distributed-model-training.md) →
+> [!nav]
+> **Section** — [Cloud and Distributed Systems](index.md)
+>
+> [← GPU Systems](gpu-systems.md) [Distributed Model Training →](distributed-model-training.md)

@@ -162,4 +162,7 @@ Gates are learned and can fail. If the task, data, or optimization encourages th
 - [Cho et al., 2014, Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation](https://arxiv.org/abs/1406.1078)
 - [Chung et al., 2014, Empirical Evaluation of Gated Recurrent Neural Networks on Sequence Modeling](https://arxiv.org/abs/1412.3555)
 
-> **Section — [Deep Learning](index.md):** ← [Recurrent Neural Networks](recurrent-neural-networks.md) · [Attention](attention.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Recurrent Neural Networks](recurrent-neural-networks.md) [Attention →](attention.md)

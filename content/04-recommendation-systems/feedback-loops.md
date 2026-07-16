@@ -56,4 +56,7 @@ Feedback loops are not always harmful; personalization necessarily changes futur
 - [Li et al., 2010, Unbiased Offline Evaluation of Contextual-bandit-based News Article Recommendation Algorithms](https://arxiv.org/abs/1003.5956)
 - [Herlocker et al., 2004, Evaluating Collaborative Filtering Recommender Systems](https://doi.org/10.1145/963770.963772)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Diversity, Novelty, Coverage, and Serendipity](diversity-novelty-coverage-serendipity.md) · [Exploration Versus Exploitation](exploration-versus-exploitation.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Diversity, Novelty, Coverage, and Serendipity](diversity-novelty-coverage-serendipity.md) [Exploration Versus Exploitation →](exploration-versus-exploitation.md)

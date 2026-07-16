@@ -59,4 +59,7 @@ Prompt wording can hide policy conflicts. A prompt is not an access-control syst
 - [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)
 - [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [In-Context Learning](in-context-learning.md) · [Sampling and Decoding](sampling-and-decoding.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← In-Context Learning](in-context-learning.md) [Sampling and Decoding →](sampling-and-decoding.md)

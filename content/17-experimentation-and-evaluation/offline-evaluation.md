@@ -59,4 +59,7 @@ Offline logs can encode the old system's exposure bias. Random splits can leak f
 - [scikit-learn documentation: ndcg_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html)
 - [scikit-learn documentation: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
 
-> **Section — [Experimentation and Evaluation](index.md):** [Golden Datasets](golden-datasets.md) →
+> [!nav]
+> **Section** — [Experimentation and Evaluation](index.md)
+>
+> [Golden Datasets →](golden-datasets.md)

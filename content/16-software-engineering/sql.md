@@ -93,4 +93,7 @@ Common failures are string-concatenated queries, forgotten authorization predica
 - [PEP 249: Python Database API Specification v2.0](https://peps.python.org/pep-0249/)
 - [PostgreSQL documentation: Transactions](https://www.postgresql.org/docs/current/tutorial-transactions.html)
 
-> **Section — [Software Engineering](index.md):** ← [Python](python.md) · [Testing](testing.md) →
+> [!nav]
+> **Section** — [Software Engineering](index.md)
+>
+> [← Python](python.md) [Testing →](testing.md)

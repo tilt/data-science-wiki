@@ -72,4 +72,7 @@ The order of multiplication encodes meaning. $XW$ and $WX$ may both be valid in 
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
 - [NumPy documentation: `numpy.linalg.norm`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html)
 
-> **Section — [Mathematical Foundations](index.md):** ← [Vectors and Matrices](vectors-and-matrices.md) · [Rank](rank.md) →
+> [!nav]
+> **Section** — [Mathematical Foundations](index.md)
+>
+> [← Vectors and Matrices](vectors-and-matrices.md) [Rank →](rank.md)

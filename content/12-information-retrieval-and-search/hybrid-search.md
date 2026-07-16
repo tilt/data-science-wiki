@@ -92,6 +92,11 @@ Fusion can hide regressions: a dense retriever may improve paraphrase queries wh
 - [Cormack, Clarke, and Buettcher, Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods](https://doi.org/10.1145/1571941.1572114)
 - [Bruch, Gai, and Ingber, An Analysis of Fusion Functions for Hybrid Retrieval](https://arxiv.org/abs/2210.11934)
 
-> **Section — [Information Retrieval and Search](index.md):** ← [Dense Retrieval](dense-retrieval.md) · [Reranking](reranking.md) →
-
-> **Learning path — [Information retrieval and search](../00-home-and-navigation/learning-paths.md#information-retrieval-and-search):** ← [Dense Retrieval](dense-retrieval.md) · [Search Evaluation](search-evaluation.md) →
+> [!nav]
+> **Section** — [Information Retrieval and Search](index.md)
+>
+> [← Dense Retrieval](dense-retrieval.md) [Reranking →](reranking.md)
+>
+> **Learning path** — [Information retrieval and search](../00-home-and-navigation/learning-paths.md#information-retrieval-and-search)
+>
+> [← Dense Retrieval](dense-retrieval.md) [Search Evaluation →](search-evaluation.md)

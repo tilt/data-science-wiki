@@ -64,4 +64,7 @@ Long contexts increase attention memory and retrieval confusion. Architecture al
 - [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Foundation Models](foundation-models.md) · [Tokenization](tokenization.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Foundation Models](foundation-models.md) [Tokenization →](tokenization.md)

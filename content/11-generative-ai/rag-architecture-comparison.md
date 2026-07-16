@@ -128,4 +128,7 @@ These families are reference points on a spectrum, not mutually exclusive produc
 - [Gao et al., 2023, Retrieval-Augmented Generation for Large Language Models: A Survey](https://arxiv.org/abs/2312.10997)
 - [Cormack, Clarke, and Buettcher, Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods](https://doi.org/10.1145/1571941.1572114)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [RAG Evaluation](rag-evaluation.md) · [RAG Benchmark Design](rag-benchmark-design.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← RAG Evaluation](rag-evaluation.md) [RAG Benchmark Design →](rag-benchmark-design.md)

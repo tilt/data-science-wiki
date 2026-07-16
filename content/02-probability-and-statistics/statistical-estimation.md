@@ -70,4 +70,7 @@ More data reduces sampling variance but does not fix a wrong estimand, biased sa
 - [OpenStax Introductory Statistics 2e, Chapter 8 introduction](https://openstax.org/books/introductory-statistics-2e/pages/8-introduction)
 - [SciPy statistics reference](https://docs.scipy.org/doc/scipy/reference/stats.html)
 
-> **Section — [Probability and Statistics](index.md):** ← [Markov Renewal Processes](markov-renewal-processes.md) · [Maximum Likelihood](maximum-likelihood.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Markov Renewal Processes](markov-renewal-processes.md) [Maximum Likelihood →](maximum-likelihood.md)

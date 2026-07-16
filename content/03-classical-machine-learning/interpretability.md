@@ -73,4 +73,7 @@ Feature importance is not causality. Correlated features can hide each other's i
 - [scikit-learn User Guide: Permutation feature importance](https://scikit-learn.org/stable/modules/permutation_importance.html)
 - [scikit-learn User Guide: Partial dependence](https://scikit-learn.org/stable/modules/partial_dependence.html)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Gradient Boosting](gradient-boosting.md) · [Unsupervised Learning](unsupervised-learning.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Gradient Boosting](gradient-boosting.md) [Unsupervised Learning →](unsupervised-learning.md)

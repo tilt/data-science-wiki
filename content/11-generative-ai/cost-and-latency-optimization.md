@@ -51,4 +51,7 @@ Shortening prompts can remove evidence and increase hallucinations. Aggressive b
 - [OpenAI API documentation: Cost optimization](https://platform.openai.com/docs/guides/cost-optimization)
 - [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Quantization](quantization.md) · [Guardrails](guardrails.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Quantization](quantization.md) [Guardrails →](guardrails.md)

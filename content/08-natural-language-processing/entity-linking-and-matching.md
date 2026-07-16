@@ -75,4 +75,7 @@ Alias tables age quickly. Mergers, product renames, transliteration, and abbrevi
 - [Manning, Raghavan, and Schutze, Introduction to Information Retrieval: Near-duplicates and shingling](https://nlp.stanford.edu/IR-book/html/htmledition/near-duplicates-and-shingling-1.html)
 - [scikit-learn API: TfidfVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)
 
-> **Section — [Natural Language Processing](index.md):** ← [Information Extraction](information-extraction.md) · [Semantic Textual Similarity](semantic-textual-similarity.md) →
+> [!nav]
+> **Section** — [Natural Language Processing](index.md)
+>
+> [← Information Extraction](information-extraction.md) [Semantic Textual Similarity →](semantic-textual-similarity.md)

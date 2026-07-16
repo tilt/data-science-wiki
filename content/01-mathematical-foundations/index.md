@@ -86,4 +86,7 @@ Read linear algebra first, then calculus and optimization, then information theo
 - [Probability and Statistics](../02-probability-and-statistics/index.md) builds estimation and inference on this notation.
 - [Classical Machine Learning](../03-classical-machine-learning/index.md) and [Deep Learning](../06-deep-learning/index.md) turn these operations into models and training loops.
 
-> **Learning path — [Foundations](../00-home-and-navigation/learning-paths.md#foundations):** [Probability and Statistics](../02-probability-and-statistics/index.md) →
+> [!nav]
+> **Learning path** — [Foundations](../00-home-and-navigation/learning-paths.md#foundations)
+>
+> [Probability and Statistics →](../02-probability-and-statistics/index.md)

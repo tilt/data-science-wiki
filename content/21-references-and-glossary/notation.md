@@ -49,4 +49,7 @@ Vectors are usually lowercase bold or plain lowercase depending on page style. M
 
 Use $k$ for a cutoff in ranked retrieval, $n$ for sample size, and $t$ for time index. When a metric has a specialized definition, link to the metric page or [references](references.md) instead of redefining it inline.
 
-> **Section — [References and Glossary](index.md):** ← [Acronyms](acronyms.md) · [Metrics Glossary](metrics.md) →
+> [!nav]
+> **Section** — [References and Glossary](index.md)
+>
+> [← Acronyms](acronyms.md) [Metrics Glossary →](metrics.md)

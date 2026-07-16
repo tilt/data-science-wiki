@@ -80,4 +80,7 @@ Pattern misuse adds vocabulary without reducing complexity. Warning signs are in
 - [Python documentation: typing Protocol](https://docs.python.org/3/library/typing.html)
 - [Python documentation: abc](https://docs.python.org/3/library/abc.html)
 
-> **Section — [Software Engineering](index.md):** ← [Software Architecture](software-architecture.md) · [API Design](api-design.md) →
+> [!nav]
+> **Section** — [Software Engineering](index.md)
+>
+> [← Software Architecture](software-architecture.md) [API Design →](api-design.md)

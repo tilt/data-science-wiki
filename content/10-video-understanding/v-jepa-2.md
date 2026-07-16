@@ -132,4 +132,7 @@ Planning claims depend on the action-conditioned model, the data distribution, a
 - [Assran et al., 2025, V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning](https://arxiv.org/abs/2506.09985)
 - [Bardes et al., 2024, Revisiting Feature Prediction for Learning Visual Representations from Video](https://arxiv.org/abs/2404.08471)
 
-> **Section — [Video Understanding](index.md):** ← [V-JEPA](v-jepa.md) · [V-JEPA 2 versus Vision-Language Models](v-jepa-2-versus-vision-language-models.md) →
+> [!nav]
+> **Section** — [Video Understanding](index.md)
+>
+> [← V-JEPA](v-jepa.md) [V-JEPA 2 versus Vision-Language Models →](v-jepa-2-versus-vision-language-models.md)

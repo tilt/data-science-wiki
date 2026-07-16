@@ -59,4 +59,7 @@ Pointwise relevance can over-optimize short-term clicks. List constraints can hi
 - [scikit-learn documentation: ndcg_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html)
 - [Herlocker et al., 2004, Evaluating Collaborative Filtering Recommender Systems](https://doi.org/10.1145/963770.963772)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Candidate Generation](candidate-generation.md) · [Retrieval and Ranking Architectures](retrieval-and-ranking-architectures.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Candidate Generation](candidate-generation.md) [Retrieval and Ranking Architectures →](retrieval-and-ranking-architectures.md)

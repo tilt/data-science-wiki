@@ -73,4 +73,7 @@ Do not report only accuracy when class priors are skewed or costs are asymmetric
 - [scikit-learn User Guide: Classification metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Regression](regression.md) · [Linear Models](linear-models.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Regression](regression.md) [Linear Models →](linear-models.md)

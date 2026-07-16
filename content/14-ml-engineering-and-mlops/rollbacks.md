@@ -59,4 +59,7 @@ Rollbacks fail when database migrations are irreversible, features were renamed 
 - [Kubernetes Deployments: rolling back a deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
 - [Google SRE Book: Managing Incidents](https://sre.google/sre-book/managing-incidents/)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Canary Deployment](canary-deployment.md) · [A/B Testing](a-b-testing.md) →
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Canary Deployment](canary-deployment.md) [A/B Testing →](a-b-testing.md)

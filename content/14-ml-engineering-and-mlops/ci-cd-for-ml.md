@@ -68,4 +68,7 @@ CI/CD becomes theater when it retrains on mutable tables, treats aggregate accur
 - [GitHub Actions workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)
 - [Google Cloud: MLOps continuous delivery and automation pipelines](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Training Pipelines](training-pipelines.md) · [Experiment Tracking](experiment-tracking.md) →
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Training Pipelines](training-pipelines.md) [Experiment Tracking →](experiment-tracking.md)

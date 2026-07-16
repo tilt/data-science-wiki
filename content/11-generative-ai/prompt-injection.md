@@ -56,4 +56,7 @@ Keyword filters are easy to evade. The most damaging failures occur when injecte
 - [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
 - [NIST AI Risk Management Framework 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Guardrails](guardrails.md) · [Data Privacy](data-privacy.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Guardrails](guardrails.md) [Data Privacy →](data-privacy.md)

@@ -75,4 +75,7 @@ Schema checks can pass while semantics drift. Aggregate checks can hide segment-
 - [Great Expectations documentation: Try GX Core](https://docs.greatexpectations.io/docs/core/introduction/try_gx/)
 - [dbt documentation: About data tests property](https://docs.getdbt.com/reference/resource-properties/data-tests)
 
-> **Section — [Data Engineering](index.md):** ← [dbt](dbt.md) · [Data Contracts](data-contracts.md) →
+> [!nav]
+> **Section** — [Data Engineering](index.md)
+>
+> [← dbt](dbt.md) [Data Contracts →](data-contracts.md)

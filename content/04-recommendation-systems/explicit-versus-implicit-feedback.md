@@ -63,4 +63,7 @@ Explicit feedback is sparse and can be biased toward users with strong opinions.
 - [Hu, Koren, and Volinsky, 2008, Collaborative Filtering for Implicit Feedback Datasets](https://doi.org/10.1109/ICDM.2008.22)
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Utility and Interaction Matrices](utility-and-interaction-matrices.md) · [Content-Based Recommendation](content-based-recommendation.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Utility and Interaction Matrices](utility-and-interaction-matrices.md) [Content-Based Recommendation →](content-based-recommendation.md)

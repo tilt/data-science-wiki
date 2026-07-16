@@ -73,4 +73,7 @@ Bayes' theorem is exact only relative to its model: the prior, sensitivity, spec
 - [Bayes' theorem](https://en.wikipedia.org/wiki/Bayes%27_theorem)
 - [ProbabilityCourse: Conditional Probability](https://www.probabilitycourse.com/chapter1/1_4_0_conditional_probability.php)
 
-> **Section — [Probability and Statistics](index.md):** ← [Conditional Probability](conditional-probability.md) · [Covariance and Correlation](covariance-and-correlation.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Conditional Probability](conditional-probability.md) [Covariance and Correlation →](covariance-and-correlation.md)

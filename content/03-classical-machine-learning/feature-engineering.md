@@ -71,4 +71,7 @@ Target encodings, rolling aggregates, and normalization are high-risk leakage po
 - [scikit-learn User Guide: Preprocessing data](https://scikit-learn.org/stable/modules/preprocessing.html)
 - [scikit-learn User Guide: Pipelines](https://scikit-learn.org/stable/modules/compose.html)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Data Leakage](data-leakage.md) · [Decision Trees](decision-trees.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Data Leakage](data-leakage.md) [Decision Trees →](decision-trees.md)

@@ -50,4 +50,7 @@ The historical caveat is that "world model" is used broadly. Some systems predic
 - [Assran et al., 2023, Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture](https://arxiv.org/abs/2301.08243)
 - [Bardes et al., 2024, Revisiting Feature Prediction for Learning Visual Representations from Video](https://arxiv.org/abs/2404.08471)
 
-> **Section — [History of AI and Machine Learning](index.md):** ← [Development of Tool-Using Language Models and Agents](development-of-tool-using-language-models-and-agents.md)
+> [!nav]
+> **Section** — [History of AI and Machine Learning](index.md)
+>
+> [← Development of Tool-Using Language Models and Agents](development-of-tool-using-language-models-and-agents.md)

@@ -89,4 +89,7 @@ Classifiers can learn background, acquisition device, border artifacts, or water
 - [scikit-learn example: Recognizing hand-written digits](https://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html)
 - [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
 
-> **Section — [Computer Vision](index.md):** ← [Data Augmentation](data-augmentation.md) · [Object Detection](object-detection.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [← Data Augmentation](data-augmentation.md) [Object Detection →](object-detection.md)

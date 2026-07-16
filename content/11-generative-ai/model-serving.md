@@ -72,4 +72,7 @@ Retries can duplicate side effects unless tool calls are idempotent. Fallback mo
 - [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
 - [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Local Versus Hosted Models](local-versus-hosted-models.md) · [Quantization](quantization.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Local Versus Hosted Models](local-versus-hosted-models.md) [Quantization →](quantization.md)

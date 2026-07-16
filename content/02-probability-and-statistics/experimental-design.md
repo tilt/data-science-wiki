@@ -70,4 +70,7 @@ Randomization does not fix attrition, interference between units, metric peeking
 - [Design of experiments](https://en.wikipedia.org/wiki/Design_of_experiments)
 - [OpenStax Introductory Statistics 2e, Chapter 9 introduction](https://openstax.org/books/introductory-statistics-2e/pages/9-introduction)
 
-> **Section — [Probability and Statistics](index.md):** ← [Statistical Modelling](statistical-modelling.md)
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Statistical Modelling](statistical-modelling.md)

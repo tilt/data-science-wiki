@@ -63,4 +63,7 @@ A useful latent rollout is not automatically a faithful simulator. Evaluation mu
 - [Ha and Schmidhuber, 2018, World Models](https://arxiv.org/abs/1803.10122)
 - [Assran et al., 2025, V-JEPA 2](https://arxiv.org/abs/2506.09985)
 
-> **Section — [Video Understanding](index.md):** ← [V-JEPA 2 versus Vision-Language Models](v-jepa-2-versus-vision-language-models.md) · [World Models and JEPA](world-models-and-jepa.md) →
+> [!nav]
+> **Section** — [Video Understanding](index.md)
+>
+> [← V-JEPA 2 versus Vision-Language Models](v-jepa-2-versus-vision-language-models.md) [World Models and JEPA →](world-models-and-jepa.md)

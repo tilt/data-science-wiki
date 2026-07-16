@@ -67,4 +67,7 @@ Content recommenders can overspecialize because they look for more of what the p
 - [scikit-learn documentation: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)
 - [Adomavicius and Tuzhilin, 2005, Toward the Next Generation of Recommender Systems](https://doi.org/10.1109/TKDE.2005.99)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Explicit Versus Implicit Feedback](explicit-versus-implicit-feedback.md) · [Collaborative Filtering](collaborative-filtering.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Explicit Versus Implicit Feedback](explicit-versus-implicit-feedback.md) [Collaborative Filtering →](collaborative-filtering.md)

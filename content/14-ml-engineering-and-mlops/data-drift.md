@@ -70,4 +70,7 @@ Drift alerts become noise when they ignore seasonality, small samples, or intend
 - [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
 - [SciPy documentation: `scipy.stats.ks_2samp`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Reliability](reliability.md) · [Concept Drift](concept-drift.md) →
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Reliability](reliability.md) [Concept Drift →](concept-drift.md)

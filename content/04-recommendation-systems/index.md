@@ -97,4 +97,7 @@ Read from data representation through models, ranking, evaluation, and online le
 - [Information Retrieval and Search](../12-information-retrieval-and-search/index.md) shares the candidate-generation and ranking machinery.
 - [Experimentation and Evaluation](../17-experimentation-and-evaluation/index.md) provides the online tests that decide whether a recommender actually helps.
 
-> **Learning path — [Recommender systems](../00-home-and-navigation/learning-paths.md#recommender-systems):** [Collaborative Filtering](collaborative-filtering.md) →
+> [!nav]
+> **Learning path** — [Recommender systems](../00-home-and-navigation/learning-paths.md#recommender-systems)
+>
+> [Collaborative Filtering →](collaborative-filtering.md)

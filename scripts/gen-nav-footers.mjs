@@ -91,46 +91,64 @@ const learningPaths = []
   }
 }
 
-// --- Build footer text for a page's membership in a path ---
-const footerFor = (cur, p, i) => {
+// --- Build one nav row per membership: a label (kind + linked name) and a pager
+// (prev/next chips with arrows). All rows render inside a single [!nav] callout,
+// styled as a compact, non-wrapping pager by quartz/styles/custom.scss. Links are
+// normal Markdown, so they still resolve and are checked like any other link. ---
+const memberBlock = (cur, p, i) => {
   const prev = i > 0 ? p.pages[i - 1] : null
   const next = i < p.pages.length - 1 ? p.pages[i + 1] : null
-  const prevLink = prev ? "← [" + titleOf(prev) + "](" + relLink(cur, prev) + ")" : null
-  const nextLink = next ? "[" + titleOf(next) + "](" + relLink(cur, next) + ") →" : null
-  if (p.kind === "section") {
-    // The section name itself links to the section overview, so the prev/next
-    // links carry the whole chapter navigation with no redundant middle item.
-    const head = "> **Section — [" + p.name + "](" + relLink(cur, p.index) + "):**"
-    const nav = [prevLink, nextLink].filter(Boolean)
-    return nav.length ? head + " " + nav.join(" · ") : head
-  }
-  // The path name links to its overview section, so prev/next carry the rest.
-  const head =
-    "> **Learning path — [" + p.name + "](" + relLink(cur, LEARNING_PATHS) + "#" + p.anchor + "):**"
-  const nav = [prevLink, nextLink].filter(Boolean)
-  return nav.length ? head + " " + nav.join(" · ") : head
+  const nameLink =
+    p.kind === "section"
+      ? "[" + p.name + "](" + relLink(cur, p.index) + ")"
+      : "[" + p.name + "](" + relLink(cur, LEARNING_PATHS) + "#" + p.anchor + ")"
+  const kind = p.kind === "section" ? "Section" : "Learning path"
+  const chips = []
+  if (prev) chips.push("[← " + titleOf(prev) + "](" + relLink(cur, prev) + ")")
+  if (next) chips.push("[" + titleOf(next) + " →](" + relLink(cur, next) + ")")
+  return { label: "**" + kind + "** — " + nameLink, pager: chips.join(" ") }
 }
 
-// --- Collect memberships per page (section footer first, then learning paths) ---
-const memberships = new Map() // repoRel -> [footerString,...]
-const add = (rel, text) => {
+const memberships = new Map() // repoRel -> [{label, pager}, ...]
+const add = (rel, block) => {
   if (!memberships.has(rel)) memberships.set(rel, [])
-  memberships.get(rel).push(text)
+  memberships.get(rel).push(block)
 }
-for (const p of sectionPaths) p.pages.forEach((pg, i) => add(pg, footerFor(pg, p, i)))
-for (const p of learningPaths) p.pages.forEach((pg, i) => add(pg, footerFor(pg, p, i)))
+for (const p of sectionPaths) p.pages.forEach((pg, i) => add(pg, memberBlock(pg, p, i)))
+for (const p of learningPaths) p.pages.forEach((pg, i) => add(pg, memberBlock(pg, p, i)))
 
-// --- Apply (strip old footers, append regenerated) ---
+// One callout per page; a blank ">" between rows makes each its own paragraph so
+// the label and pager style independently (odd = label, even = pager).
+const composeCallout = (blocks) => {
+  const rows = []
+  for (const b of blocks) rows.push("> " + b.label, "> " + b.pager)
+  return "> [!nav]\n" + rows.join("\n>\n")
+}
+
+// Strip any prior footer (the [!nav] callout block, or the legacy single-line
+// footers) before appending the freshly generated callout.
+const stripFooters = (raw) => {
+  const lines = raw.split("\n")
+  const kept = []
+  for (let i = 0; i < lines.length; i++) {
+    if (/^>\s*\[!nav\]/i.test(lines[i])) {
+      i++
+      while (i < lines.length && /^>/.test(lines[i])) i++
+      i--
+      continue
+    }
+    if (/^>\s*\*\*(Section|Learning path) —/.test(lines[i])) continue
+    kept.push(lines[i])
+  }
+  return kept.join("\n").replace(/\s+$/, "")
+}
+
+// --- Apply ---
 let changed = 0
 const drift = []
-for (const [rel, footers] of memberships) {
+for (const [rel, blocks] of memberships) {
   const raw = readFile(rel)
-  const body = raw
-    .split("\n")
-    .filter((l) => !/^>\s*\*\*(Section|Learning path) —/.test(l))
-    .join("\n")
-    .replace(/\s+$/, "")
-  const nextContent = body + "\n\n" + footers.join("\n\n") + "\n"
+  const nextContent = stripFooters(raw) + "\n\n" + composeCallout(blocks) + "\n"
   if (nextContent !== raw) {
     changed++
     drift.push(rel)

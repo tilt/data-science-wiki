@@ -73,4 +73,7 @@ Optional stopping, multiple comparisons, peeking at segments, and using the wron
 - [OpenStax Introductory Statistics 2e, Chapter 9 introduction](https://openstax.org/books/introductory-statistics-2e/pages/9-introduction)
 - [SciPy `ttest_ind` reference](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html)
 
-> **Section — [Probability and Statistics](index.md):** ← [Confidence Intervals](confidence-intervals.md) · [Statistical Modelling](statistical-modelling.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Confidence Intervals](confidence-intervals.md) [Statistical Modelling →](statistical-modelling.md)

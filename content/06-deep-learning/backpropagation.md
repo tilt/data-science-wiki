@@ -106,6 +106,11 @@ Backpropagation through many repeated transformations can make gradients vanish 
 - [PyTorch documentation: Autograd mechanics](https://docs.pytorch.org/docs/2.7/notes/autograd.html)
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 8: Optimization for Training Deep Models](https://www.deeplearningbook.org/contents/optimization.html)
 
-> **Section — [Deep Learning](index.md):** ← [Neural Network Fundamentals](neural-network-fundamentals.md) · [Activation Functions](activation-functions.md) →
-
-> **Learning path — [Deep learning](../00-home-and-navigation/learning-paths.md#deep-learning):** ← [Neural Network Fundamentals](neural-network-fundamentals.md) · [Optimizers](optimizers.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Neural Network Fundamentals](neural-network-fundamentals.md) [Activation Functions →](activation-functions.md)
+>
+> **Learning path** — [Deep learning](../00-home-and-navigation/learning-paths.md#deep-learning)
+>
+> [← Neural Network Fundamentals](neural-network-fundamentals.md) [Optimizers →](optimizers.md)

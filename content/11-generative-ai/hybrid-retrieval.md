@@ -66,4 +66,7 @@ Fusion weights are corpus-specific. Evaluate exact-match queries separately from
 - [Faiss documentation](https://faiss.ai/)
 - [OpenAI API documentation: Embeddings](https://platform.openai.com/docs/guides/embeddings)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Retrieval Pipelines](retrieval-pipelines.md) · [Query Rewriting](query-rewriting.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Retrieval Pipelines](retrieval-pipelines.md) [Query Rewriting →](query-rewriting.md)

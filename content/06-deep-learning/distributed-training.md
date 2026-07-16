@@ -73,4 +73,7 @@ Scaling is not automatic. Larger global batches can require learning-rate warmup
 - [PyTorch documentation: DistributedDataParallel](https://docs.pytorch.org/docs/2.7/generated/torch.nn.parallel.DistributedDataParallel.html)
 - [Goyal et al., 2017, Accurate, Large Minibatch SGD: Training ImageNet in 1 Hour](https://arxiv.org/abs/1706.02677)
 
-> **Section — [Deep Learning](index.md):** ← [Mixed Precision](mixed-precision.md)
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Mixed Precision](mixed-precision.md)

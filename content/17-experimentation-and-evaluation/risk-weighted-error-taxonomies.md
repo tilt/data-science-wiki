@@ -61,4 +61,7 @@ Weights are governance choices, not statistical facts. Keep examples for every s
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 - [scikit-learn documentation: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
 
-> **Section — [Experimentation and Evaluation](index.md):** ← [Abstention](abstention.md)
+> [!nav]
+> **Section** — [Experimentation and Evaluation](index.md)
+>
+> [← Abstention](abstention.md)

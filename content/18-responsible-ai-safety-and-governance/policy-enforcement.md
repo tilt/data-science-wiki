@@ -94,4 +94,7 @@ That test belongs in [adversarial evaluation](adversarial-evaluation.md) and rel
 - [OWASP LLM06:2025 Excessive Agency](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/)
 - [NIST AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 
-> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [PII Leakage](pii-leakage.md) · [Fairness](fairness.md) →
+> [!nav]
+> **Section** — [Responsible AI, Safety, and Governance](index.md)
+>
+> [← PII Leakage](pii-leakage.md) [Fairness →](fairness.md)

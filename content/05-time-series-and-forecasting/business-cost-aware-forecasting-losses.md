@@ -102,4 +102,7 @@ Cost-aware losses connect [forecast error metrics](forecast-error-metrics.md) to
 - [Hyndman & Athanasopoulos, FPP3: Distributional forecast accuracy](https://otexts.com/fpp3/prediction-intervals.html)
 - [Romano, Patterson, and Candes, Conformalized Quantile Regression](https://arxiv.org/abs/1905.03222)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Forecast Error Metrics](forecast-error-metrics.md) · [Forecasting Pitfalls and Worked Examples](forecasting-pitfalls-and-worked-examples.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Forecast Error Metrics](forecast-error-metrics.md) [Forecasting Pitfalls and Worked Examples →](forecasting-pitfalls-and-worked-examples.md)

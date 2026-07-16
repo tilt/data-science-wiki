@@ -92,4 +92,7 @@ Fixed thresholds break under lighting changes, blur, and sensor shifts. Morpholo
 - [SciPy documentation: `scipy.signal.convolve2d`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.convolve2d.html)
 - [SciPy documentation: `scipy.ndimage.sobel`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.ndimage.sobel.html)
 
-> **Section — [Computer Vision](index.md):** ← [Image Representation](image-representation.md) · [Feature Extraction](feature-extraction.md) →
+> [!nav]
+> **Section** — [Computer Vision](index.md)
+>
+> [← Image Representation](image-representation.md) [Feature Extraction →](feature-extraction.md)

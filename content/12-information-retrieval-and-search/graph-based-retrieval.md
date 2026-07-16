@@ -73,4 +73,7 @@ Graph edges are editorial claims. Citation edges can encode popularity rather th
 - [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Link analysis](https://nlp.stanford.edu/IR-book/html/htmledition/link-analysis-1.html)
 - [NetworkX Documentation: Link Analysis](https://networkx.org/documentation/stable/reference/algorithms/link_analysis.html)
 
-> **Section — [Information Retrieval and Search](index.md):** ← [ELK Stack](elk-stack.md) · [Knowledge Graphs](knowledge-graphs.md) →
+> [!nav]
+> **Section** — [Information Retrieval and Search](index.md)
+>
+> [← ELK Stack](elk-stack.md) [Knowledge Graphs →](knowledge-graphs.md)

@@ -71,4 +71,7 @@ Priors matter most with limited data. Computation can also be the weak link: app
 - [Bayesian statistics](https://en.wikipedia.org/wiki/Bayesian_statistics)
 - [SciPy beta distribution](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html)
 
-> **Section — [Probability and Statistics](index.md):** ← [Maximum A Posteriori Estimation](maximum-a-posteriori-estimation.md) · [Confidence Intervals](confidence-intervals.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Maximum A Posteriori Estimation](maximum-a-posteriori-estimation.md) [Confidence Intervals →](confidence-intervals.md)

@@ -80,4 +80,7 @@ No prompt sentence is a complete defense. Filters can miss obfuscated, multiling
 - [Greshake et al., Indirect Prompt Injection](https://arxiv.org/abs/2302.12173)
 - [NIST AI 600-1: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
 
-> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Adversarial Evaluation](adversarial-evaluation.md) · [Security](security.md) →
+> [!nav]
+> **Section** — [Responsible AI, Safety, and Governance](index.md)
+>
+> [← Adversarial Evaluation](adversarial-evaluation.md) [Security →](security.md)

@@ -76,4 +76,7 @@ Scaling can dominate unsupervised results. Internal metrics can reward artificia
 - [scikit-learn User Guide: Unsupervised learning](https://scikit-learn.org/stable/unsupervised_learning.html)
 - [scikit-learn User Guide: Clustering](https://scikit-learn.org/stable/modules/clustering.html)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Interpretability](interpretability.md) · [Dimensionality Reduction](dimensionality-reduction.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Interpretability](interpretability.md) [Dimensionality Reduction →](dimensionality-reduction.md)

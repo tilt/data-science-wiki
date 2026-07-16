@@ -74,4 +74,7 @@ KL divergence becomes infinite if $q(x)=0$ for an event with $p(x)>0$. Empirical
 - [SciPy documentation: `scipy.special.rel_entr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.rel_entr.html)
 - [MacKay, Information Theory, Inference, and Learning Algorithms](https://www.inference.org.uk/itprnn/book.pdf)
 
-> **Section — [Mathematical Foundations](index.md):** ← [Cross Entropy](cross-entropy.md) · [Mutual Information](mutual-information.md) →
+> [!nav]
+> **Section** — [Mathematical Foundations](index.md)
+>
+> [← Cross Entropy](cross-entropy.md) [Mutual Information →](mutual-information.md)

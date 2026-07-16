@@ -79,4 +79,7 @@ The scale of features changes the effective penalty, so standardize numeric pred
 - [scikit-learn User Guide: Ridge regression and Lasso](https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification)
 - [Tibshirani, 1996, Regression Shrinkage and Selection via the Lasso](https://doi.org/10.1111/j.2517-6161.1996.tb02080.x)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Support Vector Machines](support-vector-machines.md) · [Bias-Variance Trade-Off](bias-variance-trade-off.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Support Vector Machines](support-vector-machines.md) [Bias-Variance Trade-Off →](bias-variance-trade-off.md)

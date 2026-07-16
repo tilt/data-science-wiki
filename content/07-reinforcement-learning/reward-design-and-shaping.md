@@ -86,4 +86,7 @@ When a good scalar reward is hard to write, it can be learned. Inverse RL infers
 - [Amodei et al., 2016, Concrete Problems in AI Safety](https://arxiv.org/abs/1606.06565)
 - [Krakovna et al., 2020, Specification Gaming: The Flip Side of AI Ingenuity](https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/)
 
-> **Section — [Reinforcement Learning](index.md):** ← [Exploration in Reinforcement Learning](exploration-in-reinforcement-learning.md) · [Offline and Model-Based Reinforcement Learning](offline-and-model-based-reinforcement-learning.md) →
+> [!nav]
+> **Section** — [Reinforcement Learning](index.md)
+>
+> [← Exploration in Reinforcement Learning](exploration-in-reinforcement-learning.md) [Offline and Model-Based Reinforcement Learning →](offline-and-model-based-reinforcement-learning.md)

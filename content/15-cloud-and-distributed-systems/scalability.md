@@ -68,4 +68,7 @@ Scaling the API layer cannot fix a single-writer database, hot key, slow decoder
 - [Amazon EC2 Auto Scaling target tracking](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html)
 - [Cloud Run concurrency](https://docs.cloud.google.com/run/docs/about-concurrency)
 
-> **Section — [Cloud and Distributed Systems](index.md):** ← [Storage and Decoding Bottlenecks](storage-and-decoding-bottlenecks.md) · [Reliability](reliability.md) →
+> [!nav]
+> **Section** — [Cloud and Distributed Systems](index.md)
+>
+> [← Storage and Decoding Bottlenecks](storage-and-decoding-bottlenecks.md) [Reliability →](reliability.md)

@@ -53,4 +53,7 @@ Energy forecasting is a high-seasonality case of [demand forecasting](demand-for
 - [Hyndman & Athanasopoulos, FPP3: Forecasting electricity demand](https://otexts.com/fpp3/forecasting.html)
 - [GEFCom2012 load forecasting paper](https://www.sciencedirect.com/science/article/pii/S0169207013000745)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Demand Forecasting](demand-forecasting.md) · [Predictive Maintenance](predictive-maintenance.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Demand Forecasting](demand-forecasting.md) [Predictive Maintenance →](predictive-maintenance.md)

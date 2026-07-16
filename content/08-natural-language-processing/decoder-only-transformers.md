@@ -81,6 +81,11 @@ A missing or misaligned causal mask leaks answers during training or evaluation.
 - [PyTorch documentation: MultiheadAttention](https://docs.pytorch.org/docs/2.7/generated/torch.nn.MultiheadAttention.html)
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
 
-> **Section — [Natural Language Processing](index.md):** ← [BERT-Style Encoders](bert-style-encoders.md) · [Text Classification](text-classification.md) →
-
-> **Learning path — [Natural language processing](../00-home-and-navigation/learning-paths.md#natural-language-processing):** ← [Embeddings](embeddings.md) · [Text Classification](text-classification.md) →
+> [!nav]
+> **Section** — [Natural Language Processing](index.md)
+>
+> [← BERT-Style Encoders](bert-style-encoders.md) [Text Classification →](text-classification.md)
+>
+> **Learning path** — [Natural language processing](../00-home-and-navigation/learning-paths.md#natural-language-processing)
+>
+> [← Embeddings](embeddings.md) [Text Classification →](text-classification.md)

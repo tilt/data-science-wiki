@@ -81,4 +81,7 @@ Read representation, then models, then the task families, ending on evaluation.
 - [Deep Learning](../06-deep-learning/index.md) supplies the transformer architectures underneath.
 - [Generative AI](../11-generative-ai/index.md) and [Information Retrieval](../12-information-retrieval-and-search/index.md) build on these representations and tasks.
 
-> **Learning path — [Natural language processing](../00-home-and-navigation/learning-paths.md#natural-language-processing):** [Tokenization](tokenization.md) →
+> [!nav]
+> **Learning path** — [Natural language processing](../00-home-and-navigation/learning-paths.md#natural-language-processing)
+>
+> [Tokenization →](tokenization.md)

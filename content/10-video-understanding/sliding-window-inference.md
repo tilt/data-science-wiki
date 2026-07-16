@@ -58,4 +58,7 @@ Stride determines both cost and worst-case detection delay. Windows split action
 - [Wang et al., 2016, Temporal Segment Networks](https://arxiv.org/abs/1608.00859)
 - [Wu et al., 2021, Towards High-Quality Temporal Action Detection with Sparse Proposals](https://arxiv.org/abs/2109.08847)
 
-> **Section — [Video Understanding](index.md):** ← [Temporal Localization](temporal-localization.md) · [Trigger Point Prediction](trigger-point-prediction.md) →
+> [!nav]
+> **Section** — [Video Understanding](index.md)
+>
+> [← Temporal Localization](temporal-localization.md) [Trigger Point Prediction →](trigger-point-prediction.md)

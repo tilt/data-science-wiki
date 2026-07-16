@@ -75,4 +75,7 @@ Read the behavior-safety controls first, then privacy and security, fairness and
 - [Generative AI](../11-generative-ai/index.md) provides the guardrails and behaviors these controls constrain.
 - [ML Engineering and MLOps](../14-ml-engineering-and-mlops/index.md) supplies the lifecycle gates, and [Experimentation and Evaluation](../17-experimentation-and-evaluation/index.md) the evidence.
 
-> **Learning path — [Generative AI systems](../00-home-and-navigation/learning-paths.md#generative-ai-systems):** ← [RAG Evaluation](../11-generative-ai/rag-evaluation.md)
+> [!nav]
+> **Learning path** — [Generative AI systems](../00-home-and-navigation/learning-paths.md#generative-ai-systems)
+>
+> [← RAG Evaluation](../11-generative-ai/rag-evaluation.md)

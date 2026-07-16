@@ -76,4 +76,7 @@ Quantile loss trains and evaluates conditional quantiles for [probabilistic fore
 - [Romano, Patterson, and Candes, Conformalized Quantile Regression](https://arxiv.org/abs/1905.03222)
 - [Hyndman & Athanasopoulos, FPP3: Evaluating distributional forecast accuracy](https://otexts.com/fpp3/prediction-intervals.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Prediction Intervals](prediction-intervals.md) · [Forecast Calibration](forecast-calibration.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Prediction Intervals](prediction-intervals.md) [Forecast Calibration →](forecast-calibration.md)

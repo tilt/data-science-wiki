@@ -58,4 +58,7 @@ Retrieval can introduce false evidence. A fluent answer with citations can still
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
 - [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Citations](citations.md) · [RAG Evaluation](rag-evaluation.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Citations](citations.md) [RAG Evaluation →](rag-evaluation.md)

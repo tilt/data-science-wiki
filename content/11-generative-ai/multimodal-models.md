@@ -58,4 +58,7 @@ Perception errors and language errors look similar in final text. Evaluate by mo
 - [Alayrac et al., 2022, Flamingo](https://arxiv.org/abs/2204.14198)
 - [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [LLM-as-Judge](llm-as-judge.md) · [Vision-Language Models](vision-language-models.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← LLM-as-Judge](llm-as-judge.md) [Vision-Language Models →](vision-language-models.md)

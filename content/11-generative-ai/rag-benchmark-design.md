@@ -92,4 +92,7 @@ A benchmark is only as representative as its question mix: skewing toward exact-
 - [Chen et al., 2023, Benchmarking Large Language Models in Retrieval-Augmented Generation](https://arxiv.org/abs/2309.01431)
 - [Manning, Raghavan, and Schütze, Introduction to Information Retrieval: Evaluation in information retrieval](https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-in-information-retrieval-1.html)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [RAG Architecture Comparison](rag-architecture-comparison.md) · [Fine Tuning Versus RAG](fine-tuning-versus-rag.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← RAG Architecture Comparison](rag-architecture-comparison.md) [Fine Tuning Versus RAG →](fine-tuning-versus-rag.md)

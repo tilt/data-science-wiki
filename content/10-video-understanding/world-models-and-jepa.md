@@ -59,4 +59,7 @@ Representation-space prediction can ignore unpredictable pixel detail, which is 
 - [Ha and Schmidhuber, 2018, World Models](https://arxiv.org/abs/1803.10122)
 - [Assran et al., 2025, V-JEPA 2](https://arxiv.org/abs/2506.09985)
 
-> **Section — [Video Understanding](index.md):** ← [World Models](world-models.md)
+> [!nav]
+> **Section** — [Video Understanding](index.md)
+>
+> [← World Models](world-models.md)

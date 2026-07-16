@@ -91,4 +91,7 @@ Good reconstruction is not the same as semantic usefulness: an autoencoder can p
 - [Bengio, Courville, and Vincent, 2012, Representation Learning: A Review and New Perspectives](https://arxiv.org/abs/1206.5538)
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 15: Representation Learning](https://www.deeplearningbook.org/contents/representation.html)
 
-> **Section — [Deep Learning](index.md):** ← [Transformers](transformers.md) · [Autoencoders](autoencoders.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Transformers](transformers.md) [Autoencoders →](autoencoders.md)

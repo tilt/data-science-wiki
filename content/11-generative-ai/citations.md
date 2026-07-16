@@ -62,4 +62,7 @@ Page-level links are too coarse for dense manuals. Citations can also be copied 
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
 - [Anthropic Claude docs: Reduce hallucinations](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Grounding](grounding.md) · [Hallucination Mitigation](hallucination-mitigation.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Grounding](grounding.md) [Hallucination Mitigation →](hallucination-mitigation.md)

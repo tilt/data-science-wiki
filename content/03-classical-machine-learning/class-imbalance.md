@@ -86,4 +86,7 @@ Resampling before splitting leaks duplicates or synthetic information across fol
 - [scikit-learn User Guide: classification metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)
 - [scikit-learn User Guide: unbalanced problems](https://scikit-learn.org/stable/modules/svm.html#unbalanced-problems)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Calibration](calibration.md)
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Calibration](calibration.md)

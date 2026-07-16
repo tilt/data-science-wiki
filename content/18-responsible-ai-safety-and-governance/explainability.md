@@ -106,4 +106,7 @@ Explanations can leak sensitive data, hide correlated proxies, or create false c
 - [scikit-learn User Guide: Permutation feature importance](https://scikit-learn.org/stable/modules/permutation_importance.html)
 - [SHAP documentation](https://shap.readthedocs.io/en/latest/)
 
-> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Fairness](fairness.md) · [Auditability](auditability.md) →
+> [!nav]
+> **Section** — [Responsible AI, Safety, and Governance](index.md)
+>
+> [← Fairness](fairness.md) [Auditability →](auditability.md)

@@ -58,4 +58,7 @@ Versioning fails when models are overwritten in place, when preprocessing lives 
 - [MLflow Models documentation](https://mlflow.org/docs/latest/ml/model/)
 - [DVC: Versioning Data and Models](https://dvc.org/doc/use-cases/versioning-data-and-models)
 
-> **Section — [ML Engineering and MLOps](index.md):** ← [Dataset Versioning](dataset-versioning.md) · [Evaluation Datasets](evaluation-datasets.md) →
+> [!nav]
+> **Section** — [ML Engineering and MLOps](index.md)
+>
+> [← Dataset Versioning](dataset-versioning.md) [Evaluation Datasets →](evaluation-datasets.md)

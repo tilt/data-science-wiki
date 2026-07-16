@@ -88,4 +88,7 @@ Translation equivariance is useful only when the label should be insensitive to 
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 9: Convolutional Networks](https://www.deeplearningbook.org/contents/convnets.html)
 - [He et al., 2015, Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
 
-> **Section — [Deep Learning](index.md):** ← [Regularization](regularization.md) · [Recurrent Neural Networks](recurrent-neural-networks.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Regularization](regularization.md) [Recurrent Neural Networks →](recurrent-neural-networks.md)

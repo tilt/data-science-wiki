@@ -60,4 +60,7 @@ Large effective batch sizes can change optimization behavior, so throughput impr
 - [PyTorch FullyShardedDataParallel](https://docs.pytorch.org/docs/2.13/fsdp.html)
 - [Amazon EC2 P4 instances](https://aws.amazon.com/ec2/instance-types/p4/)
 
-> **Section — [Cloud and Distributed Systems](index.md):** ← [Distributed Data Processing](distributed-data-processing.md) · [Storage and Decoding Bottlenecks](storage-and-decoding-bottlenecks.md) →
+> [!nav]
+> **Section** — [Cloud and Distributed Systems](index.md)
+>
+> [← Distributed Data Processing](distributed-data-processing.md) [Storage and Decoding Bottlenecks →](storage-and-decoding-bottlenecks.md)

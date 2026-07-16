@@ -46,4 +46,7 @@ Decomposition is descriptive unless it improves forecasting or diagnosis. A visu
 - [Hyndman & Athanasopoulos, FPP3: Time series decomposition](https://otexts.com/fpp3/decomposition.html)
 - [Hyndman & Athanasopoulos, FPP3: Time series patterns](https://otexts.com/fpp3/graphics.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Time Series Fundamentals](time-series-fundamentals.md) · [Stationarity](stationarity.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Time Series Fundamentals](time-series-fundamentals.md) [Stationarity →](stationarity.md)

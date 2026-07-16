@@ -60,4 +60,7 @@ Ambiguous boundaries make annotation and evaluation noisy. High tIoU thresholds 
 - [Wu et al., 2021, Towards High-Quality Temporal Action Detection with Sparse Proposals](https://arxiv.org/abs/2109.08847)
 - [Kay et al., 2017, The Kinetics Human Action Video Dataset](https://arxiv.org/abs/1705.06950)
 
-> **Section — [Video Understanding](index.md):** ← [Temporal Action Recognition](temporal-action-recognition.md) · [Sliding Window Inference](sliding-window-inference.md) →
+> [!nav]
+> **Section** — [Video Understanding](index.md)
+>
+> [← Temporal Action Recognition](temporal-action-recognition.md) [Sliding Window Inference →](sliding-window-inference.md)

@@ -50,4 +50,7 @@ The historical lesson is that RAG shifted part of model quality into corpus engi
 - [Karpukhin et al., 2020, Dense Passage Retrieval for Open-Domain Question Answering](https://arxiv.org/abs/2004.04906)
 - [Lewis et al., 2020, Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401)
 
-> **Section — [History of AI and Machine Learning](index.md):** ← [Self-Supervised Learning](self-supervised-learning.md) · [Development of Tool-Using Language Models and Agents](development-of-tool-using-language-models-and-agents.md) →
+> [!nav]
+> **Section** — [History of AI and Machine Learning](index.md)
+>
+> [← Self-Supervised Learning](self-supervised-learning.md) [Development of Tool-Using Language Models and Agents →](development-of-tool-using-language-models-and-agents.md)

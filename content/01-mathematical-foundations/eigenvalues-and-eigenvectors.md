@@ -80,4 +80,7 @@ Eigenvectors are scale-ambiguous: $v$ and $-v$ represent the same direction. Non
 - [NumPy documentation: `numpy.linalg.eig`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.eig.html)
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
 
-> **Section — [Mathematical Foundations](index.md):** ← [Norms and Distances](norms-and-distances.md) · [Matrix Decompositions](matrix-decompositions.md) →
+> [!nav]
+> **Section** — [Mathematical Foundations](index.md)
+>
+> [← Norms and Distances](norms-and-distances.md) [Matrix Decompositions →](matrix-decompositions.md)

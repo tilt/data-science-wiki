@@ -77,4 +77,7 @@ Fit calibration on held-out data or cross-validation, never on the final test se
 - [scikit-learn User Guide: Probability calibration](https://scikit-learn.org/stable/modules/calibration.html)
 - [scikit-learn User Guide: Brier score loss](https://scikit-learn.org/stable/modules/model_evaluation.html#brier-score-loss)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Evaluation Metrics](evaluation-metrics.md) · [Class Imbalance](class-imbalance.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Evaluation Metrics](evaluation-metrics.md) [Class Imbalance →](class-imbalance.md)

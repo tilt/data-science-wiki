@@ -74,4 +74,7 @@ Common failures are hidden global state, unpinned dependencies, imports that dep
 - [Python documentation: dataclasses](https://docs.python.org/3/library/dataclasses.html)
 - [Python documentation: typing](https://docs.python.org/3/library/typing.html)
 
-> **Section — [Software Engineering](index.md):** [SQL](sql.md) →
+> [!nav]
+> **Section** — [Software Engineering](index.md)
+>
+> [SQL →](sql.md)

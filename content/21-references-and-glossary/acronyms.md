@@ -50,4 +50,7 @@ The retrieval metrics [mean reciprocal rank](../12-information-retrieval-and-sea
 - Link to [glossary](glossary.md), [notation](notation.md), or the canonical concept page when the short form alone is ambiguous.
 - Avoid inventing project-specific acronyms unless the page defines them.
 
-> **Section — [References and Glossary](index.md):** ← [Glossary](glossary.md) · [Notation](notation.md) →
+> [!nav]
+> **Section** — [References and Glossary](index.md)
+>
+> [← Glossary](glossary.md) [Notation →](notation.md)

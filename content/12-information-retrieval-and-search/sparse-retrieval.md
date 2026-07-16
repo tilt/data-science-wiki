@@ -84,4 +84,7 @@ Vocabulary mismatch is the central failure mode: `terminate recurring billing` m
 - [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Scoring and term weighting](https://nlp.stanford.edu/IR-book/html/htmledition/scoring-term-weighting-and-the-vector-space-model-1.html)
 - [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Computing scores in a complete search system](https://nlp.stanford.edu/IR-book/html/htmledition/computing-scores-in-a-complete-search-system-1.html)
 
-> **Section — [Information Retrieval and Search](index.md):** ← [Inverted Indexes](inverted-indexes.md) · [Dense Retrieval](dense-retrieval.md) →
+> [!nav]
+> **Section** — [Information Retrieval and Search](index.md)
+>
+> [← Inverted Indexes](inverted-indexes.md) [Dense Retrieval →](dense-retrieval.md)

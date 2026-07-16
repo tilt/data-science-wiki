@@ -113,4 +113,7 @@ Contrastive learning does not discover "semantic similarity" in the abstract. It
 - [He et al., 2020, Momentum Contrast for Unsupervised Visual Representation Learning](https://arxiv.org/abs/1911.05722)
 - [Radford et al., 2021, Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020)
 
-> **Section — [Deep Learning](index.md):** ← [Self-Supervised Learning](self-supervised-learning.md) · [Transfer Learning](transfer-learning.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Self-Supervised Learning](self-supervised-learning.md) [Transfer Learning →](transfer-learning.md)

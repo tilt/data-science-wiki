@@ -99,4 +99,7 @@ OLS coefficients become unstable when features are nearly collinear because $X^\
 - [scikit-learn User Guide: Ordinary Least Squares](https://scikit-learn.org/stable/modules/linear_model.html#ordinary-least-squares)
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
 
-> **Section — [Classical Machine Learning](index.md):** ← [Supervised Learning](supervised-learning.md) · [Classification](classification.md) →
+> [!nav]
+> **Section** — [Classical Machine Learning](index.md)
+>
+> [← Supervised Learning](supervised-learning.md) [Classification →](classification.md)

@@ -49,4 +49,7 @@ RNN/LSTM forecasters are one branch of [deep learning forecasting](deep-learning
 - [PyTorch LSTM documentation](https://pytorch.org/docs/stable/generated/torch.nn.LSTM.html)
 - [Nixtla NeuralForecast documentation](https://nixtlaverse.nixtla.io/neuralforecast/docs/getting-started/introduction.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Deep Learning Forecasting](deep-learning-forecasting.md) · [Temporal Convolutional Networks](temporal-convolutional-networks.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Deep Learning Forecasting](deep-learning-forecasting.md) [Temporal Convolutional Networks →](temporal-convolutional-networks.md)

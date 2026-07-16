@@ -66,4 +66,7 @@ Quantization can degrade rare-token behavior, arithmetic, multilingual quality, 
 - [OpenAI API documentation: Latency optimization](https://platform.openai.com/docs/guides/latency-optimization)
 - [OpenAI API documentation: Cost optimization](https://platform.openai.com/docs/guides/cost-optimization)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Model Serving](model-serving.md) · [Cost and Latency Optimization](cost-and-latency-optimization.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Model Serving](model-serving.md) [Cost and Latency Optimization →](cost-and-latency-optimization.md)

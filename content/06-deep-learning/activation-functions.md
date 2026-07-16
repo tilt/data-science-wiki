@@ -82,4 +82,7 @@ Sigmoids inside deep hidden stacks often slow training unless gates need bounded
 - [He et al., 2015, Delving Deep into Rectifiers](https://arxiv.org/abs/1502.01852)
 - [PyTorch documentation: Autograd mechanics](https://docs.pytorch.org/docs/2.7/notes/autograd.html)
 
-> **Section — [Deep Learning](index.md):** ← [Backpropagation](backpropagation.md) · [Loss Functions](loss-functions.md) →
+> [!nav]
+> **Section** — [Deep Learning](index.md)
+>
+> [← Backpropagation](backpropagation.md) [Loss Functions →](loss-functions.md)

@@ -68,4 +68,7 @@ MLE is a point estimate, so it needs [confidence intervals](confidence-intervals
 - [Maximum likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation)
 - [SciPy statistics reference](https://docs.scipy.org/doc/scipy/reference/stats.html)
 
-> **Section — [Probability and Statistics](index.md):** ← [Statistical Estimation](statistical-estimation.md) · [Maximum A Posteriori Estimation](maximum-a-posteriori-estimation.md) →
+> [!nav]
+> **Section** — [Probability and Statistics](index.md)
+>
+> [← Statistical Estimation](statistical-estimation.md) [Maximum A Posteriori Estimation →](maximum-a-posteriori-estimation.md)

@@ -51,4 +51,7 @@ The caveat is that none of these steps alone "caused" deep learning. Backpropaga
 - [Hinton, Osindero, and Teh, 2006, A fast learning algorithm for deep belief nets](https://doi.org/10.1162/neco.2006.18.7.1527)
 - [Krizhevsky, Sutskever, and Hinton, 2012, ImageNet classification with deep convolutional neural networks](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks)
 
-> **Section — [History of AI and Machine Learning](index.md):** ← [Statistical Pattern Recognition to Modern Machine Learning](statistical-pattern-recognition-to-modern-machine-learning.md) · [Matrix Decomposition in Statistics and Recommenders](matrix-decomposition-in-statistics-and-recommenders.md) →
+> [!nav]
+> **Section** — [History of AI and Machine Learning](index.md)
+>
+> [← Statistical Pattern Recognition to Modern Machine Learning](statistical-pattern-recognition-to-modern-machine-learning.md) [Matrix Decomposition in Statistics and Recommenders →](matrix-decomposition-in-statistics-and-recommenders.md)

@@ -80,4 +80,7 @@ Common failures are leaking authorization to the frontend, doing background work
 - [RFC 9110: HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html)
 - [RFC 7807: Problem Details for HTTP APIs](https://datatracker.ietf.org/doc/html/rfc7807)
 
-> **Section — [Software Engineering](index.md):** ← [API Design](api-design.md) · [JavaScript Application Architecture](javascript-application-architecture.md) →
+> [!nav]
+> **Section** — [Software Engineering](index.md)
+>
+> [← API Design](api-design.md) [JavaScript Application Architecture →](javascript-application-architecture.md)

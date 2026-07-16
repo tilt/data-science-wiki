@@ -74,4 +74,7 @@ Append-only ingestion without deduplication creates double counting. Watermarks 
 - [Apache Beam Programming Guide](https://beam.apache.org/documentation/programming-guide/)
 - [Apache Airflow documentation: DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html)
 
-> **Section — [Data Engineering](index.md):** ← [ETL and ELT](etl-and-elt.md) · [Airflow](airflow.md) →
+> [!nav]
+> **Section** — [Data Engineering](index.md)
+>
+> [← ETL and ELT](etl-and-elt.md) [Airflow →](airflow.md)

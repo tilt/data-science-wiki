@@ -46,4 +46,7 @@ Moving-average error terms are the MA side of [ARMA](arma.md) and [ARIMA](arima.
 - [Hyndman & Athanasopoulos, FPP3: Moving average models](https://otexts.com/fpp3/arima.html)
 - [statsmodels ARIMA API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima.model.ARIMA.html)
 
-> **Section — [Time-Series Forecasting](index.md):** ← [Autoregressive Models](autoregressive-models.md) · [ARMA](arma.md) →
+> [!nav]
+> **Section** — [Time-Series Forecasting](index.md)
+>
+> [← Autoregressive Models](autoregressive-models.md) [ARMA →](arma.md)

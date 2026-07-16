@@ -64,4 +64,7 @@ Nearest neighbor is not the same as answer relevance. Dense retrieval can miss e
 - [OpenAI API documentation: Embeddings](https://platform.openai.com/docs/guides/embeddings)
 - [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Chunking](chunking.md) · [Retrieval Pipelines](retrieval-pipelines.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Chunking](chunking.md) [Retrieval Pipelines →](retrieval-pipelines.md)

@@ -60,4 +60,7 @@ Code, tables, numbers, and non-English text can tokenize very differently from p
 - [Hugging Face Tokenizers documentation](https://huggingface.co/docs/tokenizers/en/index)
 - [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Language Model Architecture](language-model-architecture.md) · [Pretraining](pretraining.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Language Model Architecture](language-model-architecture.md) [Pretraining →](pretraining.md)

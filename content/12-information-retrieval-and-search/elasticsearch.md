@@ -92,4 +92,7 @@ The hard bugs are usually not in the query JSON. Analyzer drift, refresh latency
 - [Elasticsearch Reference: Similarity settings](https://www.elastic.co/docs/reference/elasticsearch/index-settings/similarity)
 - [Elasticsearch Reference: dense_vector field type](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/dense-vector)
 
-> **Section — [Information Retrieval and Search](index.md):** ← [Approximate Nearest Neighbour Search](approximate-nearest-neighbour-search.md) · [ELK Stack](elk-stack.md) →
+> [!nav]
+> **Section** — [Information Retrieval and Search](index.md)
+>
+> [← Approximate Nearest Neighbour Search](approximate-nearest-neighbour-search.md) [ELK Stack →](elk-stack.md)

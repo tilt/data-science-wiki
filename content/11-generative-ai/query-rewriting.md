@@ -56,4 +56,7 @@ Bad rewrites can answer a different question. Rewriters often drop negation, dat
 - [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)
 - [OpenAI API documentation: Embeddings](https://platform.openai.com/docs/guides/embeddings)
 
-> **Section — [Generative AI and Agentic Systems](index.md):** ← [Hybrid Retrieval](hybrid-retrieval.md) · [Reranking](reranking.md) →
+> [!nav]
+> **Section** — [Generative AI and Agentic Systems](index.md)
+>
+> [← Hybrid Retrieval](hybrid-retrieval.md) [Reranking →](reranking.md)

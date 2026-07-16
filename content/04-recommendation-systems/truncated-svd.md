@@ -77,4 +77,7 @@ The choice of $k$ controls underfitting versus noise retention. Randomized trunc
 
 - [scikit-learn documentation: TruncatedSVD](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html)
 
-> **Section — [Recommendation Systems and Personalization](index.md):** ← [Classical SVD](classical-svd.md) · [Sparse Utility Matrices and Ordinary SVD](sparse-utility-matrices-and-svd.md) →
+> [!nav]
+> **Section** — [Recommendation Systems and Personalization](index.md)
+>
+> [← Classical SVD](classical-svd.md) [Sparse Utility Matrices and Ordinary SVD →](sparse-utility-matrices-and-svd.md)

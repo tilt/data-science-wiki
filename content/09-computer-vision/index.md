@@ -82,4 +82,7 @@ Read image foundations, then recognition and segmentation, then backbones, appli
 - [Deep Learning](../06-deep-learning/index.md) supplies the CNN and transformer backbones.
 - [Video Understanding](../10-video-understanding/index.md) extends these methods across time, and [Domain Applications](../19-domain-applications/index.md) uses them end to end.
 
-> **Learning path — [Computer vision](../00-home-and-navigation/learning-paths.md#computer-vision):** [Image Representation](image-representation.md) →
+> [!nav]
+> **Learning path** — [Computer vision](../00-home-and-navigation/learning-paths.md#computer-vision)
+>
+> [Image Representation →](image-representation.md)

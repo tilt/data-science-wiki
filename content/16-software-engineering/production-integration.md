@@ -55,4 +55,7 @@ Integrations fail when batch data is assumed to exist online, retries are unsafe
 - [W3C Trace Context](https://www.w3.org/TR/trace-context/)
 - [Google AIP-185: API Versioning](https://google.aip.dev/185)
 
-> **Section — [Software Engineering](index.md):** ← [JavaScript Application Architecture](javascript-application-architecture.md) · [Requirements Engineering](requirements-engineering.md) →
+> [!nav]
+> **Section** — [Software Engineering](index.md)
+>
+> [← JavaScript Application Architecture](javascript-application-architecture.md) [Requirements Engineering →](requirements-engineering.md)
