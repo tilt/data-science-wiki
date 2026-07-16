@@ -60,3 +60,5 @@ LLM judges can reward verbosity, miss subtle factual errors, prefer outputs from
 
 - [Zheng et al., Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685)
 - [scikit-learn documentation: cohen_kappa_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html)
+
+> **Section — [Experimentation and Evaluation](index.md):** ← [Human Evaluation](human-evaluation.md) · [Comparing Generative AI and Classical ML Systems](comparing-generative-ai-and-classical-ml-systems.md) →

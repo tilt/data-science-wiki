@@ -67,3 +67,5 @@ Mutual information is hard to estimate from finite continuous data without model
 
 - [MacKay, Information Theory, Inference, and Learning Algorithms](https://www.inference.org.uk/itprnn/book.pdf)
 - [SciPy documentation: `scipy.special.rel_entr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.rel_entr.html)
+
+> **Section — [Mathematical Foundations](index.md):** ← [KL Divergence](kl-divergence.md)

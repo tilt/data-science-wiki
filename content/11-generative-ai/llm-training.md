@@ -120,3 +120,5 @@ LLM training is not a linear recipe. Modern systems often iterate: collect failu
 - [Wei et al., 2022, Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 - [Hu et al., 2021, LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)
 - [Rafailov et al., 2023, Direct Preference Optimization](https://arxiv.org/abs/2305.18290)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Pretraining](pretraining.md) · [Instruction Tuning](instruction-tuning.md) →

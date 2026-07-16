@@ -62,3 +62,5 @@ Common failures are training from live tables, overwriting labels, changing excl
 
 - [DVC: Versioning Data and Models](https://dvc.org/doc/use-cases/versioning-data-and-models)
 - [MLflow Tracking documentation](https://mlflow.org/docs/latest/ml/tracking/)
+
+> **Section — [ML Engineering and MLOps](index.md):** ← [Experiment Tracking](experiment-tracking.md) · [Model Versioning](model-versioning.md) →

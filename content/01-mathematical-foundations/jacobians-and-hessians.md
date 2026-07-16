@@ -101,3 +101,5 @@ Full Jacobians and Hessians can be too large to materialize. Modern autodiff oft
 
 - [MIT OpenCourseWare: 18.02SC Multivariable Calculus](https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/)
 - [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Gradients](gradients.md) · [Optimization](optimization.md) →

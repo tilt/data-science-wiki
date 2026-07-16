@@ -81,3 +81,5 @@ Additive response fields are usually compatible; changing meanings, removing fie
 - [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
 - [RFC 9110: HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html)
 - [Pydantic documentation: JSON Schema](https://pydantic.dev/docs/validation/latest/concepts/json_schema/)
+
+> **Section — [Software Engineering](index.md):** ← [Design Patterns](design-patterns.md) · [Web Backends](web-backends.md) →

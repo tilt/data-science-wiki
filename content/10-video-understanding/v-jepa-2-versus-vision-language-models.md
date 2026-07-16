@@ -65,3 +65,5 @@ Use V-JEPA-style representations when the task is anticipation, planning, motion
 - [Assran et al., 2025, V-JEPA 2](https://arxiv.org/abs/2506.09985)
 - [Lin et al., 2023, Video-LLaVA](https://arxiv.org/abs/2311.10122)
 - [Alayrac et al., 2022, Flamingo](https://arxiv.org/abs/2204.14198)
+
+> **Section — [Video Understanding](index.md):** ← [V-JEPA 2](v-jepa-2.md) · [World Models](world-models.md) →

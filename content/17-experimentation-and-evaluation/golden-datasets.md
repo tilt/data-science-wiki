@@ -66,3 +66,5 @@ Golden sets become stale when policies, products, source documents, or user beha
 
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 - [scikit-learn documentation: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
+
+> **Section — [Experimentation and Evaluation](index.md):** ← [Offline Evaluation](offline-evaluation.md) · [Calibration](calibration.md) →

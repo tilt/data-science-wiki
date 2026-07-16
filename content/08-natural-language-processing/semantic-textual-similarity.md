@@ -72,3 +72,5 @@ STS scores are not truth labels. Two sentences can be semantically similar but h
 - [Reimers and Gurevych, Sentence-BERT](https://aclanthology.org/D19-1410/)
 - [Manning, Raghavan, and Schutze, Introduction to Information Retrieval: The vector space model](https://nlp.stanford.edu/IR-book/html/htmledition/the-vector-space-model-for-scoring-1.html)
 - [scikit-learn API: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)
+
+> **Section — [Natural Language Processing](index.md):** ← [Entity Linking and Matching](entity-linking-and-matching.md) · [Summarization](summarization.md) →

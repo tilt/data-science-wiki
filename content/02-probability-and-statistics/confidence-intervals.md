@@ -80,3 +80,5 @@ One realized interval either contains the parameter or it does not. Coverage can
 
 - [OpenStax Introductory Statistics 2e, Chapter 8 introduction](https://openstax.org/books/introductory-statistics-2e/pages/8-introduction)
 - [SciPy t distribution reference](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.t.html)
+
+> **Section — [Probability and Statistics](index.md):** ← [Bayesian Statistics](bayesian-statistics.md) · [Hypothesis Testing](hypothesis-testing.md) →

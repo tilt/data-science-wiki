@@ -58,3 +58,5 @@ Short windows miss slow context; long windows dilute brief events and increase c
 
 - [Tran et al., 2015, Learning Spatiotemporal Features with 3D Convolutional Networks](https://arxiv.org/abs/1412.0767)
 - [Bertasius et al., 2021, Is Space-Time Attention All You Need for Video Understanding?](https://arxiv.org/abs/2102.05095)
+
+> **Section — [Video Understanding](index.md):** [Video Representation](video-representation.md) →

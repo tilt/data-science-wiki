@@ -71,3 +71,5 @@ Reranking cannot recover documents absent from the candidate set, so first-stage
 - [Nogueira and Cho, Passage Re-ranking with BERT](https://arxiv.org/abs/1901.04085)
 - [Khattab and Zaharia, ColBERT](https://arxiv.org/abs/2004.12832)
 - [Elasticsearch Reference: Reciprocal rank fusion](https://www.elastic.co/docs/reference/elasticsearch/rest-apis/reciprocal-rank-fusion)
+
+> **Section — [Information Retrieval and Search](index.md):** ← [Hybrid Search](hybrid-search.md) · [Vector Indexes](vector-indexes.md) →

@@ -80,3 +80,5 @@ Intermittent demand is a special case of [demand forecasting](demand-forecasting
 
 - [Hyndman & Athanasopoulos, FPP3: Time series of counts](https://otexts.com/fpp3/counts.html)
 - [Nixtla StatsForecast intermittent-demand model index](https://nixtla.github.io/statsforecast/)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Temporal Reconciliation](temporal-reconciliation.md) · [Cold-Start Forecasting](cold-start-forecasting.md) →

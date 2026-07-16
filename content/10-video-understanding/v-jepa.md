@@ -66,3 +66,5 @@ Latent prediction depends on target quality: a weak target encoder gives weak su
 
 - [Bardes et al., 2024, Revisiting Feature Prediction for Learning Visual Representations from Video](https://arxiv.org/abs/2404.08471)
 - [Assran et al., 2025, V-JEPA 2](https://arxiv.org/abs/2506.09985)
+
+> **Section — [Video Understanding](index.md):** ← [Video-Language Models](video-language-models.md) · [V-JEPA 2](v-jepa-2.md) →

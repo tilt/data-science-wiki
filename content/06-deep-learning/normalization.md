@@ -78,3 +78,5 @@ Batch norm's train/eval split is a real failure mode: stale running statistics c
 
 - [Ioffe and Szegedy, 2015, Batch Normalization](https://arxiv.org/abs/1502.03167)
 - [Ba, Kiros, and Hinton, 2016, Layer Normalization](https://arxiv.org/abs/1607.06450)
+
+> **Section — [Deep Learning](index.md):** ← [Initialization](initialization.md) · [Regularization](regularization.md) →

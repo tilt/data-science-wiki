@@ -62,3 +62,5 @@ Embeddings can miss exact constraints, names, and numbers. Evaluate by task, cor
 - [OpenAI API documentation: Embeddings](https://platform.openai.com/docs/guides/embeddings)
 - [Muennighoff et al., 2022, MTEB](https://arxiv.org/abs/2210.07316)
 - [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [RAG](rag.md) · [Chunking](chunking.md) →

@@ -84,3 +84,5 @@ BIO legality matters: an `I-ORG` after `O` is ambiguous unless the decoder fixes
 
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
 - [scikit-learn API: f1_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html)
+
+> **Section — [Natural Language Processing](index.md):** ← [Urgency Classification](urgency-classification.md) · [Named Entity Recognition](named-entity-recognition.md) →

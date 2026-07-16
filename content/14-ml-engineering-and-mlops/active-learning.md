@@ -51,3 +51,5 @@ Active learning can over-sample ambiguous cases, amplify annotator bias, and mak
 
 - [Settles, Active Learning Literature Survey](https://burrsettles.com/pub/settles.activelearning.pdf)
 - [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
+
+> **Section — [ML Engineering and MLOps](index.md):** ← [Human-in-the-Loop Systems](human-in-the-loop-systems.md)

@@ -52,3 +52,5 @@ Road-scene models fail under [domain shift](../09-computer-vision/domain-shift.m
 
 - [Cordts et al., The Cityscapes Dataset for Semantic Urban Scene Understanding](https://arxiv.org/abs/1604.01685)
 - [Cityscapes Dataset](https://www.cityscapes-dataset.com/)
+
+> **Section — [Domain Applications](index.md):** ← [Real-Time Action Recognition](real-time-action-recognition.md) · [Autonomous Driving](autonomous-driving.md) →

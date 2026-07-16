@@ -74,3 +74,5 @@ Deep unpruned trees have low bias and high variance, which is why they are often
 
 - [scikit-learn User Guide: Decision Trees](https://scikit-learn.org/stable/modules/tree.html)
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
+
+> **Section — [Classical Machine Learning](index.md):** ← [Feature Engineering](feature-engineering.md) · [Random Forests](random-forests.md) →

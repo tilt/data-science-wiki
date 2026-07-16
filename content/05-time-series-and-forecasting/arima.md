@@ -57,4 +57,6 @@ ARIMA forecasts are recursive. A one-step forecast uses the latest observed valu
 - [Hyndman & Athanasopoulos, FPP3: ARIMA models](https://otexts.com/fpp3/arima.html)
 - [statsmodels ARIMA API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima.model.ARIMA.html)
 
-> **Learning path — Forecasting:** ← [Stationarity](stationarity.md) · [path overview](../00-home-and-navigation/learning-paths.md#forecasting) · [Backtesting](backtesting.md) →
+> **Section — [Time-Series Forecasting](index.md):** ← [ARMA](arma.md) · [SARIMA](sarima.md) →
+
+> **Learning path — [Forecasting](../00-home-and-navigation/learning-paths.md#forecasting):** ← [Stationarity](stationarity.md) · [Backtesting](backtesting.md) →

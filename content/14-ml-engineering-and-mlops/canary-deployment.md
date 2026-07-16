@@ -72,3 +72,5 @@ A canary misses harm when the sample excludes the risky segment, assignment is n
 
 - [Argo Rollouts: Canary](https://argo-rollouts.readthedocs.io/en/stable/features/canary/)
 - [Kubernetes Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+> **Section — [ML Engineering and MLOps](index.md):** ← [Shadow Deployment](shadow-deployment.md) · [Rollbacks](rollbacks.md) →

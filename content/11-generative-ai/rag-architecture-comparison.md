@@ -127,3 +127,5 @@ These families are reference points on a spectrum, not mutually exclusive produc
 - [Yao et al., 2022, ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
 - [Gao et al., 2023, Retrieval-Augmented Generation for Large Language Models: A Survey](https://arxiv.org/abs/2312.10997)
 - [Cormack, Clarke, and Buettcher, Reciprocal Rank Fusion Outperforms Condorcet and Individual Rank Learning Methods](https://doi.org/10.1145/1571941.1572114)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [RAG Evaluation](rag-evaluation.md) · [RAG Benchmark Design](rag-benchmark-design.md) →

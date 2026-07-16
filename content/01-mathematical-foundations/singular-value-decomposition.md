@@ -105,3 +105,5 @@ The exact reconstruction error is numerically zero, and the rank-1 truncation er
 
 - [NumPy documentation: `numpy.linalg.svd`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html)
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Matrix Decompositions](matrix-decompositions.md) · [Low-Rank Approximation](low-rank-approximation.md) →

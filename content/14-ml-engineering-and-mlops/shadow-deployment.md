@@ -66,3 +66,5 @@ Shadowing cannot estimate user reaction because users never see the candidate ou
 
 - [Amazon SageMaker: Testing models with shadow variants](https://docs.aws.amazon.com/sagemaker/latest/dg/model-shadow-deployment.html)
 - [OpenTelemetry Signals](https://opentelemetry.io/docs/concepts/signals/)
+
+> **Section — [ML Engineering and MLOps](index.md):** ← [Docker](docker.md) · [Canary Deployment](canary-deployment.md) →

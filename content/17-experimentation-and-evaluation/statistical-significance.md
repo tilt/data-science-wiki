@@ -71,3 +71,5 @@ Significance does not repair a biased sample, bad metric, stale [golden dataset]
 - [SciPy documentation: scipy.stats.norm](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html)
 - [SciPy documentation: scipy.stats.binomtest](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binomtest.html)
 - [Larsen et al., Statistical Challenges in Online Controlled Experiments: A Review of A/B Testing Methodology](https://arxiv.org/abs/2212.11366)
+
+> **Section — [Experimentation and Evaluation](index.md):** ← [Calibration](calibration.md) · [Repeated Sampling](repeated-sampling.md) →

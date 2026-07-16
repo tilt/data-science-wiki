@@ -85,3 +85,5 @@ When a good scalar reward is hard to write, it can be learned. Inverse RL infers
 - [Ng, Harada, and Russell, 1999, Policy Invariance Under Reward Transformations](https://people.eecs.berkeley.edu/~russell/papers/icml99-shaping.pdf)
 - [Amodei et al., 2016, Concrete Problems in AI Safety](https://arxiv.org/abs/1606.06565)
 - [Krakovna et al., 2020, Specification Gaming: The Flip Side of AI Ingenuity](https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/)
+
+> **Section — [Reinforcement Learning](index.md):** ← [Exploration in Reinforcement Learning](exploration-in-reinforcement-learning.md) · [Offline and Model-Based Reinforcement Learning](offline-and-model-based-reinforcement-learning.md) →

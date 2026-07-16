@@ -73,3 +73,5 @@ Document systems fail when scan quality, templates, language, or page order shif
 
 - [Xu et al., LayoutLM: Pre-training of Text and Layout for Document Image Understanding](https://arxiv.org/abs/1912.13318)
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
+
+> **Section — [Natural Language Processing](index.md):** ← [OCR and Handwritten Text Recognition](ocr-and-handwritten-text-recognition.md) · [Evaluation of NLP Systems](evaluation-of-nlp-systems.md) →

@@ -81,3 +81,5 @@ Features can encode shortcuts: lighting, scanner type, crop border, watermark, o
 
 - [Computer Vision: Algorithms and Applications, 2nd ed.](https://szeliski.org/Book/)
 - [Torchvision feature extraction documentation](https://docs.pytorch.org/vision/stable/feature_extraction.html)
+
+> **Section — [Computer Vision](index.md):** ← [Classical Image Processing](classical-image-processing.md) · [Data Augmentation](data-augmentation.md) →

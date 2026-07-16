@@ -91,3 +91,5 @@ Entity schemas are domain-specific. `Apple` can be a company, food item, record 
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
 - [Finkel, Grenager, and Manning, Incorporating Non-local Information into Information Extraction Systems](https://aclanthology.org/P05-1045/)
 - [scikit-learn API: f1_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html)
+
+> **Section — [Natural Language Processing](index.md):** ← [Sequence Labelling](sequence-labelling.md) · [Information Extraction](information-extraction.md) →

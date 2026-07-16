@@ -1,4 +1,4 @@
-.PHONY: help doctor setup install preview preview-watch build clean validate lint test check-links check-external-links check-content portability-check format ci deploy-info new-page new-topic generate-subtopics improve-generated-content export-mkdocs serve-build list-stubs list-drafts list-stale
+.PHONY: help doctor setup install preview preview-watch build clean validate lint test check-links check-external-links check-content portability-check nav-footers nav-footers-check format ci deploy-info new-page new-topic generate-subtopics improve-generated-content export-mkdocs serve-build list-stubs list-drafts list-stale
 
 PORT ?= 8080
 WS_PORT ?= $(shell expr $(PORT) + 1)
@@ -33,7 +33,13 @@ build: ## Build the static site into public/.
 clean: ## Remove generated build artifacts only.
 	rm -rf public .generated
 
-validate: check-content check-links portability-check ## Run all repository validations.
+validate: check-content check-links portability-check nav-footers-check ## Run all repository validations.
+
+nav-footers: ## Regenerate per-section and learning-path navigation footers.
+	node scripts/gen-nav-footers.mjs
+
+nav-footers-check: ## Fail if navigation footers are out of date.
+	node scripts/gen-nav-footers.mjs --check
 
 lint: ## Check formatting, TypeScript, YAML, and Markdown structure.
 	npm run check

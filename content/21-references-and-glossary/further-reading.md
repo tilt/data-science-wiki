@@ -41,3 +41,5 @@ Choose primary papers when you need the original formulation, official documenta
 ## Maintenance
 
 Keep this page as a route map, not a dumping ground. If a source becomes important to multiple pages, add it to [references](references.md) or the central [bibliography](bibliography.md).
+
+> **Section — [References and Glossary](index.md):** ← [References](references.md)

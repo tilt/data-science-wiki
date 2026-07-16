@@ -82,3 +82,5 @@ Reference-overlap metrics can miss factual errors, omissions, and unsupported cl
 - [Mihalcea and Tarau, TextRank: Bringing Order into Text](https://aclanthology.org/W04-3252/)
 - [Lewis et al., BART: Denoising Sequence-to-Sequence Pre-training](https://arxiv.org/abs/1910.13461)
 - [Papineni et al., BLEU: a Method for Automatic Evaluation of Machine Translation](https://aclanthology.org/P02-1040/)
+
+> **Section — [Natural Language Processing](index.md):** ← [Semantic Textual Similarity](semantic-textual-similarity.md) · [OCR and Handwritten Text Recognition](ocr-and-handwritten-text-recognition.md) →

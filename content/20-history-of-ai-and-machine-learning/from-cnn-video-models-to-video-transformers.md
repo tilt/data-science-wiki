@@ -49,3 +49,5 @@ The historical lesson is that video architectures alternated between adding moti
 - [Tran et al., 2014, Learning Spatiotemporal Features with 3D Convolutional Networks](https://arxiv.org/abs/1412.0767)
 - [Bertasius, Wang, and Torresani, 2021, Is Space-Time Attention All You Need for Video Understanding?](https://arxiv.org/abs/2102.05095)
 - [Liu et al., 2021, Video Swin Transformer](https://arxiv.org/abs/2106.13230)
+
+> **Section — [History of AI and Machine Learning](index.md):** ← [Evolution of Computer Vision Architectures](evolution-of-computer-vision-architectures.md) · [From N-Gram Language Models to Transformers](from-ngram-language-models-to-transformers.md) →

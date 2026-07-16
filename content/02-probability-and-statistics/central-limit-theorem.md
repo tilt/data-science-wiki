@@ -78,3 +78,5 @@ The theorem is asymptotic, not a guarantee that $n=30$ is enough. Heavy tails ca
 
 - [OpenStax Introductory Statistics 2e, Chapter 7 introduction](https://openstax.org/books/introductory-statistics-2e/pages/7-introduction)
 - [Central limit theorem](https://en.wikipedia.org/wiki/Central_limit_theorem)
+
+> **Section — [Probability and Statistics](index.md):** ← [Law of Large Numbers](law-of-large-numbers.md) · [Markov Chains](markov-chains.md) →

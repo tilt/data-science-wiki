@@ -177,3 +177,5 @@ Forecast metrics are the scoring layer for [forecast evaluation](forecast-evalua
 
 - [Hyndman & Athanasopoulos, FPP3: Evaluating point forecast accuracy](https://otexts.com/fpp3/accuracy.html)
 - [Hyndman & Athanasopoulos, FPP3: Evaluating distributional forecast accuracy](https://otexts.com/fpp3/prediction-intervals.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Rolling Origin Validation](rolling-origin-validation.md) · [Business-Cost-Aware Forecasting Losses](business-cost-aware-forecasting-losses.md) →

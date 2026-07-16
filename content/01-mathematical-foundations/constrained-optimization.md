@@ -82,3 +82,5 @@ Constraints can make easy-looking objectives hard. Infeasible constraints, badly
 
 - [SciPy documentation: `scipy.optimize.minimize`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
 - [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Convex Optimization](convex-optimization.md) · [Gradient Descent](gradient-descent.md) →

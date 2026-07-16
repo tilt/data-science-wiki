@@ -84,3 +84,5 @@ The common failure is learning maintenance policy rather than degradation: senso
 ## References
 
 - [NASA Prognostics Center of Excellence Data Set Repository: Turbofan Engine Degradation Simulation](https://www.nasa.gov/intelligent-systems-division/discovery-and-systems-health/pcoe/pcoe-data-set-repository/)
+
+> **Section — [Domain Applications](index.md):** ← [Energy Forecasting](energy-forecasting.md) · [Medical MRI Analysis](medical-mri-analysis.md) →

@@ -79,3 +79,5 @@ The step size matters; too large can diverge, too small trains slowly. Popular i
 ## References
 
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [SVD versus Matrix Factorization](svd-versus-matrix-factorization.md) · [Alternating Least Squares](alternating-least-squares.md) →

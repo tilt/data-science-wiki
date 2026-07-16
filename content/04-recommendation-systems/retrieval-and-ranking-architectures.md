@@ -58,3 +58,5 @@ Retrieval and ranking must be evaluated separately. A ranker with excellent [NDC
 
 - [Li et al., 2010, A Contextual-Bandit Approach to Personalized News Article Recommendation](https://arxiv.org/abs/1003.0146)
 - [scikit-learn documentation: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Ranking](ranking.md) · [Evaluation of Recommenders](evaluation-of-recommenders.md) →

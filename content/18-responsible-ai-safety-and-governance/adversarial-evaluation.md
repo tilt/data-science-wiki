@@ -95,3 +95,5 @@ Adversarial evaluation is sampling, not proof of safety. Passing yesterday's att
 - [NIST AI 600-1: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
 - [NIST AI 100-2: Adversarial Machine Learning taxonomy](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-2e2023.pdf)
 - [OWASP LLM01:2025 Prompt Injection](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
+
+> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Error Taxonomies](error-taxonomies.md) · [Prompt Injection](prompt-injection.md) →

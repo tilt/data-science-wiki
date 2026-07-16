@@ -48,3 +48,5 @@ Similar tool descriptions cause wrong calls. Never let a model route to tools th
 - [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
 - [OpenAI API documentation: Function calling](https://platform.openai.com/docs/guides/function-calling)
 - [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Tool Schemas](tool-schemas.md) · [Agent Loops](agent-loops.md) →

@@ -79,4 +79,6 @@ IID validation is a modelling assumption, not a default truth. Time, user, house
 - [scikit-learn User Guide: supervised learning](https://scikit-learn.org/stable/supervised_learning.html)
 - [An Introduction to Statistical Learning](https://www.statlearning.com/)
 
-> **Learning path — Foundations:** ← [Classical Machine Learning](index.md) · [path overview](../00-home-and-navigation/learning-paths.md#foundations) · [Evaluation Metrics](evaluation-metrics.md) →
+> **Section — [Classical Machine Learning](index.md):** [Regression](regression.md) →
+
+> **Learning path — [Foundations](../00-home-and-navigation/learning-paths.md#foundations):** ← [Classical Machine Learning](index.md) · [Evaluation Metrics](evaluation-metrics.md) →

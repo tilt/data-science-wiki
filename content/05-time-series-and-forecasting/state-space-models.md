@@ -46,3 +46,5 @@ State-space models are the framework behind [kalman filters](kalman-filters.md),
 
 - [statsmodels state-space documentation](https://www.statsmodels.org/stable/statespace.html)
 - [statsmodels local linear trend example](https://www.statsmodels.org/stable/examples/notebooks/generated/statespace_local_linear_trend.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Exponential Smoothing](exponential-smoothing.md) · [Kalman Filters](kalman-filters.md) →

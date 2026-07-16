@@ -75,3 +75,5 @@ Feature scaling is essential because the margin is geometric. Kernel SVMs can be
 
 - [Cortes and Vapnik, 1995, Support-vector networks](https://doi.org/10.1007/BF00994018)
 - [scikit-learn User Guide: Support Vector Machines](https://scikit-learn.org/stable/modules/svm.html)
+
+> **Section — [Classical Machine Learning](index.md):** ← [Logistic Regression](logistic-regression.md) · [Regularization](regularization.md) →

@@ -61,3 +61,5 @@ Class imbalance can make background dominate the loss. Thin structures and fuzzy
 
 - [Fully Convolutional Networks for Semantic Segmentation](https://arxiv.org/abs/1411.4038)
 - [U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/abs/1505.04597)
+
+> **Section — [Computer Vision](index.md):** ← [Pose Estimation](pose-estimation.md) · [Instance Segmentation](instance-segmentation.md) →

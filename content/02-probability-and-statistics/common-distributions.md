@@ -81,3 +81,5 @@ Independence, constant rate, support, and tail assumptions are part of the model
 
 - [SciPy statistics reference](https://docs.scipy.org/doc/scipy/reference/stats.html)
 - [OpenStax Introductory Statistics 2e, Chapter 4 introduction](https://openstax.org/books/introductory-statistics-2e/pages/4-introduction)
+
+> **Section — [Probability and Statistics](index.md):** ← [Random Variables](random-variables.md) · [Expectation and Variance](expectation-and-variance.md) →

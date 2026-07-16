@@ -82,3 +82,5 @@ High-level APIs reduce boilerplate but can hide defaults: loss reduction, metric
 
 - [TensorFlow guide: Keras, the high-level API for TensorFlow](https://www.tensorflow.org/guide/keras)
 - [PyTorch documentation: Autograd mechanics](https://docs.pytorch.org/docs/2.7/notes/autograd.html)
+
+> **Section — [Deep Learning](index.md):** ← [PyTorch](pytorch.md) · [Mixed Precision](mixed-precision.md) →

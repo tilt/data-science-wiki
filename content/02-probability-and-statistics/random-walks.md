@@ -74,3 +74,5 @@ The [law of large numbers](law-of-large-numbers.md) says average step size conve
 
 - [Random walk](https://en.wikipedia.org/wiki/Random_walk)
 - [OpenStax Introductory Statistics 2e, Chapter 7 introduction](https://openstax.org/books/introductory-statistics-2e/pages/7-introduction)
+
+> **Section — [Probability and Statistics](index.md):** ← [Markov Chains](markov-chains.md) · [Renewal Theory](renewal-theory.md) →

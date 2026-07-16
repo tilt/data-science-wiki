@@ -93,3 +93,5 @@ Offline scores can be misleading because the learned policy changes the action d
 - [Levine et al., 2020, Offline Reinforcement Learning: Tutorial, Review, and Perspectives](https://arxiv.org/abs/2005.01643)
 - [Janner et al., 2019, When to Trust Your Model: Model-Based Policy Optimization](https://arxiv.org/abs/1906.08253)
 - [Chen et al., 2021, Decision Transformer: Reinforcement Learning via Sequence Modeling](https://arxiv.org/abs/2106.01345)
+
+> **Section — [Reinforcement Learning](index.md):** ← [Reward Design and Shaping](reward-design-and-shaping.md) · [Off-Policy Evaluation](off-policy-evaluation.md) →

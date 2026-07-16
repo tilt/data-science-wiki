@@ -51,3 +51,5 @@ The historical lesson is that transformers did not replace language modeling; th
 - [Mikolov et al., 2013, Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781)
 - [Peters et al., 2018, Deep contextualized word representations](https://arxiv.org/abs/1802.05365)
 - [Devlin et al., 2018, BERT](https://arxiv.org/abs/1810.04805)
+
+> **Section — [History of AI and Machine Learning](index.md):** ← [From CNN Video Models to Video Transformers](from-cnn-video-models-to-video-transformers.md) · [Development of Attention and Transformers](development-of-attention-and-transformers.md) →

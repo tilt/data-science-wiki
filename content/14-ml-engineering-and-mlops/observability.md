@@ -57,3 +57,5 @@ High-volume logs are not observability if they cannot answer operational questio
 
 - [OpenTelemetry Signals](https://opentelemetry.io/docs/concepts/signals/)
 - [Google SRE Book: Managing Incidents](https://sre.google/sre-book/managing-incidents/)
+
+> **Section — [ML Engineering and MLOps](index.md):** ← [Monitoring](monitoring.md) · [Service Level Objectives](service-level-objectives.md) →

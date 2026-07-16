@@ -97,3 +97,5 @@ Urgency labels drift when staffing, SLAs, and product state change. Training dat
 - [scikit-learn documentation: classification metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)
 - [scikit-learn API: TfidfVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
+
+> **Section — [Natural Language Processing](index.md):** ← [Topic Classification](topic-classification.md) · [Sequence Labelling](sequence-labelling.md) →

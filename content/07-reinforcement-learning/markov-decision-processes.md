@@ -85,4 +85,6 @@ The hardest modeling choice is the state. If important information is hidden, th
 
 - [Sutton and Barto, 2018, Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book-2nd.html)
 
-> **Learning path — Reinforcement learning:** ← [Reinforcement Learning](index.md) · [path overview](../00-home-and-navigation/learning-paths.md#reinforcement-learning) · [Value Functions and Bellman Equations](value-functions-and-bellman-equations.md) →
+> **Section — [Reinforcement Learning](index.md):** [Value Functions and Bellman Equations](value-functions-and-bellman-equations.md) →
+
+> **Learning path — [Reinforcement learning](../00-home-and-navigation/learning-paths.md#reinforcement-learning):** ← [Reinforcement Learning](index.md) · [Value Functions and Bellman Equations](value-functions-and-bellman-equations.md) →

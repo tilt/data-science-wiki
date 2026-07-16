@@ -28,43 +28,52 @@ related:
   - "../11-generative-ai/index.md"
   - "../19-domain-applications/index.md"
 historical_context: false
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-16
 ---
 
 # Video Understanding
 
-## Summary
+Video understanding turns ordered frames into representations, events, tracks, language-facing answers, or predictions about what happens next. The section starts with representations and spatiotemporal cues, then moves through recognition architectures, temporal decision problems, multi-person systems, and world-model-style latent prediction.
 
-Video understanding turns ordered frames into representations, events, tracks, language-facing answers, or predictions about what happens next. The section starts with representations and spatiotemporal cues, then moves through model families, temporal decision problems, multi-person systems, and world-model-style latent prediction.
+## Knowledge map
 
-Read the pages as four connected clusters:
+Representations and motion cues feed the recognition architectures; those support action recognition and streaming multi-person systems, while self-supervised pretraining leads to video-language and world models.
 
-| cluster                              | pages                                                                                                                                                                                                                                                                                                                                                                    |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Representations and motion cues      | [Video Representation](video-representation.md), [Spatial and Temporal Modelling](spatial-and-temporal-modelling.md), [Optical Flow](optical-flow.md)                                                                                                                                                                                                                    |
-| Recognition architectures            | [3D Convolutional Networks](3d-convolutional-networks.md), [Two-Stream Models](two-stream-models.md), [Video Transformers](video-transformers.md), [Temporal Action Recognition](temporal-action-recognition.md)                                                                                                                                                         |
-| Streaming and multi-person decisions | [Temporal Localization](temporal-localization.md), [Sliding Window Inference](sliding-window-inference.md), [Trigger Point Prediction](trigger-point-prediction.md), [Person Tracking and Track Aggregation](person-tracking-and-track-aggregation.md), [Real Time Video Understanding](real-time-video-understanding.md), [Gesture Recognition](gesture-recognition.md) |
-| Foundation models and prediction     | [Self Supervised Video Representation Learning](self-supervised-video-representation-learning.md), [Video Language Models](video-language-models.md), [V-JEPA](v-jepa.md), [V-JEPA 2](v-jepa-2.md), [World Models](world-models.md), [World Models and JEPA](world-models-and-jepa.md)                                                                                   |
+```mermaid
+flowchart TD
+  Rep[Video Representation and Motion] --> Arch[3D CNNs, Two-Stream, Video Transformers]
+  Arch --> Recog[Action Recognition and Localization]
+  Recog --> Stream[Streaming and Multi-Person Systems]
+  Rep --> SSL[Self-Supervised Video and JEPA]
+  SSL --> World[Video-Language and World Models]
+```
 
-## Subtopics
+## Reading path
 
-- [Video Representation](video-representation.md)
-- [Spatial and Temporal Modelling](spatial-and-temporal-modelling.md)
-- [Optical Flow](optical-flow.md)
-- [3D Convolutional Networks](3d-convolutional-networks.md)
-- [Two-Stream Models](two-stream-models.md)
-- [Video Transformers](video-transformers.md)
-- [Temporal Action Recognition](temporal-action-recognition.md)
-- [Temporal Localization](temporal-localization.md)
-- [Trigger Point Prediction](trigger-point-prediction.md)
-- [Sliding Window Inference](sliding-window-inference.md)
-- [Person Tracking and Track Aggregation](person-tracking-and-track-aggregation.md)
-- [Real Time Video Understanding](real-time-video-understanding.md)
-- [Gesture Recognition](gesture-recognition.md)
-- [Video Language Models](video-language-models.md)
-- [Self Supervised Video Representation Learning](self-supervised-video-representation-learning.md)
-- [V-JEPA](v-jepa.md)
-- [V-JEPA 2](v-jepa-2.md)
-- [V-JEPA 2 versus Vision-Language Models](v-jepa-2-versus-vision-language-models.md)
-- [World Models](world-models.md)
-- [World Models and JEPA](world-models-and-jepa.md)
+Read representations, then architectures, temporal and multi-person decisions, and finally foundation models and prediction.
+
+1. [Spatial and Temporal Modelling](spatial-and-temporal-modelling.md): how space and time are jointly modeled.
+2. [Video Representation](video-representation.md): frames, clips, and tokens.
+3. [Optical Flow](optical-flow.md): dense motion between frames.
+4. [3D Convolutional Networks](3d-convolutional-networks.md): convolving over time as a third dimension.
+5. [Two-Stream Models](two-stream-models.md): separate appearance and motion streams.
+6. [Video Transformers](video-transformers.md): attention over space-time tokens.
+7. [Temporal Action Recognition](temporal-action-recognition.md): classifying actions in clips.
+8. [Temporal Localization](temporal-localization.md): finding when an action occurs.
+9. [Sliding Window Inference](sliding-window-inference.md): scanning long video with windows.
+10. [Trigger Point Prediction](trigger-point-prediction.md): deciding the moment to act.
+11. [Person Tracking and Track Aggregation](person-tracking-and-track-aggregation.md): linking detections into tracks.
+12. [Real-Time Video Understanding](real-time-video-understanding.md): latency and throughput constraints.
+13. [Gesture Recognition](gesture-recognition.md): recognizing hand and body gestures.
+14. [Self-Supervised Video Representation Learning](self-supervised-video-representation-learning.md): pretraining from unlabeled video.
+15. [Video-Language Models](video-language-models.md): connecting video to text.
+16. [V-JEPA](v-jepa.md): joint-embedding predictive pretraining for video.
+17. [V-JEPA 2](v-jepa-2.md): the scaled successor.
+18. [V-JEPA 2 versus Vision-Language Models](v-jepa-2-versus-vision-language-models.md): contrasting the two paradigms.
+19. [World Models](world-models.md): learned models of environment dynamics.
+20. [World Models and JEPA](world-models-and-jepa.md): predictive latent world modeling.
+
+## Connections
+
+- [Computer Vision](../09-computer-vision/index.md) supplies the per-frame representations extended here across time.
+- [Generative AI](../11-generative-ai/index.md) shares the foundation-model and world-model ideas.

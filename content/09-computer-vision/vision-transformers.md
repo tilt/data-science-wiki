@@ -81,4 +81,6 @@ Attention cost grows as $O(N^2)$ in the number of patches, so high-resolution [s
 - [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)
 - [PyTorch documentation: scaled dot product attention](https://docs.pytorch.org/docs/stable/generated/torch.nn.functional.scaled_dot_product_attention.html)
 
-> **Learning path — Computer vision:** ← [Detection and Segmentation Metrics](detection-and-segmentation-metrics.md) · [path overview](../00-home-and-navigation/learning-paths.md#computer-vision)
+> **Section — [Computer Vision](index.md):** ← [CNN Architectures](cnn-architectures.md) · [Self Supervised Visual Learning](self-supervised-visual-learning.md) →
+
+> **Learning path — [Computer vision](../00-home-and-navigation/learning-paths.md#computer-vision):** ← [Detection and Segmentation Metrics](detection-and-segmentation-metrics.md)

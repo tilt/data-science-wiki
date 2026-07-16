@@ -155,3 +155,5 @@ This glossary is a cross-domain lookup index for evaluation metrics used across 
 ## How to use this page
 
 Use this glossary when a metric name appears before its full explanation. For study, jump from the metric to the owning subject area: classification and regression metrics usually live in classical machine learning, forecast metrics in time-series forecasting, ranked-list metrics in search or recommendation systems, and judge or trace metrics in generative AI and experimentation.
+
+> **Section — [References and Glossary](index.md):** ← [Notation](notation.md) · [Bibliography](bibliography.md) →

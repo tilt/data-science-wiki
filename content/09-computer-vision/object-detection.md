@@ -75,4 +75,6 @@ NMS can remove a real object in crowded scenes when two objects overlap. Small o
 - [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/abs/1506.01497)
 - [Microsoft COCO: Common Objects in Context](https://arxiv.org/abs/1405.0312)
 
-> **Learning path — Computer vision:** ← [Image Representation](image-representation.md) · [path overview](../00-home-and-navigation/learning-paths.md#computer-vision) · [Detection and Segmentation Metrics](detection-and-segmentation-metrics.md) →
+> **Section — [Computer Vision](index.md):** ← [Image Classification](image-classification.md) · [Rotated Object Detection](rotated-object-detection.md) →
+
+> **Learning path — [Computer vision](../00-home-and-navigation/learning-paths.md#computer-vision):** ← [Image Representation](image-representation.md) · [Detection and Segmentation Metrics](detection-and-segmentation-metrics.md) →

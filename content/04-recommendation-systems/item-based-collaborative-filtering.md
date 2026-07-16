@@ -62,3 +62,5 @@ Popular items are similar to many items unless similarities are normalized or sh
 
 - [Linden, Smith, and York, 2003, Amazon.com Recommendations: Item-to-Item Collaborative Filtering](https://doi.org/10.1109/MIC.2003.1167344)
 - [Sarwar et al., 2001, Item-based Collaborative Filtering Recommendation Algorithms](https://doi.org/10.1145/371920.372071)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [User-Based Collaborative Filtering](user-based-collaborative-filtering.md) · [Matrix Factorization for Recommender Systems](matrix-factorization.md) →

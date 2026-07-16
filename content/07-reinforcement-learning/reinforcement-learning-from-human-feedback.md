@@ -119,4 +119,6 @@ Preference optimization can reward verbosity, sycophancy, over-refusal, or styli
 - [Bai et al., 2022, Training a Helpful and Harmless Assistant with Reinforcement Learning from Human Feedback](https://arxiv.org/abs/2204.05862)
 - [Rafailov et al., 2023, Direct Preference Optimization](https://arxiv.org/abs/2305.18290)
 
-> **Learning path — Reinforcement learning:** ← [Policy Gradients and Actor-Critic Methods](policy-gradients-and-actor-critic.md) · [path overview](../00-home-and-navigation/learning-paths.md#reinforcement-learning)
+> **Section — [Reinforcement Learning](index.md):** ← [Off-Policy Evaluation](off-policy-evaluation.md)
+
+> **Learning path — [Reinforcement learning](../00-home-and-navigation/learning-paths.md#reinforcement-learning):** ← [Policy Gradients and Actor-Critic Methods](policy-gradients-and-actor-critic.md)

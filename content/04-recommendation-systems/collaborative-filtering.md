@@ -79,4 +79,6 @@ Collaborative filtering fails for new users and items without interactions, so [
 - [Sarwar et al., 2001, Item-based Collaborative Filtering Recommendation Algorithms](https://doi.org/10.1145/371920.372071)
 - [scikit-learn documentation: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)
 
-> **Learning path — Recommender systems:** ← [Recommendation Systems and Personalization](index.md) · [path overview](../00-home-and-navigation/learning-paths.md#recommender-systems) · [Matrix Factorization for Recommender Systems](matrix-factorization.md) →
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Content-Based Recommendation](content-based-recommendation.md) · [User-Based Collaborative Filtering](user-based-collaborative-filtering.md) →
+
+> **Learning path — [Recommender systems](../00-home-and-navigation/learning-paths.md#recommender-systems):** ← [Recommendation Systems and Personalization](index.md) · [Matrix Factorization for Recommender Systems](matrix-factorization.md) →

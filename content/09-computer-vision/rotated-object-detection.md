@@ -85,3 +85,5 @@ Angle discontinuities near the convention boundary can destabilize training. Sym
 
 - [DOTA: A Large-scale Dataset for Object Detection in Aerial Images](https://arxiv.org/abs/1711.10398)
 - [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://arxiv.org/abs/1506.01497)
+
+> **Section — [Computer Vision](index.md):** ← [Object Detection](object-detection.md) · [Pose Estimation](pose-estimation.md) →

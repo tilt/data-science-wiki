@@ -50,3 +50,5 @@ Each key is stable, lowercase, and portable. A content page can reference a key 
 ## Source-quality guidance
 
 Prefer primary papers, official documentation, standards, and authoritative books. Blog posts can be useful for implementation notes, but they should not replace primary sources for definitions, algorithms, or claims about model behavior.
+
+> **Section — [References and Glossary](index.md):** ← [Metrics Glossary](metrics.md) · [References](references.md) →

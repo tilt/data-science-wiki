@@ -56,3 +56,5 @@ Failures come from occluded hands, mirrored viewpoints, multi-person scenes, mot
 
 - [Kopuklu et al., Real-time Hand Gesture Detection and Classification Using CNNs](https://arxiv.org/abs/1901.10323)
 - [Wan et al., ChaLearn Looking at People: IsoGD and ConGD](https://arxiv.org/abs/1907.12193)
+
+> **Section — [Domain Applications](index.md):** ← [Medical MRI Analysis](medical-mri-analysis.md) · [Real-Time Action Recognition](real-time-action-recognition.md) →

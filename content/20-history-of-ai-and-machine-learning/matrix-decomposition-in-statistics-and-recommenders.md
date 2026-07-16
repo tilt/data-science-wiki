@@ -49,3 +49,5 @@ The historical lesson is that low rank is a useful assumption, not a law. It wor
 - [Eckart and Young, 1936, The approximation of one matrix by another of lower rank](https://doi.org/10.1007/BF02288367)
 - [Deerwester et al., 1990, Indexing by latent semantic analysis](https://doi.org/10.1002/%28SICI%291097-4571%28199009%2941%3A6%3C391%3A%3AAID-ASI1%3E3.0.CO%3B2-9)
 - [Koren, Bell, and Volinsky, 2009, Matrix factorization techniques for recommender systems](https://doi.org/10.1109/MC.2009.263)
+
+> **Section — [History of AI and Machine Learning](index.md):** ← [Early Neural Networks to Deep Learning](early-neural-networks-to-deep-learning.md) · [Evolution of Collaborative Filtering](evolution-of-collaborative-filtering.md) →

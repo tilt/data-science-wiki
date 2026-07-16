@@ -111,4 +111,6 @@ Bootstrapping introduces bias and can diverge when combined with function approx
 - [Sutton, 1988, Learning to Predict by the Methods of Temporal Differences](https://link.springer.com/article/10.1007/BF00115009)
 - [van Seijen et al., 2016, True Online Temporal-Difference Learning](https://arxiv.org/abs/1512.04087)
 
-> **Learning path — Reinforcement learning:** ← [Value Functions and Bellman Equations](value-functions-and-bellman-equations.md) · [path overview](../00-home-and-navigation/learning-paths.md#reinforcement-learning) · [Q-Learning and DQN](q-learning-and-dqn.md) →
+> **Section — [Reinforcement Learning](index.md):** ← [Value Functions and Bellman Equations](value-functions-and-bellman-equations.md) · [Q-Learning and DQN](q-learning-and-dqn.md) →
+
+> **Learning path — [Reinforcement learning](../00-home-and-navigation/learning-paths.md#reinforcement-learning):** ← [Value Functions and Bellman Equations](value-functions-and-bellman-equations.md) · [Q-Learning and DQN](q-learning-and-dqn.md) →

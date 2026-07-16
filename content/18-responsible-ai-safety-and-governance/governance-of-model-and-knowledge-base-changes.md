@@ -72,3 +72,5 @@ Change governance fails when "content-only" updates are treated as harmless. A n
 
 - [NIST AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 - [NIST AI 600-1: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
+
+> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Compliance](compliance.md)

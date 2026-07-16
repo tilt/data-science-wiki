@@ -51,3 +51,5 @@ A reference should support a specific claim in the page. If a source only inspir
 - Citing a blog post for a result that should cite the original paper.
 - Adding a bibliography key to a page before the key exists in the central bibliography.
 - Leaving source notes in prose without enough detail to find the source again.
+
+> **Section — [References and Glossary](index.md):** ← [Bibliography](bibliography.md) · [Further Reading](further-reading.md) →

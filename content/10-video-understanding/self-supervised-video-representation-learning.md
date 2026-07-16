@@ -121,3 +121,5 @@ Temporal augmentations can destroy labels that depend on order. Pixel reconstruc
 - [Wang et al., 2024, InternVideo2: Scaling Foundation Models for Multimodal Video Understanding](https://arxiv.org/abs/2403.15377)
 - [Assran et al., 2025, V-JEPA 2: Self-Supervised Video Models Enable Understanding, Prediction and Planning](https://arxiv.org/abs/2506.09985)
 - [Mur-Labadia et al., 2026, V-JEPA 2.1: Unlocking Dense Features in Video Self-Supervised Learning](https://arxiv.org/abs/2603.14482)
+
+> **Section — [Video Understanding](index.md):** ← [Gesture Recognition](gesture-recognition.md) · [Video-Language Models](video-language-models.md) →

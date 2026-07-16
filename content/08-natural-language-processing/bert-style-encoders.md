@@ -77,3 +77,5 @@ Encoder outputs are sensitive to truncation, pooling choice, and domain mismatch
 - [Devlin et al., BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805)
 - [Vaswani et al., Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [PyTorch documentation: MultiheadAttention](https://docs.pytorch.org/docs/2.7/generated/torch.nn.MultiheadAttention.html)
+
+> **Section — [Natural Language Processing](index.md):** ← [Language Modelling](language-modelling.md) · [Decoder-Only Transformers](decoder-only-transformers.md) →

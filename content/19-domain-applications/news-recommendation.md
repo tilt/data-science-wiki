@@ -55,3 +55,5 @@ Fresh articles suffer cold start, sensational items can create [feedback loops](
 
 - [MIND: MIcrosoft News Dataset](https://msnews.github.io/)
 - [Wu et al., MIND: A Large-scale Dataset for News Recommendation](https://aclanthology.org/2020.acl-main.331/)
+
+> **Section — [Domain Applications](index.md):** ← [Business Message Classification](business-message-classification.md) · [Matchmaking](matchmaking.md) →

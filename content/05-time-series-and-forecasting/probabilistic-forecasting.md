@@ -98,3 +98,5 @@ Probabilistic forecasting generalizes point forecasts into distributions. Its pr
 
 - [Hyndman & Athanasopoulos, FPP3: Distributional forecasts and prediction intervals](https://otexts.com/fpp3/prediction-intervals.html)
 - [Salinas, Flunkert, and Gasthaus, DeepAR](https://arxiv.org/abs/1704.04110)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Forecasting Pitfalls and Worked Examples](forecasting-pitfalls-and-worked-examples.md) · [Prediction Intervals](prediction-intervals.md) →

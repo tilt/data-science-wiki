@@ -105,3 +105,5 @@ Explanations can leak sensitive data, hide correlated proxies, or create false c
 - [NIST AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 - [scikit-learn User Guide: Permutation feature importance](https://scikit-learn.org/stable/modules/permutation_importance.html)
 - [SHAP documentation](https://shap.readthedocs.io/en/latest/)
+
+> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Fairness](fairness.md) · [Auditability](auditability.md) →

@@ -60,3 +60,5 @@ Tracking fails when it stores metrics without data versions, when failed runs ar
 
 - [MLflow Tracking documentation](https://mlflow.org/docs/latest/ml/tracking/)
 - [Google Cloud: MLOps continuous delivery and automation pipelines](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
+
+> **Section — [ML Engineering and MLOps](index.md):** ← [CI/CD for ML](ci-cd-for-ml.md) · [Dataset Versioning](dataset-versioning.md) →

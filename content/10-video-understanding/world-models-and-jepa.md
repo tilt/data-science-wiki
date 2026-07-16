@@ -58,3 +58,5 @@ Representation-space prediction can ignore unpredictable pixel detail, which is 
 - [Bardes et al., 2024, Revisiting Feature Prediction for Learning Visual Representations from Video](https://arxiv.org/abs/2404.08471)
 - [Ha and Schmidhuber, 2018, World Models](https://arxiv.org/abs/1803.10122)
 - [Assran et al., 2025, V-JEPA 2](https://arxiv.org/abs/2506.09985)
+
+> **Section — [Video Understanding](index.md):** ← [World Models](world-models.md)

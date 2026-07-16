@@ -58,3 +58,5 @@ Exponential smoothing is often a strong baseline for business series with stable
 
 - [Hyndman & Athanasopoulos, FPP3: Exponential smoothing](https://otexts.com/fpp3/expsmooth.html)
 - [statsmodels ExponentialSmoothing API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.holtwinters.ExponentialSmoothing.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [SARIMA](sarima.md) · [State Space Models](state-space-models.md) →

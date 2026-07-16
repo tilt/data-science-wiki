@@ -67,3 +67,5 @@ Security fails when teams grant an agent broad credentials "temporarily," store 
 - [OWASP Top 10 for Large Language Model Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 - [NIST AI 600-1: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
 - [NIST AI 100-2: Adversarial Machine Learning taxonomy](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-2e2023.pdf)
+
+> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Prompt Injection](prompt-injection.md) · [Privacy](privacy.md) →

@@ -49,3 +49,5 @@ ETL can hide source defects by overwriting raw evidence. ELT can create a raw-da
 
 - [dbt documentation: SQL models](https://docs.getdbt.com/docs/build/sql-models)
 - [dbt documentation: Sources](https://docs.getdbt.com/docs/build/sources)
+
+> **Section — [Data Engineering](index.md):** ← [Batch Versus Streaming](batch-versus-streaming.md) · [Data Pipelines](data-pipelines.md) →

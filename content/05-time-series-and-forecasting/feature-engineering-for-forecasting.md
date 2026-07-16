@@ -160,3 +160,5 @@ Forecast features translate [forecasting data and covariates](forecasting-data-a
 
 - [Hyndman & Athanasopoulos, FPP3: Time series features](https://otexts.com/fpp3/features.html)
 - [Nixtla StatsForecast exogenous regressors guide index](https://nixtla.github.io/statsforecast/)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Forecasting Data and Covariates](forecasting-data-and-covariates.md) · [Autoregressive Models](autoregressive-models.md) →

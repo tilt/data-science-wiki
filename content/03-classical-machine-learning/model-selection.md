@@ -77,3 +77,5 @@ Searching many configurations overfits validation data. Nested cross-validation 
 
 - [scikit-learn User Guide: Cross-validation](https://scikit-learn.org/stable/modules/cross_validation.html)
 - [scikit-learn User Guide: Tuning hyperparameters](https://scikit-learn.org/stable/modules/grid_search.html)
+
+> **Section — [Classical Machine Learning](index.md):** ← [Bias-Variance Trade-Off](bias-variance-trade-off.md) · [Data Leakage](data-leakage.md) →

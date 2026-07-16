@@ -58,3 +58,5 @@ Implicit logs entangle preference with exposure. A click can mean interest, curi
 
 - [Hu, Koren, and Volinsky, 2008, Collaborative Filtering for Implicit Feedback Datasets](https://doi.org/10.1109/ICDM.2008.22)
 - [Rendle, 2012, BPR: Bayesian Personalized Ranking from Implicit Feedback](https://arxiv.org/abs/1205.2618)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Weighted Matrix Factorization](weighted-matrix-factorization.md) · [Bayesian Personalized Ranking](bayesian-personalized-ranking.md) →

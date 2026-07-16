@@ -94,3 +94,5 @@ Gradients are local. A small gradient can mean a minimum, a saddle point, satura
 
 - [MIT OpenCourseWare: 18.02SC Multivariable Calculus](https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/)
 - [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Calculus](calculus.md) · [Jacobians and Hessians](jacobians-and-hessians.md) →

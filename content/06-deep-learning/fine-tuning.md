@@ -119,3 +119,5 @@ Small target datasets make full fine-tuning prone to overfitting and catastrophi
 
 - [Hu et al., 2021, LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)
 - [PyTorch documentation: Autograd mechanics](https://docs.pytorch.org/docs/2.7/notes/autograd.html)
+
+> **Section — [Deep Learning](index.md):** ← [Transfer Learning](transfer-learning.md) · [Multimodal Learning](multimodal-learning.md) →

@@ -75,3 +75,5 @@ Shape errors are semantic errors, not just syntax errors: a feature vector store
 
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
 - [NumPy documentation: `numpy.linalg.norm`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Linear Algebra](linear-algebra.md) · [Matrix Multiplication](matrix-multiplication.md) →

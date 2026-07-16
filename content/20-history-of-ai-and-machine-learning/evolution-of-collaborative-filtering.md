@@ -51,3 +51,5 @@ The historical lesson is that collaborative filtering scaled by changing what wa
 - [Linden, Smith, and York, 2003, Amazon.com recommendations](https://doi.org/10.1109/MIC.2003.1167344)
 - [Hu, Koren, and Volinsky, 2008, Collaborative filtering for implicit feedback datasets](https://doi.org/10.1109/ICDM.2008.22)
 - [Koren, Bell, and Volinsky, 2009, Matrix factorization techniques for recommender systems](https://doi.org/10.1109/MC.2009.263)
+
+> **Section — [History of AI and Machine Learning](index.md):** ← [Matrix Decomposition in Statistics and Recommenders](matrix-decomposition-in-statistics-and-recommenders.md) · [Evolution of Computer Vision Architectures](evolution-of-computer-vision-architectures.md) →

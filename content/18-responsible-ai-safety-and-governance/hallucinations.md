@@ -62,3 +62,5 @@ Unsupported claim rate depends on the evidence standard. A legal assistant, supp
 - [NIST AI 600-1: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
 - [Ji et al., Survey of Hallucination in Natural Language Generation](https://arxiv.org/abs/2202.03629)
 - [OWASP LLM09:2025 Misinformation](https://genai.owasp.org/llmrisk/llm092025-misinformation/)
+
+> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Factual Correctness](factual-correctness.md) · [Error Taxonomies](error-taxonomies.md) →

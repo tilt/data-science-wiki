@@ -62,4 +62,6 @@ Monitoring fails when thresholds are copied across models, labels are missing fr
 - [OpenTelemetry Signals](https://opentelemetry.io/docs/concepts/signals/)
 - [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
 
-> **Learning path — Production ML:** ← [Model Serving](model-serving.md) · [path overview](../00-home-and-navigation/learning-paths.md#production-ml) · [Production Incident Response](production-incident-response.md) →
+> **Section — [ML Engineering and MLOps](index.md):** ← [A/B Testing](a-b-testing.md) · [Observability](observability.md) →
+
+> **Learning path — [Production ML](../00-home-and-navigation/learning-paths.md#production-ml):** ← [Model Serving](model-serving.md) · [Production Incident Response](production-incident-response.md) →

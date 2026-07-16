@@ -88,3 +88,5 @@ Business copy changes quickly around launches, incidents, policy updates, and se
 ## References
 
 - [UCI Machine Learning Repository: SMS Spam Collection](https://archive.ics.uci.edu/dataset/228/sms+spam+collection)
+
+> **Section — [Domain Applications](index.md):** [News Recommendation](news-recommendation.md) →

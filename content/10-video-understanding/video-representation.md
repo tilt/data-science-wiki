@@ -67,3 +67,5 @@ Pooling too early erases order and boundaries, which hurts [temporal localizatio
 
 - [Carreira and Zisserman, 2017, Quo Vadis, Action Recognition?](https://arxiv.org/abs/1705.07750)
 - [Tong et al., 2022, VideoMAE](https://arxiv.org/abs/2203.12602)
+
+> **Section — [Video Understanding](index.md):** ← [Spatial and Temporal Modelling](spatial-and-temporal-modelling.md) · [Optical Flow](optical-flow.md) →

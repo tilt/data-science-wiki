@@ -56,3 +56,5 @@ Offline metrics can hide early false positives and late true positives. Calibrat
 
 - [Assran et al., 2025, V-JEPA 2](https://arxiv.org/abs/2506.09985)
 - [Wu et al., 2021, Towards High-Quality Temporal Action Detection with Sparse Proposals](https://arxiv.org/abs/2109.08847)
+
+> **Section — [Video Understanding](index.md):** ← [Sliding Window Inference](sliding-window-inference.md) · [Person Tracking and Track Aggregation](person-tracking-and-track-aggregation.md) →

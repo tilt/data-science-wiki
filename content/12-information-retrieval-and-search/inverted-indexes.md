@@ -95,4 +95,6 @@ Indexes are only as good as their analyzers. If `C++`, `c plus plus`, and `cpp` 
 - [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Boolean retrieval](https://nlp.stanford.edu/IR-book/html/htmledition/boolean-retrieval-1.html)
 - [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Term vocabulary and postings lists](https://nlp.stanford.edu/IR-book/html/htmledition/the-term-vocabulary-and-postings-lists-1.html)
 
-> **Learning path — Information retrieval and search:** ← [Information Retrieval and Search](index.md) · [path overview](../00-home-and-navigation/learning-paths.md#information-retrieval-and-search) · [BM25](bm25.md) →
+> **Section — [Information Retrieval and Search](index.md):** ← [BM25](bm25.md) · [Sparse Retrieval](sparse-retrieval.md) →
+
+> **Learning path — [Information retrieval and search](../00-home-and-navigation/learning-paths.md#information-retrieval-and-search):** ← [Information Retrieval and Search](index.md) · [BM25](bm25.md) →

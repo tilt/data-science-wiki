@@ -28,46 +28,57 @@ related:
   - "11-generative-ai/index.md"
   - "12-information-retrieval-and-search/index.md"
 historical_context: false
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-16
 ---
 
 # Natural Language Processing
-
-## Summary
 
 Natural language processing covers models and systems that turn text into tokens, labels, spans, embeddings, structured records, or generated language. This section focuses on language-specific tasks and evaluation contracts; broader foundation-model training and agent workflows live in [Generative AI and Agentic Systems](../11-generative-ai/index.md), while retrieval systems live in [Information Retrieval and Search](../12-information-retrieval-and-search/index.md).
 
 The practical distinction is output shape. Text classification predicts document-level labels, sequence labelling predicts token or span annotations, semantic similarity compares meanings, and document understanding combines OCR, layout, text, and extraction.
 
-## Task Map
+## Knowledge map
 
-| Output needed                   | Start with                                                                                                                                          | Typical evaluation concern              |
-| ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
-| Clean text representation       | [Text Preprocessing](text-preprocessing.md), [Tokenization](tokenization.md), [Embeddings](embeddings.md)                                           | normalization and vocabulary choices    |
-| Document or message labels      | [Text Classification](text-classification.md), [Topic Classification](topic-classification.md), [Urgency Classification](urgency-classification.md) | class imbalance and thresholding        |
-| Entities and spans              | [Named Entity Recognition](named-entity-recognition.md), [Sequence Labelling](sequence-labelling.md)                                                | span boundaries and partial matches     |
-| Matching and retrieval features | [Semantic Textual Similarity](semantic-textual-similarity.md), [Entity Linking and Matching](entity-linking-and-matching.md)                        | hard negatives and ambiguity            |
-| Structured documents            | [OCR and Handwritten Text Recognition](ocr-and-handwritten-text-recognition.md), [Document Understanding](document-understanding.md)                | layout errors and extraction confidence |
+Representation comes first (preprocessing, tokenization, embeddings), then language models, then the task families they power, all judged by task-appropriate evaluation.
 
-## Subtopics
+```mermaid
+flowchart TD
+  Prep[Text Preprocessing and Tokenization] --> Emb[Embeddings]
+  Emb --> LM[Language Modelling]
+  LM --> Enc[BERT-Style Encoders]
+  LM --> Dec[Decoder-Only Transformers]
+  Enc --> Tasks[Classification, Labelling, Extraction]
+  Emb --> Sim[Semantic Similarity and Linking]
+  Tasks --> Eval[Evaluation of NLP Systems]
+  Sim --> Eval
+```
 
-- [Text Preprocessing](text-preprocessing.md)
-- [Tokenization](tokenization.md)
-- [Embeddings](embeddings.md)
-- [Language Modelling](language-modelling.md)
-- [Text Classification](text-classification.md)
-- [Topic Classification](topic-classification.md)
-- [Urgency Classification](urgency-classification.md)
-- [Named Entity Recognition](named-entity-recognition.md)
-- [Entity Linking and Matching](entity-linking-and-matching.md)
-- [Information Extraction](information-extraction.md)
-- [Semantic Textual Similarity](semantic-textual-similarity.md)
-- [Sequence Labelling](sequence-labelling.md)
-- [Summarization](summarization.md)
-- [Bert Style Encoders](bert-style-encoders.md)
-- [Decoder Only Transformers](decoder-only-transformers.md)
-- [Evaluation OF NLP Systems](evaluation-of-nlp-systems.md)
-- [OCR and Handwritten Text Recognition](ocr-and-handwritten-text-recognition.md)
-- [Document Understanding](document-understanding.md)
+## Reading path
 
-> **Learning path — Natural language processing:** [path overview](../00-home-and-navigation/learning-paths.md#natural-language-processing) · [Tokenization](tokenization.md) →
+Read representation, then models, then the task families, ending on evaluation.
+
+1. [Text Preprocessing](text-preprocessing.md): normalization before anything else.
+2. [Tokenization](tokenization.md): choosing the units a model consumes.
+3. [Embeddings](embeddings.md): dense vector representations of tokens and text.
+4. [Language Modelling](language-modelling.md): predicting text and scoring likelihood.
+5. [BERT-Style Encoders](bert-style-encoders.md): bidirectional encoders for understanding tasks.
+6. [Decoder-Only Transformers](decoder-only-transformers.md): causal models for generation.
+7. [Text Classification](text-classification.md): document-level label prediction.
+8. [Topic Classification](topic-classification.md): assigning subject categories.
+9. [Urgency Classification](urgency-classification.md): cost-sensitive triage of messages.
+10. [Sequence Labelling](sequence-labelling.md): token-level tagging.
+11. [Named Entity Recognition](named-entity-recognition.md): extracting typed entity spans.
+12. [Information Extraction](information-extraction.md): turning text into structured records.
+13. [Entity Linking and Matching](entity-linking-and-matching.md): resolving mentions to canonical entities.
+14. [Semantic Textual Similarity](semantic-textual-similarity.md): comparing meanings across texts.
+15. [Summarization](summarization.md): extractive and abstractive condensation.
+16. [OCR and Handwritten Text Recognition](ocr-and-handwritten-text-recognition.md): reading text from images.
+17. [Document Understanding](document-understanding.md): combining layout, text, and extraction.
+18. [Evaluation of NLP Systems](evaluation-of-nlp-systems.md): metrics and confidence intervals for language tasks.
+
+## Connections
+
+- [Deep Learning](../06-deep-learning/index.md) supplies the transformer architectures underneath.
+- [Generative AI](../11-generative-ai/index.md) and [Information Retrieval](../12-information-retrieval-and-search/index.md) build on these representations and tasks.
+
+> **Learning path — [Natural language processing](../00-home-and-navigation/learning-paths.md#natural-language-processing):** [Tokenization](tokenization.md) →

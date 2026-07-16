@@ -48,3 +48,5 @@ Tiny chunks lose context; huge chunks bury the answer and waste tokens. Rechunki
 
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
 - [OpenAI API documentation: Embeddings](https://platform.openai.com/docs/guides/embeddings)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Embeddings](embeddings.md) · [Vector Databases](vector-databases.md) →

@@ -47,3 +47,5 @@ N-BEATS and N-HiTS are specialized [deep learning forecasting](deep-learning-for
 - [Oreshkin et al., N-BEATS](https://arxiv.org/abs/1905.10437)
 - [Challu et al., N-HiTS](https://arxiv.org/abs/2201.12886)
 - [Nixtla NeuralForecast model documentation](https://nixtlaverse.nixtla.io/neuralforecast/docs/getting-started/introduction.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Transformer-Based Forecasting](transformer-based-forecasting.md) · [Forecast Evaluation](forecast-evaluation.md) →

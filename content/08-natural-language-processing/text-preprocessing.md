@@ -79,3 +79,5 @@ Preprocessing is not harmless cleanup. Lowercasing can erase product names, rege
 
 - [Manning, Raghavan, and Schutze, Introduction to Information Retrieval: Tokenization](https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html)
 - [scikit-learn User Guide: Text feature extraction](https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction)
+
+> **Section — [Natural Language Processing](index.md):** [Tokenization](tokenization.md) →

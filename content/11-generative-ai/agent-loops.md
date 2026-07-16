@@ -69,3 +69,5 @@ Loops fail by spinning, compounding bad observations, treating tool output as tr
 
 - [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
 - [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Tool Routing](tool-routing.md) · [Agentic Systems](agentic-systems.md) →

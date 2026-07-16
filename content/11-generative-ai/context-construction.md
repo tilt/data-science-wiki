@@ -51,3 +51,5 @@ More context can hurt when it includes conflicting passages or untrusted user te
 
 - [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Reranking](reranking.md) · [Grounding](grounding.md) →

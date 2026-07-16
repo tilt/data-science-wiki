@@ -48,3 +48,5 @@ Reviews fail when one expert becomes the only quality gate, when comments are mo
 
 - [Google Engineering Practices: How to do a code review](https://google.github.io/eng-practices/review/reviewer/)
 - [pytest documentation: assertions](https://docs.pytest.org/en/stable/how-to/assert.html)
+
+> **Section — [Software Engineering](index.md):** ← [Testing](testing.md) · [Refactoring](refactoring.md) →

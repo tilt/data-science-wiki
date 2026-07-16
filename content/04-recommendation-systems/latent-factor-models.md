@@ -61,3 +61,5 @@ Latent dimensions are useful but not guaranteed to be stable or interpretable ac
 
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
 - [Rendle, 2012, BPR: Bayesian Personalized Ranking from Implicit Feedback](https://arxiv.org/abs/1205.2618)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Matrix Factorization for Recommender Systems](matrix-factorization.md) · [Classical SVD](classical-svd.md) →

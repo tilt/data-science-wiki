@@ -65,3 +65,5 @@ Contracts fail when they document fields but do not block incompatible changes. 
 
 - [Open Data Contract Standard repository](https://github.com/bitol-io/open-data-contract-standard)
 - [dbt documentation: About data tests property](https://docs.getdbt.com/reference/resource-properties/data-tests)
+
+> **Section — [Data Engineering](index.md):** ← [Data Quality](data-quality.md) · [Data Lineage](data-lineage.md) →

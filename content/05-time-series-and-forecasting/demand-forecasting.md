@@ -42,3 +42,5 @@ Demand forecasting combines [forecasting data and covariates](forecasting-data-a
 
 - [Hyndman & Athanasopoulos, FPP3: Determining what to forecast](https://otexts.com/fpp3/intro.html)
 - [Hyndman & Athanasopoulos, FPP3: Forecasting hierarchical and grouped time series](https://otexts.com/fpp3/hierarchical.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Forecast Monitoring](forecast-monitoring.md) · [Energy Consumption Forecasting](energy-consumption-forecasting.md) →

@@ -65,3 +65,5 @@ Reviewer fatigue, order effects, unclear rubrics, and hidden system identity can
 
 - [scikit-learn documentation: cohen_kappa_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html)
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
+
+> **Section — [Experimentation and Evaluation](index.md):** ← [A/B Testing](a-b-testing.md) · [LLM-as-Judge](llm-as-judge.md) →

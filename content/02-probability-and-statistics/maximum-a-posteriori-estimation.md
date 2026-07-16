@@ -57,3 +57,5 @@ MAP hides posterior uncertainty and can be sensitive to parameterization: a mode
 
 - [Maximum a posteriori estimation](https://en.wikipedia.org/wiki/Maximum_a_posteriori_estimation)
 - [SciPy beta distribution](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html)
+
+> **Section — [Probability and Statistics](index.md):** ← [Maximum Likelihood](maximum-likelihood.md) · [Bayesian Statistics](bayesian-statistics.md) →

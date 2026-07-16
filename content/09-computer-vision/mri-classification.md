@@ -86,3 +86,5 @@ MRI sequence availability, scanner vendor, coil, site, and reconstruction protoc
 
 - [A Comparative Study of Existing and New Deep Learning Methods for Detecting Knee Injuries using the MRNet Dataset](https://arxiv.org/abs/2010.01947)
 - [WILDS: A Benchmark of in-the-Wild Distribution Shifts](https://arxiv.org/abs/2012.07421)
+
+> **Section — [Computer Vision](index.md):** ← [MRI Segmentation](mri-segmentation.md)

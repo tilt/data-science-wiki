@@ -61,3 +61,5 @@ Preference data can encode annotator bias or reward verbosity. A model can be al
 - [Ouyang et al., 2022, Training language models to follow instructions](https://arxiv.org/abs/2203.02155)
 - [Rafailov et al., 2023, Direct Preference Optimization](https://arxiv.org/abs/2305.18290)
 - [NIST AI Risk Management Framework 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Instruction Tuning](instruction-tuning.md) · [In-Context Learning](in-context-learning.md) →

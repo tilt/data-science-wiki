@@ -59,3 +59,5 @@ Real-time systems fail when early frames are ambiguous, when motion blur or occl
 
 - [Soomro, Zamir, and Shah, UCF101](https://arxiv.org/abs/1212.0402)
 - [Kay et al., The Kinetics Human Action Video Dataset](https://arxiv.org/abs/1705.06950)
+
+> **Section — [Domain Applications](index.md):** ← [Gesture-Based Interaction](gesture-based-interaction.md) · [Road Scene Perception](road-scene-perception.md) →

@@ -64,3 +64,5 @@ Observed columns are samples from variables, not the variables themselves. A fea
 
 - [OpenStax Introductory Statistics 2e, Chapter 4 introduction](https://openstax.org/books/introductory-statistics-2e/pages/4-introduction)
 - [Probability space: random variables](https://en.wikipedia.org/wiki/Probability_space#Random_variables)
+
+> **Section — [Probability and Statistics](index.md):** ← [Probability Spaces](probability-spaces.md) · [Common Distributions](common-distributions.md) →

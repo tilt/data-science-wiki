@@ -73,3 +73,5 @@ Projects are not environments by themselves; they need labels, folders, billing 
 - [Google Cloud overview](https://docs.cloud.google.com/docs/overview)
 - [Google Cloud resource hierarchy](https://docs.cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy)
 - [Cloud Storage classes](https://docs.cloud.google.com/storage/docs/storage-classes)
+
+> **Section — [Cloud and Distributed Systems](index.md):** ← [AWS Fundamentals](aws-fundamentals.md) · [Managed Compute](managed-compute.md) →

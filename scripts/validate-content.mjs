@@ -246,6 +246,41 @@ for (const [rel, count] of incoming) {
   if (count === 0) warn("orphan page has no incoming Markdown links: " + rel)
 }
 
+// Reading-path completeness: if a section index has a "## Reading path" section,
+// its same-folder links must be exactly the section's non-index pages. This
+// keeps the per-section chapter navigation (scripts/gen-nav-footers.mjs) from
+// silently dropping a page when one is added or removed. Sections without a
+// reading path yet are skipped, so the convention can be rolled out gradually.
+for (const area of expectedAreas) {
+  const indexPath = path.join(content, area, "index.md")
+  if (!fs.existsSync(indexPath)) continue
+  const lines = fs.readFileSync(indexPath, "utf8").split("\n")
+  let inPath = false
+  const listed = new Set()
+  let hasReadingPath = false
+  for (const line of lines) {
+    if (/^##\s/.test(line)) {
+      inPath = /^##\s+Reading path\s*$/.test(line)
+      if (inPath) hasReadingPath = true
+      continue
+    }
+    if (!inPath) continue
+    const hit = line.match(/^\s*(?:\d+\.|[-*])\s+\[[^\]]*\]\(([^)]+)\)/)
+    if (!hit) continue
+    const target = hit[1].split("#")[0].trim()
+    if (/^https?:|\//.test(target) || !target.endsWith(".md")) continue
+    if (listed.has(target)) fail(`${area}/index.md reading path lists ${target} twice`)
+    listed.add(target)
+  }
+  if (!hasReadingPath) continue
+  const actual = new Set(
+    fs.readdirSync(path.join(content, area)).filter((f) => f.endsWith(".md") && f !== "index.md"),
+  )
+  for (const f of actual) if (!listed.has(f)) fail(`${area}/index.md reading path is missing ${f}`)
+  for (const f of listed)
+    if (!actual.has(f)) fail(`${area}/index.md reading path links non-existent ${f}`)
+}
+
 const forbiddenObsidian = [
   "content/.obsidian/workspace.json",
   "content/.obsidian/workspace",

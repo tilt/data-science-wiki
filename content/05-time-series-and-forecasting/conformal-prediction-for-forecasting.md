@@ -103,3 +103,5 @@ Conformal forecasting wraps [prediction intervals](prediction-intervals.md) arou
 - [Shafer and Vovk, A Tutorial on Conformal Prediction](https://www.jmlr.org/papers/v9/shafer08a.html)
 - [Romano, Patterson, and Candes, Conformalized Quantile Regression](https://arxiv.org/abs/1905.03222)
 - [Gibbs and Candes, Adaptive Conformal Inference Under Distribution Shift](https://arxiv.org/abs/2106.00170)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Forecast Calibration](forecast-calibration.md) · [Hierarchical Forecasting](hierarchical-forecasting.md) →

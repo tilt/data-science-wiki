@@ -112,3 +112,5 @@ A useful fairness artifact records the protected or proxy groups evaluated, the 
 - [Fairlearn documentation: Common fairness metrics](https://fairlearn.org/main/user_guide/assessment/common_fairness_metrics.html)
 - [Barocas, Hardt, and Narayanan, Fairness and Machine Learning](https://fairmlbook.org/)
 - [Hardt, Price, and Srebro, Equality of Opportunity in Supervised Learning](https://arxiv.org/abs/1610.02413)
+
+> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Policy Enforcement](policy-enforcement.md) · [Explainability](explainability.md) →

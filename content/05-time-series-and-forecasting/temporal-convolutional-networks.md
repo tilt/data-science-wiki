@@ -45,3 +45,5 @@ TCNs are a convolutional branch of deep forecasting. Their receptive fields comp
 
 - [Bai, Kolter, and Koltun, Empirical Evaluation of Generic Convolutional and Recurrent Networks](https://arxiv.org/abs/1803.01271)
 - [PyTorch Conv1d documentation](https://pytorch.org/docs/stable/generated/torch.nn.Conv1d.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [RNN and LSTM Forecasting](rnn-and-lstm-forecasting.md) · [Transformer-Based Forecasting](transformer-based-forecasting.md) →

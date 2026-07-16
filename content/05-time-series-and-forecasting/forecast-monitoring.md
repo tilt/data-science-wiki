@@ -81,3 +81,5 @@ Monitoring turns [forecast evaluation](forecast-evaluation.md) into an ongoing p
 
 - [Hyndman & Athanasopoulos, FPP3: Residual diagnostics](https://otexts.com/fpp3/toolbox.html)
 - [Gibbs and Candes, Adaptive Conformal Inference Under Distribution Shift](https://arxiv.org/abs/2106.00170)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Online Learning for Forecasting](online-learning-for-forecasting.md) · [Demand Forecasting](demand-forecasting.md) →

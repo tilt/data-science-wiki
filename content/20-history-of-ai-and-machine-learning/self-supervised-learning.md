@@ -51,3 +51,5 @@ The caveat is objective mismatch. A pretext task preserves what it needs and may
 - [Chen et al., 2020, A Simple Framework for Contrastive Learning of Visual Representations](https://arxiv.org/abs/2002.05709)
 - [Grill et al., 2020, Bootstrap Your Own Latent](https://arxiv.org/abs/2006.07733)
 - [He et al., 2021, Masked Autoencoders Are Scalable Vision Learners](https://arxiv.org/abs/2111.06377)
+
+> **Section — [History of AI and Machine Learning](index.md):** ← [Development of Attention and Transformers](development-of-attention-and-transformers.md) · [Development of RAG](development-of-rag.md) →

@@ -62,3 +62,5 @@ Batching improves throughput but adds queueing delay. Dropping frames can preser
 
 - [Bewley et al., 2016, Simple Online and Realtime Tracking](https://arxiv.org/abs/1602.00763)
 - [Bertasius et al., 2021, TimeSformer](https://arxiv.org/abs/2102.05095)
+
+> **Section — [Video Understanding](index.md):** ← [Person Tracking and Track Aggregation](person-tracking-and-track-aggregation.md) · [Gesture Recognition](gesture-recognition.md) →

@@ -125,3 +125,5 @@ System design connects [forecasting problem formulation](forecasting-problem-for
 
 - [Nixtla StatsForecast documentation](https://nixtla.github.io/statsforecast/)
 - [sktime forecasting tutorial](https://www.sktime.net/docs/examples/forecasting/)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Hyperparameter Optimization for Forecasting](hyperparameter-optimization-for-forecasting.md) · [Concept Drift in Forecasting](concept-drift-in-forecasting.md) →

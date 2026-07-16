@@ -113,3 +113,5 @@ Data design starts from [forecasting problem formulation](forecasting-problem-fo
 
 - [Hyndman & Athanasopoulos, FPP3: Forecasting with regression](https://otexts.com/fpp3/forecasting.html)
 - [Hyndman & Athanasopoulos, FPP3: Dealing with outliers and missing values](https://otexts.com/fpp3/missing-outliers.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Forecasting Problem Formulation](forecasting-problem-formulation.md) · [Feature Engineering for Forecasting](feature-engineering-for-forecasting.md) →

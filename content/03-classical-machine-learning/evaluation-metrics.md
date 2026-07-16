@@ -79,4 +79,6 @@ Do not tune on the test metric repeatedly and still call it an unbiased test est
 - [scikit-learn User Guide: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
 - [scikit-learn User Guide: Tuning the decision threshold](https://scikit-learn.org/stable/modules/classification_threshold.html)
 
-> **Learning path — Foundations:** ← [Supervised Learning](supervised-learning.md) · [path overview](../00-home-and-navigation/learning-paths.md#foundations)
+> **Section — [Classical Machine Learning](index.md):** ← [Anomaly Detection](anomaly-detection.md) · [Calibration](calibration.md) →
+
+> **Learning path — [Foundations](../00-home-and-navigation/learning-paths.md#foundations):** ← [Supervised Learning](supervised-learning.md)

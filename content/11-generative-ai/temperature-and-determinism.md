@@ -86,3 +86,5 @@ Temperature zero can still drift in hosted systems. For extraction, combine low 
 
 - [OpenAI API documentation: Text generation](https://platform.openai.com/docs/guides/text-generation)
 - [Holtzman et al., 2020, The Curious Case of Neural Text Degeneration](https://arxiv.org/abs/1904.09751)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Top-k and Top-p Sampling](top-k-and-top-p-sampling.md) · [Determinism and Reproducibility](determinism-and-reproducibility.md) →

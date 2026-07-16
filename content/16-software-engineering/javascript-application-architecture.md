@@ -76,3 +76,5 @@ Common failures are global mutable state, business rules embedded in JSX, untype
 - [MDN: Using the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 - [MDN: AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController)
 - [React documentation: Managing State](https://react.dev/learn/managing-state)
+
+> **Section — [Software Engineering](index.md):** ← [Web Backends](web-backends.md) · [Production Integration](production-integration.md) →

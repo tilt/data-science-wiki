@@ -50,3 +50,5 @@ The historical lesson is that "architecture wins" usually came from matching ind
 - [Krizhevsky, Sutskever, and Hinton, 2012, ImageNet classification with deep convolutional neural networks](https://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks)
 - [He et al., 2015, Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
 - [Dosovitskiy et al., 2020, An Image is Worth 16x16 Words](https://arxiv.org/abs/2010.11929)
+
+> **Section — [History of AI and Machine Learning](index.md):** ← [Evolution of Collaborative Filtering](evolution-of-collaborative-filtering.md) · [From CNN Video Models to Video Transformers](from-cnn-video-models-to-video-transformers.md) →

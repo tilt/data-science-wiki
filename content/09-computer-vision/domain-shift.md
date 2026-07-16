@@ -69,3 +69,5 @@ Random splits can hide site, patient, camera, or time leakage. In [medical image
 
 - [WILDS: A Benchmark of in-the-Wild Distribution Shifts](https://arxiv.org/abs/2012.07421)
 - [Computer Vision: Algorithms and Applications, 2nd ed.](https://szeliski.org/Book/)
+
+> **Section — [Computer Vision](index.md):** ← [Model Benchmarking](model-benchmarking.md) · [Synthetic Data](synthetic-data.md) →

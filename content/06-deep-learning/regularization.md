@@ -79,3 +79,5 @@ Dropout is often harmful in heavily normalized transformer blocks when applied b
 
 - [Srivastava et al., 2014, Dropout: A Simple Way to Prevent Neural Networks from Overfitting](https://jmlr.org/papers/v15/srivastava14a.html)
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 8](https://www.deeplearningbook.org/contents/optimization.html)
+
+> **Section — [Deep Learning](index.md):** ← [Normalization](normalization.md) · [Convolutional Neural Networks](convolutional-neural-networks.md) →

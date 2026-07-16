@@ -90,3 +90,5 @@ Orthogonality depends on the inner product. Standard Euclidean orthogonality may
 
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
 - [NumPy documentation: `numpy.linalg.qr`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Rank](rank.md) · [Norms and Distances](norms-and-distances.md) →

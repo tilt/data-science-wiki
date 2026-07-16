@@ -71,3 +71,5 @@ Decision records fail when they are written only for approvals, omit alternative
 - [Architectural Decision Records](https://adr.github.io/)
 - [MADR: Markdown Architectural Decision Records](https://adr.github.io/madr/)
 - [arc42 Template Overview](https://arc42.org/overview)
+
+> **Section — [Software Engineering](index.md):** ← [Behaviour Driven Development](behaviour-driven-development.md) · [Documentation](documentation.md) →

@@ -52,3 +52,5 @@ SARIMA is the seasonal extension of [ARIMA](arima.md). It uses the same stationa
 
 - [Hyndman & Athanasopoulos, FPP3: Seasonal ARIMA models](https://otexts.com/fpp3/seasonal-arima.html)
 - [statsmodels SARIMAX API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [ARIMA](arima.md) · [Exponential Smoothing](exponential-smoothing.md) →

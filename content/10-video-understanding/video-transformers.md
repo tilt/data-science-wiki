@@ -80,3 +80,5 @@ Attention can model long-range dependencies, but it does not automatically solve
 - [Bertasius et al., 2021, Is Space-Time Attention All You Need for Video Understanding?](https://arxiv.org/abs/2102.05095)
 - [Arnab et al., 2021, ViViT: A Video Vision Transformer](https://arxiv.org/abs/2103.15691)
 - [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+
+> **Section — [Video Understanding](index.md):** ← [Two-Stream Models](two-stream-models.md) · [Temporal Action Recognition](temporal-action-recognition.md) →

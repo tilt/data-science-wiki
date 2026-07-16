@@ -82,3 +82,5 @@ Transfer can fail when source and target domains differ in low-level statistics 
 
 - [Yosinski et al., 2014, How transferable are features in deep neural networks?](https://arxiv.org/abs/1411.1792)
 - [PyTorch tutorial: Transfer Learning for Computer Vision](https://docs.pytorch.org/tutorials/beginner/transfer_learning_tutorial.html)
+
+> **Section — [Deep Learning](index.md):** ← [Contrastive Learning](contrastive-learning.md) · [Fine-Tuning](fine-tuning.md) →

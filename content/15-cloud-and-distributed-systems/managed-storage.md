@@ -67,3 +67,5 @@ Durability and availability are different. Archive classes can be durable but ha
 - [What is Amazon S3?](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
 - [Amazon S3 pricing](https://aws.amazon.com/s3/pricing/)
 - [Google Cloud Storage classes](https://docs.cloud.google.com/storage/docs/storage-classes)
+
+> **Section — [Cloud and Distributed Systems](index.md):** ← [Managed Compute](managed-compute.md) · [GPU Systems](gpu-systems.md) →

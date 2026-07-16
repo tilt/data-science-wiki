@@ -84,3 +84,5 @@ Pairing does not fix a stale or overfit [golden dataset](golden-datasets.md). If
 
 - [SciPy documentation: scipy.stats.ttest_rel](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_rel.html)
 - [SciPy documentation: scipy.stats.binomtest](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binomtest.html)
+
+> **Section — [Experimentation and Evaluation](index.md):** ← [Repeated Sampling](repeated-sampling.md) · [Online Experiments](online-experiments.md) →

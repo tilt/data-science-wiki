@@ -81,3 +81,5 @@ OCR quality depends on resolution, rotation, compression, script, font, handwrit
 - [Hannun, Sequence Modeling with CTC](https://distill.pub/2017/ctc/)
 - [Tesseract OCR engine repository](https://github.com/tesseract-ocr/tesseract)
 - [Tesseract documentation repository](https://github.com/tesseract-ocr/tessdoc)
+
+> **Section — [Natural Language Processing](index.md):** ← [Summarization](summarization.md) · [Document Understanding](document-understanding.md) →

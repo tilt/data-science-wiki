@@ -75,3 +75,5 @@ A green Airflow run proves task completion, not metric correctness. Hidden side 
 
 - [Apache Airflow documentation: DAGs](https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/dags.html)
 - [Apache Airflow documentation: Dynamic Task Mapping](https://airflow.apache.org/docs/apache-airflow/stable/authoring-and-scheduling/dynamic-task-mapping.html)
+
+> **Section — [Data Engineering](index.md):** ← [Data Pipelines](data-pipelines.md) · [dbt](dbt.md) →

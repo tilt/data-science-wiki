@@ -217,3 +217,5 @@ Harnesses operationalize [RAG benchmark design](rag-benchmark-design.md), [RAG e
 - [OpenAI API documentation: Evals](https://developers.openai.com/api/docs/guides/evals)
 - [OpenAI API documentation: Graders](https://developers.openai.com/api/docs/guides/graders)
 - [OpenAI API documentation: Agents SDK evaluation](https://developers.openai.com/api/docs/guides/agents#evaluate-agent-workflows)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Multi-Agent Systems](multi-agent-systems.md) · [Agent Evaluation](agent-evaluation.md) →

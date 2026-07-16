@@ -101,3 +101,5 @@ Machine-learning forecasters depend on [feature engineering for forecasting](fea
 
 - [Hyndman & Athanasopoulos, FPP3: Time series regression models](https://otexts.com/fpp3/regression.html)
 - [scikit-learn Gradient Boosting documentation](https://scikit-learn.org/stable/modules/ensemble.html#gradient-boosting)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Statistical Forecasting](statistical-forecasting.md) · [Deep Learning Forecasting](deep-learning-forecasting.md) →

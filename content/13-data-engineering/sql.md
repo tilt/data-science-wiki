@@ -75,3 +75,5 @@ In [data warehouses](data-warehouses.md), SQL is usually versioned as models: st
 - [PostgreSQL documentation: Table expressions](https://www.postgresql.org/docs/current/queries-table-expressions.html)
 - [SQLite documentation: Window functions](https://www.sqlite.org/windowfunctions.html)
 - [BigQuery documentation: GoogleSQL query syntax](https://cloud.google.com/bigquery/docs/reference/standard-sql/query-syntax)
+
+> **Section — [Data Engineering](index.md):** ← [Relational Modelling](relational-modelling.md) · [Dimensional Modelling](dimensional-modelling.md) →

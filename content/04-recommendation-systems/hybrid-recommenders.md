@@ -56,3 +56,5 @@ Score blending is only meaningful when component scores are calibrated or normal
 
 - [Adomavicius and Tuzhilin, 2005, Toward the Next Generation of Recommender Systems](https://doi.org/10.1109/TKDE.2005.99)
 - [He and McAuley, 2015, VBPR](https://arxiv.org/abs/1510.01784)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Cold Start Problem](cold-start-problem.md) · [Candidate Generation](candidate-generation.md) →

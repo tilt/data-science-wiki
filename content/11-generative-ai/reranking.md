@@ -54,3 +54,5 @@ Rerankers can overfit to benchmark phrasing and add latency. Evaluate top-k reca
 - [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)
 - [Muennighoff et al., 2022, MTEB](https://arxiv.org/abs/2210.07316)
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Query Rewriting](query-rewriting.md) · [Context Construction](context-construction.md) →

@@ -73,3 +73,5 @@ The objective defines the behavior. A perfectly optimized proxy can still be mis
 
 - [SciPy documentation: `scipy.optimize.minimize`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.minimize.html)
 - [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Jacobians and Hessians](jacobians-and-hessians.md) · [Convex Optimization](convex-optimization.md) →

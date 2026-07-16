@@ -84,3 +84,5 @@ Exploration bonuses change the effective objective, so they should be annealed o
 - [Bellemare et al., 2016, Unifying Count-Based Exploration and Intrinsic Motivation](https://arxiv.org/abs/1606.01868)
 - [Pathak et al., 2017, Curiosity-Driven Exploration by Self-Supervised Prediction](https://arxiv.org/abs/1705.05363)
 - [Osband et al., 2016, Deep Exploration via Bootstrapped DQN](https://arxiv.org/abs/1602.04621)
+
+> **Section — [Reinforcement Learning](index.md):** ← [Proximal Policy Optimization](proximal-policy-optimization.md) · [Reward Design and Shaping](reward-design-and-shaping.md) →

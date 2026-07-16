@@ -83,3 +83,5 @@ Interference breaks independent-unit assumptions when one user's treatment chang
 
 - [Larsen et al., Statistical Challenges in Online Controlled Experiments](https://arxiv.org/abs/2212.11366)
 - [SciPy documentation: scipy.stats.ttest_ind](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_ind.html)
+
+> **Section — [Experimentation and Evaluation](index.md):** ← [Paired Evaluation](paired-evaluation.md) · [A/B Testing](a-b-testing.md) →

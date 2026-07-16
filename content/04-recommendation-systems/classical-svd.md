@@ -74,3 +74,5 @@ Do not turn sparse recommender data into a dense matrix by filling unknown cells
 
 - [scikit-learn documentation: TruncatedSVD](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html)
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Latent Factor Models](latent-factor-models.md) · [Truncated SVD](truncated-svd.md) →

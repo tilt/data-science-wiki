@@ -60,3 +60,5 @@ Pretraining data quality, deduplication, and contamination matter. Better pretra
 
 - [Kaplan et al., 2020, Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361)
 - [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Tokenization](tokenization.md) · [LLM Training](llm-training.md) →

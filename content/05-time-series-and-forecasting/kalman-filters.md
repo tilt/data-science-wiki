@@ -131,3 +131,5 @@ The Kalman filter also generalizes several simpler methods: a suitable state-spa
 - [Kalman, 1960, A New Approach to Linear Filtering and Prediction Problems](https://doi.org/10.1115/1.3662552)
 - [Särkkä, 2013, Bayesian Filtering and Smoothing](https://users.aalto.fi/~ssarkka/pub/cup_book_online_20131111.pdf)
 - [statsmodels state-space documentation](https://www.statsmodels.org/stable/statespace.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [State Space Models](state-space-models.md) · [Statistical Forecasting](statistical-forecasting.md) →

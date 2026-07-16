@@ -62,3 +62,5 @@ Information quantities depend on the probability model. Empirical estimates can 
 
 - [MacKay, Information Theory, Inference, and Learning Algorithms](https://www.inference.org.uk/itprnn/book.pdf)
 - [SciPy documentation: `scipy.special.rel_entr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.rel_entr.html)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Numerical Stability](numerical-stability.md) · [Entropy](entropy.md) →

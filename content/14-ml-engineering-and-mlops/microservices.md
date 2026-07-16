@@ -66,3 +66,5 @@ Microservices amplify schema drift and partial outages. If the feature service c
 
 - [Kubernetes Services](https://kubernetes.io/docs/concepts/services-networking/service/)
 - [OpenTelemetry Signals](https://opentelemetry.io/docs/concepts/signals/)
+
+> **Section — [ML Engineering and MLOps](index.md):** ← [Batch and Online Inference](batch-and-online-inference.md) · [Docker](docker.md) →

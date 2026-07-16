@@ -86,3 +86,5 @@ Perplexity is tokenization-dependent, so scores from different tokenizers are no
 
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
 - [Vaswani et al., Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+
+> **Section — [Natural Language Processing](index.md):** ← [Embeddings](embeddings.md) · [BERT-Style Encoders](bert-style-encoders.md) →

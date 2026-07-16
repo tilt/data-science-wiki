@@ -73,3 +73,5 @@ Bootstrap intervals inherit leakage, label error, and missing slices. For LLMs, 
 
 - [SciPy documentation: scipy.stats.bootstrap](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.bootstrap.html)
 - [SciPy documentation: scipy.stats.ttest_rel](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ttest_rel.html)
+
+> **Section — [Experimentation and Evaluation](index.md):** ← [Statistical Significance](statistical-significance.md) · [Paired Evaluation](paired-evaluation.md) →

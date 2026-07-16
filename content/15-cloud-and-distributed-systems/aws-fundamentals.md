@@ -79,3 +79,5 @@ AWS account boundaries are strong but not magic. Shared VPCs, cross-account role
 - [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html)
 - [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
 - [What is Amazon S3?](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
+
+> **Section — [Cloud and Distributed Systems](index.md):** [Google Cloud Fundamentals](google-cloud-fundamentals.md) →

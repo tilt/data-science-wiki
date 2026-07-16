@@ -69,3 +69,5 @@ If fact grain is vague, revenue can double after joining to a multi-row dimensio
 
 - [Microsoft Learn: Understand star schema and the importance for Power BI](https://learn.microsoft.com/en-us/power-bi/guidance/star-schema)
 - [PostgreSQL documentation: Table expressions](https://www.postgresql.org/docs/current/queries-table-expressions.html)
+
+> **Section — [Data Engineering](index.md):** ← [SQL](sql.md) · [Data Warehouses](data-warehouses.md) →

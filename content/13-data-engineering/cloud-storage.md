@@ -56,3 +56,5 @@ Object paths that omit partition keys make backfills and deletion hard. Lifecycl
 - [Google Cloud Storage documentation: About Cloud Storage objects](https://cloud.google.com/storage/docs/objects)
 - [Amazon S3 documentation: What is Amazon S3?](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
 - [Amazon S3 documentation: Retaining multiple versions of objects with S3 Versioning](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html)
+
+> **Section — [Data Engineering](index.md):** ← [BigQuery](bigquery.md) · [Batch Versus Streaming](batch-versus-streaming.md) →

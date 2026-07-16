@@ -63,3 +63,5 @@ Do not compare a classical model's strict labels with a generative model's polis
 - [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework)
 - [Zheng et al., Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena](https://arxiv.org/abs/2306.05685)
 - [scikit-learn documentation: Metrics and scoring](https://scikit-learn.org/stable/modules/model_evaluation.html)
+
+> **Section — [Experimentation and Evaluation](index.md):** ← [LLM-as-Judge](llm-as-judge.md) · [Coverage](coverage.md) →

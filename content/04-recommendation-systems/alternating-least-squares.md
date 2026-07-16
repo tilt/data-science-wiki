@@ -85,3 +85,5 @@ ALS is still optimizing logged observations, so it inherits exposure bias and co
 
 - [Koren, Bell, and Volinsky, 2009, Matrix Factorization Techniques for Recommender Systems](https://doi.org/10.1109/MC.2009.263)
 - [Hu, Koren, and Volinsky, 2008, Collaborative Filtering for Implicit Feedback Datasets](https://doi.org/10.1109/ICDM.2008.22)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Funk SVD](funk-svd.md) · [Weighted Matrix Factorization](weighted-matrix-factorization.md) →

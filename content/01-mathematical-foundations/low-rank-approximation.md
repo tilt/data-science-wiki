@@ -85,3 +85,5 @@ Low rank is an assumption. It can erase rare but important directions, and missi
 
 - [NumPy documentation: `numpy.linalg.svd`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.svd.html)
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Singular Value Decomposition](singular-value-decomposition.md) · [Calculus](calculus.md) →

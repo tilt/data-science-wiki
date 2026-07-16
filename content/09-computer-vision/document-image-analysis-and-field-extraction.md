@@ -76,3 +76,5 @@ Old typography, stains, multilingual layouts, handwriting, and skewed photograph
 
 - [Tesseract OCR documentation](https://tesseract-ocr.github.io/tessdoc/)
 - [What Is Wrong With Scene Text Recognition Model Comparisons?](https://arxiv.org/abs/1904.01906)
+
+> **Section — [Computer Vision](index.md):** ← [OCR Pipelines](ocr-pipelines.md) · [Model Benchmarking](model-benchmarking.md) →

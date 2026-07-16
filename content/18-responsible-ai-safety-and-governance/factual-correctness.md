@@ -103,3 +103,5 @@ Factual correctness depends on source quality. A model can be perfectly grounded
 
 - [NIST AI 600-1: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
 - [OWASP LLM09:2025 Misinformation](https://genai.owasp.org/llmrisk/llm092025-misinformation/)
+
+> **Section — [Responsible AI, Safety, and Governance](index.md):** [Hallucinations](hallucinations.md) →

@@ -74,3 +74,5 @@ Negative sampling controls what the model learns; sampling only easy negatives c
 
 - [Rendle, 2012, BPR: Bayesian Personalized Ranking from Implicit Feedback](https://arxiv.org/abs/1205.2618)
 - [He and McAuley, 2015, VBPR](https://arxiv.org/abs/1510.01784)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Implicit Feedback Recommendation](implicit-feedback.md) · [Cold Start Problem](cold-start-problem.md) →

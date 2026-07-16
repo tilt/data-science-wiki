@@ -56,3 +56,5 @@ Entropy is not variance. Relabeling categories leaves entropy unchanged, and two
 
 - [MacKay, Information Theory, Inference, and Learning Algorithms](https://www.inference.org.uk/itprnn/book.pdf)
 - [SciPy documentation: `scipy.special.rel_entr`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.rel_entr.html)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Information Theory](information-theory.md) · [Cross Entropy](cross-entropy.md) →

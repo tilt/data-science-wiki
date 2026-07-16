@@ -85,3 +85,5 @@ BDD becomes theatre when scenarios are written after implementation or restate p
 
 - [Cucumber documentation: Gherkin reference](https://cucumber.io/docs/gherkin/reference/)
 - [pytest documentation: assertions](https://docs.pytest.org/en/stable/how-to/assert.html)
+
+> **Section — [Software Engineering](index.md):** ← [Requirements Engineering](requirements-engineering.md) · [Technical Decision Records](technical-decision-records.md) →

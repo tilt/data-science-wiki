@@ -52,3 +52,5 @@ Documentation fails when it copies code, lacks an owner, or mixes current behavi
 
 - [Diataxis documentation framework](https://diataxis.fr/)
 - [Google developer documentation style guide](https://developers.google.com/style)
+
+> **Section — [Software Engineering](index.md):** ← [Technical Decision Records](technical-decision-records.md)

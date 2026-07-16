@@ -130,3 +130,5 @@ Benchmarks are necessary but insufficient. Public datasets cannot cover every ci
 - [Tian et al., 2023, Occ3D: A Large-Scale 3D Occupancy Prediction Benchmark for Autonomous Driving](https://arxiv.org/abs/2304.14365)
 - [Sima et al., 2023, DriveLM: Driving with Graph Visual Question Answering](https://arxiv.org/abs/2312.14150)
 - [Hwang et al., 2024, EMMA: End-to-End Multimodal Model for Autonomous Driving](https://arxiv.org/abs/2410.23262)
+
+> **Section — [Domain Applications](index.md):** ← [Road Scene Perception](road-scene-perception.md) · [Autonomous Driving Model Evaluation](autonomous-driving-model-evaluation.md) →

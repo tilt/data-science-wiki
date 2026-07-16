@@ -73,3 +73,5 @@ Common failures are hidden global state, unpinned dependencies, imports that dep
 - [Python tutorial: Virtual Environments and Packages](https://docs.python.org/3/tutorial/venv.html)
 - [Python documentation: dataclasses](https://docs.python.org/3/library/dataclasses.html)
 - [Python documentation: typing](https://docs.python.org/3/library/typing.html)
+
+> **Section — [Software Engineering](index.md):** [SQL](sql.md) →

@@ -75,3 +75,5 @@ Stability fixes should preserve the target computation, not silently change it. 
 
 - [SciPy documentation: `scipy.special.softmax`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.special.softmax.html)
 - [NumPy documentation: `numpy.linalg.cond`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.cond.html)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Stochastic Gradient Descent](stochastic-gradient-descent.md) · [Information Theory](information-theory.md) →

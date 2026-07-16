@@ -69,3 +69,5 @@ The contamination parameter bakes in an expected alert rate. High-dimensional di
 
 - [scikit-learn User Guide: Novelty and Outlier Detection](https://scikit-learn.org/stable/modules/outlier_detection.html)
 - [scikit-learn User Guide: Isolation Forest](https://scikit-learn.org/stable/modules/outlier_detection.html#isolation-forest)
+
+> **Section — [Classical Machine Learning](index.md):** ← [Clustering](clustering.md) · [Evaluation Metrics](evaluation-metrics.md) →

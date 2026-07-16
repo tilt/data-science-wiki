@@ -48,3 +48,5 @@ The historical lesson is that tool use increased capability by narrowing trust. 
 - [Karpas et al., 2022, MRKL Systems](https://arxiv.org/abs/2205.00445)
 - [Yao et al., 2022, ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
 - [Schick et al., 2023, Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761)
+
+> **Section — [History of AI and Machine Learning](index.md):** ← [Development of RAG](development-of-rag.md) · [World Models and JEPA Background](world-models-and-jepa-background.md) →

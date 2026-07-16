@@ -69,3 +69,5 @@ K-means requires choosing $K$ and is sensitive to scaling and initialization. In
 
 - [scikit-learn User Guide: Clustering](https://scikit-learn.org/stable/modules/clustering.html)
 - [scikit-learn User Guide: K-means](https://scikit-learn.org/stable/modules/clustering.html#k-means)
+
+> **Section — [Classical Machine Learning](index.md):** ← [PCA](pca.md) · [Anomaly Detection](anomaly-detection.md) →

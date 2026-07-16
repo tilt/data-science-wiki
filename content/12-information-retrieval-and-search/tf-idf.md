@@ -91,3 +91,5 @@ TF-IDF does not saturate term frequency the way [BM25](bm25.md) does, so repeate
 - [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Scoring and term weighting](https://nlp.stanford.edu/IR-book/html/htmledition/scoring-term-weighting-and-the-vector-space-model-1.html)
 - [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Term frequency and weighting](https://nlp.stanford.edu/IR-book/html/htmledition/term-frequency-and-weighting-1.html)
 - [scikit-learn API: TfidfVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)
+
+> **Section — [Information Retrieval and Search](index.md):** [BM25](bm25.md) →

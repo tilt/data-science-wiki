@@ -73,3 +73,5 @@ Numerical rank is thresholded. Floating-point noise can turn exact zeros into ti
 
 - [NumPy documentation: `numpy.linalg.matrix_rank`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.matrix_rank.html)
 - [MIT OpenCourseWare: 18.06 Linear Algebra](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Matrix Multiplication](matrix-multiplication.md) · [Orthogonality](orthogonality.md) →

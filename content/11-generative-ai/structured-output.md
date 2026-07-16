@@ -62,3 +62,5 @@ Valid JSON can still be semantically wrong. Validate against source evidence and
 - [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)
 - [JSON Schema documentation: object](https://json-schema.org/understanding-json-schema/reference/object)
 - [OpenAI API documentation: Function calling](https://platform.openai.com/docs/guides/function-calling)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Determinism and Reproducibility](determinism-and-reproducibility.md) · [RAG](rag.md) →

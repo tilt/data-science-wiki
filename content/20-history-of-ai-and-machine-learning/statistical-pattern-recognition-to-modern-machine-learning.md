@@ -51,3 +51,5 @@ The historical lesson is continuity, not replacement. Modern ML did not abandon 
 - [Cortes and Vapnik, 1995, Support-vector networks](https://doi.org/10.1007/BF00994018)
 - [Breiman, 2001, Random Forests](https://doi.org/10.1023/A:1010933404324)
 - [Friedman, 2001, Greedy Function Approximation: A Gradient Boosting Machine](https://doi.org/10.1214/aos/1013203451)
+
+> **Section — [History of AI and Machine Learning](index.md):** [Early Neural Networks to Deep Learning](early-neural-networks-to-deep-learning.md) →

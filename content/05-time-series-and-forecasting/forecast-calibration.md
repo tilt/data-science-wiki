@@ -84,3 +84,5 @@ Calibration is the reliability check for [probabilistic forecasting](probabilist
 
 - [Hyndman & Athanasopoulos, FPP3: Distributional forecasts and prediction intervals](https://otexts.com/fpp3/prediction-intervals.html)
 - [Romano, Patterson, and Candes, Conformalized Quantile Regression](https://arxiv.org/abs/1905.03222)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Quantile Loss](quantile-loss.md) · [Conformal Prediction for Forecasting](conformal-prediction-for-forecasting.md) →

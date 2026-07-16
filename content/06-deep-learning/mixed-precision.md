@@ -136,3 +136,5 @@ For inference, mixed precision has a different risk profile. There is no backwar
 - [Micikevicius et al., 2017, Mixed Precision Training](https://arxiv.org/abs/1710.03740)
 - [PyTorch documentation: Automatic Mixed Precision package](https://docs.pytorch.org/docs/stable/amp.html)
 - [NVIDIA documentation: TensorFloat-32 in the A100 GPU Architecture](https://developer.nvidia.com/blog/accelerating-ai-training-with-tf32-tensor-cores/)
+
+> **Section — [Deep Learning](index.md):** ← [TensorFlow and Keras](tensorflow-and-keras.md) · [Distributed Training](distributed-training.md) →

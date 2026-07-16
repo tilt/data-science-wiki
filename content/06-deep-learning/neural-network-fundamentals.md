@@ -88,4 +88,6 @@ Depth and width are capacity, not quality. The training loop only optimizes the 
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 8: Optimization for Training Deep Models](https://www.deeplearningbook.org/contents/optimization.html)
 - [PyTorch documentation: Autograd mechanics](https://docs.pytorch.org/docs/2.7/notes/autograd.html)
 
-> **Learning path — Deep learning:** ← [Deep Learning](index.md) · [path overview](../00-home-and-navigation/learning-paths.md#deep-learning) · [Backpropagation](backpropagation.md) →
+> **Section — [Deep Learning](index.md):** [Backpropagation](backpropagation.md) →
+
+> **Learning path — [Deep learning](../00-home-and-navigation/learning-paths.md#deep-learning):** ← [Deep Learning](index.md) · [Backpropagation](backpropagation.md) →

@@ -62,3 +62,5 @@ Architecture fails when diagrams omit runtime behavior, data ownership, or deplo
 - [C4 model](https://c4model.com/)
 - [arc42 Template Overview](https://arc42.org/overview)
 - [RFC 9110: HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html)
+
+> **Section — [Software Engineering](index.md):** ← [Refactoring](refactoring.md) · [Design Patterns](design-patterns.md) →

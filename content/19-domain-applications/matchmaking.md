@@ -77,3 +77,5 @@ Matchmaking fails when it optimizes clicks instead of mutually wanted outcomes, 
 
 - [GroupLens: MovieLens 100K Dataset](https://grouplens.org/datasets/movielens/100k/)
 - [Xia et al., Reciprocal Recommendation System for Online Dating](https://arxiv.org/abs/1501.06247)
+
+> **Section — [Domain Applications](index.md):** ← [News Recommendation](news-recommendation.md) · [Cultural Heritage Document Extraction and Entity Matching](cultural-heritage-document-extraction-and-entity-matching.md) →

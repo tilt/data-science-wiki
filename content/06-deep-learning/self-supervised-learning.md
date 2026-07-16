@@ -77,3 +77,5 @@ The pretext task must require information that transfers. A model can solve a ba
 
 - [Bengio, Courville, and Vincent, 2012, Representation Learning](https://arxiv.org/abs/1206.5538)
 - [Chen et al., 2020, A Simple Framework for Contrastive Learning of Visual Representations](https://arxiv.org/abs/2002.05709)
+
+> **Section — [Deep Learning](index.md):** ← [Autoencoders](autoencoders.md) · [Contrastive Learning](contrastive-learning.md) →

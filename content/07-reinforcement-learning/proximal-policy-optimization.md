@@ -103,3 +103,5 @@ PPO is still on-policy and discards data after a few epochs, so it is less sampl
 - [Schulman et al., 2015, Trust Region Policy Optimization](https://arxiv.org/abs/1502.05477)
 - [Schulman et al., 2016, High-Dimensional Continuous Control Using Generalized Advantage Estimation](https://arxiv.org/abs/1506.02438)
 - [Ouyang et al., 2022, Training Language Models to Follow Instructions with Human Feedback](https://arxiv.org/abs/2203.02155)
+
+> **Section — [Reinforcement Learning](index.md):** ← [Policy Gradients and Actor-Critic Methods](policy-gradients-and-actor-critic.md) · [Exploration in Reinforcement Learning](exploration-in-reinforcement-learning.md) →

@@ -79,3 +79,5 @@ Modality imbalance is common: a model may ignore audio if text alone solves the 
 
 - [Radford et al., 2021, Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020)
 - [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+
+> **Section — [Deep Learning](index.md):** ← [Fine-Tuning](fine-tuning.md) · [Generative Adversarial Networks](generative-adversarial-networks.md) →

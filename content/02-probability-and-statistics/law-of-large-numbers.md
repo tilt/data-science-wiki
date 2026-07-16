@@ -72,3 +72,5 @@ More data does not repair a biased sample, changing population, dependence, leak
 
 - [Law of large numbers](https://en.wikipedia.org/wiki/Law_of_large_numbers)
 - [OpenStax Introductory Statistics 2e, Chapter 7 introduction](https://openstax.org/books/introductory-statistics-2e/pages/7-introduction)
+
+> **Section — [Probability and Statistics](index.md):** ← [Covariance and Correlation](covariance-and-correlation.md) · [Central Limit Theorem](central-limit-theorem.md) →

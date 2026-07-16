@@ -72,3 +72,5 @@ Retries without budgets can amplify outages. Backups without restore tests are u
 - [AWS Well-Architected Reliability Pillar](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/welcome.html)
 - [Google SRE Book: Service Level Objectives](https://sre.google/sre-book/service-level-objectives/)
 - [Elastic Load Balancing target health checks](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html)
+
+> **Section — [Cloud and Distributed Systems](index.md):** ← [Scalability](scalability.md) · [Cost Management](cost-management.md) →

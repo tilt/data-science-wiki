@@ -77,3 +77,5 @@ Use MRR when one answer is enough, precision@k when the visible page must be cle
 
 - [Manning, Raghavan, and Schuetze, Introduction to Information Retrieval: Evaluation](https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-in-information-retrieval-1.html)
 - [scikit-learn API: ndcg_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html)
+
+> **Section — [Information Retrieval and Search](index.md):** ← [Search Evaluation](search-evaluation.md) · [Precision, Recall, MAP, MRR, and NDCG](precision-recall-map-mrr-ndcg.md) →

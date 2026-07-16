@@ -75,3 +75,5 @@ Each decomposition has preconditions. Cholesky fails outside positive definite m
 
 - [NumPy documentation: `numpy.linalg.cholesky`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.cholesky.html)
 - [NumPy documentation: `numpy.linalg.qr`](https://numpy.org/doc/stable/reference/generated/numpy.linalg.qr.html)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Eigenvalues and Eigenvectors](eigenvalues-and-eigenvectors.md) · [Singular Value Decomposition](singular-value-decomposition.md) →

@@ -59,3 +59,5 @@ Two-stream systems inherit the cost and errors of optical-flow estimation. They 
 
 - [Simonyan and Zisserman, 2014, Two-Stream Convolutional Networks for Action Recognition in Videos](https://arxiv.org/abs/1406.2199)
 - [Lucas and Kanade, 1981, An iterative image registration technique with an application to stereo vision](https://www.ri.cmu.edu/pub_files/pub3/lucas_bruce_d_1981_1/lucas_bruce_d_1981_1.pdf)
+
+> **Section — [Video Understanding](index.md):** ← [3D Convolutional Networks](3d-convolutional-networks.md) · [Video Transformers](video-transformers.md) →

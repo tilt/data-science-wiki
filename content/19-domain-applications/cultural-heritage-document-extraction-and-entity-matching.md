@@ -69,3 +69,5 @@ Common failures include OCR substitutions in names, multilingual layouts, histor
 
 - [Getty Union List of Artist Names Online](https://www.getty.edu/research/tools/vocabularies/ulan/index.html)
 - [IIIF Presentation API 3.0](https://iiif.io/api/presentation/3.0/)
+
+> **Section — [Domain Applications](index.md):** ← [Matchmaking](matchmaking.md) · [Malware Classification and Clustering](malware-classification-and-clustering.md) →

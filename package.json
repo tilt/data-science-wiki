@@ -20,6 +20,8 @@
     "check-links": "node scripts/check-links.mjs",
     "check-external-links": "node scripts/check-external-links.mjs",
     "portability-check": "node scripts/portability-check.mjs",
+    "nav-footers": "node scripts/gen-nav-footers.mjs",
+    "nav-footers-check": "node scripts/gen-nav-footers.mjs --check",
     "test:mermaid": "node scripts/check-mermaid-rendering.mjs"
   },
   "engines": {

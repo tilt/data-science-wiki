@@ -78,4 +78,6 @@ Side-effecting tools need confirmation and idempotency keys. Tool results are un
 - [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
 - [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
 
-> **Learning path — Generative AI systems:** ← [RAG](rag.md) · [path overview](../00-home-and-navigation/learning-paths.md#generative-ai-systems) · [RAG Evaluation](rag-evaluation.md) →
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Fine Tuning Versus RAG](fine-tuning-versus-rag.md) · [Tool Schemas](tool-schemas.md) →
+
+> **Learning path — [Generative AI systems](../00-home-and-navigation/learning-paths.md#generative-ai-systems):** ← [RAG](rag.md) · [RAG Evaluation](rag-evaluation.md) →

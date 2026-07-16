@@ -55,3 +55,5 @@ The matrix hides time, position, device, and whether an item was even eligible f
 
 - [Adomavicius and Tuzhilin, 2005, Toward the Next Generation of Recommender Systems](https://doi.org/10.1109/TKDE.2005.99)
 - [Hu, Koren, and Volinsky, 2008, Collaborative Filtering for Implicit Feedback Datasets](https://doi.org/10.1109/ICDM.2008.22)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Recommendation System Overview](recommendation-system-overview.md) · [Explicit Versus Implicit Feedback](explicit-versus-implicit-feedback.md) →

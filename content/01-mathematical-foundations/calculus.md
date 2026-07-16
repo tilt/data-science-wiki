@@ -80,3 +80,5 @@ Numerical derivatives depend on step size: too large gives truncation error, too
 
 - [MIT OpenCourseWare: 18.01SC Single Variable Calculus](https://ocw.mit.edu/courses/18-01sc-single-variable-calculus-fall-2010/)
 - [MIT OpenCourseWare: 18.02SC Multivariable Calculus](https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Low-Rank Approximation](low-rank-approximation.md) · [Gradients](gradients.md) →

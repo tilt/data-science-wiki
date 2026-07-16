@@ -77,3 +77,5 @@ Initialization interacts with residual connections, normalization, optimizer war
 
 - [He et al., 2015, Delving Deep into Rectifiers](https://arxiv.org/abs/1502.01852)
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 8](https://www.deeplearningbook.org/contents/optimization.html)
+
+> **Section — [Deep Learning](index.md):** ← [Optimizers](optimizers.md) · [Normalization](normalization.md) →

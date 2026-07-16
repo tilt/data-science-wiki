@@ -98,3 +98,5 @@ Brightness constancy breaks under lighting changes, specularities, motion blur, 
 
 - [Lucas and Kanade, 1981, An iterative image registration technique with an application to stereo vision](https://www.ri.cmu.edu/pub_files/pub3/lucas_bruce_d_1981_1/lucas_bruce_d_1981_1.pdf)
 - [Horn and Schunck, 1981, Determining optical flow](<https://doi.org/10.1016/0004-3702(81)90024-2>)
+
+> **Section — [Video Understanding](index.md):** ← [Video Representation](video-representation.md) · [3D Convolutional Networks](3d-convolutional-networks.md) →

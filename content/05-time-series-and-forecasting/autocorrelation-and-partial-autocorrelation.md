@@ -92,3 +92,5 @@ ACF/PACF diagnostics connect [time-series fundamentals](time-series-fundamentals
 - [Hyndman & Athanasopoulos, FPP3: Autocorrelation](https://otexts.com/fpp3/acf.html)
 - [statsmodels ACF API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.acf.html)
 - [statsmodels PACF API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.stattools.pacf.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Stationarity](stationarity.md) · [Forecasting Problem Formulation](forecasting-problem-formulation.md) →

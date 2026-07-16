@@ -54,3 +54,5 @@ Do not let the agent write its own pass criteria during the run being graded. Ke
 - [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)
 - [OpenAI API documentation: Graders](https://platform.openai.com/docs/guides/graders)
 - [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Harnesses](harnesses.md) · [LLM-as-Judge](llm-as-judge.md) →

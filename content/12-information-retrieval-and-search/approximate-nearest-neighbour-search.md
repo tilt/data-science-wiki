@@ -94,3 +94,5 @@ ANN benchmarks must report both latency and recall@k. A faster index that drops 
 - [Malkov and Yashunin, Efficient and robust approximate nearest neighbor search using HNSW](https://arxiv.org/abs/1603.09320)
 - [Elasticsearch Reference: dense_vector field type](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/dense-vector)
 - [scikit-learn User Guide: Nearest Neighbors](https://scikit-learn.org/stable/modules/neighbors.html)
+
+> **Section — [Information Retrieval and Search](index.md):** ← [Vector Indexes](vector-indexes.md) · [Elasticsearch](elasticsearch.md) →

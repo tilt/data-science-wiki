@@ -76,3 +76,5 @@ Learning rate dominates behavior. Too small wastes iterations; too large oscilla
 
 - [Boyd and Vandenberghe, Convex Optimization](https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf)
 - [MIT OpenCourseWare: 18.02SC Multivariable Calculus](https://ocw.mit.edu/courses/18-02sc-multivariable-calculus-fall-2010/)
+
+> **Section — [Mathematical Foundations](index.md):** ← [Constrained Optimization](constrained-optimization.md) · [Stochastic Gradient Descent](stochastic-gradient-descent.md) →

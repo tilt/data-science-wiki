@@ -60,3 +60,5 @@ Reviewer loops also add latency and cost. Use them selectively for high-risk tas
 - [Kim et al., 2023, Prometheus](https://arxiv.org/abs/2310.08491)
 - [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)
 - [Anthropic Claude docs: Reduce hallucinations](https://docs.anthropic.com/en/docs/test-and-evaluate/strengthen-guardrails/reduce-hallucinations)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Memory](memory.md) · [Multi-Agent Systems](multi-agent-systems.md) →

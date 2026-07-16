@@ -113,4 +113,6 @@ Backtesting operationalizes [forecast evaluation](forecast-evaluation.md): folds
 - [Hyndman & Athanasopoulos, FPP3: Time series cross-validation](https://otexts.com/fpp3/tscv.html)
 - [scikit-learn TimeSeriesSplit](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.TimeSeriesSplit.html)
 
-> **Learning path — Forecasting:** ← [ARIMA](arima.md) · [path overview](../00-home-and-navigation/learning-paths.md#forecasting) · [Forecast Evaluation](forecast-evaluation.md) →
+> **Section — [Time-Series Forecasting](index.md):** ← [Forecast Evaluation](forecast-evaluation.md) · [Rolling Origin Validation](rolling-origin-validation.md) →
+
+> **Learning path — [Forecasting](../00-home-and-navigation/learning-paths.md#forecasting):** ← [ARIMA](arima.md) · [Forecast Evaluation](forecast-evaluation.md) →

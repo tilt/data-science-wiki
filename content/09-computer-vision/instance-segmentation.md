@@ -77,3 +77,5 @@ Touching objects are easy to merge; over-segmentation can split one object into 
 
 - [Mask R-CNN](https://arxiv.org/abs/1703.06870)
 - [Microsoft COCO: Common Objects in Context](https://arxiv.org/abs/1405.0312)
+
+> **Section — [Computer Vision](index.md):** ← [Semantic Segmentation](semantic-segmentation.md) · [Detection and Segmentation Metrics](detection-and-segmentation-metrics.md) →

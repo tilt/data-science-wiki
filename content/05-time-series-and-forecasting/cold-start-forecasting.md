@@ -90,3 +90,5 @@ Cold starts tie [forecasting data and covariates](forecasting-data-and-covariate
 
 - [Hyndman & Athanasopoulos, FPP3: New product forecasting](https://otexts.com/fpp3/new-products.html)
 - [Hyndman & Athanasopoulos, FPP3: Forecasting by analogy](https://otexts.com/fpp3/analogies.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Intermittent Demand](intermittent-demand.md) · [Forecast Ensembling](forecast-ensembling.md) →

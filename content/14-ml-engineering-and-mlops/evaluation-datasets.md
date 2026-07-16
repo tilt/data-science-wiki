@@ -59,3 +59,5 @@ Evaluation sets go stale when product flows, abuse patterns, or label rules chan
 
 - [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
 - [Great Expectations documentation](https://docs.greatexpectations.io/docs/core/introduction/try_gx/)
+
+> **Section — [ML Engineering and MLOps](index.md):** ← [Model Versioning](model-versioning.md) · [Golden Datasets](golden-datasets.md) →

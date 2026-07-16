@@ -73,4 +73,6 @@ Random train-test splits leak future behavior; time-based splits are usually mor
 - [Herlocker et al., 2004, Evaluating Collaborative Filtering Recommender Systems](https://doi.org/10.1145/963770.963772)
 - [scikit-learn documentation: ndcg_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.ndcg_score.html)
 
-> **Learning path — Recommender systems:** ← [SVD versus Matrix Factorization](svd-versus-matrix-factorization.md) · [path overview](../00-home-and-navigation/learning-paths.md#recommender-systems)
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Retrieval and Ranking Architectures](retrieval-and-ranking-architectures.md) · [Offline Versus Online Evaluation](offline-versus-online-evaluation.md) →
+
+> **Learning path — [Recommender systems](../00-home-and-navigation/learning-paths.md#recommender-systems):** ← [SVD versus Matrix Factorization](svd-versus-matrix-factorization.md)

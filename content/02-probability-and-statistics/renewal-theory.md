@@ -81,3 +81,5 @@ The renewal assumption fails when events change future risk, when waiting times 
 
 - [Renewal theory](https://en.wikipedia.org/wiki/Renewal_theory)
 - [SciPy statistics reference](https://docs.scipy.org/doc/scipy/reference/stats.html)
+
+> **Section — [Probability and Statistics](index.md):** ← [Random Walks](random-walks.md) · [Markov Renewal Processes](markov-renewal-processes.md) →

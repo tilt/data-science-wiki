@@ -26,7 +26,7 @@ related:
   - "../19-domain-applications/autonomous-driving.md"
   - "../18-responsible-ai-safety-and-governance/index.md"
 historical_context: false
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-16
 ---
 
 # Reinforcement Learning
@@ -37,27 +37,41 @@ Reinforcement learning studies agents that choose actions, observe consequences,
 
 The core loop is simple, but the learning problem is hard because actions affect future states. A driving policy that brakes now changes the next position, the available future actions, and the reward sequence. This is why RL pages keep the agent-environment interface, value estimation, exploration, and evaluation separate.
 
-## Subtopics
+## Knowledge map
 
-- [Markov Decision Processes](markov-decision-processes.md)
-- [Value Functions and Bellman Equations](value-functions-and-bellman-equations.md)
-- [Temporal-Difference Learning](temporal-difference-learning.md)
-- [Q-Learning and DQN](q-learning-and-dqn.md)
-- [Policy Gradients and Actor-Critic Methods](policy-gradients-and-actor-critic.md)
-- [Proximal Policy Optimization](proximal-policy-optimization.md)
-- [Exploration in Reinforcement Learning](exploration-in-reinforcement-learning.md)
-- [Reward Design and Shaping](reward-design-and-shaping.md)
-- [Offline and Model-Based Reinforcement Learning](offline-and-model-based-reinforcement-learning.md)
-- [Off-Policy Evaluation](off-policy-evaluation.md)
-- [Reinforcement Learning from Human Feedback](reinforcement-learning-from-human-feedback.md)
+The section builds from the formal frame (MDPs) up through value-based and policy-based algorithms, then the practical problems of exploration, reward design, and offline learning, and finally preference-based optimization. Arrows point from a prerequisite to what it enables.
 
-## Learning Map
+```mermaid
+flowchart TD
+  MDP[Markov Decision Processes] --> VF[Value Functions and Bellman Equations]
+  VF --> TD[Temporal-Difference Learning]
+  TD --> QL[Q-Learning and DQN]
+  VF --> PG[Policy Gradients and Actor-Critic]
+  PG --> PPO[Proximal Policy Optimization]
+  MDP --> Explore[Exploration]
+  MDP --> Reward[Reward Design and Shaping]
+  QL --> Offline[Offline and Model-Based RL]
+  PG --> Offline
+  Offline --> OPE[Off-Policy Evaluation]
+  PPO --> RLHF[RLHF]
+  Reward --> RLHF
+```
 
-Start with [Markov decision processes](markov-decision-processes.md) to name states, actions, rewards, transitions, and discounting. Then read [value functions and Bellman equations](value-functions-and-bellman-equations.md) to see how future reward becomes a recursive prediction problem, and [temporal-difference learning](temporal-difference-learning.md) to learn those values online by bootstrapping.
+## Reading path
 
-For algorithms, [Q-learning and DQN](q-learning-and-dqn.md) covers value-based control, while [policy gradients and actor-critic methods](policy-gradients-and-actor-critic.md) covers direct policy optimization and [proximal policy optimization](proximal-policy-optimization.md) makes those updates stable enough for production. [Exploration in reinforcement learning](exploration-in-reinforcement-learning.md) and [reward design and shaping](reward-design-and-shaping.md) address the two problems every RL system faces: gathering enough information, and specifying an objective that cannot be gamed.
+Read the section in this order to go from the formal setup to deployment concerns.
 
-For deployment, [offline and model-based RL](offline-and-model-based-reinforcement-learning.md) explains methods that learn from logged data or learned dynamics instead of unrestricted trial-and-error, and [off-policy evaluation](off-policy-evaluation.md) estimates a new policy's value before it is ever run live. [RLHF](reinforcement-learning-from-human-feedback.md) connects reward modeling and preference optimization to [LLM training](../11-generative-ai/llm-training.md).
+1. [Markov Decision Processes](markov-decision-processes.md): the formal frame — states, actions, rewards, transitions, and discounting.
+2. [Value Functions and Bellman Equations](value-functions-and-bellman-equations.md): how future reward becomes a recursive prediction problem.
+3. [Temporal-Difference Learning](temporal-difference-learning.md): learning values online by bootstrapping, and on-policy versus off-policy targets.
+4. [Q-Learning and DQN](q-learning-and-dqn.md): value-based control, from tabular updates to deep Q-networks.
+5. [Policy Gradients and Actor-Critic Methods](policy-gradients-and-actor-critic.md): optimizing the policy directly with an advantage-shaped signal.
+6. [Proximal Policy Optimization](proximal-policy-optimization.md): the stable policy-update method that became the RLHF workhorse.
+7. [Exploration in Reinforcement Learning](exploration-in-reinforcement-learning.md): gathering enough information when actions change future states.
+8. [Reward Design and Shaping](reward-design-and-shaping.md): specifying an objective the agent cannot game.
+9. [Offline and Model-Based Reinforcement Learning](offline-and-model-based-reinforcement-learning.md): learning from logged data or learned dynamics instead of free exploration.
+10. [Off-Policy Evaluation](off-policy-evaluation.md): estimating a new policy's value before it is ever run live.
+11. [Reinforcement Learning from Human Feedback](reinforcement-learning-from-human-feedback.md): preference-based optimization and the bridge to LLM training.
 
 ## When RL Is the Right Tool
 
@@ -82,4 +96,4 @@ RL can exploit misspecified rewards, overfit simulators, learn unsafe exploratio
 - [Haarnoja et al., 2018, Soft Actor-Critic Algorithms and Applications](https://arxiv.org/abs/1812.05905)
 - [Ouyang et al., 2022, Training Language Models to Follow Instructions with Human Feedback](https://arxiv.org/abs/2203.02155)
 
-> **Learning path — Reinforcement learning:** [path overview](../00-home-and-navigation/learning-paths.md#reinforcement-learning) · [Markov Decision Processes](markov-decision-processes.md) →
+> **Learning path — [Reinforcement learning](../00-home-and-navigation/learning-paths.md#reinforcement-learning):** [Markov Decision Processes](markov-decision-processes.md) →

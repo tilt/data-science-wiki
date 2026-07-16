@@ -72,3 +72,5 @@ The common error is treating every drift alert as a retraining trigger. If the s
 - [Lu et al., Learning under Concept Drift: A Review](https://arxiv.org/abs/2004.05785)
 - [SciPy documentation: `scipy.stats.ks_2samp`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html)
 - [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
+
+> **Section — [ML Engineering and MLOps](index.md):** ← [Data Drift](data-drift.md) · [Model Degradation](model-degradation.md) →

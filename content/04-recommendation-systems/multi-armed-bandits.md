@@ -62,3 +62,5 @@ Bandits need reward definitions that match product goals. Delayed rewards, repea
 
 - [Li et al., 2010, A Contextual-Bandit Approach to Personalized News Article Recommendation](https://arxiv.org/abs/1003.0146)
 - [Li et al., 2010, Unbiased Offline Evaluation of Contextual-bandit-based News Article Recommendation Algorithms](https://arxiv.org/abs/1003.5956)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Exploration Versus Exploitation](exploration-versus-exploitation.md) · [Bandit Algorithms](bandit-algorithms.md) →

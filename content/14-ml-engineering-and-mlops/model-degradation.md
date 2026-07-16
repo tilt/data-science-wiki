@@ -66,3 +66,5 @@ Aggregate metrics can hide severe slice degradation. Delayed labels can make the
 
 - [Google Rules of Machine Learning](https://developers.google.com/machine-learning/guides/rules-of-ml)
 - [MLflow Tracking documentation](https://mlflow.org/docs/latest/ml/tracking/)
+
+> **Section — [ML Engineering and MLOps](index.md):** ← [Concept Drift](concept-drift.md) · [Production Incident Response](production-incident-response.md) →

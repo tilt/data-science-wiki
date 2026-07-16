@@ -95,3 +95,5 @@ Reconciliation adjusts base forecasts from [hierarchical forecasting](hierarchic
 
 - [Hyndman & Athanasopoulos, FPP3: Forecast reconciliation](https://otexts.com/fpp3/reconciliation.html)
 - [Nixtla HierarchicalForecast documentation](https://nixtlaverse.nixtla.io/hierarchicalforecast/index.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Hierarchical Forecasting](hierarchical-forecasting.md) · [Temporal Reconciliation](temporal-reconciliation.md) →

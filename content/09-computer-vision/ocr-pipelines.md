@@ -73,3 +73,5 @@ Deskew and binarization can improve clean scans but damage faint ink. Recognitio
 
 - [Tesseract OCR documentation](https://tesseract-ocr.github.io/tessdoc/)
 - [An End-to-End Trainable Neural Network for Image-based Sequence Recognition](https://arxiv.org/abs/1507.05717)
+
+> **Section — [Computer Vision](index.md):** ← [Content-Based Image Retrieval](content-based-image-retrieval.md) · [Document Image Analysis and Field Extraction](document-image-analysis-and-field-extraction.md) →

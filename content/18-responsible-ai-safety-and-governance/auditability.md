@@ -60,3 +60,5 @@ Audit logs fail when they are either too thin or too invasive. A final score wit
 
 - [EUR-Lex: Regulation (EU) 2024/1689, Artificial Intelligence Act](https://eur-lex.europa.eu/eli/reg/2024/1689/oj/eng)
 - [NIST AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
+
+> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Explainability](explainability.md) · [Risk Classification](risk-classification.md) →

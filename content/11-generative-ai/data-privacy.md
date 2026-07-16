@@ -61,3 +61,5 @@ Summaries can still contain personal data. Synthetic examples copied from produc
 - [OpenAI platform documentation: Data controls](https://platform.openai.com/docs/guides/your-data)
 - [NIST AI Risk Management Framework 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 - [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Prompt Injection](prompt-injection.md) · [PII Protection](pii-protection.md) →

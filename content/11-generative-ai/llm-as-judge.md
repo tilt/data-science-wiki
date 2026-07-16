@@ -57,3 +57,5 @@ Judges can prefer verbose answers, miss domain-specific errors, leak answer-orde
 - [OpenAI API documentation: Graders](https://platform.openai.com/docs/guides/graders)
 - [Kim et al., 2023, Prometheus](https://arxiv.org/abs/2310.08491)
 - [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Agent Evaluation](agent-evaluation.md) · [Multimodal Models](multimodal-models.md) →

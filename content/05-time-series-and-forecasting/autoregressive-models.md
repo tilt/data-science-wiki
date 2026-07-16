@@ -45,3 +45,5 @@ Autoregression is the AR component of [ARMA](arma.md), [ARIMA](arima.md), and [S
 
 - [Hyndman & Athanasopoulos, FPP3: Autoregressive models](https://otexts.com/fpp3/arima.html)
 - [statsmodels AutoReg API](https://www.statsmodels.org/stable/generated/statsmodels.tsa.ar_model.AutoReg.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Feature Engineering for Forecasting](feature-engineering-for-forecasting.md) · [Moving Average Models](moving-average-models.md) →

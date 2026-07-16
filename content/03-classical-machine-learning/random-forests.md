@@ -72,3 +72,5 @@ Forests do not extrapolate outside the training target range in regression. Corr
 
 - [Breiman, 2001, Random Forests](https://doi.org/10.1023/A:1010933404324)
 - [scikit-learn User Guide: Forests of randomized trees](https://scikit-learn.org/stable/modules/ensemble.html#forests-of-randomized-trees)
+
+> **Section — [Classical Machine Learning](index.md):** ← [Decision Trees](decision-trees.md) · [Gradient Boosting](gradient-boosting.md) →

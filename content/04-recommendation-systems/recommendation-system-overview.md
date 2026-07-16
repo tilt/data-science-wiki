@@ -55,3 +55,5 @@ Recommendations change the data they later train on, so [feedback loops](feedbac
 
 - [Adomavicius and Tuzhilin, 2005, Toward the Next Generation of Recommender Systems](https://doi.org/10.1109/TKDE.2005.99)
 - [Herlocker et al., 2004, Evaluating Collaborative Filtering Recommender Systems](https://doi.org/10.1145/963770.963772)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** [Utility and Interaction Matrices](utility-and-interaction-matrices.md) →

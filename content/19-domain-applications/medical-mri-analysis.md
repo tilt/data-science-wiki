@@ -50,3 +50,5 @@ Models can fail under scanner, site, protocol, contrast timing, artifact, and po
 ## References
 
 - [Baid et al., The RSNA-ASNR-MICCAI BraTS 2021 Benchmark](https://arxiv.org/abs/2107.02314)
+
+> **Section — [Domain Applications](index.md):** ← [Predictive Maintenance](predictive-maintenance.md) · [Gesture-Based Interaction](gesture-based-interaction.md) →

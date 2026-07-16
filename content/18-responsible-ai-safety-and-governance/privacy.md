@@ -64,3 +64,5 @@ Privacy controls can conflict with debugging, fairness analysis, and abuse monit
 - [EUR-Lex: Regulation (EU) 2016/679, General Data Protection Regulation](https://eur-lex.europa.eu/eli/reg/2016/679/oj/eng)
 - [NIST AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf)
 - [NIST SP 800-122: Guide to Protecting the Confidentiality of PII](https://csrc.nist.gov/pubs/sp/800/122/final)
+
+> **Section — [Responsible AI, Safety, and Governance](index.md):** ← [Security](security.md) · [PII Leakage](pii-leakage.md) →

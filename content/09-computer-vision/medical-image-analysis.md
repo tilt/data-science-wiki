@@ -95,3 +95,5 @@ Models can learn scanner, hospital, protocol, text overlays, or follow-up leakag
 
 - [DeepLesion: Automated Deep Mining, Categorization and Detection of Significant Radiology Image Findings](https://arxiv.org/abs/1710.01766)
 - [U-Net: Convolutional Networks for Biomedical Image Segmentation](https://arxiv.org/abs/1505.04597)
+
+> **Section — [Computer Vision](index.md):** ← [Synthetic Data](synthetic-data.md) · [MRI Segmentation](mri-segmentation.md) →

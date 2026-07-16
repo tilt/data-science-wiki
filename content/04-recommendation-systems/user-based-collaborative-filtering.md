@@ -56,3 +56,5 @@ User neighborhoods are unstable when users have few interactions or rapidly chan
 
 - [scikit-learn documentation: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)
 - [Adomavicius and Tuzhilin, 2005, Toward the Next Generation of Recommender Systems](https://doi.org/10.1109/TKDE.2005.99)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Collaborative Filtering](collaborative-filtering.md) · [Item-Based Collaborative Filtering](item-based-collaborative-filtering.md) →

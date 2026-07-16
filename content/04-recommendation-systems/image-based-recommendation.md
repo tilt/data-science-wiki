@@ -54,3 +54,5 @@ Visual models can encode photography style, demographic bias, or background arti
 ## References
 
 - [He and McAuley, 2015, VBPR: Visual Bayesian Personalized Ranking from Implicit Feedback](https://arxiv.org/abs/1510.01784)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Matchmaking Systems](matchmaking-systems.md) · [Content-Based Image Retrieval](content-based-image-retrieval.md) →

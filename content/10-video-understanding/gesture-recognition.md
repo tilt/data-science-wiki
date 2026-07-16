@@ -121,3 +121,5 @@ Gesture labels are culturally, linguistically, and product specific. Hands are f
 - [Yan et al., 2018, Spatial Temporal Graph Convolutional Networks for Skeleton-Based Action Recognition](https://arxiv.org/abs/1801.07455)
 - [Zhao et al., 2022, Multi-Scale Spatial Temporal Graph Convolutional Network for Skeleton-Based Action Recognition](https://arxiv.org/abs/2206.13028)
 - [Zhao et al., 2021, TubeR: Tubelet Transformer for Video Action Detection](https://arxiv.org/abs/2104.00969)
+
+> **Section — [Video Understanding](index.md):** ← [Real-Time Video Understanding](real-time-video-understanding.md) · [Self-Supervised Video Representation Learning](self-supervised-video-representation-learning.md) →

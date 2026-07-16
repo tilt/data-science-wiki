@@ -85,3 +85,5 @@ Training-serving skew appears when offline SQL uses a different join, window, or
 
 - [Feast documentation: Feature view](https://docs.feast.dev/getting-started/concepts/feature-view)
 - [Apache Beam Programming Guide](https://beam.apache.org/documentation/programming-guide/)
+
+> **Section — [Data Engineering](index.md):** ← [Reproducibility](reproducibility.md)

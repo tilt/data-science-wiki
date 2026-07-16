@@ -90,3 +90,5 @@ Hierarchical forecasting defines the aggregation structure; [hierarchical reconc
 
 - [Hyndman & Athanasopoulos, FPP3: Hierarchical and grouped time series](https://otexts.com/fpp3/hierarchical.html)
 - [Nixtla HierarchicalForecast documentation](https://nixtlaverse.nixtla.io/hierarchicalforecast/index.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Conformal Prediction for Forecasting](conformal-prediction-for-forecasting.md) · [Hierarchical Reconciliation](hierarchical-reconciliation.md) →

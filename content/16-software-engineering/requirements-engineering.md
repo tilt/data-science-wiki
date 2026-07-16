@@ -48,3 +48,5 @@ Weak requirements overfit to a proposed solution, omit operational constraints, 
 
 - [ISO/IEC/IEEE 29148:2018 Requirements Engineering](https://www.iso.org/standard/72089.html)
 - [Scrum Guide: Product Backlog and Product Goal](https://scrumguides.org/scrum-guide.html)
+
+> **Section — [Software Engineering](index.md):** ← [Production Integration](production-integration.md) · [Behaviour Driven Development](behaviour-driven-development.md) →

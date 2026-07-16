@@ -48,3 +48,5 @@ Transformer forecasting adapts [transformers](../06-deep-learning/transformers.m
 - [Lim et al., Temporal Fusion Transformers](https://arxiv.org/abs/1912.09363)
 - [Vaswani et al., Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [Nixtla NeuralForecast documentation](https://nixtlaverse.nixtla.io/neuralforecast/docs/getting-started/introduction.html)
+
+> **Section — [Time-Series Forecasting](index.md):** ← [Temporal Convolutional Networks](temporal-convolutional-networks.md) · [N-BEATS and N-HiTS](n-beats-and-nhits.md) →

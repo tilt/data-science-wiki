@@ -114,3 +114,5 @@ Pretraining loss is not a deployment metric. A representation can group images b
 - [Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture](https://arxiv.org/abs/2301.08243)
 - [Learning Transferable Visual Models From Natural Language Supervision](https://arxiv.org/abs/2103.00020)
 - [Deep Learning, Chapter 15: Representation Learning](https://www.deeplearningbook.org/contents/representation.html)
+
+> **Section — [Computer Vision](index.md):** ← [Vision Transformers](vision-transformers.md) · [Content-Based Image Retrieval](content-based-image-retrieval.md) →

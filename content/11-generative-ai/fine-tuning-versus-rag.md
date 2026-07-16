@@ -47,3 +47,5 @@ Fine-tuning can memorize stale or sensitive data. RAG can retrieve the wrong pas
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
 - [Hu et al., 2021, LoRA](https://arxiv.org/abs/2106.09685)
 - [Ouyang et al., 2022, Training language models to follow instructions](https://arxiv.org/abs/2203.02155)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [RAG Benchmark Design](rag-benchmark-design.md) · [Tool Use and Function Calling](tool-use-and-function-calling.md) →

@@ -60,3 +60,5 @@ A VLM can hallucinate unreadable text, miss small visual details, or confuse lay
 - [Radford et al., 2021, CLIP](https://arxiv.org/abs/2103.00020)
 - [Alayrac et al., 2022, Flamingo](https://arxiv.org/abs/2204.14198)
 - [OpenAI API documentation: Structured outputs](https://platform.openai.com/docs/guides/structured-outputs)
+
+> **Section — [Generative AI and Agentic Systems](index.md):** ← [Multimodal Models](multimodal-models.md) · [Stable Diffusion](stable-diffusion.md) →

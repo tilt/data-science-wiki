@@ -68,3 +68,5 @@ Visual similarity can overemphasize color, background, camera angle, or brand pr
 
 - [He and McAuley, 2015, VBPR: Visual Bayesian Personalized Ranking from Implicit Feedback](https://arxiv.org/abs/1510.01784)
 - [scikit-learn documentation: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)
+
+> **Section — [Recommendation Systems and Personalization](index.md):** ← [Image-Based Recommendation](image-based-recommendation.md)
