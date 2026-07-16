@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430" role="img" aria-labelledby="title desc">
+  <title id="title">Bayes theorem screening example</title>
+  <desc id="desc">A diagnostic test example where the positive-test group is larger than the disease group, creating many false positives despite high sensitivity.</desc>
+  <style>
+    text { font-family: Arial, sans-serif; }
+    .fg { fill: #111827; }
+    .muted { fill: #4b5563; }
+    .space { fill: #ffffff; stroke: #94a3b8; stroke-width: 1.5; }
+    .healthy { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1; }
+    .positive { fill: #fdba74; stroke: #f97316; stroke-width: 2.2; opacity: 0.60; }
+    .condition { fill: #93c5fd; stroke: #2563eb; stroke-width: 2.2; opacity: 0.66; }
+    .overlap { fill: #f472b6; stroke: #be123c; stroke-width: 2; opacity: 0.82; }
+    .leader { stroke: #be123c; stroke-width: 1.5; fill: none; }
+    .blue { fill: #1d4ed8; }
+    .orange { fill: #c2410c; }
+    .rose { fill: #be123c; }
+  </style>
+
+  <rect x="0" y="0" width="760" height="430" fill="transparent"/>
+  <text x="380" y="36" text-anchor="middle" font-size="23" font-weight="700" class="fg">A positive test is not the same as the condition</text>
+  <text x="380" y="63" text-anchor="middle" font-size="14" class="muted">With a rare condition, false positives can outnumber true positives even when sensitivity is high.</text>
+
+  <g transform="translate(58,96)">
+    <defs>
+      <clipPath id="positive-circle">
+        <circle cx="250" cy="118" r="82"/>
+      </clipPath>
+    </defs>
+    <rect x="0" y="0" width="644" height="230" rx="8" class="space"/>
+    <text x="18" y="24" font-size="12" class="muted">10,000 comparable people</text>
+    <rect x="36" y="46" width="560" height="145" rx="7" class="healthy"/>
+    <text x="470" y="178" font-size="12" class="muted">mostly healthy population</text>
+
+    <circle cx="250" cy="118" r="82" class="positive"/>
+    <circle cx="185" cy="118" r="34" class="condition"/>
+    <circle cx="185" cy="118" r="34" class="overlap" clip-path="url(#positive-circle)"/>
+
+    <text x="300" y="100" text-anchor="middle" font-size="14" font-weight="700" class="orange">positive tests</text>
+    <text x="306" y="119" text-anchor="middle" font-size="12" class="orange">594 total</text>
+    <text x="158" y="88" text-anchor="middle" font-size="13" font-weight="700" class="blue">condition</text>
+    <text x="158" y="106" text-anchor="middle" font-size="12" class="blue">100 people</text>
+    <path d="M205 82 C225 58, 255 50, 290 54" class="leader"/>
+    <text x="298" y="58" font-size="12" font-weight="700" class="rose">99 true positives</text>
+    <text x="295" y="151" text-anchor="middle" font-size="13" font-weight="700" class="orange">495 false+</text>
+    <text x="140" y="150" text-anchor="middle" font-size="11" class="blue">1 false-</text>
+  </g>
+
+  <g transform="translate(112,354)">
+    <text x="0" y="0" font-size="14" class="fg">Bayes asks: among positive tests, what fraction are in the condition circle?</text>
+    <text x="0" y="30" font-size="14" class="fg">P(condition given +) = 99 / (99 + 495) = 16.7%</text>
+  </g>
+</svg>

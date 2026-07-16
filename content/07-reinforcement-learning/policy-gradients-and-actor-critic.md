@@ -121,3 +121,5 @@ Policy-gradient methods can be sample-inefficient because they learn from trajec
 - [Mnih et al., 2016, Asynchronous Methods for Deep Reinforcement Learning](https://arxiv.org/abs/1602.01783)
 - [Schulman et al., 2017, Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347)
 - [Haarnoja et al., 2018, Soft Actor-Critic Algorithms and Applications](https://arxiv.org/abs/1812.05905)
+
+> **Learning path — Reinforcement learning:** ← [Q-Learning and DQN](q-learning-and-dqn.md) · [path overview](../00-home-and-navigation/learning-paths.md#reinforcement-learning) · [Reinforcement Learning from Human Feedback](reinforcement-learning-from-human-feedback.md) →

@@ -91,3 +91,5 @@ Deep learning studies neural networks as trainable function approximators: layer
 - [TensorFlow and Keras](tensorflow-and-keras.md): high-level model APIs and production-oriented TensorFlow workflows.
 - [Mixed Precision](mixed-precision.md): lower-precision arithmetic with scaling and FP32 safeguards.
 - [Distributed Training](distributed-training.md): synchronized or partitioned training across devices and machines.
+
+> **Learning path — Deep learning:** [path overview](../00-home-and-navigation/learning-paths.md#deep-learning) · [Neural Network Fundamentals](neural-network-fundamentals.md) →

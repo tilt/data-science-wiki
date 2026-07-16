@@ -69,3 +69,5 @@ Computer vision covers image representations, classical and learned visual featu
 - [Data Augmentation](data-augmentation.md)
 - [Synthetic Data](synthetic-data.md)
 - [Detection and Segmentation Metrics](detection-and-segmentation-metrics.md)
+
+> **Learning path — Computer vision:** [path overview](../00-home-and-navigation/learning-paths.md#computer-vision) · [Image Representation](image-representation.md) →

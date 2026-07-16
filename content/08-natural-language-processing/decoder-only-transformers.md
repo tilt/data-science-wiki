@@ -80,3 +80,5 @@ A missing or misaligned causal mask leaks answers during training or evaluation.
 - [Vaswani et al., Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [PyTorch documentation: MultiheadAttention](https://docs.pytorch.org/docs/2.7/generated/torch.nn.MultiheadAttention.html)
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
+
+> **Learning path — Natural language processing:** ← [Embeddings](embeddings.md) · [path overview](../00-home-and-navigation/learning-paths.md#natural-language-processing) · [Text Classification](text-classification.md) →

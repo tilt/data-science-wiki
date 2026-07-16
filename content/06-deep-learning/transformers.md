@@ -93,3 +93,5 @@ Quadratic attention cost is the obvious bottleneck, but positional encoding and 
 
 - [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 - [PyTorch documentation: TransformerEncoderLayer](https://docs.pytorch.org/docs/2.7/generated/torch.nn.TransformerEncoderLayer.html)
+
+> **Learning path — Deep learning:** ← [Optimizers](optimizers.md) · [path overview](../00-home-and-navigation/learning-paths.md#deep-learning)

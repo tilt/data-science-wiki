@@ -69,3 +69,5 @@ The practical distinction is output shape. Text classification predicts document
 - [Evaluation OF NLP Systems](evaluation-of-nlp-systems.md)
 - [OCR and Handwritten Text Recognition](ocr-and-handwritten-text-recognition.md)
 - [Document Understanding](document-understanding.md)
+
+> **Learning path — Natural language processing:** [path overview](../00-home-and-navigation/learning-paths.md#natural-language-processing) · [Tokenization](tokenization.md) →

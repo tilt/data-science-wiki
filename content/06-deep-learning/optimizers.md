@@ -102,3 +102,5 @@ Adam's adaptivity is useful for sparse or poorly scaled gradients, but weight de
 - [Kingma and Ba, 2014, Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980)
 - [PyTorch documentation: Adam](https://docs.pytorch.org/docs/2.7/generated/torch.optim.Adam.html)
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 8](https://www.deeplearningbook.org/contents/optimization.html)
+
+> **Learning path — Deep learning:** ← [Backpropagation](backpropagation.md) · [path overview](../00-home-and-navigation/learning-paths.md#deep-learning) · [Transformers](transformers.md) →

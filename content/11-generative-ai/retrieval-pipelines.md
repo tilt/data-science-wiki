@@ -71,3 +71,5 @@ Do not tune retrieval only through final answer fluency. A model can answer from
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
 - [Karpukhin et al., 2020, Dense Passage Retrieval](https://arxiv.org/abs/2004.04906)
 - [Faiss documentation](https://faiss.ai/)
+
+> **Learning path — Generative AI systems:** ← [Foundation Models](foundation-models.md) · [path overview](../00-home-and-navigation/learning-paths.md#generative-ai-systems) · [RAG](rag.md) →

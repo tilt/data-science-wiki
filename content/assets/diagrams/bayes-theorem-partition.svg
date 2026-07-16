@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420" role="img" aria-labelledby="title desc">
+  <title id="title">Bayes theorem denominator from a partition</title>
+  <desc id="desc">The sample space is split into mutually exclusive hypotheses, and the evidence event is sliced by that partition.</desc>
+  <style>
+    text { font-family: Arial, sans-serif; }
+    .fg { fill: #111827; }
+    .muted { fill: #4b5563; }
+    .space { fill: #ffffff; stroke: #94a3b8; stroke-width: 1.5; }
+    .h1 { fill: #dbeafe; stroke: #2563eb; stroke-width: 1.2; }
+    .h2 { fill: #fef3c7; stroke: #f97316; stroke-width: 1.2; }
+    .h3 { fill: #dcfce7; stroke: #16a34a; stroke-width: 1.2; }
+    .evidence { fill: #fda4af; stroke: #e11d48; stroke-width: 2; opacity: 0.76; }
+    .slice { stroke: #be123c; stroke-width: 2; stroke-dasharray: 5 5; }
+    .blue { fill: #1d4ed8; }
+    .orange { fill: #c2410c; }
+    .green { fill: #15803d; }
+    .rose { fill: #be123c; }
+  </style>
+
+  <rect x="0" y="0" width="760" height="420" fill="transparent"/>
+  <text x="380" y="36" text-anchor="middle" font-size="23" font-weight="700" class="fg">The evidence probability is a sum over a partition</text>
+  <text x="380" y="63" text-anchor="middle" font-size="14" class="muted">The hypotheses must be mutually exclusive and cover the full sample space, not only the evidence event.</text>
+
+  <g transform="translate(82,96)">
+    <rect x="0" y="0" width="596" height="210" rx="8" class="space"/>
+    <rect x="0" y="0" width="160" height="210" rx="8" class="h1"/>
+    <rect x="160" y="0" width="238" height="210" class="h2"/>
+    <rect x="398" y="0" width="198" height="210" rx="8" class="h3"/>
+    <path d="M28 89 C88 48, 154 55, 210 93 C276 137, 357 143, 428 99 C485 64, 542 67, 568 94 L568 162 C509 190, 456 182, 404 151 C338 112, 278 113, 214 150 C148 188, 80 184, 28 151 Z" class="evidence"/>
+    <line x1="160" y1="0" x2="160" y2="210" class="slice"/>
+    <line x1="398" y1="0" x2="398" y2="210" class="slice"/>
+
+    <text x="80" y="30" text-anchor="middle" font-size="15" font-weight="700" class="blue">H1</text>
+    <text x="279" y="30" text-anchor="middle" font-size="15" font-weight="700" class="orange">H2</text>
+    <text x="497" y="30" text-anchor="middle" font-size="15" font-weight="700" class="green">H3</text>
+    <text x="298" y="126" text-anchor="middle" font-size="18" font-weight="700" class="rose">E</text>
+
+    <text x="80" y="236" text-anchor="middle" font-size="13" class="muted">P(E and H1)</text>
+    <text x="279" y="236" text-anchor="middle" font-size="13" class="muted">P(E and H2)</text>
+    <text x="497" y="236" text-anchor="middle" font-size="13" class="muted">P(E and H3)</text>
+  </g>
+
+  <text x="380" y="372" text-anchor="middle" font-size="15" class="fg">P(E) = P(E and H1) + P(E and H2) + P(E and H3)</text>
+  <text x="380" y="396" text-anchor="middle" font-size="13" class="muted">Equivalently: P(E) = sum_i P(E given H_i) P(H_i).</text>
+</svg>

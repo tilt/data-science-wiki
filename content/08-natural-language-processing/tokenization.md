@@ -92,3 +92,5 @@ Token counts are not word counts. A rare name, code identifier, or OCR error may
 
 - [Manning, Raghavan, and Schutze, Introduction to Information Retrieval: Tokenization](https://nlp.stanford.edu/IR-book/html/htmledition/tokenization-1.html)
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
+
+> **Learning path — Natural language processing:** ← [Natural Language Processing](index.md) · [path overview](../00-home-and-navigation/learning-paths.md#natural-language-processing) · [Embeddings](embeddings.md) →

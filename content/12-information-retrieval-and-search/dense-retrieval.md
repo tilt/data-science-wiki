@@ -100,3 +100,5 @@ Dense retrieval can blur distinctions that matter: product codes, negation, numb
 - [Karpukhin et al., Dense Passage Retrieval for Open-Domain Question Answering](https://arxiv.org/abs/2004.04906)
 - [Khattab and Zaharia, ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction](https://arxiv.org/abs/2004.12832)
 - [Elasticsearch Reference: dense_vector field type](https://www.elastic.co/docs/reference/elasticsearch/mapping-reference/dense-vector)
+
+> **Learning path — Information retrieval and search:** ← [BM25](bm25.md) · [path overview](../00-home-and-navigation/learning-paths.md#information-retrieval-and-search) · [Hybrid Search](hybrid-search.md) →

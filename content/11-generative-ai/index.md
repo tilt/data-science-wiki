@@ -109,4 +109,4 @@ Read the early pages for foundation-model mechanics, then branch based on the sy
 - [PII Protection](pii-protection.md)
 - [Cost and Latency Optimization](cost-and-latency-optimization.md)
 
-> **Learning path — Generative AI systems:** [path overview](../00-home-and-navigation/learning-paths.md#generative-ai-systems) · [Tool Use and Function Calling](tool-use-and-function-calling.md) →
+> **Learning path — Generative AI systems:** [path overview](../00-home-and-navigation/learning-paths.md#generative-ai-systems) · [Foundation Models](foundation-models.md) →

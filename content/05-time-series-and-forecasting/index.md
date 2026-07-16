@@ -116,4 +116,4 @@ This section moves from basic time-series structure to statistical models, machi
 - [Energy Consumption Forecasting](energy-consumption-forecasting.md)
 - [Predictive Maintenance](predictive-maintenance.md)
 
-> **Learning path — Forecasting:** [path overview](../00-home-and-navigation/learning-paths.md#forecasting) · [ARIMA](arima.md) →
+> **Learning path — Forecasting:** [path overview](../00-home-and-navigation/learning-paths.md#forecasting) · [Time Series Fundamentals](time-series-fundamentals.md) →

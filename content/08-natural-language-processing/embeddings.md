@@ -89,3 +89,5 @@ Embedding geometry reflects the training corpus, objective, and tokenizer. Neare
 - [Mikolov et al., Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781)
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
 - [scikit-learn API: cosine_similarity](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.pairwise.cosine_similarity.html)
+
+> **Learning path — Natural language processing:** ← [Tokenization](tokenization.md) · [path overview](../00-home-and-navigation/learning-paths.md#natural-language-processing) · [Decoder-Only Transformers](decoder-only-transformers.md) →

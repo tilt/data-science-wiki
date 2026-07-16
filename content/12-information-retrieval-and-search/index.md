@@ -64,3 +64,5 @@ Information retrieval is the engineering and measurement discipline behind findi
 - [Knowledge Graphs](knowledge-graphs.md): entity-relation retrieval and graph patterns.
 - [Graph Based Retrieval](graph-based-retrieval.md): retrieval through links, citations, and typed neighborhoods.
 - [Literature Management Search Systems](literature-management-search-systems.md): search over papers, metadata, notes, and citation graphs.
+
+> **Learning path — Information retrieval and search:** [path overview](../00-home-and-navigation/learning-paths.md#information-retrieval-and-search) · [Inverted Indexes](inverted-indexes.md) →

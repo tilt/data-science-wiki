@@ -60,3 +60,5 @@ Foundation-model capability is uneven across languages, domains, modalities, and
 - [Kaplan et al., 2020, Scaling Laws for Neural Language Models](https://arxiv.org/abs/2001.08361)
 - [Touvron et al., 2023, Llama 2](https://arxiv.org/abs/2307.09288)
 - [Vaswani et al., 2017, Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+
+> **Learning path — Generative AI systems:** ← [Generative AI and Agentic Systems](index.md) · [path overview](../00-home-and-navigation/learning-paths.md#generative-ai-systems) · [Retrieval Pipelines](retrieval-pipelines.md) →

@@ -81,3 +81,5 @@ RL can exploit misspecified rewards, overfit simulators, learn unsafe exploratio
 - [Schulman et al., 2017, Proximal Policy Optimization Algorithms](https://arxiv.org/abs/1707.06347)
 - [Haarnoja et al., 2018, Soft Actor-Critic Algorithms and Applications](https://arxiv.org/abs/1812.05905)
 - [Ouyang et al., 2022, Training Language Models to Follow Instructions with Human Feedback](https://arxiv.org/abs/2203.02155)
+
+> **Learning path — Reinforcement learning:** [path overview](../00-home-and-navigation/learning-paths.md#reinforcement-learning) · [Markov Decision Processes](markov-decision-processes.md) →

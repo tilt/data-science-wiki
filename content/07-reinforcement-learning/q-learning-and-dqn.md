@@ -90,3 +90,5 @@ Value-based methods fit naturally when the action set is discrete. Continuous co
 - [Watkins and Dayan, 1992, Q-learning](https://link.springer.com/article/10.1007/BF00992698)
 - [Mnih et al., 2013, Playing Atari with Deep Reinforcement Learning](https://arxiv.org/abs/1312.5602)
 - [van Hasselt et al., 2015, Deep Reinforcement Learning with Double Q-learning](https://arxiv.org/abs/1509.06461)
+
+> **Learning path — Reinforcement learning:** ← [Temporal-Difference Learning](temporal-difference-learning.md) · [path overview](../00-home-and-navigation/learning-paths.md#reinforcement-learning) · [Policy Gradients and Actor-Critic Methods](policy-gradients-and-actor-critic.md) →

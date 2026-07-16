@@ -111,3 +111,5 @@ Text classifiers exploit dataset-specific lexical shortcuts. Changing the produc
 - [Jurafsky and Martin, Speech and Language Processing, 3rd ed. draft](https://web.stanford.edu/~jurafsky/slp3/)
 - [scikit-learn User Guide: Working with text data](https://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction)
 - [scikit-learn API: TfidfVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)
+
+> **Learning path — Natural language processing:** ← [Decoder-Only Transformers](decoder-only-transformers.md) · [path overview](../00-home-and-navigation/learning-paths.md#natural-language-processing) · [Evaluation of NLP Systems](evaluation-of-nlp-systems.md) →

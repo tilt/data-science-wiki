@@ -87,3 +87,5 @@ Aggregate metrics can hide minority-language failures, rare entity misses, or co
 - [scikit-learn documentation: classification metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics)
 - [scikit-learn API: f1_score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html)
 - [Papineni et al., BLEU: a Method for Automatic Evaluation of Machine Translation](https://aclanthology.org/P02-1040/)
+
+> **Learning path — Natural language processing:** ← [Text Classification](text-classification.md) · [path overview](../00-home-and-navigation/learning-paths.md#natural-language-processing)
