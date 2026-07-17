@@ -8,7 +8,7 @@ topics:
   - evaluation
   - backtesting
 level: foundational
-status: draft
+status: review
 page_type: reference
 aliases:
   - Forecast Metrics
@@ -24,7 +24,7 @@ related:
   - business-cost-aware-forecasting-losses.md
   - intermittent-demand.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Forecast Error Metrics

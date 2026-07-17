@@ -8,7 +8,7 @@ topics:
   - vectors
   - matrices
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - orthogonality.md
   - ../06-deep-learning/neural-network-fundamentals.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Vectors and Matrices

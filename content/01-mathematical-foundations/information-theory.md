@@ -6,7 +6,7 @@ area: mathematical-foundations
 topics:
   - information-theory
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - mutual-information.md
   - ../06-deep-learning/loss-functions.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Information Theory

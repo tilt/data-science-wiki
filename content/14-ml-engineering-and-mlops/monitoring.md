@@ -19,7 +19,7 @@ related:
   - service-level-objectives.md
   - ../05-time-series-and-forecasting/forecast-monitoring.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Monitoring
@@ -28,7 +28,16 @@ Monitoring watches known signals and alerts when they violate a defined expectat
 
 ## Mechanism
 
-Good monitors name the metric, owner, aggregation window, threshold, labels, and action. Infrastructure metrics include traffic, latency, error rate, saturation, and dependency failures. ML metrics add feature freshness, missingness, score distributions, prediction mix, [data drift](data-drift.md), [concept drift](concept-drift.md) proxies, and later [model degradation](model-degradation.md).
+Good monitors name the metric, owner, aggregation window, threshold, labels, and action. ML monitoring stacks four layers, from signals that fire before any harm (leading) to ones that confirm harm only after labels arrive (lagging):
+
+| Layer   | Example signals                                                  | Detects                | Typical action              |
+| ------- | ---------------------------------------------------------------- | ---------------------- | --------------------------- |
+| Service | latency, error rate, saturation, dependency failures             | outages, overload      | page on-call                |
+| Data    | feature freshness, missingness, schema drift, range checks       | broken inputs          | block or fall back          |
+| Model   | score distribution, prediction mix, drift proxies, fallback rate | silent behavior change | investigate, compare canary |
+| Outcome | delayed labels, business KPIs, complaint rate                    | real quality loss      | retrain or roll back        |
+
+The gap between the fast leading layers and the slow outcome layer is the whole reason ML needs more than uptime dashboards: a model can be perfectly available while [data drift](data-drift.md) or [concept drift](concept-drift.md) quietly degrade decisions, and the confirming labels ([model degradation](model-degradation.md)) may arrive days later.
 
 ## Artifact: Prometheus Alert
 

@@ -8,7 +8,7 @@ topics:
   - mlops
   - forecasting-pipelines
 level: advanced
-status: draft
+status: review
 page_type: system-design
 aliases:
   - Forecasting Pipeline Design
@@ -24,7 +24,7 @@ related:
   - backtesting.md
   - ../14-ml-engineering-and-mlops/model-serving.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Forecasting System Design

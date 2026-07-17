@@ -8,7 +8,7 @@ topics:
   - time-series-forecasting
   - supervised-learning
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases:
   - Time Series Forecasting Formulation
@@ -23,7 +23,7 @@ related:
   - forecast-evaluation.md
   - backtesting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Forecasting Problem Formulation

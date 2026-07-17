@@ -18,7 +18,7 @@ related:
   - retrieval-pipelines.md
   - determinism-and-reproducibility.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Cost and Latency Optimization
@@ -28,6 +28,20 @@ Cost and latency optimization should target successful task completion, not the 
 ## Mechanism
 
 For one request, latency is approximately critical-path time: $L=L_{queue}+L_{retrieval}+L_{first\ token}+L_{decode}+L_{validation}$. Cost accounting should record input tokens, output tokens, tool calls, reranks, cache hits, and failed retries. Route simple tasks differently from evidence-heavy [retrieval pipelines](retrieval-pipelines.md).
+
+## Levers
+
+Once the trace is measured, the main levers, roughly by payoff:
+
+| Lever                                 | Cuts                 | Cost or risk                                |
+| ------------------------------------- | -------------------- | ------------------------------------------- |
+| Caching (prompt, embedding, response) | repeated work        | staleness; needs cache-key discipline       |
+| Model routing / cascade               | tokens on easy tasks | a small model may fail; needs a fallback    |
+| Context trimming                      | input tokens         | dropping evidence raises hallucination risk |
+| Batching                              | throughput cost      | worse tail latency                          |
+| Streaming                             | _perceived_ latency  | complicates validation of partial output    |
+
+Streaming does not reduce total work but shows first tokens sooner, which is often what "feels fast" to a user.
 
 ## Worked budget table
 

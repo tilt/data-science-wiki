@@ -7,7 +7,7 @@ topics:
   - linear-algebra
   - low-rank-approximation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - matrix-decompositions.md
   - ../04-recommendation-systems/truncated-svd.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Low-Rank Approximation

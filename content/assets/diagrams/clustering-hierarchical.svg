@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Agglomerative hierarchical clustering builds a merge tree</title>
+  <desc id="desc">A dendrogram where nearby points merge into local clusters, and a horizontal cut selects the final flat groups.</desc>
+  <style>
+    .fg { fill: #111827; }
+    .muted { fill: #4b5563; }
+    .line { stroke: #64748b; stroke-width: 2.6; fill: none; }
+    .cut { stroke: #ef4444; stroke-width: 3; stroke-dasharray: 8 6; }
+    .blue { fill: #2563eb; }
+    .orange { fill: #f97316; }
+    .teal { fill: #14b8a6; }
+    text { font-family: Arial, sans-serif; }
+  </style>
+  <rect width="720" height="420" fill="transparent"/>
+  <text x="360" y="38" text-anchor="middle" font-size="22" font-weight="700" class="fg">Hierarchical clustering: merge tree</text>
+  <text x="360" y="64" text-anchor="middle" font-size="14" class="muted">Agglomerative clustering repeatedly merges the closest clusters; cutting the dendrogram creates groups.</text>
+  <g transform="translate(110,88)">
+    <line x1="0" y1="132" x2="500" y2="132" class="cut"/>
+    <g class="blue">
+      <circle cx="55" cy="264" r="8"/><circle cx="95" cy="246" r="8"/><circle cx="126" cy="280" r="8"/><circle cx="162" cy="256" r="8"/>
+    </g>
+    <g class="orange">
+      <circle cx="284" cy="143" r="8"/><circle cx="326" cy="126" r="8"/><circle cx="365" cy="152" r="8"/><circle cx="404" cy="128" r="8"/>
+    </g>
+    <g class="teal">
+      <circle cx="322" cy="292" r="8"/><circle cx="366" cy="272" r="8"/><circle cx="408" cy="304" r="8"/><circle cx="452" cy="266" r="8"/>
+    </g>
+    <path d="M55 238 V208 H95 V238 M126 254 V208 H162 V238 M75 208 V164 H144 V208" class="line"/>
+    <path d="M284 116 V84 H326 V116 M365 126 V84 H404 V116 M305 84 V40 H385 V84" class="line"/>
+    <path d="M322 266 V230 H366 V266 M408 278 V230 H452 V260 M344 230 V184 H430 V230" class="line"/>
+    <path d="M110 164 V104 H345 V40 M386 184 V104 H345 V40" class="line"/>
+    <path d="M345 40 V12 H250 V104" class="line"/>
+    <text x="250" y="344" text-anchor="middle" font-size="14" class="muted">Lower cuts create more clusters; higher cuts create fewer, broader clusters.</text>
+  </g>
+</svg>

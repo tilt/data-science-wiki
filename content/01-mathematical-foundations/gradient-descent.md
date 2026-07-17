@@ -7,7 +7,7 @@ topics:
   - optimization
   - gradient-descent
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - convex-optimization.md
   - ../06-deep-learning/optimizers.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Gradient Descent

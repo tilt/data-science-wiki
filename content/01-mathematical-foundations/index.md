@@ -10,6 +10,7 @@ topics:
   - "rank"
   - "orthogonality"
   - "eigenvalues-and-eigenvectors"
+  - "graph-laplacian"
   - "matrix-decompositions"
   - "singular-value-decomposition"
   - "low-rank-approximation"
@@ -17,7 +18,7 @@ topics:
   - "calculus"
   - "gradients"
 level: foundational
-status: draft
+status: complete
 page_type: area-index
 aliases:
   - "Mathematical Foundations"
@@ -28,7 +29,7 @@ related:
   - "02-probability-and-statistics/index.md"
   - "06-deep-learning/index.md"
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Mathematical Foundations
@@ -44,6 +45,7 @@ The section has three trunks — linear algebra, calculus/optimization, and info
 ```mermaid
 flowchart TD
   LA[Linear Algebra] --> Decomp[Eigen and SVD Decompositions]
+  Decomp --> Graph[Graph Laplacians]
   Decomp --> LowRank[Low-Rank Approximation]
   LA --> Calc[Calculus and Gradients]
   Calc --> Opt[Optimization]
@@ -63,23 +65,24 @@ Read linear algebra first, then calculus and optimization, then information theo
 5. [Orthogonality](orthogonality.md): perpendicular directions, projections, and orthonormal bases.
 6. [Norms and Distances](norms-and-distances.md): measuring size and similarity of vectors.
 7. [Eigenvalues and Eigenvectors](eigenvalues-and-eigenvectors.md): directions a matrix only stretches.
-8. [Matrix Decompositions](matrix-decompositions.md): factorizations that expose structure.
-9. [Singular Value Decomposition](singular-value-decomposition.md): the decomposition behind embeddings and compression.
-10. [Low-Rank Approximation](low-rank-approximation.md): keeping the dominant structure and discarding noise.
-11. [Calculus](calculus.md): derivatives as the language of change.
-12. [Gradients](gradients.md): multivariate derivatives that point training in a direction.
-13. [Jacobians and Hessians](jacobians-and-hessians.md): first- and second-order derivative matrices.
-14. [Optimization](optimization.md): finding parameters that minimize a loss.
-15. [Convex Optimization](convex-optimization.md): the well-behaved case with a single global optimum.
-16. [Constrained Optimization](constrained-optimization.md): optimizing subject to equalities and inequalities.
-17. [Gradient Descent](gradient-descent.md): the workhorse iterative optimizer.
-18. [Stochastic Gradient Descent](stochastic-gradient-descent.md): mini-batch updates that scale to large data.
-19. [Numerical Stability](numerical-stability.md): avoiding overflow, underflow, and catastrophic cancellation.
-20. [Information Theory](information-theory.md): quantifying uncertainty and information.
-21. [Entropy](entropy.md): the average surprise of a distribution.
-22. [Cross Entropy](cross-entropy.md): the standard classification training loss.
-23. [KL Divergence](kl-divergence.md): a directed measure of distribution mismatch.
-24. [Mutual Information](mutual-information.md): shared information between variables.
+8. [Graph Laplacian](graph-laplacian.md): degree-minus-adjacency matrices for graph structure.
+9. [Matrix Decompositions](matrix-decompositions.md): factorizations that expose structure.
+10. [Singular Value Decomposition](singular-value-decomposition.md): the decomposition behind embeddings and compression.
+11. [Low-Rank Approximation](low-rank-approximation.md): keeping the dominant structure and discarding noise.
+12. [Calculus](calculus.md): derivatives as the language of change.
+13. [Gradients](gradients.md): multivariate derivatives that point training in a direction.
+14. [Jacobians and Hessians](jacobians-and-hessians.md): first- and second-order derivative matrices.
+15. [Optimization](optimization.md): finding parameters that minimize a loss.
+16. [Convex Optimization](convex-optimization.md): the well-behaved case with a single global optimum.
+17. [Constrained Optimization](constrained-optimization.md): optimizing subject to equalities and inequalities.
+18. [Gradient Descent](gradient-descent.md): the workhorse iterative optimizer.
+19. [Stochastic Gradient Descent](stochastic-gradient-descent.md): mini-batch updates that scale to large data.
+20. [Numerical Stability](numerical-stability.md): avoiding overflow, underflow, and catastrophic cancellation.
+21. [Information Theory](information-theory.md): quantifying uncertainty and information.
+22. [Entropy](entropy.md): the average surprise of a distribution.
+23. [Cross Entropy](cross-entropy.md): the standard classification training loss.
+24. [KL Divergence](kl-divergence.md): a directed measure of distribution mismatch.
+25. [Mutual Information](mutual-information.md): shared information between variables.
 
 ## Connections
 

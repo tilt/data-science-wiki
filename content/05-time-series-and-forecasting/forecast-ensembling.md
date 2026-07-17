@@ -8,7 +8,7 @@ topics:
   - ensemble-learning
   - model-selection
 level: advanced
-status: draft
+status: review
 page_type: algorithm
 aliases:
   - Time Series Ensembling
@@ -24,7 +24,7 @@ related:
   - forecast-error-metrics.md
   - hyperparameter-optimization-for-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Forecast Ensembling

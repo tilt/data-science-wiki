@@ -8,7 +8,7 @@ topics:
   - arima
   - exponential-smoothing
 level: intermediate
-status: draft
+status: review
 page_type: concept
 aliases:
   - Classical Forecasting
@@ -23,7 +23,7 @@ related:
   - forecast-ensembling.md
   - machine-learning-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Statistical Forecasting

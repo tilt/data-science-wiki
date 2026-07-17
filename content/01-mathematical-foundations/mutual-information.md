@@ -7,7 +7,7 @@ topics:
   - information-theory
   - mutual-information
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - MI
@@ -20,7 +20,7 @@ related:
   - cross-entropy.md
   - ../02-probability-and-statistics/conditional-probability.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Mutual Information

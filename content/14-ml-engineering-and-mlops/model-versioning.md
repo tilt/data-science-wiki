@@ -18,7 +18,7 @@ related:
   - rollbacks.md
   - ci-cd-for-ml.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Model Versioning
@@ -28,6 +28,33 @@ Model versioning records the complete behavior that may be served or audited: ar
 ## Mechanism
 
 A candidate model is registered after training, compared against baselines, approved or rejected, and promoted through environments. The registry entry should point back to [experiment tracking](experiment-tracking.md) and [dataset versioning](dataset-versioning.md) records, then forward to [model-serving](model-serving.md) deployments.
+
+The version is the join key for the whole system: monitoring, incident response, and audits all reference it, so it must be immutable once approved and never overwritten in place.
+
+```mermaid
+flowchart TD
+  Train[Training run] --> Register[Register candidate version]
+  Register --> Evaluate[Evaluate against baseline and gates]
+  Evaluate --> Approve[Approve or reject]
+  Approve --> Canary[Deploy to canary]
+  Canary --> Prod[Promote to production]
+  Prod --> Rollback[Roll back to a prior version on regression]
+  Rollback --> Prod
+```
+
+## What a version pins
+
+A servable version is more than a weight file. Each of these can change behavior independently, so each is part of the version:
+
+| Component                   | Why it is pinned                            |
+| --------------------------- | ------------------------------------------- |
+| Model artifact and hash     | the exact weights that produce scores       |
+| Code commit                 | inference and preprocessing logic           |
+| Dataset version             | what the model learned from                 |
+| Feature pipeline version    | how raw inputs become model inputs          |
+| Threshold / decision config | where scores turn into actions              |
+| Evaluation report           | the evidence the version was approved on    |
+| Environment                 | libraries and hardware that affect numerics |
 
 ## Artifact: Registry Entry
 
@@ -52,6 +79,12 @@ The version is immutable once approved. If a threshold changes, create a new beh
 ## Failure Modes
 
 Versioning fails when models are overwritten in place, when preprocessing lives only in code, or when labels and thresholds are excluded from lineage. In regulated or high-risk systems, missing version links turn an incident into an audit problem.
+
+## Connections
+
+- [Rollbacks](rollbacks.md) depend on prior versions being immutable and redeployable.
+- [CI/CD for ML](ci-cd-for-ml.md) gates promotion on the evaluation evidence attached to a version.
+- [Model Serving](model-serving.md) records which version answered each request, closing the loop with [monitoring](monitoring.md).
 
 ## References
 

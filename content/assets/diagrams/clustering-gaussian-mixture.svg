@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Gaussian mixture models produce soft elliptical clusters</title>
+  <desc id="desc">Two overlapping elliptical Gaussian components assign most points strongly to one group, while a middle point has mixed membership.</desc>
+  <style>
+    .fg { fill: #111827; }
+    .muted { fill: #4b5563; }
+    .grid { stroke: #e5e7eb; stroke-width: 1; }
+    .axis { stroke: #94a3b8; stroke-width: 1.4; }
+    .soft-a { fill: #2563eb; opacity: 0.12; stroke: #2563eb; stroke-width: 3; }
+    .soft-b { fill: #f97316; opacity: 0.12; stroke: #f97316; stroke-width: 3; }
+    .blue { fill: #2563eb; }
+    .orange { fill: #f97316; }
+    .mixed { fill: #a855f7; }
+    text { font-family: Arial, sans-serif; }
+  </style>
+  <rect width="720" height="420" fill="transparent"/>
+  <text x="360" y="38" text-anchor="middle" font-size="22" font-weight="700" class="fg">Gaussian mixture: probabilistic components</text>
+  <text x="360" y="64" text-anchor="middle" font-size="14" class="muted">Elliptical components overlap, so points can have partial membership in several clusters.</text>
+  <g transform="translate(96,90)">
+    <line x1="0" y1="250" x2="528" y2="250" class="axis"/>
+    <line x1="0" y1="0" x2="0" y2="250" class="axis"/>
+    <g class="grid">
+      <line x1="132" y1="0" x2="132" y2="250"/><line x1="264" y1="0" x2="264" y2="250"/><line x1="396" y1="0" x2="396" y2="250"/>
+      <line x1="0" y1="84" x2="528" y2="84"/><line x1="0" y1="168" x2="528" y2="168"/>
+    </g>
+    <ellipse cx="176" cy="155" rx="135" ry="54" transform="rotate(-24 176 155)" class="soft-a"/>
+    <ellipse cx="352" cy="132" rx="145" ry="58" transform="rotate(20 352 132)" class="soft-b"/>
+    <g class="blue">
+      <circle cx="78" cy="184" r="8"/><circle cx="118" cy="155" r="8"/><circle cx="162" cy="136" r="8"/>
+      <circle cx="196" cy="171" r="8"/><circle cx="230" cy="119" r="8"/><circle cx="130" cy="210" r="8"/>
+    </g>
+    <g class="orange">
+      <circle cx="294" cy="105" r="8"/><circle cx="338" cy="118" r="8"/><circle cx="379" cy="145" r="8"/>
+      <circle cx="424" cy="180" r="8"/><circle cx="330" cy="185" r="8"/><circle cx="401" cy="88" r="8"/>
+    </g>
+    <circle cx="262" cy="143" r="9" class="mixed"/>
+    <text x="262" y="103" text-anchor="middle" font-size="13" class="muted">soft assignment</text>
+  </g>
+</svg>

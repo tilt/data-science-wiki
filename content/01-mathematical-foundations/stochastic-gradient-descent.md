@@ -7,7 +7,7 @@ topics:
   - optimization
   - stochastic-gradient-descent
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - SGD
@@ -20,7 +20,7 @@ related:
   - ../06-deep-learning/optimizers.md
   - ../03-classical-machine-learning/logistic-regression.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Stochastic Gradient Descent

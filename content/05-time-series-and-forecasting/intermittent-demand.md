@@ -8,7 +8,7 @@ topics:
   - sparse-demand
   - statistical-forecasting
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases:
   - Sparse Demand Forecasting
@@ -22,7 +22,7 @@ related:
   - statistical-forecasting.md
   - business-cost-aware-forecasting-losses.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Intermittent Demand

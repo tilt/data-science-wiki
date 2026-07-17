@@ -18,7 +18,7 @@ related:
   - ci-cd-for-ml.md
   - evaluation-datasets.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Experiment Tracking
@@ -28,6 +28,8 @@ Experiment tracking records the evidence behind training and evaluation runs: co
 ## Mechanism
 
 Each serious run should create an immutable run record. The record should link input datasets, feature pipeline version, random seed, hyperparameters, metrics by slice, produced artifact, and reviewer notes. A promoted [model-versioning](model-versioning.md) entry should point back to the run that created it.
+
+A run is only evidence if it is **reproducible**: the same code commit, [dataset version](dataset-versioning.md), configuration, and seed must reproduce the same metrics. Tracking then makes runs **comparable** — you can rank candidates, see which change moved which slice metric, and diff two runs' configurations. That comparability is what turns a pile of notebooks into a defensible decision record.
 
 ## Artifact: Run Record
 

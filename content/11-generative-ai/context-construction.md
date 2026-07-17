@@ -18,7 +18,7 @@ related:
   - tool-schemas.md
   - determinism-and-reproducibility.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Context Construction
@@ -42,6 +42,10 @@ With a 420-token budget, a simple utility-per-token packer ranks items as follow
 | `chat_history` |    160 |       5 |             0.031 | no    |
 
 The kept items use $80+120+140=340$ tokens, leaving 80 unused because the next candidate would exceed the 420-token budget. The greedy packer kept high-utility instructions and evidence but dropped chat history. That trade-off should be visible in [determinism and reproducibility](determinism-and-reproducibility.md) traces.
+
+## Trust and precedence
+
+Context is not a flat bag of text; it has an authority order. System and developer instructions outrank retrieved documents, which outrank user-supplied text, which outranks tool output. The packer must preserve that order and label each block's trust level, so a retrieved passage or a user message can never silently override an instruction. That ordering is the core defense against [prompt injection](prompt-injection.md), and it must survive truncation: when the budget forces cuts, drop low-utility evidence, never the instruction hierarchy.
 
 ## Caveats
 

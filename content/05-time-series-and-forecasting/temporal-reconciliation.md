@@ -8,7 +8,7 @@ topics:
   - forecast-reconciliation
   - time-aggregation
 level: advanced
-status: draft
+status: review
 page_type: algorithm
 aliases:
   - Time Aggregation Reconciliation
@@ -22,7 +22,7 @@ related:
   - backtesting.md
   - demand-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Temporal Reconciliation

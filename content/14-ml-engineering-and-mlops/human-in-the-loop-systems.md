@@ -18,7 +18,7 @@ related:
   - monitoring.md
   - ../18-responsible-ai-safety-and-governance/human-oversight.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Human-in-the-Loop Systems
@@ -27,7 +27,14 @@ Human-in-the-loop systems route selected model decisions to people for review, c
 
 ## Mechanism
 
-The model or policy layer decides when automation is allowed, when abstention is required, and when review is mandatory. Review outcomes should feed [golden datasets](golden-datasets.md), [active learning](active-learning.md), incident analysis, and future training data only after quality checks.
+The model or policy layer decides when automation is allowed, when abstention is required, and when review is mandatory. Cases are typically routed to a human when one of these holds:
+
+- **Low confidence** — the score sits near a decision boundary.
+- **High stakes** — the action is costly or hard to reverse (large amounts, safety, legal).
+- **Policy-flagged** — a rule marks the case (sanctions, vulnerable customer).
+- **Novel or out-of-distribution** — the input is unlike the training data.
+
+Review outcomes should feed [golden datasets](golden-datasets.md), [active learning](active-learning.md), incident analysis, and future training data only after quality checks. Be careful with that loop: reviewed cases are selected precisely because they are hard or unusual, so they are **not** a representative sample — training naively on them can skew the model. Log the selection rule alongside the labels so this bias can be corrected.
 
 ## Artifact: Review Queue Contract
 

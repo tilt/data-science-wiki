@@ -8,7 +8,7 @@ topics:
   - rolling-origin-validation
   - evaluation
 level: foundational
-status: draft
+status: review
 page_type: algorithm
 aliases:
   - Forecast Backtesting
@@ -23,7 +23,7 @@ related:
   - forecasting-pitfalls-and-worked-examples.md
   - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Backtesting

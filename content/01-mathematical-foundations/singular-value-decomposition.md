@@ -8,7 +8,7 @@ topics:
   - matrix-decompositions
   - svd
 level: intermediate
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - SVD
@@ -28,7 +28,7 @@ related:
   - ../04-recommendation-systems/sparse-utility-matrices-and-svd.md
   - ../04-recommendation-systems/matrix-factorization.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Singular Value Decomposition

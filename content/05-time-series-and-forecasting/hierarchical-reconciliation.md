@@ -8,7 +8,7 @@ topics:
   - hierarchical-forecasting
   - coherent-forecasts
 level: advanced
-status: draft
+status: review
 page_type: algorithm
 aliases:
   - Forecast Reconciliation
@@ -22,7 +22,7 @@ related:
   - backtesting.md
   - probabilistic-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Hierarchical Reconciliation

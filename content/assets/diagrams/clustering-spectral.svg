@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">Spectral clustering separates an inner cluster from an outer ring by graph connectivity</title>
+  <desc id="desc">A non-convex point pattern is shown as a similarity graph. Blue outer-ring points connect to neighboring outer-ring points; orange inner points connect to one another. The final spectral result is an outer ring cluster and an inner core cluster.</desc>
+  <style>
+    .fg { fill: #111827; }
+    .muted { fill: #4b5563; }
+    .grid { stroke: #e5e7eb; stroke-width: 1; }
+    .axis { stroke: #94a3b8; stroke-width: 1.4; }
+    .outer-edge { stroke: #2563eb; stroke-width: 2.4; stroke-opacity: 0.5; fill: none; }
+    .inner-edge { stroke: #f97316; stroke-width: 2.4; stroke-opacity: 0.55; fill: none; }
+    .outer-outline { stroke: #2563eb; stroke-width: 3.2; stroke-dasharray: 9 6; fill: none; }
+    .inner-outline { stroke: #f97316; stroke-width: 3.2; stroke-dasharray: 9 6; fill: none; }
+    .blue { fill: #2563eb; }
+    .orange { fill: #f97316; }
+    .label-box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.2; }
+    text { font-family: Arial, sans-serif; }
+  </style>
+  <rect width="760" height="460" fill="transparent"/>
+  <text x="380" y="38" text-anchor="middle" font-size="22" font-weight="700" class="fg">Spectral clustering: similarity graph first</text>
+  <text x="380" y="64" text-anchor="middle" font-size="14" class="muted">The algorithm clusters graph connectivity, not straight-line centroid boundaries in the original plane.</text>
+
+  <g transform="translate(70,94)">
+    <line x1="0" y1="282" x2="620" y2="282" class="axis"/>
+    <line x1="0" y1="0" x2="0" y2="282" class="axis"/>
+    <g class="grid">
+      <line x1="155" y1="0" x2="155" y2="282"/><line x1="310" y1="0" x2="310" y2="282"/><line x1="465" y1="0" x2="465" y2="282"/>
+      <line x1="0" y1="94" x2="620" y2="94"/><line x1="0" y1="188" x2="620" y2="188"/>
+    </g>
+
+    <path d="M168 142 C168 46 284 16 383 72 C465 118 457 211 379 249 C275 299 169 238 168 142 Z" class="outer-outline"/>
+    <path d="M262 143 C262 101 320 88 360 114 C398 138 397 181 358 204 C309 234 262 197 262 143 Z" class="inner-outline"/>
+
+    <path d="M215 119 L232 192 L276 62 L352 42 L430 110 L420 192 L344 248 L260 233 L215 119" class="outer-edge"/>
+    <path d="M305 140 L338 136 L359 171 L323 198 L286 172 L305 140" class="inner-edge"/>
+
+    <g class="blue">
+      <circle cx="215" cy="119" r="9"/><circle cx="232" cy="192" r="9"/><circle cx="276" cy="62" r="9"/>
+      <circle cx="352" cy="42" r="9"/><circle cx="430" cy="110" r="9"/><circle cx="420" cy="192" r="9"/>
+      <circle cx="344" cy="248" r="9"/><circle cx="260" cy="233" r="9"/>
+    </g>
+    <g class="orange">
+      <circle cx="305" cy="140" r="9"/><circle cx="338" cy="136" r="9"/><circle cx="359" cy="171" r="9"/>
+      <circle cx="323" cy="198" r="9"/><circle cx="286" cy="172" r="9"/>
+    </g>
+
+    <g transform="translate(448,32)">
+      <rect width="148" height="92" rx="6" class="label-box"/>
+      <text x="74" y="25" text-anchor="middle" font-size="13" font-weight="700" class="fg">spectral result</text>
+      <circle cx="26" cy="48" r="6" class="blue"/>
+      <text x="42" y="52" font-size="12" class="muted">outer ring cluster</text>
+      <circle cx="26" cy="72" r="6" class="orange"/>
+      <text x="42" y="76" font-size="12" class="muted">inner core cluster</text>
+    </g>
+
+    <text x="310" y="324" text-anchor="middle" font-size="13" class="muted">Edges connect similar neighbors; weak or missing edges form the cut.</text>
+  </g>
+</svg>

@@ -8,7 +8,7 @@ topics:
   - forecasting
   - model-updating
 level: advanced
-status: draft
+status: review
 page_type: implementation
 aliases:
   - Incremental Forecasting
@@ -22,7 +22,7 @@ related:
   - backtesting.md
   - ../14-ml-engineering-and-mlops/batch-and-online-inference.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Online Learning for Forecasting

@@ -18,7 +18,7 @@ related:
   - model-degradation.md
   - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Evaluation Datasets
@@ -50,6 +50,10 @@ evaluation_dataset:
 ```
 
 The gate should match failure cost. A fraud system may block release on a low-recall slice even when global AUC improves. The experimentation section covers [offline evaluation](../17-experimentation-and-evaluation/offline-evaluation.md) more generally.
+
+## Slice gates
+
+Release gates should be defined per slice, not only globally, because an averaged metric hides localized regressions. In the card above, `new_account_recall >= 0.72` can block a release whose `global_auc` improved: the model got better on the easy majority while getting worse on the rare, high-cost new-account cases. Choose slices by cost and by who is harmed when the model is wrong — payment type, geography, protected group, new-versus-returning — then set each gate to the level the team can defend to that population, not just the level that maximizes the headline number.
 
 ## Failure Modes
 

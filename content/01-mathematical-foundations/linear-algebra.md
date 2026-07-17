@@ -6,7 +6,7 @@ area: mathematical-foundations
 topics:
   - linear-algebra
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - singular-value-decomposition.md
   - ../03-classical-machine-learning/linear-models.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Linear Algebra

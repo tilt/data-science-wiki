@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">DBSCAN finds density-connected clusters and noise</title>
+  <desc id="desc">Two dense non-spherical regions are surrounded by dashed density outlines while isolated points are labeled as noise.</desc>
+  <style>
+    .fg { fill: #111827; }
+    .muted { fill: #4b5563; }
+    .grid { stroke: #e5e7eb; stroke-width: 1; }
+    .axis { stroke: #94a3b8; stroke-width: 1.4; }
+    .density { fill: none; stroke: #14b8a6; stroke-width: 3; stroke-dasharray: 9 7; }
+    .blue { fill: #2563eb; }
+    .orange { fill: #f97316; }
+    .noise { fill: #64748b; }
+    text { font-family: Arial, sans-serif; }
+  </style>
+  <rect width="720" height="420" fill="transparent"/>
+  <text x="360" y="38" text-anchor="middle" font-size="22" font-weight="700" class="fg">DBSCAN: density-connected clusters</text>
+  <text x="360" y="64" text-anchor="middle" font-size="14" class="muted">Dense regions become clusters; sparse isolated points are noise rather than forced assignments.</text>
+  <g transform="translate(96,90)">
+    <line x1="0" y1="250" x2="528" y2="250" class="axis"/>
+    <line x1="0" y1="0" x2="0" y2="250" class="axis"/>
+    <g class="grid">
+      <line x1="132" y1="0" x2="132" y2="250"/><line x1="264" y1="0" x2="264" y2="250"/><line x1="396" y1="0" x2="396" y2="250"/>
+      <line x1="0" y1="84" x2="528" y2="84"/><line x1="0" y1="168" x2="528" y2="168"/>
+    </g>
+    <path d="M62 128 C51 70 94 35 164 48 C226 60 219 141 164 171 C105 205 71 174 62 128 Z" class="density"/>
+    <path d="M300 166 C287 99 338 67 409 84 C466 98 487 164 435 209 C378 258 318 227 300 166 Z" class="density"/>
+    <g class="blue">
+      <circle cx="103" cy="96" r="8"/><circle cx="138" cy="68" r="8"/><circle cx="171" cy="86" r="8"/>
+      <circle cx="153" cy="129" r="8"/><circle cx="112" cy="151" r="8"/><circle cx="185" cy="154" r="8"/>
+    </g>
+    <g class="orange">
+      <circle cx="350" cy="126" r="8"/><circle cx="391" cy="109" r="8"/><circle cx="430" cy="143" r="8"/>
+      <circle cx="412" cy="190" r="8"/><circle cx="361" cy="204" r="8"/><circle cx="322" cy="166" r="8"/>
+    </g>
+    <g class="noise">
+      <circle cx="53" cy="50" r="7"/><circle cx="252" cy="83" r="7"/><circle cx="492" cy="61" r="7"/><circle cx="244" cy="224" r="7"/>
+    </g>
+    <text x="250" y="107" font-size="13" class="muted">noise</text>
+    <text x="260" y="246" font-size="13" class="muted">noise</text>
+  </g>
+</svg>

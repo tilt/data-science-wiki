@@ -8,7 +8,7 @@ topics:
   - forecasting
   - model-selection
 level: advanced
-status: draft
+status: review
 page_type: algorithm
 aliases:
   - Forecasting HPO
@@ -24,7 +24,7 @@ related:
   - machine-learning-forecasting.md
   - forecast-error-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Hyperparameter Optimization for Forecasting

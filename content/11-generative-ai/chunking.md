@@ -18,7 +18,7 @@ related:
   - citations.md
   - vector-databases.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Chunking
@@ -28,6 +28,17 @@ Chunking decides the unit that [retrieval pipelines](retrieval-pipelines.md) can
 ## Mechanism
 
 A chunker maps a document $D$ into ordered spans $(c_i, m_i)$, where $m_i$ stores source, heading, permissions, and version. Fixed token windows are simple, but heading-aware spans preserve local meaning. Overlap helps boundary cases but increases duplicate retrieval.
+
+## Strategies
+
+| Strategy             | How it splits                            | Strength                                   | Weakness                       |
+| -------------------- | ---------------------------------------- | ------------------------------------------ | ------------------------------ |
+| Fixed window         | every N tokens, optional overlap         | trivial, uniform sizes                     | splits mid-idea; boundary loss |
+| Sentence / recursive | on sentence or paragraph breaks          | respects natural units                     | uneven sizes                   |
+| Heading-aware        | keeps a heading with the text it governs | preserves local context, cleaner citations | needs document structure       |
+| Semantic             | on shifts in embedding similarity        | coherent topical spans                     | costly, non-deterministic      |
+
+Overlap of a few sentences between adjacent chunks helps answers that straddle a boundary, at the cost of some duplicate retrieval.
 
 ## Worked chunking example
 

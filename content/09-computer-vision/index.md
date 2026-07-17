@@ -17,7 +17,7 @@ topics:
   - "vision-transformers"
   - "self-supervised-visual-learning"
 level: foundational
-status: draft
+status: review
 page_type: area-index
 aliases:
   - "Computer Vision"
@@ -28,7 +28,7 @@ related:
   - "10-video-understanding/index.md"
   - "19-domain-applications/index.md"
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Computer Vision

@@ -6,7 +6,7 @@ area: mathematical-foundations
 topics:
   - optimization
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - numerical-stability.md
   - ../06-deep-learning/optimizers.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Optimization

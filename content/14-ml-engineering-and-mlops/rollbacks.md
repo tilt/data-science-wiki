@@ -18,7 +18,7 @@ related:
   - production-incident-response.md
   - service-level-objectives.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Rollbacks
@@ -28,6 +28,8 @@ A rollback restores the last acceptable production behavior after a release, ret
 ## Mechanism
 
 Rollback readiness is a pre-release contract. The team should know the trigger, owner, command, expected recovery time, validation query, and customer communication path before the [canary deployment](canary-deployment.md) begins. The previous artifact must remain compatible with current schemas and dependencies.
+
+**Roll back by default.** Reverting to a known-good version is faster and lower-risk than diagnosing and hot-fixing a live system under pressure. Fix forward only when the previous version is also unsafe — for example when the incident is a data or upstream problem that both versions share. Decide which rule applies to a given failure class before the incident, not during it.
 
 ## Artifact: Rollback Runbook Step
 

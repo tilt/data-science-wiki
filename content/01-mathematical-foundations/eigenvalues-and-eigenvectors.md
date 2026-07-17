@@ -7,24 +7,25 @@ topics:
   - linear-algebra
   - eigenvalues
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
   - linear-algebra.md
 related:
   - linear-algebra.md
+  - graph-laplacian.md
   - matrix-decompositions.md
   - singular-value-decomposition.md
   - orthogonality.md
   - ../03-classical-machine-learning/pca.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Eigenvalues and Eigenvectors
 
-An eigenvector is a direction that a square matrix stretches or shrinks without rotating away from itself. The eigenvalue is that stretch factor. They expose natural axes of transformations, covariance matrices, graph Laplacians, and stability dynamics.
+An eigenvector is a direction that a square matrix stretches or shrinks without rotating away from itself. The eigenvalue is that stretch factor. They expose natural axes of transformations, covariance matrices, [graph Laplacians](graph-laplacian.md), and stability dynamics.
 
 ## Defining math
 
@@ -76,4 +77,4 @@ Eigenvectors are scale-ambiguous: $v$ and $-v$ represent the same direction. Non
 > [!nav]
 > **Section** — [Mathematical Foundations](index.md)
 >
-> [← Norms and Distances](norms-and-distances.md) [Matrix Decompositions →](matrix-decompositions.md)
+> [← Norms and Distances](norms-and-distances.md) [Laplacians and Graph Laplacians →](graph-laplacian.md)

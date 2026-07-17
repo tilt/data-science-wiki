@@ -8,7 +8,7 @@ topics:
   - probabilistic-forecasting
   - evaluation
 level: advanced
-status: draft
+status: review
 page_type: concept
 aliases:
   - Probabilistic Forecast Calibration
@@ -23,7 +23,7 @@ related:
   - forecast-evaluation.md
   - ../17-experimentation-and-evaluation/calibration.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Forecast Calibration

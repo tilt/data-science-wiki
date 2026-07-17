@@ -17,7 +17,7 @@ topics:
   - "repeated-sampling"
   - "human-evaluation"
 level: foundational
-status: draft
+status: review
 page_type: area-index
 aliases:
   - "Experimentation and Evaluation"
@@ -28,7 +28,7 @@ related:
   - "11-generative-ai/index.md"
   - "14-ml-engineering-and-mlops/index.md"
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Experimentation and Evaluation

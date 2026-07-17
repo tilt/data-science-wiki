@@ -8,7 +8,7 @@ topics:
   - norms
   - distances
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - gradient-descent.md
   - ../03-classical-machine-learning/clustering.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Norms and Distances

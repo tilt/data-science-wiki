@@ -8,7 +8,7 @@ topics:
   - backtesting
   - metrics
 level: intermediate
-status: draft
+status: review
 page_type: concept
 aliases:
   - Forecast Model Evaluation
@@ -22,7 +22,7 @@ related:
   - forecasting-pitfalls-and-worked-examples.md
   - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Forecast Evaluation
@@ -36,6 +36,18 @@ Forecast evaluation measures how predictions perform under a time-respecting val
 Evaluation starts from the forecast origin. A valid forecast can use only target history, historical covariates, and future-known covariates available at that origin. Random train-test splits usually leak future information.
 
 Point forecasts are evaluated with metrics such as MAE, RMSE, WAPE, MASE, and bias. Probabilistic forecasts add interval coverage, interval width, quantile loss, or calibration checks. Sparse series, cold-start entities, and high-value partitions should be evaluated separately.
+
+Evaluation is not a single number but several dimensions, each answering a different question:
+
+| Dimension      | Question it answers                             | Example check                                          |
+| -------------- | ----------------------------------------------- | ------------------------------------------------------ |
+| Point accuracy | how close are the point forecasts?              | MAE, RMSE, or WAPE against a seasonal-naive baseline   |
+| Bias           | does it systematically over- or under-forecast? | mean signed error by series and horizon                |
+| Probabilistic  | are the intervals honest?                       | interval coverage and width, pinball loss              |
+| Calibration    | do stated quantiles match frequencies?          | reliability by quantile                                |
+| Slices         | who is served worst?                            | metrics by horizon, category, cold-start, intermittent |
+
+A model that wins on aggregate point accuracy can still lose on bias direction or on a high-cost slice, so a release decision reads the whole row, not one cell.
 
 ## Model comparison
 

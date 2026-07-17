@@ -19,7 +19,7 @@ topics:
   - "real-time-action-recognition"
   - "road-scene-perception"
 level: foundational
-status: draft
+status: review
 page_type: area-index
 aliases:
   - "Domain Applications"
@@ -29,7 +29,7 @@ prerequisites:
 related:
   - "../00-home-and-navigation/technical-answer-patterns.md"
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Domain Applications

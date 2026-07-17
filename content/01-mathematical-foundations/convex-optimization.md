@@ -7,7 +7,7 @@ topics:
   - optimization
   - convexity
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - jacobians-and-hessians.md
   - ../03-classical-machine-learning/logistic-regression.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Convex Optimization

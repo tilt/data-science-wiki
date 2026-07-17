@@ -8,7 +8,7 @@ topics:
   - neural-forecasting
   - transformers
 level: intermediate
-status: draft
+status: review
 page_type: model
 aliases:
   - Neural Forecasting
@@ -25,7 +25,7 @@ related:
   - probabilistic-forecasting.md
   - ../06-deep-learning/neural-network-fundamentals.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Deep Learning Forecasting

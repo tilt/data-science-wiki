@@ -18,7 +18,7 @@ related:
   - planning.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Tool Routing
@@ -28,6 +28,16 @@ Tool routing decides whether a request should be answered directly, sent to retr
 ## Mechanism
 
 Routing can be rule-based, model-based, or hybrid. The route should include tool name, arguments, confidence, and required confirmation. [Tool schemas](tool-schemas.md) validate arguments, while [guardrails](guardrails.md) enforce permissions and side-effect policy.
+
+## Routing approaches
+
+| Approach    | How the route is chosen                | Best when                                   |
+| ----------- | -------------------------------------- | ------------------------------------------- |
+| Rule-based  | keyword, pattern, or intent classifier | few tools; high-stakes or regulated routing |
+| Model-based | the model selects a tool from schemas  | many tools; open-ended requests             |
+| Hybrid      | rules gate, model chooses within scope | most production systems                     |
+
+A safe default is hybrid: deterministic rules decide what is _allowed_ (permissions, side-effect confirmation) and the model chooses _which_ allowed tool fits — so a routing mistake can never exceed the caller's authorization.
 
 ## Worked routing table
 

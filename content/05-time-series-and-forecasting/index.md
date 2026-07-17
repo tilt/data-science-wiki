@@ -25,7 +25,7 @@ topics:
   - "exponential-smoothing"
   - "state-space-models"
 level: foundational
-status: draft
+status: review
 page_type: area-index
 aliases:
   - "Time-Series Forecasting"
@@ -38,7 +38,7 @@ related:
   - "17-experimentation-and-evaluation/index.md"
   - "19-domain-applications/index.md"
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Time-Series Forecasting

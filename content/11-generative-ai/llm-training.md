@@ -11,7 +11,7 @@ topics:
   - rlhf
   - preference-optimization
 level: intermediate
-status: draft
+status: review
 page_type: concept
 aliases:
   - "Large Language Model Training"
@@ -27,7 +27,7 @@ related:
   - "../06-deep-learning/self-supervised-learning.md"
   - "../07-reinforcement-learning/reinforcement-learning-from-human-feedback.md"
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-17
 ---
 
 # LLM Training

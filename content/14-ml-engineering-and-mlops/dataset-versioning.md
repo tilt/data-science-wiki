@@ -18,7 +18,7 @@ related:
   - evaluation-datasets.md
   - ../13-data-engineering/data-lineage.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Dataset Versioning
@@ -28,6 +28,8 @@ Dataset versioning records the exact data snapshot, labels, filters, schema, and
 ## Mechanism
 
 A dataset version should be immutable and addressable. It should identify source tables or files, extraction time, transformation code, label definition, exclusions, schema, checksums, and train/validation/test split seed. For mutable warehouses, table name is not a version; the snapshot or query result is.
+
+Concretely, suppose two training runs a week apart both read `warehouse.events` filtered to June. If late-arriving rows land in the June partition between the runs, the two models learn from different data under an identical query — an untracked change that makes any comparison between them meaningless. Pinning the snapshot time (or materializing the query result) means re-running the manifest reproduces exactly the same rows, which is the precondition for [experiment tracking](experiment-tracking.md) and [model-versioning](model-versioning.md) to mean anything.
 
 ## Artifact: Dataset Manifest
 

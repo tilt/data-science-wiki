@@ -7,7 +7,7 @@ topics:
   - linear-algebra
   - matrix-decompositions
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -15,11 +15,12 @@ prerequisites:
 related:
   - singular-value-decomposition.md
   - eigenvalues-and-eigenvectors.md
+  - graph-laplacian.md
   - orthogonality.md
   - numerical-stability.md
   - ../03-classical-machine-learning/pca.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Matrix Decompositions
@@ -59,4 +60,4 @@ Each decomposition has preconditions. Cholesky fails outside positive definite m
 > [!nav]
 > **Section** — [Mathematical Foundations](index.md)
 >
-> [← Eigenvalues and Eigenvectors](eigenvalues-and-eigenvectors.md) [Singular Value Decomposition →](singular-value-decomposition.md)
+> [← Laplacians and Graph Laplacians](graph-laplacian.md) [Singular Value Decomposition →](singular-value-decomposition.md)

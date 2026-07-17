@@ -7,7 +7,7 @@ topics:
   - linear-algebra
   - orthogonality
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - singular-value-decomposition.md
   - ../03-classical-machine-learning/pca.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Orthogonality

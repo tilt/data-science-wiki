@@ -7,7 +7,7 @@ topics:
   - linear-algebra
   - rank
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - low-rank-approximation.md
   - ../04-recommendation-systems/latent-factor-models.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Rank

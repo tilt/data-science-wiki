@@ -7,7 +7,7 @@ topics:
   - calculus
   - gradients
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - stochastic-gradient-descent.md
   - ../06-deep-learning/backpropagation.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Gradients

@@ -8,7 +8,7 @@ topics:
   - supervised-learning
   - regression
 level: intermediate
-status: draft
+status: review
 page_type: model
 aliases:
   - ML Forecasting
@@ -25,7 +25,7 @@ related:
   - cold-start-forecasting.md
   - ../03-classical-machine-learning/random-forests.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Machine Learning Forecasting

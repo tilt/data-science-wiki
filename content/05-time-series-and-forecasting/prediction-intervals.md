@@ -8,7 +8,7 @@ topics:
   - probabilistic-forecasting
   - evaluation
 level: foundational
-status: draft
+status: review
 page_type: concept
 aliases:
   - Forecast Intervals
@@ -23,7 +23,7 @@ related:
   - forecast-error-metrics.md
   - ../17-experimentation-and-evaluation/coverage.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Prediction Intervals

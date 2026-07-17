@@ -7,7 +7,7 @@ topics:
   - information-theory
   - kl-divergence
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Kullback-Leibler divergence
@@ -20,7 +20,7 @@ related:
   - information-theory.md
   - ../06-deep-learning/loss-functions.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # KL Divergence

@@ -20,7 +20,7 @@ topics:
   - "top-k-and-top-p-sampling"
   - "determinism-and-reproducibility"
 level: foundational
-status: draft
+status: review
 page_type: area-index
 aliases:
   - "Generative AI and Agentic Systems"
@@ -31,7 +31,7 @@ related:
   - "../18-responsible-ai-safety-and-governance/index.md"
   - "../14-ml-engineering-and-mlops/index.md"
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Generative AI and Agentic Systems

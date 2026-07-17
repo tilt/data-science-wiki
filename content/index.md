@@ -8,7 +8,7 @@ topics:
   - "taxonomy"
   - "learning-paths"
 level: foundational
-status: draft
+status: review
 page_type: area-index
 aliases:
   - "Home"
@@ -38,7 +38,7 @@ related:
   - "20-history-of-ai-and-machine-learning"
   - "21-references-and-glossary"
 historical_context: false
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-17
 ---
 
 # Data Science, Machine Learning & AI Wiki

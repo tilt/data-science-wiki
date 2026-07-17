@@ -8,7 +8,7 @@ topics:
   - prediction-intervals
   - probabilistic-forecasting
 level: advanced
-status: draft
+status: review
 page_type: algorithm
 aliases:
   - Conformal Forecasting
@@ -24,7 +24,7 @@ related:
   - backtesting.md
   - ../17-experimentation-and-evaluation/coverage.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Conformal Prediction for Forecasting

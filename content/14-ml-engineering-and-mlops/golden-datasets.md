@@ -18,7 +18,7 @@ related:
   - human-in-the-loop-systems.md
   - ../17-experimentation-and-evaluation/golden-datasets.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Golden Datasets
@@ -28,6 +28,20 @@ Golden datasets are small, trusted, versioned examples that serve as acceptance 
 ## Mechanism
 
 A golden dataset should include inputs, expected outputs or grading criteria, slice tags, risk labels, source, reviewer, and version. It belongs in [ci-cd-for-ml](ci-cd-for-ml.md) because regressions on known critical cases should block promotion even when aggregate metrics improve.
+
+Cases are curated, not sampled: each one is drawn from a real incident, a legal or safety requirement, or a decision that must not silently change. The set stays small enough — tens to low hundreds of cases — that a reviewer can defend every entry. When a golden expectation genuinely needs to change, the correct move is a new version, never an in-place edit, so the history of what "correct" meant is preserved.
+
+## Golden versus evaluation sets
+
+Golden and [evaluation datasets](evaluation-datasets.md) answer different questions and fail in different ways:
+
+| Aspect          | Golden set                                    | Evaluation dataset            |
+| --------------- | --------------------------------------------- | ----------------------------- |
+| Size            | tens to low hundreds                          | thousands or more             |
+| Curated from    | real incidents and must-not-regress decisions | representative sampling       |
+| Purpose         | acceptance gate on critical cases             | estimate aggregate quality    |
+| A failure means | block the release and inspect the case        | a shift in an averaged metric |
+| Reviewed        | case by case, by a named owner                | in aggregate                  |
 
 ## Artifact: Golden Record Schema
 

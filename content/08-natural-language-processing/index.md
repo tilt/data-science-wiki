@@ -17,7 +17,7 @@ topics:
   - "semantic-textual-similarity"
   - "sequence-labelling"
 level: foundational
-status: draft
+status: review
 page_type: area-index
 aliases:
   - "Natural Language Processing"
@@ -28,7 +28,7 @@ related:
   - "11-generative-ai/index.md"
   - "12-information-retrieval-and-search/index.md"
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-17
 ---
 
 # Natural Language Processing

@@ -8,7 +8,7 @@ topics:
   - mlops
   - model-monitoring
 level: advanced
-status: draft
+status: review
 page_type: system-design
 aliases:
   - Forecast Model Monitoring
@@ -22,7 +22,7 @@ related:
   - forecast-calibration.md
   - ../14-ml-engineering-and-mlops/monitoring.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Forecast Monitoring

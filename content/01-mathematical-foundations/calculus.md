@@ -6,7 +6,7 @@ area: mathematical-foundations
 topics:
   - calculus
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - optimization.md
   - ../06-deep-learning/backpropagation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Calculus

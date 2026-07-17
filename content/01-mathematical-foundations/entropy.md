@@ -7,7 +7,7 @@ topics:
   - information-theory
   - entropy
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - mutual-information.md
   - ../02-probability-and-statistics/random-variables.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Entropy

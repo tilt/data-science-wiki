@@ -8,7 +8,7 @@ topics:
   - target-transformations
   - forecasting
 level: intermediate
-status: draft
+status: review
 page_type: implementation
 aliases:
   - Forecast Feature Engineering
@@ -23,7 +23,7 @@ related:
   - rolling-origin-validation.md
   - concept-drift-in-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Feature Engineering for Forecasting

@@ -18,7 +18,7 @@ related:
   - embeddings.md
   - retrieval-pipelines.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Fine Tuning Versus RAG
@@ -37,6 +37,8 @@ Use fine-tuning when the failure is stable behavior: style, output shape, classi
 | Missing latest policy clause            | RAG/index update               |
 | Needs citations                         | RAG                            |
 | Refuses domain-specific phrasing        | Fine-tune/instruction data     |
+
+The two are not exclusive. A common production shape fine-tunes for format and domain tone while retrieving for facts and citations, so the model behaves consistently _and_ its claims stay current and auditable — train the behavior, retrieve the facts, and use both when you need both.
 
 ## Caveats
 

@@ -8,7 +8,7 @@ topics:
   - forecast-evaluation
   - decision-making
 level: advanced
-status: draft
+status: review
 page_type: concept
 aliases:
   - Cost-Aware Forecasting
@@ -24,7 +24,7 @@ related:
   - forecast-evaluation.md
   - ../17-experimentation-and-evaluation/risk-weighted-error-taxonomies.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Business-Cost-Aware Forecasting Losses

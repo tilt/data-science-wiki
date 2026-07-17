@@ -8,7 +8,7 @@ topics:
   - forecast-monitoring
   - model-degradation
 level: advanced
-status: draft
+status: review
 page_type: concept
 aliases:
   - Forecast Drift
@@ -22,7 +22,7 @@ related:
   - forecasting-pitfalls-and-worked-examples.md
   - ../14-ml-engineering-and-mlops/concept-drift.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Concept Drift in Forecasting

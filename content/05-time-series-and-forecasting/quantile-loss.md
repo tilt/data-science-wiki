@@ -8,7 +8,7 @@ topics:
   - probabilistic-forecasting
   - loss-functions
 level: intermediate
-status: draft
+status: review
 page_type: reference
 aliases:
   - Pinball Loss
@@ -22,7 +22,7 @@ related:
   - business-cost-aware-forecasting-losses.md
   - conformal-prediction-for-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Quantile Loss

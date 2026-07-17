@@ -18,7 +18,7 @@ related:
   - production-incident-response.md
   - ../15-cloud-and-distributed-systems/reliability.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Reliability
@@ -28,6 +28,17 @@ Reliability is the ability of a model-backed system to keep delivering acceptabl
 ## Mechanism
 
 Reliability is specified through [service-level objectives](service-level-objectives.md), tested through failure drills, and operated through [monitoring](monitoring.md), [observability](observability.md), runbooks, and [production incident response](production-incident-response.md). For ML, the contract must include prediction availability, feature freshness, fallback quality, and delayed outcome quality, not only uptime.
+
+## Graceful degradation
+
+ML reliability is usually a ladder of acceptable degradations rather than a binary up or down. From best to worst:
+
+1. **Full service** — fresh features, current model, live scoring.
+2. **Degraded** — stale-but-valid features or a smaller fallback model, flagged in the response.
+3. **Cached** — the last good batch score served with its age attached.
+4. **Fail-safe default** — a conservative rule (for example, route to manual review) when nothing else is trustworthy.
+
+Each rung must be defined, tested, and observable so the system chooses the highest safe rung instead of returning a confident wrong answer. A response that quietly fell back should say so, which is why the fallback path belongs in [observability](observability.md).
 
 ## Artifact: Reliability Control Matrix
 

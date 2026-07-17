@@ -18,7 +18,7 @@ related:
   - microservices.md
   - model-versioning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Docker
@@ -46,6 +46,15 @@ CMD ["uvicorn", "app.server:api", "--host", "0.0.0.0", "--port", "8080"]
 ```
 
 The image should start without downloading code. Loading `MODEL_URI` at startup links it to [model-versioning](model-versioning.md) while allowing [rollbacks](rollbacks.md) to switch model versions or container revisions independently.
+
+## Environment versus model
+
+Two things must be reproducible, and keeping them separate is the point:
+
+- **The environment** — code, Python and native libraries, CUDA runtime — is pinned _in_ the image and tagged by commit.
+- **The model** — weights, thresholds — has its own version, loaded at runtime from a pinned `MODEL_URI`.
+
+Baking the model into the image couples the two: every model update forces an image rebuild, the image bloats, and you can no longer roll back code and model independently. For GPU workloads the base image must also match the host's driver and CUDA version, a common source of "works in CI, fails on the node" drift.
 
 ## Failure Modes
 

@@ -8,7 +8,7 @@ topics:
   - forecasting
   - model-selection
 level: intermediate
-status: draft
+status: review
 page_type: concept
 aliases:
   - New Series Forecasting
@@ -23,7 +23,7 @@ related:
   - forecast-ensembling.md
   - ../19-domain-applications/demand-prediction-in-logistics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Cold-Start Forecasting

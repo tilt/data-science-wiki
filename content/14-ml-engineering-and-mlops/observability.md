@@ -18,7 +18,7 @@ related:
   - production-incident-response.md
   - reliability.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Observability
@@ -27,7 +27,16 @@ Observability is the ability to explain what happened inside a system from emitt
 
 ## Mechanism
 
-The core signals are metrics, logs, traces, and events. ML systems need prediction metadata on top: request ID, model version, feature version, dataset or prompt version, score, threshold, fallback path, latency, and policy decision. In a [microservices](microservices.md) path, trace context must cross the application, feature service, [model-serving](model-serving.md) service, and downstream workflow.
+The core signals are metrics, logs, traces, and events. Each answers a different diagnostic question, and each gains an ML-specific payload:
+
+| Pillar  | Answers                           | ML addition                                     |
+| ------- | --------------------------------- | ----------------------------------------------- |
+| Metrics | is the aggregate healthy?         | score, latency, and fallback-rate distributions |
+| Logs    | what happened for this request?   | prediction metadata and input provenance        |
+| Traces  | where did time or failure go?     | spans across feature → model → policy services  |
+| Events  | did a notable state change occur? | model deploys, version promotions, drift alarms |
+
+Beyond the generic signals, ML systems need prediction metadata: request ID, model version, feature version, dataset or prompt version, score, threshold, fallback path, latency, and policy decision. In a [microservices](microservices.md) path, trace context must cross the application, feature service, [model-serving](model-serving.md) service, and downstream workflow so one transaction can be reconstructed end to end.
 
 ## Artifact: Prediction Event
 

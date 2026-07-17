@@ -7,7 +7,7 @@ topics:
   - hierarchical-forecasting
   - forecast-reconciliation
 level: advanced
-status: draft
+status: review
 page_type: concept
 aliases:
   - Grouped Forecasting
@@ -21,7 +21,7 @@ related:
   - forecast-error-metrics.md
   - forecasting-system-design.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-17
 ---
 
 # Hierarchical Forecasting
