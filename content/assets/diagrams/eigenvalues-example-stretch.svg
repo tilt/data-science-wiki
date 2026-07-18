@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="500" viewBox="0 0 820 500" role="img" aria-labelledby="title desc">
+  <title id="title">Eigenvectors are directions preserved by a linear map</title>
+  <desc id="desc">The matrix [[2,1],[1,2]] transforms the unit circle into an ellipse. The direction (1,1) is stretched by eigenvalue 3, while the direction (1,-1) is stretched by eigenvalue 1.</desc>
+  <style>
+    .fg { fill: #111827; }
+    .muted { fill: #4b5563; }
+    .axis { stroke: #94a3b8; stroke-width: 1.4; }
+    .grid { stroke: #e5e7eb; stroke-width: 1; }
+    .circle { fill: none; stroke: #94a3b8; stroke-width: 2.2; stroke-dasharray: 7 6; }
+    .ellipse { fill: #2563eb; opacity: 0.1; stroke: #2563eb; stroke-width: 3; }
+    .eig1 { stroke: #2563eb; fill: #2563eb; }
+    .eig2 { stroke: #f97316; fill: #f97316; }
+    .input { stroke-width: 3; opacity: 0.55; }
+    .output { stroke-width: 5; }
+    .label-box { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.2; }
+    text { font-family: Arial, sans-serif; }
+  </style>
+  <rect width="820" height="500" fill="transparent"/>
+  <text x="410" y="36" text-anchor="middle" font-size="23" font-weight="700" class="fg">Eigenvectors keep their direction</text>
+  <text x="410" y="62" text-anchor="middle" font-size="14" class="muted">B = [[2,1],[1,2]] maps the unit circle to an ellipse aligned with the eigenvectors.</text>
+
+  <defs>
+    <marker id="arrow-blue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f97316"/>
+    </marker>
+  </defs>
+
+  <g transform="translate(104,100)">
+    <line x1="-64" y1="150" x2="612" y2="150" class="axis"/>
+    <line x1="306" y1="-12" x2="306" y2="306" class="axis"/>
+    <g class="grid">
+      <line x1="66" y1="0" x2="66" y2="300"/><line x1="186" y1="0" x2="186" y2="300"/><line x1="426" y1="0" x2="426" y2="300"/><line x1="546" y1="0" x2="546" y2="300"/>
+      <line x1="0" y1="30" x2="612" y2="30"/><line x1="0" y1="270" x2="612" y2="270"/>
+    </g>
+
+    <circle cx="306" cy="150" r="64" class="circle"/>
+    <ellipse cx="306" cy="150" rx="192" ry="64" transform="rotate(-45 306 150)" class="ellipse"/>
+
+    <line x1="306" y1="150" x2="351" y2="105" class="eig1 input" marker-end="url(#arrow-blue)"/>
+    <line x1="306" y1="150" x2="441" y2="15" class="eig1 output" marker-end="url(#arrow-blue)"/>
+    <line x1="306" y1="150" x2="351" y2="195" class="eig2 input" marker-end="url(#arrow-orange)"/>
+    <line x1="306" y1="150" x2="351" y2="195" class="eig2 output" marker-end="url(#arrow-orange)"/>
+
+    <text x="456" y="32" font-size="14" font-weight="700" class="eig1">v ∝ (1,1), λ = 3</text>
+    <text x="360" y="211" font-size="14" font-weight="700" class="eig2">v ∝ (1,-1), λ = 1</text>
+    <text x="160" y="320" text-anchor="middle" font-size="13" class="muted">circle = inputs</text>
+    <text x="160" y="340" text-anchor="middle" font-size="13" class="muted">ellipse = outputs</text>
+  </g>
+
+  <g transform="translate(512,336)">
+    <rect width="244" height="96" rx="7" class="label-box"/>
+    <text x="118" y="25" text-anchor="middle" font-size="14" font-weight="700" class="fg">reading the picture</text>
+    <text x="20" y="52" font-size="13" class="muted">same line, 3x longer -> lambda 3</text>
+    <text x="20" y="76" font-size="13" class="muted">same line, same length -> lambda 1</text>
+  </g>
+</svg>

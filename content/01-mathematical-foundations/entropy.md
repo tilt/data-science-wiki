@@ -26,6 +26,14 @@ last_reviewed: 2026-07-17
 
 Entropy is the expected surprise of a random variable. A concentrated distribution has low entropy because outcomes are predictable; a uniform distribution has higher entropy because more outcomes remain plausible.
 
+The bit interpretation comes from binary distinctions. One bit can answer one yes/no question, splitting the remaining possibilities into two groups. An event with probability $1/2$ carries one bit of surprise because one binary distinction can separate it from the alternatives. An event with probability $1/4$ carries two bits; an event with probability $1/8$ carries three bits. That pattern is exactly
+
+$$
+\text{surprise}(x)=-\log_2 p(x).
+$$
+
+Common outcomes have low surprise and can receive short codes. Rare outcomes have high surprise and need longer codes, but they also occur less often. Entropy averages this tradeoff over the source distribution. For individual symbols, real prefix codes have integer lengths; over long sequences, good codes can approach the entropy as an average number of bits per symbol.
+
 ## Defining math
 
 For a discrete distribution $p$ over outcomes $x$,
@@ -46,7 +54,7 @@ That identity explains why minimizing cross-entropy over $q$ is equivalent to mi
 
 Imagine a three-symbol source where $A$ appears half the time and $B$ and $C$ each appear one quarter of the time. Seeing $A$ carries $-\log_2(0.5)=1$ bit of surprise, while seeing either rarer symbol carries $-\log_2(0.25)=2$ bits. The expected surprise is therefore $0.5\cdot 1+0.25\cdot 2+0.25\cdot 2=1.5$ bits.
 
-If the same source were uniform over three symbols, every outcome would carry $-\log_2(1/3)\approx 1.585$ bits. Uniform entropy is higher because no symbol can be guessed more confidently than another; the skewed source is partly predictable before the next symbol arrives.
+If the same source were uniform over three symbols, every outcome would carry $-\log_2(1/3)\approx 1.585$ bits. Uniform entropy is higher because no symbol can be guessed more confidently than another; the skewed source is partly predictable before the next symbol arrives. In coding terms, the skewed source can use a shorter code for $A$ and longer codes for $B$ and $C$, winning on average because $A$ appears more often. A uniform source offers no such shortcut.
 
 ## Caveats
 

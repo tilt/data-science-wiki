@@ -14,6 +14,7 @@ prerequisites:
 related:
   - vectors-and-matrices.md
   - matrix-multiplication.md
+  - determinants.md
   - rank.md
   - singular-value-decomposition.md
   - ../03-classical-machine-learning/linear-models.md
@@ -39,7 +40,7 @@ $$
 y=Ax.
 $$
 
-The fundamental questions are geometric: what directions are stretched, which directions collapse to zero, what subspace is reachable, and how far a vector is from a subspace. These questions become [rank](rank.md), [orthogonality](orthogonality.md), projections, [eigenvalues](eigenvalues-and-eigenvectors.md), and the [singular value decomposition](singular-value-decomposition.md).
+The fundamental questions are geometric: what directions are stretched, which directions collapse to zero, how much volume is scaled, what subspace is reachable, and how far a vector is from a subspace. These questions become [determinants](determinants.md), [rank](rank.md), [orthogonality](orthogonality.md), projections, [eigenvalues](eigenvalues-and-eigenvectors.md), and the [singular value decomposition](singular-value-decomposition.md).
 
 ## Worked example
 

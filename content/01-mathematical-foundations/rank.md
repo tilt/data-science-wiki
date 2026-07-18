@@ -14,6 +14,7 @@ prerequisites:
   - linear-algebra.md
 related:
   - linear-algebra.md
+  - determinants.md
   - matrix-multiplication.md
   - singular-value-decomposition.md
   - low-rank-approximation.md
@@ -44,7 +45,7 @@ Rank controls solvability and identifiability. If a regression design matrix lac
 
 ## Worked example
 
-Take $A=\begin{bmatrix}1&2&3\\2&4&6\\1&1&1\end{bmatrix}$. The second row is exactly twice the first, $R_2=2R_1$, so the rows span only two independent directions and $\operatorname{rank}(A)=2$. The same dependence shows up in the top-left $2\times2$ block, whose determinant vanishes:
+Take $A=\begin{bmatrix}1&2&3\\2&4&6\\1&1&1\end{bmatrix}$. The second row is exactly twice the first, $R_2=2R_1$, so the rows span only two independent directions and $\operatorname{rank}(A)=2$. The same dependence shows up in the top-left $2\times2$ block, whose [determinant](determinants.md) vanishes:
 
 $$
 \det\begin{bmatrix}1&2\\2&4\end{bmatrix}=1\cdot4-2\cdot2=0.
@@ -63,4 +64,4 @@ Numerical rank is thresholded. Floating-point noise can turn exact zeros into ti
 > [!nav]
 > **Section** — [Mathematical Foundations](index.md)
 >
-> [← Matrix Multiplication](matrix-multiplication.md) [Orthogonality →](orthogonality.md)
+> [← Determinants](determinants.md) [Orthogonality →](orthogonality.md)

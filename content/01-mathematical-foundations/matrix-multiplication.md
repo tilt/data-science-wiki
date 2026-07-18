@@ -70,4 +70,4 @@ The order of multiplication encodes meaning. $XW$ and $WX$ may both be valid in 
 > [!nav]
 > **Section** — [Mathematical Foundations](index.md)
 >
-> [← Vectors and Matrices](vectors-and-matrices.md) [Rank →](rank.md)
+> [← Vectors and Matrices](vectors-and-matrices.md) [Determinants →](determinants.md)
