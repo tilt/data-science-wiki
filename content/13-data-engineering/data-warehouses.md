@@ -30,32 +30,32 @@ A data warehouse stores integrated, historical, queryable data for analytics. It
 
 ## Warehouse mechanism
 
-Warehouses separate raw landing data from curated analytical models. A common flow is raw orders -> cleaned staging -> facts and dimensions from [dimensional-modelling](dimensional-modelling.md). The mart layer is where business definitions live: the SQLite aggregate below turns raw orders into daily revenue, and that metric means what it means only because the query restricts to `status = 'paid'` before grouping by day.
+Warehouses separate raw landing data from curated analytical models. A common flow is raw orders -> cleaned staging -> facts and dimensions from [dimensional-modelling](dimensional-modelling.md). The mart layer is where business definitions live: the aggregate below turns raw orders into daily revenue, and that metric means what it means only because the query restricts to `status = 'paid'` before grouping by day.
 
-```python
-import sqlite3
-
-con = sqlite3.connect(":memory:")
-con.executescript("""
-create table raw_orders(order_id integer, customer_id integer, order_ts text, status text, amount integer);
-insert into raw_orders values
-  (1,10,'2026-01-01T09:00:00','paid',50),
-  (2,10,'2026-01-01T10:00:00','refunded',20),
-  (3,11,'2026-01-02T09:00:00','paid',80),
-  (4,12,'2026-01-02T12:00:00','paid',40);
-""")
-for row in con.execute("""
-select substr(order_ts,1,10) as order_date, count(*) as paid_orders, sum(amount) as gross_revenue
-from raw_orders where status='paid' group by 1 order by 1;
-"""):
-    print(row)
+```sql
+WITH raw_orders(order_id, customer_id, order_ts, status, amount) AS (
+  VALUES
+    (1, 10, '2026-01-01T09:00:00', 'paid', 50),
+    (2, 10, '2026-01-01T10:00:00', 'refunded', 20),
+    (3, 11, '2026-01-02T09:00:00', 'paid', 80),
+    (4, 12, '2026-01-02T12:00:00', 'paid', 40)
+)
+SELECT
+  substr(order_ts, 1, 10) AS order_date,
+  count(*) AS paid_orders,
+  sum(amount) AS gross_revenue
+FROM raw_orders
+WHERE status = 'paid'
+GROUP BY 1
+ORDER BY 1;
 ```
 
-Observed output:
+Result:
 
 ```text
-('2026-01-01', 1, 50)
-('2026-01-02', 2, 120)
+order_date    paid_orders  gross_revenue
+2026-01-01    1            50
+2026-01-02    2            120
 ```
 
 The metric is only meaningful because the query encodes a status filter. In production that logic should live in reviewed [SQL](sql.md) or [dbt](dbt.md) models, not in each dashboard.

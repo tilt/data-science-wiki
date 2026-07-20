@@ -19,7 +19,7 @@ related:
   - forecasting-pitfalls-and-worked-examples.md
   - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-18
 ---
 
 # Rolling Origin Validation
@@ -33,6 +33,12 @@ $$
 This mirrors the production forecasting contract: each forecast can use the past and any covariates genuinely known at forecast creation time, but not outcomes or derived statistics from the future.
 
 There are two common variants. Expanding-window validation keeps the first training date fixed and adds more history at each cutoff. Sliding-window validation keeps a fixed lookback length and drops older observations, which can help when [concept drift in forecasting](concept-drift-in-forecasting.md) is expected. Multi-horizon validation records errors separately by horizon because a model that is strong at $h=1$ may be weak at $h=14$.
+
+| Fold scheme      | Training window at each cutoff             | Use when                                                           |
+| ---------------- | ------------------------------------------ | ------------------------------------------------------------------ |
+| Expanding window | first date fixed, history grows            | history stays relevant; more data helps                            |
+| Sliding window   | fixed-length lookback, older data dropped  | [drift](concept-drift-in-forecasting.md) makes old data misleading |
+| Multi-horizon    | either window, errors kept per horizon $h$ | short- and long-horizon accuracy differ                            |
 
 Leakage usually enters outside the split object. Lag features, rolling means, scalers, target encoders, hyperparameter search, and imputation must be fitted inside each fold whenever they depend on observed targets. That is why rolling origin is the fold design behind [backtesting](backtesting.md), not a complete evaluation system by itself.
 

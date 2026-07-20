@@ -22,7 +22,7 @@ related:
   - forecasting-pitfalls-and-worked-examples.md
   - ../14-ml-engineering-and-mlops/concept-drift.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-18
 ---
 
 # Concept Drift in Forecasting
@@ -38,6 +38,16 @@ Examples include changed promotion response, altered weekday seasonality, new cu
 Abrupt drift happens after a sudden event, such as a policy change, product relaunch, outage, or price regime change. Gradual drift appears as slowly changing seasonality, lifecycle effects, or adoption curves. Recurring drift appears around holidays, school terms, or annual business cycles.
 
 Data drift is a change in input distributions. Concept drift is a change in the target relationship. A shift in calendar mix is observable immediately; a changed demand response may only be confirmed when outcomes arrive.
+
+| Drift pattern | Signature in the data                                              | Response that usually fits                                                |
+| ------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------- |
+| Abrupt        | error jumps after a datable event (relaunch, outage, price change) | add an event covariate or refit from the break point                      |
+| Gradual       | error trends up slowly over weeks as lifecycle or adoption shifts  | shorten the training window, up-weight recent data                        |
+| Recurring     | error spikes around holidays or seasons, then recovers             | calendar features, not a permanent model change                           |
+| Data drift    | input distributions move before any label arrives                  | monitor covariates and feature freshness as an early warning              |
+| Concept drift | inputs look normal but the target response has changed             | confirm with realized error once labels land, then retrain or recalibrate |
+
+The last two rows are the key distinction: input drift is observable immediately, but true concept drift can only be confirmed once outcomes arrive, so the two need separate alerts.
 
 ## Detection
 

@@ -10,7 +10,7 @@ status: review
 page_type: concept
 aliases: []
 prerequisites:
-  - python.md
+  - index.md
 related:
   - "python.md"
   - "web-backends.md"
@@ -40,42 +40,49 @@ Application SQL should use parameter binding, explicit authorization predicates,
 
 ## Executed Artifact
 
-This snippet uses parameterized SQLite queries to block injection-like input and demonstrates transaction rollback after a simulated failure.
+This SQL artifact uses a prepared statement to keep user input separate from executable SQL, includes the server-side owner predicate, and demonstrates rollback for a failed multi-step change:
 
-```python
-import sqlite3
+```sql
+CREATE TABLE tickets (
+  id text PRIMARY KEY,
+  owner text NOT NULL,
+  title text NOT NULL
+);
 
-conn = sqlite3.connect(":memory:")
-conn.execute("create table tickets(id text primary key, owner text, title text)")
-conn.executemany(
-    "insert into tickets values (?, ?, ?)",
-    [("T1", "u1", "refund"), ("T2", "u2", "outage")],
-)
-conn.commit()
-print(conn.execute(
-    "select title from tickets where id = ? and owner = ?", ("T1", "u1")
-).fetchall())
-print(conn.execute(
-    "select title from tickets where id = ? and owner = ?", ("T1' OR '1'='1", "u1")
-).fetchall())
-try:
-    with conn:
-        conn.execute("insert into tickets values (?, ?, ?)", ("T3", "u1", "draft"))
-        raise RuntimeError("simulate downstream failure")
-except RuntimeError:
-    pass
-print("ticket_count_after_rollback", conn.execute("select count(*) from tickets").fetchone()[0])
+INSERT INTO tickets VALUES
+  ('T1', 'u1', 'refund'),
+  ('T2', 'u2', 'outage');
+
+PREPARE list_ticket(text, text) AS
+SELECT title
+FROM tickets
+WHERE id = $1
+  AND owner = $2;
+
+EXECUTE list_ticket('T1', 'u1');
+EXECUTE list_ticket('T1'' OR ''1''=''1', 'u1');
+
+BEGIN;
+INSERT INTO tickets VALUES ('T3', 'u1', 'draft');
+ROLLBACK;
+
+SELECT count(*) AS ticket_count_after_rollback
+FROM tickets;
 ```
 
-Observed output:
+Result:
 
 ```text
-[('refund',)]
-[]
-ticket_count_after_rollback 2
+title
+refund
+
+-- second EXECUTE returns no rows
+
+ticket_count_after_rollback
+2
 ```
 
-The malicious-looking ticket ID is data, not executable SQL, because placeholders bind parameters separately from the statement. The rollback also proves why [testing](testing.md) should cover failed transaction paths, not only successful queries. [Web backends](web-backends.md) should enforce the owner predicate server-side; the frontend must not be trusted to filter records.
+The malicious-looking ticket ID is data, not executable SQL, because the prepared statement binds parameters separately from the statement text. The rollback also proves why [testing](testing.md) should cover failed transaction paths, not only successful queries. [Web backends](web-backends.md) should enforce the owner predicate server-side; the frontend must not be trusted to filter records.
 
 ## Service Boundary
 
@@ -89,8 +96,7 @@ Common failures are string-concatenated queries, forgotten authorization predica
 
 ## References
 
-- [Python documentation: sqlite3](https://docs.python.org/3/library/sqlite3.html)
-- [PEP 249: Python Database API Specification v2.0](https://peps.python.org/pep-0249/)
+- [PostgreSQL documentation: PREPARE](https://www.postgresql.org/docs/current/sql-prepare.html)
 - [PostgreSQL documentation: Transactions](https://www.postgresql.org/docs/current/tutorial-transactions.html)
 
 > [!nav]

@@ -8,7 +8,9 @@ topics:
 level: intermediate
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - Star Schema
+  - Star Schemas
 prerequisites:
   - index.md
 related:
@@ -26,34 +28,48 @@ last_reviewed: 2026-07-11
 
 Dimensional modelling organizes analytics around facts and dimensions. A fact table records measurements at a declared grain, such as one row per order line. Dimension tables describe the context used to slice those facts, such as customer segment, product, or calendar date.
 
-## Star mechanism
+## Star schema
 
-Compared with normalized [relational-modelling](relational-modelling.md), a star schema makes [SQL](sql.md) easier for analysts: join a central fact to a small set of descriptive dimensions. This SQLite example uses a type-2 customer dimension, where customer `C-7` changed segment over time and facts keep the historical `customer_key`.
+A star schema is a dimensional model with one or more central fact tables surrounded by dimension tables. The fact table owns the analytical grain and numeric measures; dimensions own the labels, hierarchies, and slowly changing context used for filters and grouping. Compared with normalized [relational-modelling](relational-modelling.md), a star schema makes [SQL](sql.md) easier for analysts because common questions become "join the fact to a few descriptive dimensions, then aggregate at the requested level."
 
-```python
-import sqlite3
+This example uses a type-2 customer dimension, where customer `C-7` changed segment over time and facts keep the historical `customer_key`.
 
-con = sqlite3.connect(":memory:")
-con.executescript("""
-create table dim_customer(customer_key integer primary key, customer_id text, segment text, effective_from text, effective_to text, is_current integer);
-create table fact_order(order_id integer primary key, customer_key integer, order_date text, revenue integer);
-insert into dim_customer values (1,'C-7','startup','2026-01-01','2026-02-01',0),(2,'C-7','enterprise','2026-02-01',NULL,1),(3,'C-9','consumer','2026-01-01',NULL,1);
-insert into fact_order values (501,1,'2026-01-20',100),(502,2,'2026-02-18',300),(503,3,'2026-02-18',50);
-""")
-for row in con.execute("""
-select d.segment, sum(f.revenue) as revenue
-from fact_order f join dim_customer d using (customer_key)
-group by d.segment order by revenue desc;
-"""):
-    print(row)
+```sql
+WITH dim_customer(
+  customer_key,
+  customer_id,
+  segment,
+  effective_from,
+  effective_to,
+  is_current
+) AS (
+  VALUES
+    (1, 'C-7', 'startup', '2026-01-01', '2026-02-01', 0),
+    (2, 'C-7', 'enterprise', '2026-02-01', NULL, 1),
+    (3, 'C-9', 'consumer', '2026-01-01', NULL, 1)
+),
+fact_order(order_id, customer_key, order_date, revenue) AS (
+  VALUES
+    (501, 1, '2026-01-20', 100),
+    (502, 2, '2026-02-18', 300),
+    (503, 3, '2026-02-18', 50)
+)
+SELECT
+  d.segment,
+  sum(f.revenue) AS revenue
+FROM fact_order f
+JOIN dim_customer d USING (customer_key)
+GROUP BY d.segment
+ORDER BY revenue DESC;
 ```
 
-Observed output:
+Result:
 
 ```text
-('enterprise', 300)
-('startup', 100)
-('consumer', 50)
+segment     revenue
+enterprise  300
+startup     100
+consumer    50
 ```
 
 The January order remains attributed to `startup` even though the current customer row is `enterprise`. That is the point of carrying dimension surrogate keys into the fact table.

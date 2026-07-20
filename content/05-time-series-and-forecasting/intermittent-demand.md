@@ -22,7 +22,7 @@ related:
   - statistical-forecasting.md
   - business-cost-aware-forecasting-losses.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-18
 ---
 
 # Intermittent Demand
@@ -47,6 +47,24 @@ Croston's method decomposes intermittent demand into two processes:
 The forecast is based on estimated nonzero size divided by estimated interval. Bias-adjusted variants modify the original estimator because it can overforecast under some demand processes.
 
 Croston-style methods are useful baselines for slow-moving items, but they usually do not use rich covariates or metadata.
+
+### Worked example
+
+Take a 10-period series with demand in only three periods:
+
+$$
+0,\;0,\;4,\;0,\;0,\;6,\;0,\;0,\;0,\;2
+$$
+
+The nonzero sizes are $z=\{4,6,2\}$ and the intervals between successive demand events (counting from the series start) are $p=\{3,3,4\}$. Croston smooths each stream separately; using simple means for illustration,
+
+$$
+\hat{z}=\frac{4+6+2}{3}=4,\qquad
+\hat{p}=\frac{3+3+4}{3}=\frac{10}{3},\qquad
+\hat{y}=\frac{\hat{z}}{\hat{p}}=\frac{4}{10/3}=1.2 \text{ per period.}
+$$
+
+The per-period rate $1.2$ matches the long-run average ($12$ units over $10$ periods), but the decomposition is the point: Croston represents demand as "about 4 units every 3.3 periods," so it updates correctly when either the typical size or the arrival frequency changes. A moving average would instead predict a small positive value in every period, including the many periods where the true demand is zero. The Syntetos-Boylan variant multiplies by $(1-\alpha/2)$ to remove the known upward bias, giving $0.95\times1.2=1.14$ at smoothing constant $\alpha=0.1$.
 
 ## Aggregate-disaggregate methods
 

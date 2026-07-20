@@ -31,36 +31,128 @@ A useful mental model is the logical query pipeline: `FROM` builds a row source,
 
 This SQLite query joins users to orders, aggregates revenue, and ranks users within each plan:
 
-```python
-import sqlite3
-
-con = sqlite3.connect(":memory:")
-con.executescript("""
-create table users(user_id integer primary key, signup_date text, plan text);
-create table orders(order_id integer primary key, user_id integer references users(user_id), order_date text, amount integer);
-insert into users values (1,'2026-01-03','pro'),(2,'2026-01-08','free'),(3,'2026-02-02','pro');
-insert into orders values (10,1,'2026-01-12',120),(11,1,'2026-02-04',80),(12,2,'2026-02-15',35),(13,3,'2026-02-20',200);
-""")
-for row in con.execute("""
-select u.plan, u.user_id, count(o.order_id) as orders, sum(o.amount) as revenue,
-       rank() over (partition by u.plan order by sum(o.amount) desc) as plan_rank
-from users u
-join orders o using (user_id)
-group by u.plan, u.user_id
-order by u.plan, plan_rank;
-"""):
-    print(row)
+```sql
+WITH users(user_id, signup_date, plan) AS (
+  VALUES
+    (1, '2026-01-03', 'pro'),
+    (2, '2026-01-08', 'free'),
+    (3, '2026-02-02', 'pro')
+),
+orders(order_id, user_id, order_date, amount) AS (
+  VALUES
+    (10, 1, '2026-01-12', 120),
+    (11, 1, '2026-02-04', 80),
+    (12, 2, '2026-02-15', 35),
+    (13, 3, '2026-02-20', 200)
+)
+SELECT
+  u.plan,
+  u.user_id,
+  count(o.order_id) AS orders,
+  sum(o.amount) AS revenue,
+  rank() OVER (PARTITION BY u.plan ORDER BY sum(o.amount) DESC) AS plan_rank
+FROM users u
+JOIN orders o USING (user_id)
+GROUP BY u.plan, u.user_id
+ORDER BY u.plan, plan_rank;
 ```
 
-Observed output:
+Result:
 
 ```text
-('free', 2, 1, 35, 1)
-('pro', 3, 1, 200, 1)
-('pro', 1, 2, 200, 1)
+plan  user_id  orders  revenue  plan_rank
+free  2        1       35       1
+pro   3        1       200      1
+pro   1        2       200      1
 ```
 
 The tie in the `pro` partition is intentional: `rank()` gives both users rank 1 because both aggregate to 200. This is exactly the kind of semantic choice that should be tested in [data-quality](data-quality.md) checks before a [dbt](dbt.md) model becomes a shared mart.
+
+Two different "grouping" ideas appear in that query. `GROUP BY u.plan, u.user_id` collapses many order rows into one result row per user and plan; after that collapse, `count(o.order_id)` and `sum(o.amount)` are aggregate values. The window expression `rank() OVER (PARTITION BY u.plan ORDER BY sum(o.amount) DESC)` does not collapse rows again. It splits the grouped result into plan-level partitions and ranks rows within each partition. Use `GROUP BY` when the output grain should become coarser; use window `PARTITION BY` when each row should remain visible but needs context from peer rows.
+
+Physical table partitions are a different warehouse concern. A query over a date-partitioned fact table should filter the partition column, for example `WHERE order_date >= DATE '2026-02-01'`, so the engine can prune irrelevant storage before scanning. Window partitions shape calculations; table partitions shape storage access.
+
+### `GROUP BY` example
+
+`GROUP BY` changes the result grain. The input has one row per order, but the output has one row per `plan`:
+
+```sql
+WITH orders(order_id, plan, amount) AS (
+  VALUES
+    (10, 'pro', 120),
+    (11, 'pro', 80),
+    (12, 'free', 35),
+    (13, 'pro', 200)
+)
+SELECT
+  plan,
+  count(*) AS orders,
+  sum(amount) AS revenue
+FROM orders
+GROUP BY plan
+ORDER BY plan;
+```
+
+Result:
+
+```text
+plan  orders  revenue
+free  1       35
+pro   3       400
+```
+
+Every selected column must either be part of the grouping key or be produced by an aggregate function such as `count`, `sum`, `min`, or `max`. This rule protects the output grain: after grouping by `plan`, there is no single unambiguous `order_id` left to select.
+
+### Window `PARTITION BY` example
+
+Window `PARTITION BY` does not change the result grain. The input and output both have one row per order, but each row can see peer rows in the same partition:
+
+```sql
+WITH orders(order_id, plan, amount) AS (
+  VALUES
+    (10, 'pro', 120),
+    (11, 'pro', 80),
+    (12, 'free', 35),
+    (13, 'pro', 200)
+)
+SELECT
+  order_id,
+  plan,
+  amount,
+  sum(amount) OVER (PARTITION BY plan) AS plan_revenue,
+  rank() OVER (PARTITION BY plan ORDER BY amount DESC) AS rank_within_plan
+FROM orders
+ORDER BY plan, rank_within_plan;
+```
+
+Result:
+
+```text
+order_id  plan  amount  plan_revenue  rank_within_plan
+12        free  35      35            1
+13        pro   200     400           1
+10        pro   120     400           2
+11        pro   80      400           3
+```
+
+Use this shape for running totals, ranks, percentiles, and comparisons against a group average when the detail rows still matter.
+
+### Table partition filter example
+
+Warehouse table partitions are about storage layout, not window calculations. Syntax varies by engine, but the query pattern is stable: filter the physical partition column so the engine can skip irrelevant partitions.
+
+```sql
+SELECT
+  order_date,
+  sum(extended_revenue) AS revenue
+FROM mart.fact_order_line
+WHERE order_date >= DATE '2026-02-01'
+  AND order_date < DATE '2026-03-01'
+GROUP BY order_date
+ORDER BY order_date;
+```
+
+Without the `order_date` predicate, a distributed warehouse may scan many more partitions even if the final dashboard only shows February.
 
 ## Engineering use
 

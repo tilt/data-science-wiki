@@ -18,7 +18,7 @@ related:
   - sarima.md
   - exponential-smoothing.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-18
 ---
 
 # Trend Seasonality Cycles Noise
@@ -32,6 +32,13 @@ $$
 where $T_t$ is long-run movement, $S_t$ is regular calendar repetition, $C_t$ is slower irregular cyclic behavior, and $R_t$ is residual variation. Multiplicative decompositions use products instead of sums when seasonal amplitude grows with the level.
 
 Trend is directional movement over a period relevant to the decision. It may be deterministic, such as a planned rollout, or stochastic, such as a random walk-like level. Seasonality is tied to a known period: hour of day, day of week, month of year. Cycles are recurrent but not fixed to a precise calendar period, such as business-cycle demand. Noise is the part left after the modeled structure, but "noise" can still reveal missing drivers, outliers, or regime changes.
+
+| Component         | Period                        | Example                          | Captured by                                          |
+| ----------------- | ----------------------------- | -------------------------------- | ---------------------------------------------------- |
+| Trend $T_t$       | none fixed; long-run          | adoption growth, planned rollout | differencing, smoothing trend states                 |
+| Seasonality $S_t$ | fixed and known               | day-of-week, month-of-year       | [SARIMA](sarima.md) seasonal lags, calendar features |
+| Cycle $C_t$       | recurrent, not calendar-fixed | business-cycle demand            | slow states, exogenous drivers                       |
+| Noise $R_t$       | none                          | irregular residual variation     | nothing by design; check residual autocorrelation    |
 
 These components affect model choice. [SARIMA](sarima.md) is appropriate when seasonal dependence is regular and captured by seasonal lags. [Exponential smoothing](exponential-smoothing.md) handles level, trend, and seasonal states directly. [Feature engineering for forecasting](feature-engineering-for-forecasting.md) can encode holidays, events, and multiple seasonalities when a pure univariate model is too restrictive.
 

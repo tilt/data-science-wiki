@@ -23,7 +23,7 @@ related:
   - forecast-ensembling.md
   - ../19-domain-applications/demand-prediction-in-logistics.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-18
 ---
 
 # Cold-Start Forecasting
@@ -41,6 +41,16 @@ A **new series with no observations** has metadata and future covariates but no 
 These cases differ. A product with no sales because it has not launched is not the same as a mature product with zero demand.
 
 ## Strategies
+
+| Strategy                 | Assumption                            | When appropriate                  | Main risk                                               |
+| ------------------------ | ------------------------------------- | --------------------------------- | ------------------------------------------------------- |
+| Drop                     | the series can be ignored             | offline model comparison          | unusable in production if every entity needs a forecast |
+| Zero padding             | no history means no prior activity    | genuine pre-launch entities       | treats "not measured" as observed zero demand           |
+| Missing-value padding    | absence of history is informative     | when zero and unknown must differ | needs models that consume missing indicators            |
+| Partial-history training | variable context length is learnable  | many short series                 | requires masking or flexible architectures              |
+| Global-model transfer    | related series share structure        | large panels with metadata        | negative transfer if series are heterogeneous           |
+| Metadata analogues       | similar entities behave similarly     | rich static attributes            | wrong analogue class misleads the forecast              |
+| Baseline fallback        | a deterministic policy is good enough | last resort for any entity        | too coarse if used where real signal exists             |
 
 **Drop** excludes series lacking sufficient context. This is defensible for offline model comparison but can be unacceptable in production if forecasts are required for every active entity.
 

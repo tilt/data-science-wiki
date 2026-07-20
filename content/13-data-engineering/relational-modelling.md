@@ -27,27 +27,32 @@ Relational modelling chooses tables, keys, and constraints so facts are stored o
 
 ## Constraint mechanism
 
-The core contract is: primary keys identify rows, foreign keys enforce parent-child relationships, `not null` protects required fields, and `unique` prevents duplicate business identifiers. I ran this SQLite example with foreign keys enabled:
+The core contract is: primary keys identify rows, foreign keys enforce parent-child relationships, `not null` protects required fields, and `unique` prevents duplicate business identifiers. The example below creates a parent `customers` table, a child `orders` table, and then attempts two invalid writes:
 
-```python
-import sqlite3
+```sql
+PRAGMA foreign_keys = ON;
 
-con = sqlite3.connect(":memory:")
-con.execute("pragma foreign_keys=on")
-con.executescript("""
-create table customers(customer_id integer primary key, email text not null unique);
-create table orders(order_id integer primary key, customer_id integer not null references customers(customer_id));
-insert into customers values (1,'a@example.com');
-insert into orders values (100,1);
-""")
-for stmt in ["insert into customers values (2,'a@example.com')", "insert into orders values (101,99)"]:
-    try:
-        con.execute(stmt)
-    except sqlite3.IntegrityError as e:
-        print(type(e).__name__, str(e))
+CREATE TABLE customers (
+  customer_id integer PRIMARY KEY,
+  email text NOT NULL UNIQUE
+);
+
+CREATE TABLE orders (
+  order_id integer PRIMARY KEY,
+  customer_id integer NOT NULL REFERENCES customers(customer_id)
+);
+
+INSERT INTO customers VALUES (1, 'a@example.com');
+INSERT INTO orders VALUES (100, 1);
+
+-- Rejected: duplicate business identifier.
+INSERT INTO customers VALUES (2, 'a@example.com');
+
+-- Rejected: order points at a customer that does not exist.
+INSERT INTO orders VALUES (101, 99);
 ```
 
-Observed output:
+Expected constraint failures:
 
 ```text
 IntegrityError UNIQUE constraint failed: customers.email

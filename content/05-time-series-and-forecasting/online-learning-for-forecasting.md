@@ -22,7 +22,7 @@ related:
   - backtesting.md
   - ../14-ml-engineering-and-mlops/batch-and-online-inference.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-18
 ---
 
 # Online Learning for Forecasting
@@ -36,6 +36,15 @@ Online learning is not the same as real-time inference. A system can forecast in
 ## Update patterns
 
 Incremental models update parameters after each new observation or mini-batch. Rolling-window retraining periodically refits on the most recent data. Recursive state-space and exponential-smoothing models update latent states as observations arrive. Hybrid systems keep a stable global model and update local calibration, residual correction, or state variables online.
+
+| Update pattern                      | What changes on update                           | Adaptation speed                        | Main risk                                             |
+| ----------------------------------- | ------------------------------------------------ | --------------------------------------- | ----------------------------------------------------- |
+| Incremental parameters              | model weights, per observation or mini-batch     | fast                                    | a single anomaly can rewrite the model                |
+| Rolling-window refit                | full model, on a fixed schedule                  | moderate                                | window length trades stability against responsiveness |
+| Recursive state update              | latent state of a state-space or smoothing model | fast, bounded                           | drifts if the state-noise assumption is wrong         |
+| Hybrid (stable core + online layer) | only local calibration, bias, or state           | fast where it matters, stable elsewhere | more moving parts to version and monitor              |
+
+The hybrid row is usually the safest production default: it lets bias correction and state estimates react quickly while keeping the expensive global model on a controlled retraining cadence.
 
 Delayed labels are common. If the target is only observed days or weeks later, online updates must wait for confirmed outcomes or use proxy signals carefully.
 

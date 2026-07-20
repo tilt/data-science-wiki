@@ -18,7 +18,7 @@ related:
   - forecasting-problem-formulation.md
   - backtesting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-18
 ---
 
 # Time Series Fundamentals
@@ -30,6 +30,19 @@ The basic object is usually written as $y_1,\ldots,y_T$, with forecasts $\hat{y}
 Most forecasting problems combine several structures. [Trend, seasonality, cycles, and noise](trend-seasonality-cycles-noise.md) describe broad visible patterns. [Autocorrelation and partial autocorrelation](autocorrelation-and-partial-autocorrelation.md) describe lag dependence. [Stationarity](stationarity.md) asks whether those relationships are stable enough for classical models. [Forecasting problem formulation](forecasting-problem-formulation.md) fixes the target, horizon, granularity, update cadence, and decision that the forecast supports.
 
 The simplest useful baselines are often naive: forecast the last observed value, the same seasonal position, or a moving average. These baselines are not throwaways. They reveal whether a complex model is learning temporal structure or merely matching an easy persistence pattern. More expressive methods - [ARIMA](arima.md), [exponential smoothing](exponential-smoothing.md), machine-learning regressors, and neural sequence models - should be compared to those baselines with [backtesting](backtesting.md).
+
+## Baselines to beat
+
+Each baseline encodes one assumption about what persists. A model earns its complexity only by beating the baseline whose assumption matches the series.
+
+| Baseline       | Forecast $\hat{y}_{T+h\mid T}$         | Assumption it encodes                                            |
+| -------------- | -------------------------------------- | ---------------------------------------------------------------- |
+| Naive          | $y_T$                                  | the series is a random walk; the last value is the best guess    |
+| Seasonal naive | $y_{T+h-m}$                            | the pattern repeats every $m$ steps (period $m$)                 |
+| Drift          | $y_T + h\,\dfrac{y_T-y_1}{T-1}$        | a linear trend through the first and last observations continues |
+| Moving average | $\dfrac{1}{k}\sum_{i=0}^{k-1} y_{T-i}$ | recent level is stable and noise should be averaged out          |
+
+A model that cannot beat seasonal naive on a strongly seasonal series is not learning the seasonality; it is usually overfitting noise.
 
 A time-series workflow therefore starts by checking timestamp integrity, gaps, duplicates, aggregation level, calendar conventions, and known future covariates. Only then does model choice become meaningful. A daily sales forecast with censored stockouts, a temperature-driven load forecast, and an intermittent spare-parts forecast are all "time series," but they require different assumptions and validation cuts.
 

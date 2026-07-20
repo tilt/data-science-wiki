@@ -28,34 +28,33 @@ Feature pipelines compute model inputs from operational or analytical data. Thei
 
 ## Point-in-time mechanism
 
-This SQLite example shows the leakage boundary. The transaction at `2026-01-10T02:00:00` happens after the label timestamp and must not be included:
+This SQL example shows the leakage boundary. The transaction at `2026-01-10T02:00:00` happens after the label timestamp and must not be included:
 
-```python
-import sqlite3
-
-con = sqlite3.connect(":memory:")
-con.executescript("""
-create table labels(entity_id integer, label_ts text);
-create table transactions(entity_id integer, event_ts text, amount integer);
-insert into labels values (7,'2026-01-10T00:00:00');
-insert into transactions values
-  (7,'2026-01-08T12:00:00',30),
-  (7,'2026-01-09T20:00:00',40),
-  (7,'2026-01-10T02:00:00',999);
-""")
-print(con.execute("""
-select l.entity_id, sum(t.amount) as spend_before_label
-from labels l
-left join transactions t
-  on t.entity_id = l.entity_id and t.event_ts < l.label_ts
-group by l.entity_id;
-""").fetchone())
+```sql
+WITH labels(entity_id, label_ts) AS (
+  VALUES (7, '2026-01-10T00:00:00')
+),
+transactions(entity_id, event_ts, amount) AS (
+  VALUES
+    (7, '2026-01-08T12:00:00', 30),
+    (7, '2026-01-09T20:00:00', 40),
+    (7, '2026-01-10T02:00:00', 999)
+)
+SELECT
+  l.entity_id,
+  sum(t.amount) AS spend_before_label
+FROM labels l
+LEFT JOIN transactions t
+  ON t.entity_id = l.entity_id
+ AND t.event_ts < l.label_ts
+GROUP BY l.entity_id;
 ```
 
-Observed output:
+Result:
 
 ```text
-(7, 70)
+entity_id  spend_before_label
+7          70
 ```
 
 The query joins transactions only when `event_ts < label_ts`, so the feature is $30+40=70$. The later transaction for `999` is excluded because it occurs two hours after the label timestamp; without the timestamp predicate, the feature would be $30+40+999=1069$ and would leak future behavior into training.

@@ -32,7 +32,7 @@ Distributed warehouse modelling separates two decisions that are easy to confuse
 
 ## Logical model
 
-A star schema remains the usual presentation model for analytics because it gives readers a central fact table at one declared grain and dimensions that hold labels, hierarchies, and slowly changing context. A sales mart might have `fact_order_line` joined to `dim_customer`, `dim_product`, `dim_store`, and `dim_date`; the fact owns additive measures such as quantity and extended revenue, while the dimensions own filters and group labels.
+A [star schema](dimensional-modelling.md#star-schema) remains the usual presentation model for analytics because it gives readers a central fact table at one declared grain and dimensions that hold labels, hierarchies, and slowly changing context. A sales mart might have `fact_order_line` joined to `dim_customer`, `dim_product`, `dim_store`, and `dim_date`; the fact owns additive measures such as quantity and extended revenue, while the dimensions own filters and group labels.
 
 ![A star schema with fact_order_line in the center joined to customer, product, date, and store dimensions.](../assets/diagrams/data-engineering-star-schema.svg)
 
@@ -40,7 +40,7 @@ Traditional enterprise warehouse designs often keep an integrated normalized cor
 
 ![A normalized SQL schema separating customers, orders, order lines, products, payments, shipments, addresses, and categories.](../assets/diagrams/data-engineering-normalized-schema.svg)
 
-The design question is therefore not "star schema or normalized warehouse?" It is which layer owns which responsibility:
+The design question is therefore not "[star schema](dimensional-modelling.md#star-schema) or normalized warehouse?" It is which layer owns which responsibility:
 
 - Raw and staging layers preserve source history and replayability.
 - Integrated layers reconcile keys, deduplicate records, and retain audit history.

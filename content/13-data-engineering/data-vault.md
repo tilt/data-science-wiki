@@ -148,7 +148,7 @@ The final consumer model should still declare a grain. For example, a `fact_orde
 
 Compared with normalized [relational-modelling](relational-modelling.md), Data Vault is more explicit about source history, load metadata, and separating relationships from descriptive attributes. A third-normal-form warehouse may model customers, orders, and products cleanly, but it often requires additional conventions to capture multi-source history and late-arriving changes.
 
-Compared with a star schema, Data Vault optimizes integration and auditability rather than direct analytics. A star schema keeps query paths short and metrics understandable, but it denormalizes context into dimensions and facts. A vault keeps the historical integration layer flexible, then lets teams publish multiple marts from the same governed history.
+Compared with a [star schema](dimensional-modelling.md#star-schema), Data Vault optimizes integration and auditability rather than direct analytics. A star schema keeps query paths short and metrics understandable, but it denormalizes context into dimensions and facts. A vault keeps the historical integration layer flexible, then lets teams publish multiple marts from the same governed history.
 
 | Question | Data Vault answer | Star-schema answer |
 | --- | --- | --- |

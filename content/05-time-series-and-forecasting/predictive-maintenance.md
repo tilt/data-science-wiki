@@ -18,14 +18,22 @@ related:
   - prediction-intervals.md
   - ../19-domain-applications/predictive-maintenance.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-18
 ---
 
 # Predictive Maintenance
 
 Predictive maintenance uses time-series signals to forecast failure risk, degradation state, or remaining useful life. The forecast is valuable only if it creates enough lead time for an action: inspection, part replacement, load reduction, or planned shutdown.
 
-There are several target formulations. A binary risk model estimates whether failure will occur within a future window. A remaining-useful-life model estimates time until failure. A degradation model forecasts a continuous health indicator such as vibration, temperature, pressure, or error rate. These targets have different censoring problems. If a machine is repaired preventively, the true failure time is not observed; if an alarm policy already controls maintenance, labels partly reflect the old policy.
+There are several target formulations, and they differ in what they predict, how labels are censored, and how they are scored.
+
+| Target                     | Predicts                                                           | Censoring problem                                        | Typical metric                                 |
+| -------------------------- | ------------------------------------------------------------------ | -------------------------------------------------------- | ---------------------------------------------- |
+| Binary failure risk        | failure within a future window                                     | preventive repair hides the true failure time            | precision, recall, lead time                   |
+| Remaining useful life      | time until failure                                                 | rarely run to failure, so most series are right-censored | mean absolute error on RUL, prognostic horizon |
+| Degradation / health index | a continuous health indicator (vibration, temperature, error rate) | no ground-truth health label; only proxies               | tracking error, alarm precision at threshold   |
+
+If a machine is repaired preventively, the true failure time is not observed; if an alarm policy already controls maintenance, labels partly reflect the old policy. Every formulation above therefore learns partly from a censored, policy-shaped history rather than from clean failure outcomes.
 
 The time-series design must align sensor history, operating context, maintenance events, and failure definitions. Rolling windows can summarize vibration spectra or temperature trends. [Kalman filters](kalman-filters.md) and [state-space models](state-space-models.md) can track latent health states when measurements are noisy. [Prediction intervals](prediction-intervals.md) help separate normal variation from unusual degradation.
 

@@ -25,7 +25,7 @@ related:
   - probabilistic-forecasting.md
   - ../06-deep-learning/neural-network-fundamentals.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-18
 ---
 
 # Deep Learning Forecasting
@@ -41,6 +41,16 @@ They are not automatically superior. They often require more compute, tuning, re
 Many neural forecasters consume a context window of past target values and covariates, then emit forecasts for one or more horizons. Static metadata can be embedded or encoded. Future-known covariates such as holidays or planned promotions can be passed for the forecast horizon.
 
 The core advantage is representation sharing. A model can learn that similar seasonal shapes, launch curves, or event responses appear across many series, even when each individual series is short.
+
+| Architecture                                               | Core mechanism                                              | Best when                                               |
+| ---------------------------------------------------------- | ----------------------------------------------------------- | ------------------------------------------------------- |
+| [RNN / LSTM](rnn-and-lstm-forecasting.md)                  | recurrent hidden state over the sequence                    | moderate horizons, ordered dependence matters           |
+| [Temporal convolution](temporal-convolutional-networks.md) | dilated causal convolutions                                 | long context, parallel training, stable gradients       |
+| [Transformer-based](transformer-based-forecasting.md)      | self-attention over the context window                      | long-range dependencies, many covariates                |
+| [N-BEATS / N-HiTS](n-beats-and-nhits.md)                   | basis expansion, multi-resolution backcast/forecast         | long horizons where temporal shape dominates covariates |
+| Temporal Fusion Transformer                                | variable selection, gating, attention, direct multi-horizon | mixed static, known-future, and observed covariates     |
+
+None of these is a default winner: the choice follows from horizon length, covariate richness, and how much data is available to share across series.
 
 ## N-HiTS
 
