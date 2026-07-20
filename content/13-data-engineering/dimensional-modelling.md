@@ -32,7 +32,9 @@ Dimensional modelling organizes analytics around facts and dimensions. A fact ta
 
 A star schema is a dimensional model with one or more central fact tables surrounded by dimension tables. The fact table owns the analytical grain and numeric measures; dimensions own the labels, hierarchies, and slowly changing context used for filters and grouping. Compared with normalized [relational-modelling](relational-modelling.md), a star schema makes [SQL](sql.md) easier for analysts because common questions become "join the fact to a few descriptive dimensions, then aggregate at the requested level."
 
-This example uses a type-2 customer dimension, where customer `C-7` changed segment over time and facts keep the historical `customer_key`.
+![A star schema with fact_order_line in the center joined to customer, product, date, and store dimensions.](../assets/diagrams/data-engineering-star-schema.svg)
+
+This example follows the same shape as the diagram: a central `fact_order_line` table joins to customer, product, date, and store dimensions. It also uses a type-2 customer dimension, where customer `C-7` changed segment over time and facts keep the historical `customer_key`.
 
 ```sql
 WITH dim_customer(
@@ -48,31 +50,62 @@ WITH dim_customer(
     (2, 'C-7', 'enterprise', '2026-02-01', NULL, 1),
     (3, 'C-9', 'consumer', '2026-01-01', NULL, 1)
 ),
-fact_order(order_id, customer_key, order_date, revenue) AS (
+dim_product(product_key, category, brand, launch_cohort) AS (
   VALUES
-    (501, 1, '2026-01-20', 100),
-    (502, 2, '2026-02-18', 300),
-    (503, 3, '2026-02-18', 50)
+    (10, 'analytics', 'StarterKit', '2025-Q4'),
+    (11, 'platform', 'ScaleBox', '2026-Q1')
+),
+dim_date(date_key, calendar_date, week, month, quarter) AS (
+  VALUES
+    (20260120, '2026-01-20', '2026-W04', '2026-01', '2026-Q1'),
+    (20260218, '2026-02-18', '2026-W08', '2026-02', '2026-Q1')
+),
+dim_store(store_key, channel, country, market_cluster) AS (
+  VALUES
+    (100, 'online', 'DE', 'DACH'),
+    (101, 'retail', 'US', 'North America')
+),
+fact_order_line(
+  order_line_id,
+  order_id,
+  customer_key,
+  product_key,
+  date_key,
+  store_key,
+  quantity,
+  extended_revenue
+) AS (
+  VALUES
+    (9001, 501, 1, 10, 20260120, 100, 2, 100),
+    (9002, 502, 2, 11, 20260218, 100, 3, 300),
+    (9003, 503, 3, 10, 20260218, 101, 1, 50)
 )
 SELECT
-  d.segment,
-  sum(f.revenue) AS revenue
-FROM fact_order f
-JOIN dim_customer d USING (customer_key)
-GROUP BY d.segment
+  c.segment,
+  p.category,
+  s.channel,
+  sum(f.quantity) AS units,
+  sum(f.extended_revenue) AS revenue
+FROM fact_order_line f
+JOIN dim_customer c USING (customer_key)
+JOIN dim_product p USING (product_key)
+JOIN dim_date d USING (date_key)
+JOIN dim_store s USING (store_key)
+WHERE d.quarter = '2026-Q1'
+GROUP BY c.segment, p.category, s.channel
 ORDER BY revenue DESC;
 ```
 
 Result:
 
 ```text
-segment     revenue
-enterprise  300
-startup     100
-consumer    50
+segment     category   channel  units  revenue
+enterprise  platform   online   3      300
+startup     analytics  online   2      100
+consumer    analytics  retail   1      50
 ```
 
-The January order remains attributed to `startup` even though the current customer row is `enterprise`. That is the point of carrying dimension surrogate keys into the fact table.
+The January order remains attributed to `startup` even though the current customer row is `enterprise`. That is the point of carrying dimension surrogate keys into the fact table. The same fact rows can also be sliced by product category, store channel, or calendar quarter without changing the declared grain: one row per order line.
 
 ## Warehouse use
 

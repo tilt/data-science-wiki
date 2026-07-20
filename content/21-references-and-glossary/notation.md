@@ -17,7 +17,7 @@ related:
   - glossary.md
   - references.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Notation
@@ -40,6 +40,12 @@ Notation keeps formulas readable across mathematical foundations, probability, m
 | $\\mathcal{D}$ | Dataset or data-generating distribution.                |
 | $\\Omega$      | Observed entries in a sparse matrix.                    |
 | $\\lambda$     | Regularization strength or generic rate parameter.      |
+| $\\nabla$      | Gradient operator.                                      |
+| $\\mathbb{E}$  | Expectation.                                            |
+| $\\eta$        | Learning rate or step size.                             |
+| $\\sigma$      | Sigmoid function, or a standard deviation by context.   |
+| $\\gamma$      | Discount factor in reinforcement learning.              |
+| $\\pi$         | Policy in reinforcement learning.                       |
 
 ## Matrix notation
 
