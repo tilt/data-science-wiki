@@ -27,7 +27,36 @@ Evaluation metrics are loss or scoring functions used after fitting to estimate 
 
 ## Defining math
 
-For regression, $MSE=n^{-1}\sum_i(y_i-\hat y_i)^2$, $RMSE=\sqrt{MSE}$, and $MAE=n^{-1}\sum_i|y_i-\hat y_i|$. For binary classification, $accuracy=(TP+TN)/(TP+TN+FP+FN)$, $precision=TP/(TP+FP)$, $recall=TP/(TP+FN)$, and $F_1=2PR/(P+R)$. For probabilities, log loss is $-n^{-1}\sum_i y_i\log\hat p_i+(1-y_i)\log(1-\hat p_i)$.
+For regression, let $y_i$ be the observed target, $\hat y_i$ the prediction, and $n$ the number of evaluated examples:
+
+$$
+\operatorname{MSE}=\frac{1}{n}\sum_{i=1}^{n}(y_i-\hat y_i)^2,\qquad
+\operatorname{RMSE}=\sqrt{\operatorname{MSE}},\qquad
+\operatorname{MAE}=\frac{1}{n}\sum_{i=1}^{n}|y_i-\hat y_i|.
+$$
+
+For binary classification, $TP$, $TN$, $FP$, and $FN$ count true positives, true negatives, false positives, and false negatives at a chosen threshold:
+
+$$
+\operatorname{accuracy}=\frac{TP+TN}{TP+TN+FP+FN},
+\qquad
+\operatorname{precision}=P=\frac{TP}{TP+FP},
+\qquad
+\operatorname{recall}=R=\frac{TP}{TP+FN}.
+$$
+
+The $F_1$ score is the harmonic mean of precision $P$ and recall $R$:
+
+$$
+F_1=\frac{2PR}{P+R}.
+$$
+
+For probabilistic binary classifiers, let $y_i\in\{0,1\}$ and let $\hat p_i$ be the predicted probability of the positive class. Log loss is
+
+$$
+\operatorname{logloss}=-\frac{1}{n}\sum_{i=1}^{n}
+\left[y_i\log \hat p_i+(1-y_i)\log(1-\hat p_i)\right].
+$$
 
 ROC-AUC summarizes how well positive examples are ranked above negative examples across thresholds:
 
