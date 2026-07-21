@@ -18,14 +18,14 @@ related:
   - world-models-and-jepa.md
   - video-representation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # V-JEPA
 
 V-JEPA is a video version of the Joint Embedding Predictive Architecture idea: encode visible context, predict missing target representations, and avoid reconstructing every pixel. It is part of [self-supervised video representation learning](self-supervised-video-representation-learning.md), but its key design choice is latent prediction. The successor page [V-JEPA 2](v-jepa-2.md) extends the framing toward understanding, prediction, and planning.
 
-## Defining mechanism
+## Predicting masked latents
 
 Let $x_c$ be visible context and $x_m$ be a masked target region. A context encoder, target encoder, and predictor produce
 

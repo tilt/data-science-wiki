@@ -13,6 +13,7 @@ prerequisites:
   - index.md
 related:
   - neural-network-fundamentals.md
+  - vanishing-and-exploding-gradients.md
   - optimizers.md
   - activation-functions.md
   - ../01-mathematical-foundations/gradients.md
@@ -99,7 +100,7 @@ Autograd and the manual chain-rule calculation agree exactly for this tiny graph
 
 ## Caveats
 
-Backpropagation through many repeated transformations can make gradients vanish or explode, which is why [initialization](initialization.md), [normalization](normalization.md), gating, and residual connections matter. In-place tensor edits can overwrite values needed for the backward pass. The backward pass also stores activations, so memory often scales with depth and batch size rather than parameter count alone.
+Backpropagation through many repeated transformations can make [gradients vanish or explode](vanishing-and-exploding-gradients.md), which is why [initialization](initialization.md), [normalization](normalization.md), gating, and [residual connections](residual-connections.md) matter. In-place tensor edits can overwrite values needed for the backward pass. The backward pass also stores activations, so memory often scales with depth and batch size rather than parameter count alone.
 
 ## References
 
@@ -109,7 +110,7 @@ Backpropagation through many repeated transformations can make gradients vanish 
 > [!nav]
 > **Section** — [Deep Learning](index.md)
 >
-> [← Neural Network Fundamentals](neural-network-fundamentals.md) [Activation Functions →](activation-functions.md)
+> [← Multilayer Perceptrons](multilayer-perceptrons.md) [Vanishing and Exploding Gradients →](vanishing-and-exploding-gradients.md)
 >
 > **Learning path** — [Deep learning](../00-home-and-navigation/learning-paths.md#deep-learning)
 >

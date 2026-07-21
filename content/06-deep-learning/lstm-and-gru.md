@@ -44,7 +44,7 @@ $$
 \prod_{k=t+1}^{T}\frac{\partial h_k}{\partial h_{k-1}}.
 $$
 
-If the factors in that product usually have norm below $1$, gradients vanish. If they usually have norm above $1$, gradients explode. Exploding gradients can be limited with gradient clipping, but vanishing gradients are harder because the learning signal for early events becomes too small to change the parameters.
+If the factors in that product usually have norm below $1$, [gradients vanish](vanishing-and-exploding-gradients.md). If they usually have norm above $1$, gradients explode. Exploding gradients can be limited with gradient clipping, but vanishing gradients are harder because the learning signal for early events becomes too small to change the parameters.
 
 LSTMs address this by adding a cell state with an additive update:
 

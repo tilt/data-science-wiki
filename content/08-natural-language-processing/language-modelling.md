@@ -18,14 +18,14 @@ related:
   - summarization.md
   - ../11-generative-ai/language-model-architecture.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Language Modelling
 
 Language modelling assigns probabilities to token sequences. Autoregressive models predict the next token and drive [decoder-only transformers](decoder-only-transformers.md); masked language models predict hidden tokens and pretrain [bert-style encoders](bert-style-encoders.md). The same probability machinery affects [summarization](summarization.md), autocomplete, speech recognition, and generation.
 
-## Defining mechanism
+## Autoregressive factorization
 
 An autoregressive model factorizes a sequence by the chain rule:
 

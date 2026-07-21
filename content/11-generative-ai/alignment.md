@@ -20,14 +20,14 @@ related:
   - agent-evaluation.md
   - ../07-reinforcement-learning/reinforcement-learning-from-human-feedback.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Alignment
 
 Alignment is not one switch. It combines training, preference optimization, prompting, [guardrails](guardrails.md), [data privacy](data-privacy.md), and evaluation so a model follows intended behavior under realistic pressure.
 
-## Mechanism
+## Training signal and runtime layers
 
 Instruction-tuned systems often start with supervised demonstrations and then use human or AI preference data. A preference objective can compare a chosen response $y_w$ to a rejected response $y_l$ for prompt $x$ and increase the margin between their scores. Runtime alignment is separate: the application constrains tools, validates [structured output](structured-output.md), and checks [hallucination mitigation](hallucination-mitigation.md).
 
@@ -40,7 +40,7 @@ One common preference-learning signal is pairwise: for the same prompt, the trai
 | System prompt and tool policy | Runtime boundaries, allowed actions, and required evidence.              |
 | Validators and audits         | Schema validity, citation support, privacy checks, and regression tests. |
 
-## Concrete artifact
+## An alignment contract
 
 ```json
 {

@@ -8,7 +8,7 @@ topics:
   - supervised-learning
   - regression
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - ML Forecasting
@@ -25,12 +25,10 @@ related:
   - cold-start-forecasting.md
   - ../03-classical-machine-learning/random-forests.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Machine Learning Forecasting
-
-## Summary
 
 Machine learning forecasting converts time series prediction into supervised regression. Each training row represents a prediction timestamp, and the feature vector contains lagged targets, rolling statistics, covariates, calendar variables, and metadata.
 

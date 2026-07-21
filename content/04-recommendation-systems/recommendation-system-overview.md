@@ -18,14 +18,14 @@ related:
   - evaluation-of-recommenders.md
   - feedback-loops.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Recommendation System Overview
 
 A recommendation system chooses items for users from a catalog under sparse feedback, changing inventory, eligibility rules, and product objectives. The usual production shape is a pipeline: log interactions, build features, retrieve candidates, rank them, apply constraints, expose results, and evaluate the consequences.
 
-## Defining mechanism
+## Retrieval and ranking
 
 Most systems separate retrieval from ranking:
 

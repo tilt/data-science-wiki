@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - monitoring
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - service-level-objectives.md
   - ../05-time-series-and-forecasting/forecast-monitoring.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Monitoring
 
 Monitoring watches known signals and alerts when they violate a defined expectation. ML monitoring must cover service health, data health, model behavior, and delayed outcomes. A model API can be up while stale features or shifted populations make its decisions wrong.
 
-## Mechanism
+## Four layers of monitoring signals
 
 Good monitors name the metric, owner, aggregation window, threshold, labels, and action. ML monitoring stacks four layers, from signals that fire before any harm (leading) to ones that confirm harm only after labels arrive (lagging):
 

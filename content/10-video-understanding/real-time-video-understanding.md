@@ -18,14 +18,14 @@ related:
   - person-tracking-and-track-aggregation.md
   - video-transformers.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Real-Time Video Understanding
 
 Real-time video understanding turns a model into a streaming system. The question is not only whether the model is accurate, but whether it can sample, buffer, infer, aggregate, and fire before the deadline. It connects directly to [sliding-window inference](sliding-window-inference.md), [trigger-point prediction](trigger-point-prediction.md), and [person tracking and track aggregation](person-tracking-and-track-aggregation.md).
 
-## Defining mechanism
+## The latency budget
 
 A simple latency budget is
 

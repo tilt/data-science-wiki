@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - temporal-convolutional-networks
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - n-beats-and-nhits.md
   - ../06-deep-learning/convolutional-neural-networks.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Temporal Convolutional Networks

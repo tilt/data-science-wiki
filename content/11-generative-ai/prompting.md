@@ -18,14 +18,14 @@ related:
   - sampling-and-decoding.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Prompting
 
 Prompting is the runtime interface for telling a model what task to perform. It includes instructions, examples for [in-context learning](in-context-learning.md), retrieved evidence from [context construction](context-construction.md), tool descriptions, and output constraints such as [structured output](structured-output.md).
 
-## Mechanism
+## Anatomy of a prompt
 
 A prompt should separate roles: system policy, developer instructions, user request, trusted evidence, and untrusted data. The model then estimates the next-token distribution conditioned on that sequence, and [sampling and decoding](sampling-and-decoding.md) turns it into output.
 
@@ -39,7 +39,7 @@ A prompt should separate roles: system policy, developer instructions, user requ
 
 Good prompting is not magic wording. It is interface design: make the task, inputs, constraints, and output contract explicit enough that the model does not have to infer hidden requirements.
 
-## Concrete artifact
+## An example prompt
 
 ```text
 SYSTEM: Answer only from SOURCES. If unsupported, say so.

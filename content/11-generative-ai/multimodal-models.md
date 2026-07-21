@@ -18,14 +18,14 @@ related:
   - ../06-deep-learning/multimodal-learning.md
   - prompting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Multimodal Models
 
 Multimodal models connect text with images, audio, video, or structured signals. In generative systems they support captioning, document extraction, visual question answering, and tool-augmented workflows. [Vision-language models](vision-language-models.md) are the most common case in this wiki.
 
-## Mechanism
+## Encoder to language model
 
 A common pattern is modality encoder -> projection/alignment -> language model. Contrastive models align image and text embeddings; generative VLMs condition token generation on visual features. [Structured output](structured-output.md) is often needed when perception feeds software, and [prompting](prompting.md) must specify what visual evidence counts.
 
@@ -38,7 +38,7 @@ A common pattern is modality encoder -> projection/alignment -> language model. 
 
 The modality boundary matters. If a document extraction system fails, the error may come from OCR, layout parsing, visual perception, language reasoning, or schema formatting. Good evaluations isolate those layers instead of scoring only the final JSON.
 
-## Concrete artifact
+## An extraction contract
 
 ```json
 {

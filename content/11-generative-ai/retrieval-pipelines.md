@@ -18,14 +18,14 @@ related:
   - hybrid-retrieval.md
   - reranking.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Retrieval Pipelines
 
 A retrieval pipeline turns a changing corpus into ranked evidence for a model. In [RAG](rag.md), it spans ingestion, [chunking](chunking.md), embedding, lexical indexing, metadata filters, query rewriting, [hybrid retrieval](hybrid-retrieval.md), [reranking](reranking.md), context packing, and citation validation.
 
-## Mechanism
+## Offline and online contracts
 
 The pipeline has two contracts. The offline contract builds searchable records: source document, chunk boundaries, text hash, permissions, embedding model, index version, and deletion state. The online contract turns a user request into evidence: normalized query, filters, first-stage candidates, scores, reranker output, selected chunks, and the final context handed to the model.
 
@@ -44,7 +44,7 @@ flowchart TD
   Pack --> Model[Generative model]
 ```
 
-## Concrete artifact
+## A retrieval trace
 
 ```json
 {

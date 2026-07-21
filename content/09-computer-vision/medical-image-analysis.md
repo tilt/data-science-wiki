@@ -19,7 +19,7 @@ related:
   - detection-and-segmentation-metrics.md
   - ../19-domain-applications/medical-mri-analysis.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Medical Image Analysis
@@ -35,7 +35,7 @@ This page is the medical-imaging hub inside [computer vision](index.md). The dom
 | Detection and measurement | Lesion boxes, counts, diameters, volume, or change over time.        | [Object detection](object-detection.md), [detection and segmentation metrics](detection-and-segmentation-metrics.md) |
 | Representation learning   | Encoder features for scarce-label clinical tasks.                    | [Self supervised visual learning](self-supervised-visual-learning.md), [domain shift](domain-shift.md)               |
 
-## Defining mechanism
+## Triage scoring
 
 For a binary triage model, the model estimates
 

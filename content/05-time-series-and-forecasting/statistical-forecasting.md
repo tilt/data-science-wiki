@@ -8,7 +8,7 @@ topics:
   - arima
   - exponential-smoothing
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - Classical Forecasting
@@ -23,12 +23,10 @@ related:
   - forecast-ensembling.md
   - machine-learning-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Statistical Forecasting
-
-## Summary
 
 Statistical forecasting models future values through explicit assumptions about level, trend, seasonality, autocorrelation, and noise. These methods are essential even when more complex machine learning or neural models are available because they provide strong baselines, interpretable diagnostics, and robust fallbacks.
 

@@ -18,14 +18,14 @@ related:
   - cloud-storage.md
   - data-quality.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # ETL and ELT
 
 ETL transforms data before loading it into the target system. ELT loads raw data first, then transforms it inside a [data-warehouse](data-warehouses.md), lakehouse, or query engine. The letters are simple; the real design choice is where failures are isolated and where business logic is reviewed.
 
-## Mechanism
+## ETL versus ELT
 
 In ETL, a pipeline might parse and normalize a SaaS export before writing warehouse tables. In ELT, the same raw export lands in [cloud-storage](cloud-storage.md) or a raw schema, then [dbt](dbt.md) or warehouse SQL creates staged and curated models.
 

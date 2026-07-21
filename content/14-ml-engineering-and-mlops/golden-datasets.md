@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - golden-datasets
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - human-in-the-loop-systems.md
   - ../17-experimentation-and-evaluation/golden-datasets.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Golden Datasets
 
 Golden datasets are small, trusted, versioned examples that serve as acceptance references for model, prompt, retrieval, or pipeline changes. They complement larger [evaluation datasets](evaluation-datasets.md): a golden set is meant to be inspected and defended case by case.
 
-## Mechanism
+## What a golden case holds
 
 A golden dataset should include inputs, expected outputs or grading criteria, slice tags, risk labels, source, reviewer, and version. It belongs in [ci-cd-for-ml](ci-cd-for-ml.md) because regressions on known critical cases should block promotion even when aggregate metrics improve.
 

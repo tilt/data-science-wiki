@@ -17,14 +17,14 @@ related:
   - trigger-point-prediction.md
   - temporal-action-recognition.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Sliding Window Inference
 
 Sliding-window inference runs a fixed-size clip model over a long video by choosing window length and stride. It is the practical glue between clip-trained [temporal action recognition](temporal-action-recognition.md) models and untrimmed streams. The same windows can feed [temporal localization](temporal-localization.md), [trigger-point prediction](trigger-point-prediction.md), or offline indexing.
 
-## Defining mechanism
+## Windows and strides
 
 For video length $T$, window size $w$, and stride $s$, windows are
 

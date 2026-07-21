@@ -18,14 +18,14 @@ related:
   - fine-tuning-versus-rag.md
   - multimodal-models.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Foundation Models
 
 A foundation model is pretrained broadly enough to serve as a base for many tasks. In this section, [pretraining](pretraining.md) creates the base distribution, [instruction tuning](instruction-tuning.md) adapts behavior, and [fine tuning versus RAG](fine-tuning-versus-rag.md) decides how applications specialize it.
 
-## Mechanism
+## Base objective and adaptation paths
 
 For language models, the base objective is often next-token prediction: maximize $\sum_t \log p_\theta(x_t\mid x_{<t})$. The same base [language model architecture](language-model-architecture.md) can then be prompted, fine-tuned, aligned, or connected to retrieval and tools. [Multimodal models](multimodal-models.md) extend the foundation idea to image, audio, or video tokens.
 
@@ -39,7 +39,7 @@ The "foundation" property comes from reuse, not from size alone. A model becomes
 | [Alignment](alignment.md)                   | Preferences and policies shape behavior.           | Safer assistant behavior under ambiguity.                    |
 | Tool wrapper                                | Application code gives controlled actions.         | Search, calculation, database lookup, or workflow execution. |
 
-## Concrete artifact
+## The adaptation stack
 
 ```mermaid
 flowchart LR

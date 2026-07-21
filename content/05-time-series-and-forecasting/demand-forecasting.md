@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - demand-forecasting
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - forecasting-system-design.md
   - ../19-domain-applications/demand-prediction-in-logistics.md
 historical_context: false
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-20
 ---
 
 # Demand Forecasting

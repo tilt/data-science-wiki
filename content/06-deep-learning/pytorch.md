@@ -17,14 +17,14 @@ related:
   - optimizers.md
   - loss-functions.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # PyTorch
 
 PyTorch is a tensor and automatic-differentiation framework for building neural networks in ordinary Python. Its defining training workflow is: run tensor operations, record a dynamic computation graph, call `backward()`, then update parameters with an [optimizer](optimizers.md). Compared with [TensorFlow and Keras](tensorflow-and-keras.md), PyTorch exposes the lower-level imperative loop more directly.
 
-## Defining mechanism
+## Autograd and the computation graph
 
 For parameters $\theta$ and scalar loss $L$, PyTorch records operations that produce
 

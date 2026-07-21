@@ -17,14 +17,14 @@ related:
   - video-language-models.md
   - ../06-deep-learning/attention.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Video Transformers
 
 Video transformers tokenize a clip into frame patches or tubelets and let attention route information across space and time. Compared with [3D convolutional networks](3d-convolutional-networks.md), they are less tied to local kernels; compared with [two-stream models](two-stream-models.md), they learn motion interactions inside the same token system that carries appearance. Their core operation is the same scaled dot-product [attention](../06-deep-learning/attention.md) used in language models.
 
-## Defining mechanism
+## Attention over video tokens
 
 For $N$ video tokens with dimension $d_k$,
 

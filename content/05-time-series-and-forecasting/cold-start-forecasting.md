@@ -8,7 +8,7 @@ topics:
   - forecasting
   - model-selection
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - New Series Forecasting
@@ -23,12 +23,10 @@ related:
   - forecast-ensembling.md
   - ../19-domain-applications/demand-prediction-in-logistics.md
 historical_context: false
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-20
 ---
 
 # Cold-Start Forecasting
-
-## Summary
 
 Cold-start forecasting covers entities with little or no usable history. Examples include new products, newly instrumented machines, new regions, new categories, and series that were absent from backtesting but appear in production.
 

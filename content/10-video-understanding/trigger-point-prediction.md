@@ -18,14 +18,14 @@ related:
   - gesture-recognition.md
   - sliding-window-inference.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Trigger Point Prediction
 
 Trigger-point prediction decides when enough streaming evidence has arrived to fire an action. It is not retrospective [temporal localization](temporal-localization.md): the system must choose now, under uncertainty, with latency and false-trigger costs. Gesture interfaces, safety alerts, and sports-event clipping all need this form of decision.
 
-## Defining mechanism
+## Thresholding streaming probabilities
 
 For per-frame or per-window probabilities $p_t=P(y=1\mid x_{1:t})$, a threshold trigger is
 

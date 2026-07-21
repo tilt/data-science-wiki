@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - a-b-testing
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - ../17-experimentation-and-evaluation/a-b-testing.md
   - ../17-experimentation-and-evaluation/online-experiments.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # A/B Testing
 
 A/B testing compares model or product variants by randomly assigning eligible units to control and treatment. In MLOps, it answers a different question than [evaluation datasets](evaluation-datasets.md): did the deployed system improve the production outcome for randomized traffic?
 
-## Mechanism
+## The experiment contract
 
 The contract must state unit of randomization, assignment key, exposure rule, primary metric, guardrails, exclusion rules, ramp plan, and stopping rule. For two conversion rates, a simple large-sample check uses
 

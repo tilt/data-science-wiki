@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - rolling-origin-validation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - forecasting-pitfalls-and-worked-examples.md
   - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-20
 ---
 
 # Rolling Origin Validation

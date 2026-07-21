@@ -18,20 +18,20 @@ related:
   - llm-as-judge.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Hallucination Mitigation
 
 Hallucination mitigation reduces unsupported claims; it does not make a model know truth in the abstract. The strongest controls combine [grounding](grounding.md), [citations](citations.md), constrained answer formats, abstention, and targeted evaluation.
 
-## Mechanism
+## Mitigation across the pipeline
 
 A practical pipeline retrieves evidence, instructs the model to answer only from that evidence, extracts claims, and checks each claim against cited spans. [LLM-as-judge](llm-as-judge.md) can help label semantic support, but deterministic checks should verify that cited source IDs were actually retrieved and that every required claim has a citation.
 
 Mitigation can happen before generation through better retrieval, during generation through source-grounded prompts and schemas, and after generation through citation validation or abstention. [Guardrails](guardrails.md) decide what happens when support is missing: revise, ask for more evidence, route to a human, or say there is not enough information.
 
-## Concrete artifact
+## An answer policy with checks
 
 ```json
 {

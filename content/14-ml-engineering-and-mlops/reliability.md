@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - reliability
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - production-incident-response.md
   - ../15-cloud-and-distributed-systems/reliability.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Reliability
 
 Reliability is the ability of a model-backed system to keep delivering acceptable behavior despite code bugs, data delays, dependency failures, traffic spikes, and model drift. It extends cloud reliability with data and decision correctness: a service can return `200 OK` while serving stale or harmful predictions.
 
-## Mechanism
+## Specifying reliability
 
 Reliability is specified through [service-level objectives](service-level-objectives.md), tested through failure drills, and operated through [monitoring](monitoring.md), [observability](observability.md), runbooks, and [production incident response](production-incident-response.md). For ML, the contract must include prediction availability, feature freshness, fallback quality, and delayed outcome quality, not only uptime.
 

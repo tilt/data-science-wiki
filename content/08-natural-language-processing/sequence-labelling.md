@@ -18,14 +18,14 @@ related:
   - tokenization.md
   - evaluation-of-nlp-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Sequence Labelling
 
 Sequence labelling assigns an output tag to each token. [Named entity recognition](named-entity-recognition.md), part-of-speech tagging, slot filling, and some [information extraction](information-extraction.md) pipelines are sequence labelling tasks. The labels depend on [tokenization](tokenization.md), so the model predicts over model tokens even when humans annotate words or spans.
 
-## Defining mechanism
+## Per-token classification
 
 A token classifier estimates
 

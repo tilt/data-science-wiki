@@ -13,6 +13,7 @@ prerequisites:
   - index.md
 related:
   - activation-functions.md
+  - vanishing-and-exploding-gradients.md
   - normalization.md
   - backpropagation.md
   - optimizers.md
@@ -22,7 +23,7 @@ last_reviewed: 2026-07-11
 
 # Initialization
 
-Initialization sets the starting point for optimization and the scale of signals before any learning has happened. Poorly scaled weights can make activations explode or shrink layer by layer, leaving [backpropagation](backpropagation.md) with unstable gradients. Good initializers are matched to the [activation function](activation-functions.md) and sometimes made less critical by [normalization](normalization.md).
+Initialization sets the starting point for optimization and the scale of signals before any learning has happened. Poorly scaled weights can make activations explode or shrink layer by layer, leaving [backpropagation](backpropagation.md) with [vanishing or exploding gradients](vanishing-and-exploding-gradients.md). Good initializers are matched to the [activation function](activation-functions.md) and sometimes made less critical by [normalization](normalization.md).
 
 ## Defining math
 
@@ -71,7 +72,7 @@ Standard normal weights blow up variance across six ReLU layers. He scaling keep
 
 ## Caveats
 
-Initialization interacts with residual connections, normalization, optimizer warmup, and precision. A scheme that is stable for a plain ReLU MLP may not be right for a transformer block, a gated recurrent unit, or a network with very narrow layers.
+Initialization interacts with [residual connections](residual-connections.md), normalization, optimizer warmup, and precision. A scheme that is stable for a plain ReLU MLP may not be right for a transformer block, a gated recurrent unit, or a network with very narrow layers.
 
 ## References
 

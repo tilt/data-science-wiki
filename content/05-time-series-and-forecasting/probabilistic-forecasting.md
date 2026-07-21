@@ -8,7 +8,7 @@ topics:
   - prediction-intervals
   - forecast-calibration
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases:
   - Distributional Forecasting
@@ -23,12 +23,10 @@ related:
   - forecast-calibration.md
   - deep-learning-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Probabilistic Forecasting
-
-## Summary
 
 Probabilistic forecasting estimates uncertainty about future values, not only a single best forecast. The output may be a predictive distribution, a set of quantiles, samples from future trajectories, or prediction intervals.
 

@@ -17,14 +17,14 @@ related:
   - video-transformers.md
   - person-tracking-and-track-aggregation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Video Representation
 
 A video representation is the form in which a system stores evidence from frames over time: raw clips, [optical-flow](optical-flow.md) fields, tubelet tokens, per-frame embeddings, object tracks, or pooled clip vectors. It determines what information is easy to use later. A representation built from frame means may support retrieval, while a track-level representation is better for [person tracking and track aggregation](person-tracking-and-track-aggregation.md).
 
-## Defining mechanism
+## From frames to a clip vector
 
 For frame embeddings $e_1,\ldots,e_T$, a simple clip representation can concatenate appearance and motion summaries:
 

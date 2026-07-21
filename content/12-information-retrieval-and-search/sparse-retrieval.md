@@ -18,14 +18,14 @@ related:
   - hybrid-search.md
   - dense-retrieval.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Sparse Retrieval
 
 Sparse retrieval represents documents and queries with mostly-zero term features. The usual implementation is an [inverted index](inverted-indexes.md), and the usual scoring functions are [TF-IDF](tf-idf.md) or [BM25](bm25.md). It is "sparse" because each document uses only a tiny slice of the vocabulary.
 
-## Mechanism
+## Lexical scoring
 
 Let $x_d\in\mathbb R^{|V|}$ be a document vector over vocabulary $V$, with nonzero weights only for terms present in $d$. A simple lexical retrieval score is cosine similarity:
 

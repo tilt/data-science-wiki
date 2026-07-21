@@ -18,14 +18,14 @@ related:
   - text-classification.md
   - evaluation-of-nlp-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Summarization
 
 Summarization condenses one or more texts for a purpose: incident handoff, meeting recap, article abstract, legal brief, or search-result snippet. Extractive summarization selects source spans; abstractive summarization uses [language modelling](language-modelling.md) to generate new text. [Decoder-only transformers](decoder-only-transformers.md) are common generators, while [semantic textual similarity](semantic-textual-similarity.md) helps detect redundancy.
 
-## Defining mechanism
+## An extractive baseline
 
 An extractive centroid baseline scores each sentence by similarity to the document centroid:
 

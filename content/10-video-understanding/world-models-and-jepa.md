@@ -20,14 +20,14 @@ related:
   - v-jepa-2.md
   - self-supervised-video-representation-learning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # World Models and JEPA
 
 JEPA connects to [world models](world-models.md) through prediction in representation space. A pixel-prediction model tries to generate future sensory detail; a JEPA-style model tries to predict the latent features that matter for understanding or planning. This makes [V-JEPA](v-jepa.md) and [V-JEPA 2](v-jepa-2.md) natural examples in video understanding.
 
-## Defining mechanism
+## The energy view
 
 An energy view scores whether a predicted latent matches the target latent:
 

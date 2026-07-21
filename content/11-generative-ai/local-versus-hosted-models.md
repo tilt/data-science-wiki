@@ -18,14 +18,14 @@ related:
   - data-privacy.md
   - determinism-and-reproducibility.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Local Versus Hosted Models
 
 Local models run in infrastructure you control; hosted models run behind a provider API. The choice affects [model serving](model-serving.md), [data privacy](data-privacy.md), observability, upgrade cadence, and [cost and latency optimization](cost-and-latency-optimization.md).
 
-## Decision mechanism
+## Comparing the full workload
 
 Compare the full workload: input/output volume, latency target, privacy class, reliability, context length, required tools, and operator skill. Local serving may need [quantization](quantization.md), batching, GPU memory management, and model lifecycle work. Hosted serving may simplify operations but requires provider contracts and drift monitoring for [determinism and reproducibility](determinism-and-reproducibility.md).
 
@@ -38,7 +38,7 @@ The decision is rarely a single-model choice. Many systems route requests by sen
 | Operations   | The team can run GPU capacity, batching, rollback, and monitoring.        | The team prefers managed scaling, faster model upgrades, and provider SLAs.     |
 | Cost         | Traffic is steady enough to amortize hardware and utilization is high.    | Traffic is bursty, caching is effective, or only some calls need large models.  |
 
-## Concrete artifact
+## A routing policy
 
 ```yaml
 route:

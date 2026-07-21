@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - training-pipelines
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - ci-cd-for-ml.md
   - ../13-data-engineering/feature-pipelines.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Training Pipelines
 
 Training pipelines automate the steps that turn versioned data into an evaluated model artifact. They are not just scheduled notebooks: they must make inputs, parameters, outputs, and approval evidence reproducible.
 
-## Mechanism
+## The pipeline steps
 
 A pipeline typically extracts point-in-time data, validates schema, builds features, trains, evaluates, records an [experiment tracking](experiment-tracking.md) run, registers a candidate [model version](model-versioning.md), and publishes a release report. It consumes [dataset versioning](dataset-versioning.md) manifests and often depends on upstream [feature pipelines](../13-data-engineering/feature-pipelines.md).
 

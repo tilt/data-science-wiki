@@ -18,14 +18,14 @@ related:
   - rag-evaluation.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Agent Evaluation
 
 Agent evaluation measures the whole control loop, not just a final answer. A useful suite checks whether [agent loops](agent-loops.md) call the right tools, obey [guardrails](guardrails.md), preserve evidence from [RAG evaluation](rag-evaluation.md), and stop within budget.
 
-## Mechanism
+## What a trace grader scores
 
 A trace grader should score at least four fields: final task result, required actions, forbidden actions, and resource envelope. For a task $t$, a simple pass predicate is $P(t)=O_t \land R_t \land \neg F_t \land B_t$, where $O$ is outcome correctness, $R$ required evidence/actions, $F$ forbidden events, and $B$ budget compliance. A simple budget check is
 

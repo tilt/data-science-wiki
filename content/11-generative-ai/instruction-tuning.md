@@ -20,14 +20,14 @@ related:
   - structured-output.md
   - ../07-reinforcement-learning/reinforcement-learning-from-human-feedback.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Instruction Tuning
 
 Instruction tuning trains a pretrained model on instruction-response pairs so it follows natural-language tasks more reliably. It sits between [pretraining](pretraining.md) and [alignment](alignment.md), and can reduce prompt burden for [structured output](structured-output.md) or domain-specific workflows.
 
-## Mechanism
+## Training on demonstrations
 
 Given demonstrations $(x,y)$, supervised instruction tuning minimizes token cross-entropy $-\sum_t\log p_\theta(y_t\mid x,y_{<t})$. Preference methods can then compare outputs, but the supervised stage teaches the basic mapping from instruction to answer.
 
@@ -40,7 +40,7 @@ The training row needs to specify more than the target text. It should make the 
 | Target response  | Encodes the expected machine-readable fields and numeric type.                                  |
 | Held-out checks  | Test the same behavior on unseen merchants, currencies, missing values, and malformed receipts. |
 
-## Concrete artifact
+## A training row
 
 ```jsonl
 {

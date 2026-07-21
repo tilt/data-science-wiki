@@ -19,14 +19,14 @@ related:
   - ../11-generative-ai/hybrid-retrieval.md
   - ../11-generative-ai/rag-architecture-comparison.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Hybrid Search
 
 Hybrid search combines result sets from different retrieval signals, most commonly [BM25](bm25.md) and [dense retrieval](dense-retrieval.md). The point is not aesthetic balance: lexical methods catch exact names, IDs, and rare terms, while embeddings catch paraphrase. A good hybrid system keeps both failure modes visible in [search evaluation](search-evaluation.md).
 
-## Defining mechanism
+## Reciprocal rank fusion
 
 One common rank-only fusion method is reciprocal rank fusion:
 

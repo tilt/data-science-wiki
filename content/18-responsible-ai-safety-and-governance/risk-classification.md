@@ -19,14 +19,14 @@ related:
   - security.md
   - ../17-experimentation-and-evaluation/risk-weighted-error-taxonomies.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Risk Classification
 
 Risk classification sorts an AI use case by potential harm, autonomy, domain, data sensitivity, reversibility, and exposure. It determines the required evidence for [compliance](compliance.md), [human oversight](human-oversight.md), security review, monitoring, and [auditability](auditability.md). The unit is the use case, not the model architecture.
 
-## Concrete artifact
+## A classification record
 
 A classification record should be short enough to complete but specific enough to trigger controls:
 

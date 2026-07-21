@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - predictive-maintenance
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - prediction-intervals.md
   - ../19-domain-applications/predictive-maintenance.md
 historical_context: false
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-20
 ---
 
 # Predictive Maintenance

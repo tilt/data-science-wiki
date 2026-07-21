@@ -8,7 +8,7 @@ topics:
   - mlops
   - forecasting-pipelines
 level: advanced
-status: review
+status: complete
 page_type: system-design
 aliases:
   - Forecasting Pipeline Design
@@ -24,12 +24,10 @@ related:
   - backtesting.md
   - ../14-ml-engineering-and-mlops/model-serving.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Forecasting System Design
-
-## Summary
 
 A forecasting system should separate data validation, enrichment, feature generation, model training, prediction, backtesting, ensemble fitting, evaluation, artifacts, and monitoring. This keeps modeling choices inspectable and makes production behavior closer to offline evaluation.
 

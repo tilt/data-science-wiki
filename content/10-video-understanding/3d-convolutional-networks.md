@@ -18,14 +18,14 @@ related:
   - spatial-and-temporal-modelling.md
   - video-representation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # 3D Convolutional Networks
 
 3D convolutional networks replace image kernels with kernels over $(T,H,W)$. A 2D CNN sees one frame at a time; a 3D CNN can fire on a short motion pattern such as "hand moves upward while the torso stays still." They are a direct architecture for [spatial and temporal modelling](spatial-and-temporal-modelling.md), an alternative to [two-stream models](two-stream-models.md), and a useful baseline before reaching for [video transformers](video-transformers.md).
 
-## Defining mechanism
+## The 3D convolution
 
 For input $X\in\mathbb R^{C_{in}\times T\times H\times W}$, a 3D convolution computes
 

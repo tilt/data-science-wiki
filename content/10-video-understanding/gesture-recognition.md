@@ -20,7 +20,7 @@ related:
   - video-transformers.md
   - ../09-computer-vision/pose-estimation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Gesture Recognition
@@ -29,7 +29,7 @@ Gesture recognition identifies intentional hand, arm, body, face, or object moti
 
 The input representation determines the method. A gesture system may use RGB clips, cropped hands, [pose-estimation](../09-computer-vision/pose-estimation.md) keypoints, skeleton tracks, depth, inertial sensors, [optical-flow](optical-flow.md), or fused streams. The same product may combine a fast keypoint baseline for obvious gestures with a deep video model for ambiguous or occluded cases.
 
-## Defining mechanism
+## Method families
 
 Gesture recognition methods fall into several families:
 

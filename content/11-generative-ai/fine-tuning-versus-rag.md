@@ -18,18 +18,18 @@ related:
   - embeddings.md
   - retrieval-pipelines.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Fine Tuning Versus RAG
 
 Fine-tuning changes model behavior or parameters. [RAG](rag.md) changes the evidence available at request time. They are complementary: [instruction tuning](instruction-tuning.md) can teach format and domain behavior, while [retrieval pipelines](retrieval-pipelines.md) supply current or private facts. Parameter-efficient adapters such as [LoRA](../06-deep-learning/fine-tuning.md#lora-footprint) reduce the training and storage footprint by freezing the base model and training a small low-rank update.
 
-## Decision mechanism
+## When to train, when to retrieve
 
 Use fine-tuning when the failure is stable behavior: style, output shape, classification policy, or repeated task procedure. Use RAG when the failure is missing knowledge, stale knowledge, or auditable citation. A compact rule is: train behavior, retrieve facts. [Embeddings](embeddings.md) and rerankers make the retrieval side testable without changing the base model.
 
-## Concrete artifact
+## Choosing by symptom
 
 | Symptom                                 | Better first lever             |
 | --------------------------------------- | ------------------------------ |

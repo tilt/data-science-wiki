@@ -8,7 +8,7 @@ topics:
   - evaluation
   - backtesting
 level: foundational
-status: review
+status: complete
 page_type: reference
 aliases:
   - Forecast Metrics
@@ -24,12 +24,10 @@ related:
   - business-cost-aware-forecasting-losses.md
   - intermittent-demand.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Forecast Error Metrics
-
-## Summary
 
 Forecast metrics quantify different aspects of error. No single metric captures absolute accuracy, relative accuracy, bias, tail risk, and business cost. A robust evaluation reports several metrics by horizon, series group, and aggregation level.
 

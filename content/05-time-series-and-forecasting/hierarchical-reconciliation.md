@@ -8,7 +8,7 @@ topics:
   - hierarchical-forecasting
   - coherent-forecasts
 level: advanced
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - Forecast Reconciliation
@@ -22,12 +22,10 @@ related:
   - backtesting.md
   - probabilistic-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Hierarchical Reconciliation
-
-## Summary
 
 Hierarchical reconciliation adjusts forecasts so they satisfy aggregation constraints. It is needed when forecasts are produced independently at several levels, such as item, category, region, and total.
 

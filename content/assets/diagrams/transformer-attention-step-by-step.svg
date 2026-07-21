@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="590" viewBox="0 0 1120 590" role="img" aria-labelledby="title desc">
+  <title id="title">Transformer self-attention step by step</title>
+  <desc id="desc">A token creates query, key, and value vectors. The query for bank scores all keys, softmax produces attention weights, and a weighted sum of values creates a contextual representation.</desc>
+  <style>
+    text {
+      fill: #111827;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .muted { fill: #4b5563; }
+    .bg { fill: transparent; }
+    .panel { fill: #ffffff; stroke: #d8dee9; }
+    .token { fill: #dbeafe; stroke: #2563eb; }
+    .token-focus { fill: #ffedd5; stroke: #f97316; }
+    .q { fill: #ffedd5; stroke: #f97316; }
+    .k { fill: #dbeafe; stroke: #2563eb; }
+    .v { fill: #ccfbf1; stroke: #0f766e; }
+    .out { fill: #ede9fe; stroke: #7c3aed; }
+    .arrow { stroke: #4b5563; fill: none; }
+    .strong-arrow { stroke: #f97316; fill: none; }
+    .grid-line { stroke: #d8dee9; }
+    .heat-low { fill: #bfdbfe; }
+    .heat-mid { fill: #60a5fa; }
+    .heat-high { fill: #2563eb; }
+    .blocked { fill: #fee2e2; stroke: #ef4444; }
+  </style>
+  <defs>
+    <marker id="arrow-attn" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4b5563"/>
+    </marker>
+    <marker id="arrow-attn-strong" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f97316"/>
+    </marker>
+  </defs>
+
+  <rect width="1120" height="590" rx="16" class="bg"/>
+  <text x="560" y="40" text-anchor="middle" font-size="27" font-weight="700">Self-attention builds a context-specific token vector</text>
+  <text x="560" y="68" text-anchor="middle" font-size="15" class="muted">For one query token, scores over keys become weights over values.</text>
+
+  <g transform="translate(48,98)">
+    <rect x="0" y="0" width="1024" height="88" rx="10" class="panel"/>
+    <text x="22" y="30" font-size="16" font-weight="700">Input tokens + positions</text>
+    <text x="22" y="58" font-size="14" class="muted">Focus token: bank</text>
+    <g transform="translate(446,22)">
+      <rect x="0" y="0" width="82" height="44" rx="8" class="token"/>
+      <text x="41" y="28" text-anchor="middle" font-size="16" font-weight="700">The</text>
+      <rect x="96" y="0" width="82" height="44" rx="8" class="token"/>
+      <text x="137" y="28" text-anchor="middle" font-size="16" font-weight="700">river</text>
+      <rect x="192" y="0" width="82" height="44" rx="8" class="token-focus" stroke-width="2.5"/>
+      <text x="233" y="28" text-anchor="middle" font-size="16" font-weight="700">bank</text>
+      <rect x="288" y="0" width="82" height="44" rx="8" class="token"/>
+      <text x="329" y="28" text-anchor="middle" font-size="16" font-weight="700">was</text>
+      <rect x="384" y="0" width="82" height="44" rx="8" class="token"/>
+      <text x="425" y="28" text-anchor="middle" font-size="16" font-weight="700">wide</text>
+    </g>
+  </g>
+
+  <g transform="translate(48,220)">
+    <rect x="0" y="0" width="278" height="178" rx="10" class="panel"/>
+    <text x="139" y="28" text-anchor="middle" font-size="18" font-weight="700">1. Project each token</text>
+    <text x="139" y="53" text-anchor="middle" font-size="13" class="muted">Learned matrices produce Q, K, and V.</text>
+    <rect x="36" y="78" width="52" height="52" rx="8" class="q" stroke-width="2"/>
+    <text x="62" y="110" text-anchor="middle" font-size="22" font-weight="700">Q</text>
+    <rect x="99" y="78" width="52" height="52" rx="8" class="k" stroke-width="2"/>
+    <text x="125" y="110" text-anchor="middle" font-size="22" font-weight="700">K</text>
+    <rect x="162" y="78" width="52" height="52" rx="8" class="v" stroke-width="2"/>
+    <text x="188" y="110" text-anchor="middle" font-size="22" font-weight="700">V</text>
+    <text x="139" y="150" text-anchor="middle" font-size="13" class="muted">Query asks. Key matches.</text>
+    <text x="139" y="168" text-anchor="middle" font-size="13" class="muted">Value carries content.</text>
+  </g>
+
+  <g transform="translate(420,220)">
+    <rect x="0" y="0" width="300" height="178" rx="10" class="panel"/>
+    <text x="150" y="28" text-anchor="middle" font-size="18" font-weight="700">2. Score keys for one query</text>
+    <text x="150" y="53" text-anchor="middle" font-size="13" class="muted">bank query dot-products every key.</text>
+    <line x1="40" y1="78" x2="260" y2="78" class="grid-line"/>
+    <g font-size="13" class="muted">
+      <text x="40" y="105" text-anchor="middle">The</text>
+      <text x="95" y="105" text-anchor="middle">river</text>
+      <text x="150" y="105" text-anchor="middle">bank</text>
+      <text x="205" y="105" text-anchor="middle">was</text>
+      <text x="260" y="105" text-anchor="middle">wide</text>
+    </g>
+    <rect x="24" y="116" width="32" height="30" rx="5" class="heat-low"/>
+    <rect x="79" y="116" width="32" height="30" rx="5" class="heat-high"/>
+    <rect x="134" y="116" width="32" height="30" rx="5" class="heat-mid"/>
+    <rect x="189" y="116" width="32" height="30" rx="5" class="heat-low"/>
+    <rect x="244" y="116" width="32" height="30" rx="5" class="heat-mid"/>
+    <g font-size="12" font-weight="700">
+      <text x="40" y="136" text-anchor="middle">.05</text>
+      <text x="95" y="136" text-anchor="middle">.45</text>
+      <text x="150" y="136" text-anchor="middle">.30</text>
+      <text x="205" y="136" text-anchor="middle">.08</text>
+      <text x="260" y="136" text-anchor="middle">.12</text>
+    </g>
+    <text x="150" y="164" text-anchor="middle" font-size="13" class="muted">softmax makes weights sum to 1</text>
+  </g>
+
+  <g transform="translate(794,220)">
+    <rect x="0" y="0" width="278" height="178" rx="10" class="panel"/>
+    <text x="143" y="28" text-anchor="middle" font-size="18" font-weight="700">3. Mix value vectors</text>
+    <text x="143" y="53" text-anchor="middle" font-size="13" class="muted">Values are averaged by attention weights.</text>
+    <rect x="24" y="78" width="54" height="42" rx="7" class="v"/>
+    <text x="51" y="105" text-anchor="middle" font-size="15" font-weight="700">V</text>
+    <text x="100" y="105" text-anchor="middle" font-size="18">×</text>
+    <rect x="122" y="78" width="70" height="42" rx="7" class="q"/>
+    <text x="157" y="103" text-anchor="middle" font-size="12" font-weight="700">weights</text>
+    <text x="208" y="105" text-anchor="middle" font-size="18">→</text>
+    <rect x="224" y="74" width="52" height="50" rx="8" class="out" stroke-width="2"/>
+    <text x="250" y="94" text-anchor="middle" font-size="11" font-weight="700">bank</text>
+    <text x="250" y="111" text-anchor="middle" font-size="10" font-weight="700">context</text>
+    <text x="143" y="146" text-anchor="middle" font-size="13" class="muted">Output is the bank vector</text>
+    <text x="143" y="164" text-anchor="middle" font-size="13" class="muted">updated with context.</text>
+  </g>
+
+  <g class="arrow" stroke-width="2.2" marker-end="url(#arrow-attn)">
+    <path d="M338 309 L402 309"/>
+    <path d="M732 309 L776 309"/>
+  </g>
+  <path d="M720 182 C714 198 704 207 694 216" class="strong-arrow" stroke-width="2.2" marker-end="url(#arrow-attn-strong)"/>
+  <text x="750" y="207" text-anchor="middle" font-size="12" class="muted">bank query</text>
+
+  <g transform="translate(48,430)">
+    <rect x="0" y="0" width="1024" height="108" rx="10" class="panel"/>
+    <text x="22" y="30" font-size="16" font-weight="700">Transformer block wrapper</text>
+    <text x="22" y="57" font-size="14" class="muted">Multi-head attention repeats this routing in parallel heads.</text>
+    <text x="22" y="79" font-size="14" class="muted">Residual paths, layer norm, and the feed-forward network stabilize and transform the result.</text>
+    <g transform="translate(800,24)" font-size="13">
+      <rect x="0" y="0" width="174" height="56" rx="8" class="blocked"/>
+      <text x="87" y="23" text-anchor="middle" font-weight="700">decoder mask</text>
+      <text x="87" y="42" text-anchor="middle" class="muted">future keys are blocked</text>
+    </g>
+  </g>
+</svg>

@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - model-serving
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - docker.md
   - ../11-generative-ai/model-serving.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Model Serving

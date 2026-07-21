@@ -22,14 +22,14 @@ related:
   - comparing-generative-ai-and-classical-ml-systems.md
   - ../18-responsible-ai-safety-and-governance/index.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Risk-Weighted Error Taxonomies
 
 A risk-weighted error taxonomy classifies what went wrong and how much it matters. It prevents harmless formatting issues from being averaged together with unsupported medical, legal, financial, privacy, or safety-critical claims. The taxonomy should be part of the [golden dataset](golden-datasets.md) schema and the [human evaluation](human-evaluation.md) rubric.
 
-## Defining mechanism
+## Weighting errors by severity
 
 Each error receives a type and severity. A simple risk-weighted score is
 

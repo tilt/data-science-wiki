@@ -19,14 +19,14 @@ related:
   - ../11-generative-ai/grounding.md
   - ../11-generative-ai/citations.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Factual Correctness
 
 Factual correctness is agreement between an output and the evidence the system is allowed to use. For retrieval-augmented generation, this links directly to [grounding](../11-generative-ai/grounding.md), [citations](../11-generative-ai/citations.md), and the [error taxonomy](error-taxonomies.md) used to classify unsupported, contradicted, stale, or wrong-entity claims.
 
-## Mechanism
+## Three factuality contracts
 
 A factuality control needs three explicit contracts:
 

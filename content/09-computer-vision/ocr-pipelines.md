@@ -18,14 +18,14 @@ related:
   - document-image-analysis-and-field-extraction.md
   - image-representation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # OCR Pipelines
 
 An OCR pipeline converts document images into text and structured fields. It combines [classical image processing](classical-image-processing.md), page or text-region detection, recognition, language correction, layout reconstruction, and downstream extraction. For skewed labels and text lines, [rotated object detection](rotated-object-detection.md) may be the localization step.
 
-## Defining mechanism
+## The OCR composition
 
 A practical OCR system is a composition
 

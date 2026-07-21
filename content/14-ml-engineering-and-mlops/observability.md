@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - observability
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - production-incident-response.md
   - reliability.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Observability
 
 Observability is the ability to explain what happened inside a system from emitted evidence. [Monitoring](monitoring.md) asks whether known conditions are healthy; observability lets an engineer diagnose why a specific decision, latency spike, or data anomaly occurred.
 
-## Mechanism
+## The four observability pillars
 
 The core signals are metrics, logs, traces, and events. Each answers a different diagnostic question, and each gains an ML-specific payload:
 

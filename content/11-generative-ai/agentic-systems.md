@@ -19,14 +19,14 @@ related:
   - agent-evaluation.md
   - rag-architecture-comparison.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Agentic Systems
 
 An agentic system gives a model conditional control over a workflow. The model may choose when to search, call tools, ask for clarification, or stop, while application code enforces [tool routing](tool-routing.md), [guardrails](guardrails.md), and traceable [agent evaluation](agent-evaluation.md).
 
-## Mechanism
+## Model judgement versus deterministic control
 
 The core design split is model judgement versus deterministic control. A practical architecture is:
 
@@ -51,7 +51,7 @@ An agent loop should make each transition auditable:
 | Observe result | Incorporate the returned observation into the next decision. | Log the call, redact sensitive data, and preserve source metadata. |
 | Terminate      | Produce final answer or completion state.                    | Check success criteria and escalation rules.                       |
 
-## Concrete artifact
+## A validated decision
 
 ```json
 {

@@ -15,6 +15,7 @@ related:
   - normalization.md
   - backpropagation.md
   - initialization.md
+  - residual-connections.md
   - ../09-computer-vision/cnn-architectures.md
 historical_context: false
 last_reviewed: 2026-07-11
@@ -22,7 +23,7 @@ last_reviewed: 2026-07-11
 
 # Convolutional Neural Networks
 
-A convolutional neural network uses small learned kernels across many spatial locations. Instead of learning a separate weight for every input pixel and output unit, a CNN shares each filter over the grid. This is why CNNs remain central to [computer-vision architectures](../09-computer-vision/cnn-architectures.md), often combined with [normalization](normalization.md), residual connections, and careful [initialization](initialization.md).
+A convolutional neural network uses small learned kernels across many spatial locations. Instead of learning a separate weight for every input pixel and output unit, a CNN shares each filter over the grid. This is why CNNs remain central to [computer-vision architectures](../09-computer-vision/cnn-architectures.md), often combined with [normalization](normalization.md), [residual connections](residual-connections.md), and careful [initialization](initialization.md).
 
 ## Defining math
 
@@ -91,4 +92,4 @@ Translation equivariance is useful only when the label should be insensitive to 
 > [!nav]
 > **Section** — [Deep Learning](index.md)
 >
-> [← Regularization](regularization.md) [Recurrent Neural Networks →](recurrent-neural-networks.md)
+> [← Residual Connections](residual-connections.md) [Recurrent Neural Networks →](recurrent-neural-networks.md)

@@ -18,14 +18,14 @@ related:
   - determinism-and-reproducibility.md
   - structured-output.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Model Serving
 
 Model serving is the runtime layer that turns application requests into model responses. It handles routing, rate limits, streaming, batching, retries, fallbacks, validation, and observability across [local versus hosted models](local-versus-hosted-models.md).
 
-## Mechanism
+## The serving path
 
 A serving path typically runs request normalization, policy checks, [context construction](context-construction.md), model selection, model call, streaming or full decode, [structured output](structured-output.md) validation, logging, and retry or fallback. Local serving adds scheduler choices such as batching, KV-cache reuse, [quantization](quantization.md), and GPU memory management. Hosted serving adds provider rate limits, network latency, data-retention policy, and vendor-specific request features.
 
@@ -43,7 +43,7 @@ flowchart TD
 
 The serving layer should log enough to reproduce and debug behavior without storing sensitive prompts unnecessarily: model identifier, prompt or context hash, tool versions, schema version, token counts, latency, retry count, validation result, and final status.
 
-## Concrete artifact
+## A serving route
 
 ```yaml
 route: support_answer_v3

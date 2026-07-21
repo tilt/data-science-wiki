@@ -19,14 +19,14 @@ related:
   - loss-functions.md
   - optimizers.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # TensorFlow and Keras
 
 TensorFlow provides tensor execution, automatic differentiation, saved models, and deployment tooling; Keras is its high-level model-building API. A Keras `Dense` layer still implements the same affine-plus-activation mechanism from [neural network fundamentals](neural-network-fundamentals.md), but the framework organizes training through `compile`, `fit`, losses, metrics, callbacks, and export paths. [PyTorch](pytorch.md) tends to make the custom training loop more visible.
 
-## Defining mechanism
+## A dense classifier
 
 A dense classifier computes
 

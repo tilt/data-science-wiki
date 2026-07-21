@@ -22,14 +22,14 @@ related:
   - video-transformers.md
   - gesture-recognition.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # V-JEPA 2
 
 V-JEPA 2 is a scaled self-supervised video model in the JEPA family. The paper frames it around video understanding, prediction, and planning, including a latent action-conditioned variant for robot planning. It should be read as a [world models](world-models.md) research direction, not as proof that the model has complete physical understanding.
 
-## Defining mechanism
+## Latent prediction for planning
 
 The representation-learning core follows [V-JEPA](v-jepa.md): predict masked or future latent representations from visible context. For planning, an action-conditioned latent dynamics model can score candidate actions:
 

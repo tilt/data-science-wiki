@@ -18,14 +18,14 @@ related:
   - prompting.md
   - model-serving.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Structured Output
 
 Structured output asks the model to return data in a parseable shape, usually JSON matching a schema. It is essential when output feeds [tool use](tool-use-and-function-calling.md), databases, workflows, or [model serving](model-serving.md) validators.
 
-## Mechanism
+## What a schema constrains
 
 The schema defines fields, types, required keys, enums, and whether extra properties are allowed. Generation can be constrained by the provider, but applications should still validate the parsed object. [Tool schemas](tool-schemas.md) use the same idea for model-proposed tool calls.
 
@@ -53,9 +53,7 @@ For the record `{"merchant":"Miro Cafe","total":12.4,"currency":"EUR"}`, all req
 | Source-grounding validation | Values not supported by the input document.                                         |
 | Business-rule validation    | Impossible totals, unsupported currencies, duplicate records, or policy violations. |
 
-## Caveats
-
-Valid JSON can still be semantically wrong. Validate against source evidence and business rules, not only syntax.
+The last two checks are the reason schema validity is not enough: valid JSON can still be semantically wrong, and only source-grounding and business-rule validation catch a well-formed record that misreports reality.
 
 ## References
 

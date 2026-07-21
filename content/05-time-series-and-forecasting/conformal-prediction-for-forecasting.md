@@ -8,7 +8,7 @@ topics:
   - prediction-intervals
   - probabilistic-forecasting
 level: advanced
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - Conformal Forecasting
@@ -24,12 +24,10 @@ related:
   - backtesting.md
   - ../17-experimentation-and-evaluation/coverage.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Conformal Prediction for Forecasting
-
-## Summary
 
 Conformal prediction constructs prediction sets with finite-sample coverage guarantees under exchangeability assumptions. In forecasting, it is commonly used to calibrate prediction intervals from residuals on a validation window.
 

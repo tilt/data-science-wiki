@@ -18,14 +18,14 @@ related:
   - content-based-image-retrieval.md
   - ../19-domain-applications/cultural-heritage-document-extraction-and-entity-matching.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Document Image Analysis and Field Extraction
 
 Document image analysis turns scanned or photographed documents into usable text and structured metadata: people, dates, titles, materials, invoice fields, places, identifiers, or authority links. It builds on [OCR pipelines](ocr-pipelines.md), but the final objective is often field correctness rather than generic text accuracy.
 
-## Defining mechanism
+## The extraction pipeline
 
 The pipeline is usually
 

@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - model-versioning
 level: foundational
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - rollbacks.md
   - ci-cd-for-ml.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Model Versioning
 
 Model versioning records the complete behavior that may be served or audited: artifact, code, data, preprocessing, thresholds, environment, evaluation evidence, approval status, and deployment target. Versioning only the weight file is not enough for [rollbacks](rollbacks.md).
 
-## Mechanism
+## The promotion lifecycle
 
 A candidate model is registered after training, compared against baselines, approved or rejected, and promoted through environments. The registry entry should point back to [experiment tracking](experiment-tracking.md) and [dataset versioning](dataset-versioning.md) records, then forward to [model-serving](model-serving.md) deployments.
 

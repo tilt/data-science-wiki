@@ -21,14 +21,14 @@ related:
   - abstention.md
   - risk-weighted-error-taxonomies.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Coverage
 
 Coverage asks what an evaluation actually reaches: languages, domains, classes, source documents, risk categories, thresholds, fallbacks, and user segments. It is different from quality. A slice can be covered and fail badly; an uncovered slice makes the aggregate score silent. This is why [golden datasets](golden-datasets.md) need metadata, not just inputs and labels.
 
-## Defining mechanism
+## Measuring slice coverage
 
 For categorical slices, coverage is the fraction of required cells with at least one valid example:
 

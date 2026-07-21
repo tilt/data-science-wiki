@@ -20,7 +20,7 @@ related:
   - structured-output.md
   - model-serving.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Temperature and Determinism
@@ -39,7 +39,7 @@ Here $z_i$ is the logit for token $i$, $T$ is the temperature, and $p_i(T)$ is t
 
 Lower $T$ sharpens the distribution; higher $T$ flattens it. At the limit toward zero, decoding approaches greedy selection.
 
-## Executed artifact
+## Isolating the temperature effect
 
 The code keeps the logits fixed and changes only temperature, so the output isolates how temperature changes probability mass and entropy.
 

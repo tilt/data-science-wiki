@@ -20,14 +20,14 @@ related:
   - ../12-information-retrieval-and-search/bm25.md
   - ../12-information-retrieval-and-search/hybrid-search.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Hybrid Retrieval
 
 Hybrid retrieval combines lexical matching with dense [embeddings](embeddings.md). It is useful in [retrieval pipelines](retrieval-pipelines.md) because exact names, numbers, and codes often matter while semantic similarity still recovers paraphrases. [Reranking](reranking.md) can then read the merged candidates more carefully.
 
-## Mechanism
+## Score fusion
 
 A simple fusion normalizes each score and combines them:
 

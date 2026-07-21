@@ -8,11 +8,16 @@ topics:
 level: foundational
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - GELU
+  - SwiGLU
+  - Swish-Gated Linear Unit
 prerequisites:
   - index.md
 related:
   - neural-network-fundamentals.md
+  - multilayer-perceptrons.md
+  - transformers.md
   - initialization.md
   - backpropagation.md
   - normalization.md
@@ -46,6 +51,30 @@ $$
 
 Sigmoid and tanh saturate for large magnitudes; ReLU keeps a unit derivative on the positive side but can produce dead units on the negative side.
 
+## GELU and SwiGLU
+
+Modern transformer MLPs often use smoother or gated activations instead of plain ReLU.
+
+The Gaussian error linear unit, GELU, is
+
+$$
+\operatorname{GELU}(x)=x\Phi(x),
+$$
+
+where $x$ is one scalar pre-activation value and $\Phi(x)$ is the cumulative distribution function of the standard normal distribution. Intuitively, GELU keeps large positive values, suppresses large negative values, and gives values near zero a smooth probabilistic transition instead of the hard ReLU cutoff.
+
+SwiGLU is a gated feed-forward variant. Instead of applying one activation to one projection, the layer creates two learned projections and uses one to gate the other:
+
+$$
+\operatorname{SwiGLU}(x)=(xW_a+b_a)\odot\operatorname{Swish}(xW_g+b_g),
+\qquad
+\operatorname{Swish}(z)=z\sigma(z).
+$$
+
+Here $x$ is an input vector, $W_a,b_a$ are the value-projection parameters, $W_g,b_g$ are the gate-projection parameters, $\sigma$ is the sigmoid function, and $\odot$ means elementwise multiplication. The gate can amplify, dampen, or suppress each hidden feature before the next linear projection.
+
+In a [transformer](transformers.md), GELU or SwiGLU usually appears inside the position-wise [MLP](multilayer-perceptrons.md). Attention mixes information between token positions; the activation inside the MLP shapes nonlinear feature interactions within each token vector.
+
 ## Worked example
 
 This snippet evaluates common activation functions on the same input grid and prints both activations and gradients for comparison.
@@ -75,14 +104,16 @@ At $\pm3$, sigmoid and tanh already have small gradients. ReLU avoids that on po
 
 ## Caveats
 
-Sigmoids inside deep hidden stacks often slow training unless gates need bounded values, as in [LSTM and GRU](lstm-and-gru.md). ReLU-family activations pair naturally with He initialization, but high learning rates can push many units permanently negative. Smooth alternatives such as GELU can help transformers but do not remove the need to monitor activation scale.
+Sigmoids inside deep hidden stacks often slow training unless gates need bounded values, as in [LSTM and GRU](lstm-and-gru.md). ReLU-family activations pair naturally with He initialization, but high learning rates can push many units permanently negative. Smooth alternatives such as GELU can help transformers but do not remove the need to monitor activation scale. Gated variants such as SwiGLU add parameters and compute, so their benefit should be evaluated under the same training budget.
 
 ## References
 
 - [He et al., 2015, Delving Deep into Rectifiers](https://arxiv.org/abs/1502.01852)
+- [Hendrycks and Gimpel, 2016, Gaussian Error Linear Units](https://arxiv.org/abs/1606.08415)
+- [Shazeer, 2020, GLU Variants Improve Transformer](https://arxiv.org/abs/2002.05202)
 - [PyTorch documentation: Autograd mechanics](https://docs.pytorch.org/docs/2.7/notes/autograd.html)
 
 > [!nav]
 > **Section** — [Deep Learning](index.md)
 >
-> [← Backpropagation](backpropagation.md) [Loss Functions →](loss-functions.md)
+> [← Vanishing and Exploding Gradients](vanishing-and-exploding-gradients.md) [Loss Functions →](loss-functions.md)

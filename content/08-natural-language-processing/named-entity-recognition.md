@@ -18,14 +18,14 @@ related:
   - tokenization.md
   - evaluation-of-nlp-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Named Entity Recognition
 
 Named entity recognition (NER) detects spans and assigns entity types such as person, organization, location, date, product, or medication. It is a special case of [sequence labelling](sequence-labelling.md), and it often feeds [entity linking and matching](entity-linking-and-matching.md) or [information extraction](information-extraction.md). The output is not just a class; the exact span boundary is part of the prediction.
 
-## Defining mechanism
+## BIO tagging
 
 NER commonly predicts BIO tags for tokens:
 

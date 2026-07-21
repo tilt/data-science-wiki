@@ -18,14 +18,14 @@ related:
   - context-construction.md
   - temperature-and-determinism.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # In-Context Learning
 
 In-context learning is the model's ability to infer a task pattern from examples in the prompt. It is a [prompting](prompting.md) technique, not weight training. Compared with [fine tuning versus RAG](fine-tuning-versus-rag.md), it is fast to change but limited by [context construction](context-construction.md).
 
-## Mechanism
+## Conditioning on examples
 
 A prompt supplies examples $(x_i,y_i)$ followed by a new input $x_*$. The model conditions on the whole sequence and estimates $p(y_*\mid x_1,y_1,\ldots,x_*)$. Example order, label balance, and decoding settings from [temperature and determinism](temperature-and-determinism.md) can change the result.
 

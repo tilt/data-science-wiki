@@ -8,7 +8,7 @@ topics:
   - forecasting
   - model-selection
 level: advanced
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - Forecasting HPO
@@ -24,12 +24,10 @@ related:
   - machine-learning-forecasting.md
   - forecast-error-metrics.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Hyperparameter Optimization for Forecasting
-
-## Summary
 
 Hyperparameter optimization searches over model, feature, and pipeline choices to minimize a validation objective. In forecasting, the objective must be computed under time-respecting evaluation. Searching directly on final backtest results leads to optimistic estimates.
 

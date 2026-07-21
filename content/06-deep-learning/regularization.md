@@ -83,4 +83,4 @@ Dropout is often harmful in heavily normalized transformer blocks when applied b
 > [!nav]
 > **Section** — [Deep Learning](index.md)
 >
-> [← Normalization](normalization.md) [Convolutional Neural Networks →](convolutional-neural-networks.md)
+> [← Normalization](normalization.md) [Residual Connections →](residual-connections.md)

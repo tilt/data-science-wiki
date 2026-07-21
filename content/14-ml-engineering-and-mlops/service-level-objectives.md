@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - service-level-objectives
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - model-serving.md
   - production-incident-response.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Service Level Objectives
 
 A service level objective is a measurable target for user-visible reliability. In ML systems, SLOs should cover both service delivery and decision usefulness: latency, availability, feature freshness, prediction coverage, fallback rate, and delayed label quality where labels exist.
 
-## Mechanism
+## SLIs, SLOs, and error budgets
 
 An SLO is defined over a service level indicator and a window. The error budget is the allowed badness: for a 99.9% monthly availability SLO, 0.1% of the window may be bad. The budget should govern [canary deployment](canary-deployment.md), release freezes, and [production incident response](production-incident-response.md).
 

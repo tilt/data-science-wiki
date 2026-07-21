@@ -20,14 +20,14 @@ related:
   - storage-and-decoding-bottlenecks.md
   - ../14-ml-engineering-and-mlops/batch-and-online-inference.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Scalability
 
 Scalability is the ability to handle more load by adding resources, partitioning state, reducing work, or changing the workload contract. It is not the same as speed: a service can be fast at low traffic and fail to scale because a single queue, database partition, model endpoint, or object prefix saturates. In ML systems, [batch and online inference](../14-ml-engineering-and-mlops/batch-and-online-inference.md) often scale through different mechanisms.
 
-## Mechanism
+## Little's Law and scaling limits
 
 A useful first approximation is Little's Law:
 

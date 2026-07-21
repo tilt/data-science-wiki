@@ -25,7 +25,7 @@ related:
   - determinism-and-reproducibility.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-20
 ---
 
 # Harnesses
@@ -34,7 +34,7 @@ A harness is the controlled wrapper around a generative-AI system. It fixes inpu
 
 Harnesses are especially important for [RAG evaluation](rag-evaluation.md), [agent evaluation](agent-evaluation.md), [LLM-as-judge](llm-as-judge.md), and [tool use and function calling](tool-use-and-function-calling.md), because the final answer is only one part of the behavior. A good harness records the path that produced the answer.
 
-## Mechanism
+## The five parts of a harness
 
 At minimum, a harness has five parts:
 
@@ -64,7 +64,7 @@ $$
 
 The runner owns reproducibility. The system adapter owns product-specific calls. The trace recorder owns observability. Graders should read the trace and artifacts, not just the final answer, because retrieval misses, forbidden tool calls, and citation errors can be invisible in fluent text.
 
-## Concrete Artifact
+## A harness spec
 
 This compact harness spec shows the contract a runner needs. The exact file format is less important than the boundaries it names.
 

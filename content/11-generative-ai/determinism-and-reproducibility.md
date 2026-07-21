@@ -18,14 +18,14 @@ related:
   - model-serving.md
   - agent-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Determinism and Reproducibility
 
 Determinism means identical inputs and execution conditions produce identical outputs. Reproducibility means a run can be reconstructed closely enough to debug drift. In generative systems, this spans [sampling and decoding](sampling-and-decoding.md), [context construction](context-construction.md), retrieval, tools, serving, and validators.
 
-## Mechanism
+## What to record for a replayable run
 
 A run record should include model identifier, prompt messages, decoding parameters, seed if exposed, retrieved chunk IDs, tool schemas, tool outputs, validator versions, and post-processing code. Temperature zero narrows sampling but does not freeze hosted infrastructure or retrieval state; see [temperature and determinism](temperature-and-determinism.md).
 
@@ -39,7 +39,7 @@ Reproducibility fails whenever an unrecorded dependency changes. In a RAG system
 | Tools              | schema versions, arguments, outputs, errors      | tool state can dominate the result           |
 | Validators         | schema, citation, safety, and policy versions    | post-processing can accept or reject outputs |
 
-## Concrete artifact
+## A minimal run record
 
 ```json
 {

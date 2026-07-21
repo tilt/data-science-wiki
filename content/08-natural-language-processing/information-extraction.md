@@ -18,14 +18,14 @@ related:
   - document-understanding.md
   - evaluation-of-nlp-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Information Extraction
 
 Information extraction (IE) converts text into structured records: entities, fields, relations, events, or table rows. [Named entity recognition](named-entity-recognition.md) finds typed spans; IE adds schema constraints such as invoice id, total, due date, buyer, supplier, and source offsets. It connects naturally to [document understanding](document-understanding.md) when layout matters.
 
-## Defining mechanism
+## Predicting structured records
 
 An extraction system predicts a record
 

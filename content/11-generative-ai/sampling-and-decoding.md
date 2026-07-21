@@ -18,14 +18,14 @@ related:
   - structured-output.md
   - language-model-architecture.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Sampling and Decoding
 
 Sampling and decoding turn a language model's next-token logits into actual output. The model architecture supplies a score vector; the decoder chooses whether to take the highest score, rescale the distribution, truncate unlikely tokens, or enforce a contract such as [structured output](structured-output.md). This page is the parent concept for [temperature and determinism](temperature-and-determinism.md) and [top-k and top-p sampling](top-k-and-top-p-sampling.md).
 
-## Defining mechanism
+## Decoding rules
 
 For vocabulary logits $z\in\mathbb R^V$, ordinary sampling uses
 
@@ -35,7 +35,7 @@ $$
 
 with temperature $T>0$. Greedy decoding is $\arg\max_i z_i$. Top-k sets all but the $k$ largest logits to $-\infty$ before softmax. Nucleus, or top-p, first sorts tokens by probability and keeps the smallest prefix $S$ such that $\sum_{i\in S}p_i\ge p$, then renormalizes on $S$. These controls affect diversity but do not by themselves make an application reproducible; that requires the broader trace discipline in [determinism and reproducibility](determinism-and-reproducibility.md).
 
-## Executed artifact
+## Comparing decoders
 
 This snippet applies greedy, temperature, top-k, and nucleus decoding to the same logits and compares the resulting token probabilities and entropy.
 

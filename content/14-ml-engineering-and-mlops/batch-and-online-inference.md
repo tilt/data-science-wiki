@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - batch-and-online-inference
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - service-level-objectives.md
   - ../13-data-engineering/batch-versus-streaming.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Batch and Online Inference
 
 Batch inference scores many entities on a schedule; online inference scores one request, or a small request batch, while a user or downstream service is waiting. The choice is not cosmetic. It fixes the freshness contract, timeout behavior, cost shape, and the kind of [model-serving](model-serving.md) interface the rest of the system consumes.
 
-## Mechanism
+## Batch path versus online path
 
 A batch path usually reads a point-in-time feature snapshot, writes predictions to a table, and exposes them through lookup. An online path validates a request, fetches fresh features, runs inference synchronously, and returns a bounded-latency response. The contract should name the scoring time, feature freshness, model version, fallback behavior, and owner of stale predictions.
 

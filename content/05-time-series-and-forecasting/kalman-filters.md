@@ -8,7 +8,7 @@ topics:
   - state-space-models
   - recursive-estimation
 level: advanced
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - "Kalman Filter"
@@ -23,7 +23,7 @@ related:
   - online-learning-for-forecasting.md
   - prediction-intervals.md
 historical_context: false
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-20
 ---
 
 # Kalman Filters

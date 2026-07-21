@@ -17,14 +17,14 @@ related:
   - backpropagation.md
   - ../15-cloud-and-distributed-systems/distributed-model-training.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Distributed Training
 
 Distributed training uses multiple devices or machines to reduce wall-clock time or fit larger models. Data parallelism is the default pattern: each worker runs forward and [backpropagation](backpropagation.md) on a shard of the batch, gradients are averaged, then every replica applies the same [optimizer](optimizers.md) step. Systems concerns connect this page to broader [distributed model training](../15-cloud-and-distributed-systems/distributed-model-training.md).
 
-## Defining mechanism
+## Synchronous data parallelism
 
 For $N$ workers with local gradients $g_i$, synchronous data parallelism computes
 

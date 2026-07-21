@@ -19,14 +19,14 @@ related:
   - ../11-generative-ai/vector-databases.md
   - ../08-natural-language-processing/embeddings.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Vector Indexes
 
 A vector index stores embeddings so [dense retrieval](dense-retrieval.md) can find nearest neighbors quickly. Small corpora can use exact matrix multiplication; large corpora usually need [approximate nearest-neighbour search](approximate-nearest-neighbour-search.md), quantization, sharding, or hardware-aware batching.
 
-## Mechanism
+## Exact and approximate search
 
 For normalized vectors, exact top-$k$ search computes
 

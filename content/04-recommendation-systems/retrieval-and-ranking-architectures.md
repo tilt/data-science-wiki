@@ -19,14 +19,14 @@ related:
   - ../12-information-retrieval-and-search/vector-indexes.md
   - ../12-information-retrieval-and-search/reranking.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Retrieval and Ranking Architectures
 
 Retrieval-and-ranking architectures split recommendation into fast broad recall and slower precise ordering. This is the recommender analogue of [dense retrieval](../12-information-retrieval-and-search/dense-retrieval.md) followed by [reranking](../12-information-retrieval-and-search/reranking.md): retrieve thousands, rank hundreds, display a few.
 
-## Defining mechanism
+## The two-stage system
 
 A two-stage system can be written as
 

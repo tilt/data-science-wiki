@@ -19,14 +19,14 @@ related:
   - agent-evaluation.md
   - rag-architecture-comparison.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Agent Loops
 
 An agent loop repeatedly observes state, chooses an action, receives an observation, and decides whether to continue. It is the runtime skeleton under [agentic systems](agentic-systems.md), combining [planning](planning.md), [tool use](tool-use-and-function-calling.md), stopping rules, and sometimes [memory](memory.md).
 
-## Mechanism
+## The loop as a state machine
 
 A useful loop is a state machine, not an unconstrained conversation:
 
@@ -45,7 +45,7 @@ flowchart TD
 
 The application owns the loop invariants: maximum steps, available tools, retry policy, side-effect confirmation, budget limits, and what counts as completion. The model proposes actions inside those constraints. This separation matters because the same model output can be valid in one state and invalid in another.
 
-## Concrete artifact
+## A loop contract
 
 ```json
 {

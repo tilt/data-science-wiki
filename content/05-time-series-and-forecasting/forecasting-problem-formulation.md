@@ -8,7 +8,7 @@ topics:
   - time-series-forecasting
   - supervised-learning
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Time Series Forecasting Formulation
@@ -23,12 +23,10 @@ related:
   - forecast-evaluation.md
   - backtesting.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Forecasting Problem Formulation
-
-## Summary
 
 Time series forecasting estimates future values of an ordered quantity from information available at a prediction time. The central difficulty is not only fitting a function, but defining exactly what was known at the forecast origin, what horizon is required, and how predictions will be evaluated.
 

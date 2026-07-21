@@ -18,14 +18,14 @@ related:
   - "documentation.md"
   - "python.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Refactoring
 
 Refactoring changes internal structure without intentionally changing external behavior. It is not cleanup as a side quest; it is a controlled change with a behavior contract. The usual loop is capture current behavior, make one small structural move, run checks, then continue. [Code review](code-review.md) should reject refactors that smuggle in product changes without tests.
 
-## Mechanism
+## Refactoring under a test net
 
 Characterization tests are the safety net when the existing code has unclear intent. They record what the system currently does on representative inputs. Once the checks exist, common moves include extract function, replace conditional with polymorphism, introduce parameter object, or split side effects from pure logic. Those moves often reveal when a [design pattern](design-patterns.md) is useful rather than decorative.
 

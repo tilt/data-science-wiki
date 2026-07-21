@@ -18,14 +18,14 @@ related:
   - text-preprocessing.md
   - semantic-textual-similarity.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Urgency Classification
 
 Urgency classification predicts how quickly a text needs action: low, normal, urgent, safety-critical, or escalation-worthy. It is a [text classification](text-classification.md) task, but unlike [topic classification](topic-classification.md), the loss is asymmetric: missing a true outage is usually worse than over-escalating a harmless typo.
 
-## Defining mechanism
+## Cost-sensitive classification
 
 A classifier can estimate class probabilities $p(y\mid d)$ and then choose the action with minimum expected cost:
 

@@ -19,14 +19,14 @@ related:
   - "../13-data-engineering/sql.md"
   - "../13-data-engineering/relational-modelling.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # SQL
 
 SQL in software engineering is an application contract: which records a user may see, which transaction boundary protects a change, and which query shape stays stable under load. The deeper SQL-language and warehouse-pattern discussion belongs in [data engineering SQL](../13-data-engineering/sql.md); this page focuses on using SQL safely from services.
 
-## Mechanism
+## Safe application SQL
 
 Application SQL should use parameter binding, explicit authorization predicates, pagination, indexes aligned with access paths, and transaction scopes around multi-step changes. Query success is not enough: the returned rows must be authorized and semantically correct for the [API design](api-design.md) contract.
 

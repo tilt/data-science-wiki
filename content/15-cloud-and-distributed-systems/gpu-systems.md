@@ -19,14 +19,14 @@ related:
   - ../06-deep-learning/pytorch.md
   - ../06-deep-learning/mixed-precision.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # GPU Systems
 
 GPU systems are useful when a workload has enough tensor arithmetic to amortize data movement. For ML, the hard limits are usually not "has a GPU" but HBM capacity, HBM bandwidth, PCIe or NVLink movement, kernel launch overhead, and whether the model can use lower precision safely through [mixed precision](../06-deep-learning/mixed-precision.md). A deployment choice in [managed compute](managed-compute.md) therefore has to name the accelerator type, memory size, interconnect, driver stack, and serving batch shape.
 
-## Mechanism
+## The roofline model
 
 The operating model is a roofline constraint:
 

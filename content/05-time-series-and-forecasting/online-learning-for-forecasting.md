@@ -8,7 +8,7 @@ topics:
   - forecasting
   - model-updating
 level: advanced
-status: review
+status: complete
 page_type: implementation
 aliases:
   - Incremental Forecasting
@@ -22,12 +22,10 @@ related:
   - backtesting.md
   - ../14-ml-engineering-and-mlops/batch-and-online-inference.md
 historical_context: false
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-20
 ---
 
 # Online Learning for Forecasting
-
-## Summary
 
 Online learning updates a forecasting model as new data arrives instead of retraining from scratch on a fixed schedule. It is useful when patterns change quickly, data volume is high, or forecasts must adapt between batch retraining runs.
 

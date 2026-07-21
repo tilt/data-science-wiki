@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - microservices
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - reliability.md
   - ../16-software-engineering/api-design.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Microservices
 
 In ML systems, microservices split responsibilities such as feature retrieval, model scoring, policy decisions, and feedback collection into independently deployable services. The pattern helps when ownership and scaling boundaries are real; it hurts when a single prediction path becomes a chain of poorly observed network calls.
 
-## Mechanism
+## Service boundaries
 
 Each service owns an API contract, deployment unit, telemetry, and failure policy. A typical synchronous decision path is application API -> feature service -> [model-serving](model-serving.md) service -> policy service. A slow dependency can consume the whole user-facing latency budget, so [reliability](reliability.md) depends on timeouts, bulkheads, retries with limits, and fallbacks.
 

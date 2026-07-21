@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - docker
 level: foundational
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - microservices.md
   - model-versioning.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Docker
 
 Docker packages application code, Python dependencies, native libraries, and a startup command into an image. In MLOps, the image is the runtime envelope for [training pipelines](training-pipelines.md), batch scoring jobs, and [model-serving](model-serving.md) processes; the model artifact still needs its own version.
 
-## Mechanism
+## Building immutable images
 
 A Dockerfile builds immutable layers. CI should pin the base image, install dependencies deterministically, run tests, and push an image tagged by source commit. Runtime configuration, model URIs, and secrets should be injected by the orchestrator rather than baked into the image.
 

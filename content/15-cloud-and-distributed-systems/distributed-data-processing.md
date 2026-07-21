@@ -20,14 +20,14 @@ related:
   - ../13-data-engineering/data-pipelines.md
   - ../13-data-engineering/feature-pipelines.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Distributed Data Processing
 
 Distributed data processing splits a dataset into partitions, runs tasks near those partitions, and coordinates the shuffle steps that move records by key. It is the systems layer behind many [data pipelines](../13-data-engineering/data-pipelines.md), feature builds, backfills, and offline evaluation jobs. The design question is not just "can it run on a cluster?" but "which stage repartitions data, which key can become hot, and what side effects are safe to retry?"
 
-## Mechanism
+## Jobs as DAGs
 
 A Spark-style batch job is a DAG:
 

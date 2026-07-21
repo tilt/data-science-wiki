@@ -18,14 +18,14 @@ related:
   - reranking.md
   - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Search Evaluation
 
 Search evaluation checks whether retrieval satisfies real information needs, not whether a component looks elegant. A useful evaluation set has queries, candidate results, relevance labels, metrics, and slices for query classes such as exact identifiers, broad topics, paraphrases, and permission-filtered searches.
 
-## Defining mechanism
+## Offline metric averaging
 
 For labelled queries $Q$, an offline evaluation computes a metric per query and averages:
 

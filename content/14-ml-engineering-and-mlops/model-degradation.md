@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - model-degradation
 level: foundational
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - rollbacks.md
   - evaluation-datasets.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Model Degradation
 
 Model degradation is a measured decline in production behavior: worse ranking, calibration, cost-weighted error, coverage, or human override rate. It is an outcome, not a cause. The cause may be [data drift](data-drift.md), [concept drift](concept-drift.md), a feature pipeline bug, feedback loops, or a changed business process.
 
-## Mechanism
+## Diagnosing degradation
 
 Degradation monitoring compares current behavior with an approved baseline by model version and slice. The diagnosis should separate request health, feature freshness, score distribution, delayed labels, threshold decisions, and user impact. If the current model is unsafe, [rollbacks](rollbacks.md) take priority over root-cause perfection.
 

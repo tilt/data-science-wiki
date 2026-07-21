@@ -17,14 +17,14 @@ related:
   - content-based-image-retrieval.md
   - self-supervised-visual-learning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Feature Extraction
 
 Feature extraction converts an [image representation](image-representation.md) into measurements a downstream model can compare or classify. Classical features are hand-designed descriptors; learned features are intermediate activations or embeddings trained by [CNN architectures](cnn-architectures.md), [vision transformers](vision-transformers.md), or [self-supervised visual learning](self-supervised-visual-learning.md).
 
-## Defining mechanism
+## Features as a mapping
 
 A feature extractor is a map
 

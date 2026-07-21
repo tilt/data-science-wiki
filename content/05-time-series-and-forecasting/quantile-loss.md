@@ -8,7 +8,7 @@ topics:
   - probabilistic-forecasting
   - loss-functions
 level: intermediate
-status: review
+status: complete
 page_type: reference
 aliases:
   - Pinball Loss
@@ -22,12 +22,10 @@ related:
   - business-cost-aware-forecasting-losses.md
   - conformal-prediction-for-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Quantile Loss
-
-## Summary
 
 Quantile loss, also called pinball loss, trains or evaluates a forecast for a chosen quantile. It is useful when underforecasting and overforecasting have different costs.
 

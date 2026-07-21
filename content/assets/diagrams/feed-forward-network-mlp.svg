@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="500" viewBox="0 0 900 500" role="img" aria-labelledby="title desc">
+  <title id="title">Feed-forward network as a multilayer perceptron</title>
+  <desc id="desc">A feed-forward network maps an input vector through dense hidden layers and nonlinear activation functions to an output vector. In a transformer FFN, the same MLP is applied independently to every token position.</desc>
+  <style>
+    text {
+      fill: #111827;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .muted { fill: #4b5563; }
+    .panel { fill: #ffffff; stroke: #d8dee9; }
+    .node-input { fill: #dbeafe; stroke: #2563eb; }
+    .node-hidden { fill: #ccfbf1; stroke: #0f766e; }
+    .node-output { fill: #ede9fe; stroke: #7c3aed; }
+    .edge { stroke: #64748b; opacity: 0.8; }
+    .arrow { stroke: #f97316; fill: none; }
+    .note { fill: #ffedd5; stroke: #f97316; }
+  </style>
+  <defs>
+    <marker id="mlp-arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#f97316"/>
+    </marker>
+  </defs>
+
+  <rect width="900" height="500" rx="16" fill="transparent"/>
+  <text x="450" y="40" text-anchor="middle" font-size="27" font-weight="700">Feed-forward networks transform features layer by layer</text>
+  <text x="450" y="68" text-anchor="middle" font-size="15" class="muted">Dense affine maps plus nonlinear activations form a multilayer perceptron.</text>
+
+  <g transform="translate(50,104)">
+    <rect x="0" y="0" width="570" height="326" rx="10" class="panel"/>
+    <text x="285" y="32" text-anchor="middle" font-size="18" font-weight="700">MLP data flow</text>
+    <text x="285" y="58" text-anchor="middle" font-size="13" class="muted">Information moves forward; there are no recurrent loops.</text>
+
+    <g class="edge" stroke-width="1.5">
+      <line x1="98" y1="114" x2="256" y2="92"/>
+      <line x1="98" y1="114" x2="256" y2="142"/>
+      <line x1="98" y1="114" x2="256" y2="192"/>
+      <line x1="98" y1="164" x2="256" y2="92"/>
+      <line x1="98" y1="164" x2="256" y2="142"/>
+      <line x1="98" y1="164" x2="256" y2="192"/>
+      <line x1="98" y1="214" x2="256" y2="92"/>
+      <line x1="98" y1="214" x2="256" y2="142"/>
+      <line x1="98" y1="214" x2="256" y2="192"/>
+      <line x1="314" y1="92" x2="472" y2="134"/>
+      <line x1="314" y1="92" x2="472" y2="184"/>
+      <line x1="314" y1="142" x2="472" y2="134"/>
+      <line x1="314" y1="142" x2="472" y2="184"/>
+      <line x1="314" y1="192" x2="472" y2="134"/>
+      <line x1="314" y1="192" x2="472" y2="184"/>
+    </g>
+
+    <g>
+      <circle cx="98" cy="114" r="22" class="node-input" stroke-width="2"/>
+      <circle cx="98" cy="164" r="22" class="node-input" stroke-width="2"/>
+      <circle cx="98" cy="214" r="22" class="node-input" stroke-width="2"/>
+      <text x="98" y="270" text-anchor="middle" font-size="15" font-weight="700">input</text>
+      <text x="98" y="292" text-anchor="middle" font-size="13" class="muted">features x</text>
+    </g>
+
+    <g>
+      <circle cx="286" cy="92" r="22" class="node-hidden" stroke-width="2"/>
+      <circle cx="286" cy="142" r="22" class="node-hidden" stroke-width="2"/>
+      <circle cx="286" cy="192" r="22" class="node-hidden" stroke-width="2"/>
+      <text x="286" y="270" text-anchor="middle" font-size="15" font-weight="700">hidden layer</text>
+      <text x="286" y="292" text-anchor="middle" font-size="13" class="muted">affine + activation</text>
+    </g>
+
+    <g>
+      <circle cx="502" cy="134" r="22" class="node-output" stroke-width="2"/>
+      <circle cx="502" cy="184" r="22" class="node-output" stroke-width="2"/>
+      <text x="502" y="270" text-anchor="middle" font-size="15" font-weight="700">output</text>
+      <text x="502" y="292" text-anchor="middle" font-size="13" class="muted">prediction or new features</text>
+    </g>
+  </g>
+
+  <g transform="translate(650,104)">
+    <rect x="0" y="0" width="200" height="326" rx="10" class="panel"/>
+    <text x="100" y="32" text-anchor="middle" font-size="18" font-weight="700">Transformer FFN</text>
+    <text x="100" y="58" text-anchor="middle" font-size="13" class="muted">same MLP at each token</text>
+    <g font-size="13">
+      <rect x="42" y="84" width="116" height="36" rx="7" class="node-input"/>
+      <text x="100" y="107" text-anchor="middle" font-weight="700">token h_i</text>
+      <path d="M100 124 L100 146" class="arrow" stroke-width="2" marker-end="url(#mlp-arrow)"/>
+      <rect x="35" y="154" width="130" height="44" rx="7" class="note"/>
+      <text x="100" y="173" text-anchor="middle" font-weight="700">W1, activation</text>
+      <text x="100" y="190" text-anchor="middle" class="muted">expand channels</text>
+      <path d="M100 202 L100 224" class="arrow" stroke-width="2" marker-end="url(#mlp-arrow)"/>
+      <rect x="42" y="232" width="116" height="36" rx="7" class="node-output"/>
+      <text x="100" y="255" text-anchor="middle" font-weight="700">new h_i</text>
+    </g>
+    <text x="100" y="296" text-anchor="middle" font-size="13" class="muted">Attention mixes positions;</text>
+    <text x="100" y="314" text-anchor="middle" font-size="13" class="muted">FFN mixes features.</text>
+  </g>
+</svg>

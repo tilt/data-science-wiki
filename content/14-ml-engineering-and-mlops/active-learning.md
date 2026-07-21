@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - active-learning
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - dataset-versioning.md
   - ../03-classical-machine-learning/classification.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Active Learning
 
 Active learning selects unlabeled examples for annotation because the model expects those labels to improve learning more than random labels would. It is an ML operations loop: model scores a pool, a selection policy creates a labeling batch, [human-in-the-loop systems](human-in-the-loop-systems.md) collect labels, and a fixed [evaluation dataset](evaluation-datasets.md) checks whether the loop actually helped.
 
-## Mechanism
+## Selecting what to label
 
 Uncertainty sampling selects examples with small margin between the top two predicted classes. Diversity and stratification are usually added so the batch is not full of duplicates or low-value edge cases.
 

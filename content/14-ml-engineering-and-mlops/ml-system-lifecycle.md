@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - ml-system-lifecycle
 level: foundational
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - monitoring.md
   - production-incident-response.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # ML System Lifecycle
 
 The ML system lifecycle is the controlled path from problem framing to data creation, training, evaluation, deployment, monitoring, incident response, retraining, and retirement. It is broader than model development because production behavior depends on data, code, infrastructure, policies, and humans.
 
-## Mechanism
+## Stages and their artifacts
 
 Each stage should produce an artifact that the next stage consumes: a decision brief, dataset manifest, training run, evaluation report, model version, serving contract, rollout record, monitoring dashboard, and retirement note. The lifecycle is circular only when [monitoring](monitoring.md) or incidents create new evidence that justifies another training or policy cycle.
 

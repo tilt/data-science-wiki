@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - transformer-based-forecasting
 level: advanced
-status: review
+status: complete
 page_type: model
 aliases:
   - "Transformer Based Forecasting"
@@ -20,7 +20,7 @@ related:
   - ../06-deep-learning/attention.md
   - ../06-deep-learning/transformers.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Transformer-Based Forecasting

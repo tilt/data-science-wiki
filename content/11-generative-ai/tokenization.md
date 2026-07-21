@@ -18,14 +18,14 @@ related:
   - pretraining.md
   - ../08-natural-language-processing/tokenization.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Tokenization
 
 Tokenization converts text into the units consumed by a model. It affects [language model architecture](language-model-architecture.md), [pretraining](pretraining.md), prompt cost, [chunking](chunking.md), truncation, and generation boundaries.
 
-## Mechanism
+## Subword vocabularies
 
 Subword tokenizers learn a vocabulary of pieces so rare words can be represented as combinations. Byte-pair encoding repeatedly merges frequent adjacent symbols; other systems use unigram or byte-level variants. Context limits count tokens, not words, so [context construction](context-construction.md) needs the model's tokenizer.
 

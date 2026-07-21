@@ -17,14 +17,14 @@ related:
   - video-representation.md
   - self-supervised-video-representation-learning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # World Models
 
 World models learn a latent state and transition model that supports prediction, planning, or control. In video understanding, this means representing how scenes evolve, not only recognizing a label. The topic overlaps with [video representation](video-representation.md), [self-supervised video representation learning](self-supervised-video-representation-learning.md), and [V-JEPA 2](v-jepa-2.md).
 
-## Defining mechanism
+## Encoder, dynamics, decoder
 
 A compact world model has an encoder, dynamics model, and decoder or cost head:
 

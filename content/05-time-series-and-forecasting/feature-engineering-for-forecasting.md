@@ -8,7 +8,7 @@ topics:
   - target-transformations
   - forecasting
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases:
   - Forecast Feature Engineering
@@ -23,12 +23,10 @@ related:
   - rolling-origin-validation.md
   - concept-drift-in-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Feature Engineering for Forecasting
-
-## Summary
 
 Forecasting features must encode temporal structure without using information from after the forecast origin. The most common families are lag features, rolling-window statistics, calendar variables, event indicators, promotions, lifecycle features, categorical encodings, exposure variables, scaling, imputation, and target transformations.
 

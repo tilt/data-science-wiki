@@ -20,14 +20,14 @@ related:
   - ../14-ml-engineering-and-mlops/reliability.md
   - ../14-ml-engineering-and-mlops/service-level-objectives.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Reliability
 
 Cloud reliability is the ability of a workload to keep its promised behavior while components fail, slow down, or recover. In this section, reliability is infrastructure-facing: zones, dependencies, retries, backups, quotas, and failover. For model-specific production reliability, cross-reference the MLOps page on [reliability](../14-ml-engineering-and-mlops/reliability.md) and [service-level objectives](../14-ml-engineering-and-mlops/service-level-objectives.md).
 
-## Mechanism
+## SLIs, SLOs, and redundancy
 
 Reliability starts with an SLI and an SLO:
 

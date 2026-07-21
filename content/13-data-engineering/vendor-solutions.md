@@ -35,12 +35,12 @@ The leading pattern in 2026 is convergence. Warehouse vendors add lakehouse, str
 
 ## Platform categories
 
-| Category | Common choices | Best fit |
-| --- | --- | --- |
-| Cloud data warehouse | Snowflake, BigQuery, Amazon Redshift | SQL-first analytics, governed marts, BI, elastic analytical workloads. |
-| Lakehouse platform | Databricks, Microsoft Fabric, open Spark with Delta/Iceberg/Hudi | Mixed SQL, Python, Spark, ML, streaming, and object-storage-first data. |
-| Cloud suite | Google Cloud, AWS, Microsoft Fabric/Azure | Organizations standardizing on one cloud's IAM, network, billing, and managed services. |
-| Specialized engine | ClickHouse, Starburst/Trino, DuckDB, Firebolt | Low-latency analytics, federated SQL, local analytics, or application-facing OLAP. |
+| Category               | Common choices                                                            | Best fit                                                                                                 |
+| ---------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Cloud data warehouse   | Snowflake, BigQuery, Amazon Redshift                                      | SQL-first analytics, governed marts, BI, elastic analytical workloads.                                   |
+| Lakehouse platform     | Databricks, Microsoft Fabric, open Spark with Delta/Iceberg/Hudi          | Mixed SQL, Python, Spark, ML, streaming, and object-storage-first data.                                  |
+| Cloud suite            | Google Cloud, AWS, Microsoft Fabric/Azure                                 | Organizations standardizing on one cloud's IAM, network, billing, and managed services.                  |
+| Specialized engine     | ClickHouse, Starburst/Trino, DuckDB, Firebolt                             | Low-latency analytics, federated SQL, local analytics, or application-facing OLAP.                       |
 | Adjacent control plane | dbt, Fivetran, Airbyte, Airflow, Dagster, Kafka, Flink, DataHub, Collibra | Transformation, ingestion, orchestration, streaming, catalog, quality, and lineage around the warehouse. |
 
 The practical architecture is often a platform plus several adjacent tools: for example Snowflake plus Fivetran, dbt, Airflow, and Tableau; or Databricks plus Delta Live Tables, Unity Catalog, Workflows, MLflow, and Power BI. Vendor consolidation reduces integration work, but independent tools can preserve portability and sharper specialization.
@@ -124,15 +124,15 @@ The most important state-of-the-art shift is that governance, lineage, quality, 
 
 Use vendor evaluation as an architecture exercise:
 
-| Criterion | Questions |
-| --- | --- |
-| Workload mix | Is the dominant workload BI SQL, Spark engineering, streaming, ML, AI inference, application analytics, or all of them? |
-| Storage ownership | Does data live in vendor-managed tables, object storage with open formats, or both? |
-| Governance | Can the platform enforce row/column policies, lineage, audit logs, sharing, data classification, and model governance consistently? |
-| Interoperability | Can other engines read the same tables through Iceberg, Delta, Parquet, open catalogs, or standard APIs? |
-| Operations | Who owns compute policies, cost budgets, environment promotion, incident response, and performance tuning? |
-| Ecosystem fit | Does the platform match the organization's cloud, IAM, BI, ML, and procurement defaults? |
-| Lock-in risk | Which workloads become hard to move, and is that acceptable for the business value gained? |
+| Criterion         | Questions                                                                                                                           |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Workload mix      | Is the dominant workload BI SQL, Spark engineering, streaming, ML, AI inference, application analytics, or all of them?             |
+| Storage ownership | Does data live in vendor-managed tables, object storage with open formats, or both?                                                 |
+| Governance        | Can the platform enforce row/column policies, lineage, audit logs, sharing, data classification, and model governance consistently? |
+| Interoperability  | Can other engines read the same tables through Iceberg, Delta, Parquet, open catalogs, or standard APIs?                            |
+| Operations        | Who owns compute policies, cost budgets, environment promotion, incident response, and performance tuning?                          |
+| Ecosystem fit     | Does the platform match the organization's cloud, IAM, BI, ML, and procurement defaults?                                            |
+| Lock-in risk      | Which workloads become hard to move, and is that acceptable for the business value gained?                                          |
 
 Avoid choosing a vendor from a feature checklist alone. The expensive failures are usually mismatched ownership: nobody owns cost controls, nobody owns semantic definitions, or nobody owns the platform conventions that keep ingestion, transformation, governance, and marts coherent.
 

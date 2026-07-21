@@ -19,14 +19,14 @@ related:
   - ../11-generative-ai/hallucination-mitigation.md
   - ../11-generative-ai/grounding.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Hallucinations
 
 Hallucinations are generated statements that are unsupported, fabricated, or misleading relative to the task evidence. The governance problem is not that a model "sounds creative"; it is that users may treat fluent unsupported text as fact. The control surface overlaps with [factual correctness](factual-correctness.md), [prompt injection](prompt-injection.md), and [hallucination mitigation](../11-generative-ai/hallucination-mitigation.md).
 
-## Mechanism
+## Where the failure entered
 
 A hallucination review should classify each unsupported output by where the failure entered:
 

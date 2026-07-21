@@ -7,7 +7,7 @@ topics:
   - "arima"
   - "statistical-forecasting"
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - "ARIVA"
@@ -21,7 +21,7 @@ related:
   - sarima.md
   - backtesting.md
 historical_context: false
-last_reviewed: 2026-07-10
+last_reviewed: 2026-07-20
 references:
   - "box-jenkins-reinsel-ljung-2015-time-series"
 ---

@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - rnn-and-lstm-forecasting
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - "RNN and Lstm Forecasting"
@@ -20,7 +20,7 @@ related:
   - ../06-deep-learning/recurrent-neural-networks.md
   - ../06-deep-learning/lstm-and-gru.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # RNN and LSTM Forecasting

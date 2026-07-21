@@ -8,7 +8,7 @@ topics:
   - covariates
   - exposure
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Time Series Covariates
@@ -23,12 +23,10 @@ related:
   - forecasting-system-design.md
   - cold-start-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Forecasting Data and Covariates
-
-## Summary
 
 A forecasting dataset should make the prediction unit, timestamp, target, and feature availability explicit. A generic long-format table contains an entity identifier, a timestamp, a target value, time-varying covariates, static metadata, and optional masks indicating which entities should be forecast.
 

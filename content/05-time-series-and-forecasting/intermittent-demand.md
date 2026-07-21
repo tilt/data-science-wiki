@@ -8,7 +8,7 @@ topics:
   - sparse-demand
   - statistical-forecasting
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Sparse Demand Forecasting
@@ -22,12 +22,10 @@ related:
   - statistical-forecasting.md
   - business-cost-aware-forecasting-losses.md
 historical_context: false
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-20
 ---
 
 # Intermittent Demand
-
-## Summary
 
 Intermittent demand series contain many zero observations and occasional positive demand. They are common in spare parts, slow-moving inventory, maintenance events, and low-frequency service requests. Ordinary forecasting methods struggle because the timing of nonzero events and their sizes are both uncertain.
 

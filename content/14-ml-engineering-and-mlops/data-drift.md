@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - data-drift
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - evaluation-datasets.md
   - ../13-data-engineering/data-quality.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Data Drift
 
 Data drift means production inputs no longer follow the reference distribution used for training, validation, or release approval. It concerns $P(X)$, while [concept drift](concept-drift.md) concerns $P(Y\mid X)$. Data drift can be harmless, but it is often the earliest observable sign that [model degradation](model-degradation.md) may follow.
 
-## Mechanism
+## Comparing reference and current windows
 
 Drift checks compare a reference window with a current window by feature, slice, and time. Numeric features can use quantile buckets, KS tests, or Wasserstein distance; categorical features can use frequency shifts; embeddings can use distance summaries. The check must record the reference period, bucket edges, sample sizes, and alert threshold so [monitoring](monitoring.md) can distinguish real movement from changing definitions.
 

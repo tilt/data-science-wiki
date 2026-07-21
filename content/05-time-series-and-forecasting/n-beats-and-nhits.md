@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - n-beats-and-nhits
 level: advanced
-status: review
+status: complete
 page_type: model
 aliases:
   - "N Beats and Nhits"
@@ -19,7 +19,7 @@ related:
   - probabilistic-forecasting.md
   - forecast-error-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # N-BEATS and N-HiTS

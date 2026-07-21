@@ -17,14 +17,14 @@ related:
   - detection-and-segmentation-metrics.md
   - data-augmentation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Instance Segmentation
 
 Instance segmentation predicts a separate mask for each object instance. It combines [object detection](object-detection.md) with mask prediction: the system must decide how many objects exist, where they are, and which pixels belong to each one.
 
-## Defining mechanism
+## Masks per instance
 
 A typical instance model returns
 

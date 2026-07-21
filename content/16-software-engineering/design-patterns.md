@@ -18,14 +18,14 @@ related:
   - "api-design.md"
   - "python.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Design Patterns
 
 Design patterns are named boundaries for recurring design problems. The useful part is not the name; it is the dependency direction the pattern creates. Strategy separates interchangeable algorithms, Adapter hides incompatible interfaces, Factory centralizes construction, Repository isolates persistence, and Facade gives callers a smaller API over a complex subsystem.
 
-## Mechanism
+## Patterns in data and AI code
 
 In data and AI products, Strategy is common when the same request path may use BM25, dense retrieval, hybrid retrieval, or a fallback policy. Instead of scattering `if ranker == ...` across a [web backend](web-backends.md), define one scoring interface and inject the implementation. That keeps [testing](testing.md) focused on behavior and keeps [technical decision records](technical-decision-records.md) honest about why an implementation was selected.
 

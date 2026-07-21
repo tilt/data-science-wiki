@@ -18,14 +18,14 @@ related:
   - ranking-and-retrieval-metrics.md
   - ../11-generative-ai/reranking.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Reranking
 
 Reranking reorders a small candidate set after first-stage retrieval. [BM25](bm25.md), [dense retrieval](dense-retrieval.md), or [hybrid search](hybrid-search.md) tries to avoid missing plausible candidates; the reranker spends more compute to improve the final order shown to the user or passed to a RAG context builder.
 
-## Defining mechanism
+## Scoring query-document pairs
 
 A reranker scores each candidate conditioned on the full query-document pair:
 

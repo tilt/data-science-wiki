@@ -18,14 +18,14 @@ related:
   - entity-linking-and-matching.md
   - ../12-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Semantic Textual Similarity
 
 Semantic textual similarity (STS) scores whether two pieces of text mean the same thing or are useful substitutes in a task. It is broader than lexical overlap: "terminate my subscription" and "cancel my plan" should be close even with different words. STS often uses [embeddings](embeddings.md), while [entity linking and matching](entity-linking-and-matching.md) adds canonical identifiers when names must resolve to records.
 
-## Defining mechanism
+## Scoring text pairs
 
 A bi-encoder embeds two texts independently and compares vectors:
 

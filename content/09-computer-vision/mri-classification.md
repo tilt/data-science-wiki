@@ -17,14 +17,14 @@ related:
   - image-classification.md
   - domain-shift.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # MRI Classification
 
 MRI classification assigns labels to slices, series, regions, scans, or patients. That label level must be explicit: a slice-level tear label, a scan-level abnormality label, and a patient-level outcome label have different leakage risks. The task is a medical specialization of [image classification](image-classification.md), with stricter validation requirements from [medical image analysis](medical-image-analysis.md).
 
-## Defining mechanism
+## Aggregating slice embeddings
 
 For a study with slices $x_1,\ldots,x_T$, a model may aggregate slice embeddings:
 

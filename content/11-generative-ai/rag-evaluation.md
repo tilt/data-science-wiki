@@ -19,14 +19,14 @@ related:
   - llm-as-judge.md
   - rag-benchmark-design.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # RAG Evaluation
 
 RAG evaluation separates retrieval quality from generation quality. A good final answer can hide weak retrieval, and a bad answer can occur despite perfect retrieved evidence. Evaluate [retrieval pipelines](retrieval-pipelines.md), [grounding](grounding.md), [citations](citations.md), and abstention separately.
 
-## Mechanism
+## Retrieval and generation metrics
 
 Useful retrieval metrics include context recall, precision@k, [nDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md), and filter correctness. Useful generation metrics include answer support, citation precision, citation coverage, abstention quality, and task success. [LLM-as-judge](llm-as-judge.md) can grade semantic support, but source IDs, retrieved chunk membership, and citation presence should be deterministic checks.
 

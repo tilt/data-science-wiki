@@ -7,7 +7,7 @@ topics:
   - hierarchical-forecasting
   - forecast-reconciliation
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases:
   - Grouped Forecasting
@@ -21,12 +21,10 @@ related:
   - forecast-error-metrics.md
   - forecasting-system-design.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Hierarchical Forecasting
-
-## Summary
 
 Hierarchical forecasting predicts related series at multiple aggregation levels. Examples include SKU-store, SKU-region, category-region, total category, and total business demand. A hierarchy is coherent when lower-level forecasts add up to higher-level forecasts.
 

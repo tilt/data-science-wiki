@@ -18,20 +18,20 @@ related:
   - memory.md
   - tool-use-and-function-calling.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Data Privacy
 
 Data privacy in generative systems is a boundary problem. Sensitive data can leak through prompts, [memory](memory.md), retrieval indexes, [tool use](tool-use-and-function-calling.md), logs, citations, or generated outputs. [PII protection](pii-protection.md) is one control, not the whole privacy program.
 
-## Mechanism
+## The privacy contract
 
 A privacy contract should define data classes, allowed processors, retention windows, access filters, redaction rules, and logging policy before model calls. Retrieval should apply permissions before ranking. Tools should fetch private records only after user authorization. Prompt and response logs should store the minimum needed for debugging and evaluation.
 
 [Prompt injection](prompt-injection.md) matters because retrieved text can ask the model to reveal hidden data. Privacy controls should therefore be enforced outside the model: access checks, field-level filtering, redaction, audit logs, and deletion workflows.
 
-## Concrete artifact
+## A field-level privacy policy
 
 ```yaml
 fields:

@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - energy-consumption-forecasting
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - transformer-based-forecasting.md
   - ../19-domain-applications/energy-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Energy Consumption Forecasting

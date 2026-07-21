@@ -8,7 +8,7 @@ topics:
   - probabilistic-forecasting
   - evaluation
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases:
   - Probabilistic Forecast Calibration
@@ -23,12 +23,10 @@ related:
   - forecast-evaluation.md
   - ../17-experimentation-and-evaluation/calibration.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Forecast Calibration
-
-## Summary
 
 Forecast calibration checks whether predicted probabilities match observed frequencies. In forecasting, calibration is usually assessed for quantiles, prediction intervals, or full predictive distributions.
 

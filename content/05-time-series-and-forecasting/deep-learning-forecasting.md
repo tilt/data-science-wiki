@@ -8,7 +8,7 @@ topics:
   - neural-forecasting
   - transformers
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - Neural Forecasting
@@ -25,12 +25,10 @@ related:
   - probabilistic-forecasting.md
   - ../06-deep-learning/neural-network-fundamentals.md
 historical_context: false
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-20
 ---
 
 # Deep Learning Forecasting
-
-## Summary
 
 Deep learning forecasting uses neural networks to learn temporal representations, covariate interactions, and multi-horizon outputs. Neural models can be useful for large collections of related series, long histories, multiple covariates, nonlinear temporal relationships, and shared representations across entities.
 

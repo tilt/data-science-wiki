@@ -18,14 +18,14 @@ related:
   - embeddings.md
   - evaluation-of-nlp-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Entity Linking and Matching
 
 Entity linking maps a text mention to a canonical identifier; entity matching decides whether two records refer to the same real-world entity. It usually follows [named entity recognition](named-entity-recognition.md) or [information extraction](information-extraction.md). Unlike [semantic textual similarity](semantic-textual-similarity.md), the output must be a stable id, not just a high similarity score.
 
-## Defining mechanism
+## Candidate retrieval and scoring
 
 A practical linker retrieves candidates and scores mention-context compatibility:
 

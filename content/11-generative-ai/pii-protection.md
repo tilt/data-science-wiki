@@ -18,14 +18,14 @@ related:
   - structured-output.md
   - memory.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # PII Protection
 
 PII protection reduces exposure of personal data in prompts, retrieval, logs, [memory](memory.md), and outputs. It is a control inside broader [data privacy](data-privacy.md) and [guardrails](guardrails.md), not a guarantee by itself.
 
-## Mechanism
+## Choosing the least destructive control
 
 A practical pipeline classifies fields, redacts or masks high-risk patterns, minimizes context, and enforces permissions before [tool use](tool-use-and-function-calling.md). Deterministic recognizers catch common emails, phone numbers, and card-shaped strings. Model classifiers may help with free-form sensitive text, but they should not be the only control for regulated fields.
 

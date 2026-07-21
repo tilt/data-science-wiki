@@ -18,14 +18,14 @@ related:
   - video-transformers.md
   - optical-flow.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Spatial and Temporal Modelling
 
 Spatial modelling asks what is visible in each frame; temporal modelling asks how that evidence changes. A single frame may show a raised hand, but the sequence distinguishes waving, pointing, throwing, and stretching. This distinction runs through [video representation](video-representation.md), [3D convolutional networks](3d-convolutional-networks.md), [video transformers](video-transformers.md), and [optical flow](optical-flow.md).
 
-## Defining mechanism
+## Modeling temporal order
 
 For frame features $x_t$, a temporal model applies an order-sensitive function
 

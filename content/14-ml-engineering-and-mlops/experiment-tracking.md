@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - experiment-tracking
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - ci-cd-for-ml.md
   - evaluation-datasets.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Experiment Tracking
 
 Experiment tracking records the evidence behind training and evaluation runs: code commit, [dataset versioning](dataset-versioning.md), parameters, metrics, artifacts, environment, notes, and promotion status. It prevents "best model" from meaning "the notebook output someone remembers."
 
-## Mechanism
+## The run record
 
 Each serious run should create an immutable run record. The record should link input datasets, feature pipeline version, random seed, hyperparameters, metrics by slice, produced artifact, and reviewer notes. A promoted [model-versioning](model-versioning.md) entry should point back to the run that created it.
 

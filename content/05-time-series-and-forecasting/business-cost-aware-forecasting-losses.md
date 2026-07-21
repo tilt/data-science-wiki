@@ -8,7 +8,7 @@ topics:
   - forecast-evaluation
   - decision-making
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases:
   - Cost-Aware Forecasting
@@ -24,12 +24,10 @@ related:
   - forecast-evaluation.md
   - ../17-experimentation-and-evaluation/risk-weighted-error-taxonomies.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Business-Cost-Aware Forecasting Losses
-
-## Summary
 
 Business-cost-aware losses evaluate forecasts by the decision cost they create. MAE and RMSE treat errors symmetrically, but many forecasting decisions do not. Underforecasting demand may cause stockouts; overforecasting may create holding cost or waste.
 

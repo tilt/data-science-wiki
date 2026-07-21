@@ -18,14 +18,14 @@ related:
   - hybrid-search.md
   - ranking-and-retrieval-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Literature Management Search Systems
 
 Literature-management search systems retrieve papers, notes, citations, authors, datasets, and concepts. They need more than full-text search: a useful result may come from bibliographic metadata, a PDF passage, a tag, a citation edge, or a [knowledge graph](knowledge-graphs.md) relation.
 
-## Mechanism
+## Four searchable surfaces
 
 A practical schema has at least four searchable surfaces:
 

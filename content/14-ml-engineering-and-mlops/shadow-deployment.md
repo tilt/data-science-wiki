@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - shadow-deployment
 level: foundational
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - observability.md
   - rollbacks.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Shadow Deployment
 
 A shadow deployment sends production requests to the current service and copies the same requests to a candidate model whose response is logged but not shown to users. It tests [model-serving](model-serving.md) integration, latency, resource use, and output distributions before a [canary deployment](canary-deployment.md) exposes users.
 
-## Mechanism
+## Side-effect-free shadowing
 
 The stable path remains authoritative. The shadow path must be side-effect free: no emails, charges, database writes, recommendation impressions, or policy actions. Every copied request should carry the same correlation ID so [observability](observability.md) can compare stable and shadow behavior.
 

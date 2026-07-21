@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - rollbacks
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - production-incident-response.md
   - service-level-objectives.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Rollbacks
 
 A rollback restores the last acceptable production behavior after a release, retrain, threshold change, or dependency update causes unacceptable risk. In ML systems, "behavior" includes [model-versioning](model-versioning.md), feature definitions, thresholds, prompts, retrieval indexes, and routing, not just application code.
 
-## Mechanism
+## Rollback readiness
 
 Rollback readiness is a pre-release contract. The team should know the trigger, owner, command, expected recovery time, validation query, and customer communication path before the [canary deployment](canary-deployment.md) begins. The previous artifact must remain compatible with current schemas and dependencies.
 

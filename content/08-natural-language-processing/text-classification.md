@@ -18,14 +18,14 @@ related:
   - tokenization.md
   - evaluation-of-nlp-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Text Classification
 
 Text classification maps a text unit to one or more labels: a support ticket to a queue, a review to sentiment, a contract paragraph to a clause type. It is the supervised core behind [topic classification](topic-classification.md) and [urgency classification](urgency-classification.md), but the hard part is usually the label policy: what counts as billing, bug, abuse, or urgent must be annotated consistently before model choice matters.
 
-## Defining mechanism
+## From text to classifier
 
 A classical pipeline turns text into a sparse vector and fits a classifier:
 

@@ -19,14 +19,14 @@ related:
   - semantic-textual-similarity.md
   - ../06-deep-learning/transformers.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # BERT-Style Encoders
 
 BERT-style encoders read an entire token sequence bidirectionally and produce contextual representations for tokens or pooled text. They are strong for [sequence labelling](sequence-labelling.md), [semantic textual similarity](semantic-textual-similarity.md), classification, reranking, and feature extraction. Unlike [decoder-only transformers](decoder-only-transformers.md), they are not trained to generate left-to-right completions.
 
-## Defining mechanism
+## Bidirectional self-attention
 
 Encoder self-attention has no causal future mask:
 

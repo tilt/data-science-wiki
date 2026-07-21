@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - trend-seasonality-cycles-noise
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - sarima.md
   - exponential-smoothing.md
 historical_context: false
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-20
 ---
 
 # Trend Seasonality Cycles Noise

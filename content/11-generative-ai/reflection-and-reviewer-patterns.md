@@ -18,14 +18,14 @@ related:
   - agent-evaluation.md
   - hallucination-mitigation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Reflection and Reviewer Patterns
 
 Reflection and reviewer patterns add a critique step after a draft. The reviewer can be the same model, another model, deterministic validators, or a human. In [multi-agent systems](multi-agent-systems.md), this is the simplest useful role split.
 
-## Mechanism
+## The review loop
 
 The safe pattern gives the reviewer the draft, task, rubric, and evidence, then asks for structured defects rather than vague advice. [LLM-as-judge](llm-as-judge.md) can identify unsupported claims, while deterministic validators check schemas and citations. The [agentic systems](agentic-systems.md) loop decides whether to revise, escalate, or stop.
 
@@ -38,7 +38,7 @@ The safe pattern gives the reviewer the draft, task, rubric, and evidence, then 
 
 The reviewer should be asked for falsifiable checks: unsupported claim, missing citation, schema mismatch, unsafe tool call, contradiction, or incomplete answer. A vague prompt such as "reflect on your answer" often produces style edits rather than evidence-based corrections.
 
-## Concrete artifact
+## A defect report
 
 ```json
 {

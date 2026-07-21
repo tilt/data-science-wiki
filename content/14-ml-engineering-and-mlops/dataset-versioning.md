@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - dataset-versioning
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - evaluation-datasets.md
   - ../13-data-engineering/data-lineage.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Dataset Versioning
 
 Dataset versioning records the exact data snapshot, labels, filters, schema, and split policy used for training or evaluation. Without it, [experiment tracking](experiment-tracking.md) can tell which run won but not what evidence it used.
 
-## Mechanism
+## Pinning a dataset version
 
 A dataset version should be immutable and addressable. It should identify source tables or files, extraction time, transformation code, label definition, exclusions, schema, checksums, and train/validation/test split seed. For mutable warehouses, table name is not a version; the snapshot or query result is.
 

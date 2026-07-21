@@ -17,7 +17,7 @@ topics:
   - "monitoring"
   - "data-drift"
 level: foundational
-status: review
+status: complete
 page_type: area-index
 aliases:
   - "ML Engineering and MLOps"
@@ -29,7 +29,7 @@ related:
   - "17-experimentation-and-evaluation/index.md"
   - "18-responsible-ai-safety-and-governance/index.md"
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # ML Engineering and MLOps

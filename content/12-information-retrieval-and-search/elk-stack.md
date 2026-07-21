@@ -18,14 +18,14 @@ related:
   - search-evaluation.md
   - ranking-and-retrieval-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # ELK Stack
 
 The ELK stack combines Logstash ingest pipelines, [Elasticsearch](elasticsearch.md) indexing/search, and Kibana exploration. Its retrieval problem is operational: find the right events, traces, or logs quickly enough during debugging or incident response. That makes field extraction and time filters as important as [BM25](bm25.md)-style text scoring.
 
-## Mechanism
+## The pipeline contract
 
 The pipeline contract is:
 
@@ -35,7 +35,7 @@ $$
 
 Logstash has `input`, `filter`, and `output` sections. Elasticsearch stores parsed events in time-based indices backed by [inverted indexes](inverted-indexes.md) and columnar doc values. Kibana queries and visualizes those fields.
 
-## Concrete artifact
+## A Logstash pipeline
 
 This minimal Logstash pipeline follows Elastic's documented configuration structure: read JSON lines from an application log, parse a timestamp, and write to Elasticsearch.
 

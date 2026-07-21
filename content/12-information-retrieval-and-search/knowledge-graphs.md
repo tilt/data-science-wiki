@@ -18,14 +18,14 @@ related:
   - elasticsearch.md
   - hybrid-search.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Knowledge Graphs
 
 A knowledge graph stores entities and typed relations as a graph. In search, it supplies structure that text alone cannot: aliases, entity disambiguation, typed filters, relation traversal, and explanations. It is a natural partner for [graph-based retrieval](graph-based-retrieval.md) and [hybrid search](hybrid-search.md).
 
-## Defining mechanism
+## Triples and graphs
 
 RDF-style knowledge graphs use triples:
 

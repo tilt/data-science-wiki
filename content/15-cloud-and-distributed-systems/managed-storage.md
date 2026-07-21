@@ -20,14 +20,14 @@ related:
   - reliability.md
   - ../13-data-engineering/cloud-storage.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Managed Storage
 
 Managed storage is selected by access pattern: object storage for immutable blobs and datasets, block storage for attached disks, file storage for POSIX-like shared paths, warehouses for analytical tables, databases for serving state, and caches for repeated low-latency reads. The wrong abstraction creates both performance and [cost management](cost-management.md) problems.
 
-## Mechanism
+## Storage service types
 
 Object stores such as S3 and Cloud Storage expose buckets, object keys, metadata, IAM, lifecycle rules, and storage classes. They are excellent for [cloud storage](../13-data-engineering/cloud-storage.md), model artifacts, and [distributed data processing](distributed-data-processing.md) inputs. They are not low-latency mutable filesystems. A practical storage contract should state:
 

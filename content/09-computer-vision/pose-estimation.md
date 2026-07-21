@@ -17,14 +17,14 @@ related:
   - detection-and-segmentation-metrics.md
   - ../10-video-understanding/gesture-recognition.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Pose Estimation
 
 Pose estimation predicts keypoints such as joints, hands, faces, animal landmarks, or object parts. It often follows [object detection](object-detection.md) because the person or object crop constrains the keypoint search, and it feeds downstream video tasks such as [gesture recognition](../10-video-understanding/gesture-recognition.md).
 
-## Defining mechanism
+## Keypoint heatmaps
 
 Top-down pose systems detect instances, then predict keypoint heatmaps $H_k(u,v)$ for each landmark $k$. A coordinate estimate can be the heatmap argmax,
 

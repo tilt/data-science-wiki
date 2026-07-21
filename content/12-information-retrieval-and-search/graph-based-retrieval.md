@@ -18,14 +18,14 @@ related:
   - hybrid-search.md
   - ranking-and-retrieval-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Graph Based Retrieval
 
 Graph-based retrieval uses edges between documents, entities, authors, citations, topics, or permissions as retrieval evidence. It complements [BM25](bm25.md) and [dense retrieval](dense-retrieval.md) when relationships matter more than shared words or embedding distance.
 
-## Defining mechanism
+## Retrieval over a graph
 
 Represent the corpus as $G=(V,E)$. A query can seed one or more nodes, then retrieve by paths, personalized PageRank, metapaths, or neighborhood overlap. A simple score from seed set $S$ is inverse shortest-path distance:
 

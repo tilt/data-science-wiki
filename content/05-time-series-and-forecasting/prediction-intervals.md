@@ -8,7 +8,7 @@ topics:
   - probabilistic-forecasting
   - evaluation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Forecast Intervals
@@ -23,12 +23,10 @@ related:
   - forecast-error-metrics.md
   - ../17-experimentation-and-evaluation/coverage.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Prediction Intervals
-
-## Summary
 
 A prediction interval describes a range of plausible future observations. It differs from a confidence interval, which describes uncertainty about an estimated parameter. Forecasting decisions usually need prediction intervals because the future observation itself is uncertain.
 

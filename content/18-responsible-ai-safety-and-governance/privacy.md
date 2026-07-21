@@ -19,14 +19,14 @@ related:
   - fairness.md
   - ../11-generative-ai/data-privacy.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Privacy
 
 Privacy governs how personal data is collected, used, exposed, retained, and deleted. In AI systems, the privacy boundary includes prompts, retrieved documents, embeddings, fine-tuning data, evaluation sets, logs, traces, human review queues, and vendor calls. The operational failure often appears as [PII leakage](pii-leakage.md), but the root cause is usually poor data-flow governance.
 
-## Concrete artifact
+## GDPR principles as release checks
 
 GDPR principles such as purpose limitation, data minimization, storage limitation, integrity/confidentiality, and data protection by design translate into concrete AI release checks:
 

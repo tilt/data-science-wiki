@@ -20,14 +20,14 @@ related:
   - scalability.md
   - ../11-generative-ai/cost-and-latency-optimization.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Cost Management
 
 Cost management is the feedback loop that connects architecture choices to spend. It is not just "make it cheaper": an SLO, a [reliability](reliability.md) target, a [GPU systems](gpu-systems.md) memory requirement, and a [scalability](scalability.md) target can all be valid reasons to pay more. The important mechanism is attribution: every material cost should have an owner, workload, environment, and unit driver.
 
-## Mechanism
+## What drives cloud cost
 
 Cloud cost is usually:
 

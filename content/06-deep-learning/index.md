@@ -5,12 +5,15 @@ description: "Learning map for neural network mechanisms, architectures, represe
 area: deep-learning
 topics:
   - neural-network-fundamentals
+  - multilayer-perceptrons
   - backpropagation
+  - vanishing-and-exploding-gradients
   - activation-functions
   - loss-functions
   - initialization
   - normalization
   - regularization
+  - residual-connections
   - optimizers
   - convolutional-neural-networks
   - recurrent-neural-networks
@@ -68,30 +71,33 @@ flowchart TD
 Read fundamentals and training mechanics, then architectures, representation learning, generative models, and engineering.
 
 1. [Neural Network Fundamentals](neural-network-fundamentals.md): how affine layers, nonlinearities, losses, and optimizers combine into a trainable model.
-2. [Backpropagation](backpropagation.md): reverse-mode chain-rule differentiation through a computational graph.
-3. [Activation Functions](activation-functions.md): nonlinearities that control expressiveness and gradient flow.
-4. [Loss Functions](loss-functions.md): differentiable objectives for regression and classification.
-5. [Optimizers](optimizers.md): SGD, momentum, and Adam-style rules that turn gradients into updates.
-6. [Initialization](initialization.md): starting weight scales that keep activations and gradients usable.
-7. [Normalization](normalization.md): batch and layer standardization with trainable affine recovery.
-8. [Regularization](regularization.md): dropout, weight penalties, and other ways to reduce memorization.
-9. [Convolutional Neural Networks](convolutional-neural-networks.md): shared local filters for grids and images.
-10. [Recurrent Neural Networks](recurrent-neural-networks.md): stateful sequence models with shared temporal transitions.
-11. [LSTM and GRU](lstm-and-gru.md): gated recurrent cells for longer-range credit assignment.
-12. [Attention](attention.md): content-based weighted routing between positions or modalities.
-13. [Transformers](transformers.md): attention, residual, normalization, and feed-forward blocks for parallel sequence modeling.
-14. [Representation Learning](representation-learning.md): learned feature spaces for prediction, retrieval, and transfer.
-15. [Autoencoders](autoencoders.md): encoder-decoder models that learn latent codes by reconstruction.
-16. [Self-Supervised Learning](self-supervised-learning.md): pretext objectives generated from unlabeled data.
-17. [Contrastive Learning](contrastive-learning.md): embedding objectives that separate positives from negatives.
-18. [Transfer Learning](transfer-learning.md): reusing pretrained features on a new task.
-19. [Fine-Tuning](fine-tuning.md): selectively updating pretrained parameters or adapters.
-20. [Multimodal Learning](multimodal-learning.md): aligning and fusing text, image, audio, and video.
-21. [Generative Adversarial Networks](generative-adversarial-networks.md): generator-discriminator games for sharp implicit generation.
-22. [PyTorch](pytorch.md): dynamic-tape tensor programming and explicit training loops.
-23. [TensorFlow and Keras](tensorflow-and-keras.md): high-level model APIs and production workflows.
-24. [Mixed Precision](mixed-precision.md): lower-precision arithmetic with scaling and FP32 safeguards.
-25. [Distributed Training](distributed-training.md): synchronized or partitioned training across devices and machines.
+2. [Multilayer Perceptrons](multilayer-perceptrons.md): dense feed-forward networks that transform features without recurrent state.
+3. [Backpropagation](backpropagation.md): reverse-mode chain-rule differentiation through a computational graph.
+4. [Vanishing and Exploding Gradients](vanishing-and-exploding-gradients.md): why deep chain-rule products can shrink or blow up.
+5. [Activation Functions](activation-functions.md): nonlinearities that control expressiveness and gradient flow.
+6. [Loss Functions](loss-functions.md): differentiable objectives for regression and classification.
+7. [Optimizers](optimizers.md): SGD, momentum, and Adam-style rules that turn gradients into updates.
+8. [Initialization](initialization.md): starting weight scales that keep activations and gradients usable.
+9. [Normalization](normalization.md): batch and layer standardization with trainable affine recovery.
+10. [Regularization](regularization.md): dropout, weight penalties, and other ways to reduce memorization.
+11. [Residual Connections](residual-connections.md): skip paths that let deep blocks learn corrections.
+12. [Convolutional Neural Networks](convolutional-neural-networks.md): shared local filters for grids and images.
+13. [Recurrent Neural Networks](recurrent-neural-networks.md): stateful sequence models with shared temporal transitions.
+14. [LSTM and GRU](lstm-and-gru.md): gated recurrent cells for longer-range credit assignment.
+15. [Attention](attention.md): content-based weighted routing between positions or modalities.
+16. [Transformers](transformers.md): attention, residual, normalization, and feed-forward blocks for parallel sequence modeling.
+17. [Representation Learning](representation-learning.md): learned feature spaces for prediction, retrieval, and transfer.
+18. [Autoencoders](autoencoders.md): encoder-decoder models that learn latent codes by reconstruction.
+19. [Self-Supervised Learning](self-supervised-learning.md): pretext objectives generated from unlabeled data.
+20. [Contrastive Learning](contrastive-learning.md): embedding objectives that separate positives from negatives.
+21. [Transfer Learning](transfer-learning.md): reusing pretrained features on a new task.
+22. [Fine-Tuning](fine-tuning.md): selectively updating pretrained parameters or adapters.
+23. [Multimodal Learning](multimodal-learning.md): aligning and fusing text, image, audio, and video.
+24. [Generative Adversarial Networks](generative-adversarial-networks.md): generator-discriminator games for sharp implicit generation.
+25. [PyTorch](pytorch.md): dynamic-tape tensor programming and explicit training loops.
+26. [TensorFlow and Keras](tensorflow-and-keras.md): high-level model APIs and production workflows.
+27. [Mixed Precision](mixed-precision.md): lower-precision arithmetic with scaling and FP32 safeguards.
+28. [Distributed Training](distributed-training.md): synchronized or partitioned training across devices and machines.
 
 ## Connections
 

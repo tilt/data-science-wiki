@@ -19,14 +19,14 @@ related:
   - explainability.md
   - ../17-experimentation-and-evaluation/risk-weighted-error-taxonomies.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Error Taxonomies
 
 An error taxonomy turns failures into structured evidence. Instead of reporting that "the assistant was wrong," reviewers label what failed, why it likely failed, who was affected, and how severe the outcome was. That makes [factual correctness](factual-correctness.md), [hallucinations](hallucinations.md), [fairness](fairness.md), and [adversarial evaluation](adversarial-evaluation.md) comparable across releases.
 
-## Mechanism
+## Symptom, cause, consequence
 
 A useful taxonomy separates symptom, cause, and consequence:
 

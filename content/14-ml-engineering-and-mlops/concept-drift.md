@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - concept-drift
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - human-in-the-loop-systems.md
   - ../05-time-series-and-forecasting/concept-drift-in-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Concept Drift
 
 Concept drift is a change in the conditional relationship a model is meant to learn: $P_t(Y\mid X)$ differs from the relationship seen during training or validation. It is different from [data drift](data-drift.md), which only says $P_t(X)$ moved. A feature distribution can move while the decision boundary is still valid, and the feature distribution can look stable while fraud tactics, user intent, or labeling policy changes make the old boundary wrong.
 
-## Mechanism
+## How drift shows up in metrics
 
 For a deployed classifier with score $s=f_\theta(x)$, concept drift shows up when delayed labels reveal that calibration, ranking, or threshold utility has changed in a production window:
 

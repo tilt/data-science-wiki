@@ -21,14 +21,14 @@ related:
   - coverage.md
   - ../02-probability-and-statistics/confidence-intervals.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Repeated Sampling
 
 Repeated sampling turns one evaluation number into a distribution. It can resample examples from a fixed [golden dataset](golden-datasets.md), rerun stochastic generation, vary random seeds, or split live traffic into repeated windows. It is especially useful when [paired evaluation](paired-evaluation.md) shows an improvement but the example set is small.
 
-## Defining mechanism
+## The bootstrap
 
 The nonparametric bootstrap samples $n$ examples with replacement from the observed $n$ examples and recomputes a statistic $T$. Repeating this produces an empirical distribution
 

@@ -20,14 +20,14 @@ related:
   - structured-output.md
   - prompt-injection.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Tool Use and Function Calling
 
 A language model does not execute tools internally. It emits a structured request, usually a tool name plus JSON arguments. Application code validates the request, checks authorization, executes the tool, and returns the result to the model or user. This is the action layer for [agent loops](agent-loops.md).
 
-## Mechanism
+## From tool call to execution
 
 The model sees available [tool schemas](tool-schemas.md), task context, and prior observations. It then generates either a final answer or a tool call. The orchestrator checks schema validity, permissions, idempotency, timeouts, and [prompt injection](prompt-injection.md) risk before execution. [Tool routing](tool-routing.md) can be deterministic, model-selected, or hybrid, but the final execution boundary should remain outside the model.
 
@@ -42,7 +42,7 @@ flowchart TD
   Observation --> Model
 ```
 
-## Concrete artifact
+## A checked tool call
 
 ```json
 {

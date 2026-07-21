@@ -17,14 +17,14 @@ related:
   - vision-transformers.md
   - image-classification.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Image Representation
 
 Image representation defines the contract between visual data and algorithms: pixel grid, channel semantics, dtype, scale, metadata, patches, feature maps, or embeddings. Most failures in [image classification](image-classification.md), [classical image processing](classical-image-processing.md), and [vision transformers](vision-transformers.md) become harder to debug when this contract is implicit.
 
-## Defining mechanism
+## Tensors and normalization
 
 A common tensor representation is $X\in\mathbb R^{C\times H\times W}$ or batched $X\in\mathbb R^{N\times C\times H\times W}$. Normalization maps integer pixels into numeric ranges suitable for optimization:
 

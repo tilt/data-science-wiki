@@ -20,14 +20,14 @@ related:
   - ../06-deep-learning/pytorch.md
   - ../11-generative-ai/tokenization.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Storage and Decoding Bottlenecks
 
 Storage and decoding bottlenecks happen when data reaches the model slower than the model can consume it. The bottleneck may be object-store listing, small-file reads, network bandwidth, decompression, image/video decode, tokenization, Python collation, or synchronous logging. In [GPU systems](gpu-systems.md), the symptom is often low device utilization with high input queue time.
 
-## Mechanism
+## The input pipeline
 
 The input path is a pipeline:
 

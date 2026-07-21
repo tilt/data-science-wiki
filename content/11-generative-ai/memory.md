@@ -18,20 +18,20 @@ related:
   - context-construction.md
   - prompt-injection.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Memory
 
 Memory is persisted state used beyond the current prompt. It can be explicit profile fields, conversation summaries, vector-retrieved notes, task state, or tool results inside [agentic systems](agentic-systems.md). It differs from ordinary [context construction](context-construction.md) because it survives the request that created it.
 
-## Mechanism
+## The four memory policies
 
 A memory system needs four policies: what may be written, how it is stored, when it is retrieved, and how it is deleted. Vector memory embeds notes with [embeddings](embeddings.md) for similarity lookup. Structured memory stores fields such as preferences, account IDs, or task state. Sensitive attributes should be structured, permissioned, and auditable rather than mixed into free-text summaries.
 
 Memory writes should have provenance. An explicit user statement is different from a model inference. Retrieval should be scoped to the active user, workspace, and task. [Data privacy](data-privacy.md) and [prompt injection](prompt-injection.md) controls decide whether a memory can be stored, recalled, or shown.
 
-## Concrete artifact
+## A memory record
 
 ```json
 {

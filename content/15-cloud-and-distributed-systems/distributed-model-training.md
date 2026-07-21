@@ -20,14 +20,14 @@ related:
   - ../06-deep-learning/distributed-training.md
   - ../06-deep-learning/mixed-precision.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Distributed Model Training
 
 Distributed model training uses multiple accelerators because the model, batch, or wall-clock target exceeds one device. The mechanisms differ: data parallelism replicates the model and synchronizes gradients; tensor and pipeline parallelism split computation; fully sharded training shards parameters, gradients, and optimizer state. The cloud design is coupled to [GPU systems](gpu-systems.md) because memory, interconnect, and storage throughput decide which pattern is viable.
 
-## Mechanism
+## Data-parallel training
 
 In synchronous data parallelism, each rank computes gradients on a local mini-batch and participates in an all-reduce:
 

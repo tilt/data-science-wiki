@@ -18,14 +18,14 @@ related:
   - reranking.md
   - rag.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Vector Databases
 
 Vector databases store [embeddings](embeddings.md) together with document metadata so a query embedding can retrieve semantically nearby records. In [RAG](rag.md), the vector store is not the whole retrieval system; it is one stage between ingestion, filtering, [hybrid retrieval](hybrid-retrieval.md), [reranking](reranking.md), and context packing.
 
-## Defining mechanism
+## Nearest-neighbor search
 
 Given normalized corpus vectors $x_i \in \mathbb{R}^d$ and a normalized query vector $q$, cosine search is equivalent to maximizing the dot product:
 
@@ -35,7 +35,7 @@ $$
 
 Exact search computes that score for every vector. Production systems usually use approximate nearest-neighbor indexes such as HNSW or IVF-style partitioning to trade recall for latency and memory. The query path should apply authorization and freshness filters before unsafe chunks can reach [context construction](context-construction.md); filtering after retrieval can silently drop all useful evidence or expose records before policy checks.
 
-## Concrete artifact
+## A stored vector record
 
 ```json
 {

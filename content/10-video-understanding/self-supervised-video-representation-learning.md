@@ -18,7 +18,7 @@ related:
   - v-jepa-2.md
   - ../06-deep-learning/self-supervised-learning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Self-Supervised Video Representation Learning
@@ -27,7 +27,7 @@ Self-supervised video representation learning trains encoders without manual cli
 
 The modern state of the art is not one objective. Strong video foundation models usually combine a scalable video-transformer backbone, aggressive masking or latent prediction, large unlabeled video corpora, and sometimes multimodal alignment. V-JEPA 2 is one important example, but the broader pattern includes masked video autoencoders such as VideoMAE, feature-prediction models such as V-JEPA, and multimodal systems such as InternVideo2.
 
-## Defining mechanism
+## Learning targets from the clip
 
 Self-supervised learning creates targets from the clip itself. Three common objectives are:
 

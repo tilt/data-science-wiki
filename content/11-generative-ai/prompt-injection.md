@@ -18,20 +18,20 @@ related:
   - rag.md
   - context-construction.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Prompt Injection
 
 Prompt injection happens when untrusted text tries to control the model or surrounding tools. It is common in [RAG](rag.md), where retrieved documents enter [context construction](context-construction.md), and in [tool use](tool-use-and-function-calling.md), where malicious text may try to trigger actions or reveal hidden data.
 
-## Mechanism
+## Privilege separation
 
 The core defense is privilege separation. System and developer instructions define policy. User messages, web pages, emails, tickets, and retrieved documents are data. The model may summarize or cite that data, but the application should not let it redefine tools, permissions, secrets, or safety rules.
 
 Injection can be direct, such as "ignore previous instructions," or indirect, such as a retrieved document telling the model to call a refund tool. [Guardrails](guardrails.md) can scan for high-risk patterns, but robust protection comes from external validation: schema checks, access control, allow-listed tools, citation checks, and confirmation for side effects.
 
-## Concrete artifact
+## Trust boundaries
 
 ```text
 trusted:

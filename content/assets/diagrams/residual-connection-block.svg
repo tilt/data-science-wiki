@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="540" viewBox="0 0 1100 540" role="img" aria-labelledby="title desc">
+  <title id="title">Residual connection and grouped residual transform</title>
+  <desc id="desc">A residual block copies input x around a nonlinear block F and adds it back. ResNet uses one residual transform; ResNeXt aggregates several grouped transforms before the residual addition.</desc>
+  <style>
+    text {
+      fill: #111827;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .muted { fill: #4b5563; }
+    .panel { fill: transparent; stroke: #d8dee9; }
+    .input { fill: #dbeafe; stroke: #2563eb; }
+    .block { fill: #ccfbf1; stroke: #0f766e; }
+    .skip { fill: #ffedd5; stroke: #f97316; }
+    .sum { fill: #ede9fe; stroke: #7c3aed; }
+    .group { fill: #fef3c7; stroke: #d97706; }
+    .arrow { stroke: #4b5563; fill: none; }
+    .arrow-head { fill: #4b5563; }
+    .skip-arrow { stroke: #f97316; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+  <text x="550" y="42" text-anchor="middle" font-size="27" font-weight="700">Residual blocks learn an update, not a full rewrite</text>
+  <text x="550" y="72" text-anchor="middle" font-size="15" class="muted">The skip path preserves x while the block learns the residual correction F(x).</text>
+
+  <g transform="translate(42,112)">
+    <rect x="0" y="0" width="455" height="365" rx="10" class="panel"/>
+    <text x="228" y="34" text-anchor="middle" font-size="18" font-weight="700">Residual block</text>
+
+    <rect x="38" y="130" width="76" height="50" rx="8" class="input" stroke-width="2"/>
+    <text x="76" y="161" text-anchor="middle" font-size="18" font-weight="700">x</text>
+
+    <rect x="168" y="118" width="136" height="74" rx="8" class="block" stroke-width="2"/>
+    <text x="236" y="146" text-anchor="middle" font-size="16" font-weight="700">nonlinear</text>
+    <text x="236" y="170" text-anchor="middle" font-size="16" font-weight="700">block F(x)</text>
+
+    <circle cx="398" cy="155" r="25" class="sum" stroke-width="2.5"/>
+    <text x="398" y="163" text-anchor="middle" font-size="24" font-weight="700">+</text>
+
+    <line x1="114" y1="155" x2="150" y2="155" class="arrow" stroke-width="2.2"/>
+    <path d="M166 155 L150 147 L150 163 Z" class="arrow-head"/>
+    <line x1="304" y1="155" x2="348" y2="155" class="arrow" stroke-width="2.2"/>
+    <path d="M364 155 L348 147 L348 163 Z" class="arrow-head"/>
+    <line x1="423" y1="155" x2="430" y2="155" class="arrow" stroke-width="2.2"/>
+    <path d="M446 155 L430 147 L430 163 Z" class="arrow-head"/>
+    <text x="428" y="133" font-size="14" font-weight="700">y</text>
+    <text x="419" y="205" font-size="13" class="muted" text-anchor="end">x + F(x)</text>
+
+    <path d="M76 130 C76 108 76 96 98 96 H376 C391 96 398 113 398 130" class="skip-arrow" stroke-width="2.3"/>
+    <rect x="154" y="52" width="160" height="32" rx="7" class="skip" stroke-width="2"/>
+    <text x="234" y="73" text-anchor="middle" font-size="12" font-weight="700">skip path copies x</text>
+
+    <text x="228" y="292" text-anchor="middle" font-size="14" class="muted">If F(x) is near zero, the block is near identity.</text>
+    <text x="228" y="318" text-anchor="middle" font-size="14" class="muted">Gradients also have a direct additive route.</text>
+  </g>
+
+  <g transform="translate(552,112)">
+    <rect x="0" y="0" width="510" height="365" rx="10" class="panel"/>
+    <text x="255" y="34" text-anchor="middle" font-size="18" font-weight="700">ResNet and ResNeXt variants</text>
+
+    <rect x="38" y="98" width="92" height="42" rx="8" class="input" stroke-width="2"/>
+    <text x="84" y="124" text-anchor="middle" font-size="15" font-weight="700">input x</text>
+
+    <rect x="205" y="84" width="150" height="70" rx="8" class="block" stroke-width="2"/>
+    <text x="280" y="110" text-anchor="middle" font-size="16" font-weight="700">ResNet</text>
+    <text x="280" y="132" text-anchor="middle" font-size="12" class="muted">one residual</text>
+    <text x="280" y="148" text-anchor="middle" font-size="12" class="muted">transform</text>
+
+    <circle cx="450" cy="119" r="24" class="sum" stroke-width="2.5"/>
+    <text x="450" y="127" text-anchor="middle" font-size="23" font-weight="700">+</text>
+    <line x1="130" y1="119" x2="185" y2="119" class="arrow" stroke-width="2"/>
+    <path d="M201 119 L185 111 L185 127 Z" class="arrow-head"/>
+    <line x1="355" y1="119" x2="400" y2="119" class="arrow" stroke-width="2"/>
+    <path d="M416 119 L400 111 L400 127 Z" class="arrow-head"/>
+    <path d="M84 98 C84 72 84 58 110 58 H426 C445 58 450 76 450 95" class="skip-arrow" stroke-width="2"/>
+
+    <rect x="38" y="228" width="92" height="42" rx="8" class="input" stroke-width="2"/>
+    <text x="84" y="254" text-anchor="middle" font-size="15" font-weight="700">input x</text>
+
+    <g transform="translate(205,190)">
+      <rect x="0" y="0" width="150" height="30" rx="7" class="group" stroke-width="2"/>
+      <text x="75" y="20" text-anchor="middle" font-size="12" font-weight="700">group T1(x)</text>
+      <rect x="0" y="40" width="150" height="30" rx="7" class="group" stroke-width="2"/>
+      <text x="75" y="60" text-anchor="middle" font-size="12" font-weight="700">group T2(x)</text>
+      <rect x="0" y="80" width="150" height="30" rx="7" class="group" stroke-width="2"/>
+      <text x="75" y="100" text-anchor="middle" font-size="12" font-weight="700">group TC(x)</text>
+    </g>
+
+    <circle cx="450" cy="249" r="24" class="sum" stroke-width="2.5"/>
+    <text x="450" y="256" text-anchor="middle" font-size="22" font-weight="700">Σ</text>
+    <line x1="130" y1="249" x2="185" y2="249" class="arrow" stroke-width="2"/>
+    <path d="M201 249 L185 241 L185 257 Z" class="arrow-head"/>
+    <line x1="355" y1="249" x2="400" y2="249" class="arrow" stroke-width="2"/>
+    <path d="M416 249 L400 242 L400 256 Z" class="arrow-head"/>
+    <path d="M84 228 C84 190 84 176 120 176 H420 C442 176 450 202 450 225" class="skip-arrow" stroke-width="2"/>
+
+    <text x="255" y="334" text-anchor="middle" font-size="13" class="muted">ResNeXt increases cardinality:</text>
+    <text x="255" y="352" text-anchor="middle" font-size="13" class="muted">more grouped transforms before the residual add.</text>
+  </g>
+</svg>

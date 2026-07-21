@@ -33,11 +33,11 @@ Data Vault is an enterprise [data warehouse](data-warehouses.md) modelling metho
 
 Data Vault separates stable business identity from relationships and descriptive history.
 
-| Object | Purpose | Typical columns |
-| --- | --- | --- |
-| Hub | One durable business key for a core entity, such as customer, order, product, or account. | hub hash/surrogate key, business key, load timestamp, record source |
-| Link | An association between two or more hubs, such as customer-to-order or product-on-order-line. | link hash/surrogate key, hub keys, load timestamp, record source |
-| Satellite | Historical descriptive payload attached to one hub or link. | parent key, load timestamp, hashdiff, payload columns, record source, optional effective date |
+| Object    | Purpose                                                                                      | Typical columns                                                                               |
+| --------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| Hub       | One durable business key for a core entity, such as customer, order, product, or account.    | hub hash/surrogate key, business key, load timestamp, record source                           |
+| Link      | An association between two or more hubs, such as customer-to-order or product-on-order-line. | link hash/surrogate key, hub keys, load timestamp, record source                              |
+| Satellite | Historical descriptive payload attached to one hub or link.                                  | parent key, load timestamp, hashdiff, payload columns, record source, optional effective date |
 
 The hub should not carry mutable attributes such as customer segment or product color. Those values belong in satellites so every change can be loaded as a new historical row. The link should declare relationship grain. If a relationship changes over business time, an effectivity satellite can record start and end dates for that link relationship.
 
@@ -150,13 +150,13 @@ Compared with normalized [relational-modelling](relational-modelling.md), Data V
 
 Compared with a [star schema](dimensional-modelling.md#star-schema), Data Vault optimizes integration and auditability rather than direct analytics. A star schema keeps query paths short and metrics understandable, but it denormalizes context into dimensions and facts. A vault keeps the historical integration layer flexible, then lets teams publish multiple marts from the same governed history.
 
-| Question | Data Vault answer | Star-schema answer |
-| --- | --- | --- |
-| Primary goal | Integrate sources with traceable history. | Serve analytics at a declared grain. |
-| Core objects | Hubs, links, satellites, PITs, bridges. | Facts, dimensions, aggregates. |
-| Change handling | Append new satellite rows and preserve record source. | Slowly changing dimensions or fact snapshots. |
-| Query ergonomics | Requires projection or helper tables. | Designed for BI and analyst queries. |
-| Best layer | Integration and history layer. | Presentation and consumption layer. |
+| Question         | Data Vault answer                                     | Star-schema answer                            |
+| ---------------- | ----------------------------------------------------- | --------------------------------------------- |
+| Primary goal     | Integrate sources with traceable history.             | Serve analytics at a declared grain.          |
+| Core objects     | Hubs, links, satellites, PITs, bridges.               | Facts, dimensions, aggregates.                |
+| Change handling  | Append new satellite rows and preserve record source. | Slowly changing dimensions or fact snapshots. |
+| Query ergonomics | Requires projection or helper tables.                 | Designed for BI and analyst queries.          |
+| Best layer       | Integration and history layer.                        | Presentation and consumption layer.           |
 
 ## When to use it
 

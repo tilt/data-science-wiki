@@ -8,7 +8,7 @@ topics:
   - forecast-reconciliation
   - time-aggregation
 level: advanced
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - Time Aggregation Reconciliation
@@ -22,12 +22,10 @@ related:
   - backtesting.md
   - demand-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Temporal Reconciliation
-
-## Summary
 
 Temporal reconciliation makes forecasts coherent across time aggregation levels. For example, seven daily forecasts should sum to the corresponding weekly forecast, and monthly forecasts should be consistent with quarterly forecasts.
 

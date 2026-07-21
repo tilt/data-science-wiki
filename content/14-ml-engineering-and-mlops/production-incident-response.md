@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - production-incident-response
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - reliability.md
   - human-in-the-loop-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Production Incident Response
 
 Production incident response coordinates detection, triage, mitigation, communication, and learning when a live ML system behaves unsafely or unreliably. ML incidents include ordinary outages, but also wrong model behavior with green infrastructure metrics.
 
-## Mechanism
+## The response loop
 
 The response loop is declare, assign roles, stabilize, preserve evidence, communicate, mitigate, and run a blameless review after recovery. During the incident, restoring acceptable behavior matters more than proving the root cause. Mitigation may mean [rollbacks](rollbacks.md), disabling automation, routing to [human-in-the-loop systems](human-in-the-loop-systems.md), freezing retraining, or lowering traffic.
 

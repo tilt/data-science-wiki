@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - evaluation-datasets
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - model-degradation.md
   - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Evaluation Datasets
 
 Evaluation datasets are curated examples used to measure model behavior before release and during regression checks. They are broader than [golden datasets](golden-datasets.md): an evaluation set may be large and statistical, while a golden set is usually small, trusted, and inspectable.
 
-## Mechanism
+## What an evaluation set specifies
 
 An evaluation dataset needs an owner, sampling policy, label policy, slice definitions, refresh cadence, allowed uses, and known limitations. It should be versioned through [dataset versioning](dataset-versioning.md) and kept separate from training data. Offline evaluation informs release decisions, while [A/B testing](a-b-testing.md) measures live impact.
 

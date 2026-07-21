@@ -19,14 +19,14 @@ related:
   - v-jepa-2-versus-vision-language-models.md
   - ../11-generative-ai/vision-language-models.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Video-Language Models
 
 Video-language models connect video evidence to language inputs or outputs: captions, question answering, retrieval, instruction following, and dialogue over temporal content. They usually start from a [video representation](video-representation.md), project visual tokens into a language-model-compatible space, and use cross-attention or token concatenation. This makes them different from [V-JEPA](v-jepa.md), whose central objective is latent visual prediction rather than text generation.
 
-## Defining mechanism
+## Cross-modal attention
 
 A simple cross-modal pooling step computes attention from a text query $q$ to video tokens $v_t$:
 

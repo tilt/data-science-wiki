@@ -18,18 +18,18 @@ related:
   - guardrails.md
   - agent-loops.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Tool Schemas
 
 Tool schemas define the callable surface exposed to a model: tool name, description, argument object, required fields, allowed values, and sometimes side-effect warnings. They sit between model reasoning and application code. A model may propose a call, but the application owns validation, authorization, execution, and result handling.
 
-## Mechanism
+## What a schema does
 
 A useful schema does two jobs. First, it gives the model enough semantic guidance to choose the right tool and populate arguments. Second, it gives the runtime a deterministic validator before [tool use and function calling](tool-use-and-function-calling.md) reaches an external system. JSON Schema keywords such as `type`, `properties`, `required`, `enum`, and `additionalProperties` are directly relevant, but type validity is not permission. Permission checks belong in [guardrails](guardrails.md) and [tool routing](tool-routing.md).
 
-## Concrete artifact
+## A bounded tool schema
 
 ```json
 {

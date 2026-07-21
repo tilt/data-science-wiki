@@ -17,14 +17,14 @@ related:
   - rotated-object-detection.md
   - cnn-architectures.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Object Detection
 
 Object detection predicts both what is present and where it is, usually as class-labeled bounding boxes with confidence scores. It is the box-level task between [image classification](image-classification.md), which ignores location, and [instance segmentation](instance-segmentation.md), which predicts object masks.
 
-## Defining mechanism
+## Boxes and scores
 
 A detector returns a set
 

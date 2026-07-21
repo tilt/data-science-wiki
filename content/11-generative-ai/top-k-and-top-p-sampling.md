@@ -18,18 +18,18 @@ related:
   - prompting.md
   - structured-output.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Top-k and Top-p Sampling
 
 Top-k and top-p are truncation controls inside [sampling and decoding](sampling-and-decoding.md). They remove candidate tokens before sampling, often after temperature is applied. Use them with [temperature and determinism](temperature-and-determinism.md) and trace their settings for [determinism and reproducibility](determinism-and-reproducibility.md), not as independent magic knobs.
 
-## Defining mechanism
+## Top-k versus top-p
 
 Top-k keeps the $k$ largest-probability tokens and renormalizes. Top-p, or nucleus sampling, sorts tokens by probability and keeps the smallest prefix whose cumulative mass reaches $p$. Top-p adapts to distribution shape: it can keep many tokens for flat distributions and few tokens for peaked ones.
 
-## Executed artifact
+## Comparing the two truncations
 
 The snippet first converts logits to probabilities, then compares two truncation rules on the same distribution. Top-k keeps a fixed number of tokens; top-p keeps however many tokens are needed to reach the cumulative probability threshold.
 
@@ -77,7 +77,7 @@ top_p=0.80 [('alpha', 0.75), ('beta', 0.25)] entropy_bits 0.811
 
 With these logits, top-p is narrower than top-k because the first two tokens already exceed 0.80 cumulative probability.
 
-For top-k with $k=3$, the kept set is `alpha`, `beta`, and `gamma`; renormalizing their probabilities leaves entropy `1.222` bits. For top-p with $p=0.80`, only `alpha`and`beta`are needed, so the renormalized distribution has lower entropy,`0.811` bits, and samples from a smaller candidate set.
+For top-k with $k=3$, the kept set is `alpha`, `beta`, and `gamma`; renormalizing their probabilities leaves entropy `1.222` bits. For top-p with $p=0.80$, only `alpha` and `beta` are needed, so the renormalized distribution has lower entropy, `0.811` bits, and samples from a smaller candidate set.
 
 ## Caveats
 

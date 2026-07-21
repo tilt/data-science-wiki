@@ -18,14 +18,14 @@ related:
   - structured-output.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # LLM-as-Judge
 
 LLM-as-judge uses a model to grade outputs for qualities such as helpfulness, citation support, rubric fit, safety compliance, or task completion. It can accelerate [agent evaluation](agent-evaluation.md) and [rag evaluation](rag-evaluation.md), but it is still a model call that needs calibration against human labels.
 
-## Mechanism
+## Building and calibrating a judge
 
 A judge prompt should include the task, candidate answer, evidence, rubric, and required output schema. The judge should return structured fields that can be aggregated: score, pass/fail, violated rubric item, explanation, confidence, and whether human review is required. For a score $s \in \{0,1,2,3\}$, track agreement with human labels and inspect disagreements by task category.
 
@@ -33,7 +33,7 @@ Use [structured output](structured-output.md) so judge results can be parsed and
 
 Calibration is the difference between a convenient judge and a useful evaluator. If 100 human-labeled examples contain 20 unsupported answers and the judge flags only 12, the judge is missing 8 failures before it ever reaches production traffic. Track confusion matrices, disagreement examples, and score drift across model versions instead of trusting the average score alone.
 
-## Concrete artifact
+## A structured judge result
 
 ```json
 {

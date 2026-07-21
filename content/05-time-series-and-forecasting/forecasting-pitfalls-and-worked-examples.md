@@ -8,7 +8,7 @@ topics:
   - worked-examples
   - forecasting
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Forecasting Failure Modes
@@ -22,12 +22,10 @@ related:
   - forecast-error-metrics.md
   - concept-drift-in-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Forecasting Pitfalls and Worked Examples
-
-## Summary
 
 Forecasting errors often come from problem formulation and validation mistakes rather than model choice. This page collects common failure modes and compact examples that connect data, features, baselines, metrics, and model selection.
 

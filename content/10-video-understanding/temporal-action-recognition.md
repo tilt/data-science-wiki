@@ -18,14 +18,14 @@ related:
   - two-stream-models.md
   - sliding-window-inference.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Temporal Action Recognition
 
 Temporal action recognition assigns a label to a clip or stream segment by using appearance, motion, and ordering. It is weaker than [temporal localization](temporal-localization.md), which must also find boundaries, but stronger than image classification because the label may depend on change over time. A serve, fall, swipe, or handshake is often a trajectory, not a single pose.
 
-## Defining mechanism
+## Encode, aggregate, classify
 
 A common model encodes frame or clip features $x_{1:T}$, aggregates them, and predicts a class:
 

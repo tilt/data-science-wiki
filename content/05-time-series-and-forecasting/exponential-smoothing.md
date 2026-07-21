@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - exponential-smoothing
 level: foundational
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - arima.md
   - forecast-error-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Exponential Smoothing

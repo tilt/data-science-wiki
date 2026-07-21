@@ -7,7 +7,7 @@ area: time-series-and-forecasting
 topics:
   - autocorrelation-and-partial-autocorrelation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,10 +19,8 @@ related:
   - moving-average-models.md
   - arima.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
-
-## Summary
 
 Autocorrelation measures how a time series relates to lagged versions of itself. Partial autocorrelation isolates the direct relationship at a lag after accounting for shorter lags.
 

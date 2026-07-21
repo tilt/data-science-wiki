@@ -18,20 +18,20 @@ related:
   - context-construction.md
   - rag-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Query Rewriting
 
 Query rewriting converts a user request into one or more search queries for [retrieval pipelines](retrieval-pipelines.md). It helps [RAG](rag.md) when the user uses pronouns, conversational context, task language, or partial identifiers that differ from source documents.
 
-## Mechanism
+## What a good rewrite preserves
 
 A rewrite should preserve answer intent while making retrieval terms explicit. The system can produce lexical queries, dense-search text, filters, date constraints, and permission constraints. [Hybrid retrieval](hybrid-retrieval.md) benefits when rewrites include both exact entities for sparse search and semantic paraphrases for dense retrieval.
 
 The rewrite should be logged beside the original request. If evaluation only sees the final answer, a bad rewrite can masquerade as model hallucination. If [rag evaluation](rag-evaluation.md) sees both, the team can tell whether retrieval failed because the corpus lacked evidence or because the system searched for the wrong thing.
 
-## Concrete artifact
+## A logged rewrite
 
 ```json
 {
@@ -45,6 +45,8 @@ The rewrite should be logged beside the original request. If evaluation only see
   "must_preserve": ["amount", "customer_type", "approval_action"]
 }
 ```
+
+The `must_preserve` list is the safety rail: it names the entities a rewrite may not drop, so an evaluator can automatically flag a rewrite that silently changed the amount, customer type, or requested action even when the retrieved text looks plausible.
 
 ## Caveats
 

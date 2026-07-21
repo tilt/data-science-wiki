@@ -18,14 +18,14 @@ related:
   - tokenization.md
   - evaluation-of-nlp-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # OCR and Handwritten Text Recognition
 
 OCR and handwritten text recognition convert page images into machine-readable text. In an NLP pipeline, OCR output becomes input to [text preprocessing](text-preprocessing.md), [tokenization](tokenization.md), [document understanding](document-understanding.md), and [information extraction](information-extraction.md). The recognition problem is visual, but the downstream errors are linguistic and structured.
 
-## Defining mechanism
+## CTC sequence recognition
 
 Modern recognizers often produce a distribution over characters or subword symbols for each image timestep. Connectionist temporal classification (CTC) sums over alignments between frame-level predictions and the target string:
 

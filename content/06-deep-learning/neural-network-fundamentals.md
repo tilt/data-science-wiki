@@ -12,6 +12,7 @@ aliases: []
 prerequisites:
   - index.md
 related:
+  - multilayer-perceptrons.md
   - backpropagation.md
   - activation-functions.md
   - loss-functions.md
@@ -91,7 +92,7 @@ Depth and width are capacity, not quality. The training loop only optimizes the 
 > [!nav]
 > **Section** — [Deep Learning](index.md)
 >
-> [Backpropagation →](backpropagation.md)
+> [Multilayer Perceptrons →](multilayer-perceptrons.md)
 >
 > **Learning path** — [Deep learning](../00-home-and-navigation/learning-paths.md#deep-learning)
 >

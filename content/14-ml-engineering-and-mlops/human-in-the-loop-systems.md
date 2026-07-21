@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - human-in-the-loop-systems
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - monitoring.md
   - ../18-responsible-ai-safety-and-governance/human-oversight.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-21
 ---
 
 # Human-in-the-Loop Systems
 
 Human-in-the-loop systems route selected model decisions to people for review, correction, escalation, or labeling. They are not a vague safety blanket; they are an operational queue with eligibility rules, reviewer instructions, latency targets, audit logs, and feedback paths.
 
-## Mechanism
+## When to route to a human
 
 The model or policy layer decides when automation is allowed, when abstention is required, and when review is mandatory. Cases are typically routed to a human when one of these holds:
 

@@ -18,14 +18,14 @@ related:
   - temporal-action-recognition.md
   - video-transformers.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Two-Stream Models
 
 Two-stream video models split recognition into an appearance stream and a motion stream. The appearance stream usually consumes RGB frames; the motion stream consumes [optical flow](optical-flow.md) or stacked frame differences. This design made action recognition practical before end-to-end [3D convolutional networks](3d-convolutional-networks.md) and [video transformers](video-transformers.md) became common.
 
-## Defining mechanism
+## Appearance and motion streams
 
 If $z^{rgb}$ and $z^{flow}$ are class logits, late fusion combines them as
 

@@ -20,14 +20,14 @@ related:
   - ../09-computer-vision/vision-transformers.md
   - ../10-video-understanding/v-jepa-2-versus-vision-language-models.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Vision-Language Models
 
 Vision-language models condition text generation or scoring on visual input. They are a [multimodal models](multimodal-models.md) subtype used for image QA, captioning, screenshot understanding, document extraction, and visual grounding.
 
-## Mechanism
+## Encoding image plus text
 
 A VLM usually encodes an image into visual tokens or features, aligns them with a language model, and generates text conditioned on both visual and textual tokens. Some systems use contrastive image-text encoders; others use cross-attention or projected visual tokens inside a generative decoder. [Structured output](structured-output.md) turns visual perception into usable fields.
 
@@ -40,7 +40,7 @@ For document and screenshot tasks, the model must combine at least three signals
 | Screenshot understanding | UI hierarchy, visible state, icons     | hallucinated invisible controls       |
 | Video-frame reasoning    | sampled frames and temporal order      | missed short event or wrong ordering  |
 
-## Concrete artifact
+## An extraction contract
 
 ```json
 {

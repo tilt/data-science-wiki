@@ -5,14 +5,22 @@ description: "Trainable standardization layers that stabilize activation scale."
 area: deep-learning
 topics:
   - normalization
+  - batch-normalization
+  - layer-normalization
 level: intermediate
 status: review
 page_type: concept
-aliases: []
+aliases:
+  - Batch Normalization
+  - BatchNorm
+  - Layer Normalization
+  - LayerNorm
 prerequisites:
   - index.md
 related:
   - initialization.md
+  - vanishing-and-exploding-gradients.md
+  - residual-connections.md
   - transformers.md
   - convolutional-neural-networks.md
   - backpropagation.md
@@ -35,7 +43,7 @@ $$
 
 Here the $m$ values are the activations in whichever axis is being normalized: a batch-feature column for batch norm, or the feature coordinates of one example for layer norm. The mean $\mu$ recenters those values and $\sigma^2$ measures their spread.
 
-then returns
+Normalization then returns
 
 $$
 y_i=\gamma\frac{x_i-\mu}{\sqrt{\sigma^2+\epsilon}}+\beta.
@@ -44,6 +52,34 @@ $$
 The normalized value is scaled by trainable $\gamma$ and shifted by trainable $\beta$, so the layer can recover a useful activation scale instead of forcing every downstream feature to stay standardized. The small $\epsilon$ prevents division by zero.
 
 Batch normalization usually estimates $\mu,\sigma^2$ across the minibatch and spatial positions, common in [convolutional networks](convolutional-neural-networks.md). Layer normalization estimates them across a single example's feature dimension, so train and inference use the same statistics.
+
+## Batch normalization
+
+Batch normalization standardizes each feature or channel using statistics from the current training minibatch. For a feature/channel $c$, let $\mathcal I_c$ be the set of values used to estimate its moments: in an MLP this is usually the minibatch examples for feature $c$; in a CNN this is often minibatch examples plus spatial positions for channel $c$.
+
+$$
+\mu_c=\frac{1}{|\mathcal I_c|}\sum_{i\in\mathcal I_c}x_{i,c},
+\qquad
+\sigma_c^2=\frac{1}{|\mathcal I_c|}\sum_{i\in\mathcal I_c}(x_{i,c}-\mu_c)^2.
+$$
+
+The normalized activation is
+
+$$
+\hat x_{i,c}=\frac{x_{i,c}-\mu_c}{\sqrt{\sigma_c^2+\epsilon}},
+\qquad
+y_{i,c}=\gamma_c\hat x_{i,c}+\beta_c.
+$$
+
+Here $x_{i,c}$ is one activation value for item or position $i$ and feature/channel $c$, $\epsilon$ is a small numerical constant, and $\gamma_c,\beta_c$ are learned scale and shift parameters. The learned affine parameters are important: they let the network choose the activation scale it needs after the standardization step.
+
+During training, BatchNorm uses minibatch statistics and updates running estimates of the mean and variance. During inference, it uses those running estimates so predictions do not depend on which other examples happen to be in the same batch.
+
+BatchNorm helps with [vanishing and exploding gradients](vanishing-and-exploding-gradients.md) indirectly. By keeping intermediate activations in a controlled range, it reduces sensitivity to weight scale and learning rate, which usually makes the local backward Jacobians less erratic. It is not a proof that gradients cannot vanish or explode, but it was one of the key techniques that made deeper CNNs easier to optimize.
+
+## Layer normalization
+
+Layer normalization uses the same standardize-then-affine pattern, but computes the moments across the feature coordinates of one example rather than across the minibatch. That makes train and inference behavior the same and avoids coupling different examples together. This is why LayerNorm is the default normalization style inside [transformers](transformers.md), where sequence lengths, batch sizes, and autoregressive inference patterns often make BatchNorm inconvenient.
 
 ## Worked example
 
@@ -72,7 +108,7 @@ Batch normalization makes each feature column zero-mean and unit-variance across
 
 ## Caveats
 
-Batch norm's train/eval split is a real failure mode: stale running statistics can break inference after distribution shift or very small batches. Layer norm avoids batch coupling but does not preserve feature scale information unless the learned affine parameters recover it. Normalization also changes the effective optimization geometry, so it is not merely preprocessing.
+BatchNorm's train/eval split is a real failure mode: stale running statistics can break inference after distribution shift or very small batches. It is also awkward for online inference and variable batch composition. LayerNorm avoids batch coupling but does not preserve feature scale information unless the learned affine parameters recover it. Normalization also changes the effective optimization geometry, so it is not merely preprocessing.
 
 ## References
 

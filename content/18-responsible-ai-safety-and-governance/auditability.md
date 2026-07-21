@@ -19,14 +19,14 @@ related:
   - human-oversight.md
   - ../14-ml-engineering-and-mlops/observability.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Auditability
 
 Auditability is the ability to reconstruct what an AI system did, which artifacts were in force, why the action was allowed, and who approved the relevant controls. It connects operational [observability](../14-ml-engineering-and-mlops/observability.md) with [compliance](compliance.md): logs are useful only if they answer a later accountability question.
 
-## Concrete artifact
+## A logged decision event
 
 For high-risk systems, the EU AI Act includes record-keeping and logging obligations; NIST AI RMF also treats systematic documentation as part of managing risk. A minimal decision event should identify both the model path and the governance path:
 

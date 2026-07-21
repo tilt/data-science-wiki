@@ -6,7 +6,7 @@ area: ml-engineering-and-mlops
 topics:
   - canary-deployment
 level: foundational
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - service-level-objectives.md
   - monitoring.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Canary Deployment
 
 A canary deployment routes a small, controlled share of production traffic to a new [model-serving](model-serving.md) version before full release. It reduces blast radius while exposing the candidate to real request shapes, dependencies, and latency pressure.
 
-## Mechanism
+## Three canary contracts
 
 Canaries need three contracts: traffic assignment, guardrail metrics, and rollback triggers. Traffic can be random, sticky by user, regional, or feature-flagged. Guardrails should include service health, score distribution, fallback rate, and delayed product or label outcomes. The first decision is usually "continue ramp or [roll back](rollbacks.md)," not "declare the model better."
 

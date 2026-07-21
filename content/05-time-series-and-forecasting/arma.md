@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - arma
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - stationarity.md
   - autocorrelation-and-partial-autocorrelation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # ARMA

@@ -8,7 +8,7 @@ topics:
   - mlops
   - model-monitoring
 level: advanced
-status: review
+status: complete
 page_type: system-design
 aliases:
   - Forecast Model Monitoring
@@ -22,12 +22,10 @@ related:
   - forecast-calibration.md
   - ../14-ml-engineering-and-mlops/monitoring.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Forecast Monitoring
-
-## Summary
 
 Forecast monitoring checks whether a forecasting system remains healthy after deployment. It covers service reliability, data freshness, feature availability, forecast distributions, realized error, bias, calibration, drift, fallback usage, and operational impact.
 

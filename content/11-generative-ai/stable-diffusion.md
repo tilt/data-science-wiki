@@ -25,7 +25,7 @@ related:
   - ../09-computer-vision/self-supervised-visual-learning.md
   - ../09-computer-vision/image-representation.md
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-20
 ---
 
 # Stable Diffusion
@@ -34,7 +34,7 @@ Stable Diffusion is a family of text-conditioned image-generation models built a
 
 Stable Diffusion sits between [generative AI](index.md) and [computer vision](../09-computer-vision/index.md). The generator is a diffusion model, but it depends on visual representation learning: an [autoencoder](../06-deep-learning/autoencoders.md) defines the image latent space, a text or vision-language encoder supplies conditioning, and the denoiser learns visual structure from large image corpora. For representation-side context, see [self-supervised visual learning](../09-computer-vision/self-supervised-visual-learning.md).
 
-## Defining mechanism
+## Latent diffusion
 
 A latent diffusion model first encodes an image $x$ into a latent:
 

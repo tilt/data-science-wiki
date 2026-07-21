@@ -18,14 +18,14 @@ related:
   - rag.md
   - vector-databases.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Reranking
 
 Reranking reorders candidates after a fast first-stage retriever. It lets [retrieval pipelines](retrieval-pipelines.md) use cheap lexical or vector search for recall, then a more expensive model for precision before [RAG](rag.md) context is packed.
 
-## Mechanism
+## Bi-encoder recall, cross-encoder precision
 
 First-stage retrieval scores documents independently or approximately. A reranker scores $(q,d_i)$ pairs directly and sorts by $r(q,d_i)$. It is commonly applied after [hybrid retrieval](hybrid-retrieval.md), [embeddings](embeddings.md), or [vector databases](vector-databases.md) return a short candidate list.
 

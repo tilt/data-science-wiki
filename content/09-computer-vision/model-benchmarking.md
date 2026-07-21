@@ -17,14 +17,14 @@ related:
   - image-classification.md
   - object-detection.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Model Benchmarking
 
 Computer-vision benchmarking compares models under the same data, preprocessing, metrics, and deployment constraints. It should connect task scores from [detection and segmentation metrics](detection-and-segmentation-metrics.md) to practical constraints such as latency, memory, calibration, and [domain shift](domain-shift.md).
 
-## Defining mechanism
+## What a benchmark specifies
 
 A benchmark should specify a tuple
 

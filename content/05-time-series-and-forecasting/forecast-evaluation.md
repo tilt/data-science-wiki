@@ -8,7 +8,7 @@ topics:
   - backtesting
   - metrics
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - Forecast Model Evaluation
@@ -22,12 +22,10 @@ related:
   - forecasting-pitfalls-and-worked-examples.md
   - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Forecast Evaluation
-
-## Summary
 
 Forecast evaluation measures how predictions perform under a time-respecting validation protocol. It combines [backtesting](backtesting.md), forecast error metrics, bias analysis, aggregation choices, uncertainty checks, and business interpretation.
 

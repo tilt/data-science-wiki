@@ -18,14 +18,14 @@ related:
   - content-based-recommendation.md
   - ../12-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Candidate Generation
 
 Candidate generation retrieves a small set of plausible items from a large catalog so a slower [ranking](ranking.md) model does not score everything. Sources often include [item-based collaborative filtering](item-based-collaborative-filtering.md), [content-based recommendation](content-based-recommendation.md), trending items, subscriptions, and business rules.
 
-## Defining mechanism
+## Merging candidate sources
 
 If sources $S_1,\ldots,S_m$ return scored item sets, a simple merge is
 

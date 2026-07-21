@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - sarima
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - statistical-forecasting.md
   - energy-consumption-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # SARIMA

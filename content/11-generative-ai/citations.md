@@ -18,14 +18,14 @@ related:
   - context-construction.md
   - hallucination-mitigation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-20
 ---
 
 # Citations
 
 Citations are evidence pointers, not decorations. A cited source must support the specific claim made by the answer. They are strongest when [grounding](grounding.md), [context construction](context-construction.md), and [RAG evaluation](rag-evaluation.md) all operate on stable passage IDs.
 
-## Mechanism
+## What a citation must prove
 
 A citation contract can require each factual claim to carry `{claim, source_id, span}`. A validator then checks that the source was retrieved, the span exists, and the claim is semantically supported. [Hallucination mitigation](hallucination-mitigation.md) should treat uncited factual claims as defects, not as style issues.
 

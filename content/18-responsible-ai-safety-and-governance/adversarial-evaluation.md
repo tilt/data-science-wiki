@@ -19,14 +19,14 @@ related:
   - security.md
   - ../11-generative-ai/agent-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # Adversarial Evaluation
 
 Adversarial evaluation tests whether an AI system still behaves acceptably when inputs are hostile, ambiguous, out of distribution, or designed to trigger policy gaps. It is the safety counterpart to average-case [offline evaluation](../17-experimentation-and-evaluation/offline-evaluation.md): ordinary test sets estimate expected quality, while adversarial suites look for concentrated failures before attackers or users find them.
 
-## Mechanism
+## A threat-linked test matrix
 
 The artifact is a threat-linked test matrix, not a single score. For a RAG or agentic assistant, each case should record the attack surface, expected control, observed behavior, severity, owner, and regression status. A minimal matrix looks like this:
 

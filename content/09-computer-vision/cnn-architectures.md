@@ -12,6 +12,7 @@ aliases: []
 prerequisites:
   - index.md
 related:
+  - ../06-deep-learning/residual-connections.md
   - vision-transformers.md
   - image-classification.md
   - object-detection.md
@@ -22,7 +23,7 @@ last_reviewed: 2026-07-11
 
 # CNN Architectures
 
-CNN architectures organize convolution, nonlinearities, normalization, pooling or strided convolution, residual paths, and task heads. They are the standard backbone for [image classification](image-classification.md), [object detection](object-detection.md), and many segmentation models, and are the vision-specific case of [convolutional neural networks](../06-deep-learning/convolutional-neural-networks.md).
+CNN architectures organize convolution, nonlinearities, normalization, pooling or strided convolution, residual paths, and task heads. They are the standard backbone for [image classification](image-classification.md), [object detection](object-detection.md), and many segmentation models, and are the vision-specific case of [convolutional neural networks](../06-deep-learning/convolutional-neural-networks.md). ResNet and ResNeXt are useful reference architectures for [residual connections](../06-deep-learning/residual-connections.md), skip paths, and grouped convolutional capacity.
 
 ## Defining math
 
@@ -38,7 +39,7 @@ $$
 \left\lfloor \frac{L+2p-d(k-1)-1}{s}+1 \right\rfloor,
 $$
 
-with input size $L$, padding $p$, dilation $d$, kernel size $k$, and stride $s$. Residual blocks learn $y=x+F(x)$, making deep stacks easier to optimize.
+with input size $L$, padding $p$, dilation $d$, kernel size $k$, and stride $s$. Residual blocks learn $y=x+F(x)$, making deep stacks easier to optimize; see [residual connections](../06-deep-learning/residual-connections.md) for a more detailed treatment of skip connections, ResNet, and ResNeXt.
 
 ## Worked example
 
@@ -79,7 +80,8 @@ Architecture comparisons are not meaningful unless resolution, augmentation, tra
 ## References
 
 - [PyTorch documentation: `torch.nn.Conv2d`](https://docs.pytorch.org/docs/stable/generated/torch.nn.Conv2d.html)
-- [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
+- [He et al., 2015, Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
+- [Xie et al., 2016, Aggregated Residual Transformations for Deep Neural Networks](https://arxiv.org/abs/1611.05431)
 
 > [!nav]
 > **Section** — [Computer Vision](index.md)

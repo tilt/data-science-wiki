@@ -6,7 +6,7 @@ area: time-series-and-forecasting
 topics:
   - time-series-fundamentals
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - forecasting-problem-formulation.md
   - backtesting.md
 historical_context: false
-last_reviewed: 2026-07-18
+last_reviewed: 2026-07-20
 ---
 
 # Time Series Fundamentals

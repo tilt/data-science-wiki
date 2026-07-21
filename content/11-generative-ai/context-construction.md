@@ -18,14 +18,14 @@ related:
   - tool-schemas.md
   - determinism-and-reproducibility.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Context Construction
 
 Context construction is the packing layer between retrieval and generation. It decides which instructions, [tool schemas](tool-schemas.md), conversation turns, [chunking](chunking.md) outputs, and formatting constraints reach the model.
 
-## Mechanism
+## Packing under a token budget
 
 With a token budget $B$, each candidate item has cost $c_i$ and estimated utility $u_i$. The system chooses a subset with $\sum c_i\le B$, while reserving room for the answer and preserving instruction precedence. This is why [retrieval pipelines](retrieval-pipelines.md) should return ranked, source-labeled chunks rather than raw documents.
 

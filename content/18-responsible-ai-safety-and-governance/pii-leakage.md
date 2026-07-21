@@ -19,14 +19,14 @@ related:
   - auditability.md
   - ../11-generative-ai/pii-protection.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-21
 ---
 
 # PII Leakage
 
 PII leakage occurs when an AI system exposes personally identifiable information to a user, model provider, tool, log sink, retrieval result, analyst, or downstream system that should not receive it. It is both a [privacy](privacy.md) failure and a [security](security.md) failure because leakage often happens through permission gaps, prompt injection, or overly broad logging.
 
-## Mechanism
+## Common leakage paths
 
 Common leakage paths in AI systems include:
 

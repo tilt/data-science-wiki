@@ -8,7 +8,7 @@ topics:
   - ensemble-learning
   - model-selection
 level: advanced
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - Time Series Ensembling
@@ -24,12 +24,10 @@ related:
   - forecast-error-metrics.md
   - hyperparameter-optimization-for-forecasting.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-20
 ---
 
 # Forecast Ensembling
-
-## Summary
 
 Forecast ensembling combines predictions from multiple models. A generic point ensemble is:
 
