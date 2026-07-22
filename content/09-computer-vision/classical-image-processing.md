@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - classical-image-processing
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,14 @@ related:
   - ocr-pipelines.md
   - semantic-segmentation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Classical Image Processing
 
 Classical image processing uses fixed operations such as convolution, thresholding, morphology, and geometric transforms. It is not obsolete: it is often the most auditable part of an [OCR pipeline](ocr-pipelines.md), a preprocessing step before [feature extraction](feature-extraction.md), or a sanity baseline for [semantic segmentation](semantic-segmentation.md).
 
-## Defining math
+## Convolution and gradient filters
 
 For a grayscale image $I$ and kernel $K$, 2D convolution computes
 

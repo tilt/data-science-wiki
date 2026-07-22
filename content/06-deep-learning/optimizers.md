@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - optimizers
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -17,14 +17,24 @@ related:
   - loss-functions.md
   - ../01-mathematical-foundations/gradient-descent.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Optimizers
 
 An optimizer consumes gradients from [backpropagation](backpropagation.md) and changes parameters. Plain SGD follows the local slope; momentum accumulates a velocity; Adam rescales updates with running first and second moments. These rules are usually more consequential than small architecture changes when the [loss](loss-functions.md) is noisy or sparse.
 
-## Defining math
+## What an optimizer does
+
+An optimizer decides how to turn gradients into parameter changes. The three standard choices differ in how much history they carry:
+
+| Optimizer | Uses                                   | Effect                                             |
+| --------- | -------------------------------------- | -------------------------------------------------- |
+| SGD       | only the current gradient              | follows the local slope; sensitive to noise        |
+| Momentum  | a running velocity of past gradients   | smooths noise, accelerates through shallow regions |
+| Adam      | running mean and variance of gradients | adapts the step size per parameter                 |
+
+## The update rules
 
 SGD updates
 

@@ -7,7 +7,7 @@ topics:
   - multilayer-perceptrons
   - feed-forward-networks
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - MLP
@@ -24,7 +24,7 @@ related:
   - backpropagation.md
   - transformers.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Multilayer Perceptrons
@@ -33,7 +33,7 @@ A multilayer perceptron, or MLP, is the standard dense feed-forward neural netwo
 
 "Feed-forward network" is the broader graph description: the computation has directed layers and no cycles. An MLP is the dense version most people mean in deep-learning architectures. In transformer papers, `FFN` usually means a position-wise MLP sublayer, not a separate sequence model.
 
-## Defining math
+## The MLP computation
 
 For a two-layer MLP,
 

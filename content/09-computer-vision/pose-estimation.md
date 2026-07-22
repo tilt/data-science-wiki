@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - pose-estimation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - detection-and-segmentation-metrics.md
   - ../10-video-understanding/gesture-recognition.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Pose Estimation

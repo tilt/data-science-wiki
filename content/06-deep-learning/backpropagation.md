@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - backpropagation
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -18,37 +18,21 @@ related:
   - activation-functions.md
   - ../01-mathematical-foundations/gradients.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Backpropagation
 
 Backpropagation is reverse-mode automatic differentiation applied to a network's computational graph. A forward pass records intermediate values; the backward pass reuses them to push an error signal from the [loss function](loss-functions.md) through parameters, nonlinear [activation functions](activation-functions.md), and earlier layers. It supplies gradients; [optimizers](optimizers.md) decide how parameters move.
 
-## Defining math
+## How it works
 
-For a two-layer scalar-output network,
+Backpropagation computes every parameter's gradient in two passes over the network's computation graph:
 
-$$
-h=\phi(xW_1), \qquad \hat y=hW_2, \qquad L=(\hat y-y)^2.
-$$
+1. **Forward pass.** Run the input through the layers to produce the prediction and the loss, caching each layer's intermediate activations along the way.
+2. **Backward pass.** Starting from the loss, send an error signal backward through the graph. At each layer, combine the incoming error with the cached activations to produce both the gradient for that layer's parameters and the error signal to pass further back.
 
-The final-layer gradient is local:
-
-$$
-\frac{\partial L}{\partial W_2}=h^\top\frac{\partial L}{\partial \hat y}, \qquad \frac{\partial L}{\partial \hat y}=2(\hat y-y).
-$$
-
-The earlier layer gets the same error signal multiplied through downstream weights and the derivative of the nonlinearity:
-
-$$
-\frac{\partial L}{\partial W_1}
-=x^\top\left[\left(\frac{\partial L}{\partial \hat y}W_2^\top\right)\odot \phi'(xW_1)\right].
-$$
-
-This is the chain rule from [gradients](../01-mathematical-foundations/gradients.md), organized so each intermediate Jacobian-vector product is computed once instead of recomputing every path independently.
-
-The forward pass (solid) computes and caches activations; the backward pass (dotted) reuses them to send the error signal back into each parameter:
+The efficiency comes from reuse: each activation is computed once in the forward pass and reused in the backward pass, so a network with millions of parameters still needs only one forward and one backward sweep — not one pass per parameter. The forward pass (solid) caches activations; the backward pass (dotted) reuses them to send the error signal back into each parameter:
 
 ```mermaid
 flowchart TD
@@ -60,6 +44,29 @@ flowchart TD
   dY -.-> dH[Propagate through W2 and the activation derivative]
   dH -.-> dW1[Gradient for W1 reuses x]
 ```
+
+## The chain rule, organized
+
+For a two-layer scalar-output network with input $x$, weight matrices $W_1$ and $W_2$, nonlinearity $\phi$, and target $y$,
+
+$$
+h=\phi(xW_1), \qquad \hat y=hW_2, \qquad L=(\hat y-y)^2,
+$$
+
+where $h$ is the hidden activation and $\hat y$ the prediction. The final-layer gradient is local:
+
+$$
+\frac{\partial L}{\partial W_2}=h^\top\frac{\partial L}{\partial \hat y}, \qquad \frac{\partial L}{\partial \hat y}=2(\hat y-y).
+$$
+
+The earlier layer gets the same error signal multiplied back through the downstream weights $W_2$ and the derivative of the nonlinearity ($\odot$ is elementwise multiplication):
+
+$$
+\frac{\partial L}{\partial W_1}
+=x^\top\left[\left(\frac{\partial L}{\partial \hat y}W_2^\top\right)\odot \phi'(xW_1)\right].
+$$
+
+This is the chain rule from [gradients](../01-mathematical-foundations/gradients.md), organized so each intermediate Jacobian-vector product is computed once instead of recomputing every path independently.
 
 ## Worked example
 

@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - document-image-analysis-and-field-extraction
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Historical Document and Museum Label Analysis
@@ -18,7 +18,7 @@ related:
   - content-based-image-retrieval.md
   - ../19-domain-applications/cultural-heritage-document-extraction-and-entity-matching.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Document Image Analysis and Field Extraction

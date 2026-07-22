@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - rotated-object-detection
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - oriented object detection
@@ -18,14 +18,14 @@ related:
   - ocr-pipelines.md
   - synthetic-data.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Rotated Object Detection
 
 Rotated object detection predicts oriented boxes instead of axis-aligned boxes. It matters when angle is part of localization: aerial ships, text lines, shelves, industrial parts, and long objects where ordinary [object detection](object-detection.md) boxes include too much background.
 
-## Defining math
+## Oriented boxes and rotated IoU
 
 An oriented rectangle can be parameterized as
 

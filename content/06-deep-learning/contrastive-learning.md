@@ -9,7 +9,7 @@ topics:
   - representation-learning
   - metric-learning
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Contrastive Representation Learning"
@@ -25,7 +25,7 @@ related:
   - ../01-mathematical-foundations/cross-entropy.md
   - ../12-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-22
 ---
 
 # Contrastive Learning
@@ -36,7 +36,7 @@ Contrastive learning trains an embedding space by comparing examples. A positive
 
 The important design choice is not only the loss. The positive-pair construction defines the invariances the model learns. If two crops of the same image are treated as positive, the representation is encouraged to ignore crop location. If an image and its caption are treated as positive, the representation is encouraged to align visual and textual semantics.
 
-## Defining Math
+## The contrastive objective
 
 Let $z_i$ and $z_j$ be normalized embeddings of two positive views. Similarity is often cosine similarity,
 

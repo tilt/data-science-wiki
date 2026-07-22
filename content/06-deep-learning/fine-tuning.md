@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - fine-tuning
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - fine tuning
@@ -18,14 +18,14 @@ related:
   - optimizers.md
   - ../11-generative-ai/fine-tuning-versus-rag.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Fine-Tuning
 
 Fine-tuning adapts a pretrained model to a target task by updating selected parameters. It is a specific form of [transfer learning](transfer-learning.md): start from a useful representation, then decide which layers or adapters should learn. In generative systems it should be separated from [fine-tuning versus RAG](../11-generative-ai/fine-tuning-versus-rag.md), because retrieval can solve knowledge injection without changing weights.
 
-## Defining math
+## Full, partial, and low-rank tuning
 
 Full fine-tuning optimizes all parameters:
 

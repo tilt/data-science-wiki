@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - convolutional-neural-networks
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,28 +18,21 @@ related:
   - residual-connections.md
   - ../09-computer-vision/cnn-architectures.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Convolutional Neural Networks
 
 A convolutional neural network uses small learned kernels across many spatial locations. Instead of learning a separate weight for every input pixel and output unit, a CNN shares each filter over the grid. This is why CNNs remain central to [computer-vision architectures](../09-computer-vision/cnn-architectures.md), often combined with [normalization](normalization.md), [residual connections](residual-connections.md), and careful [initialization](initialization.md).
 
-## Defining math
+## How a CNN works
 
-For input channel $c$, output channel $k$, and kernel offsets $(u,v)$,
+A convolutional network builds features by sliding small learned filters (kernels) across the input grid:
 
-$$
-y_{k,i,j}=b_k+\sum_c\sum_u\sum_v W_{k,c,u,v}x_{c,i+u,j+v}.
-$$
-
-Stride controls how far the kernel moves; padding controls boundary size. With kernel size $k_\ell$ and stride $s_i$, the receptive field after layer $\ell$ grows as
-
-$$
-r_\ell=r_{\ell-1}+(k_\ell-1)\prod_{i<\ell}s_i.
-$$
-
-Gradients through convolution are still handled by [backpropagation](backpropagation.md); the key difference is that shared weights accumulate gradient contributions from every spatial position where the filter was used.
+1. **Convolve.** Slide each filter over the image; at every location it computes a weighted sum of the pixels beneath it, producing one output value. The same filter weights are reused at every position (weight sharing), so a filter that detects an edge detects it anywhere.
+2. **Activate.** Apply a nonlinearity to each output value.
+3. **Reduce.** Pooling or a strided convolution shrinks the spatial size, summarizing each region.
+4. **Stack.** Repeat. Because each layer sees the outputs of the previous one, deeper layers respond to a larger patch of the original image — a growing receptive field.
 
 ```mermaid
 flowchart TD
@@ -49,6 +42,22 @@ flowchart TD
   Pool --> Stack[Repeat: deeper layers see larger receptive fields]
   Stack --> Head[Flatten or pool, then classifier]
 ```
+
+## The convolution operation
+
+For input channel $c$, output channel $k$, and kernel offsets $(u,v)$,
+
+$$
+y_{k,i,j}=b_k+\sum_c\sum_u\sum_v W_{k,c,u,v}\,x_{c,i+u,j+v},
+$$
+
+where $x_{c,i+u,j+v}$ is the input value at channel $c$ and position $(i+u,j+v)$, $W_{k,c,u,v}$ is the shared filter weight, $b_k$ is the bias for output channel $k$, and $y_{k,i,j}$ is the output at channel $k$, position $(i,j)$. Stride controls how far the kernel moves; padding controls boundary size. With kernel size $k_\ell$ and stride $s_i$, the receptive field after layer $\ell$ grows as
+
+$$
+r_\ell=r_{\ell-1}+(k_\ell-1)\prod_{i<\ell}s_i.
+$$
+
+Gradients through convolution are still handled by [backpropagation](backpropagation.md); the key difference is that shared weights accumulate gradient contributions from every spatial position where the filter was used.
 
 ## Worked example
 

@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - regularization
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,27 @@ related:
   - optimizers.md
   - ../03-classical-machine-learning/regularization.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Regularization
 
 Regularization changes the training problem so a neural network is less free to memorize. In deep learning this can be explicit penalties in the [loss](loss-functions.md), stochastic training behavior such as dropout, data augmentation, early stopping, or freezing layers during [fine-tuning](fine-tuning.md). It overlaps with but is not identical to [classical regularization](../03-classical-machine-learning/regularization.md): the classical page covers ridge, lasso, and why lasso can prune features, while this page focuses on neural-network training behavior.
 
-## Defining math
+## Ways to regularize a network
+
+Deep learning has several regularizers that all fight memorization, each in a different way:
+
+| Technique         | What it does                                   |
+| ----------------- | ---------------------------------------------- |
+| Weight decay (L2) | shrinks weights toward zero                    |
+| Dropout           | randomly zeros activations during training     |
+| Early stopping    | halts training when validation stops improving |
+| Data augmentation | expands the effective training set             |
+
+The two with an explicit formula are weight decay and dropout.
+
+## Weight decay and dropout
 
 Weight decay adds an L2 term to the empirical loss:
 

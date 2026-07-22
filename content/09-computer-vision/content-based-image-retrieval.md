@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - content-based-image-retrieval
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,14 @@ related:
   - self-supervised-visual-learning.md
   - ../12-information-retrieval-and-search/vector-indexes.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Content-Based Image Retrieval
 
 Content-based image retrieval finds images by visual similarity rather than only text metadata. The core dependency is [feature extraction](feature-extraction.md): the retrieval system can only rank by what the descriptor or embedding preserves. It connects directly to vector search in [vector indexes](../12-information-retrieval-and-search/vector-indexes.md).
 
-## Defining math
+## Ranking by embedding similarity
 
 Given indexed image embeddings $v_i=\phi(x_i)$ and a query embedding $q=\phi(x_q)$, rank by cosine similarity
 

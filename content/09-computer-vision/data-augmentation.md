@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - data-augmentation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,14 @@ related:
   - self-supervised-visual-learning.md
   - instance-segmentation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Data Augmentation
 
 Data augmentation creates transformed training examples that should preserve the target label. It is a robustness tool for [domain shift](domain-shift.md), a core ingredient of [self-supervised visual learning](self-supervised-visual-learning.md), and a label-geometry risk in [object detection](object-detection.md) or [instance segmentation](instance-segmentation.md).
 
-## Defining math
+## The augmentation objective
 
 For a transformation $T\sim\mathcal T$, training minimizes
 

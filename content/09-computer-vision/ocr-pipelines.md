@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - ocr-pipelines
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases:
   - optical character recognition
@@ -18,7 +18,7 @@ related:
   - document-image-analysis-and-field-extraction.md
   - image-representation.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # OCR Pipelines

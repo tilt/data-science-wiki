@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - self-supervised-visual-learning
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - self-supervised vision
@@ -20,7 +20,7 @@ related:
   - ../11-generative-ai/stable-diffusion.md
   - ../06-deep-learning/contrastive-learning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Self Supervised Visual Learning
@@ -29,14 +29,14 @@ Self-supervised visual learning trains an encoder from images without manual tas
 
 This page is about representation learning, not image generation. It still matters for generative systems: text-to-image models such as [Stable Diffusion](../11-generative-ai/stable-diffusion.md) depend on visual and vision-language representation learning through autoencoders, image-text encoders, and perceptual feature spaces.
 
-## Defining math
+## Contrastive, masked, and predictive objectives
 
 Contrastive methods make two augmented views of the same image close and other images far apart. For normalized embeddings $z_i$ and positive index $p(i)$, the NT-Xent loss is
 
 $$
 L_i=-\log
 \frac{\exp(z_i^\top z_{p(i)}/\tau)}
-\sum_{j\ne i}\exp(z_i^\top z_j/\tau)}.
+{\sum_{j\ne i}\exp(z_i^\top z_j/\tau)}.
 $$
 
 The [data augmentation](data-augmentation.md) policy is part of the objective: it defines which changes should preserve identity.

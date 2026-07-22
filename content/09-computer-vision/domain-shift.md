@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - domain-shift
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,14 @@ related:
   - model-benchmarking.md
   - medical-image-analysis.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Domain Shift
 
 Domain shift occurs when deployment images differ from training images. In vision this often comes from sensors, lighting, geography, weather, hospital, scanner protocol, annotation policy, or time. It is the reason [model benchmarking](model-benchmarking.md) must report slices, not only a random validation split.
 
-## Defining math
+## Types of distribution shift
 
 The training and deployment distributions differ:
 
@@ -32,7 +32,15 @@ $$
 P_{\mathrm{train}}(X,Y)\ne P_{\mathrm{test}}(X,Y).
 $$
 
-Covariate shift changes $P(X)$ while the labeling rule is stable; label shift changes $P(Y)$; concept shift changes $P(Y\mid X)$. [Data augmentation](data-augmentation.md) and [synthetic data](synthetic-data.md) try to widen the training distribution, but they must be checked against real target-domain examples.
+That difference comes in three forms, and the right fix depends on which one it is:
+
+| Shift type      | What changes                 | Example                                   |
+| --------------- | ---------------------------- | ----------------------------------------- |
+| Covariate shift | $P(X)$, labeling rule stable | new camera or scanner, different lighting |
+| Label shift     | $P(Y)$                       | disease prevalence differs at deployment  |
+| Concept shift   | $P(Y\mid X)$                 | the labeling rule itself changes          |
+
+[Data augmentation](data-augmentation.md) and [synthetic data](synthetic-data.md) try to widen the training distribution, but they must be checked against real target-domain examples.
 
 ## Worked example
 

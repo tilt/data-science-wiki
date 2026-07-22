@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - semantic-segmentation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,14 @@ related:
   - mri-segmentation.md
   - cnn-architectures.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Semantic Segmentation
 
 Semantic segmentation assigns a class to every pixel. Unlike [instance segmentation](instance-segmentation.md), it does not separate two touching objects of the same class; unlike [image classification](image-classification.md), its output preserves spatial shape.
 
-## Defining math
+## Per-pixel classification
 
 For an image of height $H$ and width $W$, the model returns logits $z_{u,v,k}$ for every pixel $(u,v)$ and class $k$:
 

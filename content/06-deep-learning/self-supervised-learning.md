@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - self-supervised-learning
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - self supervised learning
@@ -19,16 +19,25 @@ related:
   - transfer-learning.md
   - ../10-video-understanding/self-supervised-video-representation-learning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Self-Supervised Learning
 
 Self-supervised learning creates a training signal from unlabeled data: predict masked content, match two augmented views, order frames, or reconstruct missing features. The goal is usually a reusable [representation](representation-learning.md) that can be adapted by [transfer learning](transfer-learning.md), not the pretext task itself. [Autoencoders](autoencoders.md) and [contrastive learning](contrastive-learning.md) are two major families.
 
-## Defining math
+## Making labels from the data
 
-Let $t$ be a transformation that hides or augments part of $x$. A masked-prediction objective can be written as
+Self-supervision invents a target from the input itself. The common recipes differ in what they hide and ask the model to recover:
+
+| Pretext task              | Signal derived from $x$              | Example                   |
+| ------------------------- | ------------------------------------ | ------------------------- |
+| Masked prediction         | reconstruct hidden tokens or patches | BERT, masked autoencoders |
+| Contrastive views         | two augmentations should embed alike | SimCLR                    |
+| Ordering                  | recover the correct sequence order   | frame-order prediction    |
+| Inpainting / colorization | recover removed content              | image colorization        |
+
+Formally, let $t$ be a transformation that hides or augments part of $x$. A masked-prediction objective can be written as
 
 $$
 \min_\theta \mathbb E_x\left[L(g_\theta(t(x)), s(x))\right],

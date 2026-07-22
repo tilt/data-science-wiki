@@ -9,7 +9,7 @@ topics:
   - generative-models
   - image-generation
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - GAN
@@ -24,7 +24,7 @@ related:
   - ../11-generative-ai/stable-diffusion.md
   - ../09-computer-vision/image-representation.md
 historical_context: false
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-22
 ---
 
 # Generative Adversarial Networks
@@ -35,7 +35,7 @@ A generative adversarial network trains two models against each other. The gener
 
 GANs are implicit generative models: they can sample quickly after training, but they do not usually provide an explicit likelihood for a data point. This makes them different from [autoencoders](autoencoders.md), VAEs, autoregressive models, and diffusion models.
 
-## Defining Mechanism
+## The adversarial game
 
 Let $z\sim p(z)$ be a noise vector, $G_\theta(z)$ a generated sample, and $D_\psi(x)$ the discriminator's estimate that $x$ is real. The original minimax objective is
 

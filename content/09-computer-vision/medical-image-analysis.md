@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - medical-image-analysis
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Medical Imaging
@@ -19,7 +19,7 @@ related:
   - detection-and-segmentation-metrics.md
   - ../19-domain-applications/medical-mri-analysis.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Medical Image Analysis

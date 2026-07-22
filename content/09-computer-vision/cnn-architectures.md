@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - cnn-architectures
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - object-detection.md
   - ../06-deep-learning/convolutional-neural-networks.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # CNN Architectures
 
 CNN architectures organize convolution, nonlinearities, normalization, pooling or strided convolution, residual paths, and task heads. They are the standard backbone for [image classification](image-classification.md), [object detection](object-detection.md), and many segmentation models, and are the vision-specific case of [convolutional neural networks](../06-deep-learning/convolutional-neural-networks.md). ResNet and ResNeXt are useful reference architectures for [residual connections](../06-deep-learning/residual-connections.md), skip paths, and grouped convolutional capacity.
 
-## Defining math
+## Convolution, stride, and receptive field
 
 For input $X$ and kernel $W$, a 2D convolutional layer computes
 

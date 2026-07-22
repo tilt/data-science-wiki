@@ -10,7 +10,7 @@ topics:
   - bf16
   - numerical-stability
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases:
   - "AMP"
@@ -27,7 +27,7 @@ related:
   - ../01-mathematical-foundations/numerical-stability.md
   - ../15-cloud-and-distributed-systems/gpu-systems.md
 historical_context: false
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-22
 ---
 
 # Mixed Precision
@@ -49,7 +49,7 @@ A floating-point number stores a sign, an exponent, and a significand, often cal
 
 FP16 and BF16 are both 16-bit formats, but they spend those bits differently. FP16 keeps more mantissa bits than BF16, so it can represent nearby numbers more finely around moderate magnitudes. BF16 keeps the same exponent width as FP32, so it can represent very large and very small magnitudes across a much wider range. That is why BF16 often needs less loss scaling than FP16, even though each individual BF16 value is rounded more coarsely.
 
-## Defining Mechanism
+## Loss scaling and master weights
 
 A typical FP16 training loop keeps FP32 master weights $\theta_{32}$, casts working weights and activations to lower precision, scales the loss by $S$, and unscales gradients before the optimizer step:
 

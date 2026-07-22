@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - initialization
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,16 +18,23 @@ related:
   - backpropagation.md
   - optimizers.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Initialization
 
 Initialization sets the starting point for optimization and the scale of signals before any learning has happened. Poorly scaled weights can make activations explode or shrink layer by layer, leaving [backpropagation](backpropagation.md) with [vanishing or exploding gradients](vanishing-and-exploding-gradients.md). Good initializers are matched to the [activation function](activation-functions.md) and sometimes made less critical by [normalization](normalization.md).
 
-## Defining math
+## Scaling rules
 
-For a layer with fan-in $n_{\text{in}}$ and fan-out $n_{\text{out}}$, Xavier/Glorot-style scaling targets variance around
+The goal is to keep the variance of activations, and of the gradients flowing back through them, roughly constant from layer to layer. The right scale depends on the activation:
+
+| Initializer     | Weight-variance target             | Matched activation        |
+| --------------- | ---------------------------------- | ------------------------- |
+| Xavier / Glorot | $2/(n_{\text{in}}+n_{\text{out}})$ | symmetric (tanh, sigmoid) |
+| He              | $2/n_{\text{in}}$                  | ReLU family               |
+
+For a layer with fan-in $n_{\text{in}}$ (incoming connections) and fan-out $n_{\text{out}}$ (outgoing connections), Xavier/Glorot-style scaling targets variance around
 
 $$
 \operatorname{Var}(W)\approx \frac{2}{n_{\text{in}}+n_{\text{out}}},

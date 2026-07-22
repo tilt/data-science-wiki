@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - model-benchmarking
 level: foundational
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - image-classification.md
   - object-detection.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Model Benchmarking

@@ -9,7 +9,7 @@ topics:
   - resnet
   - resnext
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Skip Connections
@@ -30,14 +30,14 @@ related:
   - transformers.md
   - ../09-computer-vision/cnn-architectures.md
 historical_context: true
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Residual Connections
 
 A residual connection copies a block input around a nonlinear transformation and adds it back to the result. Instead of forcing the block to learn a full new representation, the block learns a correction.
 
-## Defining math
+## Residual blocks
 
 A plain neural-network block computes
 

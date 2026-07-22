@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - distributed-training
 level: advanced
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - backpropagation.md
   - ../15-cloud-and-distributed-systems/distributed-model-training.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Distributed Training

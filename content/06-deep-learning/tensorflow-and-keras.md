@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - tensorflow-and-keras
 level: foundational
-status: review
+status: complete
 page_type: implementation
 aliases:
   - tensorflow
@@ -19,7 +19,7 @@ related:
   - loss-functions.md
   - optimizers.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # TensorFlow and Keras

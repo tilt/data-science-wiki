@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - representation-learning
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,25 @@ related:
   - transfer-learning.md
   - neural-network-fundamentals.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Representation Learning
 
 Representation learning is the practice of learning features instead of hand-designing them. A network maps raw input $x$ to a latent vector $z=f_\theta(x)$ that should make reconstruction, classification, retrieval, or [transfer learning](transfer-learning.md) easier. It is the shared substrate behind [autoencoders](autoencoders.md), [self-supervised learning](self-supervised-learning.md), and [contrastive learning](contrastive-learning.md).
 
-## Defining math
+## Ways to learn a representation
+
+The encoder $f_\theta$ can be trained in several ways depending on what supervision is available, and the choice decides what the latent vector $z$ keeps:
+
+| Approach                                               | Training signal              | What the representation keeps            |
+| ------------------------------------------------------ | ---------------------------- | ---------------------------------------- |
+| Supervised                                             | labels $y$                   | features predictive of the target        |
+| [Autoencoder](autoencoders.md)                         | reconstruction of $x$        | factors that rebuild the input           |
+| [Contrastive](contrastive-learning.md)                 | similarity of positive pairs | invariances from the view construction   |
+| [Self-supervised](self-supervised-learning.md) masking | predict hidden content       | structure that predicts the missing part |
+
+## Encoder and downstream head
 
 For an encoder $f_\theta$ and downstream head $g_\psi$,
 

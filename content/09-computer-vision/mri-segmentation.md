@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - mri-segmentation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,14 @@ related:
   - semantic-segmentation.md
   - detection-and-segmentation-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # MRI Segmentation
 
 MRI segmentation assigns labels to voxels or pixels for anatomy, lesions, tumor regions, edema, or organs. It is a volumetric specialization of [semantic segmentation](semantic-segmentation.md), and it often supplies measurements for [medical image analysis](medical-image-analysis.md) rather than just pictures.
 
-## Defining math
+## Dice overlap and physical volume
 
 For a volume $X\in\mathbb R^{C\times D\times H\times W}$, the model predicts a mask $\hat M\in\{0,1,\ldots,K\}^{D\times H\times W}$. Dice overlap for one structure is
 

@@ -9,7 +9,7 @@ topics:
   - self-supervised-learning
   - generative-models
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - Autoencoder
@@ -25,7 +25,7 @@ related:
   - neural-network-fundamentals.md
   - ../11-generative-ai/stable-diffusion.md
 historical_context: false
-last_reviewed: 2026-07-14
+last_reviewed: 2026-07-22
 ---
 
 # Autoencoders
@@ -36,7 +36,7 @@ An autoencoder learns to copy an input through a constrained intermediate repres
 
 Autoencoders are a form of [representation learning](representation-learning.md) and often a form of [self-supervised learning](self-supervised-learning.md), because the input provides its own target. They differ from [contrastive learning](contrastive-learning.md): contrastive objectives learn by comparing examples, while autoencoders learn by reconstructing missing, noisy, or compressed information.
 
-## Defining Mechanism
+## The encoder-decoder objective
 
 For input $x$, encoder $f_\theta$, decoder $g_\phi$, and latent code $z$:
 

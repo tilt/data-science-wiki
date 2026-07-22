@@ -8,7 +8,7 @@ topics:
   - gated-recurrent-networks
   - sequence-modeling
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - "Long Short-Term Memory"
@@ -23,7 +23,7 @@ related:
   - transformers.md
   - backpropagation.md
 historical_context: false
-last_reviewed: 2026-07-13
+last_reviewed: 2026-07-22
 ---
 
 # LSTM and GRU

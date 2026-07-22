@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - attention
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,22 +17,28 @@ related:
   - multimodal-learning.md
   - ../11-generative-ai/language-model-architecture.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Attention
 
 Attention computes a context-dependent weighted average of value vectors. A query asks what it needs, keys decide which positions match, and values provide the information to mix. This is the central mechanism in [transformers](transformers.md), a bridge away from [recurrent networks](recurrent-neural-networks.md), and a common alignment mechanism in [multimodal learning](multimodal-learning.md).
 
-## Defining math
+## How attention works
 
-Scaled dot-product attention is
+Every position produces three vectors: a **query** (what it is looking for), a **key** (what it offers to be matched against), and a **value** (the information it will contribute). For each query, attention then
+
+1. scores the query against every key with a dot product,
+2. turns those scores into weights with a softmax, so they are non-negative and sum to one, and
+3. returns the weighted average of the value vectors.
+
+Scaled dot-product attention writes this as
 
 $$
-\operatorname{Attention}(Q,K,V)=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V.
+\operatorname{Attention}(Q,K,V)=\operatorname{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V,
 $$
 
-For multi-head attention,
+where $Q$, $K$, and $V$ stack the query, key, and value vectors for all positions and $d_k$ is the key dimension. For multi-head attention,
 
 $$
 \operatorname{head}_i=\operatorname{Attention}(QW_i^Q,KW_i^K,VW_i^V),

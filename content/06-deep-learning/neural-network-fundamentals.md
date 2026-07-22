@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - neural-network-fundamentals
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - loss-functions.md
   - optimizers.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Neural Network Fundamentals

@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - image-classification
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,25 @@ related:
   - vision-transformers.md
   - model-benchmarking.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Image Classification
 
 Image classification maps an entire image to one or more labels. It is appropriate when the image-level category is the deliverable; if the user needs object location, use [object detection](object-detection.md) or [semantic segmentation](semantic-segmentation.md) instead.
 
-## Defining math
+## Where classification sits among vision tasks
+
+Image classification is the coarsest of the recognition tasks — it answers _what_ without _where_. The other tasks add location at increasing resolution:
+
+| Task                                              | Output                         | Question it answers                  |
+| ------------------------------------------------- | ------------------------------ | ------------------------------------ |
+| Image classification                              | one or more image-level labels | what is in the image?                |
+| [Object detection](object-detection.md)           | class-labeled bounding boxes   | what is where, as boxes?             |
+| [Semantic segmentation](semantic-segmentation.md) | a class for every pixel        | which pixels are which class?        |
+| [Instance segmentation](instance-segmentation.md) | a mask per object              | which pixels belong to which object? |
+
+## Scores, softmax, and cross-entropy
 
 For single-label classification, a model computes logits $z=f_\theta(x)\in\mathbb R^K$ and class probabilities
 

@@ -8,7 +8,7 @@ topics:
   - batch-normalization
   - layer-normalization
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - Batch Normalization
@@ -25,14 +25,21 @@ related:
   - convolutional-neural-networks.md
   - backpropagation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Normalization
 
 Normalization layers standardize intermediate activations and then apply trainable scale and shift. They reduce sensitivity to [initialization](initialization.md) and learning rate, but the axis being normalized matters: batch norm couples examples in a minibatch, while layer norm normalizes features within each example and is therefore natural in [transformers](transformers.md).
 
-## Defining math
+## Standardize, then scale and shift
+
+Normalization layers all share one shape: standardize a set of activations, then apply a learned scale and shift. They differ only in which axis supplies the statistics:
+
+| Method     | Normalizes over                       | Natural setting                                            |
+| ---------- | ------------------------------------- | ---------------------------------------------------------- |
+| Batch norm | the minibatch (and spatial positions) | [convolutional networks](convolutional-neural-networks.md) |
+| Layer norm | one example's features                | [transformers](transformers.md)                            |
 
 For a set of activations $x$, normalization computes
 

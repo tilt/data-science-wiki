@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="400" viewBox="0 0 640 400" role="img" aria-labelledby="title desc">
+  <title id="title">Intersection over union of a predicted and a ground-truth box</title>
+  <desc id="desc">Two overlapping rectangles, a ground-truth box and a predicted box. Their overlap is the intersection; the area they jointly cover is the union. IoU is the intersection area divided by the union area.</desc>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: #4b5563; }
+    .small { font-size: 15px; }
+    .gt { fill: #dcfce7; fill-opacity: 0.55; stroke: #16a34a; stroke-width: 3; }
+    .pred { fill: #dbeafe; fill-opacity: 0.45; stroke: #2563eb; stroke-width: 3; }
+    .inter { fill: #f97316; fill-opacity: 0.55; stroke: #c2410c; stroke-width: 2; }
+  </style>
+
+  <text x="320" y="34" text-anchor="middle" font-size="24" font-weight="800">Intersection over union (IoU)</text>
+  <text x="320" y="60" text-anchor="middle" font-size="16" class="muted">How tightly a predicted box overlaps the ground-truth box.</text>
+
+  <!-- ground-truth box A -->
+  <rect class="gt" x="110" y="100" width="230" height="185"/>
+  <text x="130" y="122" class="small" fill="#15803d" font-weight="700">ground truth (A)</text>
+
+  <!-- predicted box B -->
+  <rect class="pred" x="250" y="150" width="230" height="185"/>
+  <text x="470" y="328" text-anchor="end" class="small" fill="#1d4ed8" font-weight="700">prediction (B)</text>
+
+  <!-- intersection A ∩ B: x 250..340, y 150..285 -->
+  <rect class="inter" x="250" y="150" width="90" height="135"/>
+  <text x="295" y="222" text-anchor="middle" font-size="13" fill="#7c2d12" font-weight="700">A ∩ B</text>
+
+  <!-- formula -->
+  <text x="320" y="374" text-anchor="middle" font-size="19" font-weight="700" fill="#c2410c">IoU = area(A ∩ B) / area(A ∪ B)</text>
+</svg>

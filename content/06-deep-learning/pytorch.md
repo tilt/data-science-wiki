@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - pytorch
 level: foundational
-status: review
+status: complete
 page_type: implementation
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - optimizers.md
   - loss-functions.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # PyTorch

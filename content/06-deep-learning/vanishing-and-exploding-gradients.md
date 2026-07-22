@@ -8,7 +8,7 @@ topics:
   - exploding-gradients
   - optimization
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Vanishing Gradients
@@ -24,14 +24,14 @@ related:
   - residual-connections.md
   - lstm-and-gru.md
 historical_context: true
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Vanishing and Exploding Gradients
 
 Vanishing and exploding gradients are training failures caused by repeated multiplication in [backpropagation](backpropagation.md). The loss gradient must travel backward through many layers or time steps. If that backward signal is repeatedly shrunk, early layers barely learn. If it is repeatedly amplified, updates become unstable and can produce infinities or NaNs.
 
-## Defining math
+## The Jacobian product
 
 For a deep chain of hidden states
 

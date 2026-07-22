@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - recurrent-neural-networks
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -17,16 +17,16 @@ related:
   - transformers.md
   - backpropagation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Recurrent Neural Networks
 
 A recurrent neural network processes a sequence by carrying a hidden state forward. The same transition function is reused at every step, so an RNN can accept variable-length inputs while sharing parameters. [LSTM and GRU](lstm-and-gru.md) add gates to this basic recurrence; [attention](attention.md) and [transformers](transformers.md) replace the single state bottleneck with direct pairwise interactions.
 
-## Defining math
+## How a recurrent network works
 
-The vanilla recurrence is
+An RNN reads a sequence one step at a time, keeping a hidden state that summarizes everything seen so far. At each step it combines the current input with the previous hidden state to produce a new hidden state, reusing the _same_ weights at every step — which is what lets it handle sequences of any length. The vanilla recurrence is
 
 $$
 h_t=\phi(W_xx_t+W_hh_{t-1}+b), \qquad y_t=g(W_yh_t).

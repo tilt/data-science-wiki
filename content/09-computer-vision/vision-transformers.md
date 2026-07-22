@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - vision-transformers
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - ViT
@@ -18,14 +18,25 @@ related:
   - self-supervised-visual-learning.md
   - ../06-deep-learning/attention.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Vision Transformers
 
 Vision transformers treat image patches as tokens and process them with transformer blocks. They replace the hard-coded locality of [CNN architectures](cnn-architectures.md) with learned attention over patch sequences, using the same core mechanism as [attention](../06-deep-learning/attention.md).
 
-## Defining math
+## CNN locality versus learned attention
+
+A vision transformer keeps the transformer machinery but swaps the CNN's built-in locality for attention that any patch can direct anywhere:
+
+|                    | CNN                             | Vision transformer                    |
+| ------------------ | ------------------------------- | ------------------------------------- |
+| Inductive bias     | local, translation-equivariant  | learned global attention              |
+| Information mixing | neighboring convolution windows | any patch to any patch                |
+| Data efficiency    | works with less data            | usually needs large-scale pretraining |
+| Cost driver        | scales with resolution          | attention is $O(N^2)$ in patch count  |
+
+## Patches to tokens
 
 An image $x\in\mathbb R^{C\times H\times W}$ is split into $N=HW/P^2$ patches, flattened, projected, and combined with positional embeddings:
 

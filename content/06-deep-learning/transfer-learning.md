@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - transfer-learning
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,14 @@ related:
   - self-supervised-learning.md
   - regularization.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Transfer Learning
 
 Transfer learning starts from a model or [representation](representation-learning.md) learned elsewhere and adapts it to a new task. The simplest version freezes the base and trains a small head; [fine-tuning](fine-tuning.md) updates some or all pretrained weights. It works best when the source task learned features that remain useful in the target domain, including features learned by [self-supervised learning](self-supervised-learning.md).
 
-## Defining math
+## Feature extraction versus fine-tuning
 
 Let $f_{\theta_0}$ be a pretrained encoder and $g_\psi$ a new task head. Feature extraction solves
 

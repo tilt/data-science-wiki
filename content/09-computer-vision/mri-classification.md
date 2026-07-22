@@ -6,7 +6,7 @@ area: computer-vision
 topics:
   - mri-classification
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - image-classification.md
   - domain-shift.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # MRI Classification

@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - loss-functions
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,16 +17,28 @@ related:
   - neural-network-fundamentals.md
   - ../01-mathematical-foundations/cross-entropy.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Loss Functions
 
 A loss function defines what training means. It converts model outputs and targets into a scalar that [backpropagation](backpropagation.md) can differentiate. The same architecture can behave very differently under mean squared error, binary cross-entropy, or multiclass [cross-entropy](../01-mathematical-foundations/cross-entropy.md).
 
-## Defining math
+## Choosing a loss
 
-For regression, mean squared error is
+The loss encodes what the model should get right, and the choice follows from the task and the output type:
+
+| Task                      | Loss                       | Output it expects        |
+| ------------------------- | -------------------------- | ------------------------ |
+| Regression                | mean squared error (MSE)   | a real number            |
+| Binary classification     | binary cross-entropy (BCE) | a probability in $(0,1)$ |
+| Multiclass classification | cross-entropy (CE)         | class logits             |
+
+Each turns predictions and targets into one differentiable scalar, and the gradient of that scalar is what training follows.
+
+## The loss formulas
+
+For regression, mean squared error over $n$ examples with predictions $\hat y_i$ and targets $y_i$ is
 
 $$
 L_{\text{MSE}}=\frac{1}{n}\sum_i(\hat y_i-y_i)^2.

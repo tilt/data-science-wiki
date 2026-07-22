@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - activation-functions
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - GELU
@@ -29,7 +29,18 @@ last_reviewed: 2026-07-22
 
 Activation functions turn affine layers into nonlinear [neural networks](neural-network-fundamentals.md). They also decide how much gradient reaches earlier layers during [backpropagation](backpropagation.md), so activation choice is inseparable from [initialization](initialization.md) and sometimes [normalization](normalization.md).
 
-## Defining math
+## What activations do
+
+Without a nonlinearity between layers, a stack of affine maps collapses to a single affine map, so activations are what let depth build nonlinear features. Their second job matters just as much: an activation's derivative controls how much gradient survives [backpropagation](backpropagation.md) to earlier layers. The common choices trade these off differently:
+
+| Activation   | Output range            | Gradient behavior                                                  |
+| ------------ | ----------------------- | ------------------------------------------------------------------ |
+| Sigmoid      | $(0,1)$                 | saturates in both tails (small gradient)                           |
+| Tanh         | $(-1,1)$                | zero-centered, but still saturates                                 |
+| ReLU         | $[0,\infty)$            | gradient 1 on the positive side, 0 on the negative (units can die) |
+| GELU / Swish | smooth, unbounded above | smooth gradient, no hard cutoff                                    |
+
+## Common activations and their derivatives
 
 Common elementwise activations include
 

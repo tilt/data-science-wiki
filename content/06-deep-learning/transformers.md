@@ -6,7 +6,7 @@ area: deep-learning
 topics:
   - transformers
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - Transformer
@@ -26,7 +26,7 @@ related:
   - ../09-computer-vision/vision-transformers.md
   - ../10-video-understanding/video-transformers.md
 historical_context: true
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Transformers
