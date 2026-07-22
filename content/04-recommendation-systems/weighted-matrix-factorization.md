@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - weighted-matrix-factorization
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - explicit-versus-implicit-feedback.md
   - bayesian-personalized-ranking.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Weighted Matrix Factorization
 
 Weighted matrix factorization is the standard [implicit feedback](implicit-feedback.md) adaptation of factor models: an interaction says "some preference evidence exists," while its count or strength says how confident the system should be. It avoids treating every missing pair as a strong negative.
 
-## Defining math
+## Preference and confidence
 
 Hu, Koren, and Volinsky separate binary preference $p_{ui}$ from confidence $c_{ui}$:
 

@@ -7,7 +7,7 @@ topics:
   - truncated-svd
   - singular-value-decomposition
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - ../12-information-retrieval-and-search/tf-idf.md
   - ../01-mathematical-foundations/low-rank-approximation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Truncated SVD
 
 Truncated SVD computes only the largest singular components of a matrix. It is useful for compression, latent semantic indexing, and baseline recommender representations, but it inherits the input-matrix assumptions of [classical SVD](classical-svd.md).
 
-## Defining math
+## The rank-k approximation
 
 The rank-$k$ approximation is
 

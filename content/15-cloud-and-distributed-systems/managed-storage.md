@@ -6,7 +6,7 @@ area: cloud-and-distributed-systems
 topics:
   - managed-storage
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - reliability.md
   - ../13-data-engineering/cloud-storage.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Managed Storage
@@ -28,6 +28,17 @@ last_reviewed: 2026-07-21
 Managed storage is selected by access pattern: object storage for immutable blobs and datasets, block storage for attached disks, file storage for POSIX-like shared paths, warehouses for analytical tables, databases for serving state, and caches for repeated low-latency reads. The wrong abstraction creates both performance and [cost management](cost-management.md) problems.
 
 ## Storage service types
+
+Each type is defined by its access pattern, and mismatches are the usual source of cost and latency surprises:
+
+| Type      | Access pattern              | Good fit                             | Poor fit                        |
+| --------- | --------------------------- | ------------------------------------ | ------------------------------- |
+| Object    | key-addressed blob GET/PUT  | datasets, model artifacts, backups   | low-latency mutation, POSIX I/O |
+| Block     | attached disk, random R/W   | database volumes, boot disks         | shared multi-host access        |
+| File      | POSIX shared path           | shared home dirs, legacy apps        | massive object throughput       |
+| Warehouse | analytical SQL over columns | facts and dimensions, BI queries     | transactional row serving       |
+| Database  | indexed row or key serving  | application state, low-latency reads | large analytical scans          |
+| Cache     | in-memory key lookup        | hot repeated reads                   | durable storage of record       |
 
 Object stores such as S3 and Cloud Storage expose buckets, object keys, metadata, IAM, lifecycle rules, and storage classes. They are excellent for [cloud storage](../13-data-engineering/cloud-storage.md), model artifacts, and [distributed data processing](distributed-data-processing.md) inputs. They are not low-latency mutable filesystems. A practical storage contract should state:
 

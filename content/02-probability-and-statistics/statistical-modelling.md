@@ -6,7 +6,7 @@ area: probability-and-statistics
 topics:
   - statistical-modelling
 level: foundational
-status: review
+status: complete
 page_type: model
 aliases:
   - Statistical Modeling
@@ -18,7 +18,7 @@ related:
   - maximum-likelihood.md
   - ../03-classical-machine-learning/regression.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Statistical Modelling

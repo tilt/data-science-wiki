@@ -6,7 +6,7 @@ area: cloud-and-distributed-systems
 topics:
   - cost-management
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - scalability.md
   - ../11-generative-ai/cost-and-latency-optimization.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Cost Management

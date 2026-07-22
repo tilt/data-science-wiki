@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - data-lineage
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - dbt.md
   - reproducibility.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Data Lineage
 
 Data lineage records how datasets are produced and consumed. Good lineage answers impact questions: if `raw.orders` changed, which [dbt](dbt.md) models, dashboards, [feature-pipelines](feature-pipelines.md), and audits are affected?
 
-## Event mechanism
+## A lineage event
 
 OpenLineage models jobs, runs, and datasets. A minimal lineage event names the job version, its inputs, and its outputs:
 

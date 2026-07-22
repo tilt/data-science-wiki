@@ -6,7 +6,7 @@ area: cloud-and-distributed-systems
 topics:
   - managed-compute
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,14 +20,14 @@ related:
   - gpu-systems.md
   - ../14-ml-engineering-and-mlops/model-serving.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Managed Compute
 
 Managed compute is the set of cloud services that run code while the provider operates part of the underlying fleet. The useful distinction is not "serverless versus servers"; it is startup latency, concurrency model, runtime limit, state, accelerator access, network control, and operational ownership. A [model serving](../14-ml-engineering-and-mlops/model-serving.md) API, a nightly batch job, and a GPU trainer have different compute shapes even if all run containers.
 
-## Selection mechanism
+## Matching workload to compute
 
 Use the workload contract:
 

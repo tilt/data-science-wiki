@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - evaluation-of-recommenders
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - feedback-loops.md
   - ../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Evaluation of Recommenders
 
 Recommender evaluation asks whether ranked lists are useful, robust, and healthy for users and inventory. Accuracy metrics such as recall@k and [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) are necessary, but they miss novelty, diversity, coverage, calibration, and long-term [feedback loops](feedback-loops.md).
 
-## Defining math
+## Top-k ranking metrics
 
 For a top-$k$ list $L_k$ and relevant set $G_u$,
 
@@ -35,6 +35,8 @@ $$
 $$
 
 [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) discounts hits by rank and normalizes by the ideal list. The same family appears in [ranking and retrieval metrics](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md).
+
+![A ranked list of relevant and irrelevant items: precision@k counts the hits in the top k, while NDCG weights each relevant item by a rank discount so hits near the top count more.](../assets/diagrams/recsys-ranking-metrics.svg)
 
 ## Worked example
 

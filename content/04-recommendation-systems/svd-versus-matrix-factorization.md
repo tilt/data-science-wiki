@@ -8,7 +8,7 @@ topics:
   - collaborative-filtering
   - singular-value-decomposition
 level: intermediate
-status: review
+status: complete
 page_type: comparison
 aliases:
   - "SVD versus MF"
@@ -22,7 +22,7 @@ related:
   - matrix-factorization.md
   - funk-svd.md
 historical_context: true
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # SVD versus Matrix Factorization

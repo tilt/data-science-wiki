@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - data-quality
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - data-lineage.md
   - reproducibility.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Data Quality
 
 Data quality is not a dashboard of vague health indicators. It is a set of executable expectations tied to a dataset's intended use: schema validity, completeness, uniqueness, freshness, referential integrity, and semantic constraints.
 
-## Check mechanism
+## Expectations as queries
 
 Each expectation becomes a query that counts violations, so an abstract property turns into a number a gate can act on. Against a small payments table seeded with one null amount, one duplicate `payment_id`, and one non-USD row, completeness is the count of null amounts, uniqueness is the count of `payment_id` values that appear more than once, and validity is the count of rows outside the allowed currency set:
 

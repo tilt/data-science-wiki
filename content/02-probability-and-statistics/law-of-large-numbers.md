@@ -6,7 +6,7 @@ area: probability-and-statistics
 topics:
   - law-of-large-numbers
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - LLN
@@ -18,7 +18,7 @@ related:
   - statistical-estimation.md
   - random-walks.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Law of Large Numbers

@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - dense-retrieval
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,24 @@ related:
   - ../08-natural-language-processing/embeddings.md
   - ../11-generative-ai/vector-databases.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Dense Retrieval
 
 Dense retrieval embeds queries and documents into continuous vectors, then ranks documents by vector similarity. It is the semantic counterpart to [sparse retrieval](sparse-retrieval.md): exact token overlap is no longer required, but quality depends heavily on the embedding model and training data.
 
-## Defining math
+## When to use dense retrieval
+
+Dense retrieval matches on learned meaning rather than exact words, so it complements lexical scoring instead of replacing it:
+
+| Approach                   | Matches on        | Strength                            | Weakness                        |
+| -------------------------- | ----------------- | ----------------------------------- | ------------------------------- |
+| Lexical ([BM25](bm25.md))  | exact terms       | precise on names, codes, rare terms | misses paraphrases and synonyms |
+| Dense (dual-encoder)       | learned semantics | recovers paraphrases and meaning    | can miss exact identifiers      |
+| [Hybrid](hybrid-search.md) | both, then fused  | robust across query types           | more moving parts to tune       |
+
+## Dual-encoder scoring
 
 A dual-encoder retriever computes
 

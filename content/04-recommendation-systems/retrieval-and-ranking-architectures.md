@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - retrieval-and-ranking-architectures
 level: advanced
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - ../12-information-retrieval-and-search/vector-indexes.md
   - ../12-information-retrieval-and-search/reranking.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Retrieval and Ranking Architectures
@@ -36,6 +36,8 @@ L_u=\operatorname{sort}_{i\in C_u} h(u,i,x_{ui}),
 $$
 
 where $g$ is a cheap retrieval score and $h$ is a richer [ranking](ranking.md) model. [Candidate generation](candidate-generation.md) may combine multiple retrieval sources before ranking.
+
+![The two-stage recommender funnel: cheap candidate generation narrows the catalog to a few hundred items, then expensive ranking orders the survivors into a top-k list.](../assets/diagrams/recsys-two-stage-funnel.svg)
 
 ## Worked example
 

@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - implicit-feedback
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - Implicit feedback
@@ -20,14 +20,14 @@ related:
   - feedback-loops.md
   - offline-versus-online-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Implicit Feedback Recommendation
 
 Implicit feedback uses events such as clicks, plays, purchases, dwell time, or skips as indirect preference evidence. Unlike [explicit feedback](explicit-versus-implicit-feedback.md), the user did not state a rating; the recommender must decide how behavior maps to preference, confidence, and exposure.
 
-## Defining math
+## From clicks to preferences
 
 A common transformation is
 

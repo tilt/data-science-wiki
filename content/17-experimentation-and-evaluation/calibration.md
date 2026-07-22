@@ -8,7 +8,7 @@ topics:
   - brier-score
   - confidence
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Reliability"
@@ -21,14 +21,14 @@ related:
   - ../03-classical-machine-learning/calibration.md
   - ../03-classical-machine-learning/evaluation-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Calibration
 
 Calibration evaluation checks whether confidence scores mean what downstream decisions assume. The canonical modelling concept is [classical ML calibration](../03-classical-machine-learning/calibration.md); this page focuses on how to report reliability in an evaluation suite. Calibration matters when confidence drives [abstention](abstention.md), triage, pricing, or expected-cost decisions.
 
-## Defining statistics
+## Calibration error
 
 Perfect binary calibration means
 

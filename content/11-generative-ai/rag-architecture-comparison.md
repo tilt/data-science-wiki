@@ -8,7 +8,7 @@ topics:
   - rag-architectures
   - agentic-retrieval
 level: intermediate
-status: review
+status: complete
 page_type: comparison
 aliases:
   - RAG architectures
@@ -26,7 +26,7 @@ related:
   - rag-benchmark-design.md
   - ../12-information-retrieval-and-search/hybrid-search.md
 historical_context: false
-last_reviewed: 2026-07-12
+last_reviewed: 2026-07-22
 ---
 
 # RAG Architecture Comparison

@@ -7,7 +7,7 @@ topics:
   - vision-language-models
   - multimodal-models
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - "VLMs"
@@ -20,7 +20,7 @@ related:
   - ../09-computer-vision/vision-transformers.md
   - ../10-video-understanding/v-jepa-2-versus-vision-language-models.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Vision-Language Models

@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - contextual-bandits
 level: advanced
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - offline-versus-online-evaluation.md
   - candidate-generation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Contextual Bandits
 
 Contextual bandits choose actions using features available at decision time: user segment, device, query, location, item age, or content embedding. They are bandits because only the chosen action's reward is observed, but they can personalize exploration instead of treating every user the same.
 
-## Defining math
+## LinUCB
 
 LinUCB estimates one linear model per arm. For context $x$, arm matrix $A_a$, and vector $b_a$,
 

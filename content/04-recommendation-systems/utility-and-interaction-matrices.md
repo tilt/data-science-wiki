@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - utility-and-interaction-matrices
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - matrix-factorization.md
   - implicit-feedback.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Utility and Interaction Matrices
 
 A utility or interaction matrix places users in rows, items in columns, and observed ratings or events in cells. It is the core data object behind [collaborative filtering](collaborative-filtering.md), [matrix factorization](matrix-factorization.md), and most sparse recommendation examples.
 
-## Defining math
+## The utility matrix
 
 Let $R\in\mathbb R^{m\times n}$ and $\Omega$ be the observed user-item pairs. Explicit-feedback systems store values such as $r_{ui}=5$. [Implicit feedback](implicit-feedback.md) systems often store event counts $r_{ui}$ and transform them into preference and confidence. Sparsity is
 

@@ -6,7 +6,7 @@ area: cloud-and-distributed-systems
 topics:
   - google-cloud-fundamentals
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - reliability.md
   - ../13-data-engineering/bigquery.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Google Cloud Fundamentals
 
 Google Cloud organizes work around resources in a hierarchy: organization, folders, projects, and then service resources. A project is the common operational boundary for APIs, IAM bindings, quotas, labels, and billing attribution. Compared with [AWS fundamentals](aws-fundamentals.md), the first design question is often "which project owns this workload?" rather than "which account owns it?"
 
-## Architecture contract
+## A data and ML path
 
 The common data/ML path is:
 

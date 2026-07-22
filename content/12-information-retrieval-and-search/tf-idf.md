@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - tf-idf
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - TF IDF
@@ -19,14 +19,14 @@ related:
   - inverted-indexes.md
   - ranking-and-retrieval-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # TF-IDF
 
 TF-IDF turns text into a sparse weighted vector: frequent terms in one document get larger weights, while terms that appear in many documents get discounted. It is the vector-space ancestor of [BM25](bm25.md) and a useful baseline for [sparse retrieval](sparse-retrieval.md), clustering, and quick lexical similarity checks.
 
-## Defining math
+## TF-IDF weighting
 
 For term $t$ and document $d$,
 

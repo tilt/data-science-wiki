@@ -6,7 +6,7 @@ area: natural-language-processing
 topics:
   - decoder-only-transformers
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - summarization.md
   - ../06-deep-learning/transformers.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Decoder-Only Transformers

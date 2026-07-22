@@ -6,7 +6,7 @@ area: cloud-and-distributed-systems
 topics:
   - reliability
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - ../14-ml-engineering-and-mlops/reliability.md
   - ../14-ml-engineering-and-mlops/service-level-objectives.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Reliability

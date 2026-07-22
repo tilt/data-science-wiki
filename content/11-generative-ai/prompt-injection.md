@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - prompt-injection
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - rag.md
   - context-construction.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Prompt Injection

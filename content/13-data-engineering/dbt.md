@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - dbt
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases:
   - DBT
@@ -20,14 +20,14 @@ related:
   - data-lineage.md
   - airflow.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # dbt
 
 dbt turns warehouse [SQL](sql.md) files into a dependency graph of models, tests, documentation, and build commands. It is most useful in ELT systems where raw data lands first and reviewed transformations publish marts in a [data-warehouse](data-warehouses.md).
 
-## Model contract
+## A dbt model
 
 A dbt model is a `select` statement saved as a file. dbt materializes it as a view, table, incremental table, or ephemeral query depending on configuration. This artifact defines a daily order fact and tests the grain:
 

@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - feature-pipelines
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - ../14-ml-engineering-and-mlops/training-pipelines.md
   - ../14-ml-engineering-and-mlops/dataset-versioning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Feature Pipelines
 
 Feature pipelines compute model inputs from operational or analytical data. Their special contract is point-in-time correctness: training features must include only information available before the label or prediction timestamp, while serving features must use the same definitions under lower latency.
 
-## Point-in-time mechanism
+## Point-in-time correctness
 
 This SQL example shows the leakage boundary. The transaction at `2026-01-10T02:00:00` happens after the label timestamp and must not be included:
 

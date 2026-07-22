@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - elk-stack
 level: foundational
-status: review
+status: complete
 page_type: implementation
 aliases:
   - Elastic Stack
@@ -18,7 +18,7 @@ related:
   - search-evaluation.md
   - ranking-and-retrieval-metrics.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # ELK Stack

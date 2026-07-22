@@ -82,14 +82,43 @@ mean_predicted_positive_rate 0.453 observed_rate 0.488
 
 The average predicted positive rate is near, but not equal to, the observed rate. Calibration should also be checked by bins, not only by the mean.
 
+With the default ensemble behavior for this unfitted base estimator, `CalibratedClassifierCV(base, method="sigmoid", cv=3).fit(Xtr, ytr)` does this:
+
+1. `Xte, yte` are held out before calibration and are used only for final evaluation.
+2. Because `cv=3`, scikit-learn splits `Xtr, ytr` into three stratified folds.
+3. For each fold, it clones the random forest, trains that clone on two folds, and asks the trained clone for scores on the remaining fold. A model with `decision_function` would use those scores; `RandomForestClassifier` does not expose one, so the calibrator uses the forest's `predict_proba` output.
+4. On that held-out fold, it fits a sigmoid calibrator
+
+$$
+\hat p(y=1\mid f)=\frac{1}{1+\exp(Af+B)},
+$$
+
+where $f$ is the uncalibrated model score for one example, $\hat p(y=1\mid f)$ is the calibrated probability assigned to that score, and $A,B$ are the two learned parameters of the sigmoid curve. This is Platt scaling: a one-dimensional logistic regression fitted on pairs $(f_i,y_i)$ from the held-out fold, where $f_i$ is the base model's score for example $i$ and $y_i\in\{0,1\}$ is its true label. It is not fitted separately inside percentile bins. The bins in a reliability diagram are mainly for diagnosis and visualization; sigmoid calibration fits one smooth global mapping from scores to probabilities.
+5. The fitted object stores three `(forest clone, sigmoid calibrator)` pairs. At prediction time, each forest clone scores the new example, its paired sigmoid maps that score to a calibrated probability, and the three calibrated probabilities are averaged.
+
+The key detail is that each sigmoid is trained on predictions from examples that its paired forest clone did not train on. If the calibrator were fit on the forest's own training predictions, the scores would be too optimistic and the learned probability map would usually be too confident. The final test set must remain outside both the base-model fitting and the calibration fitting.
+
+## When calibration helps
+
+Calibration is most useful when probabilities are consumed directly rather than only used for ranking. Examples include thresholding by expected cost, prioritizing human review queues, pricing risk, combining model probabilities with business rules, or reporting user-facing risk estimates. It is also useful for models whose score ranking is good but whose probabilities have a systematic distortion: random forests and bagged trees often avoid probabilities near 0 or 1, maximum-margin methods such as SVMs often need a post-hoc probability map, and reweighted or resampled classifiers can have distorted base rates.
+
+Calibration is easiest when the calibration set is large, representative of deployment, and has enough positives and negatives across the score range. A monotonic distortion is especially well suited because calibration changes the score-to-probability map, not the underlying ranking. Sigmoid calibration is a low-variance choice when the distortion is roughly S-shaped or the calibration set is small. Isotonic calibration is more flexible because it learns any non-decreasing step function, but it needs substantially more calibration data and can overfit when the calibration sample is small.
+
+Calibration is harder when positives are rare, the deployment base rate shifts, or important subgroups have different reliability curves. Each class must appear in the training and held-out calibration folds; otherwise a per-fold calibrator may learn from no positive examples for that class. Multiclass calibration is harder than binary calibration because one-vs-rest calibrators can produce probabilities that need renormalization. Calibration also cannot rescue a model with poor discrimination: if the model cannot separate positives from negatives, a calibrated score may be honest but still not useful.
+
+For example, suppose a fraud model has 10,000 labeled transactions but only 40 confirmed fraud cases. With `cv=5`, each calibration fold has about eight positives before considering score bins or subgroups. If the model assigns most transactions scores below 0.05 and only a handful above 0.8, the high-score region may contain one positive in one fold and none in another. A flexible isotonic calibrator can then learn a jagged step function from noise, while a sigmoid calibrator may be more stable but too simple to correct local distortions. In this setting, the practical fix is usually more calibration data, fewer folds with enough positives per fold, grouped or time-aware splits that match deployment, and segment checks before trusting the calibrated probabilities.
+
 ## Caveats
 
-Fit calibration on held-out data or cross-validation, never on the final test set. Calibration can differ by subgroup even when global reliability is acceptable. Recalibration after drift can mask a deteriorating feature distribution.
+Fit calibration on held-out data or cross-validation, never on the final test set. Calibration can differ by subgroup even when global reliability is acceptable, so inspect reliability by important segments when decisions are sensitive. Recalibration after drift can mask a deteriorating feature distribution; it should accompany drift checks, not replace them. Brier score and log loss mix calibration with discrimination, so use reliability diagrams or bin-level checks when the specific question is probability reliability.
 
 ## References
 
 - [scikit-learn User Guide: Probability calibration](https://scikit-learn.org/stable/modules/calibration.html)
+- [scikit-learn API Reference: CalibratedClassifierCV](https://scikit-learn.org/stable/modules/generated/sklearn.calibration.CalibratedClassifierCV.html)
 - [scikit-learn User Guide: Brier score loss](https://scikit-learn.org/stable/modules/model_evaluation.html#brier-score-loss)
+- [Platt, 1999, Probabilistic Outputs for Support Vector Machines](https://ndlsearch.ndl.go.jp/en/books/R100000136-I1572824500548904064)
+- [Niculescu-Mizil and Caruana, 2005, Predicting Good Probabilities with Supervised Learning](https://doi.org/10.1145/1102351.1102430)
 
 > [!nav]
 > **Section** — [Classical Machine Learning](index.md)

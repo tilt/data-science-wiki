@@ -6,7 +6,7 @@ area: responsible-ai-safety-and-governance
 topics:
   - compliance
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - fairness.md
   - human-oversight.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Compliance
 
 Compliance is the workflow that maps an AI system to obligations and evidence. It is not a launch checkbox: it starts with [risk classification](risk-classification.md), then turns law, standards, contracts, and internal policy into controls that can be tested, approved, monitored, and audited.
 
-## Control mechanism
+## The compliance register
 
 A compliance register should be concrete enough that an engineer can produce the evidence:
 

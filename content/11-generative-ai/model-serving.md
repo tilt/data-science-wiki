@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - model-serving
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - determinism-and-reproducibility.md
   - structured-output.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Model Serving

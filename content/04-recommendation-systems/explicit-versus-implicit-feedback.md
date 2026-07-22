@@ -7,7 +7,7 @@ topics:
   - feedback
   - implicit-feedback
 level: foundational
-status: review
+status: complete
 page_type: comparison
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - evaluation-of-recommenders.md
   - feedback-loops.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Explicit Versus Implicit Feedback
 
 Explicit feedback is a stated judgment: stars, thumbs, survey answers, or direct preferences. [Implicit feedback](implicit-feedback.md) is behavioral evidence: clicks, plays, purchases, dwell time, or skips. Recommenders often have much more implicit data, but explicit data has clearer semantics.
 
-## Defining math
+## Rating error versus ranking loss
 
 For explicit ratings, a model can minimize observed rating error:
 

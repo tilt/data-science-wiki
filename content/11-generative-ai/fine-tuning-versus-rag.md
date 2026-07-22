@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - fine-tuning-versus-rag
 level: intermediate
-status: review
+status: complete
 page_type: comparison
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - embeddings.md
   - retrieval-pipelines.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Fine Tuning Versus RAG

@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - vector-databases
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - reranking.md
   - rag.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Vector Databases

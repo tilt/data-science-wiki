@@ -8,7 +8,7 @@ topics:
   - latent-diffusion
   - text-to-image-generation
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - Latent diffusion
@@ -25,7 +25,7 @@ related:
   - ../09-computer-vision/self-supervised-visual-learning.md
   - ../09-computer-vision/image-representation.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Stable Diffusion

@@ -6,7 +6,7 @@ area: responsible-ai-safety-and-governance
 topics:
   - adversarial-evaluation
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - security.md
   - ../11-generative-ai/agent-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Adversarial Evaluation

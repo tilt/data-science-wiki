@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - bigquery
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases: []
 prerequisites:
@@ -20,14 +20,14 @@ related:
   - dbt.md
   - cloud-storage.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # BigQuery
 
 BigQuery is a managed analytical [data warehouse](data-warehouses.md): users submit GoogleSQL, while Google manages storage, execution, and scaling. For data engineering, the design surface is table layout, query semantics, access policy, and cost control by bytes processed. It is one concrete [vendor solution](vendor-solutions.md) for the broader [distributed warehouse modelling](distributed-warehouse-modelling.md) patterns of partition pruning, clustering, columnar scans, and materialized query surfaces.
 
-## Table layout contract
+## Partitioned and clustered DDL
 
 The artifact below is a real BigQuery DDL pattern for an events table partitioned by event date and clustered by high-selectivity columns used in filters and joins:
 
@@ -46,7 +46,7 @@ cluster by user_id, event_name;
 
 Partitioning limits which date slices are scanned; clustering co-locates similar values inside partitions so filters on `user_id` or `event_name` can prune more data. This matters when [dbt](dbt.md) incrementally builds [dimensional-modelling](dimensional-modelling.md) facts from event data.
 
-## Query mechanism
+## Columnar, serverless execution
 
 BigQuery's dialect supports standard analytical [SQL](sql.md): joins, arrays, structs, window functions, `qualify`, and DDL. The physical engine is columnar and serverless, so a query that selects three columns from a partitioned table can be much cheaper than `select *` over all dates. External tables and load jobs often start from files in [cloud-storage](cloud-storage.md), but operational marts should make ownership, partition expiration, and access rules explicit.
 

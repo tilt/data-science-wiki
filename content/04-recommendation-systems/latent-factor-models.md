@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - latent-factor-models
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - content-based-recommendation.md
   - cold-start-problem.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Latent Factor Models
 
 A latent factor model maps users and items to hidden coordinates and scores compatibility from those coordinates. In recommender systems, [matrix factorization](matrix-factorization.md) is the canonical example, but factor models can also include side features, biases, context, or neural encoders.
 
-## Defining math
+## The scoring contract
 
 The core scoring contract is
 

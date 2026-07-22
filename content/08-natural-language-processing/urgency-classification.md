@@ -6,7 +6,7 @@ area: natural-language-processing
 topics:
   - urgency-classification
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - text-preprocessing.md
   - semantic-textual-similarity.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Urgency Classification

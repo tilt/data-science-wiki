@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - multi-armed-bandits
 level: intermediate
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - MAB
@@ -19,20 +19,22 @@ related:
   - offline-versus-online-evaluation.md
   - cold-start-problem.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Multi-Armed Bandits
 
 A multi-armed bandit repeatedly chooses one action and observes reward only for that action. In recommendation, an arm can be a headline, module, notification, or item bucket. The missing labels for unchosen arms are the key difference from ordinary supervised [ranking](ranking.md).
 
-## Defining math
+## Regret
 
 Regret after $T$ rounds compares the policy with always choosing the best arm:
 
 $$
 R_T=T\mu^\*-\sum_{t=1}^T \mu_{a_t}.
 $$
+
+![Cumulative regret over rounds: a greedy policy grows almost linearly because it can lock onto a suboptimal arm, while epsilon-greedy and UCB grow sublinearly, with UCB accumulating the least regret.](../assets/diagrams/bandit-regret-curves.svg)
 
 UCB-style methods choose arms with high estimated reward plus uncertainty:
 

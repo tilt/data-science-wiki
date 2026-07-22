@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - feedback-loops
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - diversity-novelty-coverage-serendipity.md
   - evaluation-of-recommenders.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Feedback Loops
 
 A recommender feedback loop occurs when the system's exposures shape the interactions used to train the next system. If popular items get more exposure, they get more clicks, which can make them appear even better. This is a central risk for [implicit feedback](implicit-feedback.md).
 
-## Defining math
+## The exposure update
 
 A minimal exposure update is
 
@@ -34,6 +34,16 @@ e_i^{(t+1)}=\frac{e_i^{(t)}q_i}{\sum_j e_j^{(t)}q_j},
 $$
 
 where $e_i$ is exposure share and $q_i$ is click probability. Even when a niche item has higher quality, it cannot gather clicks without exposure. [Exploration](exploration-versus-exploitation.md) interrupts this dynamic.
+
+The danger is that the model trains on data its own past recommendations produced, so popular items keep getting shown and clicked, reinforcing the cycle:
+
+```mermaid
+flowchart LR
+  Model[Recommender model] --> Rec[Recommendations shown]
+  Rec --> Clicks[User clicks and skips]
+  Clicks --> Logs[Logged interaction data]
+  Logs --> Model
+```
 
 ## Worked example
 

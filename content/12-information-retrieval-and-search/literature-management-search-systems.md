@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - literature-management-search-systems
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - hybrid-search.md
   - ranking-and-retrieval-metrics.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Literature Management Search Systems

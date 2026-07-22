@@ -9,7 +9,7 @@ topics:
   - coverage
   - serendipity
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -21,14 +21,14 @@ related:
   - feedback-loops.md
   - cold-start-problem.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Diversity, Novelty, Coverage, and Serendipity
 
 These metrics measure qualities that relevance alone misses in [evaluation of recommenders](evaluation-of-recommenders.md). Diversity asks whether a list contains varied items; novelty asks whether items are not already obvious; coverage asks how much catalog or user space the system reaches; serendipity asks whether recommendations are both unexpected and useful.
 
-## Defining math
+## Beyond-accuracy measures
 
 One intra-list diversity score is
 

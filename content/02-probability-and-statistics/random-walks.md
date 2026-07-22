@@ -6,7 +6,7 @@ area: probability-and-statistics
 topics:
   - random-walks
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - central-limit-theorem.md
   - ../05-time-series-and-forecasting/autoregressive-models.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Random Walks

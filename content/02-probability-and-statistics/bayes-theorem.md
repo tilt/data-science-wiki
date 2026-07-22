@@ -6,7 +6,7 @@ area: probability-and-statistics
 topics:
   - bayes-theorem
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Bayes' Theorem
@@ -19,7 +19,7 @@ related:
   - maximum-a-posteriori-estimation.md
   - statistical-estimation.md
 historical_context: false
-last_reviewed: 2026-07-15
+last_reviewed: 2026-07-22
 ---
 
 # Bayes Theorem

@@ -8,7 +8,7 @@ topics:
   - bootstrap
   - uncertainty
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Resampling"
@@ -21,7 +21,7 @@ related:
   - coverage.md
   - ../02-probability-and-statistics/confidence-intervals.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Repeated Sampling

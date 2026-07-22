@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - multi-agent-systems
 level: advanced
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - reflection-and-reviewer-patterns.md
   - agent-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Multi-Agent Systems

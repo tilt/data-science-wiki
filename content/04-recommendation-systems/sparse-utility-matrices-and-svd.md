@@ -8,7 +8,7 @@ topics:
   - matrix-factorization
   - sparse-data
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Sparse utility matrix SVD"
@@ -23,14 +23,14 @@ related:
   - implicit-feedback.md
   - utility-and-interaction-matrices.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Sparse Utility Matrices and Ordinary SVD
 
 Ordinary [classical SVD](classical-svd.md) requires a complete matrix. A recommender [utility matrix](utility-and-interaction-matrices.md) is sparse because most user-item pairs were never observed, not because the user assigned a numeric zero. This difference is why direct zero filling can dominate the signal.
 
-## Defining math
+## Why zero-filling fails
 
 Zero filling changes an observed-entry problem
 

@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - sampling-and-decoding
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - structured-output.md
   - language-model-architecture.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Sampling and Decoding

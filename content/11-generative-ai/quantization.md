@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - quantization
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - vector-databases.md
   - ../01-mathematical-foundations/numerical-stability.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Quantization
 
 Quantization stores model values in lower precision, commonly int8 or 4-bit formats, to reduce memory bandwidth and serving cost. It matters most for [model serving](model-serving.md) of local models, [cost and latency optimization](cost-and-latency-optimization.md), and [local versus hosted models](local-versus-hosted-models.md) decisions.
 
-## Defining math
+## Int8 quantization
 
 Uniform symmetric int8 quantization can use scale $s=\max |x|/127$, quantized value $q=\operatorname{round}(x/s)$, and reconstruction $\hat x=sq$. The error $x-\hat x$ affects logits, attention, and sometimes tool-routing reliability.
 

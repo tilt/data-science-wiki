@@ -6,7 +6,7 @@ area: cloud-and-distributed-systems
 topics:
   - storage-and-decoding-bottlenecks
 level: advanced
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - ../06-deep-learning/pytorch.md
   - ../11-generative-ai/tokenization.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Storage and Decoding Bottlenecks

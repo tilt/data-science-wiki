@@ -6,7 +6,7 @@ area: natural-language-processing
 topics:
   - named-entity-recognition
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - tokenization.md
   - evaluation-of-nlp-systems.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Named Entity Recognition
@@ -27,7 +27,15 @@ Named entity recognition (NER) detects spans and assigns entity types such as pe
 
 ## BIO tagging
 
-NER commonly predicts BIO tags for tokens:
+NER labels each token with a BIO tag marking whether it begins, continues, or falls outside an entity span:
+
+| Tag    | Meaning                       | Example (token → tag)               |
+| ------ | ----------------------------- | ----------------------------------- |
+| B-TYPE | begins an entity of that type | `Paris` → B-LOC                     |
+| I-TYPE | continues the current entity  | `Tower` → I-LOC (in "Eiffel Tower") |
+| O      | outside any entity            | `visited` → O                       |
+
+Formally, the model predicts the most likely tag for each token:
 
 $$
 \hat y_i=\arg\max_k P(y_i=k\mid x_{1:n}).

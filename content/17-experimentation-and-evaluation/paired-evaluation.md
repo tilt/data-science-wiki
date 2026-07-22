@@ -8,7 +8,7 @@ topics:
   - statistical-significance
   - evaluation
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Paired comparisons"
@@ -21,14 +21,14 @@ related:
   - llm-as-judge.md
   - comparing-generative-ai-and-classical-ml-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Paired Evaluation
 
 Paired evaluation compares systems on the same examples. It is stronger than comparing two unrelated averages because hard examples, ambiguous labels, and domain mix affect both systems. The pattern is useful for model-score comparisons, [human evaluation](human-evaluation.md), and [LLM-as-judge](llm-as-judge.md) preference tests.
 
-## Defining statistics
+## Per-example differences
 
 For numeric scores, compute one difference per example:
 

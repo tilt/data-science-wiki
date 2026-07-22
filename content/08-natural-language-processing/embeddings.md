@@ -6,7 +6,7 @@ area: natural-language-processing
 topics:
   - embeddings
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,12 +18,22 @@ related:
   - text-classification.md
   - ../12-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Embeddings
 
 Embeddings represent linguistic objects as vectors so that distances, dot products, and downstream models can operate on text. Static word embeddings assign one vector per token type; contextual [bert-style encoders](bert-style-encoders.md) compute different vectors for the same token in different contexts. Sentence and document embeddings power [semantic textual similarity](semantic-textual-similarity.md), clustering, [text classification](text-classification.md), and dense retrieval.
+
+## Kinds of embedding
+
+Embeddings differ in what each vector represents and whether it depends on context:
+
+| Embedding type                                    | One vector per   | Context-aware? | Typical use                                                         |
+| ------------------------------------------------- | ---------------- | -------------- | ------------------------------------------------------------------- |
+| Static word (word2vec, GloVe)                     | token type       | no             | lexical similarity, sparse-model features                           |
+| Contextual ([BERT-style](bert-style-encoders.md)) | token occurrence | yes            | labeling, classification, understanding                             |
+| Sentence / document                               | whole text       | yes            | [similarity](semantic-textual-similarity.md), retrieval, clustering |
 
 ## The embedding table
 

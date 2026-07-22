@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - offline-versus-online-evaluation
 level: intermediate
-status: review
+status: complete
 page_type: comparison
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - feedback-loops.md
   - ../17-experimentation-and-evaluation/online-experiments.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Offline Versus Online Evaluation
 
 Offline evaluation replays or splits historical data. Online evaluation measures behavior under actual exposure, usually through experiments. Recommenders need both because recommendations change what users see and therefore change future labels.
 
-## Defining math
+## Replay and off-policy estimation
 
 For randomized logged bandit data, replay keeps only events where the new policy matches the logged action:
 

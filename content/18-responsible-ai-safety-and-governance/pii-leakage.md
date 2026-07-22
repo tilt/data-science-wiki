@@ -6,7 +6,7 @@ area: responsible-ai-safety-and-governance
 topics:
   - pii-leakage
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - auditability.md
   - ../11-generative-ai/pii-protection.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # PII Leakage

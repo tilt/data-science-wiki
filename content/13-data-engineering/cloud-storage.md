@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - cloud-storage
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - data-warehouses.md
   - ../15-cloud-and-distributed-systems/managed-storage.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Cloud Storage
 
 Cloud object storage is the durable file layer behind many lakes, warehouses, exports, and model datasets. In data engineering it is usually not a filesystem replacement; it is an object namespace with explicit paths, metadata, lifecycle policy, and access controls.
 
-## Layout mechanism
+## A discoverable object layout
 
 A useful layout makes data version, grain, and partition visible:
 

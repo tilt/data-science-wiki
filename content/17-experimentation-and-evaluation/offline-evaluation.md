@@ -8,7 +8,7 @@ topics:
   - ranking-metrics
   - evaluation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Offline model evaluation"
@@ -21,14 +21,14 @@ related:
   - online-experiments.md
   - ../14-ml-engineering-and-mlops/evaluation-datasets.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Offline Evaluation
 
 Offline evaluation measures a system on fixed historical or curated data before it reaches live users. It is a deployment gate, not a product-impact estimate. A recommender, classifier, RAG system, and extraction model can all pass offline checks and still need [online experiments](online-experiments.md) because real users change exposure, feedback, and cost.
 
-## Defining metric
+## Task-matched metrics
 
 For ranked retrieval or recommendation, [NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) rewards placing highly relevant items near the top:
 

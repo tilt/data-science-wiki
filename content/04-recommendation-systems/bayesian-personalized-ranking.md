@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - bayesian-personalized-ranking
 level: advanced
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - BPR
@@ -19,14 +19,14 @@ related:
   - ranking.md
   - image-based-recommendation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Bayesian Personalized Ranking
 
 Bayesian Personalized Ranking trains recommenders from triples: user $u$, observed positive item $i$, and sampled unobserved item $j$. Instead of predicting a rating, it pushes $i$ above $j$, which fits [implicit feedback](implicit-feedback.md) where missing data is not a reliable negative label.
 
-## Defining math
+## The BPR objective
 
 For score $\hat x_{ui}$, BPR maximizes pairwise preference likelihood:
 

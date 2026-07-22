@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - rag
 level: foundational
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - citations.md
   - rag-architecture-comparison.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # RAG

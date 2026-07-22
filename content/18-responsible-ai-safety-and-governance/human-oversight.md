@@ -6,7 +6,7 @@ area: responsible-ai-safety-and-governance
 topics:
   - human-oversight
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - fairness.md
   - ../14-ml-engineering-and-mlops/human-in-the-loop-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Human Oversight
 
 Human oversight defines when people review, approve, override, stop, or appeal AI-assisted outcomes. It is only meaningful if the human has authority, time, evidence, and a clear decision boundary. Otherwise it becomes a rubber stamp attached to [risk classification](risk-classification.md) rather than a real control.
 
-## Control mechanism
+## Oversight requirements
 
 The EU AI Act's high-risk system requirements include human oversight, and OWASP's agent guidance also recommends human approval for high-impact actions. A practical oversight matrix looks like this:
 

@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - cold-start-problem
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - candidate-generation.md
   - matrix-factorization.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Cold Start Problem
 
 Cold start occurs when a recommender lacks enough interaction history for a new user, item, market, or context. Pure [collaborative filtering](collaborative-filtering.md) cannot infer much from an empty row or column, so systems use content, priors, onboarding, or exploration until behavior arrives.
 
-## Defining math
+## Serving-time fallbacks
 
 A common serving-time fallback blends content and prior evidence:
 

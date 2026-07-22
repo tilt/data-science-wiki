@@ -7,7 +7,7 @@ topics:
   - funk-svd
   - matrix-factorization
 level: intermediate
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - FunkSVD
@@ -20,14 +20,14 @@ related:
   - svd-versus-matrix-factorization.md
   - latent-factor-models.md
 historical_context: true
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Funk SVD
 
 Funk SVD is the informal name for SGD-trained recommender [matrix factorization](matrix-factorization.md) popularized during the Netflix Prize. Despite the name, it is not [classical SVD](classical-svd.md): it does not decompose a complete matrix with orthogonal singular vectors. It learns user and item factors directly from observed ratings.
 
-## Defining math
+## The Funk-SVD update
 
 For one observed pair $(u,i)$, the prediction and squared-error update are
 

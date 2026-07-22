@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - vector-indexes
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases:
   - vector index
@@ -19,7 +19,7 @@ related:
   - ../11-generative-ai/vector-databases.md
   - ../08-natural-language-processing/embeddings.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Vector Indexes

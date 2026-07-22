@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - knowledge-graphs
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases:
   - knowledge graph
@@ -18,7 +18,7 @@ related:
   - elasticsearch.md
   - hybrid-search.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Knowledge Graphs

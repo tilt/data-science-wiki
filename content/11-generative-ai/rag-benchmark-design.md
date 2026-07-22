@@ -8,7 +8,7 @@ topics:
   - rag-evaluation
   - benchmark-design
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases:
   - RAG benchmarking
@@ -25,7 +25,7 @@ related:
   - ../17-experimentation-and-evaluation/golden-datasets.md
   - ../17-experimentation-and-evaluation/llm-as-judge.md
 historical_context: false
-last_reviewed: 2026-07-12
+last_reviewed: 2026-07-22
 ---
 
 # RAG Benchmark Design

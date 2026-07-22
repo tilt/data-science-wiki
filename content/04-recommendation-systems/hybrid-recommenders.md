@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - hybrid-recommenders
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - cold-start-problem.md
   - retrieval-and-ranking-architectures.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Hybrid Recommenders
 
 Hybrid recommenders combine signals that fail in different ways: [collaborative filtering](collaborative-filtering.md) captures collective taste, [content-based recommendation](content-based-recommendation.md) handles item attributes, and contextual or business rules handle eligibility. Most production recommenders are hybrid even when one model family dominates.
 
-## Defining math
+## Combining recommenders
 
 A simple late-fusion score is
 

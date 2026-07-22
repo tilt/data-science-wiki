@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - matchmaking-systems
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - feedback-loops.md
   - contextual-bandits.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Matchmaking Systems
 
 Matchmaking systems recommend pairs where both sides matter: dating, hiring, mentoring, marketplaces, or team formation. Unlike one-sided [ranking](ranking.md), a high score from side A to side B is insufficient if side B would reject or be overloaded.
 
-## Defining math
+## Reciprocal scoring
 
 A simple reciprocal score combines directional preferences:
 

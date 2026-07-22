@@ -6,7 +6,7 @@ area: probability-and-statistics
 topics:
   - maximum-a-posteriori-estimation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - MAP Estimation
@@ -18,7 +18,7 @@ related:
   - bayesian-statistics.md
   - ../03-classical-machine-learning/regularization.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Maximum A Posteriori Estimation

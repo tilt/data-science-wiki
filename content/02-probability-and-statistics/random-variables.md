@@ -6,7 +6,7 @@ area: probability-and-statistics
 topics:
   - random-variables
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - expectation-and-variance.md
   - covariance-and-correlation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Random Variables

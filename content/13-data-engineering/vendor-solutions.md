@@ -7,7 +7,7 @@ topics:
   - vendor-solutions
   - data-warehouses
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases:
   - Data Platform Vendors
@@ -24,7 +24,7 @@ related:
   - data-lineage.md
   - data-quality.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-23
 ---
 
 # Vendor Solutions

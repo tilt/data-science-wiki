@@ -8,7 +8,7 @@ topics:
   - generative-ai
   - classical-ml
 level: intermediate
-status: review
+status: complete
 page_type: comparison
 aliases:
   - "Generative AI evaluation versus classical ML"
@@ -23,14 +23,14 @@ related:
   - paired-evaluation.md
   - ../11-generative-ai/rag-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Comparing Generative AI and Classical ML Systems
 
 Compare systems by the user decision and failure cost, not by whether the output is a label or text. A classifier may produce a calibrated fraud risk; a RAG assistant may produce a cited explanation for the same case. Both need [offline evaluation](offline-evaluation.md), but the generative system also needs evidence checks, refusal quality, and often [LLM-as-judge](llm-as-judge.md) audits.
 
-## Defining comparison
+## Shared and system-specific metrics
 
 Use shared metrics where the task overlaps, then add system-specific failure modes:
 

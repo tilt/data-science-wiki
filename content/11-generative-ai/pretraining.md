@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - pretraining
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,14 +20,14 @@ related:
   - ../06-deep-learning/self-supervised-learning.md
   - ../01-mathematical-foundations/cross-entropy.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Pretraining
 
 Pretraining is the large-scale self-supervised stage that gives [foundation models](foundation-models.md) broad linguistic or multimodal capability. For decoder language models, it trains the [language model architecture](language-model-architecture.md) to predict the next token from previous [tokenization](tokenization.md) outputs.
 
-## Defining math
+## Next-token pretraining
 
 For sequence $x_1,\ldots,x_T$, next-token pretraining minimizes
 

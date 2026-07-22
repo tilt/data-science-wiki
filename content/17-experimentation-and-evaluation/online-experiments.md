@@ -8,7 +8,7 @@ topics:
   - ab-testing
   - guardrails
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Controlled experiments"
@@ -21,14 +21,14 @@ related:
   - paired-evaluation.md
   - ../14-ml-engineering-and-mlops/canary-deployment.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Online Experiments
 
 Online experiments expose randomized traffic to a live product change and measure what users actually do. They are downstream of [offline evaluation](offline-evaluation.md): an offline win makes a launch plausible, while an online experiment estimates product impact under latency, feedback loops, user choice, and production logging.
 
-## Defining checks
+## Estimand and treatment effect
 
 The estimand for a binary or mean metric is usually an average treatment effect,
 

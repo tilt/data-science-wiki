@@ -8,7 +8,7 @@ topics:
   - responsible-ai
   - evaluation
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Error taxonomy"
@@ -22,7 +22,7 @@ related:
   - comparing-generative-ai-and-classical-ml-systems.md
   - ../18-responsible-ai-safety-and-governance/index.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Risk-Weighted Error Taxonomies

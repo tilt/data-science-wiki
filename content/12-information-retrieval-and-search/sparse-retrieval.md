@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - sparse-retrieval
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - hybrid-search.md
   - dense-retrieval.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Sparse Retrieval

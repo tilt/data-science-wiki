@@ -6,7 +6,7 @@ area: natural-language-processing
 topics:
   - language-modelling
 level: foundational
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,12 +18,21 @@ related:
   - summarization.md
   - ../11-generative-ai/language-model-architecture.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Language Modelling
 
 Language modelling assigns probabilities to token sequences. Autoregressive models predict the next token and drive [decoder-only transformers](decoder-only-transformers.md); masked language models predict hidden tokens and pretrain [bert-style encoders](bert-style-encoders.md). The same probability machinery affects [summarization](summarization.md), autocomplete, speech recognition, and generation.
+
+## Two ways to model a sequence
+
+The two dominant pretraining objectives differ in what they predict and what context they may use:
+
+| Objective                   | Predicts       | Sees              | Powers                                                                |
+| --------------------------- | -------------- | ----------------- | --------------------------------------------------------------------- |
+| Autoregressive (next-token) | the next token | left context only | [decoder-only transformers](decoder-only-transformers.md), generation |
+| Masked (MLM)                | hidden tokens  | both sides        | [BERT-style encoders](bert-style-encoders.md), understanding          |
 
 ## Autoregressive factorization
 

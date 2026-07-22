@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - language-model-architecture
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - pretraining.md
   - context-construction.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Language Model Architecture
 
 A modern language model usually tokenizes text, embeds tokens and positions, applies stacks of masked self-attention and feed-forward blocks, then projects hidden states to vocabulary logits for [sampling and decoding](sampling-and-decoding.md). The core mechanism is the transformer [attention](../06-deep-learning/attention.md) block.
 
-## Defining math
+## Causal self-attention
 
 Causal self-attention uses
 

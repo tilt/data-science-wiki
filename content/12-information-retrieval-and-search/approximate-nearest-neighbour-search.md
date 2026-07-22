@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - approximate-nearest-neighbour-search
 level: intermediate
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - ANN search
@@ -20,7 +20,7 @@ related:
   - ranking-and-retrieval-metrics.md
   - ../11-generative-ai/vector-databases.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Approximate Nearest Neighbour Search

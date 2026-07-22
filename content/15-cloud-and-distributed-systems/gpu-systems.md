@@ -6,7 +6,7 @@ area: cloud-and-distributed-systems
 topics:
   - gpu-systems
 level: foundational
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - ../06-deep-learning/pytorch.md
   - ../06-deep-learning/mixed-precision.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # GPU Systems

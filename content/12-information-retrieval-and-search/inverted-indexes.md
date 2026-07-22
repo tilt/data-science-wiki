@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - inverted-indexes
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - inverted index
@@ -18,7 +18,7 @@ related:
   - sparse-retrieval.md
   - elasticsearch.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Inverted Indexes

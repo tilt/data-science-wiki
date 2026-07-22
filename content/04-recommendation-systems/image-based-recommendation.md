@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - image-based-recommendation
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - cold-start-problem.md
   - bayesian-personalized-ranking.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Image-Based Recommendation
 
 Image-based recommendation uses visual features to personalize or filter recommendations. It differs from pure [content-based image retrieval](content-based-image-retrieval.md): the goal is not just "looks similar," but "visually and behaviorally plausible for this user."
 
-## Defining math
+## Hybrid visual scoring
 
 A simple hybrid visual score is
 

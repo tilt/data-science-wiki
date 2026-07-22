@@ -8,7 +8,7 @@ topics:
   - slices
   - evaluation
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Evaluation coverage"
@@ -21,7 +21,7 @@ related:
   - abstention.md
   - risk-weighted-error-taxonomies.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Coverage

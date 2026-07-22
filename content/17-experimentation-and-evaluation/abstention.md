@@ -8,7 +8,7 @@ topics:
   - coverage
   - confidence-thresholds
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Selective prediction"
@@ -23,14 +23,14 @@ related:
   - comparing-generative-ai-and-classical-ml-systems.md
   - ../11-generative-ai/guardrails.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Abstention
 
 Abstention is the decision not to answer, classify, retrieve, or take an action when evidence or confidence is insufficient. It is a first-class outcome, not a fallback message. In generative systems it overlaps with refusals and [guardrails](../11-generative-ai/guardrails.md); in classifiers it is selective prediction based on score thresholds.
 
-## Defining statistics
+## Coverage and selective risk
 
 For threshold $\tau$, answer only when confidence $c_i\ge\tau$. The two basic evaluation quantities are
 

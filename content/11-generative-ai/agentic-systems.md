@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - agentic-systems
 level: advanced
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - agent-evaluation.md
   - rag-architecture-comparison.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Agentic Systems

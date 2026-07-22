@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - data-contracts
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - relational-modelling.md
   - reproducibility.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Data Contracts
 
 A data contract is an explicit agreement between a producer and consumers about what a dataset means and how it may change. It extends [relational-modelling](relational-modelling.md) constraints with ownership, freshness, allowed values, compatibility rules, and [data-quality](data-quality.md) gates.
 
-## Contract artifact
+## A minimal contract
 
 This minimal contract says `payments` must carry required fields, allowed currencies, and non-negative amounts:
 

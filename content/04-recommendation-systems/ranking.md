@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - ranking
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - diversity-novelty-coverage-serendipity.md
   - ../12-information-retrieval-and-search/ranking-and-retrieval-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Ranking
 
 Ranking orders candidate items for a user or context. In a recommender, the ranker usually combines predicted relevance with freshness, diversity, eligibility, risk, and product constraints. It sits after [candidate generation](candidate-generation.md) in most [retrieval and ranking architectures](retrieval-and-ranking-architectures.md).
 
-## Defining math
+## Pointwise, pairwise, and listwise
 
 A pointwise ranker might score
 

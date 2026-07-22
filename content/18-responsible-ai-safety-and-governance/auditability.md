@@ -6,7 +6,7 @@ area: responsible-ai-safety-and-governance
 topics:
   - auditability
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - human-oversight.md
   - ../14-ml-engineering-and-mlops/observability.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Auditability

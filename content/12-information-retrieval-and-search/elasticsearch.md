@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - elasticsearch
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - vector-indexes.md
   - hybrid-search.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Elasticsearch

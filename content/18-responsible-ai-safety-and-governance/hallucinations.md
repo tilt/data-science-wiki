@@ -6,7 +6,7 @@ area: responsible-ai-safety-and-governance
 topics:
   - hallucinations
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - ../11-generative-ai/hallucination-mitigation.md
   - ../11-generative-ai/grounding.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Hallucinations

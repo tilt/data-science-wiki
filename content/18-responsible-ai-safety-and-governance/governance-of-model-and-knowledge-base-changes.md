@@ -6,7 +6,7 @@ area: responsible-ai-safety-and-governance
 topics:
   - governance-of-model-and-knowledge-base-changes
 level: advanced
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - adversarial-evaluation.md
   - ../14-ml-engineering-and-mlops/model-versioning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Governance of Model and Knowledge Base Changes
 
 Governance of model and knowledge base changes controls behavior changes that may bypass ordinary application-code review. A model swap, prompt edit, threshold move, retrieval-index refresh, tool schema change, or safety policy update can change user outcomes as much as a code deployment, so it needs the same level of evidence as [model versioning](../14-ml-engineering-and-mlops/model-versioning.md) and [auditability](auditability.md).
 
-## Control mechanism
+## Change classes and evidence depth
 
 Change classes should determine evidence depth:
 

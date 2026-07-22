@@ -9,7 +9,7 @@ topics:
   - reproducibility
   - agentic-systems
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases:
   - Evaluation Harnesses
@@ -25,7 +25,7 @@ related:
   - determinism-and-reproducibility.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Harnesses

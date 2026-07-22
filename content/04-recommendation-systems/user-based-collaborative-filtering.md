@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - user-based-collaborative-filtering
 level: intermediate
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - utility-and-interaction-matrices.md
   - cold-start-problem.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # User-Based Collaborative Filtering
 
 User-based collaborative filtering finds users whose rows in the [utility matrix](utility-and-interaction-matrices.md) resemble the target user's row, then recommends what those neighbors liked. It is the most literal form of [collaborative filtering](collaborative-filtering.md): "people with histories like yours also liked this."
 
-## Defining math
+## User-user prediction
 
 With similarity $w_{uv}$, a rating-style prediction is
 

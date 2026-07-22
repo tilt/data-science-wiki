@@ -6,7 +6,7 @@ area: natural-language-processing
 topics:
   - evaluation-of-nlp-systems
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - urgency-classification.md
   - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Evaluation of NLP Systems
@@ -27,6 +27,15 @@ last_reviewed: 2026-07-21
 NLP evaluation asks whether a text system does the task correctly under the ambiguity, noise, and cost structure of its use case. A [text classification](text-classification.md) router, [sequence labelling](sequence-labelling.md) tagger, [named entity recognition](named-entity-recognition.md) model, [summarization](summarization.md) system, and [urgency classification](urgency-classification.md) policy need different metrics and examples.
 
 ## How NLP tasks are scored
+
+Different NLP tasks call for different metrics, because the unit being judged changes:
+
+| Task                                                   | Typical metric                 | What it measures                      |
+| ------------------------------------------------------ | ------------------------------ | ------------------------------------- |
+| [Classification](text-classification.md)               | precision / recall / F1        | correct label assignment              |
+| Sequence labeling / [NER](named-entity-recognition.md) | span-level F1 (exact match)    | correct span boundary and type        |
+| Generation (translation, [summary](summarization.md))  | BLEU / ROUGE plus human review | overlap with references, plus quality |
+| [Semantic similarity](semantic-textual-similarity.md)  | correlation with human scores  | agreement of ranked similarity        |
 
 For classification, precision, recall, and F1 for class $k$ are
 

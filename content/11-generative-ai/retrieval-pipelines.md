@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - retrieval-pipelines
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - hybrid-retrieval.md
   - reranking.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Retrieval Pipelines

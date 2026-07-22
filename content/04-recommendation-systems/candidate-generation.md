@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - candidate-generation
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - content-based-recommendation.md
   - ../12-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Candidate Generation

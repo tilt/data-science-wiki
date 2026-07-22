@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - reranking
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - ranking-and-retrieval-metrics.md
   - ../11-generative-ai/reranking.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Reranking

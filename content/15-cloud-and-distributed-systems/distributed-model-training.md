@@ -6,7 +6,7 @@ area: cloud-and-distributed-systems
 topics:
   - distributed-model-training
 level: advanced
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - ../06-deep-learning/distributed-training.md
   - ../06-deep-learning/mixed-precision.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Distributed Model Training

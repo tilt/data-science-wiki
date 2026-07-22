@@ -6,7 +6,7 @@ area: information-retrieval-and-search
 topics:
   - search-evaluation
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - reranking.md
   - ../17-experimentation-and-evaluation/offline-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Search Evaluation

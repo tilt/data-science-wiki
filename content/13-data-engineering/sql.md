@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - sql
 level: foundational
-status: review
+status: complete
 page_type: implementation
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - data-quality.md
   - ../16-software-engineering/sql.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # SQL
 
 SQL is the contract language of warehouse-centric data engineering: tables expose named columns, queries declare the result set, and engines decide the physical plan. In this section it means analytical SQL over modeled data, while [software-engineering SQL](../16-software-engineering/sql.md) focuses on application safety, transactions, and parameterization.
 
-## Query mechanism
+## The logical query pipeline
 
 A useful mental model is the logical query pipeline: `FROM` builds a row source, joins combine tables from [relational modelling](relational-modelling.md), `WHERE` filters rows, `GROUP BY` aggregates them, `HAVING` filters groups, window functions compute over partitions, and the final `SELECT` projects columns. Warehouses such as [BigQuery](bigquery.md) may reorder physical execution, but the declarative contract is the result table.
 

@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - relational-modelling
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - data-contracts.md
   - data-quality.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Relational Modelling
 
 Relational modelling chooses tables, keys, and constraints so facts are stored once and relationships are enforced by the database. It is the integrity layer beneath [SQL](sql.md), [data-warehouses](data-warehouses.md), and many [data-contracts](data-contracts.md).
 
-## Constraint mechanism
+## Keys and constraints
 
 The core contract is: primary keys identify rows, foreign keys enforce parent-child relationships, `not null` protects required fields, and `unique` prevents duplicate business identifiers. The example below creates a parent `customers` table, a child `orders` table, and then attempts two invalid writes:
 

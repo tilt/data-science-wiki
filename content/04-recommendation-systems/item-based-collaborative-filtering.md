@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - item-based-collaborative-filtering
 level: intermediate
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - matrix-factorization.md
   - ranking.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Item-Based Collaborative Filtering
 
 Item-based collaborative filtering computes similarity between item columns, then recommends items similar to those a user already consumed. Compared with [user-based collaborative filtering](user-based-collaborative-filtering.md), item similarities can be more stable because item catalogs often change slower than user histories.
 
-## Defining math
+## Item-item similarity
 
 For item vectors $x_i$ and $x_j$ over users,
 

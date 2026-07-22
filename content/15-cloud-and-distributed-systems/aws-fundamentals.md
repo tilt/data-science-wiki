@@ -6,7 +6,7 @@ area: cloud-and-distributed-systems
 topics:
   - aws-fundamentals
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - reliability.md
   - ../14-ml-engineering-and-mlops/training-pipelines.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # AWS Fundamentals
 
 AWS is a control plane around accounts, regions, IAM, networking, compute, storage, and managed services. A useful AWS design is not a list of services; it is a contract for which principal can call which API on which resource in which region, with logging, recovery, and cost ownership attached. That makes this page the provider-specific companion to [Google Cloud fundamentals](google-cloud-fundamentals.md).
 
-## Architecture contract
+## A batch training path
 
 For a batch training workload, the core path is usually:
 

@@ -6,7 +6,7 @@ area: natural-language-processing
 topics:
   - semantic-textual-similarity
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - entity-linking-and-matching.md
   - ../12-information-retrieval-and-search/dense-retrieval.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Semantic Textual Similarity

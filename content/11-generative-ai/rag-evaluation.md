@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - rag-evaluation
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - llm-as-judge.md
   - rag-benchmark-design.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # RAG Evaluation

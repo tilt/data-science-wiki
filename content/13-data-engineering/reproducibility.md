@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - reproducibility
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - cloud-storage.md
   - ../14-ml-engineering-and-mlops/dataset-versioning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Reproducibility
 
 Reproducibility in data engineering means a table, file set, or feature dataset can be rebuilt from pinned inputs, transformation code, parameters, and environment. It is stricter than "the job usually reruns" because mutable sources and changing business rules can produce different outputs under the same name.
 
-## Manifest mechanism
+## A reproducibility manifest
 
 A reproducibility manifest should be deterministic and human-reviewable:
 

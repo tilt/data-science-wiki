@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - bandit-algorithms
 level: intermediate
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - offline-versus-online-evaluation.md
   - cold-start-problem.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Bandit Algorithms
 
 Bandit algorithms choose recommendations while learning from the rewards they cause. They are useful when a system must balance short-term performance with information gathering, especially for [cold-start](cold-start-problem.md) items and changing content.
 
-## Defining math
+## UCB and Thompson sampling
 
 For an arm $a$, empirical mean $\hat\mu_a$, count $n_a$, and time $t$, UCB chooses
 

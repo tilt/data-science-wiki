@@ -8,7 +8,7 @@ topics:
   - evaluation-datasets
   - quality-control
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Gold datasets"
@@ -22,14 +22,14 @@ related:
   - risk-weighted-error-taxonomies.md
   - ../14-ml-engineering-and-mlops/evaluation-datasets.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Golden Datasets
 
 A golden dataset is a trusted, versioned set of inputs, expected behavior, labels, evidence, and risk metadata. It is not necessarily large; its value is that teams can rerun [offline evaluation](offline-evaluation.md) on the same decision cases and know what changed. The MLOps duplicate should usually point here for evaluation design, while [evaluation datasets](../14-ml-engineering-and-mlops/evaluation-datasets.md) covers storage and pipeline ownership.
 
-## Defining artifact
+## Anatomy of a golden row
 
 For a support assistant, one row should identify the user query, source document ID, acceptable-answer criteria, refusal rule, slice tags, severity, reviewer owner, and version. A minimal acceptance contract is:
 

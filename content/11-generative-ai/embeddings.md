@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - embeddings
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - reranking.md
   - ../08-natural-language-processing/embeddings.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Embeddings
 
 Embeddings map text, images, or other objects into vectors so nearby points represent model-learned similarity. In this section they power [vector databases](vector-databases.md), [retrieval pipelines](retrieval-pipelines.md), [hybrid retrieval](hybrid-retrieval.md), and sometimes agent [memory](memory.md).
 
-## Defining math
+## Embedding similarity
 
 An encoder maps an item $x$ to $e=f_\theta(x)\in\mathbb R^d$. Cosine similarity is
 

@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - hybrid-retrieval
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - ../12-information-retrieval-and-search/bm25.md
   - ../12-information-retrieval-and-search/hybrid-search.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Hybrid Retrieval

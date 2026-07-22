@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - etl-and-elt
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - cloud-storage.md
   - data-quality.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # ETL and ELT

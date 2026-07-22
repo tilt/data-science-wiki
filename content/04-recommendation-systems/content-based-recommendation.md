@@ -6,7 +6,7 @@ area: recommendation-systems
 topics:
   - content-based-recommendation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - content-based-image-retrieval.md
   - ../12-information-retrieval-and-search/tf-idf.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Content-Based Recommendation
 
 Content-based recommendation scores items from their attributes: text, tags, categories, prices, image embeddings, or metadata. It is useful when [collaborative filtering](collaborative-filtering.md) is sparse, especially for [cold-start](cold-start-problem.md) items that have content but no interactions.
 
-## Defining math
+## Profiles from item features
 
 If $x_i$ is an item feature vector and $I_u^+$ are items the user liked, a simple user profile is
 

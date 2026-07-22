@@ -8,7 +8,7 @@ topics:
   - inter-rater-agreement
   - rubrics
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Human review"
@@ -21,14 +21,14 @@ related:
   - risk-weighted-error-taxonomies.md
   - ../14-ml-engineering-and-mlops/human-in-the-loop-systems.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Human Evaluation
 
 Human evaluation uses trained reviewers when the target behavior is open-ended, subjective, safety-sensitive, or not fully captured by automatic labels. It is central for summaries, support answers, refusal quality, and severity labels in [risk-weighted error taxonomies](risk-weighted-error-taxonomies.md). It also provides the audit sample for [LLM-as-judge](llm-as-judge.md).
 
-## Defining statistic
+## Inter-rater agreement
 
 Raw agreement is the observed matching rate between reviewers:
 

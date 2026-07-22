@@ -6,7 +6,7 @@ area: responsible-ai-safety-and-governance
 topics:
   - security
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - privacy.md
   - ../11-generative-ai/tool-use-and-function-calling.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Security

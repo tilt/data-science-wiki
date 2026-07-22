@@ -10,7 +10,7 @@ topics:
   - mrr
   - ndcg
 level: foundational
-status: review
+status: complete
 page_type: reference
 aliases: []
 prerequisites:
@@ -21,7 +21,7 @@ related:
   - reranking.md
   - hybrid-search.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Precision, Recall, MAP, MRR, and NDCG

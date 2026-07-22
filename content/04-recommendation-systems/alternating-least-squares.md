@@ -7,7 +7,7 @@ topics:
   - matrix-factorization
   - als
 level: intermediate
-status: review
+status: complete
 page_type: algorithm
 aliases:
   - ALS
@@ -20,14 +20,14 @@ related:
   - funk-svd.md
   - sparse-utility-matrices-and-svd.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Alternating Least Squares
 
 Alternating least squares trains [matrix factorization](matrix-factorization.md) by freezing one side of the model and solving the other side exactly. With item factors fixed, each user factor is a small ridge regression; with user factors fixed, each item factor is the symmetric ridge problem. This is why ALS is a natural fit for sparse [utility matrices](utility-and-interaction-matrices.md) and distributed computation.
 
-## Defining math
+## The ALS objective
 
 For explicit ratings, ALS minimizes the usual observed-entry objective
 

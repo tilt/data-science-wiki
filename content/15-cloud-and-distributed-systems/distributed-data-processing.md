@@ -6,7 +6,7 @@ area: cloud-and-distributed-systems
 topics:
   - distributed-data-processing
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - ../13-data-engineering/data-pipelines.md
   - ../13-data-engineering/feature-pipelines.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Distributed Data Processing

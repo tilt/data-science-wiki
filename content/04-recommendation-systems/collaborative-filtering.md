@@ -7,7 +7,7 @@ topics:
   - collaborative-filtering
   - personalization
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - hybrid-recommenders.md
   - cold-start-problem.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Collaborative Filtering
 
 Collaborative filtering recommends from collective behavior rather than item content alone. It assumes that users with similar histories, or items consumed by similar users, carry useful preference signal. The main families are [user-based collaborative filtering](user-based-collaborative-filtering.md), [item-based collaborative filtering](item-based-collaborative-filtering.md), and model-based methods such as [matrix factorization](matrix-factorization.md).
 
-## Defining math
+## Similarity-based prediction
 
 For memory-based collaborative filtering, cosine similarity is common:
 

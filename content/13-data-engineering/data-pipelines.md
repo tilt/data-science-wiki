@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - data-pipelines
 level: foundational
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - data-lineage.md
   - ../14-ml-engineering-and-mlops/training-pipelines.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Data Pipelines
 
 A data pipeline is a repeatable path from source data to a named output dataset. The pipeline contract includes inputs, transformation code, scheduling, quality gates, lineage, and replay behavior. That is broader than [Airflow](airflow.md), which orchestrates tasks, or [dbt](dbt.md), which usually handles warehouse SQL transforms.
 
-## Pipeline contract
+## A minimal pipeline spec
 
 The smallest useful pipeline spec names source, transform, target, and watermark. I computed the hash below from the JSON manifest so the run can be compared during an incident or backfill:
 

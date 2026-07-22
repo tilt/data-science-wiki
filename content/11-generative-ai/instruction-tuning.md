@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - instruction-tuning
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - structured-output.md
   - ../07-reinforcement-learning/reinforcement-learning-from-human-feedback.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Instruction Tuning

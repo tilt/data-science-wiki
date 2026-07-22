@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - local-versus-hosted-models
 level: intermediate
-status: review
+status: complete
 page_type: comparison
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - data-privacy.md
   - determinism-and-reproducibility.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Local Versus Hosted Models

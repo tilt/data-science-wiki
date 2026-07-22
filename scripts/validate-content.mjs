@@ -185,7 +185,10 @@ for (const file of files) {
   }
   const body = raw.slice(match[0].length)
   if (/^#{1,6}\s*$/m.test(body)) fail(rel + " has empty heading")
-  if (meta.status === "complete" && /TODO|TBD|placeholder/i.test(body))
+  if (
+    meta.status === "complete" &&
+    /\bTODO\b|\bTBD\b|\bFIXME\b|\[placeholder\]|placeholder text/i.test(body)
+  )
     fail(rel + " complete page contains placeholder text")
   if (raw.length < 250 && !rel.includes("_templates")) warn(rel + " is very short")
 

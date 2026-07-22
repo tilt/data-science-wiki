@@ -6,7 +6,7 @@ area: probability-and-statistics
 topics:
   - hypothesis-testing
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - statistical-estimation.md
   - ../17-experimentation-and-evaluation/statistical-significance.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Hypothesis Testing

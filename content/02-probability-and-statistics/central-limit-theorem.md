@@ -6,7 +6,7 @@ area: probability-and-statistics
 topics:
   - central-limit-theorem
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - hypothesis-testing.md
   - common-distributions.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Central Limit Theorem

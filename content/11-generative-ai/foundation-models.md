@@ -6,7 +6,7 @@ area: generative-ai
 topics:
   - foundation-models
 level: foundational
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - fine-tuning-versus-rag.md
   - multimodal-models.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Foundation Models

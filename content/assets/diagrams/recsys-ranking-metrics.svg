@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="440" viewBox="0 0 720 440" role="img" aria-labelledby="title desc">
+  <title id="title">Ranked list with relevance and position discount</title>
+  <desc id="desc">An eight-item ranked list. Relevant items are green, irrelevant items gray. Each rank has a discount weight one over log base two of one plus rank, so relevant items near the top contribute more to ranking metrics like NDCG. Precision at 3 is two thirds; precision at 5 is three fifths.</desc>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: #374151; }
+    .callout { fill: #111827; }
+    .small { font-size: 14px; }
+    .rel { fill: #16a34a; }
+    .irr { fill: #cbd5e1; }
+    .cut { stroke: #c2410c; stroke-width: 2; stroke-dasharray: 5 4; }
+  </style>
+
+  <text x="360" y="32" text-anchor="middle" font-size="23" font-weight="800">Early hits count more</text>
+  <text x="360" y="56" text-anchor="middle" font-size="15" class="muted">A relevant item high in the list is worth more than one buried lower.</text>
+
+  <!-- column headers -->
+  <text x="70" y="88" class="small muted" font-weight="700">rank</text>
+  <text x="150" y="88" class="small muted" font-weight="700">result</text>
+  <text x="470" y="88" class="small muted" font-weight="700">discount 1/log₂(1+rank)</text>
+
+  <!-- rows: rank, relevance, discount -->
+  <!-- r1 rel -->
+  <text x="76" y="122" text-anchor="middle" class="small">1</text>
+  <rect class="rel" x="140" y="106" width="260" height="24" rx="5"/>
+  <text x="150" y="123" class="small" fill="#fff" font-weight="700">relevant</text>
+  <text x="470" y="123" class="small muted">1.00</text>
+  <!-- r2 rel -->
+  <text x="76" y="156" text-anchor="middle" class="small">2</text>
+  <rect class="rel" x="140" y="140" width="260" height="24" rx="5"/>
+  <text x="150" y="157" class="small" fill="#fff" font-weight="700">relevant</text>
+  <text x="470" y="157" class="small muted">0.63</text>
+  <!-- r3 irr -->
+  <text x="76" y="190" text-anchor="middle" class="small">3</text>
+  <rect class="irr" x="140" y="174" width="260" height="24" rx="5"/>
+  <text x="150" y="191" class="small muted">not relevant</text>
+  <text x="470" y="191" class="small muted">0.50</text>
+  <!-- @3 cutoff -->
+  <line class="cut" x1="120" y1="202" x2="430" y2="202"/>
+  <text x="544" y="208" class="small callout">@3 precision 2/3</text>
+  <!-- r4 rel -->
+  <text x="76" y="224" text-anchor="middle" class="small">4</text>
+  <rect class="rel" x="140" y="208" width="260" height="24" rx="5"/>
+  <text x="150" y="225" class="small" fill="#fff" font-weight="700">relevant</text>
+  <text x="470" y="225" class="small muted">0.43</text>
+  <!-- r5 irr -->
+  <text x="76" y="258" text-anchor="middle" class="small">5</text>
+  <rect class="irr" x="140" y="242" width="260" height="24" rx="5"/>
+  <text x="150" y="259" class="small muted">not relevant</text>
+  <text x="470" y="259" class="small muted">0.39</text>
+  <!-- @5 cutoff -->
+  <line class="cut" x1="120" y1="270" x2="430" y2="270"/>
+  <text x="544" y="276" class="small callout">@5 precision 3/5</text>
+  <!-- r6 irr -->
+  <text x="76" y="292" text-anchor="middle" class="small">6</text>
+  <rect class="irr" x="140" y="276" width="260" height="24" rx="5"/>
+  <text x="150" y="293" class="small muted">not relevant</text>
+  <text x="470" y="293" class="small muted">0.36</text>
+  <!-- r7 rel -->
+  <text x="76" y="326" text-anchor="middle" class="small">7</text>
+  <rect class="rel" x="140" y="310" width="260" height="24" rx="5"/>
+  <text x="150" y="327" class="small" fill="#fff" font-weight="700">relevant</text>
+  <text x="470" y="327" class="small muted">0.33</text>
+  <!-- r8 irr -->
+  <text x="76" y="360" text-anchor="middle" class="small">8</text>
+  <rect class="irr" x="140" y="344" width="260" height="24" rx="5"/>
+  <text x="150" y="361" class="small muted">not relevant</text>
+  <text x="470" y="361" class="small muted">0.32</text>
+
+  <text x="360" y="404" text-anchor="middle" class="small muted">NDCG sums each relevant item's discount, then normalizes by the best possible ordering.</text>
+</svg>

@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - data-warehouses
 level: foundational
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -21,14 +21,14 @@ related:
   - dbt.md
   - etl-and-elt.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Data Warehouses
 
 A data warehouse stores integrated, historical, queryable data for analytics. Its core promise is not "large tables"; it is consistent semantics: the same order, customer, and revenue definition should support dashboards, analysis, and downstream [feature-pipelines](feature-pipelines.md).
 
-## Warehouse mechanism
+## Raw, staging, and marts
 
 Warehouses separate raw landing data from curated analytical models. A common flow is raw orders -> cleaned staging -> facts and dimensions from [dimensional-modelling](dimensional-modelling.md). The mart layer is where business definitions live: the aggregate below turns raw orders into daily revenue, and that metric means what it means only because the query restricts to `status = 'paid'` before grouping by day.
 

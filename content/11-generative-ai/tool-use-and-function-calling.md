@@ -8,7 +8,7 @@ topics:
   - tool-use
   - agentic-systems
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - structured-output.md
   - prompt-injection.md
 historical_context: false
-last_reviewed: 2026-07-20
+last_reviewed: 2026-07-22
 ---
 
 # Tool Use and Function Calling

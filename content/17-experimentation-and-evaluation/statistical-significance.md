@@ -8,7 +8,7 @@ topics:
   - hypothesis-testing
   - ab-testing
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Significance testing"
@@ -22,14 +22,14 @@ related:
   - ../02-probability-and-statistics/hypothesis-testing.md
   - ../02-probability-and-statistics/confidence-intervals.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Statistical Significance
 
 Statistical significance asks whether an observed effect is surprising under a null model. In an [A/B test](a-b-testing.md), the null is usually "treatment and control have the same conversion rate"; in [paired evaluation](paired-evaluation.md), it is usually "the mean paired difference is zero." It is an uncertainty statement, not a claim that the effect is useful, causal without a valid design, or safe to launch.
 
-## Defining statistics
+## The two-proportion z-test
 
 For two independent conversion rates, $\hat p_A=x_A/n_A$ and $\hat p_B=x_B/n_B$. A large-sample two-sided z-test uses the pooled null rate
 

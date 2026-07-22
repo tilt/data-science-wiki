@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - distributed-warehouse-modelling
 level: advanced
-status: review
+status: complete
 page_type: system-design
 aliases:
   - Large Scale Warehouse Modelling
@@ -23,7 +23,7 @@ related:
   - cloud-storage.md
   - dbt.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-23
 ---
 
 # Distributed Warehouse Modelling

@@ -6,7 +6,7 @@ area: probability-and-statistics
 topics:
   - markov-renewal-processes
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - random-walks.md
   - conditional-probability.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Markov Renewal Processes

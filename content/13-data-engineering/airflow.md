@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - airflow
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - batch-versus-streaming.md
   - data-quality.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Airflow
 
 Airflow is an orchestrator: it decides when tasks should run, in what dependency order, with what retries and metadata. It does not make bad [SQL](sql.md) correct or turn an unreliable source into a contract; it gives [data-pipelines](data-pipelines.md) a schedulable control plane.
 
-## DAG contract
+## A minimal DAG
 
 Airflow represents a workflow as a directed acyclic graph. The artifact below is a minimal DAG shape for an ELT pipeline: one task extracts a dated object, one task runs [dbt](dbt.md), and one task blocks publication unless a [data-quality](data-quality.md) check passes.
 

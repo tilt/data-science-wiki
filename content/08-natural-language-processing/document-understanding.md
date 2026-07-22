@@ -6,7 +6,7 @@ area: natural-language-processing
 topics:
   - document-understanding
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - text-preprocessing.md
   - evaluation-of-nlp-systems.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Document Understanding

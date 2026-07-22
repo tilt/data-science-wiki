@@ -8,7 +8,7 @@ topics:
   - online-experiments
   - power
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Split test"
@@ -22,14 +22,14 @@ related:
   - ../02-probability-and-statistics/experimental-design.md
   - ../14-ml-engineering-and-mlops/a-b-testing.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # A/B Testing
 
 A/B testing is a randomized experiment comparing a control experience with one or more variants. This page is the evaluation concept; the production lifecycle counterpart is [MLOps A/B testing](../14-ml-engineering-and-mlops/a-b-testing.md). A valid test needs a named decision, a randomization unit, primary and guardrail metrics, a minimum meaningful effect, and an analysis plan before traffic is exposed.
 
-## Defining statistics
+## Sample size and the test statistic
 
 For a binary metric, the planning problem is often "how many users per variant are needed to detect $p_1-p_0$?" A normal approximation for equal-sized arms is
 

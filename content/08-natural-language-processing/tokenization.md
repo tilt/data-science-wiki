@@ -6,7 +6,7 @@ area: natural-language-processing
 topics:
   - tokenization
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,12 +18,24 @@ related:
   - bert-style-encoders.md
   - decoder-only-transformers.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-22
 ---
 
 # Tokenization
 
 Tokenization chooses the units consumed by NLP models. A word tokenizer is natural for sparse [text classification](text-classification.md); subword or byte tokenizers are essential for [bert-style encoders](bert-style-encoders.md), [decoder-only transformers](decoder-only-transformers.md), and open-vocabulary [language modelling](language-modelling.md). The tokenizer defines vocabulary size, sequence length, and which errors are even representable.
+
+## Granularity of the unit
+
+Tokenizers differ in how coarse their units are, which trades vocabulary size against sequence length:
+
+| Granularity      | Unit                      | Trade-off                                                                  |
+| ---------------- | ------------------------- | -------------------------------------------------------------------------- |
+| Word             | whole words               | short sequences, but a large brittle vocabulary and out-of-vocabulary gaps |
+| Subword (BPE)    | frequent character chunks | balances vocabulary size against out-of-vocabulary coverage                |
+| Byte / character | bytes or characters       | no out-of-vocabulary words, but much longer sequences                      |
+
+Subword schemes such as byte-pair encoding are the common default because they interpolate between the two extremes.
 
 ## Byte-pair encoding
 

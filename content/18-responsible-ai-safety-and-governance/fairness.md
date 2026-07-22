@@ -6,7 +6,7 @@ area: responsible-ai-safety-and-governance
 topics:
   - fairness
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - ../03-classical-machine-learning/calibration.md
   - ../03-classical-machine-learning/evaluation-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Fairness
 
 Fairness asks whether an AI system creates unjustified differences in benefits, burdens, or errors across affected groups. In model work it is measured with explicit group metrics; in governance it is tied to [compliance](compliance.md), appeal routes, and [human oversight](human-oversight.md) because a metric gap alone does not decide what outcome is justified.
 
-## Defining metrics
+## Group fairness metrics
 
 For binary label $Y\in\{0,1\}$, prediction $\hat Y\in\{0,1\}$, and protected attribute $A$, demographic parity requires equal selection rates:
 

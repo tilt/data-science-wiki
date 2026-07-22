@@ -8,7 +8,7 @@ topics:
   - human-evaluation
   - generative-ai
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Model-based evaluation"
@@ -22,14 +22,14 @@ related:
   - ../11-generative-ai/llm-as-judge.md
   - ../11-generative-ai/rag-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # LLM-as-Judge
 
 LLM-as-judge evaluation uses a model to score, classify, critique, or compare outputs from another system. It can scale qualitative review for [RAG evaluation](../11-generative-ai/rag-evaluation.md), but it is not ground truth. The judge prompt, candidate order, rubric, model version, and sampling settings are part of the evaluation artifact.
 
-## Defining statistic
+## Judge-human agreement
 
 For pairwise judging, compare the judge label $J_i\in\{A,B,\text{tie}\}$ with a human label $H_i$ on an audit sample. Agreement and kappa measure whether judge outputs are usable as a proxy:
 

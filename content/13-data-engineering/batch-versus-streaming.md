@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - batch-versus-streaming
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,14 +18,14 @@ related:
   - data-quality.md
   - etl-and-elt.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Batch Versus Streaming
 
 Batch processing runs over bounded inputs: a date partition, snapshot, or file set. Streaming processing runs over unbounded event streams and must decide how long to wait for late data. The difference is not just latency; it changes the correctness contract for [data-pipelines](data-pipelines.md), [feature-pipelines](feature-pipelines.md), and quality checks.
 
-## Timing mechanism
+## Completeness versus latency
 
 A batch job can wait until a partition is complete and recompute it. A streaming job needs event time, processing time, a window, and a lateness policy. In a 10-minute event-time window ending at 10:10, these events behave differently:
 

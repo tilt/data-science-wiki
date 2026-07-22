@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - dimensional-modelling
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - Star Schema
@@ -21,7 +21,7 @@ related:
   - bigquery.md
   - dbt.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Dimensional Modelling

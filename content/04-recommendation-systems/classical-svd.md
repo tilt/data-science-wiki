@@ -7,7 +7,7 @@ topics:
   - classical-svd
   - singular-value-decomposition
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -19,14 +19,14 @@ related:
   - matrix-factorization.md
   - ../01-mathematical-foundations/low-rank-approximation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Classical SVD
 
 Classical singular value decomposition factorizes a complete numeric matrix. In recommender systems it supplies the low-rank vocabulary used by [matrix factorization](matrix-factorization.md), but it is not by itself a correct treatment of missing ratings.
 
-## Defining math
+## The SVD factorization
 
 For a dense matrix $A\in\mathbb R^{m\times n}$,
 

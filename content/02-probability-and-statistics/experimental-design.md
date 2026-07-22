@@ -6,7 +6,7 @@ area: probability-and-statistics
 topics:
   - experimental-design
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - statistical-modelling.md
   - ../17-experimentation-and-evaluation/a-b-testing.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Experimental Design

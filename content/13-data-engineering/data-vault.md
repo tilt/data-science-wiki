@@ -6,7 +6,7 @@ area: data-engineering
 topics:
   - data-vault
 level: advanced
-status: review
+status: complete
 page_type: system-design
 aliases:
   - Data Vault 2.0
@@ -22,7 +22,7 @@ related:
   - data-lineage.md
   - reproducibility.md
 historical_context: false
-last_reviewed: 2026-07-16
+last_reviewed: 2026-07-23
 ---
 
 # Data Vault
