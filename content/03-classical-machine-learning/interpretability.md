@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - interpretability
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -24,7 +24,18 @@ last_reviewed: 2026-07-22
 
 Interpretability connects a fitted model's behavior to features, examples, and decisions. A [decision tree](decision-trees.md) is directly readable as rules; a [linear model](linear-models.md) exposes coefficients; a [random forest](random-forests.md) usually needs post-hoc tools such as permutation importance or partial dependence.
 
-## Defining math
+## Why interpret a model
+
+Interpretability is not decoration after [evaluation metrics](evaluation-metrics.md). It is a debugging tool: which features drive predictions, where does the model rely on shortcuts, and which examples are near a decision boundary? Different questions call for different tools:
+
+| Method                          | Scope  | What it answers                                        |
+| ------------------------------- | ------ | ------------------------------------------------------ |
+| Model coefficients              | global | the direction and size of each feature's linear effect |
+| Permutation importance          | global | how much the model relies on each feature              |
+| Partial dependence              | global | the average effect of a feature across its range       |
+| Local attributions (SHAP-style) | local  | why this one prediction came out as it did             |
+
+## Measuring feature importance
 
 Permutation importance for feature $j$ measures how much the model's score drops when that feature's link to the target is destroyed:
 
@@ -33,10 +44,6 @@ I_j = S(\hat f, X, y) - S(\hat f, \pi_j(X), y),
 $$
 
 where $\hat f$ is the fitted model, $X$ the feature matrix, $y$ the labels, $S$ a chosen score (such as accuracy or $R^2$), and $\pi_j(X)$ is $X$ with the values in column $j$ randomly permuted. A large drop $I_j$ means the model relied heavily on feature $j$. For additive local explanations, many methods approximate the prediction at a point as $\hat f(x)\approx\phi_0+\sum_j\phi_j(x)$, where $\phi_0$ is a baseline value and each $\phi_j(x)$ is the contribution attributed to feature $j$.
-
-## Intuition
-
-Interpretability is not decoration after [evaluation metrics](evaluation-metrics.md). It is a debugging tool: which features drive predictions, where does the model rely on shortcuts, and which examples are near a decision boundary?
 
 ## Worked example
 

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="480" viewBox="0 0 720 480" role="img" aria-labelledby="title desc">
+  <title id="title">GELU and Swish are smooth transformer-era activations</title>
+  <desc id="desc">GELU and Swish closely follow ReLU for positive inputs, but give a smooth transition near zero and allow small negative outputs instead of a hard cutoff.</desc>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: #374151; }
+    .small { font-size: 14px; }
+    .axis { stroke: #94a3b8; stroke-width: 2; }
+    .grid { stroke: #e2e8f0; stroke-width: 1; }
+    .zero { stroke: #f97316; stroke-width: 2; stroke-dasharray: 6 5; }
+    .gelu { fill: none; stroke: #2563eb; stroke-width: 4; }
+    .swish { fill: none; stroke: #16a34a; stroke-width: 3.5; }
+    .relu { fill: none; stroke: #7c3aed; stroke-width: 2.8; stroke-dasharray: 8 6; }
+    .legend { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+  </style>
+
+  <text x="360" y="34" text-anchor="middle" font-size="24" font-weight="800">GELU and Swish smooth the ReLU transition</text>
+  <text x="360" y="60" text-anchor="middle" font-size="16" class="muted">SwiGLU uses Swish as the scalar gate inside a wider vector-valued MLP layer.</text>
+
+  <line class="grid" x1="90" y1="96" x2="650" y2="96"/>
+  <line class="grid" x1="90" y1="207.1" x2="650" y2="207.1"/>
+  <line class="grid" x1="90" y1="318.2" x2="650" y2="318.2"/>
+  <line class="grid" x1="370" y1="86" x2="370" y2="346"/>
+  <line class="axis" x1="90" y1="318.2" x2="650" y2="318.2"/>
+  <line class="axis" x1="90" y1="96" x2="90" y2="346"/>
+  <line class="zero" x1="370" y1="86" x2="370" y2="346"/>
+
+  <path class="relu" d="M 90 318.2 L 370 318.2 L 650 96"/>
+  <path class="gelu" d="M 90 318.2 C 190 318.2 250 322 300 327 C 334 330 350 326 370 318.2 C 390 310 408 287 426 270 C 486 214 560 148 650 96"/>
+  <path class="swish" d="M 90 322.2 C 190 326 258 337 300 333.2 C 336 330 350 326 370 318.2 C 390 310 408 293 426 276 C 488 218 562 156 650 100"/>
+
+  <text x="80" y="101" text-anchor="end" class="small muted">4</text>
+  <text x="80" y="212" text-anchor="end" class="small muted">2</text>
+  <text x="80" y="323" text-anchor="end" class="small muted">0</text>
+  <text x="80" y="350" text-anchor="end" class="small muted">-0.5</text>
+  <text x="46" y="218" text-anchor="middle" class="small muted" transform="rotate(-90 46 218)">activation value</text>
+  <text x="90" y="378" text-anchor="middle" class="small muted">-4</text>
+  <text x="370" y="378" text-anchor="middle" class="small muted">0</text>
+  <text x="650" y="378" text-anchor="middle" class="small muted">4</text>
+  <text x="370" y="464" text-anchor="middle" class="small muted">pre-activation x</text>
+
+  <rect x="106" y="394" width="508" height="42" rx="10" class="legend"/>
+  <line class="gelu" x1="126" y1="418" x2="158" y2="418"/>
+  <text x="166" y="423" class="small">GELU: xΦ(x)</text>
+  <line class="swish" x1="302" y1="418" x2="334" y2="418"/>
+  <text x="342" y="423" class="small">Swish: xσ(x)</text>
+  <line class="relu" x1="486" y1="418" x2="518" y2="418"/>
+  <text x="526" y="423" class="small">ReLU reference</text>
+
+  <text x="138" y="344" class="small muted">small negative dip is expected</text>
+  <text x="442" y="126" class="small muted">nearly linear for large positives</text>
+</svg>

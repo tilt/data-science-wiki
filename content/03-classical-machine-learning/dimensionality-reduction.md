@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - dimensionality-reduction
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -24,7 +24,20 @@ last_reviewed: 2026-07-22
 
 Dimensionality reduction maps $x\in\mathbb R^p$ to $z\in\mathbb R^d$ with $d<p$. The preserved structure depends on the method: [PCA](pca.md) preserves variance in a linear subspace, manifold methods preserve neighborhoods, and supervised reductions preserve label-relevant directions.
 
-## Defining math
+## What to preserve
+
+High-dimensional data often contains redundancy. A good lower-dimensional representation keeps the variation that matters and discards noise — but "matters" must be defined, and different methods preserve different structure:
+
+| Method        | Preserves                           | Linear?          |
+| ------------- | ----------------------------------- | ---------------- |
+| [PCA](pca.md) | global variance                     | yes              |
+| LDA           | label-separating directions         | yes (supervised) |
+| t-SNE / UMAP  | local neighborhoods                 | no               |
+| Autoencoders  | reconstruction under a learned code | no               |
+
+Variance is not the same as predictive value, so the right method depends on the downstream use.
+
+## Linear projection and PCA
 
 An encoder maps each original feature vector $x_i\in\mathbb R^p$ to a lower-dimensional representation $z_i=g(x_i)\in\mathbb R^d$ with $d<p$. A linear encoder writes $Z=XW$, where $X$ is the data matrix and $W\in\mathbb R^{p\times d}$ is a projection matrix taking the $p$ input dimensions to $d$ output dimensions. PCA chooses $W$ to retain as much variance as possible:
 
@@ -33,10 +46,6 @@ $$
 $$
 
 where $X_c$ is the centered data (each feature mean-subtracted), the constraint $W^\top W=I_d$ (with $I_d$ the $d\times d$ identity) makes the projection directions orthonormal, and $\operatorname{tr}(\cdot)$ is the trace, here the total projected variance. The reconstruction error of linear PCA is $\lVert X_c-X_cWW^\top\rVert_F^2$, with $\lVert\cdot\rVert_F$ the Frobenius norm. The same transformation can be preprocessing for [clustering](clustering.md), visualization, denoising, or [feature engineering](feature-engineering.md). In [unsupervised learning](unsupervised-learning.md), the reduction objective often becomes the implicit definition of what structure is worth preserving.
-
-## Intuition
-
-High-dimensional data often contains redundancy. A good lower-dimensional representation keeps the variation that matters and discards noise, but "matters" must be defined. Variance is not the same as predictive value.
 
 ## Worked example
 

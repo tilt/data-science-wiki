@@ -22,7 +22,7 @@ last_reviewed: 2026-07-11
 
 # Regularization
 
-Regularization changes the training problem so a neural network is less free to memorize. In deep learning this can be explicit penalties in the [loss](loss-functions.md), stochastic training behavior such as dropout, data augmentation, early stopping, or freezing layers during [fine-tuning](fine-tuning.md). It overlaps with but is not identical to [classical regularization](../03-classical-machine-learning/regularization.md).
+Regularization changes the training problem so a neural network is less free to memorize. In deep learning this can be explicit penalties in the [loss](loss-functions.md), stochastic training behavior such as dropout, data augmentation, early stopping, or freezing layers during [fine-tuning](fine-tuning.md). It overlaps with but is not identical to [classical regularization](../03-classical-machine-learning/regularization.md): the classical page covers ridge, lasso, and why lasso can prune features, while this page focuses on neural-network training behavior.
 
 ## Defining math
 
@@ -32,7 +32,7 @@ $$
 J(\theta)=\frac{1}{n}\sum_i L(f_\theta(x_i),y_i)+\frac{\lambda}{2}\lVert\theta\rVert_2^2.
 $$
 
-For SGD this contributes $\lambda\theta$ to the gradient. In inverted dropout, a hidden activation $h$ becomes
+This is the neural-network version of the same $\ell_2$ shrinkage idea used by [ridge regularization](../03-classical-machine-learning/regularization.md#defining-math). For SGD this contributes $\lambda\theta$ to the gradient. In inverted dropout, a hidden activation $h$ becomes
 
 $$
 \tilde h=\frac{m\odot h}{1-p}, \qquad m_j\sim\operatorname{Bernoulli}(1-p),

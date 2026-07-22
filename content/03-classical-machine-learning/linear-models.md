@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - linear-models
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -32,7 +32,7 @@ $$
 \hat y_i = \beta_0 + x_i^\top\beta, \qquad \min_{\beta_0,\beta}\sum_i (y_i - \hat y_i)^2,
 $$
 
-where $x_i$ is the feature vector for example $i$, $\beta_0$ is the intercept, $\beta$ is the vector of coefficients (one per feature), $y_i$ is the observed target, and $\hat y_i$ is the prediction. For binary logistic regression, the same linear score $\eta=\beta_0+x^\top\beta$ is passed through the sigmoid $\sigma$ to produce a probability:
+where $x_i$ is the feature vector for example $i$, $\beta_0$ is the intercept, $\beta$ is the vector of coefficients (one per feature), $y_i$ is the observed target, and $\hat y_i$ is the prediction. For binary logistic regression, the same linear score $\eta=\beta_0+x^\top\beta$ is passed through the [sigmoid](../06-deep-learning/activation-functions.md#defining-math) $\sigma$ to produce a probability:
 
 $$
 P(Y=1\mid x) = \sigma(\eta)=\frac{1}{1+e^{-\eta}},
@@ -44,7 +44,7 @@ $$
 \lambda \lVert\beta\rVert_2^2,
 $$
 
-where $\lVert\beta\rVert_2^2=\sum_j \beta_j^2$ is the squared coefficient norm and $\lambda\ge 0$ is the penalty strength that trades fit against shrinkage. The geometry is simple: a one-unit feature change moves the score by the corresponding coefficient, holding other features fixed. That interpretability is only meaningful when preprocessing, interactions, and scaling are explicit.
+where $\lVert\beta\rVert_2^2=\sum_j \beta_j^2$ is the squared coefficient norm and $\lambda\ge 0$ is the penalty strength that trades fit against shrinkage. Lasso regularization instead uses an $\ell_1$ penalty and can set coefficients exactly to zero, which turns coefficient shrinkage into feature pruning; see [regularization](regularization.md) for the ridge-lasso comparison. The geometry is simple: a one-unit feature change moves the score by the corresponding coefficient, holding other features fixed. That interpretability is only meaningful when preprocessing, interactions, and scaling are explicit.
 
 ## Intuition
 
@@ -68,7 +68,7 @@ The slope $0.8$ is the model's whole story: a one-unit increase in $x$ raises th
 
 ## Caveats
 
-Coefficient magnitude is not comparable across differently scaled features. Correlated predictors make individual coefficient stories fragile even when predictions are stable. Linear additivity also hides interactions: if risk rises only when two conditions co-occur, the model needs interaction features or a nonlinear method such as [decision trees](decision-trees.md).
+Coefficient magnitude is not comparable across differently scaled features. Correlated predictors make individual coefficient stories fragile even when predictions are stable, and lasso may prune one correlated feature while keeping another. Linear additivity also hides interactions: if risk rises only when two conditions co-occur, the model needs interaction features or a nonlinear method such as [decision trees](decision-trees.md).
 
 ## References
 

@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - calibration
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -24,7 +24,19 @@ last_reviewed: 2026-07-22
 
 Calibration asks whether predicted probabilities mean what they say. Among examples assigned probability 0.8, roughly 80 percent should be positive. This is different from discrimination: a [classification](classification.md) model can rank cases well and still give overconfident probabilities. The same predictions should be judged with [evaluation metrics](evaluation-metrics.md), and imbalance can make reliability look different across classes as described in [class imbalance](class-imbalance.md).
 
-## Defining math
+## Reading a reliability diagram
+
+The direct way to check calibration is to group predictions into probability bins and compare the average predicted probability in each bin with the fraction of those cases that were actually positive. A well-calibrated model stays on the diagonal — predicted matches observed:
+
+| predicted-probability bin | mean predicted | observed positive rate | reading         |
+| ------------------------- | -------------: | ---------------------: | --------------- |
+| 0.0 – 0.2                 |           0.11 |                   0.10 | well calibrated |
+| 0.4 – 0.6                 |           0.51 |                   0.47 | close           |
+| 0.8 – 1.0                 |           0.90 |                   0.72 | overconfident   |
+
+The top bin is the warning sign: when the model says $0.90$ it is right only $72\%$ of the time, so those confident predictions are systematically too high. This is a separate question from ranking — a model can order cases perfectly (high [AUC](evaluation-metrics.md#probability-and-ranking-metrics)) and still be miscalibrated like this, which is why calibration is checked in bins rather than by a single average.
+
+## Measuring calibration error
 
 Perfect binary calibration means that among all cases assigned probability $p$, a fraction $p$ really are positive: $P(Y=1\mid \hat p(X)=p)=p$. Two scores measure how far predictions fall from this ideal, using the predicted positive-class probability $\hat p_i$, the label $y_i\in\{0,1\}$, and the number of examples $n$. The Brier score is the mean squared probability error,
 
@@ -40,13 +52,9 @@ $$
 
 Platt scaling fits a sigmoid on validation scores; isotonic regression fits a monotone calibration curve. [Logistic regression](logistic-regression.md) is often reasonably calibrated under correct specification, but imbalance and misspecification can distort probabilities.
 
-## Intuition
+## Calibrating a classifier
 
-Calibration is required when a probability drives a threshold, price, triage rule, or expected-cost calculation. A model that says 0.9 too often will overload review teams and misstate risk even if its ranking is strong.
-
-## Worked example
-
-This snippet calibrates a random forest classifier with sigmoid calibration and reports probabilistic scores through Brier loss, log loss, and predicted-versus-observed positive rate.
+Calibration is required whenever a probability drives a threshold, price, triage rule, or expected-cost calculation: a model that says 0.9 too often will overload review teams and misstate risk even if its ranking is strong. This snippet calibrates a random forest classifier with sigmoid calibration and reports probabilistic scores through Brier loss, log loss, and predicted-versus-observed positive rate.
 
 ```python
 from sklearn.calibration import CalibratedClassifierCV

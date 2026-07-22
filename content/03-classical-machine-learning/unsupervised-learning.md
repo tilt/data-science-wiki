@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - unsupervised-learning
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -24,7 +24,18 @@ last_reviewed: 2026-07-22
 
 Unsupervised learning fits structure from $X$ without observed target labels. The output may be clusters, components, density estimates, embeddings, or anomaly scores. Because there is no direct $y$, validation depends more heavily on assumptions and downstream utility than in [supervised learning](supervised-learning.md).
 
-## Defining math
+## Structure without labels
+
+Without labels, the method's definition of "structure" is the whole game. Variance, Euclidean distance, density, and neighborhood preservation can all disagree, and [dimensionality reduction](dimensionality-reduction.md) that helps visualization may discard information a later classifier needs. The main families differ in what they output and what they optimize:
+
+| Task                                                    | Output                      | Typical objective                 |
+| ------------------------------------------------------- | --------------------------- | --------------------------------- |
+| [Clustering](clustering.md)                             | group assignments           | within-cluster distance (k-means) |
+| [Dimensionality reduction](dimensionality-reduction.md) | low-dimensional coordinates | retained variance (PCA)           |
+| Density estimation                                      | a probability model         | data likelihood                   |
+| [Anomaly detection](anomaly-detection.md)               | outlier scores              | a score threshold                 |
+
+## Common objectives
 
 Many unsupervised methods optimize a reconstruction, partition, or likelihood objective. [Clustering](clustering.md) with k-means partitions the points into clusters $C_1,\dots,C_K$ to minimize the within-cluster squared distance,
 
@@ -43,10 +54,6 @@ $$
 where $RI$ is the Rand index — the fraction of point pairs that are either together in both the clustering and the reference, or apart in both — and $\mathbb E[RI]$ is its expected value under random labeling.
 
 It is an external validation score, not an unsupervised objective.
-
-## Intuition
-
-Without labels, the method's definition of "structure" is the whole game. Variance, Euclidean distance, density, and neighborhood preservation can all disagree. [Dimensionality reduction](dimensionality-reduction.md) that helps visualization may discard information needed for a later classifier.
 
 ## Worked example
 

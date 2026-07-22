@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - decision-trees
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:

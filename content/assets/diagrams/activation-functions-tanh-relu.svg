@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="500" viewBox="0 0 760 500" role="img" aria-labelledby="title desc">
+  <title id="title">Tanh and ReLU activations with separate derivative panels</title>
+  <desc id="desc">The left column shows tanh saturating between minus one and one and its derivative peaking at one. The right column shows ReLU zeroing negative inputs, passing positive inputs linearly, and having derivative zero on the left and one on the right.</desc>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: #374151; }
+    .small { font-size: 13px; }
+    .axis { stroke: #94a3b8; stroke-width: 2; }
+    .grid { stroke: #e2e8f0; stroke-width: 1; }
+    .zero { stroke: #f97316; stroke-width: 2; stroke-dasharray: 6 5; }
+    .tanh { fill: none; stroke: #2563eb; stroke-width: 4; }
+    .relu { fill: none; stroke: #16a34a; stroke-width: 4; }
+    .deriv { fill: none; stroke: #7c3aed; stroke-width: 3.5; }
+    .open { fill: #ffffff; stroke: #7c3aed; stroke-width: 2.5; }
+  </style>
+
+  <text x="380" y="34" text-anchor="middle" font-size="24" font-weight="800">Tanh saturates; ReLU gates by sign</text>
+  <text x="380" y="60" text-anchor="middle" font-size="16" class="muted">Activation values and derivatives use separate y-axes.</text>
+
+  <text x="240" y="88" text-anchor="middle" font-size="19" font-weight="800">tanh(x)</text>
+  <text x="580" y="88" text-anchor="middle" font-size="19" font-weight="800">ReLU(x)</text>
+
+  <!-- tanh activation -->
+  <line class="grid" x1="90" y1="96" x2="390" y2="96"/>
+  <line class="grid" x1="90" y1="186" x2="390" y2="186"/>
+  <line class="grid" x1="90" y1="276" x2="390" y2="276"/>
+  <line class="zero" x1="90" y1="186" x2="390" y2="186"/>
+  <line class="zero" x1="240" y1="96" x2="240" y2="276"/>
+  <line class="axis" x1="90" y1="276" x2="390" y2="276"/>
+  <line class="axis" x1="90" y1="96" x2="90" y2="276"/>
+  <path class="tanh" d="M 90 275.9 C 150 276 190 270 215 230 C 225 214 232 198 240 186 C 248 174 255 158 265 142 C 290 104 330 96 390 96.1"/>
+  <text x="82" y="101" text-anchor="end" class="small muted">1</text>
+  <text x="82" y="190" text-anchor="end" class="small muted">0</text>
+  <text x="82" y="281" text-anchor="end" class="small muted">-1</text>
+  <text x="238" y="256" text-anchor="end" class="small muted">saturates at -1</text>
+  <text x="288" y="122" class="small muted">saturates at 1</text>
+
+  <!-- ReLU activation -->
+  <line class="grid" x1="480" y1="96" x2="680" y2="96"/>
+  <line class="grid" x1="480" y1="186" x2="680" y2="186"/>
+  <line class="grid" x1="480" y1="276" x2="680" y2="276"/>
+  <line class="zero" x1="580" y1="96" x2="580" y2="276"/>
+  <line class="axis" x1="480" y1="276" x2="680" y2="276"/>
+  <line class="axis" x1="480" y1="96" x2="480" y2="276"/>
+  <path class="relu" d="M 480 276 L 580 276 L 680 96"/>
+  <text x="472" y="101" text-anchor="end" class="small muted">4</text>
+  <text x="472" y="281" text-anchor="end" class="small muted">0</text>
+  <text x="500" y="258" class="small muted">zero for x &lt; 0</text>
+  <text x="614" y="150" class="small muted">linear for x &gt; 0</text>
+
+  <!-- tanh derivative -->
+  <text x="240" y="324" text-anchor="middle" font-size="16" font-weight="800">tanh'(x) = 1 - tanh²(x)</text>
+  <line class="grid" x1="90" y1="340" x2="390" y2="340"/>
+  <line class="grid" x1="90" y1="450" x2="390" y2="450"/>
+  <line class="zero" x1="240" y1="340" x2="240" y2="450"/>
+  <line class="axis" x1="90" y1="450" x2="390" y2="450"/>
+  <line class="axis" x1="90" y1="340" x2="90" y2="450"/>
+  <path class="deriv" d="M 90 449.9 C 155 450 190 430 213 388 C 226 364 232 340 240 340 C 248 340 254 364 267 388 C 290 430 325 450 390 449.9"/>
+  <text x="82" y="345" text-anchor="end" class="small muted">1</text>
+  <text x="82" y="455" text-anchor="end" class="small muted">0</text>
+  <text x="254" y="362" class="small muted">largest near x = 0</text>
+
+  <!-- ReLU derivative -->
+  <text x="580" y="324" text-anchor="middle" font-size="16" font-weight="800">ReLU'(x)</text>
+  <line class="grid" x1="480" y1="340" x2="680" y2="340"/>
+  <line class="grid" x1="480" y1="450" x2="680" y2="450"/>
+  <line class="zero" x1="580" y1="340" x2="580" y2="450"/>
+  <line class="axis" x1="480" y1="450" x2="680" y2="450"/>
+  <line class="axis" x1="480" y1="340" x2="480" y2="450"/>
+  <line class="deriv" x1="480" y1="450" x2="574" y2="450"/>
+  <line class="deriv" x1="586" y1="340" x2="680" y2="340"/>
+  <circle class="open" cx="580" cy="450" r="4"/>
+  <circle class="open" cx="580" cy="340" r="4"/>
+  <text x="472" y="345" text-anchor="end" class="small muted">1</text>
+  <text x="472" y="455" text-anchor="end" class="small muted">0</text>
+  <text x="604" y="384" class="small muted">undefined at x = 0</text>
+
+  <text x="240" y="484" text-anchor="middle" class="small muted">pre-activation x</text>
+  <text x="580" y="484" text-anchor="middle" class="small muted">pre-activation x</text>
+</svg>

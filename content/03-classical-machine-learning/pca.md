@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - pca
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:

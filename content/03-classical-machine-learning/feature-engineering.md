@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - feature-engineering
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -24,13 +24,21 @@ last_reviewed: 2026-07-22
 
 Feature engineering changes the representation $x\mapsto\phi(x)$ so a model can express the relevant relationship. It is especially important for [linear models](linear-models.md), where the model may be simple but the features can encode nonlinearities, interactions, lags, bins, or domain aggregates.
 
-## Defining math
+## Why representation matters
+
+A simple model can only use what the representation makes visible. If the target is quadratic in a raw input, a straight-line model fails; adding $x^2$ gives the same estimator the right coordinate system. Common transformations each expose a different kind of structure:
+
+| Transformation        | Example                           | Structure it exposes                        |
+| --------------------- | --------------------------------- | ------------------------------------------- |
+| Polynomial            | $x \to [x, x^2]$                  | curvature                                   |
+| Interaction           | $x_1, x_2 \to x_1 x_2$            | joint effects                               |
+| Binning               | age → age bracket                 | non-monotone effects                        |
+| Lag / rolling         | $x_t \to x_{t-1}$, moving average | temporal structure                          |
+| Target-aware encoding | category → mean of $y$            | high-cardinality categories (leakage-prone) |
+
+## The feature map
 
 A model trained on engineered features predicts $\hat y=f(\phi(x))$, where $\phi$ is a fixed feature map that transforms the raw input $x$ and $f$ is the learned model. Polynomial features, for example, expand a single variable to degree $d$: $\phi(x)=[x,x^2,\dots,x^d]$. Feature maps alter both approximation power and risk. More features can reduce bias, but they increase variance and often require [regularization](regularization.md). Every learned transformation must be fit inside the training split to avoid [data leakage](data-leakage.md).
-
-## Intuition
-
-A simple model can only use what the representation makes visible. If the target is quadratic in a raw input, a straight-line model fails; adding $x^2$ gives the same estimator the right coordinate system.
 
 ## Worked example
 

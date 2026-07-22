@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - clustering
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - dimensionality-reduction.md
   - ../01-mathematical-foundations/graph-laplacian.md
 historical_context: false
-last_reviewed: 2026-07-17
+last_reviewed: 2026-07-22
 ---
 
 # Clustering

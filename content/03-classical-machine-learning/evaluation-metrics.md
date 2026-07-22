@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - evaluation-metrics
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:

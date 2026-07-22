@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - logistic-regression
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:

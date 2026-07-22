@@ -117,6 +117,9 @@
 :root[saved-theme="dark"] .markdown-rendered img[src*="lstm-gru-gating.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="residual-connection-block.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="feed-forward-network-mlp.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="activation-functions-sigmoid.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="activation-functions-tanh-relu.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="activation-functions-gelu-swish.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="transformer-attention-step-by-step.svg"],
 :root[saved-theme="dark"]
   .markdown-rendered
@@ -145,7 +148,8 @@
 :root[saved-theme="dark"] .markdown-rendered img[src*="cv-kfold-splits.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="decision-tree-split.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="random-forest-bootstrap.svg"],
-:root[saved-theme="dark"] .markdown-rendered img[src*="gradient-boosting-stages.svg"] {
+:root[saved-theme="dark"] .markdown-rendered img[src*="gradient-boosting-stages.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="svm-margin-hyperplane.svg"] {
   filter: invert(1) hue-rotate(180deg) saturate(0.95) brightness(1.05);
 }
 

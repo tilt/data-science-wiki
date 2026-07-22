@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - classification
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -25,15 +25,17 @@ last_reviewed: 2026-07-22
 
 Classification predicts a discrete label $y\in\{1,\dots,K\}$. Some classifiers estimate probabilities, as [logistic regression](logistic-regression.md) does; others produce scores or margins, as [support vector machines](support-vector-machines.md) do.
 
-## Defining math
+## From scores to decisions
+
+A classifier's job is to turn a score into an action. A **probabilistic** classifier outputs one probability per class, and the prediction is the class with the highest probability. For a three-class example with $\hat p(x)=(0.1,\,0.6,\,0.3)$ over classes $\{A,B,C\}$, the prediction is $\arg\max = B$.
+
+A **binary** classifier usually exposes a single score $s(x)$ and a threshold $t$: predict positive when $s(x)\ge t$. If $s(x)=0.42$ and $t=0.5$, the prediction is negative because $0.42<0.5$; lowering the threshold to $t=0.4$ flips the same example to positive. The model has not changed — only the decision rule has. That is why the ranking can be good even when the default threshold is wrong, and why high [accuracy](evaluation-metrics.md#classification-metrics) can be worthless when one class dominates. Probability estimates also need [calibration](calibration.md) before they are used as risks or expected costs.
+
+## Scores and thresholds
 
 A probabilistic classifier estimates $\hat p_k(x)=P(Y=k\mid X=x)$ and predicts $\hat y=\arg\max_k\hat p_k(x)$. Binary classifiers often expose a thresholded rule $\hat y(t)=\mathbf 1\{s(x)\ge t\}$, where $s(x)$ is a model score, $t$ a chosen threshold, and the indicator $\mathbf 1\{\cdot\}$ is $1$ when the score clears the threshold. The threshold $t$ is part of the decision system, not the model alone. Changing it moves [precision, recall](evaluation-metrics.md#classification-metrics), false-positive rate, and false-negative rate, so [evaluation metrics](evaluation-metrics.md) and [class imbalance](class-imbalance.md) are central.
 
-## Intuition
-
-Classification turns a continuous score into an action. The model ranking may be good even if the default threshold is wrong, and high [accuracy](evaluation-metrics.md#classification-metrics) can be worthless when one class dominates. Probability estimates also need [calibration](calibration.md) before they are used as risks or expected costs.
-
-## Worked example
+## Baseline versus a real classifier
 
 The example contrasts a majority-class baseline with a logistic classifier, making clear why accuracy alone is a weak classification summary.
 

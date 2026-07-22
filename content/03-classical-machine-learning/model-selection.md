@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - model-selection
 level: foundational
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:

@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - anomaly-detection
 level: foundational
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:
@@ -24,13 +24,20 @@ last_reviewed: 2026-07-22
 
 Anomaly detection ranks or flags observations that look unusual relative to a reference distribution. It is often [unsupervised learning](unsupervised-learning.md), but evaluation usually becomes supervised once analysts label true incidents. Compared with [clustering](clustering.md), the goal is not to assign every point to a group; compared with [class imbalance](class-imbalance.md), the rare class may not be labeled at training time.
 
-## Defining math
+## What counts as an anomaly
+
+An anomaly is not just a rare point. It is rare under the model of normal behavior and relevant to the operational question. A new legitimate customer segment can look anomalous, while a common failure pattern may stop looking unusual after enough incidents accumulate. Methods differ in how they define "unusual":
+
+| Family                  | Idea                                   | Example method                     |
+| ----------------------- | -------------------------------------- | ---------------------------------- |
+| Density                 | flag points in low-probability regions | Gaussian model, kernel density     |
+| Distance / neighborhood | flag points far from their neighbors   | kNN distance, local outlier factor |
+| Isolation               | anomalies are easy to separate off     | Isolation Forest                   |
+| Reconstruction          | flag points the model rebuilds poorly  | PCA or autoencoder error           |
+
+## Scoring and flagging
 
 Many methods learn an anomaly score $s(x)$ where larger (or smaller) means more anomalous, then flag a point when the score crosses a threshold $\tau$: $\hat y=\mathbf 1\{s(x)\ge\tau\}$, the indicator $\mathbf 1\{\cdot\}$ being $1$ when the rule fires. Density methods instead flag points of low estimated density $\hat p(x)$, using $\hat y=\mathbf 1\{\hat p(x)<\tau\}$. Isolation Forest isolates points by random partitioning; anomalies tend to have shorter average path lengths.
-
-## Intuition
-
-An anomaly is not just a rare point. It is rare under the model of normal behavior and relevant to the operational question. A new legitimate customer segment can look anomalous, while a common failure pattern may stop looking unusual after enough incidents accumulate.
 
 ## Worked example
 

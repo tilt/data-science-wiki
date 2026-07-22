@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - data-leakage
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -24,7 +24,19 @@ last_reviewed: 2026-07-22
 
 Data leakage occurs when training or validation uses information that would not be available at prediction time. It is not a minor hygiene issue; it changes the estimand of [supervised learning](supervised-learning.md) and makes [evaluation metrics](evaluation-metrics.md) optimistic.
 
-## Defining math
+## What leakage does
+
+Leakage gives the model an answer key, or a proxy for it. The model may look excellent in [model selection](model-selection.md) while learning a production-impossible shortcut. It usually enters through one of a few recurring channels:
+
+| Leakage source            | Example                                            | Fix                                   |
+| ------------------------- | -------------------------------------------------- | ------------------------------------- |
+| Preprocessing on all data | scaler or PCA fit before the split                 | fit inside the training fold only     |
+| Target encoding           | category replaced by the mean of $y$ over all rows | compute within cross-validation folds |
+| Temporal leakage          | a feature that uses future information             | split in time order                   |
+| Group leakage             | the same user or patient in train and test         | group-aware split                     |
+| Duplicate rows            | near-duplicates spread across the split            | de-duplicate before splitting         |
+
+## The clean versus leaky estimate
 
 The intended validation estimate averages a model's loss over a held-out set:
 
@@ -33,10 +45,6 @@ $$
 $$
 
 where $V$ is the validation set, $|V|$ its size, $L$ the loss, and $\hat f_T$ a model fit only on the training data $T$ by a learning procedure $A$, so $\hat f=A(T)$. Leakage means the fitted pipeline instead depends on validation labels $y_V$ or other future information — $\hat f=A(T,V,y_V)$ — so the model has effectively seen what it is being tested on and the estimate is optimistic.
-
-## Intuition
-
-Leakage gives the model an answer key or a proxy for it. The model may look excellent in [model selection](model-selection.md) while learning a production-impossible shortcut.
 
 ## Worked example
 

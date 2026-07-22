@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - regression
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:

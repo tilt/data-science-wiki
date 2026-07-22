@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - gradient-boosting
 level: intermediate
-status: review
+status: complete
 page_type: algorithm
 aliases: []
 prerequisites:

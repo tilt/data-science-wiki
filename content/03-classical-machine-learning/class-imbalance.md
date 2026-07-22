@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - class-imbalance
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -24,7 +24,18 @@ last_reviewed: 2026-07-22
 
 Class imbalance means the class prior $P(Y=k)$ is highly uneven. The problem is not rarity by itself; it is that default training objectives, thresholds, and [evaluation metrics](evaluation-metrics.md) may optimize the majority class while missing the decision that matters.
 
-## Defining math
+## Why accuracy misleads
+
+Imbalance makes [accuracy](evaluation-metrics.md#classification-metrics) a trap. Suppose $1000$ transactions contain only $10$ fraud cases (the positive class) and $990$ legitimate ones. A model that always predicts "not fraud" produces this confusion matrix:
+
+|                     | actual fraud (10) | actual legit (990) |
+| ------------------- | ----------------- | ------------------ |
+| **predicted fraud** | $TP = 0$          | $FP = 0$           |
+| **predicted legit** | $FN = 10$         | $TN = 990$         |
+
+Its accuracy is $\tfrac{TP+TN}{1000}=\tfrac{0+990}{1000}=0.99$, yet its recall on the class that matters is $\tfrac{TP}{TP+FN}=\tfrac{0}{10}=0$ — it catches no fraud at all. Under imbalance, [classification](classification.md) is really a ranking and decision-cost problem: how many cases can be reviewed, and what does missing a positive cost?
+
+## Metrics under imbalance
 
 Let $\pi=P(Y=1)$ be the prevalence of the positive class. A binary rule thresholds a model score $s(x)$ at a cutoff $t$, predicting positive when $\hat y=\mathbf 1\{s(x)\ge t\}=1$, where the indicator $\mathbf 1\{\cdot\}$ is $1$ when its condition holds. Writing $TP$, $FP$, and $FN$ for the true-positive, false-positive, and false-negative counts, minority-class precision and recall are
 
@@ -42,11 +53,7 @@ where $P_j$ and $R_j$ are [precision and recall](evaluation-metrics.md#classific
 
 Class weighting changes empirical risk to $\min_f\sum_i w_{y_i}L(y_i,f(x_i))$, where $w_k$ is larger for rare or costly classes.
 
-## Intuition
-
-If fraud is 1 percent of transactions, predicting "not fraud" gets 99 percent [accuracy](evaluation-metrics.md#classification-metrics) and zero business value. [Classification](classification.md) under imbalance is a ranking and decision-cost problem: how many cases can be reviewed, and what is the cost of missing a positive?
-
-## Worked example
+## Comparing plain and weighted models
 
 The snippet compares the same imbalanced dataset with and without class weighting. The point is not that weighting is always better; it is that it changes the precision-recall tradeoff.
 
@@ -79,7 +86,7 @@ The balanced model catches more minority examples but creates many more false po
 
 ## Caveats
 
-Resampling before splitting leaks duplicates or synthetic information across folds. PR-AUC is usually more informative than [ROC-AUC](evaluation-metrics.md#probability-and-ranking-metrics) under extreme rarity, but it still does not choose an operating threshold. Reweighting can hurt [calibration](calibration.md), so check probability reliability separately.
+Resampling before splitting leaks duplicates or synthetic information across folds. PR-AUC is usually more informative than [ROC-AUC](evaluation-metrics.md#probability-and-ranking-metrics) under extreme rarity, but it still does not choose an [operating threshold](evaluation-metrics.md#intuition). Reweighting can hurt [calibration](calibration.md), so check probability reliability separately.
 
 ## References
 

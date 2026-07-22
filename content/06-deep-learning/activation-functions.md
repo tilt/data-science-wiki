@@ -22,7 +22,7 @@ related:
   - backpropagation.md
   - normalization.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Activation Functions
@@ -41,6 +41,8 @@ $$
 
 The scalar $x$ is one pre-activation value from an affine layer. Sigmoid maps it to $(0,1)$, tanh maps it to $(-1,1)$, and ReLU keeps positive values while zeroing negative values.
 
+![The sigmoid activation maps any real pre-activation to a value between zero and one, with saturation in both tails.](../assets/diagrams/activation-functions-sigmoid.svg)
+
 Their derivatives show the training behavior:
 
 $$
@@ -50,6 +52,8 @@ $$
 $$
 
 Sigmoid and tanh saturate for large magnitudes; ReLU keeps a unit derivative on the positive side but can produce dead units on the negative side.
+
+![Tanh and ReLU activation values and derivatives use separate panels so saturation and gradient flow can be compared without mixing scales.](../assets/diagrams/activation-functions-tanh-relu.svg)
 
 ## GELU and SwiGLU
 
@@ -72,6 +76,8 @@ $$
 $$
 
 Here $x$ is an input vector, $W_a,b_a$ are the value-projection parameters, $W_g,b_g$ are the gate-projection parameters, $\sigma$ is the sigmoid function, and $\odot$ means elementwise multiplication. The gate can amplify, dampen, or suppress each hidden feature before the next linear projection.
+
+![GELU and Swish are smooth alternatives to the hard ReLU cutoff; SwiGLU uses Swish as its scalar gate inside a vector-valued feed-forward layer.](../assets/diagrams/activation-functions-gelu-swish.svg)
 
 In a [transformer](transformers.md), GELU or SwiGLU usually appears inside the position-wise [MLP](multilayer-perceptrons.md). Attention mixes information between token positions; the activation inside the MLP shapes nonlinear feature interactions within each token vector.
 

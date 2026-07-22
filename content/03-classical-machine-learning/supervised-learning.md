@@ -6,7 +6,7 @@ area: classical-machine-learning
 topics:
   - supervised-learning
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,26 @@ related:
   - model-selection.md
   - data-leakage.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Supervised Learning
 
 Supervised learning estimates a function $f: \mathcal X \to \mathcal Y$ from labeled examples $(x_i, y_i)$. The target may be continuous, as in [regression](regression.md), or discrete, as in [classification](classification.md); the shared contract is that future examples are judged against labels drawn from the same deployment problem.
 
-## Objective
+## What a supervised model learns
+
+A supervised model is not learning labels in the abstract. It is learning a reusable rule that maps information available at prediction time to a decision-relevant output. The strongest mental check is temporal: would every feature in $x$ be known before $y$ happens? If not, [data leakage](data-leakage.md) can make empirical risk look low while deployment risk is high.
+
+The choice of **loss** decides what the model estimates:
+
+| Loss $L$      | What it estimates                         | Used by                                               |
+| ------------- | ----------------------------------------- | ----------------------------------------------------- |
+| squared error | the conditional mean $\mathbb E[Y\mid X]$ | [regression](regression.md)                           |
+| cross-entropy | the conditional probability $P(Y\mid X)$  | [logistic regression](logistic-regression.md)         |
+| hinge         | a maximum-margin boundary                 | [support vector machines](support-vector-machines.md) |
+
+## The learning objective
 
 The statistical target is usually the risk
 
@@ -32,17 +44,13 @@ $$
 R(f) = \mathbb E[L(Y, f(X))],
 $$
 
-where $L$ is a task loss. Because the joint distribution of $(X,Y)$ is unknown, training minimizes empirical risk, often with a complexity penalty:
+where $L$ is the task loss and the expectation is over the true distribution of $(X,Y)$. Because that distribution is unknown, training minimizes empirical risk on the sample, often with a complexity penalty $\Omega$:
 
 $$
-\hat f = \arg\min_{f \in \mathcal F}\frac{1}{n}\sum_{i=1}^n L(y_i, f(x_i)) + \lambda \Omega(f).
+\hat f = \arg\min_{f \in \mathcal F}\frac{1}{n}\sum_{i=1}^n L(y_i, f(x_i)) + \lambda \Omega(f),
 $$
 
-The loss chooses what errors mean. Squared error gives conditional-mean estimates for [regression](regression.md); cross-entropy gives conditional-probability estimates for [logistic regression](logistic-regression.md); hinge loss gives a margin classifier for [support vector machines](support-vector-machines.md). The validation split belongs to the objective in practice because [model selection](model-selection.md) chooses $\mathcal F$, $\lambda$, preprocessing, and thresholds.
-
-## Intuition
-
-A supervised model is not learning labels in the abstract. It is learning a reusable rule that maps information available at prediction time to a decision-relevant output. The strongest mental check is temporal: would every feature in $x$ be known before $y$ happens? If not, [data leakage](data-leakage.md) can make empirical risk look low while deployment risk is high.
+where $\mathcal F$ is the model class searched, $\lambda\ge 0$ the penalty strength, and $n$ the number of training examples. The validation split belongs to the objective in practice because [model selection](model-selection.md) chooses $\mathcal F$, $\lambda$, preprocessing, and thresholds.
 
 ## Worked example
 
