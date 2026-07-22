@@ -17,7 +17,7 @@ related:
   - evaluation-metrics.md
   - supervised-learning.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Data Leakage
@@ -26,7 +26,13 @@ Data leakage occurs when training or validation uses information that would not 
 
 ## Defining math
 
-The intended validation estimate is $\hat R_{val}=|V|^{-1}\sum_{i\in V}L(y_i,\hat f_T(x_i))$, where $\hat f_T$ is fit only on training data $T$. Leakage means the fitted pipeline depends on validation labels or future information: $\hat f=A(T,V,y_V)$ instead of $\hat f=A(T)$.
+The intended validation estimate averages a model's loss over a held-out set:
+
+$$
+\hat R_{val}=\frac{1}{|V|}\sum_{i\in V}L\big(y_i,\hat f_T(x_i)\big),
+$$
+
+where $V$ is the validation set, $|V|$ its size, $L$ the loss, and $\hat f_T$ a model fit only on the training data $T$ by a learning procedure $A$, so $\hat f=A(T)$. Leakage means the fitted pipeline instead depends on validation labels $y_V$ or other future information — $\hat f=A(T,V,y_V)$ — so the model has effectively seen what it is being tested on and the estimate is optimistic.
 
 ## Intuition
 

@@ -17,7 +17,7 @@ related:
   - calibration.md
   - logistic-regression.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Class Imbalance
@@ -26,25 +26,25 @@ Class imbalance means the class prior $P(Y=k)$ is highly uneven. The problem is 
 
 ## Defining math
 
-For binary prevalence $\pi=P(Y=1)$, thresholding predicts $\hat y=\mathbf 1\{s(x)\ge t\}$. Minority-class precision and recall are
+Let $\pi=P(Y=1)$ be the prevalence of the positive class. A binary rule thresholds a model score $s(x)$ at a cutoff $t$, predicting positive when $\hat y=\mathbf 1\{s(x)\ge t\}=1$, where the indicator $\mathbf 1\{\cdot\}$ is $1$ when its condition holds. Writing $TP$, $FP$, and $FN$ for the true-positive, false-positive, and false-negative counts, minority-class precision and recall are
 
 $$
 precision=\frac{TP}{TP+FP}, \qquad recall=\frac{TP}{TP+FN}.
 $$
 
-Balanced accuracy averages recall across classes; in binary classification it is $(TPR+TNR)/2$, where $TPR$ is sensitivity and $TNR$ is specificity. PR-AUC summarizes the precision-recall curve for the rare positive class and is often computed through average precision,
+Balanced accuracy averages [recall](evaluation-metrics.md#classification-metrics) across classes; in binary classification it is $(TPR+TNR)/2$, where $TPR$ is sensitivity and $TNR$ is specificity. PR-AUC summarizes the precision-recall curve for the rare positive class and is often computed through average precision,
 
 $$
 \operatorname{AP}=\sum_j (R_j-R_{j-1})P_j,
 $$
 
-where $P_j$ and $R_j$ are precision and recall after the $j$th ranked prediction. It is often more diagnostic than ROC-AUC when the negative class dominates.
+where $P_j$ and $R_j$ are [precision and recall](evaluation-metrics.md#classification-metrics) after the $j$th ranked prediction. It is often more diagnostic than [ROC-AUC](evaluation-metrics.md#probability-and-ranking-metrics) when the negative class dominates.
 
 Class weighting changes empirical risk to $\min_f\sum_i w_{y_i}L(y_i,f(x_i))$, where $w_k$ is larger for rare or costly classes.
 
 ## Intuition
 
-If fraud is 1 percent of transactions, predicting "not fraud" gets 99 percent accuracy and zero business value. [Classification](classification.md) under imbalance is a ranking and decision-cost problem: how many cases can be reviewed, and what is the cost of missing a positive?
+If fraud is 1 percent of transactions, predicting "not fraud" gets 99 percent [accuracy](evaluation-metrics.md#classification-metrics) and zero business value. [Classification](classification.md) under imbalance is a ranking and decision-cost problem: how many cases can be reviewed, and what is the cost of missing a positive?
 
 ## Worked example
 
@@ -79,7 +79,7 @@ The balanced model catches more minority examples but creates many more false po
 
 ## Caveats
 
-Resampling before splitting leaks duplicates or synthetic information across folds. PR-AUC is usually more informative than ROC-AUC under extreme rarity, but it still does not choose an operating threshold. Reweighting can hurt [calibration](calibration.md), so check probability reliability separately.
+Resampling before splitting leaks duplicates or synthetic information across folds. PR-AUC is usually more informative than [ROC-AUC](evaluation-metrics.md#probability-and-ranking-metrics) under extreme rarity, but it still does not choose an operating threshold. Reweighting can hurt [calibration](calibration.md), so check probability reliability separately.
 
 ## References
 

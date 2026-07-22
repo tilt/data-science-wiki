@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1020" height="430" viewBox="0 0 1020 430" role="img" aria-labelledby="title desc">
+  <title id="title">Decision tree split into threshold rules</title>
+  <desc id="desc">A root node splits on x2 at threshold t. The left branch predicts positive; the right branch tests x1 at threshold s and then predicts negative or positive.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: #4b5563; }
+    .node { fill: #eff6ff; stroke: #2563eb; stroke-width: 2.5; }
+    .leaf-pos { fill: #dcfce7; stroke: #16a34a; stroke-width: 2.5; }
+    .leaf-neg { fill: #fee2e2; stroke: #dc2626; stroke-width: 2.5; }
+    .chip { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.8; }
+    .link { fill: none; stroke: #64748b; stroke-width: 2.5; marker-end: url(#arrow); }
+    .small { font-size: 16px; }
+  </style>
+
+  <text x="510" y="38" text-anchor="middle" font-size="28" font-weight="800">A tree routes examples by threshold tests</text>
+  <text x="510" y="68" text-anchor="middle" font-size="17" class="muted">Each branch is an if-then condition; each leaf stores the prediction reached by that path.</text>
+
+  <rect x="350" y="108" width="220" height="78" rx="12" class="node"/>
+  <text x="460" y="138" text-anchor="middle" font-size="20" font-weight="800">split node</text>
+  <text x="460" y="164" text-anchor="middle" font-size="18">test x2 at t</text>
+
+  <rect x="104" y="296" width="226" height="78" rx="12" class="leaf-pos"/>
+  <text x="217" y="327" text-anchor="middle" font-size="20" font-weight="800">leaf</text>
+  <text x="217" y="353" text-anchor="middle" font-size="18">predict positive</text>
+
+  <rect x="350" y="296" width="220" height="78" rx="12" class="node"/>
+  <text x="460" y="327" text-anchor="middle" font-size="20" font-weight="800">split node</text>
+  <text x="460" y="353" text-anchor="middle" font-size="18">test x1 at s</text>
+
+  <rect x="760" y="248" width="226" height="78" rx="12" class="leaf-neg"/>
+  <text x="873" y="279" text-anchor="middle" font-size="20" font-weight="800">leaf</text>
+  <text x="873" y="305" text-anchor="middle" font-size="18">predict negative</text>
+
+  <rect x="760" y="342" width="226" height="62" rx="12" class="leaf-pos"/>
+  <text x="873" y="381" text-anchor="middle" font-size="18" font-weight="800">predict positive</text>
+
+  <path d="M 405 186 C 348 230 289 250 229 292" class="link"/>
+  <path d="M 460 186 L 460 292" class="link"/>
+  <path d="M 570 323 C 630 304 692 292 756 292" class="link"/>
+  <path d="M 570 348 C 632 362 694 371 756 371" class="link"/>
+
+  <rect x="236" y="188" width="116" height="34" rx="8" class="chip"/>
+  <text x="294" y="211" text-anchor="middle" class="small" font-weight="700">x2 &lt;= t</text>
+  <rect x="484" y="220" width="106" height="34" rx="8" class="chip"/>
+  <text x="537" y="243" text-anchor="middle" class="small" font-weight="700">x2 > t</text>
+  <rect x="616" y="232" width="106" height="34" rx="8" class="chip"/>
+  <text x="669" y="255" text-anchor="middle" class="small" font-weight="700">x1 &lt;= s</text>
+  <rect x="622" y="390" width="96" height="34" rx="8" class="chip"/>
+  <text x="670" y="413" text-anchor="middle" class="small" font-weight="700">x1 > s</text>
+</svg>

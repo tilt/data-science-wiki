@@ -18,7 +18,7 @@ related:
   - model-selection.md
   - gradient-boosting.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Regularization
@@ -27,13 +27,13 @@ Regularization changes the training problem so a model must buy fit with complex
 
 ## Defining math
 
-A regularized estimator solves
+A regularized estimator adds a complexity penalty to the average training loss:
 
 $$
-\hat\theta = \arg\min_\theta \frac{1}{n}\sum_{i=1}^n L(y_i, f_\theta(x_i)) + \lambda\Omega(\theta).
+\hat\theta = \arg\min_\theta \frac{1}{n}\sum_{i=1}^n L(y_i, f_\theta(x_i)) + \lambda\Omega(\theta),
 $$
 
-Ridge uses $\Omega(\beta)=\lVert\beta\rVert_2^2$ and the linear estimator $\hat\beta_{ridge}=(X^\top X+\lambda I)^{-1}X^\top y$. The lasso uses $\Omega(\beta)=\lVert\beta\rVert_1=\sum_j |\beta_j|$, which can set coefficients exactly to zero. For [logistic regression](logistic-regression.md), the same penalties apply to cross-entropy rather than squared error.
+where $\theta$ are the model parameters, $f_\theta$ is the model, $L$ is the per-example loss over the $n$ training examples, $\Omega(\theta)$ measures model complexity, and $\lambda\ge 0$ is the penalty strength that trades fit against simplicity. Ridge uses the squared $\ell_2$ norm $\Omega(\beta)=\lVert\beta\rVert_2^2$, giving the closed-form linear estimator $\hat\beta_{ridge}=(X^\top X+\lambda I)^{-1}X^\top y$ (with $I$ the identity matrix). The lasso uses the $\ell_1$ norm $\Omega(\beta)=\lVert\beta\rVert_1=\sum_j |\beta_j|$, which can set coefficients exactly to zero. For [logistic regression](logistic-regression.md), the same penalties apply to cross-entropy rather than squared error.
 
 ## Intuition
 
@@ -41,7 +41,24 @@ Regularization encodes skepticism. A large coefficient, deep tree, or late boost
 
 ## Worked example
 
-This snippet compares linear regression, Ridge, and Lasso on the same regression split, reporting RMSE and how many coefficients remain nonzero.
+Regularization shrinks coefficients toward zero, and in the one-feature case ridge does so with an exact closed form. With $X^\top X = 10$ and $X^\top y = 20$, ordinary least squares gives $\hat\beta = 20/10 = 2$. Ridge divides by $X^\top X + \lambda$ instead:
+
+$$
+\hat\beta_{\text{ridge}} = \frac{X^\top y}{X^\top X + \lambda}
+= \frac{20}{10+\lambda}
+\;\Rightarrow\;
+\lambda=10 \to 1.0, \qquad \lambda=40 \to 0.4.
+$$
+
+Larger $\lambda$ shrinks the coefficient smoothly toward zero but never exactly to zero. The lasso's $\ell_1$ penalty behaves differently because its constraint region is a diamond whose corners lie on the axes: the lowest loss contour often first touches at a corner, setting a coefficient exactly to zero. Ridge's circular region has no corners, so it shrinks without eliminating:
+
+![Ridge's circular constraint yields a solution with both coefficients nonzero; the lasso's diamond touches at a corner, setting one coefficient to zero.](../assets/diagrams/regularization-l1-l2-geometry.svg)
+
+That geometric difference is why the lasso doubles as feature selection while ridge only stabilizes.
+
+## Comparing ridge and lasso
+
+On real data the difference shows up as a coefficient count: the lasso zeroes some out, ridge keeps them all, and which wins on held-out error depends on the problem.
 
 ```python
 from sklearn.datasets import make_regression
@@ -68,7 +85,7 @@ Ridge rmse 24.07 nonzero 8
 Lasso rmse 23.33 nonzero 7
 ```
 
-The lasso removes one coefficient and slightly improves this held-out RMSE. That does not prove lasso is universally better; it shows how a sparsity penalty can trade a little fit flexibility for stability.
+The lasso removes one coefficient and slightly improves this held-out [RMSE](evaluation-metrics.md#regression-metrics). That does not prove lasso is universally better; it shows how a sparsity penalty can trade a little fit flexibility for stability.
 
 ## Caveats
 

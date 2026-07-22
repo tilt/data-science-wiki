@@ -17,7 +17,7 @@ related:
   - dimensionality-reduction.md
   - anomaly-detection.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Unsupervised Learning
@@ -26,14 +26,21 @@ Unsupervised learning fits structure from $X$ without observed target labels. Th
 
 ## Defining math
 
-Many unsupervised methods optimize a reconstruction, partition, or likelihood objective. [Clustering](clustering.md) with k-means solves $\min_{C_1,
-\dots,C_K}\sum_k\sum_{x_i\in C_k}\lVert x_i-\mu_k\rVert_2^2$. [PCA](pca.md) solves $\max_{W^\top W=I}\operatorname{tr}(W^\top X^\top XW)$. Anomaly methods learn a score $s(x)$ and flag points crossing a threshold.
-
-When reference labels are available after clustering, adjusted Rand index compares pair assignments while correcting for chance:
+Many unsupervised methods optimize a reconstruction, partition, or likelihood objective. [Clustering](clustering.md) with k-means partitions the points into clusters $C_1,\dots,C_K$ to minimize the within-cluster squared distance,
 
 $$
-\operatorname{ARI}=\frac{RI-\mathbb E[RI]}{\max(RI)-\mathbb E[RI]}.
+\min_{C_1,\dots,C_K}\sum_k\sum_{x_i\in C_k}\lVert x_i-\mu_k\rVert_2^2,
 $$
+
+where $x_i$ is a data point and $\mu_k$ is the centroid (mean) of the points assigned to cluster $C_k$. [PCA](pca.md) solves $\max_{W^\top W=I}\operatorname{tr}(W^\top X^\top XW)$ for an orthonormal projection $W$, and anomaly methods learn a score $s(x)$ and flag points whose score crosses a threshold.
+
+When reference labels are available after clustering, the adjusted Rand index compares how pairs of points are grouped while correcting for chance:
+
+$$
+\operatorname{ARI}=\frac{RI-\mathbb E[RI]}{\max(RI)-\mathbb E[RI]},
+$$
+
+where $RI$ is the Rand index — the fraction of point pairs that are either together in both the clustering and the reference, or apart in both — and $\mathbb E[RI]$ is its expected value under random labeling.
 
 It is an external validation score, not an unsupervised objective.
 

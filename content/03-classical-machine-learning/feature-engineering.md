@@ -17,7 +17,7 @@ related:
   - regularization.md
   - model-selection.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Feature Engineering
@@ -26,7 +26,7 @@ Feature engineering changes the representation $x\mapsto\phi(x)$ so a model can 
 
 ## Defining math
 
-A model trained on engineered features predicts $\hat y=f(\phi(x))$. Polynomial features, for example, map one variable to $\phi(x)=[x,x^2,\dots,x^d]$. Feature maps alter both approximation power and risk. More features can reduce bias, but they increase variance and often require [regularization](regularization.md). Every learned transformation must be fit inside the training split to avoid [data leakage](data-leakage.md).
+A model trained on engineered features predicts $\hat y=f(\phi(x))$, where $\phi$ is a fixed feature map that transforms the raw input $x$ and $f$ is the learned model. Polynomial features, for example, expand a single variable to degree $d$: $\phi(x)=[x,x^2,\dots,x^d]$. Feature maps alter both approximation power and risk. More features can reduce bias, but they increase variance and often require [regularization](regularization.md). Every learned transformation must be fit inside the training split to avoid [data leakage](data-leakage.md).
 
 ## Intuition
 

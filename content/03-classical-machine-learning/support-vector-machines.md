@@ -17,7 +17,7 @@ related:
   - classification.md
   - linear-models.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Support Vector Machines
@@ -26,13 +26,21 @@ Support vector machines learn a decision boundary with a large margin. Unlike [l
 
 ## Defining math
 
-For labels $y_i\in\{-1,1\}$ and score $f(x)=w^\top x+b$, the soft-margin primal objective is
+Each example has a label $y_i\in\{-1,1\}$, and the model scores an input with $f(x)=w^\top x+b$, where $w$ is the weight vector whose direction is perpendicular to the decision boundary and $b$ is the bias (offset) term. The soft-margin primal objective is
 
 $$
 \min_{w,b,\xi}\frac{1}{2}\lVert w\rVert_2^2 + C\sum_i \xi_i
+\qquad\text{subject to}\qquad
+y_i(w^\top x_i+b)\ge 1-\xi_i,\;\; \xi_i\ge0.
 $$
 
-subject to $y_i(w^\top x_i+b)\ge 1-\xi_i$ and $\xi_i\ge0$. Equivalently, minimize $\frac12\lVert w\rVert_2^2+C\sum_i\max(0,1-y_if(x_i))$. $C$ is inverse [regularization](regularization.md): large $C$ penalizes violations strongly.
+Here $\lVert w\rVert_2^2$ is small when the margin is wide (the margin width is $2/\lVert w\rVert_2$), each slack variable $\xi_i\ge 0$ measures how far example $i$ falls inside or past the margin, and $C>0$ sets how heavily those violations are penalized. Substituting the constraint gives the equivalent unconstrained form with the hinge loss $\max(0,1-y_i f(x_i))$:
+
+$$
+\min_{w,b}\;\frac12\lVert w\rVert_2^2+C\sum_i\max\!\big(0,\,1-y_i f(x_i)\big).
+$$
+
+So $C$ acts as inverse [regularization](regularization.md): a large $C$ punishes margin violations strongly (low bias, high variance), while a small $C$ favors a wider, simpler margin.
 
 ## Intuition
 

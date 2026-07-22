@@ -18,7 +18,7 @@ related:
   - class-imbalance.md
   - calibration.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Classification
@@ -27,11 +27,11 @@ Classification predicts a discrete label $y\in\{1,\dots,K\}$. Some classifiers e
 
 ## Defining math
 
-A probabilistic classifier estimates $\hat p_k(x)=P(Y=k\mid X=x)$ and predicts $\hat y=\arg\max_k\hat p_k(x)$. Binary classifiers often expose $\hat y(t)=\mathbf 1\{s(x)\ge t\}$. The threshold $t$ is part of the decision system, not the model alone. Changing it moves precision, recall, false-positive rate, and false-negative rate, so [evaluation metrics](evaluation-metrics.md) and [class imbalance](class-imbalance.md) are central.
+A probabilistic classifier estimates $\hat p_k(x)=P(Y=k\mid X=x)$ and predicts $\hat y=\arg\max_k\hat p_k(x)$. Binary classifiers often expose a thresholded rule $\hat y(t)=\mathbf 1\{s(x)\ge t\}$, where $s(x)$ is a model score, $t$ a chosen threshold, and the indicator $\mathbf 1\{\cdot\}$ is $1$ when the score clears the threshold. The threshold $t$ is part of the decision system, not the model alone. Changing it moves [precision, recall](evaluation-metrics.md#classification-metrics), false-positive rate, and false-negative rate, so [evaluation metrics](evaluation-metrics.md) and [class imbalance](class-imbalance.md) are central.
 
 ## Intuition
 
-Classification turns a continuous score into an action. The model ranking may be good even if the default threshold is wrong, and high accuracy can be worthless when one class dominates. Probability estimates also need [calibration](calibration.md) before they are used as risks or expected costs.
+Classification turns a continuous score into an action. The model ranking may be good even if the default threshold is wrong, and high [accuracy](evaluation-metrics.md#classification-metrics) can be worthless when one class dominates. Probability estimates also need [calibration](calibration.md) before they are used as risks or expected costs.
 
 ## Worked example
 
@@ -66,7 +66,7 @@ The dummy classifier looks decent by accuracy because the majority class is comm
 
 ## Caveats
 
-Do not report only accuracy when class priors are skewed or costs are asymmetric. Multiclass labels may have hierarchy or ordinal structure that ordinary argmax ignores. Train-test splits must preserve deployment boundaries; otherwise [data leakage](data-leakage.md) can inflate every metric.
+Do not report only [accuracy](evaluation-metrics.md#classification-metrics) when class priors are skewed or costs are asymmetric. Multiclass labels may have hierarchy or ordinal structure that ordinary argmax ignores. Train-test splits must preserve deployment boundaries; otherwise [data leakage](data-leakage.md) can inflate every metric.
 
 ## References
 

@@ -60,11 +60,12 @@ flowchart TD
 \`\`\`mermaid
 flowchart LR
   Goal[User goal] --> Builder[Policy and context builder]
-  Builder --> Decision[Model decision]
-  Decision --> Validator[Validator]
-  Validator --> Runtime[Tool or runtime]
-  Runtime --> Log[Observation log]
-  Log --> Decision
+  Builder -->|bootstrap sample| Sample[Bootstrap sample]
+  Sample -->|feature subset per split| Decision[Model decision]
+  Decision -->|validation route| Validator[Validator]
+  Validator -->|runtime call| Runtime[Tool or runtime]
+  Runtime -->|observation log| Log[Observation log]
+  Log -->|retry decision| Decision
 \`\`\`
 `,
     "utf8",
@@ -142,6 +143,7 @@ async function checkBrowser(name, browserType, url) {
 
       const violations = []
       const centerViolations = []
+      const edgeLabelViolations = []
       for (const [svgIndex, svg] of svgs.entries()) {
         for (const [nodeIndex, node] of [...svg.querySelectorAll("g.node")].entries()) {
           const shape = shapeForNode(node)
@@ -190,6 +192,47 @@ async function checkBrowser(name, browserType, url) {
             })
           }
         }
+
+        for (const [labelIndex, label] of [
+          ...svg.querySelectorAll("g.edgeLabel, g.edgeLabels"),
+        ].entries()) {
+          const background = label.querySelector(
+            "rect, .background, .label-container, .labelBkg",
+          )
+          const textBox = unionRect([...label.querySelectorAll("text")])
+          if (!background || !textBox || !textBox.width || !textBox.height) continue
+
+          const backgroundBox = background.getBoundingClientRect()
+          if (!backgroundBox.width || !backgroundBox.height) continue
+
+          const minXPad = 4
+          const minYPad = 2
+          if (
+            backgroundBox.left > textBox.left - minXPad ||
+            backgroundBox.right < textBox.right + minXPad ||
+            backgroundBox.top > textBox.top - minYPad ||
+            backgroundBox.bottom < textBox.bottom + minYPad
+          ) {
+            edgeLabelViolations.push({
+              svgIndex,
+              labelIndex,
+              background: {
+                width: backgroundBox.width,
+                height: backgroundBox.height,
+              },
+              text: {
+                width: textBox.right - textBox.left,
+                height: textBox.bottom - textBox.top,
+              },
+              padding: {
+                left: textBox.left - backgroundBox.left,
+                right: backgroundBox.right - textBox.right,
+                top: textBox.top - backgroundBox.top,
+                bottom: backgroundBox.bottom - textBox.bottom,
+              },
+            })
+          }
+        }
       }
 
       return {
@@ -202,6 +245,7 @@ async function checkBrowser(name, browserType, url) {
           .filter(Boolean),
         violations,
         centerViolations,
+        edgeLabelViolations,
       }
     })
 
@@ -228,6 +272,11 @@ async function checkBrowser(name, browserType, url) {
     if (result.centerViolations.length > 0) {
       throw new Error(
         `${name}: Mermaid label centering risk: ${JSON.stringify(result.centerViolations)}`,
+      )
+    }
+    if (result.edgeLabelViolations.length > 0) {
+      throw new Error(
+        `${name}: Mermaid edge label padding risk: ${JSON.stringify(result.edgeLabelViolations)}`,
       )
     }
 

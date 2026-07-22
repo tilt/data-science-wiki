@@ -20,7 +20,7 @@ related:
   - ../01-mathematical-foundations/eigenvalues-and-eigenvectors.md
   - ../01-mathematical-foundations/low-rank-approximation.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # PCA
@@ -29,25 +29,25 @@ Principal component analysis finds orthogonal directions of maximum variance in 
 
 ## Defining math
 
-Let $X_c$ be centered. The first component solves
+Let $X_c$ be the centered data matrix ($n$ samples, each feature mean-subtracted). The first principal direction $w_1$ is the unit vector along which the data varies most:
 
 $$
 w_1=\arg\max_{\lVert w\rVert_2=1} w^\top X_c^\top X_cw.
 $$
 
-Subsequent components solve the same problem subject to orthogonality. Equivalently, PCA uses the eigendecomposition
+Later components solve the same problem subject to being orthogonal to the earlier ones. Equivalently, PCA diagonalizes the covariance through the eigendecomposition
 
 $$
-\frac{1}{n-1}X_c^\top X_c=V\Lambda V^\top
+\frac{1}{n-1}X_c^\top X_c=V\Lambda V^\top,
 $$
 
-or the [SVD](../01-mathematical-foundations/singular-value-decomposition.md)
+where the columns of $V$ are the eigenvectors (the principal axes) and $\Lambda=\operatorname{diag}(\lambda_1,\dots,\lambda_p)$ holds the eigenvalues, each $\lambda_j$ being the variance along axis $j$. The same axes come from the [SVD](../01-mathematical-foundations/singular-value-decomposition.md)
 
 $$
-X_c=U\Sigma V^\top.
+X_c=U\Sigma V^\top,
 $$
 
-The principal axes are the columns of $V$, scores are $Z=X_cV_d$, and explained variance ratios are
+whose singular values $\sigma_j$ (the diagonal of $\Sigma$) satisfy $\lambda_j=\sigma_j^2/(n-1)$, with $U$ holding the left singular vectors. Projecting onto the first $d$ axes $V_d$ gives the scores $Z=X_cV_d$, and the fraction of total variance captured by component $j$ is
 
 $$
 \frac{\lambda_j}{\sum_k\lambda_k}

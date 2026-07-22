@@ -17,7 +17,7 @@ related:
   - evaluation-metrics.md
   - data-leakage.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Model Selection
@@ -26,13 +26,13 @@ Model selection chooses the model class, preprocessing, hyperparameters, and som
 
 ## Defining math
 
-Given candidate configurations $\lambda\in\Lambda$, validation selects $\hat\lambda=\arg\min_{\lambda\in\Lambda}\hat R_{val}(\hat f_\lambda)$. K-fold cross-validation estimates risk by
+Let $\lambda$ index a candidate configuration — a choice of model, preprocessing, and hyperparameters — drawn from a search space $\Lambda$, and let $\hat f_\lambda$ be the model fit with that configuration. Validation picks the configuration with the lowest validation risk $\hat R_{val}$, that is $\hat\lambda=\arg\min_{\lambda\in\Lambda}\hat R_{val}(\hat f_\lambda)$. K-fold cross-validation estimates that risk by splitting the data into $K$ folds and averaging the loss on each held-out fold:
 
 $$
-CV(\lambda)=\frac{1}{K}\sum_{k=1}^K \frac{1}{|V_k|}\sum_{i\in V_k} L(y_i, \hat f_{\lambda}^{(-k)}(x_i)).
+CV(\lambda)=\frac{1}{K}\sum_{k=1}^K \frac{1}{|V_k|}\sum_{i\in V_k} L(y_i, \hat f_{\lambda}^{(-k)}(x_i)),
 $$
 
-The final test set estimates performance after selection. It must not influence candidate generation, preprocessing, or threshold decisions, or [data leakage](data-leakage.md) has occurred.
+where $V_k$ is the $k$-th validation fold, $|V_k|$ its size, $\hat f_\lambda^{(-k)}$ is the model trained on all folds except $k$, and $L$ is the loss. The final test set estimates performance after selection. It must not influence candidate generation, preprocessing, or threshold decisions, or [data leakage](data-leakage.md) has occurred.
 
 ## Intuition
 
@@ -40,7 +40,21 @@ Training loss asks "can this model fit the sample?" Validation asks "which model
 
 ## Worked example
 
-This snippet performs grid search over logistic-regression regularization strengths and reports the selected $C$, cross-validated AUC, and candidate scores.
+Cross-validation turns a single train/validation split into $K$ of them, so every example is used for validation exactly once. Suppose 5-fold validation of one configuration yields per-fold errors $[12, 9, 11, 10, 13]$. The cross-validation estimate is their mean:
+
+$$
+CV = \frac{12+9+11+10+13}{5} = \frac{55}{5} = 11.
+$$
+
+Rotating the validation block across folds makes this estimate far less dependent on one lucky or unlucky split than a single hold-out would be:
+
+![Five-fold cross-validation rotates the validation block through each fold and averages the five scores.](../assets/diagrams/cv-kfold-splits.svg)
+
+The winning configuration is the one with the best averaged score — but the spread across folds matters too, because a small gap between candidates can be noise rather than signal.
+
+## Grid search in practice
+
+A grid search runs this averaging for every candidate and keeps the best. The margins between candidates are often small, which is exactly the caution the fold spread implies.
 
 ```python
 from sklearn.datasets import make_classification
@@ -67,7 +81,7 @@ best_cv_auc 0.771
 mean_scores [0.755 0.77  0.77  0.771]
 ```
 
-The best regularization setting is only slightly ahead. That small margin should be treated as uncertain unless repeated validation or domain cost supports the choice.
+The best setting scores 0.771 against 0.770 for two rivals — a margin far smaller than typical fold-to-fold spread, so it should be treated as uncertain unless repeated validation or domain cost supports the choice.
 
 ## Caveats
 

@@ -17,7 +17,7 @@ related:
   - class-imbalance.md
   - classification.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Calibration
@@ -26,7 +26,13 @@ Calibration asks whether predicted probabilities mean what they say. Among examp
 
 ## Defining math
 
-Perfect binary calibration means $P(Y=1\mid \hat p(X)=p)=p$. The Brier score is $BS=n^{-1}\sum_i(\hat p_i-y_i)^2$, and log loss is
+Perfect binary calibration means that among all cases assigned probability $p$, a fraction $p$ really are positive: $P(Y=1\mid \hat p(X)=p)=p$. Two scores measure how far predictions fall from this ideal, using the predicted positive-class probability $\hat p_i$, the label $y_i\in\{0,1\}$, and the number of examples $n$. The Brier score is the mean squared probability error,
+
+$$
+BS=\frac{1}{n}\sum_i(\hat p_i-y_i)^2,
+$$
+
+and log loss penalizes confident mistakes more sharply,
 
 $$
 -\frac{1}{n}\sum_i \left[y_i\log \hat p_i+(1-y_i)\log(1-\hat p_i)\right].

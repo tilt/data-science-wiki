@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="430" viewBox="0 0 1120 430" role="img" aria-labelledby="title desc">
+  <title id="title">Gradient boosting fits residuals stage by stage</title>
+  <desc id="desc">A constant initial model produces residuals. A weak tree fits those residuals and updates the model. The process repeats with new residuals.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: #4b5563; }
+    .model { fill: #eff6ff; stroke: #2563eb; stroke-width: 2.5; }
+    .resid { fill: #fef3c7; stroke: #d97706; stroke-width: 2.5; }
+    .tree { fill: #ecfdf5; stroke: #059669; stroke-width: 2.5; }
+    .chip { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.8; }
+    .link { fill: none; stroke: #64748b; stroke-width: 2.4; marker-end: url(#arrow); }
+    .small { font-size: 15px; }
+  </style>
+
+  <text x="560" y="38" text-anchor="middle" font-size="28" font-weight="800">Boosting adds trees that correct the current model</text>
+  <text x="560" y="68" text-anchor="middle" font-size="17" class="muted">Each stage fits what the previous stage still gets wrong, then applies a learning-rate-scaled update.</text>
+
+  <rect x="52" y="152" width="142" height="76" rx="12" class="model"/>
+  <text x="123" y="184" text-anchor="middle" font-size="18" font-weight="800">F0</text>
+  <text x="123" y="208" text-anchor="middle" class="small">constant mean</text>
+
+  <rect x="248" y="152" width="142" height="76" rx="12" class="resid"/>
+  <text x="319" y="184" text-anchor="middle" font-size="18" font-weight="800">r1</text>
+  <text x="319" y="208" text-anchor="middle" class="small">residuals</text>
+
+  <rect x="444" y="152" width="156" height="76" rx="12" class="tree"/>
+  <text x="522" y="184" text-anchor="middle" font-size="18" font-weight="800">h1</text>
+  <text x="522" y="208" text-anchor="middle" class="small">fit stump to r1</text>
+
+  <rect x="670" y="152" width="158" height="76" rx="12" class="model"/>
+  <text x="749" y="184" text-anchor="middle" font-size="18" font-weight="800">F1</text>
+  <text x="749" y="208" text-anchor="middle" class="small">F0 + nu h1</text>
+
+  <rect x="888" y="118" width="142" height="64" rx="12" class="resid"/>
+  <text x="959" y="157" text-anchor="middle" font-size="17" font-weight="800">new r2</text>
+  <rect x="888" y="220" width="142" height="64" rx="12" class="tree"/>
+  <text x="959" y="259" text-anchor="middle" font-size="17" font-weight="800">fit h2</text>
+
+  <path d="M 194 190 L 242 190" class="link"/>
+  <path d="M 390 190 L 438 190" class="link"/>
+  <path d="M 600 190 L 664 190" class="link"/>
+  <path d="M 828 190 C 854 178 858 157 882 151" class="link"/>
+  <path d="M 828 190 C 854 203 858 241 882 251" class="link"/>
+
+  <rect x="614" y="104" width="106" height="34" rx="8" class="chip"/>
+  <text x="667" y="127" text-anchor="middle" class="small" font-weight="700">update</text>
+  <rect x="678" y="330" width="236" height="38" rx="9" class="chip"/>
+  <text x="796" y="354" text-anchor="middle" class="small" font-weight="700">repeat until validation stops</text>
+</svg>

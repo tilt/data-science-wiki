@@ -108,6 +108,9 @@
 :root[saved-theme="dark"] .markdown-rendered img[src*="clustering-dbscan.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="clustering-gaussian-mixture.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="clustering-spectral.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="evaluation-confusion-sets.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="evaluation-threshold-metrics.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="evaluation-roc-auc-ranking.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="medical-threshold-tradeoff.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="optimizer-update-trajectories.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="temperature-probability-spread.svg"],
@@ -133,6 +136,46 @@
 :root[saved-theme="dark"] .markdown-rendered img[src*="reinforcement-learning-loop.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="llm-training-pipeline.svg"],
 :root[saved-theme="dark"] .markdown-rendered img[src*="data-engineering-star-schema.svg"],
-:root[saved-theme="dark"] .markdown-rendered img[src*="data-engineering-normalized-schema.svg"] {
+:root[saved-theme="dark"] .markdown-rendered img[src*="data-engineering-normalized-schema.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="logistic-regression-sigmoid.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="linear-models-least-squares-fit.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="regression-r-squared-fit.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="bias-variance-u-curve.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="regularization-l1-l2-geometry.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="cv-kfold-splits.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="decision-tree-split.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="random-forest-bootstrap.svg"],
+:root[saved-theme="dark"] .markdown-rendered img[src*="gradient-boosting-stages.svg"] {
   filter: invert(1) hue-rotate(180deg) saturate(0.95) brightness(1.05);
+}
+
+// Mermaid edge (branch) labels. htmlLabels is forced off for render stability,
+// which makes edge labels tight SVG text boxes sized from a text-metric
+// estimate. The browser often renders the font slightly wider, so the last
+// glyph can clip and the connector line crosses the text ("bootstra" instead
+// of "bootstrap"). These rules restore breathing room without re-enabling
+// HTML labels.
+// Do not clip labels that render wider than Mermaid's estimated box.
+.mermaid svg,
+svg[id^="mermaid-"] {
+  overflow: visible;
+}
+
+// Paint a page-background halo behind each glyph so the connector line is
+// masked and the label gets padding, regardless of the tight background box.
+:is(.mermaid, svg[id^="mermaid-"]) :is(.edgeLabel, .edgeLabels) :is(text, tspan) {
+  paint-order: stroke fill;
+  stroke: var(--light);
+  stroke-width: 3.5px;
+  stroke-linejoin: round;
+}
+
+// Blend the cramped edge-label background rectangle into the page and round
+// its corners so it no longer reads as a tight dark box.
+:is(.mermaid, svg[id^="mermaid-"])
+  :is(.edgeLabel, .edgeLabels)
+  :is(rect, .background, .label-container, .labelBkg) {
+  fill: var(--light) !important;
+  rx: 5px;
+  ry: 5px;
 }

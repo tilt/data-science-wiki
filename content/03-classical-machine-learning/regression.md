@@ -17,7 +17,7 @@ related:
   - regularization.md
   - evaluation-metrics.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Regression
@@ -26,31 +26,31 @@ Regression estimates a numeric target $y \in \mathbb R$ from features $x$. In th
 
 ## Defining math
 
-Ordinary least squares writes predictions as
+Ordinary least squares writes the prediction for a feature vector $x$ as
 
 $$
 \hat y = x^\top \beta,
 $$
 
-and solves
+where $\beta$ is the vector of coefficients. Stacking the $n$ examples into a design matrix $X$ (one row per example) and targets $y$, it chooses $\beta$ to minimize the squared residual:
 
 $$
 \hat\beta = \arg\min_\beta \lVert y - X\beta\rVert_2^2.
 $$
 
-When $X^\top X$ is invertible, the closed-form estimator is
+When $X^\top X$ is invertible, this has the closed-form solution
 
 $$
 \hat\beta = (X^\top X)^{-1}X^\top y.
 $$
 
-One common fit metric is
+Fit is often summarized by the coefficient of determination
 
 $$
 R^2=1-\frac{\sum_i(y_i-\hat y_i)^2}{\sum_i(y_i-\bar y)^2},
 $$
 
-which compares squared residual error with the error from predicting the sample mean.
+where $y_i$ is the observed target, $\hat y_i$ the prediction, and $\bar y$ the sample mean. The numerator is the model's squared residual error and the denominator is the error from always predicting $\bar y$, so $R^2$ is the fraction of variance the model explains beyond that baseline.
 
 Residuals $e_i = y_i - \hat y_i$ are not just errors; their pattern is a diagnostic. Curvature suggests missing [feature engineering](feature-engineering.md), changing variance suggests heteroscedasticity, and large leverage points can dominate the fitted line. Penalized versions such as ridge replace the objective with $\lVert y-X\beta\rVert_2^2 + \lambda\lVert\beta\rVert_2^2$, connecting regression directly to [regularization](regularization.md).
 
@@ -60,39 +60,27 @@ OLS projects the target vector onto the column space of the design matrix. The f
 
 ## Worked example
 
-This snippet fits a one-feature linear regression on the diabetes dataset and reports the slope, intercept, RMSE, and several predictions beside true values.
+Fit $\hat y = 2.2 + 0.6x$ to five points $(1,2),(2,4),(3,5),(4,4),(5,5)$, whose mean is $\bar y = 4$. The two sums that define $R^2$ compare the fit against the baseline of always predicting the mean:
 
-```python
-from sklearn.datasets import load_diabetes
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
-from sklearn.model_selection import train_test_split
-import numpy as np
+$$
+\mathrm{SS_{res}} = \sum_i (y_i-\hat y_i)^2 = 2.4,
+\qquad
+\mathrm{SS_{tot}} = \sum_i (y_i-\bar y)^2 = 6,
+$$
 
-X, y = load_diabetes(return_X_y=True)
-Xtr, Xte, ytr, yte = train_test_split(X[:, [2]], y, random_state=0)
-reg = LinearRegression().fit(Xtr, ytr)
-pred = reg.predict(Xte[:5])
-print("slope", round(reg.coef_[0], 2), "intercept", round(reg.intercept_, 2))
-print("rmse", round(mean_squared_error(yte, reg.predict(Xte)) ** 0.5, 2))
-print("first5_pred", np.round(pred, 1))
-print("first5_true", yte[:5].astype(int))
-```
+$$
+R^2 = 1 - \frac{\mathrm{SS_{res}}}{\mathrm{SS_{tot}}} = 1 - \frac{2.4}{6} = 0.6.
+$$
 
-Observed output:
+The fitted line explains 60% of the variance around the mean: the points hug it more tightly than they hug the flat mean line, and $R^2$ is exactly that reduction in squared error.
 
-```text
-slope 1016.92 intercept 153.23
-rmse 64.66
-first5_pred [259.8 214.9 162.3 129.4 199.5]
-first5_true [321 215 127  64 175]
-```
+![R-squared compares residuals from the fitted line with deviations from the mean line; here the fit gives R-squared equal to 0.6.](../assets/diagrams/regression-r-squared-fit.svg)
 
-With only one feature, the model captures a broad trend but individual errors remain large. The RMSE is in target units, so it can be compared with operational tolerance rather than only with $R^2$.
+$R^2$ is unitless and always improves as features are added, so pair it with an error in target units. [RMSE](evaluation-metrics.md#regression-metrics) here is $\sqrt{2.4/5} \approx 0.69$, which can be compared against an operational tolerance rather than only against the mean.
 
 ## Caveats
 
-OLS coefficients become unstable when features are nearly collinear because $X^\top X$ is close to singular. Outliers affect squared error strongly. Extrapolation is linear forever, so a plausible fit inside the training range can produce impossible predictions outside it. Report regression with [evaluation metrics](evaluation-metrics.md) that match the decision: RMSE punishes large misses, MAE is more robust, and residual plots often reveal failures that aggregate scores hide.
+OLS coefficients become unstable when features are nearly collinear because $X^\top X$ is close to singular. Outliers affect squared error strongly. Extrapolation is linear forever, so a plausible fit inside the training range can produce impossible predictions outside it. Report regression with [evaluation metrics](evaluation-metrics.md) that match the decision: [RMSE](evaluation-metrics.md#regression-metrics) punishes large misses, [MAE](evaluation-metrics.md#regression-metrics) is more robust, and residual plots often reveal failures that aggregate scores hide.
 
 ## References
 

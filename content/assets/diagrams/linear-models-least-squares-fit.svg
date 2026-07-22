@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="440" viewBox="0 0 640 440" role="img" aria-labelledby="title desc">
+  <title id="title">Least squares fits the line that minimizes total squared residual length</title>
+  <desc id="desc">Five data points with a fitted line y-hat equals 0.6 plus 0.8 x. Dashed vertical segments show each residual, the gap between a point and the line. The sum of squared residuals is 3.6.</desc>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .muted { fill: #4b5563; }
+    .small { font-size: 15px; }
+    .axis { stroke: #94a3b8; stroke-width: 2; }
+    .grid { stroke: #eef2f7; stroke-width: 1; }
+    .fit { stroke: #2563eb; stroke-width: 3.5; }
+    .resid { stroke: #f97316; stroke-width: 2; stroke-dasharray: 5 4; }
+    .pt { fill: #16a34a; }
+  </style>
+
+  <text x="320" y="34" text-anchor="middle" font-size="24" font-weight="800">Least squares minimizes squared residuals</text>
+  <text x="320" y="60" text-anchor="middle" font-size="16" class="muted">The fitted line is the one that makes the total squared vertical gap smallest.</text>
+
+  <!-- gridlines -->
+  <line class="grid" x1="80" y1="326.7" x2="600" y2="326.7"/>
+  <line class="grid" x1="80" y1="220" x2="600" y2="220"/>
+  <line class="grid" x1="80" y1="113.3" x2="600" y2="113.3"/>
+  <!-- axes -->
+  <line class="axis" x1="80" y1="380" x2="600" y2="380"/>
+  <line class="axis" x1="80" y1="72" x2="80" y2="380"/>
+
+  <!-- fitted line y = 0.6 + 0.8 x, drawn from x=0.5 to x=5.5 -->
+  <line class="fit" x1="123.3" y1="326.7" x2="556.7" y2="113.3"/>
+
+  <!-- residual segments (point to fitted value) -->
+  <line class="resid" x1="166.7" y1="326.7" x2="166.7" y2="305.3"/>
+  <line class="resid" x1="253.3" y1="220" x2="253.3" y2="262.7"/>
+  <line class="resid" x1="340" y1="273.3" x2="340" y2="220"/>
+  <line class="resid" x1="426.7" y1="113.3" x2="426.7" y2="177.3"/>
+  <line class="resid" x1="513.3" y1="166.7" x2="513.3" y2="134.7"/>
+
+  <!-- data points -->
+  <circle class="pt" cx="166.7" cy="326.7" r="6.5"/>
+  <circle class="pt" cx="253.3" cy="220" r="6.5"/>
+  <circle class="pt" cx="340" cy="273.3" r="6.5"/>
+  <circle class="pt" cx="426.7" cy="113.3" r="6.5"/>
+  <circle class="pt" cx="513.3" cy="166.7" r="6.5"/>
+
+  <!-- axis labels -->
+  <text x="600" y="404" text-anchor="end" class="small muted">feature x</text>
+  <text x="64" y="80" text-anchor="end" class="small muted">y</text>
+  <text x="166.7" y="400" text-anchor="middle" class="small muted">1</text>
+  <text x="253.3" y="400" text-anchor="middle" class="small muted">2</text>
+  <text x="340" y="400" text-anchor="middle" class="small muted">3</text>
+  <text x="426.7" y="400" text-anchor="middle" class="small muted">4</text>
+  <text x="513.3" y="400" text-anchor="middle" class="small muted">5</text>
+
+  <!-- annotations -->
+  <text x="470" y="300" text-anchor="middle" font-size="18" font-weight="700" fill="#1d4ed8">ŷ = 0.6 + 0.8x</text>
+  <text x="470" y="326" text-anchor="middle" class="small" fill="#c2410c">sum of squared residuals = 3.6</text>
+</svg>

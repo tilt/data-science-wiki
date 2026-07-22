@@ -30,12 +30,12 @@ This glossary is a cross-domain lookup index for evaluation metrics used across 
 
 | Metric                                                                            | Field of application               | Meaning                                                                                                 |
 | --------------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| [Accuracy](../03-classical-machine-learning/evaluation-metrics.md)                | Classification                     | Fraction of examples whose predicted class equals the label.                                            |
-| [Precision](../03-classical-machine-learning/evaluation-metrics.md)               | Classification                     | Fraction of predicted positives that are true positives.                                                |
-| [Recall](../03-classical-machine-learning/evaluation-metrics.md)                  | Classification                     | Fraction of actual positives found by the model.                                                        |
-| [F1](../03-classical-machine-learning/evaluation-metrics.md)                      | Classification                     | Harmonic mean of precision and recall for a class or averaging scheme.                                  |
+| [Accuracy](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)                | Classification                     | Fraction of examples whose predicted class equals the label.                                            |
+| [Precision](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)               | Classification                     | Fraction of predicted positives that are true positives.                                                |
+| [Recall](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)                  | Classification                     | Fraction of actual positives found by the model.                                                        |
+| [F1 score](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)                | Classification                     | Harmonic mean of precision and recall for a class or averaging scheme.                                  |
 | [Balanced accuracy](../03-classical-machine-learning/class-imbalance.md)          | Imbalanced classification          | Accuracy averaged across classes so a majority class cannot dominate the score.                         |
-| [ROC-AUC](../03-classical-machine-learning/evaluation-metrics.md)                 | Binary ranking and classification  | Threshold-free discrimination score based on the receiver operating characteristic curve.               |
+| [ROC-AUC](../03-classical-machine-learning/evaluation-metrics.md#probability-and-ranking-metrics)        | Binary ranking and classification  | Threshold-free discrimination score based on the receiver operating characteristic curve.               |
 | [PR-AUC / average precision](../03-classical-machine-learning/class-imbalance.md) | Rare-positive classification       | Area-style summary of precision-recall ranking quality, often more informative under extreme imbalance. |
 | [Log loss](../03-classical-machine-learning/calibration.md)                       | Probabilistic classification       | Negative log-likelihood that rewards calibrated probability assigned to the observed label.             |
 | [Brier score](../17-experimentation-and-evaluation/calibration.md)                | Probability calibration            | Mean squared error between predicted probability and binary outcome.                                    |
@@ -47,9 +47,9 @@ This glossary is a cross-domain lookup index for evaluation metrics used across 
 
 | Metric                                                                            | Field of application | Meaning                                                      |
 | --------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------ |
-| [Mean absolute error](../03-classical-machine-learning/evaluation-metrics.md)     | Regression           | Average absolute prediction error in target units.           |
-| [Mean squared error](../03-classical-machine-learning/evaluation-metrics.md)      | Regression           | Average squared prediction error, emphasizing larger misses. |
-| [Root mean squared error](../03-classical-machine-learning/evaluation-metrics.md) | Regression           | Square root of mean squared error, reported in target units. |
+| [MAE: mean absolute error](../03-classical-machine-learning/evaluation-metrics.md#regression-metrics)     | Regression           | Average absolute prediction error in target units.           |
+| [MSE: mean squared error](../03-classical-machine-learning/evaluation-metrics.md#regression-metrics)      | Regression           | Average squared prediction error, emphasizing larger misses. |
+| [RMSE: root mean squared error](../03-classical-machine-learning/evaluation-metrics.md#regression-metrics) | Regression           | Square root of mean squared error, reported in target units. |
 | [R-squared](../03-classical-machine-learning/regression.md)                       | Regression           | Share of target variance explained relative to a baseline.   |
 
 ## Ranking and Retrieval

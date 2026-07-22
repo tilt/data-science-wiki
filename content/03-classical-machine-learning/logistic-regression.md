@@ -19,7 +19,7 @@ related:
   - evaluation-metrics.md
   - regularization.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Logistic Regression
@@ -28,29 +28,31 @@ Logistic regression is a [linear model](linear-models.md) for class probability,
 
 ## Defining math
 
-The score and sigmoid are
+For example $i$ with feature vector $x_i$, the linear score $z_i$ and its sigmoid transform are
 
 $$
-z_i = \beta_0 + x_i^\top\beta, \qquad \sigma(z_i)=\frac{1}{1+e^{-z_i}}.
+z_i = \beta_0 + x_i^\top\beta, \qquad \sigma(z_i)=\frac{1}{1+e^{-z_i}},
 $$
 
-The model estimates
+where $\beta_0$ is the intercept and $\beta$ the coefficient vector. The predicted probability of the positive class is
 
 $$
 P(Y_i=1\mid x_i)=p_i=\sigma(z_i).
 $$
 
-The unregularized negative log-likelihood is
+Fitting maximizes the Bernoulli likelihood, equivalently minimizing the negative log-likelihood
 
 $$
 \ell(\beta_0,\beta)=-\sum_{i=1}^n\left[y_i\log p_i + (1-y_i)\log(1-p_i)\right],
 $$
 
-with gradient
+where $y_i\in\{0,1\}$ is the label and $n$ the number of examples. Its gradient has a compact form,
 
 $$
-\nabla_\beta \ell = X^\top(p-y).
+\nabla_\beta \ell = X^\top(p-y),
 $$
+
+where $X$ is the $n\times d$ design matrix (one row per example), $p=(p_1,\dots,p_n)^\top$ is the vector of predicted probabilities, and $y=(y_1,\dots,y_n)^\top$ is the vector of labels — so $p-y$ is simply the vector of prediction errors.
 
 Most practical fits add [regularization](regularization.md), for example $\lambda\lVert\beta\rVert_2^2/2$, because high-dimensional or nearly separable data can drive coefficients to unstable values.
 
@@ -60,40 +62,20 @@ A coefficient is an additive effect on log-odds: increasing feature $x_j$ by one
 
 ## Worked example
 
-This snippet trains a standardized logistic regression classifier and reports accuracy, log loss, the confusion matrix, and example predicted probabilities.
+Suppose a fitted model has intercept $\beta_0 = -1$ and a single coefficient $\beta_1 = 2$, so the score is $z = -1 + 2x$. Take an example with $x = 1.2$:
 
-```python
-from sklearn.datasets import make_classification
-from sklearn.linear_model import LogisticRegression
-from sklearn.metrics import accuracy_score, confusion_matrix, log_loss
-from sklearn.model_selection import train_test_split
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
-import numpy as np
+$$
+z = -1 + 2(1.2) = 1.4, \qquad
+p = \sigma(1.4) = \frac{1}{1+e^{-1.4}} \approx 0.80.
+$$
 
-X, y = make_classification(n_samples=160, n_features=4, n_informative=2,
-                           n_redundant=0, class_sep=1.4, random_state=12)
-Xtr, Xte, ytr, yte = train_test_split(X, y, stratify=y, random_state=12)
-clf = make_pipeline(StandardScaler(), LogisticRegression(random_state=12)).fit(Xtr, ytr)
-proba = clf.predict_proba(Xte)[:, 1]
-pred = clf.predict(Xte)
-print("accuracy", round(accuracy_score(yte, pred), 3), "log_loss", round(log_loss(yte, proba), 3))
-print("confusion")
-print(confusion_matrix(yte, pred))
-print("first5_proba", np.round(proba[:5], 3))
-```
+The model assigns an 80% probability to the positive class. The coefficient acts on the log-odds: because $\beta_1 = 2$, increasing $x$ by one unit adds $2$ to $z$, which multiplies the odds $p/(1-p)$ by $e^{2}\approx 7.4$. At $x = 1.2$ the odds are $0.80/0.20 = 4$; at $x = 2.2$ they become $4 \times 7.4 \approx 29.6$, i.e. $p \approx 0.97$.
 
-Observed output:
+The sigmoid turns any score into a probability, and a threshold (often $0.5$, i.e. $z = 0$) turns the probability into a label:
 
-```text
-accuracy 0.925 log_loss 0.166
-confusion
-[[18  2]
- [ 1 19]]
-first5_proba [0.98  0.031 0.133 0.079 0.973]
-```
+![The logistic function maps a linear score to a probability, crossing 0.5 at score zero.](../assets/diagrams/logistic-regression-sigmoid.svg)
 
-The model makes three mistakes on forty held-out examples. The probability output is useful beyond accuracy: changing the decision threshold would trade false positives against false negatives, which should be reported with [evaluation metrics](evaluation-metrics.md).
+Because the decision boundary is the line $z = 0$, moving the threshold slides it left or right, trading false positives against false negatives — a trade best reported with [evaluation metrics](evaluation-metrics.md) rather than accuracy alone.
 
 ## Caveats
 

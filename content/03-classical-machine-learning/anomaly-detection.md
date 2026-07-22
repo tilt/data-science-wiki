@@ -17,7 +17,7 @@ related:
   - evaluation-metrics.md
   - class-imbalance.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Anomaly Detection
@@ -26,7 +26,7 @@ Anomaly detection ranks or flags observations that look unusual relative to a re
 
 ## Defining math
 
-Many methods learn a score $s(x)$ where larger or smaller means more anomalous, then flag $\hat y=\mathbf 1\{s(x)\ge\tau\}$ or the corresponding lower-tail rule. Density methods flag low estimated density, $\hat y=\mathbf 1\{\hat p(x)<\tau\}$. Isolation Forest isolates points by random partitioning; anomalies tend to have shorter average path lengths.
+Many methods learn an anomaly score $s(x)$ where larger (or smaller) means more anomalous, then flag a point when the score crosses a threshold $\tau$: $\hat y=\mathbf 1\{s(x)\ge\tau\}$, the indicator $\mathbf 1\{\cdot\}$ being $1$ when the rule fires. Density methods instead flag points of low estimated density $\hat p(x)$, using $\hat y=\mathbf 1\{\hat p(x)<\tau\}$. Isolation Forest isolates points by random partitioning; anomalies tend to have shorter average path lengths.
 
 ## Intuition
 

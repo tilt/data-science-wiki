@@ -17,7 +17,7 @@ related:
   - clustering.md
   - feature-engineering.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-22
 ---
 
 # Dimensionality Reduction
@@ -26,13 +26,13 @@ Dimensionality reduction maps $x\in\mathbb R^p$ to $z\in\mathbb R^d$ with $d<p$.
 
 ## Defining math
 
-A generic encoder is $z_i=g(x_i)$. Linear projection writes $Z=XW$ with $W\in\mathbb R^{p\times d}$. PCA chooses $W$ to maximize retained variance:
+An encoder maps each original feature vector $x_i\in\mathbb R^p$ to a lower-dimensional representation $z_i=g(x_i)\in\mathbb R^d$ with $d<p$. A linear encoder writes $Z=XW$, where $X$ is the data matrix and $W\in\mathbb R^{p\times d}$ is a projection matrix taking the $p$ input dimensions to $d$ output dimensions. PCA chooses $W$ to retain as much variance as possible:
 
 $$
-\max_{W^\top W=I_d}\operatorname{tr}(W^\top X_c^\top X_c W).
+\max_{W^\top W=I_d}\operatorname{tr}\!\big(W^\top X_c^\top X_c W\big),
 $$
 
-Reconstruction error for linear PCA is $\lVert X_c-X_cWW^\top\rVert_F^2$. The same transformation can be preprocessing for [clustering](clustering.md), visualization, denoising, or [feature engineering](feature-engineering.md). In [unsupervised learning](unsupervised-learning.md), the reduction objective often becomes the implicit definition of what structure is worth preserving.
+where $X_c$ is the centered data (each feature mean-subtracted), the constraint $W^\top W=I_d$ (with $I_d$ the $d\times d$ identity) makes the projection directions orthonormal, and $\operatorname{tr}(\cdot)$ is the trace, here the total projected variance. The reconstruction error of linear PCA is $\lVert X_c-X_cWW^\top\rVert_F^2$, with $\lVert\cdot\rVert_F$ the Frobenius norm. The same transformation can be preprocessing for [clustering](clustering.md), visualization, denoising, or [feature engineering](feature-engineering.md). In [unsupervised learning](unsupervised-learning.md), the reduction objective often becomes the implicit definition of what structure is worth preserving.
 
 ## Intuition
 
