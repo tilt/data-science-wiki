@@ -42,7 +42,7 @@ $$
 \chi^2=\sum_k \frac{(O_k-E_k)^2}{E_k}.
 $$
 
-Guardrail metrics then protect user experience even when the primary metric improves; [A/B testing](a-b-testing.md) without guardrails is only a partial launch decision.
+Guardrail metrics then protect user experience even when the primary metric improves; [A-B testing](a-b-testing.md) without guardrails is only a partial launch decision.
 
 ## Worked calculation
 
@@ -87,4 +87,4 @@ Interference breaks independent-unit assumptions when one user's treatment chang
 > [!nav]
 > **Section** — [Experimentation and Evaluation](index.md)
 >
-> [← Paired Evaluation](paired-evaluation.md) [A/B Testing →](a-b-testing.md)
+> [← Paired Evaluation](paired-evaluation.md) [A-B Testing →](a-b-testing.md)

@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - two-stream-models
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - Two-stream ConvNets
@@ -18,7 +18,7 @@ related:
   - temporal-action-recognition.md
   - video-transformers.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Two-Stream Models
@@ -34,6 +34,15 @@ z = \alpha z^{rgb} + (1-\alpha)z^{flow}, \qquad p(y\mid x)=\operatorname{softmax
 $$
 
 The streams are complementary: RGB sees objects and scene context, while flow emphasizes motion direction and speed. A basketball court and a person holding a ball help, but the jump-shot label depends on the temporal motion that [temporal action recognition](temporal-action-recognition.md) must capture.
+
+```mermaid
+flowchart LR
+  RGB[RGB frames] --> Spatial[Appearance stream]
+  Flow[Optical flow] --> Temporal[Motion stream]
+  Spatial --> Fuse[Late fusion]
+  Temporal --> Fuse
+  Fuse --> Pred[Action prediction]
+```
 
 ## Worked fusion example
 

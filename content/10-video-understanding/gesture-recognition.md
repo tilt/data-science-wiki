@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - gesture-recognition
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - video-transformers.md
   - ../09-computer-vision/pose-estimation.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Gesture Recognition

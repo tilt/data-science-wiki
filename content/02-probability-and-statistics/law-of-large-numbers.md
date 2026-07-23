@@ -37,7 +37,7 @@ Individual observations remain noisy; averaging divides the cumulative noise by 
 
 ## Worked simulation
 
-This simulation draws Bernoulli trials with probability $0.37$ and prints running means at larger sample sizes to show convergence toward the true probability.
+This simulation draws [Bernoulli](common-distributions.md#bernoulli-distribution) trials with probability $0.37$ and prints running means at larger sample sizes to show convergence toward the true probability.
 
 ```python
 import numpy as np

@@ -6,7 +6,7 @@ area: software-engineering
 topics:
   - web-backends
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - HTTP backends
@@ -20,18 +20,29 @@ related:
   - "software-architecture.md"
   - "../14-ml-engineering-and-mlops/model-serving.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Web Backends
 
 Web backends expose product behavior through HTTP APIs, persistence, queues, background jobs, and integration services. In AI products they also coordinate retrieval, model calls, streaming responses, authorization, audit logs, and [model serving](../14-ml-engineering-and-mlops/model-serving.md). The backend is where client intent becomes an enforceable system contract.
 
-## Backend Mechanism
+## Validate, authorize, execute, observe
 
 A backend request path should validate input, authenticate and authorize, call domain logic, persist state, map errors, emit telemetry, and return a stable response shape. Long-running model calls need timeouts, cancellation, partial failure handling, and idempotency when actions can be repeated. Database work should go through [sql](sql.md) queries that enforce server-side ownership.
 
-## Executed Artifact
+```mermaid
+flowchart LR
+  Request[HTTP request] --> Validate[Validate schema]
+  Validate --> Auth[Authenticate and authorize]
+  Auth --> Domain[Run domain logic]
+  Domain --> Data[SQL jobs or model calls]
+  Data --> Errors[Map errors and fallbacks]
+  Errors --> Telemetry[Emit telemetry]
+  Telemetry --> Response[Stable response]
+```
+
+## Authorized endpoint contract
 
 This snippet defines a small FastAPI endpoint and uses a test client to compare the authorized response with the forbidden response.
 
@@ -70,7 +81,7 @@ Observed output:
 
 The endpoint demonstrates a backend responsibility that [javascript application architecture](javascript-application-architecture.md) must not own: authorization. [Testing](testing.md) can verify both the 200 and 403 contracts without a browser, and [production integration](production-integration.md) can require the trace fields before launch.
 
-## Failure Modes
+## Failure modes
 
 Common failures are leaking authorization to the frontend, doing background work inside request handlers, returning unversioned response shapes, and collapsing provider failures into anonymous 500 errors. A backend that wraps model calls should expose typed fallbacks and telemetry, not just pass through provider responses.
 

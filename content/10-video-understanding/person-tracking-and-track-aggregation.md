@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - person-tracking-and-track-aggregation
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases:
   - Person tracking
@@ -18,7 +18,7 @@ related:
   - optical-flow.md
   - temporal-action-recognition.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Person Tracking and Track Aggregation

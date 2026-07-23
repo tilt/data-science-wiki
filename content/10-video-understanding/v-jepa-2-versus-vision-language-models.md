@@ -8,7 +8,7 @@ topics:
   - vision-language-models
   - world-models
 level: intermediate
-status: review
+status: complete
 page_type: comparison
 aliases:
   - V-JEPA 2 versus VLM
@@ -22,14 +22,14 @@ related:
   - world-models-and-jepa.md
   - ../11-generative-ai/vision-language-models.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # V-JEPA 2 versus Vision-Language Models
 
 [V-JEPA 2](v-jepa-2.md) and [video-language models](video-language-models.md) answer different engineering questions. V-JEPA 2 asks whether latent video prediction can produce reusable visual dynamics and planning-oriented features. A vision-language model asks whether visual tokens can be aligned with language for captioning, question answering, retrieval, or chat. The comparison is objective and interface, not a universal ranking.
 
-## Defining distinction
+## Latent prediction versus token generation
 
 V-JEPA-style training minimizes a latent prediction loss:
 

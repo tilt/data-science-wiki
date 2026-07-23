@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - video-transformers
 level: advanced
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - video-language-models.md
   - ../06-deep-learning/attention.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Video Transformers
@@ -35,6 +35,25 @@ $$
 Full space-time attention forms an $N\times N$ score matrix, where $N=(T/\tau)(H/P)(W/P)$ for tubelet length $\tau$ and patch size $P$. Factorized variants attend spatially and temporally in separate steps to reduce cost and stabilize learning.
 
 The important implementation detail is that video tokens have geometry. A token is not just sequence element $i$; it corresponds to an original address such as $(t,h,w)$ or to a tubelet covering a small block of time and space. Positional encodings must agree with that address. If a system physically keeps only person- or hand-region tokens for [gesture recognition](gesture-recognition.md), the kept tokens should retain their original positions rather than being renumbered as a dense sequence.
+
+## From clip to tokens
+
+A video transformer turns pixels into a token sequence before any attention happens:
+
+1. **Split.** Divide the clip into non-overlapping patches per frame, or into tubelets that each span a small block of time and space.
+2. **Project.** Apply one shared linear map to flatten each patch or tubelet into a token embedding of dimension $d_k$.
+3. **Position.** Add positional encodings that carry the original $(t,h,w)$ address, so attention can tell apart tokens that share appearance but differ in space or time.
+4. **Attend.** Run stacked attention blocks over the tokens, either full space-time or factorized into separate spatial and temporal steps.
+5. **Read out.** Pool the tokens (or a class token) into a clip vector for the task head.
+
+```mermaid
+flowchart LR
+  Clip[Input clip] --> Split[Split into tubelets or patches]
+  Split --> Proj[Linear projection to tokens]
+  Proj --> Pos[Add space-time positions]
+  Pos --> Attn[Space-time attention blocks]
+  Attn --> Head[Pool and task head]
+```
 
 ## Worked token budget
 
@@ -70,6 +89,10 @@ Patch size is a budget knob. Smaller patches preserve small objects such as hand
 | RoI token keep inside the backbone  | Lower token budget while preserving the original frame, if positions are handled correctly. |
 
 This is why comparing full-frame, static-crop, tracking-crop, and token-keep variants can reveal more about input-domain alignment than about the model family alone.
+
+## History and adoption
+
+Video transformers followed directly from the image [vision transformer](../09-computer-vision/vision-transformers.md), which showed that patch tokens plus attention could match convolutional networks when pretrained at scale. Extending this to time raised an immediate cost problem, because full space-time attention is quadratic in the token count. TimeSformer (2021) addressed it by factorizing attention into separate temporal and spatial steps, and ViViT (2021) explored tubelet embeddings and factorized encoders for the same reason. The line then merged with [video-language models](video-language-models.md), where a video-transformer encoder feeds a language model for captioning, retrieval, and question answering. Throughout, the recurring design tension is the token budget from the [worked token budget](#worked-token-budget) above: richer spatial or temporal detail means more tokens and quadratically more attention cost.
 
 ## Caveats
 

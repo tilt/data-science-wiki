@@ -38,7 +38,7 @@ Covariance keeps the product of the units; correlation is unitless and lies in $
 
 ## Executed sample check
 
-The code below draws 5000 observations from a bivariate normal distribution with mean vector $(0,0)$ and covariance matrix
+The code below draws 5000 observations from a [bivariate normal distribution](common-distributions.md#multivariate-normal-distribution) with mean vector $(0,0)$ and covariance matrix
 
 $$
 \Sigma =

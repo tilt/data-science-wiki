@@ -6,7 +6,7 @@ area: software-engineering
 topics:
   - refactoring
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - "documentation.md"
   - "python.md"
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Refactoring
@@ -29,7 +29,7 @@ Refactoring changes internal structure without intentionally changing external b
 
 Characterization tests are the safety net when the existing code has unclear intent. They record what the system currently does on representative inputs. Once the checks exist, common moves include extract function, replace conditional with polymorphism, introduce parameter object, or split side effects from pure logic. Those moves often reveal when a [design pattern](design-patterns.md) is useful rather than decorative.
 
-## Executed Artifact
+## Golden cases before extraction
 
 This snippet compares a legacy order-total function with a refactored version across golden cases to verify behavior stayed unchanged.
 
@@ -71,7 +71,7 @@ same_behavior True
 
 The refactor made pricing rules easier to name without changing results on the golden cases. Add or update [documentation](documentation.md) if the extracted names become part of the team vocabulary, and add [testing](testing.md) around edge cases before changing the discount rule itself.
 
-## Failure Modes
+## Failure modes
 
 Refactors fail when they mix behavior changes with structure changes, expand scope opportunistically, or rely on manual inspection for behavior that can be checked. For ML code, "same behavior" may mean same schema, same selected model version, or score distribution within tolerance rather than byte-for-byte equality.
 

@@ -21,30 +21,38 @@ related:
   - repeated-sampling.md
   - ../02-probability-and-statistics/hypothesis-testing.md
   - ../02-probability-and-statistics/confidence-intervals.md
+  - ../14-ml-engineering-and-mlops/a-b-testing.md
 historical_context: false
 last_reviewed: 2026-07-23
 ---
 
 # Statistical Significance
 
-Statistical significance asks whether an observed effect is surprising under a null model. In an [A/B test](a-b-testing.md), the null is usually "treatment and control have the same conversion rate"; in [paired evaluation](paired-evaluation.md), it is usually "the mean paired difference is zero." It is an uncertainty statement, not a claim that the effect is useful, causal without a valid design, or safe to launch.
+Statistical significance is the experiment-reporting layer of [hypothesis testing](../02-probability-and-statistics/hypothesis-testing.md). It asks whether an observed effect is large relative to sampling noise under a pre-specified null model. In an [A-B test](a-b-testing.md), the null is usually "treatment and control have the same conversion rate"; in [paired evaluation](paired-evaluation.md), it is usually "the mean paired difference is zero."
 
-## The two-proportion z-test
+This page focuses on interpreting significance for product and model evaluation decisions. The probability-and-statistics page owns the general mechanics of null hypotheses, p-values, z-statistics, and reference distributions. The [A-B testing](a-b-testing.md) page owns experiment planning and sample size. The MLOps [A-B testing](../14-ml-engineering-and-mlops/a-b-testing.md) page owns production release mechanics, guardrails, and rollback decisions.
 
-For two independent conversion rates, $\hat p_A=x_A/n_A$ and $\hat p_B=x_B/n_B$. A large-sample two-sided z-test uses the pooled null rate
+## Effect, uncertainty, and decision
+
+A useful significance report separates three questions:
+
+1. **Effect size.** How large is the observed effect in the metric's units?
+2. **Uncertainty.** How wide is the plausible range once sampling noise is included?
+3. **Decision.** Is the effect large enough, reliable enough, and safe enough to act on?
+
+For two independent conversion rates, the common large-sample check is the two-proportion z-test. The canonical derivation and symbol definitions are on [Hypothesis Testing](../02-probability-and-statistics/hypothesis-testing.md). In experiment reports, the important quantities are the absolute lift, p-value, confidence interval, sample size, and practical threshold.
 
 $$
-\hat p=\frac{x_A+x_B}{n_A+n_B}, \qquad
-z=\frac{\hat p_B-\hat p_A}{\sqrt{\hat p(1-\hat p)(1/n_A+1/n_B)}}.
+\text{absolute lift}=\hat p_B-\hat p_A
 $$
 
-The p-value is $2(1-\Phi(|z|))$. The confidence interval for the absolute lift usually reports the unpooled standard error,
+The confidence interval for the absolute lift often reports the unpooled standard error:
 
 $$
 (\hat p_B-\hat p_A)\pm 1.96\sqrt{\frac{\hat p_A(1-\hat p_A)}{n_A}+\frac{\hat p_B(1-\hat p_B)}{n_B}}.
 $$
 
-The same logic appears in [online experiments](online-experiments.md), but production tests also need assignment checks, guardrails, and pre-specified stopping rules.
+Here $\hat p_A$ and $\hat p_B$ are observed conversion rates and $n_A$ and $n_B$ are exposed sample sizes. The z-test p-value says how surprising the lift is under a no-effect null model; the interval shows a range of effect sizes compatible with the data. [Online experiments](online-experiments.md) add assignment integrity, logging, interference, guardrails, and pre-specified stopping rules.
 
 ## Worked calculation
 
@@ -60,17 +68,19 @@ Suppose the control arm has 492 conversions from 10,000 users and the treatment 
 | two-sided p-value              |            0.0745 |
 | 95 percent confidence interval | [-0.0006, 0.0118] |
 
-The treatment is 0.56 percentage points higher, but the 95 percent interval still includes a small negative effect. This is not statistically significant at a 5 percent two-sided threshold because $p=0.0745$ is larger than 0.05. It could still be worth a follow-up if a 0.5 point lift is commercially meaningful, or irrelevant if the minimum practical lift was 1.5 points.
+The treatment is 0.56 percentage points higher, but the 95 percent interval still includes a small negative effect. This is not statistically significant at a 5 percent two-sided threshold because $p=0.0745$ is larger than 0.05.
+
+That does not mean "no effect." It means this experiment did not produce strong enough evidence to reject the no-effect null at the chosen threshold. The result could still be worth a follow-up if a 0.5 point lift is commercially meaningful, or irrelevant if the minimum practical lift was 1.5 points. Conversely, a very large experiment can make a tiny, operationally useless effect statistically significant. Practical significance belongs in the decision rule, not in an after-the-fact interpretation.
 
 ## Caveats
 
-Significance does not repair a biased sample, bad metric, stale [golden dataset](golden-datasets.md), or multiple unreported looks at the data. With enough traffic, trivial effects can become significant; with too little traffic, important effects can be missed. Report effect size, interval, sample size, metric definition, and any repeated-look or multiple-comparison adjustment.
+Significance does not repair a biased sample, bad metric, stale [golden dataset](golden-datasets.md), or multiple unreported looks at the data. With enough traffic, trivial effects can become significant; with too little traffic, important effects can be missed. Report effect size, interval, sample size, metric definition, practical threshold, and any repeated-look or multiple-comparison adjustment.
 
 ## References
 
 - [SciPy documentation: scipy.stats.norm](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html)
 - [SciPy documentation: scipy.stats.binomtest](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binomtest.html)
-- [Larsen et al., Statistical Challenges in Online Controlled Experiments: A Review of A/B Testing Methodology](https://arxiv.org/abs/2212.11366)
+- [Larsen et al., Statistical Challenges in Online Controlled Experiments](https://arxiv.org/abs/2212.11366)
 
 > [!nav]
 > **Section** — [Experimentation and Evaluation](index.md)

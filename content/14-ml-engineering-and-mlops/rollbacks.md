@@ -64,4 +64,4 @@ Rollbacks fail when database migrations are irreversible, features were renamed 
 > [!nav]
 > **Section** — [ML Engineering and MLOps](index.md)
 >
-> [← Canary Deployment](canary-deployment.md) [A/B Testing →](a-b-testing.md)
+> [← Canary Deployment](canary-deployment.md) [MLOps A-B Testing →](a-b-testing.md)

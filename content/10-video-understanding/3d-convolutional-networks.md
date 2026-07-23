@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - 3d-convolutional-networks
 level: intermediate
-status: review
+status: complete
 page_type: model
 aliases:
   - 3D CNNs
@@ -18,7 +18,7 @@ related:
   - spatial-and-temporal-modelling.md
   - video-representation.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # 3D Convolutional Networks

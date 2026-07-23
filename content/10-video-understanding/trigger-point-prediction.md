@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - trigger-point-prediction
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases:
   - Trigger prediction
@@ -18,7 +18,7 @@ related:
   - gesture-recognition.md
   - sliding-window-inference.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Trigger Point Prediction

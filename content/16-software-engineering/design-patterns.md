@@ -6,7 +6,7 @@ area: software-engineering
 topics:
   - design-patterns
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,7 +18,7 @@ related:
   - "api-design.md"
   - "python.md"
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Design Patterns
@@ -29,7 +29,7 @@ Design patterns are named boundaries for recurring design problems. The useful p
 
 In data and AI products, Strategy is common when the same request path may use BM25, dense retrieval, hybrid retrieval, or a fallback policy. Instead of scattering `if ranker == ...` across a [web backend](web-backends.md), define one scoring interface and inject the implementation. That keeps [testing](testing.md) focused on behavior and keeps [technical decision records](technical-decision-records.md) honest about why an implementation was selected.
 
-## Executed Artifact
+## Strategy as a scorer interface
 
 This snippet implements a scorer strategy interface and swaps keyword and freshness scorers without changing the ranking function.
 
@@ -71,7 +71,7 @@ freshness ['B', 'A']
 
 The caller does not change when the scoring policy changes. That is a real reduction in coupling. If the project has only one scorer and no planned alternative, the interface may be premature; [refactoring](refactoring.md) can introduce it later when duplication appears.
 
-## Failure Modes
+## Failure modes
 
 Pattern misuse adds vocabulary without reducing complexity. Warning signs are interfaces with one implementation, factories that hide simple constructors, inheritance trees used where composition would work, and architecture diagrams that say "adapter" but still leak provider-specific fields into [API design](api-design.md).
 

@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - temporal-localization
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases:
   - Temporal action localization
@@ -19,14 +19,14 @@ related:
   - trigger-point-prediction.md
   - video-transformers.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Temporal Localization
 
 Temporal localization marks when an event starts and ends in an untrimmed video. [Temporal action recognition](temporal-action-recognition.md) may say "goal attempt"; localization must output a segment such as 12.0s to 22.0s. This is the bridge from clip classification to usable timelines, alerts, and search indexes.
 
-## Defining math
+## Temporal IoU and mAP
 
 For a predicted segment $\hat s=[\hat t_1,\hat t_2]$ and ground truth $s=[t_1,t_2]$, temporal intersection-over-union is
 

@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - video-representation
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - video-transformers.md
   - person-tracking-and-track-aggregation.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Video Representation
@@ -33,6 +33,16 @@ r = \left[\frac{1}{T}\sum_{t=1}^T e_t,\; e_T-e_1\right].
 $$
 
 This is not a universal best representation; it shows the contract. The first term carries average visual content, and the second carries coarse temporal change. [Video transformers](video-transformers.md) keep many tokens instead of reducing early, while [self-supervised video representation learning](self-supervised-video-representation-learning.md) trains the encoder that produces the embeddings.
+
+```mermaid
+flowchart LR
+  Frames[Video frames] --> Encoder[Per-frame encoder]
+  Encoder --> Emb[Frame embeddings e1 to eT]
+  Emb --> Mean[Mean: average appearance]
+  Emb --> Delta[Endpoint delta: temporal change]
+  Mean --> Rep[Clip representation r]
+  Delta --> Rep
+```
 
 ## Worked representation example
 

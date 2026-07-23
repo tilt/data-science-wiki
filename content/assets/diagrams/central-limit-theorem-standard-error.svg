@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="460" viewBox="0 0 860 460" role="img" aria-labelledby="title desc">
+  <title id="title">Sample means concentrate while standardized means keep a fixed scale</title>
+  <desc id="desc">Three sampling distributions of a sample mean get narrower as sample size grows, while standardization maps the typical fluctuation to a fixed z scale.</desc>
+  <style>
+    text {
+      fill: #111827;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .title { font-size: 24px; font-weight: 800; }
+    .subtitle, .muted, .tick, .axis-label { fill: #374151; }
+    .subtitle { font-size: 14px; }
+    .tick { font-size: 12px; }
+    .axis-label { font-size: 14px; }
+    .callout { font-size: 13px; font-weight: 650; }
+    .card { fill: #f8fafc; stroke: #64748b; stroke-width: 1.1; }
+    .grid { stroke: #e5e7eb; stroke-width: 1; }
+    .axis { stroke: #111827; stroke-width: 1.5; }
+    .guide { stroke: #111827; stroke-width: 1.5; fill: none; }
+    .n1 { stroke: #f97316; }
+    .n5 { stroke: #14b8a6; }
+    .n30 { stroke: #2563eb; }
+    .curve { fill: none; stroke-width: 4; stroke-linecap: round; }
+  </style>
+
+  <text x="430" y="36" text-anchor="middle" class="title">Averages tighten; standardization restores a fixed scale</text>
+  <text x="430" y="62" text-anchor="middle" class="subtitle">For a mean-one exponential variable, Var(X)=1, so SE(mean)=1/sqrt(n).</text>
+
+  <g class="grid">
+    <line x1="80" y1="352" x2="780" y2="352"/>
+    <line x1="80" y1="292" x2="780" y2="292"/>
+    <line x1="80" y1="232" x2="780" y2="232"/>
+    <line x1="80" y1="172" x2="780" y2="172"/>
+    <line x1="80" y1="112" x2="780" y2="112"/>
+  </g>
+  <line x1="80" y1="352" x2="780" y2="352" class="axis"/>
+  <line x1="430" y1="92" x2="430" y2="352" class="axis" stroke-dasharray="6 6"/>
+
+  <g class="tick">
+    <text x="80" y="374" text-anchor="middle">0.0</text>
+    <text x="197" y="374" text-anchor="middle">0.5</text>
+    <text x="313" y="374" text-anchor="middle">0.75</text>
+    <text x="430" y="374" text-anchor="middle">1.0</text>
+    <text x="547" y="374" text-anchor="middle">1.25</text>
+    <text x="663" y="374" text-anchor="middle">1.5</text>
+    <text x="780" y="374" text-anchor="middle">2.0</text>
+    <text x="430" y="405" text-anchor="middle" class="axis-label">sample mean value</text>
+    <text x="36" y="226" text-anchor="middle" transform="rotate(-90 36 226)" class="axis-label">relative density</text>
+    <text x="438" y="96">true mean mu = 1</text>
+  </g>
+
+  <path d="M80 347 C150 344 205 331 252 306 C303 279 345 246 388 217 C429 191 474 178 524 183 C577 190 627 218 671 257 C719 301 753 336 780 347" class="curve n1" opacity="0.78"/>
+  <path d="M80 352 C177 352 255 350 312 335 C358 323 389 292 409 250 C424 219 439 219 454 250 C474 292 502 323 548 335 C605 350 683 352 780 352" class="curve n5" opacity="0.86"/>
+  <path d="M80 352 C228 352 317 352 367 350 C397 347 413 303 421 215 C426 155 434 155 439 215 C447 303 463 347 493 350 C543 352 632 352 780 352" class="curve n30"/>
+
+  <g class="guide">
+    <line x1="80" y1="324" x2="780" y2="324"/>
+    <line x1="80" y1="316" x2="80" y2="332"/>
+    <line x1="780" y1="316" x2="780" y2="332"/>
+    <line x1="273" y1="270" x2="587" y2="270"/>
+    <line x1="273" y1="262" x2="273" y2="278"/>
+    <line x1="587" y1="262" x2="587" y2="278"/>
+    <line x1="366" y1="136" x2="494" y2="136"/>
+    <line x1="366" y1="128" x2="366" y2="144"/>
+    <line x1="494" y1="128" x2="494" y2="144"/>
+  </g>
+
+  <g class="callout">
+    <text x="430" y="318" text-anchor="middle">mu +/- 1 SE for n = 1</text>
+    <text x="430" y="264" text-anchor="middle">mu +/- 1/sqrt(5)</text>
+    <text x="430" y="130" text-anchor="middle">mu +/- 1/sqrt(30)</text>
+    <line x1="612" y1="100" x2="640" y2="100" class="n1 curve" opacity="0.78"/>
+    <text x="650" y="104">n = 1</text>
+    <line x1="612" y1="126" x2="640" y2="126" class="n5 curve" opacity="0.86"/>
+    <text x="650" y="130">n = 5</text>
+    <line x1="612" y1="152" x2="640" y2="152" class="n30 curve"/>
+    <text x="650" y="156">n = 30</text>
+  </g>
+
+  <g font-size="14">
+    <rect x="88" y="92" width="176" height="84" rx="8" class="card"/>
+    <text x="104" y="119">Raw mean:</text>
+    <text x="104" y="143">mean moves toward mu</text>
+    <text x="104" y="160" class="tick">law of large numbers</text>
+    <rect x="88" y="188" width="176" height="98" rx="8" class="card"/>
+    <text x="104" y="216">Standardized mean:</text>
+    <text x="104" y="240">sqrt(n)(mean - mu)</text>
+    <text x="104" y="260">/ sigma</text>
+    <text x="104" y="278" class="tick">central limit theorem</text>
+  </g>
+</svg>

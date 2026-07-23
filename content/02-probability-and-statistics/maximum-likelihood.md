@@ -39,7 +39,7 @@ $$
 
 The logarithm turns the product into a sum without changing the maximizer, which is numerically more stable and easier to differentiate.
 
-This connects [common distributions](common-distributions.md) to losses: Gaussian regression uses squared error, while [logistic regression](../03-classical-machine-learning/logistic-regression.md) uses Bernoulli negative log-likelihood. [MAP estimation](maximum-a-posteriori-estimation.md) adds a prior term to the same likelihood.
+This connects probability laws to losses: [Gaussian](common-distributions.md#normal-and-gaussian-distributions) regression uses squared error, while [logistic regression](../03-classical-machine-learning/logistic-regression.md) uses [Bernoulli](common-distributions.md#bernoulli-distribution) negative log-likelihood. [MAP estimation](maximum-a-posteriori-estimation.md) adds a prior term to the same likelihood.
 
 ## Worked computation
 

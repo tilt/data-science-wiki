@@ -23,7 +23,7 @@ last_reviewed: 2026-07-22
 
 # Statistical Modelling
 
-A statistical model specifies a family of probability laws for data. A simple Gaussian linear model writes
+A statistical model specifies a family of probability laws for data. A simple [Gaussian](common-distributions.md#normal-and-gaussian-distributions) linear model writes
 
 $$
 Y_i=x_i^\top\beta+\epsilon_i,\qquad

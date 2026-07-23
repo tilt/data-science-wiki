@@ -6,7 +6,7 @@ area: software-engineering
 topics:
   - python
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,18 +18,18 @@ related:
   - "javascript-application-architecture.md"
   - "refactoring.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Python
 
 Python is the dominant language in data science because it connects numerical libraries, notebooks, orchestration, and service code. Production Python needs stronger boundaries than exploratory work: isolated environments, typed interfaces, deterministic functions, explicit configuration, and [testing](testing.md) around data and service contracts.
 
-## Engineering Contract
+## Modules, configuration, and typed boundaries
 
 Keep notebook exploration outside importable library code. Put reusable transformations in modules, expose training and backfill workflows through CLIs, keep configuration in typed objects, and make database access explicit through [sql](sql.md) adapters. Type hints do not prove correctness, but they make [API design](api-design.md) reviewable at module boundaries.
 
-## Executed Artifact
+## Typed configuration boundary
 
 This snippet parses a typed dataclass configuration and raises a validation error when the feature window is invalid.
 
@@ -64,7 +64,7 @@ ValueError window_minutes must be positive
 
 The dataclass gives a small immutable configuration contract. In a service, this object can be tested without reading environment variables or starting a framework. In a mixed stack, keep this boundary as explicit as the state boundary in [javascript application architecture](javascript-application-architecture.md).
 
-## Failure Modes
+## Failure modes
 
 Common failures are hidden global state, unpinned dependencies, imports that depend on the current working directory, mutable default values, and code paths that silently change dtype or timezone semantics. During [refactoring](refactoring.md), protect behavior with golden examples before moving notebook logic into modules.
 

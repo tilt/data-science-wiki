@@ -44,7 +44,7 @@ Offline evaluation and its statistics feed online experiments; human and model-a
 ```mermaid
 flowchart TD
   Offline[Offline Evaluation and Golden Datasets] --> Stats[Statistical Significance and Resampling]
-  Stats --> Online[Online Experiments and A/B Testing]
+  Stats --> Online[Online Experiments and A-B Testing]
   Offline --> Human[Human Evaluation and LLM-as-Judge]
   Human --> GenAI[Comparing Generative and Classical Systems]
   Online --> Risk[Coverage, Abstention, Risk-Weighted Errors]
@@ -62,7 +62,7 @@ Read offline evaluation and its statistics, then online experiments, subjective 
 5. [Repeated Sampling](repeated-sampling.md): bootstrap estimates of uncertainty.
 6. [Paired Evaluation](paired-evaluation.md): comparing systems on the same items.
 7. [Online Experiments](online-experiments.md): measuring impact under real traffic.
-8. [A/B Testing](a-b-testing.md): controlled randomized comparison.
+8. [A-B Testing](a-b-testing.md): controlled randomized comparison.
 9. [Human Evaluation](human-evaluation.md): rubric-based judgment of outputs.
 10. [LLM-as-Judge](llm-as-judge.md): using models to score generations.
 11. [Comparing Generative AI and Classical ML Systems](comparing-generative-ai-and-classical-ml-systems.md): evaluating fundamentally different systems.

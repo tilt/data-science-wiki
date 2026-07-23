@@ -6,7 +6,7 @@ area: software-engineering
 topics:
   - technical-decision-records
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - ADR
@@ -20,18 +20,18 @@ related:
   - "api-design.md"
   - "production-integration.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Technical Decision Records
 
 Technical decision records preserve why a choice was made, not just what the code now does. They are most valuable when the decision is expensive to reverse, changes operational risk, affects multiple teams, or sets a precedent for future [software architecture](software-architecture.md).
 
-## Record Mechanism
+## Status, context, decision, and consequences
 
 A small ADR usually has status, context, decision, alternatives, consequences, and links to evidence. The status is part of the contract: proposed, accepted, deprecated, or superseded. Keep the record near the code or docs it governs so [documentation](documentation.md) and implementation drift are visible.
 
-## Authentic Artifact
+## ADR example
 
 ```markdown
 # ADR-004: Use Hosted Embeddings For First Release
@@ -62,7 +62,7 @@ Consequences:
 
 This artifact is not runnable because an ADR is a governance object, but it is concrete enough for [requirements engineering](requirements-engineering.md), [api design](api-design.md), and [production integration](production-integration.md) to inspect. It names traffic, latency, privacy, owner, fallback, and a reconsideration trigger.
 
-## Failure Modes
+## Failure modes
 
 Decision records fail when they are written only for approvals, omit alternatives, or never get superseded after reality changes. A vague note saying "hosted is simpler" is not an ADR; it does not tell a future engineer which constraint mattered or when to revisit the choice.
 

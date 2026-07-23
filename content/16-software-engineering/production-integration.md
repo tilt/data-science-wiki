@@ -6,7 +6,7 @@ area: software-engineering
 topics:
   - production-integration
 level: foundational
-status: review
+status: complete
 page_type: system-design
 aliases: []
 prerequisites:
@@ -20,18 +20,28 @@ related:
   - "../14-ml-engineering-and-mlops/rollbacks.md"
   - "../14-ml-engineering-and-mlops/monitoring.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Production Integration
 
 Production integration is the work of connecting a prototype to real product traffic. The mechanism is a launch contract: interface, authentication, data freshness, rollout path, telemetry, fallback, owner, and rollback. For ML systems this is where notebook assumptions meet [web backends](web-backends.md), latency budgets, authorization, and [monitoring](../14-ml-engineering-and-mlops/monitoring.md).
 
-## Integration Contract
+## Launch gate and rollback contract
 
 Before launch, name the upstream dependencies, downstream consumers, schema versions, timeout budget, retry policy, idempotency key, trace propagation, and user-visible fallback. Roll out behind shadow traffic, a feature flag, or [canary deployment](../14-ml-engineering-and-mlops/canary-deployment.md). The same checklist should link to [testing](testing.md) fixtures and the [API design](api-design.md) contract it exercises.
 
-## Worked Launch Gate
+```mermaid
+flowchart LR
+  Contract[Launch contract] --> Shadow[Shadow traffic]
+  Shadow --> Canary[Canary release]
+  Canary --> Metrics[Metrics gate]
+  Metrics --> Continue[Continue rollout]
+  Metrics --> Rollback[Rollback path]
+  Rollback --> Review[Incident review]
+```
+
+## Canary rollback example
 
 Suppose a launch contract says to roll back when the canary error rate exceeds 5 percent or the overall p95 latency exceeds 250 ms. A five-request smoke sample contains:
 
@@ -45,7 +55,7 @@ Suppose a launch contract says to roll back when the canary error rate exceeds 5
 
 One of two canary requests failed, so the canary error rate is 0.50. The inclusive p95 latency over all five requests is 228.8 ms, below the latency threshold, but the error-rate guardrail alone triggers rollback. The numbers are intentionally small, but the contract is real: define thresholds before launch and automate the decision path. A [software architecture](software-architecture.md) that has no rollback path is not production-ready, even if the model looks good offline.
 
-## Failure Modes
+## Failure modes
 
 Integrations fail when batch data is assumed to exist online, retries are unsafe, provider errors become generic 500s, or trace IDs stop at the first service boundary. Use W3C trace context or equivalent propagation so incidents can cross service boundaries. Document [rollbacks](../14-ml-engineering-and-mlops/rollbacks.md) before the first full release.
 

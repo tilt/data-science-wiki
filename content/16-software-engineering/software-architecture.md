@@ -8,7 +8,7 @@ topics:
   - "system-design"
   - "production-integration"
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Architecture"
@@ -23,14 +23,14 @@ related:
   - "../14-ml-engineering-and-mlops/microservices.md"
   - "../15-cloud-and-distributed-systems/index.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Software Architecture
 
 Software architecture is the set of structural decisions that make a system easier or harder to change, operate, secure, and scale. It is not the diagram itself; it is the set of boundaries and trade-offs the diagram records. In ML and AI systems, architecture must include data contracts, model versions, evaluation gates, [production integration](production-integration.md), observability, privacy, and rollback.
 
-## Architecture Mechanism
+## Containers, contracts, and ownership
 
 The C4-style view is a useful contract: system context, containers, components, and code. For a document-answering product, the container view might be:
 
@@ -53,7 +53,7 @@ This artifact is not executable, but it is concrete: each arrow implies an [API 
 
 Architecture works by making expensive decisions explicit while they can still be discussed. If latency is dominated by model calls, [web backends](web-backends.md) need streaming and cancellation. If privacy is the primary constraint, retrieval and model-serving boundaries must enforce permission checks before context construction. If operational risk is high, the architecture must reserve a rollback path before launch.
 
-## Failure Modes
+## Failure modes
 
 Architecture fails when diagrams omit runtime behavior, data ownership, or deployment order. A box labeled "AI service" is not enough: name the schema, timeout, retry rule, observability fields, and degradation path. Do not introduce [design patterns](design-patterns.md) or service boundaries unless they reduce a real coupling problem.
 

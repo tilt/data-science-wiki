@@ -34,6 +34,21 @@ $$
 
 Here $x_t$ is the input at time step $t$, $h_t$ is the hidden state after seeing that input, and $y_t$ is the output or prediction for that step. The matrices $W_x$, $W_h$, and $W_y$ are shared across all time steps; $\phi$ is the recurrent nonlinearity, such as tanh, and $g$ is the output mapping.
 
+Unrolling the recurrence over time makes the shared weights and the single state path visible. Each hidden state depends on the current input and the previous state, and every step reuses the same $W_x$, $W_h$, and $W_y$:
+
+```mermaid
+flowchart LR
+  h0[Initial state h0] --> h1[Hidden h1]
+  x1[Input x1] --> h1
+  h1 --> h2[Hidden h2]
+  x2[Input x2] --> h2
+  h2 --> h3[Hidden h3]
+  x3[Input x3] --> h3
+  h1 --> y1[Output y1]
+  h2 --> y2[Output y2]
+  h3 --> y3[Output y3]
+```
+
 Training uses backpropagation through time: unfold the recurrence over $T$ steps and apply [backpropagation](backpropagation.md) through the shared copies of $W_x,W_h,W_y$. Gradients include products of recurrent Jacobians,
 
 $$
@@ -71,6 +86,10 @@ final_hidden [0.515999972820282, -0.07500000298023224, -0.05700000002980232]
 
 Each hidden state combines the current input with the previous hidden state. The final vector is a compressed summary of all four inputs, which is useful but also a bottleneck.
 
+## History and adoption
+
+Recurrent networks began with Elman and Jordan networks in the late 1980s, which added a recurrent state to a feed-forward net so it could model order. The [vanishing-gradient](vanishing-and-exploding-gradients.md) problem limited how far these vanilla RNNs could carry information, motivating gated variants: the [LSTM](lstm-and-gru.md) in 1997 and the simpler GRU in 2014, both of which use gates to protect a memory path across many steps. Encoder-decoder ("sequence to sequence") RNNs then became the standard for machine translation, and adding an [attention](attention.md) mechanism between encoder and decoder removed the single-vector bottleneck. That attention step was ultimately generalized into the [transformer](transformers.md), which dropped recurrence entirely and now dominates long-context sequence modeling. RNNs remain useful where strict streaming, small state, or low per-step latency matters.
+
 ## Caveats
 
 Long sequences expose the product-of-Jacobians problem. Truncated backpropagation reduces memory and compute but limits credit assignment length. Hidden states are order-sensitive, so shuffling or padding mistakes create real modeling errors rather than harmless preprocessing noise.
@@ -78,7 +97,9 @@ Long sequences expose the product-of-Jacobians problem. Truncated backpropagatio
 ## References
 
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 10: Sequence Modeling](https://www.deeplearningbook.org/contents/rnn.html)
+- [Elman, 1990, Finding Structure in Time](https://doi.org/10.1207/s15516709cog1402_1)
 - [Hochreiter and Schmidhuber, 1997, Long Short-Term Memory](https://doi.org/10.1162/neco.1997.9.8.1735)
+- [Cho et al., 2014, Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation](https://arxiv.org/abs/1406.1078)
 
 > [!nav]
 > **Section** — [Deep Learning](index.md)

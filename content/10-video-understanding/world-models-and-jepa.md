@@ -8,7 +8,7 @@ topics:
   - jepa
   - self-supervised-learning
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -20,7 +20,7 @@ related:
   - v-jepa-2.md
   - self-supervised-video-representation-learning.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # World Models and JEPA

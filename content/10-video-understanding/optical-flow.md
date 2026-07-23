@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - optical-flow
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -17,14 +17,14 @@ related:
   - spatial-and-temporal-modelling.md
   - temporal-action-recognition.md
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Optical Flow
 
 Optical flow estimates the apparent 2D motion field between nearby frames. It is lower-level than [temporal action recognition](temporal-action-recognition.md): instead of naming the action, it asks how local image intensity is moving. That motion field can be fed to [two-stream models](two-stream-models.md), used as a cue in [person tracking and track aggregation](person-tracking-and-track-aggregation.md), or treated as one component of broader [spatial and temporal modelling](spatial-and-temporal-modelling.md).
 
-## Defining math
+## Brightness constancy
 
 Brightness constancy assumes a point keeps the same intensity as it moves:
 

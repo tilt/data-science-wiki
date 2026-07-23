@@ -43,7 +43,7 @@ These follow the wiki's section order; each names a good entry point for depth i
 - Information retrieval and search: start with [BM25](../12-information-retrieval-and-search/bm25.md), [Dense Retrieval](../12-information-retrieval-and-search/dense-retrieval.md), and [Ranking and Retrieval Metrics](../12-information-retrieval-and-search/ranking-and-retrieval-metrics.md).
 - Data engineering: start with [Data Pipelines](../13-data-engineering/data-pipelines.md), [ETL and ELT](../13-data-engineering/etl-and-elt.md), and [Data Quality](../13-data-engineering/data-quality.md).
 - Production ML: start with [ML System Lifecycle](../14-ml-engineering-and-mlops/ml-system-lifecycle.md), [Monitoring](../14-ml-engineering-and-mlops/monitoring.md), and [Golden Datasets](../17-experimentation-and-evaluation/golden-datasets.md).
-- Experimentation and evaluation: start with [Offline Evaluation](../17-experimentation-and-evaluation/offline-evaluation.md), [A/B Testing](../17-experimentation-and-evaluation/a-b-testing.md), and [Statistical Significance](../17-experimentation-and-evaluation/statistical-significance.md).
+- Experimentation and evaluation: start with [Offline Evaluation](../17-experimentation-and-evaluation/offline-evaluation.md), [A-B Testing](../17-experimentation-and-evaluation/a-b-testing.md), and [Statistical Significance](../17-experimentation-and-evaluation/statistical-significance.md).
 - Responsible AI: start with [Fairness](../18-responsible-ai-safety-and-governance/fairness.md), [Explainability](../18-responsible-ai-safety-and-governance/explainability.md), and [Governance of Model and Knowledge Base Changes](../18-responsible-ai-safety-and-governance/governance-of-model-and-knowledge-base-changes.md).
 
 ## How to choose sources

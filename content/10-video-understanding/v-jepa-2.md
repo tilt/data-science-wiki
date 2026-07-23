@@ -8,7 +8,7 @@ topics:
   - world-models
   - self-supervised-video
 level: advanced
-status: review
+status: complete
 page_type: model
 aliases:
   - VJEPA 2
@@ -22,7 +22,7 @@ related:
   - video-transformers.md
   - gesture-recognition.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # V-JEPA 2

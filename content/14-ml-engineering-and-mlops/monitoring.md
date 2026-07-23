@@ -74,7 +74,7 @@ Monitoring fails when thresholds are copied across models, labels are missing fr
 > [!nav]
 > **Section** — [ML Engineering and MLOps](index.md)
 >
-> [← A/B Testing](a-b-testing.md) [Observability →](observability.md)
+> [← MLOps A-B Testing](a-b-testing.md) [Observability →](observability.md)
 >
 > **Learning path** — [Production ML](../00-home-and-navigation/learning-paths.md#production-ml)
 >

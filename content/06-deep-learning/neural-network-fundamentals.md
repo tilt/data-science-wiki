@@ -41,6 +41,25 @@ The parameter set $\theta$ contains the weights and biases across all layers. Th
 
 The nonlinearity is what makes the model more than a linear projection; without [activation functions](activation-functions.md), any stack of dense layers collapses to one affine layer. Training chooses parameters $\theta$ by minimizing a [loss function](loss-functions.md), usually with gradients from [backpropagation](backpropagation.md) and updates from an [optimizer](optimizers.md).
 
+## The forward and backward pass
+
+Using the network and training it are two passes over the same layers:
+
+1. **Forward pass.** Feed the input $x$ into the first layer, compute the affine map $xW_1+b_1$, apply the activation $\phi$, and pass the result to the next layer. Repeat until the output layer produces the prediction $\hat y=f_\theta(x)$.
+2. **Loss.** Score the prediction against the target $y$ with a [loss](loss-functions.md) $L(\hat y,y)$, a single scalar measuring how wrong the prediction is.
+3. **Backward pass.** Run [backpropagation](backpropagation.md), which works through this pass in detail: starting from $\partial L/\partial\hat y$, it applies the chain rule layer by layer, from output back to input, to obtain the gradient $\partial L/\partial\theta$ for every weight and bias.
+4. **Update.** An [optimizer](optimizers.md) moves each parameter against its gradient, $\theta\leftarrow\theta-\eta\,\partial L/\partial\theta$ with learning rate $\eta$, and the loop repeats on the next batch.
+
+```mermaid
+flowchart LR
+  X[Input x] --> H1[Dense layer plus activation]
+  H1 --> H2[Dense layer plus activation]
+  H2 --> Yhat[Prediction y-hat]
+  Yhat --> Loss[Loss versus target y]
+  Loss --> Back[Backprop: gradient w.r.t. every parameter]
+  Back --> Update[Optimizer update]
+```
+
 ## Intuition
 
 Hidden layers learn intermediate coordinates that make the target easier to predict. In vision those coordinates may resemble edges or parts; in tabular data they may be interactions that were not manually encoded. The same mechanism also creates the usual risks: a high-capacity network can memorize small data, and a bad loss or initialization can make the optimization problem look harder than the prediction problem really is.
@@ -86,7 +105,8 @@ Depth and width are capacity, not quality. The training loop only optimizes the 
 
 ## References
 
-- [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 8: Optimization for Training Deep Models](https://www.deeplearningbook.org/contents/optimization.html)
+- [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 6: Deep Feedforward Networks](https://www.deeplearningbook.org/contents/mlp.html)
+- [Nielsen, Neural Networks and Deep Learning, Chapter 1: Using neural nets to recognize handwritten digits](http://neuralnetworksanddeeplearning.com/chap1.html)
 - [PyTorch documentation: Autograd mechanics](https://docs.pytorch.org/docs/2.7/notes/autograd.html)
 
 > [!nav]

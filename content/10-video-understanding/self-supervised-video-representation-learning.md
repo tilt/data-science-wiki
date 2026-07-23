@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - self-supervised-video-representation-learning
 level: advanced
-status: review
+status: complete
 page_type: concept
 aliases:
   - Self-supervised video learning
@@ -18,7 +18,7 @@ related:
   - v-jepa-2.md
   - ../06-deep-learning/self-supervised-learning.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Self-Supervised Video Representation Learning

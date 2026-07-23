@@ -6,7 +6,7 @@ area: software-engineering
 topics:
   - sql
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -19,7 +19,7 @@ related:
   - "../13-data-engineering/sql.md"
   - "../13-data-engineering/relational-modelling.md"
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # SQL
@@ -38,7 +38,7 @@ Application SQL should use parameter binding, explicit authorization predicates,
 | Performance   | design indexes for access paths and pagination     | queries that pass tests but fail under load |
 | Evolvability  | keep migrations backward compatible during deploys | old code reading a half-migrated schema     |
 
-## Executed Artifact
+## Prepared statement and rollback example
 
 This SQL artifact uses a prepared statement to keep user input separate from executable SQL, includes the server-side owner predicate, and demonstrates rollback for a failed multi-step change:
 
@@ -84,13 +84,13 @@ ticket_count_after_rollback
 
 The malicious-looking ticket ID is data, not executable SQL, because the prepared statement binds parameters separately from the statement text. The rollback also proves why [testing](testing.md) should cover failed transaction paths, not only successful queries. [Web backends](web-backends.md) should enforce the owner predicate server-side; the frontend must not be trusted to filter records.
 
-## Service Boundary
+## Service boundary
 
 SQL should not leak upward as arbitrary query access from the client. A backend endpoint should expose task-specific operations such as "list my tickets" or "close ticket" and keep row-level predicates inside the service. This makes the [API design](api-design.md) reviewable: reviewers can see which user, tenant, status, or time-window constraints are enforced for each operation.
 
 For analytical workloads, query flexibility belongs in governed data tools or warehouses. For application services, stable query shapes are a reliability feature because they can be indexed, tested, rate-limited, and audited.
 
-## Failure Modes
+## Failure modes
 
 Common failures are string-concatenated queries, forgotten authorization predicates, unbounded result sets, hidden business logic in unreadable nested SQL, and migrations that assume no concurrent traffic. For data products, align service SQL with [relational modelling](../13-data-engineering/relational-modelling.md) and document null semantics in [documentation](documentation.md).
 

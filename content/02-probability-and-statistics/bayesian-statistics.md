@@ -33,7 +33,7 @@ The posterior is the main object: it supports point summaries, credible interval
 
 ## Worked computation
 
-This snippet updates a Beta prior after seven heads and three tails, then computes the posterior probability that the coin is biased toward heads and the central credible interval.
+This snippet updates a [Beta](common-distributions.md#beta-distribution) prior after seven heads and three tails, then computes the posterior probability that the coin is biased toward heads and the central credible interval.
 
 ```python
 import numpy as np

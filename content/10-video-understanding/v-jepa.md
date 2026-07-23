@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - v-jepa
 level: advanced
-status: review
+status: complete
 page_type: model
 aliases:
   - Video JEPA
@@ -18,7 +18,7 @@ related:
   - world-models-and-jepa.md
   - video-representation.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # V-JEPA

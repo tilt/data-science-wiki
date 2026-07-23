@@ -6,7 +6,7 @@ area: software-engineering
 topics:
   - behaviour-driven-development
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - BDD
@@ -18,14 +18,14 @@ related:
   - "documentation.md"
   - "code-review.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Behaviour Driven Development
 
 Behaviour-driven development turns a requirement into examples of externally visible behavior. The mechanism is the Given-When-Then scenario: initial state, action, expected result. It sits between [requirements engineering](requirements-engineering.md) and [testing](testing.md): stakeholders can read it before code exists, and engineers can later automate the example.
 
-## Contract Form
+## Given, when, then scenarios
 
 ```gherkin
 Feature: Feed personalization opt-out
@@ -45,7 +45,7 @@ Feature: Feed personalization opt-out
 
 The scenario names policy behavior, not implementation classes. That makes it suitable for [documentation](documentation.md), review comments, and future regression tests.
 
-## Executed Artifact
+## Executable scenarios
 
 This snippet runs behavior-style examples against a small shipping-fee rule and prints whether each scenario matches the expected outcome.
 
@@ -77,7 +77,7 @@ opted in uses personalization: True -> personalized_ranker
 
 BDD is strongest for deterministic edges: authorization, consent, routing, workflow state, and fallback behavior. It is weaker for exact model scores; use evaluation datasets and [golden datasets](../17-experimentation-and-evaluation/golden-datasets.md) for statistical behavior. During [code review](code-review.md), a scenario is useful if the reviewer can point to the user-visible rule it protects.
 
-## Failure Modes
+## Failure modes
 
 BDD becomes theatre when scenarios are written after implementation or restate private method names. Keep the scenario count small, name the business rule, and move brittle setup into fixtures. If every scenario requires a full browser and real provider call, the examples will be too slow to guide design.
 

@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - sliding-window-inference
 level: intermediate
-status: review
+status: complete
 page_type: implementation
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - trigger-point-prediction.md
   - temporal-action-recognition.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Sliding Window Inference

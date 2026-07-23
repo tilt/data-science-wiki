@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - video-language-models
 level: advanced
-status: review
+status: complete
 page_type: model
 aliases:
   - Video language models
@@ -19,7 +19,7 @@ related:
   - v-jepa-2-versus-vision-language-models.md
   - ../11-generative-ai/vision-language-models.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Video-Language Models

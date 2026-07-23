@@ -69,4 +69,4 @@ Reviewer fatigue, order effects, unclear rubrics, and hidden system identity can
 > [!nav]
 > **Section** — [Experimentation and Evaluation](index.md)
 >
-> [← A/B Testing](a-b-testing.md) [LLM-as-Judge →](llm-as-judge.md)
+> [← A-B Testing](a-b-testing.md) [LLM-as-Judge →](llm-as-judge.md)

@@ -1,5 +1,5 @@
 ---
-title: A/B Testing
+title: A-B Testing
 slug: experimentation-and-evaluation/a-b-testing
 description: "Randomized comparison of product or model variants with pre-specified metrics and uncertainty."
 area: experimentation-and-evaluation
@@ -11,6 +11,7 @@ level: foundational
 status: complete
 page_type: concept
 aliases:
+  - "A/B Testing"
   - "Split test"
 prerequisites:
   - index.md
@@ -20,14 +21,16 @@ related:
   - paired-evaluation.md
   - repeated-sampling.md
   - ../02-probability-and-statistics/experimental-design.md
+  - ../02-probability-and-statistics/hypothesis-testing.md
+  - ../02-probability-and-statistics/confidence-intervals.md
   - ../14-ml-engineering-and-mlops/a-b-testing.md
 historical_context: false
 last_reviewed: 2026-07-23
 ---
 
-# A/B Testing
+# A-B Testing
 
-A/B testing is a randomized experiment comparing a control experience with one or more variants. This page is the evaluation concept; the production lifecycle counterpart is [MLOps A/B testing](../14-ml-engineering-and-mlops/a-b-testing.md). A valid test needs a named decision, a randomization unit, primary and guardrail metrics, a minimum meaningful effect, and an analysis plan before traffic is exposed.
+A-B testing is a randomized experiment comparing a control experience with one or more variants. This page is the evaluation concept: it focuses on planning, sample size, metric choice, and analysis before and after exposure. The production lifecycle counterpart is [MLOps A-B testing](../14-ml-engineering-and-mlops/a-b-testing.md), which focuses on feature flags, versioned telemetry, guardrails, and rollback; the underlying test-statistic mechanics — z-tests, p-values, and confidence intervals — are derived in [hypothesis testing](../02-probability-and-statistics/hypothesis-testing.md). A valid test needs a named decision, a randomization unit, primary and guardrail metrics, a minimum meaningful effect, and an analysis plan before traffic is exposed.
 
 ## Sample size and the test statistic
 
@@ -37,7 +40,7 @@ $$
 n \approx \frac{\left[z_{1-\alpha/2}\sqrt{2\bar p(1-\bar p)} + z_{\text{power}}\sqrt{p_0(1-p_0)+p_1(1-p_1)}\right]^2}{(p_1-p_0)^2},
 $$
 
-where $\bar p=(p_0+p_1)/2$. After launch, [statistical significance](statistical-significance.md) tests the observed effect; [online experiments](online-experiments.md) add assignment integrity, logging, interference, and guardrails.
+where $\bar p=(p_0+p_1)/2$. Here $p_0$ is the baseline conversion rate, $p_1$ is the smallest treatment rate worth detecting, $\alpha$ is the false-positive rate, and `power` is the probability of detecting that effect under the planning model. [Hypothesis testing](../02-probability-and-statistics/hypothesis-testing.md) defines z-statistics and p-values; [statistical significance](statistical-significance.md) interprets the observed effect after launch; [online experiments](online-experiments.md) add assignment integrity, logging, interference, and guardrails.
 
 ## Worked calculation
 

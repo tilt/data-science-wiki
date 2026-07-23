@@ -42,7 +42,7 @@ This is a counting-process version of the [law of large numbers](law-of-large-nu
 
 ## Worked simulation
 
-The code simulates many renewal processes with Gamma-distributed interarrival times and compares the observed count rate to the theorem's $1/\mathbb E[S]$ prediction.
+The code simulates many renewal processes with [Gamma-distributed](common-distributions.md#gamma-distribution) interarrival times and compares the observed count rate to the theorem's $1/\mathbb E[S]$ prediction.
 
 ```python
 import numpy as np
@@ -75,7 +75,7 @@ The simulated mean interarrival time is `6.0013`, close to the modeled mean 6, s
 
 ## Caveats
 
-The renewal assumption fails when events change future risk, when waiting times depend on covariates, or when the system does not reset after an event. A Poisson process is only the exponential-waiting-time special case and is also a continuous-time [Markov chain](markov-chains.md).
+The renewal assumption fails when events change future risk, when waiting times depend on covariates, or when the system does not reset after an event. A [Poisson](common-distributions.md#poisson-distribution) process is only the [exponential](common-distributions.md#exponential-distribution)-waiting-time special case and is also a continuous-time [Markov chain](markov-chains.md).
 
 ## References
 

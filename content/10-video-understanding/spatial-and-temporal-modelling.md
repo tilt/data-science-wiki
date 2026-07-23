@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - spatial-and-temporal-modelling
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases:
   - Spatiotemporal modelling
@@ -18,7 +18,7 @@ related:
   - video-transformers.md
   - optical-flow.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Spatial and Temporal Modelling
@@ -34,6 +34,14 @@ h_t = f_\theta(x_{t-k:t+k}), \qquad y = g(h_1,\ldots,h_T).
 $$
 
 A spatial-only model can treat frames independently or average them; a temporal model includes derivatives, recurrence, temporal convolution, or attention over positions. The mechanism matters because many actions have the same objects but different order.
+
+```mermaid
+flowchart LR
+  Frames[Frame sequence] --> Spatial[Spatial model: what is in each frame]
+  Spatial --> Feats[Per-frame features x_t]
+  Feats --> Temporal[Temporal model: order-sensitive over time]
+  Temporal --> Out[Sequence prediction y]
+```
 
 ## Worked example
 

@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - real-time-video-understanding
 level: advanced
-status: review
+status: complete
 page_type: system-design
 aliases:
   - Real time video understanding
@@ -18,7 +18,7 @@ related:
   - person-tracking-and-track-aggregation.md
   - video-transformers.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Real-Time Video Understanding

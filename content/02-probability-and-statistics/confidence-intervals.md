@@ -22,7 +22,7 @@ last_reviewed: 2026-07-22
 
 # Confidence Intervals
 
-A confidence interval is a random interval produced by a procedure with a target long-run coverage rate. For an approximately normal estimator,
+A confidence interval is a random interval produced by a procedure with a target long-run coverage rate. For an approximately [normal](common-distributions.md#normal-and-gaussian-distributions) estimator,
 
 $$
 \hat\theta \pm z_{1-\alpha/2}\operatorname{SE}(\hat\theta)
@@ -38,7 +38,7 @@ The [central limit theorem](central-limit-theorem.md) supplies many standard err
 
 ## Worked simulation
 
-This simulation repeatedly builds $t$ confidence intervals for normal samples and measures empirical coverage, average width, and the critical value used.
+This simulation repeatedly builds [t](common-distributions.md#student-t-distribution) confidence intervals for normal samples and measures empirical coverage, average width, and the critical value used.
 
 ```python
 import numpy as np

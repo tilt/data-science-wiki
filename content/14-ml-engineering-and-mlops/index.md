@@ -72,7 +72,7 @@ Read the lifecycle and training first, then artifacts, serving, release, operati
 13. [Shadow Deployment](shadow-deployment.md): testing on copied traffic without exposure.
 14. [Canary Deployment](canary-deployment.md): progressive exposure with guardrails.
 15. [Rollbacks](rollbacks.md): reverting safely when a release goes wrong.
-16. [A/B Testing](a-b-testing.md): controlled comparison of model variants.
+16. [A-B Testing](a-b-testing.md): controlled comparison of model variants.
 17. [Monitoring](monitoring.md): tracking health and quality in production.
 18. [Observability](observability.md): traces and logs that explain behavior.
 19. [Service Level Objectives](service-level-objectives.md): the reliability targets to hold.

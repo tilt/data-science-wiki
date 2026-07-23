@@ -6,7 +6,7 @@ area: software-engineering
 topics:
   - javascript-application-architecture
 level: intermediate
-status: review
+status: complete
 page_type: system-design
 aliases:
   - Frontend architecture
@@ -19,18 +19,18 @@ related:
   - "python.md"
   - "production-integration.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # JavaScript Application Architecture
 
 JavaScript application architecture separates rendering, state, domain logic, network clients, and side effects so product behavior can evolve without turning every component into a special case. For AI products, this boundary has to handle streaming tokens, cancellation, citation state, partial failure, telemetry, and retry decisions from [web backends](web-backends.md).
 
-## Architecture Contract
+## State, domain, network, and effects
 
 A practical layout is: UI components render state and emit events; a state store owns workflow transitions; domain modules validate objects such as citations and uploads; API clients own `fetch` calls and error mapping; telemetry modules record latency and failure classes. This mirrors [API design](api-design.md): the frontend should consume a contract rather than infer behavior from incidental JSON.
 
-## Executed Artifact
+## Cancellable stream state
 
 ```javascript
 class ChatStore {
@@ -67,7 +67,7 @@ aborted true
 
 The state machine makes cancellation explicit instead of leaving it as a browser side effect. [Testing](testing.md) can exercise the store without a DOM, while integration tests can focus on streaming and backend errors. The same separation helps mixed [python](python.md) and JavaScript stacks because each side owns a small contract.
 
-## Failure Modes
+## Failure modes
 
 Common failures are global mutable state, business rules embedded in JSX, untyped response objects, and no cancellation path for long-running requests. A streaming UI needs states for pending, receiving, complete, failed, and cancelled; otherwise [production integration](production-integration.md) bugs appear as stuck spinners.
 

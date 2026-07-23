@@ -27,7 +27,7 @@ Evaluation datasets are curated examples used to measure model behavior before r
 
 ## What an evaluation set specifies
 
-An evaluation dataset needs an owner, sampling policy, label policy, slice definitions, refresh cadence, allowed uses, and known limitations. It should be versioned through [dataset versioning](dataset-versioning.md) and kept separate from training data. Offline evaluation informs release decisions, while [A/B testing](a-b-testing.md) measures live impact.
+An evaluation dataset needs an owner, sampling policy, label policy, slice definitions, refresh cadence, allowed uses, and known limitations. It should be versioned through [dataset versioning](dataset-versioning.md) and kept separate from training data. Offline evaluation informs release decisions, while [A-B testing](a-b-testing.md) measures live impact.
 
 ## Artifact: Evaluation Card
 

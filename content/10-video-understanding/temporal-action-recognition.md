@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - temporal-action-recognition
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - Action recognition
@@ -18,7 +18,7 @@ related:
   - two-stream-models.md
   - sliding-window-inference.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # Temporal Action Recognition
@@ -34,6 +34,14 @@ h_t = f_\theta(x_t), \qquad z = g_\phi(h_{1:T}), \qquad p(y\mid x_{1:T})=\operat
 $$
 
 The aggregator may be temporal averaging, max pooling, a recurrent model, [3D convolution](3d-convolutional-networks.md), or [video-transformer](video-transformers.md) attention. [Two-stream models](two-stream-models.md) implement the same classification goal with separate appearance and motion logits.
+
+```mermaid
+flowchart LR
+  Frames[Frame or clip features] --> Encoder[Per-frame encoder]
+  Encoder --> Aggregate[Temporal aggregation]
+  Aggregate --> Classifier[Clip classifier]
+  Classifier --> Label[Action label]
+```
 
 ## Worked example
 

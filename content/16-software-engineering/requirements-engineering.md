@@ -6,7 +6,7 @@ area: software-engineering
 topics:
   - requirements-engineering
 level: foundational
-status: review
+status: complete
 page_type: concept
 aliases: []
 prerequisites:
@@ -18,18 +18,18 @@ related:
   - "testing.md"
   - "documentation.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Requirements Engineering
 
 Requirements engineering turns stakeholder needs, constraints, and risks into a testable description of what should be built. A goal says why the work matters; a requirement says what behavior, quality, interface, or constraint the system must satisfy. For data products, requirements must include data availability, workflow fit, acceptable error, latency, privacy, and auditability before [software architecture](software-architecture.md) is chosen.
 
-## Requirement Mechanism
+## Actors, conditions, and fit criteria
 
 A useful requirement has an actor, condition, system response, fit criterion, owner, and non-goal. "Use AI to improve support" is a goal. "Auto-route German billing tickets only when precision is at least 0.94 on `golden_de_billing_v3`, with human override visible on every routed ticket" is testable. The examples can become [behaviour-driven development](behaviour-driven-development.md) scenarios or [testing](testing.md) fixtures.
 
-## Worked Requirements
+## Reviewable requirements
 
 Two requirements can be reviewed as requirements rather than aspirations:
 
@@ -40,7 +40,7 @@ Two requirements can be reviewed as requirements rather than aspirations:
 
 The artifact is intentionally small: it distinguishes requirements from aspirations. Once a requirement carries a fit criterion, [code review](code-review.md) can ask whether the implementation and [documentation](documentation.md) updated the same contract.
 
-## Failure Modes
+## Failure modes
 
 Weak requirements overfit to a proposed solution, omit operational constraints, or hide disagreement behind words such as "accurate", "real-time", or "scalable." If a term cannot be tested, measured, or reviewed, clarify it before writing a [technical decision record](technical-decision-records.md).
 

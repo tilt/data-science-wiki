@@ -89,6 +89,10 @@ receptive_field_two_3x3_layers 5
 
 The same $2\times2$ filter is applied at nine locations, producing identical local contrast on this linear ramp. Two stride-1 $3\times3$ layers see a $5\times5$ patch, not just two independent local windows.
 
+## Architectural lineage
+
+The modern CNN traces to LeNet-5, which used convolution, pooling, and a small classifier for handwritten-digit recognition in 1998. The idea scaled up with AlexNet, whose 2012 ImageNet result — using ReLU activations, dropout, and GPU training — began the deep-learning era in vision. VGG showed that stacking many small $3\times3$ filters builds large receptive fields with few parameters per layer, and GoogLeNet added parallel multi-scale "inception" branches. [ResNet](residual-connections.md) then made very deep CNNs trainable with [residual connections](residual-connections.md) that give gradients a direct path, and remains a common backbone for [computer-vision architectures](../09-computer-vision/cnn-architectures.md). Later designs such as [vision transformers](../09-computer-vision/vision-transformers.md) revisit the same problem with attention rather than fixed local kernels.
+
 ## Caveats
 
 Translation equivariance is useful only when the label should be insensitive to location. Aggressive pooling can discard small objects, and padding can introduce boundary artifacts. Batch normalization statistics also become brittle when image batches are tiny or distribution-shifted.
@@ -96,6 +100,8 @@ Translation equivariance is useful only when the label should be insensitive to 
 ## References
 
 - [Goodfellow, Bengio, and Courville, Deep Learning, Chapter 9: Convolutional Networks](https://www.deeplearningbook.org/contents/convnets.html)
+- [LeCun et al., 1998, Gradient-Based Learning Applied to Document Recognition](https://doi.org/10.1109/5.726791)
+- [Krizhevsky, Sutskever, and Hinton, 2012, ImageNet Classification with Deep Convolutional Neural Networks](https://doi.org/10.1145/3065386)
 - [He et al., 2015, Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
 
 > [!nav]

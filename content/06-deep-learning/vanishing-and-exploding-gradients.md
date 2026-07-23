@@ -63,7 +63,9 @@ $$
 1.2^{20}\approx38.
 $$
 
-This is why depth, recurrent time length, activation derivatives, weight scale, and normalization all affect whether gradients remain usable.
+This is why depth, recurrent time length, activation derivatives, weight scale, and normalization all affect whether gradients remain usable. On a log scale the three regimes are straight lines: the gradient norm decays, stays level, or grows geometrically as it travels back through the layers.
+
+![Gradient norm on a log scale versus the number of back-propagated layers: repeated Jacobian factors below one make the gradient vanish, factors near one keep it stable, and factors above one make it explode.](../assets/diagrams/vanishing-exploding-gradients.svg)
 
 ## Symptoms and mitigations
 

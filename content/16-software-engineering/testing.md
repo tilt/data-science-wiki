@@ -8,7 +8,7 @@ topics:
   - "quality"
   - "regression"
 level: intermediate
-status: review
+status: complete
 page_type: concept
 aliases:
   - "Automated testing"
@@ -22,18 +22,18 @@ related:
   - "../17-experimentation-and-evaluation/golden-datasets.md"
   - "../14-ml-engineering-and-mlops/ci-cd-for-ml.md"
 historical_context: false
-last_reviewed: 2026-07-11
+last_reviewed: 2026-07-23
 ---
 
 # Testing
 
 Testing is executable evidence about a system boundary. In ordinary software that boundary may be a function, HTTP contract, database transaction, or browser workflow. In ML and AI systems it also includes data validation, prompt and retrieval fixtures, model-version behavior, and [golden datasets](../17-experimentation-and-evaluation/golden-datasets.md). The point is not to have many tests; it is to make important regressions cheap to detect before [production integration](production-integration.md).
 
-## Test Layers
+## Unit, integration, property, and end-to-end checks
 
 Unit tests isolate deterministic logic. Integration tests exercise a real boundary between components, such as a service calling a payment gateway adapter or a RAG endpoint calling retrieval and validation. Property tests check invariants across many inputs, for example "a discount never makes a price negative." End-to-end tests cover user-visible workflows, but they are expensive and should not carry checks that a unit or contract test could catch faster. [Behaviour-driven development](behaviour-driven-development.md) is useful when the expected behavior must be negotiated with non-engineers before the test is automated.
 
-## Executed Artifact
+## Checkout test suite
 
 This snippet defines unit, integration, and property-style pytest tests for checkout logic and shows the expected test run result.
 
@@ -103,7 +103,7 @@ E        +  where 895 = discount(995, 10)
 
 That failure is exactly why [refactoring](refactoring.md) needs characterization checks: a small internal rewrite changed a money contract. [Code review](code-review.md) should inspect whether the test is attached to the behavior that matters, not only whether the diff is formatted.
 
-## Failure Modes
+## Failure modes
 
 Slow suites get ignored, so keep fast deterministic checks close to the code and isolate slow model/provider tests behind explicit markers. Flaky tests should be treated as observability signals until proven otherwise. Snapshot tests for generated text are brittle unless they assert structured fields, citations, or risk labels; pair them with [documentation](documentation.md) that explains what the fixture is protecting.
 

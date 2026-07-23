@@ -6,7 +6,7 @@ area: video-understanding
 topics:
   - world-models
 level: advanced
-status: review
+status: complete
 page_type: model
 aliases: []
 prerequisites:
@@ -17,7 +17,7 @@ related:
   - video-representation.md
   - self-supervised-video-representation-learning.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-07-23
 ---
 
 # World Models
@@ -33,6 +33,16 @@ z_t = E(x_t), \qquad \hat z_{t+1}=F(z_t,a_t), \qquad \hat x_{t+1}=D(\hat z_{t+1}
 $$
 
 Planning can happen in latent space by rolling out candidate actions and minimizing a cost. [World models and JEPA](world-models-and-jepa.md) focuses on the variant where prediction happens in representation space rather than pixel space.
+
+```mermaid
+flowchart LR
+  Obs[Observation x_t] --> Encoder[Encoder E]
+  Encoder --> Latent[Latent state z_t]
+  Action[Action a_t] --> Dynamics[Dynamics F]
+  Latent --> Dynamics
+  Dynamics --> Next[Predicted next latent]
+  Next --> Decoder[Decoder or cost head]
+```
 
 ## Worked rollout
 
