@@ -56,7 +56,7 @@ can be compared with standard normal cutoffs such as $\pm 1.96$.
 
 ![Sampling distributions of the sample mean get narrower as n grows, while standardization maps the remaining error to a fixed z scale.](../assets/diagrams/central-limit-theorem-standard-error.svg)
 
-The first visual separates two ideas that are often mixed together. The sampling distribution of $\bar X_n$ tightens around $\mu$ because averaging reduces variance. Standardization then zooms back in by multiplying the error by $\sqrt n/\sigma$, producing a stable scale where normal reference values can be reused.
+The first visual separates two ideas that are often mixed together. The sampling distribution of $\bar X_n$ tightens around $\mu$ because averaging reduces variance. For the exponential example, the $n=1$ curve is just the raw exponential density: it is highest at 0 even though its mean is 1. Standardization then zooms back in by multiplying the error by $\sqrt n/\sigma$, producing a stable scale where normal reference values can be reused.
 
 ## Statement with named symbols
 
@@ -133,7 +133,7 @@ A skewed observation can have a long right tail, but an average is a sum of many
 
 ![Standardized exponential sample means becoming more symmetric and closer to a normal curve as n grows.](../assets/diagrams/central-limit-theorem-convergence.svg)
 
-The plot uses [exponential](common-distributions.md#exponential-distribution) observations, which are right-skewed and strictly nonnegative. After centering and scaling the sample mean, the $n=2$ curve is still visibly skewed, $n=10$ is closer, and $n=50$ is close to the dashed standard normal reference. The approximation improves in shape, not only in mean and variance.
+The plot uses [exponential](common-distributions.md#exponential-distribution) observations, which are right-skewed and strictly nonnegative. After centering and scaling the sample mean, the $n=2$ curve is still visibly skewed, $n=10$ is closer, and $n=50$ is close to the dashed standard normal reference. The $n=2$ curve starts abruptly because $\sqrt n(\bar X_n-\mu)/\sigma$ cannot be smaller than $-\sqrt n$ when the original observations are nonnegative; its peak is left of zero because the finite-sample Gamma shape is still skewed. The approximation improves in shape, not only in mean and variance.
 
 ## Proof from characteristic functions
 
