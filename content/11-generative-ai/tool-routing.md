@@ -15,10 +15,12 @@ related:
   - tool-use-and-function-calling.md
   - tool-schemas.md
   - agent-loops.md
+  - langchain.md
+  - langgraph.md
   - planning.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # Tool Routing
@@ -28,6 +30,8 @@ Tool routing decides whether a request should be answered directly, sent to retr
 ## What a route contains
 
 Routing can be rule-based, model-based, or hybrid. The route should include tool name, arguments, confidence, and required confirmation. [Tool schemas](tool-schemas.md) validate arguments, while [guardrails](guardrails.md) enforce permissions and side-effect policy.
+
+[LangChain](langchain.md) is useful when model-selected tools fit a standard agent loop. [LangGraph](langgraph.md) is useful when routes must become explicit graph transitions, especially for deterministic branches, retries, human review, or side-effecting tools.
 
 ## Routing approaches
 

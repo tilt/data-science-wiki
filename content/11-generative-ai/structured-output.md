@@ -15,10 +15,12 @@ related:
   - tool-schemas.md
   - tool-use-and-function-calling.md
   - guardrails.md
+  - langchain.md
+  - langgraph.md
   - prompting.md
   - model-serving.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # Structured Output
@@ -28,6 +30,8 @@ Structured output asks the model to return data in a parseable shape, usually JS
 ## What a schema constrains
 
 The schema defines fields, types, required keys, enums, and whether extra properties are allowed. Generation can be constrained by the provider, but applications should still validate the parsed object. [Tool schemas](tool-schemas.md) use the same idea for model-proposed tool calls.
+
+[LangChain](langchain.md) can request schema-bound final outputs from an agent, while [LangGraph](langgraph.md) often uses structured outputs as state updates or routing decisions between nodes. In both cases, schema validity is only the first check.
 
 ## Schema Example
 

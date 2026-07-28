@@ -20,6 +20,8 @@ related:
   - rag-evaluation.md
   - rag-benchmark-design.md
   - agent-evaluation.md
+  - langchain.md
+  - langgraph.md
   - llm-as-judge.md
   - tool-use-and-function-calling.md
   - determinism-and-reproducibility.md
@@ -221,4 +223,4 @@ Harnesses operationalize [RAG benchmark design](rag-benchmark-design.md), [RAG e
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)
 >
-> [← Multi-Agent Systems](multi-agent-systems.md) [Agent Evaluation →](agent-evaluation.md)
+> [← Multi-Agent Systems](multi-agent-systems.md) [LangChain →](langchain.md)

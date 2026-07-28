@@ -13,12 +13,14 @@ prerequisites:
   - index.md
 related:
   - agentic-systems.md
+  - langgraph.md
+  - langchain.md
   - embeddings.md
   - data-privacy.md
   - context-construction.md
   - prompt-injection.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # Memory
@@ -30,6 +32,8 @@ Memory is persisted state used beyond the current prompt. It can be explicit pro
 A memory system needs four policies: what may be written, how it is stored, when it is retrieved, and how it is deleted. Vector memory embeds notes with [embeddings](embeddings.md) for similarity lookup. Structured memory stores fields such as preferences, account IDs, or task state. Sensitive attributes should be structured, permissioned, and auditable rather than mixed into free-text summaries.
 
 Memory writes should have provenance. An explicit user statement is different from a model inference. Retrieval should be scoped to the active user, workspace, and task. [Data privacy](data-privacy.md) and [prompt injection](prompt-injection.md) controls decide whether a memory can be stored, recalled, or shown.
+
+[LangGraph](langgraph.md) separates active graph state, checkpoints, threads, and longer-term stores, which is a useful implementation model for agent memory. [LangChain](langchain.md) can then provide model, retriever, and tool components inside that memory-aware runtime.
 
 ## A memory record
 

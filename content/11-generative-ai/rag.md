@@ -17,14 +17,17 @@ related:
   - embeddings.md
   - context-construction.md
   - citations.md
+  - langchain.md
   - rag-architecture-comparison.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # RAG
 
 Retrieval-augmented generation retrieves external evidence and places it into the model request before generation. It is the pattern connecting [chunking](chunking.md), [embeddings](embeddings.md), [retrieval pipelines](retrieval-pipelines.md), [context construction](context-construction.md), and [citations](citations.md). The same pattern can be built as several designs — a tool-based loop, an indexed hybrid retriever, or a two-phase curation agent — compared in [RAG architecture comparison](rag-architecture-comparison.md).
+
+Implementation frameworks can help, but they do not change the concept. [LangChain](langchain.md) commonly supplies retriever and model-call abstractions for RAG systems; the evidence quality still comes from corpus preparation, retrieval evaluation, citation checks, and product-specific permissions.
 
 ## The retrieval-to-answer path
 

@@ -13,17 +13,21 @@ prerequisites:
   - index.md
 related:
   - agent-loops.md
+  - langchain.md
+  - langgraph.md
   - tool-use-and-function-calling.md
   - llm-as-judge.md
   - rag-evaluation.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # Agent Evaluation
 
 Agent evaluation measures the whole control loop, not just a final answer. A useful suite checks whether [agent loops](agent-loops.md) call the right tools, obey [guardrails](guardrails.md), preserve evidence from [RAG evaluation](rag-evaluation.md), and stop within budget.
+
+For framework-built agents, evaluate the framework trace rather than treating the framework as a black box. [LangChain](langchain.md) runs should expose model calls, tool calls, middleware decisions, and final outputs; [LangGraph](langgraph.md) runs should expose node transitions, checkpoints, interrupts, and state updates.
 
 ## What a trace grader scores
 
@@ -58,4 +62,4 @@ Do not let the agent write its own pass criteria during the run being graded. Ke
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)
 >
-> [← Harnesses](harnesses.md) [LLM-as-Judge →](llm-as-judge.md)
+> [← LangGraph](langgraph.md) [LLM-as-Judge →](llm-as-judge.md)

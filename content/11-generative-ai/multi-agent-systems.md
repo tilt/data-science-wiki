@@ -14,11 +14,13 @@ prerequisites:
 related:
   - agentic-systems.md
   - agent-loops.md
+  - langgraph.md
+  - langchain.md
   - tool-routing.md
   - reflection-and-reviewer-patterns.md
   - agent-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # Multi-Agent Systems
@@ -30,6 +32,8 @@ A multi-agent system uses more than one model role or policy loop, such as resea
 The reliable version is not free-form chat between personas. It is a protocol: role, input contract, output schema, allowed tools, handoff condition, and stop rule. [Tool routing](tool-routing.md) should remain centralized when tools have permissions or side effects. [Reflection and reviewer patterns](reflection-and-reviewer-patterns.md) are a two-role special case where one role produces and another critiques against a rubric.
 
 Shared evidence matters more than role labels. If the researcher passes unsourced prose to the writer, the writer inherits unverified claims. A better handoff passes claim objects with source IDs, confidence, and unresolved questions. The coordinator then decides whether the next role has enough evidence to proceed.
+
+[LangGraph](langgraph.md) is a natural fit when those roles need explicit state, handoffs, checkpoints, or human interrupts. [LangChain](langchain.md) components can still run inside individual role nodes for model calls, tools, retrieval, and structured outputs.
 
 ```mermaid
 flowchart TD

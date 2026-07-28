@@ -15,10 +15,12 @@ related:
   - prompt-injection.md
   - structured-output.md
   - tool-schemas.md
+  - langchain.md
+  - langgraph.md
   - alignment.md
   - data-privacy.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # Guardrails
@@ -30,6 +32,8 @@ Guardrails are runtime controls around a model. They include input filtering, [p
 A guardrail pipeline can run before retrieval, before generation, before tool execution, and before final output. Deterministic checks should own hard constraints such as JSON schema validity, enum values, authorization, rate limits, and PII redaction. Model-based classifiers can triage ambiguous language, but their labels should be logged with confidence, policy version, and action taken.
 
 Guardrails should be attached to the risk they control. A citation validator checks whether claims are supported by retrieved context. A tool gate checks whether a proposed call is allowed for the user and task. A privacy guard checks whether [data privacy](data-privacy.md) rules permit the data to enter the model call or leave the system.
+
+In implementation, [LangChain](langchain.md) middleware can attach checks around model and tool calls, and [LangGraph](langgraph.md) can make high-risk gates explicit nodes or interrupts. The important design point is that guardrails enforce policy outside the model's prose.
 
 ## A layered guardrail pipeline
 

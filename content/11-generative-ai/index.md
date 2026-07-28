@@ -19,6 +19,8 @@ topics:
   - "temperature"
   - "top-k-and-top-p-sampling"
   - "determinism-and-reproducibility"
+  - "langchain"
+  - "langgraph"
 level: foundational
 status: review
 page_type: area-index
@@ -100,19 +102,21 @@ Read foundation-model mechanics and generation control first, then retrieval, ag
 38. [Reflection and Reviewer Patterns](reflection-and-reviewer-patterns.md): self-critique against a rubric.
 39. [Multi-Agent Systems](multi-agent-systems.md): coordinating multiple roles.
 40. [Harnesses](harnesses.md): the runtime scaffolding around a model.
-41. [Agent Evaluation](agent-evaluation.md): measuring multi-step task success.
-42. [LLM-as-Judge](llm-as-judge.md): using models to score outputs.
-43. [Multimodal Models](multimodal-models.md): models over text, image, and more.
-44. [Vision-Language Models](vision-language-models.md): joint image-text models.
-45. [Stable Diffusion](stable-diffusion.md): latent-diffusion image generation.
-46. [Local Versus Hosted Models](local-versus-hosted-models.md): where the model runs.
-47. [Model Serving](model-serving.md): the runtime layer for reliable calls.
-48. [Quantization](quantization.md): lower-precision weights for cheaper serving.
-49. [Cost and Latency Optimization](cost-and-latency-optimization.md): making systems affordable and fast.
-50. [Guardrails](guardrails.md): runtime behavior constraints.
-51. [Prompt Injection](prompt-injection.md): the core adversarial-input risk.
-52. [Data Privacy](data-privacy.md): protecting user and training data.
-53. [PII Protection](pii-protection.md): detecting and redacting personal information.
+41. [LangChain](langchain.md): a configurable framework for models, tools, middleware, retrieval, and agent loops.
+42. [LangGraph](langgraph.md): graph orchestration for durable, stateful, long-running agents.
+43. [Agent Evaluation](agent-evaluation.md): measuring multi-step task success.
+44. [LLM-as-Judge](llm-as-judge.md): using models to score outputs.
+45. [Multimodal Models](multimodal-models.md): models over text, image, and more.
+46. [Vision-Language Models](vision-language-models.md): joint image-text models.
+47. [Stable Diffusion](stable-diffusion.md): latent-diffusion image generation.
+48. [Local Versus Hosted Models](local-versus-hosted-models.md): where the model runs.
+49. [Model Serving](model-serving.md): the runtime layer for reliable calls.
+50. [Quantization](quantization.md): lower-precision weights for cheaper serving.
+51. [Cost and Latency Optimization](cost-and-latency-optimization.md): making systems affordable and fast.
+52. [Guardrails](guardrails.md): runtime behavior constraints.
+53. [Prompt Injection](prompt-injection.md): the core adversarial-input risk.
+54. [Data Privacy](data-privacy.md): protecting user and training data.
+55. [PII Protection](pii-protection.md): detecting and redacting personal information.
 
 ## Connections
 

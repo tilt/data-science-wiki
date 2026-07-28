@@ -14,11 +14,12 @@ prerequisites:
 related:
   - agent-loops.md
   - agentic-systems.md
+  - langgraph.md
   - tool-routing.md
   - reflection-and-reviewer-patterns.md
   - agent-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # Planning
@@ -30,6 +31,8 @@ Planning decomposes a goal into actions before execution or replans after observ
 A plan should be a state object. Useful fields include goal, steps, dependencies, allowed tools, evidence needed, risk gates, and done condition. [Tool routing](tool-routing.md) maps planned steps to callable tools, while [agent evaluation](agent-evaluation.md) checks whether the trace followed the plan or revised it for a valid reason.
 
 Planning can happen once at the beginning, incrementally after each observation, or through a planner/reviewer split. Incremental planning is safer for workflows where tool output can invalidate the original path. The loop should log both the previous plan and the reason for any replan.
+
+When plans become operational state rather than explanatory text, [LangGraph](langgraph.md) can encode plan fields, allowed transitions, replanning nodes, and approval interrupts directly in the graph.
 
 ## A plan object
 

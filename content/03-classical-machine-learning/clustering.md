@@ -136,7 +136,9 @@ Clusters grow by connecting density-reachable core points and their border point
 
 ![DBSCAN finds density-connected regions and labels isolated points as noise.](../assets/diagrams/clustering-dbscan.svg)
 
-DBSCAN is useful for spatial data, anomaly-heavy datasets, and clusters with non-spherical shapes. Its main weakness is parameter sensitivity: one global `eps` can fail when densities vary. HDBSCAN generalizes the idea by building a hierarchy over density levels, which often works better when clusters have different densities, but it still requires careful interpretation of stability and noise labels.
+DBSCAN is useful for spatial data, anomaly-heavy datasets, and clusters with non-spherical shapes. Its main weakness is parameter sensitivity: one global `eps` can fail when densities vary. HDBSCAN generalizes the idea by building a hierarchy over density levels, which often works better when clusters have different densities, but it still requires careful interpretation of stability and noise labels. The next plot shows that density hierarchy explicitly: long-lived branches become selected clusters, while short branches are treated as unstable or noise.
+
+![HDBSCAN builds a density hierarchy and keeps branches that persist across density levels.](../assets/diagrams/clustering-hdbscan.svg)
 
 ### Gaussian mixture models
 

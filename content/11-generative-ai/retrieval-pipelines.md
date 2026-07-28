@@ -17,13 +17,16 @@ related:
   - embeddings.md
   - hybrid-retrieval.md
   - reranking.md
+  - langchain.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # Retrieval Pipelines
 
 A retrieval pipeline turns a changing corpus into ranked evidence for a model. In [RAG](rag.md), it spans ingestion, [chunking](chunking.md), embedding, lexical indexing, metadata filters, query rewriting, [hybrid retrieval](hybrid-retrieval.md), [reranking](reranking.md), context packing, and citation validation.
+
+[LangChain](langchain.md) is often used to assemble these pieces because it provides integrations for loaders, embedding models, vector stores, retrievers, and model-call composition. The retrieval contract still belongs to the application: source versions, permissions, and trace fields must be explicit even when a framework supplies the connectors.
 
 ## Offline and online contracts
 

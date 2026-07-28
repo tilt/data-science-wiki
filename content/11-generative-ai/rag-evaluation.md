@@ -14,12 +14,14 @@ prerequisites:
 related:
   - rag.md
   - retrieval-pipelines.md
+  - langchain.md
+  - langgraph.md
   - citations.md
   - grounding.md
   - llm-as-judge.md
   - rag-benchmark-design.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # RAG Evaluation
@@ -71,6 +73,8 @@ The retriever found both gold chunks and the citation points to a gold source, b
 ## Caveats
 
 A single aggregate score hides the failing stage. Keep per-stage traces from [retrieval pipelines](retrieval-pipelines.md), and report metrics by query type, source freshness, permission scope, and answerability.
+
+Framework traces help only when the evaluation harness reads them. For [LangChain](langchain.md) RAG agents, record retriever inputs, selected chunks, tool calls, and final citations. For [LangGraph](langgraph.md) workflows, score the node trace and checkpointed state so retrieval, routing, drafting, and validation failures remain separable.
 
 ## References
 

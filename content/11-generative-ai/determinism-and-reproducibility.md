@@ -15,10 +15,12 @@ related:
   - sampling-and-decoding.md
   - temperature-and-determinism.md
   - context-construction.md
+  - langchain.md
+  - langgraph.md
   - model-serving.md
   - agent-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-28
 ---
 
 # Determinism and Reproducibility
@@ -30,6 +32,8 @@ Determinism means identical inputs and execution conditions produce identical ou
 A run record should include model identifier, prompt messages, decoding parameters, seed if exposed, retrieved chunk IDs, tool schemas, tool outputs, validator versions, and post-processing code. Temperature zero narrows sampling but does not freeze hosted infrastructure or retrieval state; see [temperature and determinism](temperature-and-determinism.md).
 
 Reproducibility fails whenever an unrecorded dependency changes. In a RAG system, the same prompt can produce a different answer after chunking, embedding, reranking, or source documents change. In an agent, a tool response, clock, permission state, or retry path can change the final answer even when the model settings are fixed.
+
+[LangChain](langchain.md) traces help identify model, retriever, tool, and middleware changes. [LangGraph](langgraph.md) checkpoints go further by preserving graph state at execution boundaries, which is useful for replaying long-running or human-reviewed workflows.
 
 | Layer              | What to record                                   | Why it matters                               |
 | ------------------ | ------------------------------------------------ | -------------------------------------------- |

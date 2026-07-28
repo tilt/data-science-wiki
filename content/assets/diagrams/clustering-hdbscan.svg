@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+  <title id="title">HDBSCAN selects stable clusters across density levels</title>
+  <desc id="desc">A point cloud with one dense compact cluster, one looser cluster, and noise is paired with a condensed density tree. Stable branches survive across many density levels, while short branches are pruned as noise.</desc>
+  <style>
+    text {
+      fill: #111827;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    .title { font-size: 22px; font-weight: 800; }
+    .subtitle, .muted, .axis-label { fill: #374151; }
+    .subtitle { font-size: 14px; }
+    .muted { font-size: 12px; }
+    .axis-label { font-size: 13px; }
+    .panel { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.2; }
+    .axis { stroke: #64748b; stroke-width: 1.5; }
+    .grid { stroke: #e5e7eb; stroke-width: 1; }
+    .dense { fill: #2563eb; }
+    .loose { fill: #f97316; }
+    .noise { fill: #64748b; }
+    .cluster-a { stroke: #2563eb; fill: #2563eb; fill-opacity: 0.08; stroke-width: 2.5; stroke-dasharray: 8 6; }
+    .cluster-b { stroke: #f97316; fill: #f97316; fill-opacity: 0.08; stroke-width: 2.5; stroke-dasharray: 8 6; }
+    .tree { stroke: #64748b; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .stable-a { stroke: #2563eb; stroke-width: 5; fill: none; stroke-linecap: round; }
+    .stable-b { stroke: #f97316; stroke-width: 5; fill: none; stroke-linecap: round; }
+    .pruned { stroke: #94a3b8; stroke-width: 2; stroke-dasharray: 5 6; fill: none; }
+    .label { font-size: 13px; font-weight: 700; }
+  </style>
+
+  <text x="380" y="36" text-anchor="middle" class="title">HDBSCAN: clusters that persist across density levels</text>
+  <text x="380" y="62" text-anchor="middle" class="subtitle">A hierarchy over density avoids choosing one global eps when groups have different density.</text>
+
+  <g transform="translate(46,92)">
+    <rect width="316" height="288" rx="8" class="panel"/>
+    <text x="158" y="28" text-anchor="middle" class="label">variable-density point cloud</text>
+    <line x1="36" y1="244" x2="284" y2="244" class="axis"/>
+    <line x1="36" y1="54" x2="36" y2="244" class="axis"/>
+    <g class="grid">
+      <line x1="98" y1="54" x2="98" y2="244"/>
+      <line x1="160" y1="54" x2="160" y2="244"/>
+      <line x1="222" y1="54" x2="222" y2="244"/>
+      <line x1="36" y1="117" x2="284" y2="117"/>
+      <line x1="36" y1="181" x2="284" y2="181"/>
+    </g>
+
+    <ellipse cx="106" cy="145" rx="50" ry="42" class="cluster-a"/>
+    <ellipse cx="226" cy="151" rx="66" ry="54" class="cluster-b"/>
+    <g class="dense">
+      <circle cx="82" cy="124" r="7"/><circle cx="101" cy="113" r="7"/><circle cx="120" cy="127" r="7"/>
+      <circle cx="91" cy="146" r="7"/><circle cx="111" cy="149" r="7"/><circle cx="130" cy="158" r="7"/>
+      <circle cx="98" cy="170" r="7"/><circle cx="119" cy="180" r="7"/><circle cx="74" cy="158" r="7"/>
+    </g>
+    <g class="loose">
+      <circle cx="192" cy="111" r="7"/><circle cx="232" cy="107" r="7"/><circle cx="261" cy="132" r="7"/>
+      <circle cx="204" cy="150" r="7"/><circle cx="239" cy="153" r="7"/><circle cx="275" cy="171" r="7"/>
+      <circle cx="217" cy="191" r="7"/><circle cx="252" cy="204" r="7"/>
+    </g>
+    <g class="noise">
+      <circle cx="70" cy="76" r="6"/><circle cx="151" cy="76" r="6"/><circle cx="171" cy="222" r="6"/><circle cx="289" cy="72" r="6"/>
+    </g>
+    <text x="105" y="214" text-anchor="middle" class="axis-label">dense cluster</text>
+    <text x="229" y="232" text-anchor="middle" class="axis-label">looser cluster</text>
+  </g>
+
+  <g transform="translate(398,92)">
+    <rect width="316" height="288" rx="8" class="panel"/>
+    <text x="158" y="28" text-anchor="middle" class="label">condensed density tree</text>
+    <line x1="52" y1="244" x2="280" y2="244" class="axis"/>
+    <line x1="52" y1="54" x2="52" y2="244" class="axis"/>
+    <text x="22" y="154" text-anchor="middle" transform="rotate(-90 22 154)" class="axis-label">higher density</text>
+    <text x="166" y="266" text-anchor="middle" class="axis-label">points leave or branches split</text>
+
+    <path d="M164 236 V72" class="tree"/>
+    <path d="M164 118 H96 V214" class="stable-a"/>
+    <path d="M164 150 H232 V218" class="stable-b"/>
+    <path d="M164 88 H126 V130" class="pruned"/>
+    <path d="M164 174 H276 V196" class="pruned"/>
+    <path d="M96 214 H74 M232 218 H254" class="tree"/>
+
+    <circle cx="96" cy="214" r="6" class="dense"/>
+    <circle cx="232" cy="218" r="6" class="loose"/>
+    <circle cx="126" cy="130" r="5" class="noise"/>
+    <circle cx="276" cy="196" r="5" class="noise"/>
+
+    <text x="82" y="108" text-anchor="middle" class="axis-label">stable branch</text>
+    <text x="242" y="142" text-anchor="middle" class="axis-label">stable branch</text>
+    <text x="216" y="72" class="muted">short branches</text>
+    <text x="216" y="88" class="muted">become noise</text>
+  </g>
+
+  <text x="380" y="420" text-anchor="middle" class="axis-label">HDBSCAN keeps branches that persist over density levels; it can separate clusters with different local density.</text>
+</svg>

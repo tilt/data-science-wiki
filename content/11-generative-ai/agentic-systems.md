@@ -13,6 +13,8 @@ prerequisites:
   - index.md
 related:
   - agent-loops.md
+  - langchain.md
+  - langgraph.md
   - tool-routing.md
   - planning.md
   - guardrails.md

@@ -13,6 +13,8 @@ prerequisites:
   - index.md
 related:
   - agentic-systems.md
+  - langchain.md
+  - langgraph.md
   - planning.md
   - tool-use-and-function-calling.md
   - memory.md
