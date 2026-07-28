@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
   <title id="title">k-nearest neighbors classifies a query by local neighbor votes</title>
-  <desc id="desc">A query point is surrounded by its five nearest neighbors. Three blue neighbors and two orange neighbors vote, so the query is classified as blue. A small panel shows that small k gives jagged boundaries while larger k smooths the decision rule.</desc>
+  <desc id="desc">A query point is surrounded by its five nearest neighbors. Three blue neighbors and two orange neighbors vote, so the query is classified as blue. An orange-red dashed decision boundary runs between the blue and orange training examples. A small panel shows that small k gives jagged boundaries while larger k smooths the decision rule.</desc>
   <style>
     text {
       fill: #111827;
@@ -41,7 +41,7 @@
     </g>
 
     <circle cx="218" cy="148" r="92" class="radius"/>
-    <path d="M112 62 C144 76 148 109 132 135 C116 161 144 174 152 196 C164 229 202 238 228 216 C254 194 242 157 256 133 C272 106 296 88 316 72" class="boundary"/>
+    <path d="M136 54 C174 78 222 72 242 101 C261 129 231 144 244 167 C257 190 254 214 235 232 C219 247 195 253 168 250" class="boundary"/>
 
     <g class="blue">
       <circle cx="116" cy="87" r="8"/><circle cx="148" cy="126" r="8"/><circle cx="178" cy="162" r="8"/>

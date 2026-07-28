@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="760" height="460" viewBox="0 0 760 460" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="480" viewBox="0 0 760 480" role="img" aria-labelledby="title desc">
   <title id="title">Naive Bayes adds independent feature evidence per class</title>
   <desc id="desc">A document with tokens enters a Naive Bayes scoring table. Each class score is the log prior plus a sum of per-feature log likelihoods. The class with the larger total wins, even though correlated features are treated as independent.</desc>
   <style>
@@ -30,7 +30,7 @@
   <text x="380" y="62" text-anchor="middle" class="subtitle">The model treats features as conditionally independent, then compares class log-scores.</text>
 
   <g transform="translate(52,96)">
-    <rect width="214" height="250" rx="8" class="panel"/>
+    <rect width="214" height="272" rx="8" class="panel"/>
     <text x="107" y="28" text-anchor="middle" class="label">query features</text>
     <rect x="36" y="58" width="142" height="34" rx="8" class="chip"/>
     <text x="107" y="80" text-anchor="middle" class="mono">"discount"</text>
@@ -47,7 +47,7 @@
   <path d="M278 220 H334" class="arrow"/>
 
   <g transform="translate(344,92)">
-    <rect width="360" height="258" rx="8" class="panel"/>
+    <rect width="360" height="286" rx="8" class="panel"/>
     <text x="180" y="28" text-anchor="middle" class="label">class score table</text>
     <text x="42" y="62" class="muted">score(y) = log P(y) + sum_j log P(x_j | y)</text>
 
@@ -63,5 +63,5 @@
     <text x="180" y="249" text-anchor="middle" class="label">larger log-score wins</text>
   </g>
 
-  <text x="380" y="412" text-anchor="middle" class="muted">Good for sparse high-dimensional features; probabilities are often over-confident when features are correlated.</text>
+  <text x="380" y="430" text-anchor="middle" class="muted">Good for sparse high-dimensional features; probabilities are often over-confident when features are correlated.</text>
 </svg>
