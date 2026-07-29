@@ -80,36 +80,301 @@ flowchart TD
 
 These concepts match the design advice on [agent loops](agent-loops.md): keep the model inside explicit invariants instead of letting it silently own the whole workflow.
 
-## A minimal graph shape
+## A support triage graph
 
-This sketch shows the core structure. A real graph would add typed state fields, tools, error handling, persistence, and trace configuration.
+This example models a support workflow. The graph enriches a case with account data, uses a model to classify the request, retrieves policy evidence, drafts a reply, pauses for human approval when the refund is high-risk, and sends only after the approval branch resolves. It also uses a checkpointer, so the state can be inspected or resumed by thread ID.
+
+The in-memory account and policy dictionaries stand in for real service calls. The production-relevant parts are the typed state, model nodes, deterministic routing, interrupt, checkpointer, and explicit side-effect boundary.
 
 ```python
-from typing import TypedDict
+from operator import add
+from typing import Annotated, Literal, TypedDict
 
+from langchain.chat_models import init_chat_model
+from langgraph.checkpoint.memory import InMemorySaver
 from langgraph.graph import END, START, StateGraph
+from langgraph.types import Command, interrupt
+from pydantic import BaseModel, Field
 
 
-class State(TypedDict):
-    question: str
-    answer: str
+ACCOUNT_DB = {
+    "cust_enterprise_17": {
+        "tier": "enterprise",
+        "open_invoice_id": "INV-9001",
+        "open_invoice_total_usd": 900,
+    }
+}
+
+POLICY_INDEX = {
+    "refund": [
+        "refunds-2026-07: enterprise refunds above 500 USD require "
+        "manager approval before a customer-facing refund commitment.",
+        "refunds-2026-07: approved refunds must be logged with the "
+        "case ID and invoice ID.",
+    ]
+}
 
 
-def draft_answer(state: State) -> dict:
-    return {"answer": f"Draft answer for: {state['question']}"}
+class SupportState(TypedDict, total=False):
+    case_id: str
+    customer_id: str
+    email: str
+    account_tier: str
+    invoice_id: str
+    invoice_total_usd: int
+    intent: str
+    urgency: str
+    risk_flags: list[str]
+    docs: list[str]
+    draft: str
+    approved: bool
+    sent_reply_id: str
+    final_status: str
+    audit_log: Annotated[list[str], add]
 
 
-builder = StateGraph(State)
-builder.add_node("draft_answer", draft_answer)
-builder.add_edge(START, "draft_answer")
-builder.add_edge("draft_answer", END)
+class CaseClassification(BaseModel):
+    intent: Literal["refund", "billing_question", "unsupported"]
+    urgency: Literal["normal", "high"]
+    risk_flags: list[str] = Field(default_factory=list)
 
-graph = builder.compile()
-result = graph.invoke({"question": "What policy applies?"})
-print(result["answer"])
+
+classifier = init_chat_model(
+    model="openai:gpt-4.1-mini"
+).with_structured_output(CaseClassification)
+writer = init_chat_model(model="openai:gpt-4.1-mini")
+
+
+def lookup_account(customer_id: str) -> dict:
+    """Read account data visible to this support workflow."""
+    return ACCOUNT_DB[customer_id]
+
+
+def retrieve_policy(intent: str) -> list[str]:
+    """Retrieve approved policy passages for the classified intent."""
+    return POLICY_INDEX.get(intent, [])
+
+
+def enrich_customer(state: SupportState) -> dict:
+    account = lookup_account(state["customer_id"])
+    return {
+        "account_tier": account["tier"],
+        "invoice_id": account["open_invoice_id"],
+        "invoice_total_usd": account["open_invoice_total_usd"],
+        "audit_log": ["loaded account and invoice metadata"],
+    }
+
+
+def classify_intent(state: SupportState) -> dict:
+    classification = classifier.invoke(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Classify the support email. Mark urgency as high for "
+                    "legal threats, chargebacks, or refunds above policy limits."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"Email: {state['email']}\n"
+                    f"Account tier: {state['account_tier']}\n"
+                    f"Invoice total: {state['invoice_total_usd']} USD"
+                ),
+            },
+        ]
+    )
+    return {
+        "intent": classification.intent,
+        "urgency": classification.urgency,
+        "risk_flags": classification.risk_flags,
+        "audit_log": [f"classified case as {classification.intent}"],
+    }
+
+
+def route_after_classification(
+    state: SupportState,
+) -> Literal["search_documentation", "close_without_sending"]:
+    if state["intent"] == "unsupported":
+        return "close_without_sending"
+    return "search_documentation"
+
+
+def search_documentation(state: SupportState) -> dict:
+    docs = retrieve_policy(state["intent"])
+    return {
+        "docs": docs,
+        "audit_log": [f"retrieved {len(docs)} policy passages"],
+    }
+
+
+def draft_response(state: SupportState) -> dict:
+    message = writer.invoke(
+        [
+            {
+                "role": "system",
+                "content": (
+                    "Draft a concise support reply. Cite policy IDs. "
+                    "Do not promise that a refund has been issued."
+                ),
+            },
+            {
+                "role": "user",
+                "content": (
+                    f"Customer email: {state['email']}\n"
+                    f"Invoice: {state['invoice_id']} "
+                    f"({state['invoice_total_usd']} USD)\n"
+                    f"Policy evidence: {state['docs']}"
+                ),
+            },
+        ]
+    )
+    return {"draft": message.content, "audit_log": ["drafted customer reply"]}
+
+
+def route_after_draft(state: SupportState) -> Literal["human_approval", "send_reply"]:
+    high_value_refund = state["invoice_total_usd"] > 500
+    if state["urgency"] == "high" or high_value_refund or state["risk_flags"]:
+        return "human_approval"
+    return "send_reply"
+
+
+def human_review(state: SupportState) -> dict:
+    review = interrupt(
+        {
+            "case_id": state["case_id"],
+            "question": "Approve this customer reply?",
+            "draft": state["draft"],
+            "risk_flags": state["risk_flags"],
+            "invoice_total_usd": state["invoice_total_usd"],
+        }
+    )
+
+    if review["decision"] == "approve":
+        return {
+            "approved": True,
+            "draft": review.get("edited_draft", state["draft"]),
+            "audit_log": ["human reviewer approved reply"],
+        }
+
+    return {
+        "approved": False,
+        "final_status": "blocked_by_review",
+        "audit_log": ["human reviewer blocked reply"],
+    }
+
+
+def route_after_review(
+    state: SupportState,
+) -> Literal["send_reply", "close_without_sending"]:
+    return "send_reply" if state["approved"] else "close_without_sending"
+
+
+def send_reply(state: SupportState) -> dict:
+    # Real code would call the ticketing API with this idempotency key.
+    reply_id = f"{state['case_id']}:{state['invoice_id']}:reply-v1"
+    return {
+        "sent_reply_id": reply_id,
+        "final_status": "sent",
+        "audit_log": [f"sent reply with idempotency key {reply_id}"],
+    }
+
+
+def close_without_sending(state: SupportState) -> dict:
+    return {
+        "final_status": state.get("final_status", "closed_without_sending"),
+        "audit_log": ["closed case without customer-facing reply"],
+    }
+
+
+builder = StateGraph(SupportState)
+builder.add_node("enrich_customer", enrich_customer)
+builder.add_node("classify_intent", classify_intent)
+builder.add_node("search_documentation", search_documentation)
+builder.add_node("draft_response", draft_response)
+builder.add_node("human_review", human_review)
+builder.add_node("send_reply", send_reply)
+builder.add_node("close_without_sending", close_without_sending)
+
+builder.add_edge(START, "enrich_customer")
+builder.add_edge("enrich_customer", "classify_intent")
+builder.add_conditional_edges("classify_intent", route_after_classification)
+builder.add_edge("search_documentation", "draft_response")
+builder.add_conditional_edges("draft_response", route_after_draft)
+builder.add_conditional_edges("human_review", route_after_review)
+builder.add_edge("send_reply", END)
+builder.add_edge("close_without_sending", END)
+
+# InMemorySaver is for development and tests. Production graphs usually use
+# a persistent checkpointer such as PostgreSQL.
+graph = builder.compile(checkpointer=InMemorySaver())
+
+config = {"configurable": {"thread_id": "support-case-1842"}}
+first_run = graph.invoke(
+    {
+        "case_id": "case-1842",
+        "customer_id": "cust_enterprise_17",
+        "email": (
+            "Customer asks whether we can refund enterprise invoice INV-9001 "
+            "for 900 USD."
+        ),
+        "audit_log": [],
+    },
+    config,
+)
+
+if "__interrupt__" in first_run:
+    print(first_run["__interrupt__"][0].value)
+    final_state = graph.invoke(
+        Command(
+            resume={
+                "decision": "approve",
+                "edited_draft": first_run["__interrupt__"][0].value["draft"],
+            }
+        ),
+        config,
+    )
+else:
+    final_state = first_run
+
+print(final_state["final_status"])
+print(final_state["audit_log"])
 ```
 
-The value is not that this example is shorter than ordinary Python. It is that the same graph model can grow into branches, retries, interrupts, checkpoints, and state inspection without turning the workflow into an untraceable loop.
+The graph encoded by the code is:
+
+```mermaid
+flowchart TD
+  Start[Start] --> Enrich[Load account and invoice]
+  Enrich --> Classify[Classify with structured output]
+  Classify --> Search[Search documentation]
+  Classify --> Close[Close without sending]
+  Search --> Draft[Draft response]
+  Draft --> Human[Human approval interrupt]
+  Draft --> Send[Send reply]
+  Human --> Send
+  Human --> Close
+  Send --> End[End]
+  Close --> End
+```
+
+The important object is `SupportState`. Each node reads the current state and returns only the fields it updates. `enrich_customer` adds account and invoice fields, `classify_intent` adds model-derived intent and risk flags, `search_documentation` adds evidence, `draft_response` adds the customer-facing draft, and `send_reply` records the final side effect. The `audit_log` field uses a reducer so every node can append trace entries instead of overwriting earlier ones.
+
+The conditional edges are the main reason to use LangGraph here. The model classifies the case and drafts text, but deterministic functions decide whether the workflow may continue, whether a human must approve, and whether a customer-facing reply may be sent. That split keeps judgement where the model is useful while keeping policy, routing, and side effects under application control.
+
+The interrupt gives the example its production shape. For the 900 USD enterprise refund, the graph pauses inside `human_review` and returns a payload containing the draft, risk flags, and invoice total. Reusing the same `thread_id` with `Command(resume=...)` resumes the saved checkpoint; the graph then records reviewer approval and sends the reply with an idempotency key. With a persistent checkpointer, this same pattern supports a real review queue without repeating completed retrieval, classification, or drafting work.
+
+A trace from this run would read like an operational audit record:
+
+| Step                   | State update                                     | Why it matters                                      |
+| ---------------------- | ------------------------------------------------ | --------------------------------------------------- |
+| `enrich_customer`      | account tier, invoice ID, invoice total          | External business facts enter the graph explicitly. |
+| `classify_intent`      | intent, urgency, risk flags                      | Model judgement is structured and inspectable.      |
+| `search_documentation` | policy passages                                  | The draft is grounded in retrieved evidence.        |
+| `draft_response`       | customer-facing draft                            | Text generation happens before side effects.        |
+| `human_review`         | interrupt payload, approval, optional edit       | A reviewer controls high-risk communication.        |
+| `send_reply`           | final status, idempotency key, audit-log message | The side effect is explicit and replay-safe.        |
 
 ## Persistence and memory
 
@@ -153,22 +418,6 @@ LangGraph is intentionally low-level. Do not use it when a simpler abstraction i
 
 The main cost is complexity. Explicit state machines make production behavior more controllable, but they also force the team to design state schemas, merge rules, storage, routing, and failure semantics.
 
-## Worked design example
-
-Suppose a support email agent must classify an incoming email, search documentation, draft a response, and route high-risk cases to a human. A LangGraph design could use:
-
-| Node                   | Deterministic or model-driven       | State update                                       |
-| ---------------------- | ----------------------------------- | -------------------------------------------------- |
-| `read_email`           | deterministic                       | parse sender, subject, body, and tenant ID         |
-| `classify_intent`      | model-driven with structured output | intent, urgency, topic, confidence                 |
-| `route_case`           | deterministic                       | next node based on urgency, policy, and confidence |
-| `search_documentation` | deterministic retrieval tool        | source IDs and snippets                            |
-| `draft_response`       | model-driven                        | draft answer and citations                         |
-| `human_review`         | interrupt                           | approval, edits, or escalation                     |
-| `send_reply`           | deterministic side-effecting tool   | delivery result and audit ID                       |
-
-This graph keeps the model where judgement is useful: classification and drafting. It keeps permissions, routing, and sending under deterministic application control. Checkpoints make it possible to pause before `send_reply`, show a reviewer the exact state, resume after approval, and avoid re-running completed retrieval or classification steps.
-
 ## Relationship to LangChain
 
 LangChain and LangGraph are complementary:
@@ -203,6 +452,7 @@ Avoid over-graphing. Too many tiny nodes can make the system harder to understan
 
 - [LangGraph documentation: overview](https://docs.langchain.com/oss/python/langgraph/overview)
 - [LangGraph documentation: persistence](https://docs.langchain.com/oss/python/langgraph/persistence)
+- [LangGraph documentation: interrupts](https://docs.langchain.com/oss/python/langgraph/interrupts)
 - [LangGraph documentation: thinking in LangGraph](https://docs.langchain.com/oss/python/langgraph/thinking-in-langgraph)
 - [LangGraph Python API reference](https://reference.langchain.com/python/langgraph/overview)
 - [LangGraph GitHub repository](https://github.com/langchain-ai/langgraph)

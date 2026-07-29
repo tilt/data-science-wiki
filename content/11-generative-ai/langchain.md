@@ -80,38 +80,69 @@ flowchart TD
 
 The framework is not the intelligence. It is the runtime contract around the intelligence. A weak prompt, poor retriever, unsafe tool, or badly specified success criterion remains weak even when wrapped in LangChain.
 
-## A minimal agent shape
+## A minimal agent with tools
 
-The current LangChain entry point for agents is `create_agent`. The concrete provider package and model name depend on the stack, but the shape is stable: define tools, create the agent, invoke it with messages, and inspect the returned message state.
+The current LangChain entry point for agents is `create_agent`. The concrete provider package and model name depend on the stack, but the shape is stable: choose a model, define tools, create the agent, invoke it with messages, and inspect the returned message state.
 
 ```python
-import os
-
 from langchain.agents import create_agent
+
+INVOICES = {
+    "INV-9001": {
+        "customer_tier": "enterprise",
+        "amount_usd": 900,
+        "status": "paid",
+    }
+}
 
 
 def search_policy(query: str) -> str:
-    """Return policy passages relevant to a user question."""
-    return "Enterprise refunds require manager approval above 500 USD."
+    """Return approved policy passages relevant to a support question."""
+    # In production this would call a retriever over versioned policy documents.
+    if "refund" in query.lower():
+        return (
+            "Policy refunds-2026-07: enterprise refunds above 500 USD "
+            "require manager approval before the refund is issued."
+        )
+    return "No matching policy passage found."
+
+
+def lookup_invoice(invoice_id: str) -> dict:
+    """Return invoice metadata visible to the current support agent."""
+    return INVOICES.get(invoice_id, {"error": "invoice not found"})
 
 
 agent = create_agent(
-    model=os.environ["CHAT_MODEL"],
-    tools=[search_policy],
+    # The model string names the provider and chat model. The required provider
+    # package and API key depend on the environment.
+    model="openai:gpt-4.1-mini",
+    tools=[search_policy, lookup_invoice],
     system_prompt=(
-        "Answer policy questions using the available tools. "
-        "If the policy is not found, say what is missing."
+        "You are a support policy assistant. Use tools when invoice facts "
+        "or policy passages are needed. Do not issue refunds yourself. "
+        "Answer with the policy ID and the next required action."
     ),
 )
 
 result = agent.invoke(
-    {"messages": [{"role": "user", "content": "Can I refund a 900 USD invoice?"}]}
+    {
+        "messages": [
+            {
+                "role": "user",
+                "content": "Can I refund invoice INV-9001? Cite the policy.",
+            }
+        ]
+    }
 )
 
 print(result["messages"][-1].content)
 ```
 
-The code is short because LangChain owns the common loop mechanics. The application still owns the hard parts: tool correctness, permission checks, data access, prompt quality, evaluation, and deployment controls.
+The example has a real reason to use an agent harness. The user asks a policy question, but the answer depends on two external facts: the invoice amount and the current refund rule. The model should not guess either fact from its pretrained memory. It should call `lookup_invoice` to get the amount and customer tier, call `search_policy` to retrieve the relevant policy passage, then synthesize an answer such as "manager approval is required under `refunds-2026-07`."
+
+LangChain owns the repetitive loop mechanics. It passes the messages and tool schemas to the model, receives a model-proposed tool call, executes the matching Python function outside the model, appends the tool result as an observation, and calls the model again until the agent returns a final message. That is the same [tool use](tool-use-and-function-calling.md) boundary described elsewhere in this section.
+
+The application still owns the hard parts. `lookup_invoice` must enforce access control before returning invoice data. `search_policy` must retrieve from approved, versioned documents. Side-effecting tools such as `issue_refund` should not be exposed without authorization, idempotency, human approval, and audit logging. LangChain makes the model-tool loop easier to assemble; it does not make the product decision safe by itself.
 
 ## Where it fits with adjacent concepts
 
