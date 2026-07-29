@@ -121,9 +121,9 @@ $$
 That means:
 
 | Vector | Node 1 | Node 2 | Node 3 | Node 4 |
-| --- | --- | --- | --- | --- |
-| $f$ | 1 | 1 | 0 | 0 |
-| $g$ | 0 | 0 | 1 | 1 |
+| ------ | ------ | ------ | ------ | ------ |
+| $f$    | 1      | 1      | 0      | 0      |
+| $g$    | 0      | 0      | 1      | 1      |
 
 The vector $f$ is constant on every existing edge. The edge $1\text{--}2$ connects two nodes with value 1, so there is no difference across that edge. The edge $3\text{--}4$ connects two nodes with value 0, so there is no difference there either. Since this toy graph has no edge between the first pair and the second pair, the jump from 1 to 0 is invisible to the graph. The Laplacian therefore reports no graph-local variation: $Lf=0$.
 

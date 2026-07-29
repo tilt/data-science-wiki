@@ -28,29 +28,29 @@ This glossary is a cross-domain lookup index for evaluation metrics used across 
 
 ## Classification and Probability Calibration
 
-| Metric                                                                            | Field of application               | Meaning                                                                                                 |
-| --------------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| [Accuracy](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)                | Classification                     | Fraction of examples whose predicted class equals the label.                                            |
-| [Precision](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)               | Classification                     | Fraction of predicted positives that are true positives.                                                |
-| [Recall](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)                  | Classification                     | Fraction of actual positives found by the model.                                                        |
-| [F1 score](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)                | Classification                     | Harmonic mean of precision and recall for a class or averaging scheme.                                  |
-| [Balanced accuracy](../03-classical-machine-learning/class-imbalance.md)          | Imbalanced classification          | Accuracy averaged across classes so a majority class cannot dominate the score.                         |
-| [ROC-AUC](../03-classical-machine-learning/evaluation-metrics.md#probability-and-ranking-metrics)        | Binary ranking and classification  | Threshold-free discrimination score based on the receiver operating characteristic curve.               |
-| [PR-AUC / average precision](../03-classical-machine-learning/class-imbalance.md) | Rare-positive classification       | Area-style summary of precision-recall ranking quality, often more informative under extreme imbalance. |
-| [Log loss](../03-classical-machine-learning/calibration.md)                       | Probabilistic classification       | Negative log-likelihood that rewards calibrated probability assigned to the observed label.             |
-| [Brier score](../17-experimentation-and-evaluation/calibration.md)                | Probability calibration            | Mean squared error between predicted probability and binary outcome.                                    |
-| [Expected calibration error](../17-experimentation-and-evaluation/calibration.md) | Probability calibration            | Weighted gap between predicted confidence and observed accuracy across bins.                            |
-| [Sensitivity](../09-computer-vision/medical-image-analysis.md)                    | Clinical and safety classification | Positive-class recall, usually emphasizing missed positives.                                            |
-| [Specificity](../09-computer-vision/medical-image-analysis.md)                    | Clinical and safety classification | Fraction of actual negatives correctly rejected.                                                        |
+| Metric                                                                                            | Field of application               | Meaning                                                                                                 |
+| ------------------------------------------------------------------------------------------------- | ---------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| [Accuracy](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)         | Classification                     | Fraction of examples whose predicted class equals the label.                                            |
+| [Precision](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)        | Classification                     | Fraction of predicted positives that are true positives.                                                |
+| [Recall](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)           | Classification                     | Fraction of actual positives found by the model.                                                        |
+| [F1 score](../03-classical-machine-learning/evaluation-metrics.md#classification-metrics)         | Classification                     | Harmonic mean of precision and recall for a class or averaging scheme.                                  |
+| [Balanced accuracy](../03-classical-machine-learning/class-imbalance.md)                          | Imbalanced classification          | Accuracy averaged across classes so a majority class cannot dominate the score.                         |
+| [ROC-AUC](../03-classical-machine-learning/evaluation-metrics.md#probability-and-ranking-metrics) | Binary ranking and classification  | Threshold-free discrimination score based on the receiver operating characteristic curve.               |
+| [PR-AUC / average precision](../03-classical-machine-learning/class-imbalance.md)                 | Rare-positive classification       | Area-style summary of precision-recall ranking quality, often more informative under extreme imbalance. |
+| [Log loss](../03-classical-machine-learning/calibration.md)                                       | Probabilistic classification       | Negative log-likelihood that rewards calibrated probability assigned to the observed label.             |
+| [Brier score](../17-experimentation-and-evaluation/calibration.md)                                | Probability calibration            | Mean squared error between predicted probability and binary outcome.                                    |
+| [Expected calibration error](../17-experimentation-and-evaluation/calibration.md)                 | Probability calibration            | Weighted gap between predicted confidence and observed accuracy across bins.                            |
+| [Sensitivity](../09-computer-vision/medical-image-analysis.md)                                    | Clinical and safety classification | Positive-class recall, usually emphasizing missed positives.                                            |
+| [Specificity](../09-computer-vision/medical-image-analysis.md)                                    | Clinical and safety classification | Fraction of actual negatives correctly rejected.                                                        |
 
 ## Regression
 
-| Metric                                                                            | Field of application | Meaning                                                      |
-| --------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------ |
-| [MAE: mean absolute error](../03-classical-machine-learning/evaluation-metrics.md#regression-metrics)     | Regression           | Average absolute prediction error in target units.           |
-| [MSE: mean squared error](../03-classical-machine-learning/evaluation-metrics.md#regression-metrics)      | Regression           | Average squared prediction error, emphasizing larger misses. |
+| Metric                                                                                                     | Field of application | Meaning                                                      |
+| ---------------------------------------------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------ |
+| [MAE: mean absolute error](../03-classical-machine-learning/evaluation-metrics.md#regression-metrics)      | Regression           | Average absolute prediction error in target units.           |
+| [MSE: mean squared error](../03-classical-machine-learning/evaluation-metrics.md#regression-metrics)       | Regression           | Average squared prediction error, emphasizing larger misses. |
 | [RMSE: root mean squared error](../03-classical-machine-learning/evaluation-metrics.md#regression-metrics) | Regression           | Square root of mean squared error, reported in target units. |
-| [R-squared](../03-classical-machine-learning/regression.md)                       | Regression           | Share of target variance explained relative to a baseline.   |
+| [R-squared](../03-classical-machine-learning/regression.md)                                                | Regression           | Share of target variance explained relative to a baseline.   |
 
 ## Ranking and Retrieval
 

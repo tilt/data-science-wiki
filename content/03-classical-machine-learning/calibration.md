@@ -89,11 +89,12 @@ With the default ensemble behavior for this unfitted base estimator, `Calibrated
 3. For each fold, it clones the random forest, trains that clone on two folds, and asks the trained clone for scores on the remaining fold. A model with `decision_function` would use those scores; `RandomForestClassifier` does not expose one, so the calibrator uses the forest's `predict_proba` output.
 4. On that held-out fold, it fits a sigmoid calibrator
 
-$$
-\hat p(y=1\mid f)=\frac{1}{1+\exp(Af+B)},
-$$
+   $$
+   \hat p(y=1\mid f)=\frac{1}{1+\exp(Af+B)},
+   $$
 
-where $f$ is the uncalibrated model score for one example, $\hat p(y=1\mid f)$ is the calibrated probability assigned to that score, and $A,B$ are the two learned parameters of the sigmoid curve. This is Platt scaling: a one-dimensional logistic regression fitted on pairs $(f_i,y_i)$ from the held-out fold, where $f_i$ is the base model's score for example $i$ and $y_i\in\{0,1\}$ is its true label. It is not fitted separately inside percentile bins. The bins in a reliability diagram are mainly for diagnosis and visualization; sigmoid calibration fits one smooth global mapping from scores to probabilities.
+   where $f$ is the uncalibrated model score for one example, $\hat p(y=1\mid f)$ is the calibrated probability assigned to that score, and $A,B$ are the two learned parameters of the sigmoid curve. This is Platt scaling: a one-dimensional logistic regression fitted on pairs $(f_i,y_i)$ from the held-out fold, where $f_i$ is the base model's score for example $i$ and $y_i\in\{0,1\}$ is its true label. It is not fitted separately inside percentile bins. The bins in a reliability diagram are mainly for diagnosis and visualization; sigmoid calibration fits one smooth global mapping from scores to probabilities.
+
 5. The fitted object stores three `(forest clone, sigmoid calibrator)` pairs. At prediction time, each forest clone scores the new example, its paired sigmoid maps that score to a calibrated probability, and the three calibrated probabilities are averaged.
 
 The key detail is that each sigmoid is trained on predictions from examples that its paired forest clone did not train on. If the calibrator were fit on the forest's own training predictions, the scores would be too optimistic and the learned probability map would usually be too confident. The final test set must remain outside both the base-model fitting and the calibration fitting.

@@ -196,9 +196,7 @@ async function checkBrowser(name, browserType, url) {
         for (const [labelIndex, label] of [
           ...svg.querySelectorAll("g.edgeLabel, g.edgeLabels"),
         ].entries()) {
-          const background = label.querySelector(
-            "rect, .background, .label-container, .labelBkg",
-          )
+          const background = label.querySelector("rect, .background, .label-container, .labelBkg")
           const textBox = unionRect([...label.querySelectorAll("text")])
           if (!background || !textBox || !textBox.width || !textBox.height) continue
 

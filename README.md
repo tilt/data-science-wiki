@@ -11,6 +11,8 @@ The canonical wiki entry point is [content/index.md](content/index.md). From the
 Published site:
 
 - GitLab Pages: <https://data-science-wiki-5e0a3b.gitlab.io/>
+- GitHub Pages: <https://tilt.github.io/data-science-wiki/>
+
 
 ## What Is Included
 
