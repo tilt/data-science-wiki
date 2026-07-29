@@ -18,12 +18,12 @@ related:
   - pretraining.md
   - context-construction.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Language Model Architecture
 
-A modern language model usually tokenizes text, embeds tokens and positions, applies stacks of masked self-attention and feed-forward blocks, then projects hidden states to vocabulary logits for [sampling and decoding](sampling-and-decoding.md). The core mechanism is the transformer [attention](../06-deep-learning/attention.md) block.
+A modern language model usually tokenizes text, embeds tokens and positions, applies stacks of masked self-attention and feed-forward blocks, then projects hidden states to vocabulary logits for [sampling and decoding](sampling-and-decoding.md). The core mechanism is the transformer [attention](../06-deep-learning/attention.md) block. The architecture produces a probability distribution over the next token; product behavior comes from training, prompts, tools, and runtime controls around that distribution.
 
 ## Causal self-attention
 
@@ -34,6 +34,8 @@ $$
 $$
 
 where mask $M$ sets future positions to $-\infty$. [Pretraining](pretraining.md) then optimizes next-token likelihood over [tokenization](tokenization.md) outputs.
+
+The mask is what makes decoder language modeling causal. At generation time, the model can condition on the prompt and previously generated tokens, but not on future target tokens. During training, the same mask prevents label leakage.
 
 ## Worked mask example
 
@@ -55,9 +57,24 @@ With unmasked scores $(2,1,0)$ at every row, the masked softmax weights become r
 | Feed-forward block     | Applies a position-wise nonlinear transformation.       |
 | Vocabulary projection  | Converts the final hidden state into next-token logits. |
 
+## From hidden state to text
+
+At the final position, the model produces a hidden vector. A learned vocabulary projection turns it into logits, one score per token in the vocabulary. [Sampling and decoding](sampling-and-decoding.md) then chooses the next token by greedy decoding, temperature sampling, nucleus sampling, or another rule. The chosen token is appended to the context, and the process repeats.
+
+This loop explains several product behaviors:
+
+- Long prompts increase prefill work before the first token appears.
+- Long outputs are slow because tokens are decoded sequentially.
+- The model can be fluent without being grounded, because logits come from learned parameters and current context.
+- Tool use is not part of the transformer block; it is orchestration around model outputs.
+
+## Architecture versus system behavior
+
+Architecture choices affect context length, latency, memory, and raw capability. They do not by themselves enforce privacy, citations, tool permissions, or domain policy. Those belong to [context construction](context-construction.md), [tool use](tool-use-and-function-calling.md), guardrails, and evaluation.
+
 ## Caveats
 
-Long contexts increase attention memory and retrieval confusion. Architecture alone does not define product behavior; prompts, tools, safety layers, and context do.
+Long contexts increase attention memory and retrieval confusion. Architecture alone does not define product behavior; prompts, tools, safety layers, and context do. Treat architectural capability as the substrate, not the whole application.
 
 ## References
 

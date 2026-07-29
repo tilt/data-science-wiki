@@ -18,12 +18,14 @@ related:
   - vector-databases.md
   - ../01-mathematical-foundations/numerical-stability.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Quantization
 
 Quantization stores model values in lower precision, commonly int8 or 4-bit formats, to reduce memory bandwidth and serving cost. It matters most for [model serving](model-serving.md) of local models, [cost and latency optimization](cost-and-latency-optimization.md), and [local versus hosted models](local-versus-hosted-models.md) decisions.
+
+The practical question is not "how many bits can we use?" but "which lower-precision representation preserves enough task quality while fitting the serving budget?"
 
 ## Int8 quantization
 
@@ -56,9 +58,24 @@ The endpoint maps exactly to 127 by construction. Intermediate values absorb rou
 | Per-tensor scale                   | Simpler metadata, worse fit for heterogeneous channels.   |
 | Per-channel scale                  | More metadata, often lower reconstruction error.          |
 
+## Where quantization is applied
+
+| Target      | Typical benefit                            | Risk                                             |
+| ----------- | ------------------------------------------ | ------------------------------------------------ |
+| Weights     | lower memory footprint and bandwidth       | degraded rare-token or domain behavior.          |
+| Activations | faster kernels and lower memory traffic    | sensitivity to outliers and long-context states. |
+| KV cache    | longer context or more concurrent sessions | accumulated attention error.                     |
+| Embeddings  | smaller vector stores                      | changed nearest-neighbor rankings.               |
+
+Quantization is therefore evaluated at the system level. A 4-bit model that answers normal chat well may still fail tool routing, numeric extraction, multilingual prompts, or long-context retrieval synthesis.
+
+## Evaluation
+
+Compare the quantized model to the reference model on the routes it will actually serve: direct answers, structured extraction, RAG answers, tool calls, refusals, and long-context prompts. Track exact-schema validity, unsupported-claim rate, latency, memory, and cost. If quantization changes only a few logits, the visible failures may appear in rare but important edge cases.
+
 ## Caveats
 
-Quantization can degrade rare-token behavior, arithmetic, multilingual quality, or long-context stability before aggregate benchmarks show large drops.
+Quantization can degrade rare-token behavior, arithmetic, multilingual quality, or long-context stability before aggregate benchmarks show large drops. It can also change determinism if kernels, batching, or hardware differ between reference and serving environments.
 
 ## References
 

@@ -19,13 +19,16 @@ related:
   - citations.md
   - langchain.md
   - rag-architecture-comparison.md
+  - rag-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-28
+last_reviewed: 2026-07-29
 ---
 
 # RAG
 
 Retrieval-augmented generation retrieves external evidence and places it into the model request before generation. It is the pattern connecting [chunking](chunking.md), [embeddings](embeddings.md), [retrieval pipelines](retrieval-pipelines.md), [context construction](context-construction.md), and [citations](citations.md). The same pattern can be built as several designs — a tool-based loop, an indexed hybrid retriever, or a two-phase curation agent — compared in [RAG architecture comparison](rag-architecture-comparison.md).
+
+RAG is best understood as a system contract: answer from selected evidence, cite it, and abstain when evidence is missing. It is not simply "add vector search to a prompt."
 
 Implementation frameworks can help, but they do not change the concept. [LangChain](langchain.md) commonly supplies retriever and model-call abstractions for RAG systems; the evidence quality still comes from corpus preparation, retrieval evaluation, citation checks, and product-specific permissions.
 
@@ -51,6 +54,22 @@ flowchart TD
 ```
 
 This trace is useful because each stage can be evaluated separately with [rag evaluation](rag-evaluation.md). If the answer is wrong, the team can inspect whether retrieval missed the right document, reranking chose stale evidence, context packing dropped the key sentence, or generation ignored the source.
+
+## When RAG is the right lever
+
+Use RAG when answers depend on current, private, auditable, or source-specific information. Examples include support policies, internal documentation, contracts, product catalogs, legal clauses, and operational runbooks. Use fine-tuning instead when the problem is stable behavior, tone, or output format despite correct evidence being present.
+
+## Failure modes
+
+| Failure                                  | Where to look                                              |
+| ---------------------------------------- | ---------------------------------------------------------- |
+| right document missing                   | ingestion, permissions, query rewriting, retrieval recall. |
+| right document retrieved but not used    | reranking, context packing, prompt, generation.            |
+| answer cites irrelevant passage          | citation validation and grounding.                         |
+| stale policy used                        | metadata filters, index freshness, source versioning.      |
+| malicious retrieved instruction followed | prompt-injection defenses and tool gates.                  |
+
+RAG quality is therefore multi-stage. Evaluating only final answers makes failures hard to repair.
 
 ## Caveats
 

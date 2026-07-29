@@ -20,12 +20,12 @@ related:
   - ../12-information-retrieval-and-search/bm25.md
   - ../12-information-retrieval-and-search/hybrid-search.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Hybrid Retrieval
 
-Hybrid retrieval combines lexical matching with dense [embeddings](embeddings.md). It is useful in [retrieval pipelines](retrieval-pipelines.md) because exact names, numbers, and codes often matter while semantic similarity still recovers paraphrases. [Reranking](reranking.md) can then read the merged candidates more carefully.
+Hybrid retrieval combines lexical matching with dense [embeddings](embeddings.md). It is useful in [retrieval pipelines](retrieval-pipelines.md) because exact names, numbers, and codes often matter while semantic similarity still recovers paraphrases. [Reranking](reranking.md) can then read the merged candidates more carefully. Hybrid retrieval is the pragmatic default when a corpus contains both natural language and exact business identifiers.
 
 ## Score fusion
 
@@ -56,9 +56,23 @@ Document 0 wins after fusion because its lexical score is strongest and its dens
 | Hybrid                | Workflows that need both semantic recall and exact support.          |
 | Hybrid plus reranking | High-value answers where the system can afford a slower second pass. |
 
+## Realistic example
+
+Query:
+
+```text
+policy exception for SKU-X19 refund in July 2026
+```
+
+Dense retrieval may find refund-exception discussions but miss the exact `SKU-X19` identifier. Lexical retrieval may find every document containing `SKU-X19`, including irrelevant release notes. Hybrid retrieval merges both signals so the candidate list contains documents that are semantically about refunds and lexically anchored to the SKU and date.
+
+## Evaluation
+
+Evaluate hybrid retrieval by query type. Exact-identifier queries, semantic paraphrase queries, multilingual queries, and date-sensitive policy queries may need different fusion weights. Track recall before reranking, duplicate rate after merging, and final answer support. If lexical and dense retrievers return disjoint but useful results, reciprocal-rank fusion can be more robust than score interpolation.
+
 ## Caveats
 
-Fusion weights are corpus-specific. Evaluate exact-match queries separately from broad semantic questions.
+Fusion weights are corpus-specific. Evaluate exact-match queries separately from broad semantic questions. Hybrid retrieval can also over-retrieve boilerplate if exact terms appear in headers or footers, so deduplication and reranking still matter.
 
 ## References
 

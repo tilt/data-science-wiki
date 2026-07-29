@@ -19,7 +19,7 @@ related:
   - reranking.md
   - langchain.md
 historical_context: false
-last_reviewed: 2026-07-28
+last_reviewed: 2026-07-29
 ---
 
 # Retrieval Pipelines
@@ -64,6 +64,23 @@ flowchart TD
 ```
 
 This is a retrieval artifact, not a generation artifact. It should be evaluated against retrieval labels or hard negatives before judging final answer quality with [rag evaluation](rag-evaluation.md).
+
+## Operational contracts
+
+| Contract  | Fields to record                                                         |
+| --------- | ------------------------------------------------------------------------ |
+| Ingestion | source ID, source version, text hash, parser version, deletion state.    |
+| Chunking  | chunk ID, heading path, token count, neighboring chunks, permissions.    |
+| Indexing  | embedding model, index version, lexical analyzer, build time.            |
+| Querying  | original query, rewritten query, filters, user/tenant scope.             |
+| Ranking   | candidate lists, scores, fusion method, reranker version.                |
+| Handoff   | selected chunks, dropped high-score chunks, context order, citation IDs. |
+
+Without these fields, teams cannot tell whether a bad answer came from the model or from stale retrieval state.
+
+## Realistic failure trace
+
+A policy answer cites `refunds-007`, but the user says the threshold is outdated. The retrieval trace shows `policy_version=2025-12` even though the UI selected July 2026. The fix is not a different language model; it is filter propagation and index freshness. Retrieval traces make that kind of root cause visible.
 
 ## Caveats
 

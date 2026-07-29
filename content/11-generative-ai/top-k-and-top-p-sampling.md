@@ -18,12 +18,12 @@ related:
   - prompting.md
   - structured-output.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Top-k and Top-p Sampling
 
-Top-k and top-p are truncation controls inside [sampling and decoding](sampling-and-decoding.md). They remove candidate tokens before sampling, often after temperature is applied. Use them with [temperature and determinism](temperature-and-determinism.md) and trace their settings for [determinism and reproducibility](determinism-and-reproducibility.md), not as independent magic knobs.
+Top-k and top-p are truncation controls inside [sampling and decoding](sampling-and-decoding.md). They remove candidate tokens before sampling, often after temperature is applied. Use them with [temperature and determinism](temperature-and-determinism.md) and trace their settings for [determinism and reproducibility](determinism-and-reproducibility.md), not as independent magic knobs. They shape the candidate set; they do not make a weak prompt or unsupported answer correct.
 
 ## Top-k versus top-p
 
@@ -79,9 +79,25 @@ With these logits, top-p is narrower than top-k because the first two tokens alr
 
 For top-k with $k=3$, the kept set is `alpha`, `beta`, and `gamma`; renormalizing their probabilities leaves entropy `1.222` bits. For top-p with $p=0.80$, only `alpha` and `beta` are needed, so the renormalized distribution has lower entropy, `0.811` bits, and samples from a smaller candidate set.
 
+## Choosing truncation settings
+
+| Use case                   | Typical direction                      | Reason                                                              |
+| -------------------------- | -------------------------------------- | ------------------------------------------------------------------- |
+| JSON extraction            | narrow top-p or deterministic decoding | reduce malformed or surprising tokens.                              |
+| grounded answers           | moderate truncation                    | preserve stable wording while avoiding low-probability tail tokens. |
+| creative writing           | wider top-p/top-k                      | diversity is part of the goal.                                      |
+| code generation            | moderate, plus tests                   | avoid tail syntax errors while allowing alternatives.               |
+| safety-sensitive workflows | narrow, plus validators                | decoding cannot enforce policy by itself.                           |
+
+Top-p adapts to the shape of the distribution, so it is often easier to reason about across prompts. Top-k is easier to explain but can keep too many poor candidates when the distribution is already peaked.
+
+## Debugging output changes
+
+If output becomes bland, repetitive, or too risky, inspect temperature, top-p/top-k, max tokens, prompt changes, and retrieval changes together. A lower top-p can reduce strange tail completions, but it can also remove useful rare tokens such as product codes or non-English words. For structured workflows, prefer schema validation over relying on sampling settings alone.
+
 ## Caveats
 
-Very low top-p can collapse creativity. Very high top-k still admits bad tail tokens if temperature is high.
+Very low top-p can collapse creativity and remove rare but correct tokens. Very high top-k still admits bad tail tokens if temperature is high. Provider defaults may also change, so record decoding settings in reproducibility traces.
 
 ## References
 

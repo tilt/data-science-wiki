@@ -20,12 +20,12 @@ related:
   - agent-evaluation.md
   - ../07-reinforcement-learning/reinforcement-learning-from-human-feedback.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Alignment
 
-Alignment is not one switch. It combines training, preference optimization, prompting, [guardrails](guardrails.md), [data privacy](data-privacy.md), and evaluation so a model follows intended behavior under realistic pressure.
+Alignment is not one switch. It combines training, preference optimization, prompting, [guardrails](guardrails.md), [data privacy](data-privacy.md), and evaluation so a model follows intended behavior under realistic pressure. In a product, alignment means the full system behaves according to user intent, developer policy, and deployment constraints.
 
 ## Training signal and runtime layers
 
@@ -52,9 +52,30 @@ One common preference-learning signal is pairwise: for the same prompt, the trai
 
 The artifact separates learned behavior from controls that remain outside the model. A citation policy can be reinforced during training, but the application still needs an evidence checker because a fluent unsupported answer can satisfy style preferences while failing the workflow.
 
+## Alignment layers
+
+| Layer                   | Example control                               | What it cannot guarantee alone            |
+| ----------------------- | --------------------------------------------- | ----------------------------------------- |
+| Pretraining data        | broad capability and priors                   | instruction following or safety.          |
+| Instruction tuning      | task-following and response formats           | correct policy under adversarial context. |
+| Preference optimization | preferred style and refusal behavior          | exact authorization or citation support.  |
+| System instructions     | runtime policy for a route                    | resistance to all prompt injection.       |
+| Guardrails              | deterministic checks around tools and outputs | semantic quality of every answer.         |
+| Evaluation              | detects regressions and gaps                  | prevents failures without enforcement.    |
+
+Strong alignment is layered because each mechanism fails differently.
+
+## Realistic example
+
+A general assistant may be aligned to be helpful, but a finance assistant must also refuse to invent policy, avoid exposing private data, and require confirmation for refunds. If preference data rewards "helpful completion" too strongly, the assistant may take action or answer without evidence. The product needs workflow-specific alignment data, retrieval grounding, and tool gates.
+
+## Evaluation
+
+Evaluate alignment by deployment scenario, not only broad chat preference. Include helpfulness, harmlessness, honesty, privacy, unsupported-claim rate, refusal accuracy, and tool-policy compliance. A model that is aligned for open-domain chat can still be misaligned for a regulated workflow if it optimizes for user satisfaction over policy.
+
 ## Caveats
 
-Preference data can encode annotator bias or reward verbosity. A model can be aligned for chat helpfulness but misaligned for a regulated workflow unless the workflow has its own tests.
+Preference data can encode annotator bias or reward verbosity. A model can be aligned for chat helpfulness but misaligned for a regulated workflow unless the workflow has its own tests. Alignment also drifts when prompts, retrieval corpora, tools, or user populations change.
 
 ## References
 

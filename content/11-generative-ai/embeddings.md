@@ -17,13 +17,15 @@ related:
   - hybrid-retrieval.md
   - reranking.md
   - ../08-natural-language-processing/embeddings.md
+  - query-rewriting.md
+  - rag-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Embeddings
 
-Embeddings map text, images, or other objects into vectors so nearby points represent model-learned similarity. In this section they power [vector databases](vector-databases.md), [retrieval pipelines](retrieval-pipelines.md), [hybrid retrieval](hybrid-retrieval.md), and sometimes agent [memory](memory.md).
+Embeddings map text, images, or other objects into vectors so nearby points represent model-learned similarity. In this section they power [vector databases](vector-databases.md), [retrieval pipelines](retrieval-pipelines.md), [hybrid retrieval](hybrid-retrieval.md), and sometimes agent [memory](memory.md). They are best understood as learned similarity functions with operational constraints.
 
 ## Embedding similarity
 
@@ -34,6 +36,8 @@ $$
 $$
 
 The training objective determines what similarity means; a search embedding is not automatically a clustering or classification embedding.
+
+For normalized vectors, cosine similarity and dot product give the same ranking. For unnormalized vectors, vector length can change ranking behavior. Production indexes should document the distance function, normalization, embedding model, and version because all four affect retrieval.
 
 ## Worked example
 
@@ -53,9 +57,30 @@ The query vector points toward the refund document, so vector search retrieves i
 | Use a domain-tuned embedding model        | Improves similarity for local jargon and document structure.                            |
 | Keep metadata filters with vectors        | Prevents semantically similar but unauthorized or stale passages from entering context. |
 
+## Choosing embedding inputs
+
+The text sent to the embedding model should be the text you want similarity to operate on. A chunk containing only:
+
+```text
+Section 4.2: Exceptions
+```
+
+is usually a poor embedding input. A better record includes title, path, normalized metadata, and the chunk body:
+
+```text
+Refund policy > Enterprise accounts > Approval thresholds.
+Enterprise refunds above 5000 EUR require finance approval.
+```
+
+This improves retrieval because the vector now carries both local content and document context. It also helps [query rewriting](query-rewriting.md) match user language such as "approval threshold" to the policy wording.
+
+## Evaluation
+
+Evaluate embeddings by retrieval task, not by visual intuition. Use a set of queries with known answer-bearing chunks and measure recall before reranking, recall after metadata filters, and answer support after context packing. Slice by language, document type, freshness, and rare identifiers. A model that works for English FAQs may fail on code snippets, tables, legal clauses, or product IDs.
+
 ## Caveats
 
-Embeddings can miss exact constraints, names, and numbers. Evaluate by task, corpus, language, and update cadence.
+Embeddings can miss exact constraints, names, and numbers. Similarity can also retrieve topically related but non-answering chunks. Evaluate by task, corpus, language, and update cadence; combine dense vectors with lexical or structured retrieval when exact terms matter.
 
 ## References
 

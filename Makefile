@@ -1,4 +1,4 @@
-.PHONY: help doctor setup install preview preview-watch build clean validate lint test check-links check-external-links check-content portability-check nav-footers nav-footers-check format ci deploy-info new-page new-topic generate-subtopics improve-generated-content export-mkdocs serve-build list-stubs list-drafts list-stale
+.PHONY: help doctor setup install install-hooks preview preview-watch build clean validate lint test check-links check-external-links check-content portability-check nav-footers nav-footers-check format ci deploy-info new-page new-topic generate-subtopics improve-generated-content export-mkdocs serve-build list-stubs list-drafts list-stale
 
 PORT ?= 8080
 WS_PORT ?= $(shell expr $(PORT) + 1)
@@ -15,6 +15,10 @@ install: ## Install locked dependencies reproducibly.
 	npm ci
 	npx quartz plugin install
 	npm run patch-plugins
+
+install-hooks: ## Enable tracked Git hooks for this local checkout.
+	git config core.hooksPath .githooks
+	chmod +x .githooks/pre-commit
 
 preview: ## Serve public/ locally; build once first only if public/ is missing.
 	@if [ ! -f public/index.html ]; then echo "public/index.html not found; running make build first."; $(MAKE) build; fi

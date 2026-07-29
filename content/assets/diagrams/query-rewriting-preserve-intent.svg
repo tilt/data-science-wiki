@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="480" viewBox="0 0 960 480" role="img" aria-labelledby="title desc">
+  <title id="title">Query rewriting preserves intent</title>
+  <desc id="desc">A conversational query is rewritten into lexical, semantic, and filtered retrieval queries while preserving amount, customer type, and approval action.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { font-size: 27px; font-weight: 800; }
+    .subtitle { font-size: 15px; fill: #4b5563; }
+    .label { font-size: 15px; font-weight: 800; }
+    .small { font-size: 13px; fill: #374151; }
+    .box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; }
+    .in { fill: #eef2ff; stroke: #2563eb; stroke-width: 1.8; }
+    .mid { fill: #ecfdf5; stroke: #0f766e; stroke-width: 1.8; }
+    .out { fill: #fff7ed; stroke: #f97316; stroke-width: 1.8; }
+    .arrow { stroke: #64748b; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+  </style>
+  <text x="480" y="40" text-anchor="middle" class="title">Query rewriting improves recall without changing the question</text>
+  <text x="480" y="70" text-anchor="middle" class="subtitle">The rewrite must preserve entities, constraints, dates, roles, and negation.</text>
+
+  <rect x="60" y="126" width="250" height="118" rx="10" class="in"/>
+  <text x="185" y="157" text-anchor="middle" class="label">user request</text>
+  <text x="92" y="188" class="small">"Can I get this approved?"</text>
+  <text x="92" y="213" class="small">ticket: 700 EUR refund</text>
+  <text x="92" y="235" class="small">customer: enterprise</text>
+
+  <path d="M314 185 H392" class="arrow"/>
+  <rect x="406" y="120" width="204" height="130" rx="10" class="mid"/>
+  <text x="508" y="151" text-anchor="middle" class="label">must preserve</text>
+  <text x="438" y="183" class="small">amount: 700 EUR</text>
+  <text x="438" y="208" class="small">customer: enterprise</text>
+  <text x="438" y="233" class="small">intent: approval</text>
+
+  <path d="M614 185 H664" class="arrow"/>
+  <g transform="translate(678,96)">
+    <rect width="238" height="66" rx="10" class="out"/>
+    <text x="119" y="27" text-anchor="middle" class="label">lexical query</text>
+    <text x="119" y="50" text-anchor="middle" class="small">enterprise refund approval 700 EUR</text>
+
+    <rect y="90" width="238" height="66" rx="10" class="out"/>
+    <text x="119" y="117" text-anchor="middle" class="label">semantic query</text>
+    <text x="119" y="140" text-anchor="middle" class="small">manager approval threshold</text>
+
+    <rect y="180" width="238" height="66" rx="10" class="out"/>
+    <text x="119" y="207" text-anchor="middle" class="label">filters</text>
+    <text x="119" y="230" text-anchor="middle" class="small">policy_version=2026-07</text>
+  </g>
+
+  <rect x="250" y="378" width="460" height="58" rx="10" class="box"/>
+  <text x="480" y="402" text-anchor="middle" class="label">bad rewrite: "refund policy"</text>
+  <text x="480" y="424" text-anchor="middle" class="small">drops amount, customer type, and approval action</text>
+</svg>

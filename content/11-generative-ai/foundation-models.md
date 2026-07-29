@@ -18,12 +18,12 @@ related:
   - fine-tuning-versus-rag.md
   - multimodal-models.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Foundation Models
 
-A foundation model is pretrained broadly enough to serve as a base for many tasks. In this section, [pretraining](pretraining.md) creates the base distribution, [instruction tuning](instruction-tuning.md) adapts behavior, and [fine tuning versus RAG](fine-tuning-versus-rag.md) decides how applications specialize it.
+A foundation model is pretrained broadly enough to serve as a base for many tasks. In this section, [pretraining](pretraining.md) creates the base distribution, [instruction tuning](instruction-tuning.md) adapts behavior, and [fine tuning versus RAG](fine-tuning-versus-rag.md) decides how applications specialize it. The point is reuse: one base model can support many products when wrapped with the right context, tools, and controls.
 
 ## Base objective and adaptation paths
 
@@ -51,9 +51,25 @@ flowchart LR
 
 The diagram shows why application behavior should not be attributed only to the base weights. A good or bad answer may come from the pretrained distribution, the instruction-tuning data, the retrieval layer, tool permissions, or the product wrapper.
 
+## What foundation models do and do not provide
+
+| Provides                            | Still needed in an application                      |
+| ----------------------------------- | --------------------------------------------------- |
+| broad language and reasoning priors | current private evidence through RAG or tools.      |
+| reusable representations            | product-specific prompts, schemas, and workflows.   |
+| general task adaptation             | domain evaluation and failure analysis.             |
+| multimodal or code capability       | privacy, access control, and auditability.          |
+| fluent generation                   | grounding, citations, and hallucination mitigation. |
+
+The same foundation model can behave very differently in a chat UI, a retrieval system, a coding agent, or a batch extraction pipeline. The wrapper is part of the system, not decoration.
+
+## Realistic specialization path
+
+A company building a support assistant might start with a hosted foundation model, add RAG for policies, add structured outputs for ticket routing, add tool calls for order lookup, and only later fine-tune for tone or repeated extraction behavior. This sequence keeps facts outside the weights while using the base model's general capability.
+
 ## Caveats
 
-Foundation-model capability is uneven across languages, domains, modalities, and time-sensitive facts. Avoid relying on implicit parametric memory when the answer must be current or auditable.
+Foundation-model capability is uneven across languages, domains, modalities, and time-sensitive facts. Avoid relying on implicit parametric memory when the answer must be current or auditable. Broad capability also creates broad failure modes; product systems should narrow the task and evaluate the deployed workflow.
 
 ## References
 

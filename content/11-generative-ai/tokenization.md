@@ -17,13 +17,14 @@ related:
   - chunking.md
   - pretraining.md
   - ../08-natural-language-processing/tokenization.md
+  - cost-and-latency-optimization.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Tokenization
 
-Tokenization converts text into the units consumed by a model. It affects [language model architecture](language-model-architecture.md), [pretraining](pretraining.md), prompt cost, [chunking](chunking.md), truncation, and generation boundaries.
+Tokenization converts text into the units consumed by a model. It affects [language model architecture](language-model-architecture.md), [pretraining](pretraining.md), prompt cost, [chunking](chunking.md), truncation, latency, and generation boundaries. In production systems, "how many tokens?" is a cost, context, and reliability question, not only a preprocessing detail.
 
 ## Subword vocabularies
 
@@ -51,9 +52,26 @@ Without the last merge, the same word would remain split as `low` and `est`. Tha
 | Non-English text | Coverage depends on the tokenizer training mixture.              |
 | Tables or JSON   | Repeated punctuation can consume context quickly.                |
 
+## Why token counts matter
+
+| System concern       | Tokenization effect                                                   |
+| -------------------- | --------------------------------------------------------------------- |
+| Context budget       | long prompts may evict evidence, examples, or instructions.           |
+| Cost                 | hosted APIs usually bill on input and output tokens.                  |
+| Latency              | long inputs increase prefill time; long outputs increase decode time. |
+| Retrieval chunks     | chunk boundaries should target token counts, not character counts.    |
+| Structured output    | JSON punctuation and repeated field names consume output budget.      |
+| Multilingual support | some languages may require more tokens for the same meaning.          |
+
+## Realistic failure case
+
+A support RAG system chunks documents by 2,000 characters and assumes each chunk fits comfortably. A policy table with many product IDs, currency values, and JSON-like snippets tokenizes far denser than prose. At runtime, the context packer silently drops the final chunk containing the actual approval rule. The final answer then looks like a model hallucination, but the root cause is token-budget accounting.
+
+The fix is to measure chunks with the target model tokenizer, reserve budget for instructions and output, and log both input-token and output-token counts for [cost and latency optimization](cost-and-latency-optimization.md).
+
 ## Caveats
 
-Code, tables, numbers, and non-English text can tokenize very differently from prose. Tokenization changes can break cached counts.
+Code, tables, numbers, and non-English text can tokenize very differently from prose. Tokenization changes can break cached counts, chunk sizes, prompt templates, and latency estimates. Always count with the tokenizer of the model that will actually serve the request.
 
 ## References
 

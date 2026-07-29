@@ -21,12 +21,12 @@ related:
   - agent-evaluation.md
   - rag-architecture-comparison.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Agentic Systems
 
-An agentic system gives a model conditional control over a workflow. The model may choose when to search, call tools, ask for clarification, or stop, while application code enforces [tool routing](tool-routing.md), [guardrails](guardrails.md), and traceable [agent evaluation](agent-evaluation.md).
+An agentic system gives a model conditional control over a workflow. The model may choose when to search, call tools, ask for clarification, or stop, while application code enforces [tool routing](tool-routing.md), [guardrails](guardrails.md), and traceable [agent evaluation](agent-evaluation.md). The useful autonomy is bounded: the model can choose among allowed actions, not redefine the workflow's authority.
 
 ## Model judgement versus deterministic control
 
@@ -68,9 +68,17 @@ An agent loop should make each transition auditable:
 
 The action is only a proposal until the orchestrator validates name, schema, user permission, and budget. This separation keeps autonomy useful without letting the model silently bypass product controls.
 
+## When an agent is justified
+
+Use an agentic system when the next step depends on observations that are not known upfront: retrieval may fail, tools may return conflicting state, the user may need a clarification, or a task may require several conditional actions. Use a fixed pipeline when the path is known and stable. A deterministic RAG pipeline is usually better than an agent for "answer from these documents"; an agent is more justified for "investigate why this deployment failed and propose a rollback plan."
+
+## Evaluation and operations
+
+Agentic systems should be evaluated by traces: task success, route choice, tool arguments, forbidden actions, retries, latency, and cost. They also need operational limits such as max steps, max tool calls, tool timeouts, budget ceilings, and explicit blocked states. Without those limits, the system can spend tokens and tool calls hiding uncertainty rather than resolving it.
+
 ## Caveats
 
-Agentic systems are inappropriate when a fixed pipeline is enough. Added autonomy increases test surface: tool misuse, prompt injection, stale memory, and runaway cost.
+Agentic systems are inappropriate when a fixed pipeline is enough. Added autonomy increases test surface: tool misuse, prompt injection, stale memory, hidden retries, and runaway cost. The more autonomy a system has, the more its state and permissions must be explicit.
 
 ## References
 

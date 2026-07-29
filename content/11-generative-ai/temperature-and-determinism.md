@@ -20,12 +20,12 @@ related:
   - structured-output.md
   - model-serving.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Temperature and Determinism
 
-Temperature rescales logits before sampling. It is one control inside [sampling and decoding](sampling-and-decoding.md), but [determinism and reproducibility](determinism-and-reproducibility.md) also depend on model version, retrieval, tools, seeds, serving, and post-processing.
+Temperature rescales logits before sampling. It is one control inside [sampling and decoding](sampling-and-decoding.md), but [determinism and reproducibility](determinism-and-reproducibility.md) also depend on model version, retrieval, tools, seeds, serving, and post-processing. Low temperature reduces sampling variance; it does not make a whole generative system reproducible.
 
 ## Temperature scaling
 
@@ -78,9 +78,25 @@ The plot shows the same effect: high temperature leaves the top token first, but
 
 ![Higher temperature spreads probability mass from the top token to lower-ranked tokens.](../assets/diagrams/temperature-probability-spread.svg)
 
+## Choosing temperature
+
+| Task                       | Typical setting     | Reason                                            |
+| -------------------------- | ------------------- | ------------------------------------------------- |
+| extraction and routing     | low temperature     | stable format and fewer surprising tokens.        |
+| grounded support answers   | low to moderate     | preserve evidence while allowing fluent phrasing. |
+| brainstorming or ideation  | moderate to high    | diversity matters more than exact repeatability.  |
+| code generation with tests | low to moderate     | keep syntax stable; use tests for correctness.    |
+| safety-critical workflows  | low plus validators | decoding alone is not the safety control.         |
+
+Temperature should be evaluated with the full route. A creative setting that is harmless for drafting marketing copy may be unacceptable for policy answers or tool calls.
+
+## Determinism misconceptions
+
+Temperature $0$ or near-zero decoding can still produce different outputs if retrieved chunks change, prompt templates change, model deployments change, tool calls return different data, or validators retry on failure. For reproducibility, record the whole run: prompt, model, decoding parameters, retrieval IDs, tool results, and schema versions.
+
 ## Caveats
 
-Temperature zero can still drift in hosted systems. For extraction, combine low temperature with [structured output](structured-output.md) validation.
+Temperature zero can still drift in hosted systems. For extraction, combine low temperature with [structured output](structured-output.md) validation. For debugging, prefer replayable traces over relying on a single temperature setting.
 
 ## References
 

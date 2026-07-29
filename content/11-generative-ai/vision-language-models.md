@@ -20,12 +20,12 @@ related:
   - ../09-computer-vision/vision-transformers.md
   - ../10-video-understanding/v-jepa-2-versus-vision-language-models.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Vision-Language Models
 
-Vision-language models condition text generation or scoring on visual input. They are a [multimodal models](multimodal-models.md) subtype used for image QA, captioning, screenshot understanding, document extraction, and visual grounding.
+Vision-language models condition text generation or scoring on visual input. They are a [multimodal models](multimodal-models.md) subtype used for image QA, captioning, screenshot understanding, document extraction, and visual grounding. They are useful when the answer depends on pixels, layout, or visual state rather than text alone.
 
 ## Encoding image plus text
 
@@ -40,6 +40,16 @@ For document and screenshot tasks, the model must combine at least three signals
 | Screenshot understanding | UI hierarchy, visible state, icons     | hallucinated invisible controls       |
 | Video-frame reasoning    | sampled frames and temporal order      | missed short event or wrong ordering  |
 
+## Realistic workflow
+
+For invoice extraction, the VLM should not merely read visible text. It must determine which number is the total, which currency applies, whether line items reconcile, and whether the scan is readable enough for automation. A good workflow often combines OCR, VLM reasoning, [structured output](structured-output.md), and deterministic validators:
+
+```text
+image -> OCR/layout -> VLM extraction -> schema validation -> total reconciliation -> human review if uncertain
+```
+
+This decomposition makes failures diagnosable. If the total is wrong, the team can inspect whether OCR missed text, the VLM chose the wrong region, or the validator failed to catch an impossible value.
+
 ## An extraction contract
 
 ```json
@@ -50,6 +60,10 @@ For document and screenshot tasks, the model must combine at least three signals
   "output": { "supplier": "string", "total": "number", "currency": "string" }
 }
 ```
+
+## Evaluation
+
+Evaluate VLMs by visual condition and task type: clean scans, mobile photos, rotated pages, low resolution, screenshots with hidden state, charts, tables, handwriting, and multi-page documents. For grounding, ask the model to point to the region or source page that supports each extracted field. For safety, include unreadable inputs and test whether the model abstains instead of inventing text.
 
 ## Caveats
 

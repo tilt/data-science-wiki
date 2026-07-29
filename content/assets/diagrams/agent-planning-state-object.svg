@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="470" viewBox="0 0 960 470" role="img" aria-labelledby="title desc">
+  <title id="title">Agent planning state object</title>
+  <desc id="desc">A plan is represented as operational state with goal, steps, evidence requirements, observations, risk gates, and done condition.</desc>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { font-size: 27px; font-weight: 800; }
+    .subtitle { font-size: 15px; fill: #4b5563; }
+    .label { font-size: 15px; font-weight: 800; }
+    .small { font-size: 13px; fill: #374151; }
+    .box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; }
+    .goal { fill: #eef2ff; stroke: #2563eb; stroke-width: 1.8; }
+    .step { fill: #ecfdf5; stroke: #0f766e; stroke-width: 1.8; }
+    .risk { fill: #fef2f2; stroke: #ef4444; stroke-width: 1.8; }
+    .done { fill: #fff7ed; stroke: #f97316; stroke-width: 1.8; }
+  </style>
+  <text x="480" y="40" text-anchor="middle" class="title">A useful plan is operational state</text>
+  <text x="480" y="70" text-anchor="middle" class="subtitle">The loop can inspect, revise, gate, and evaluate it after every observation.</text>
+  <rect x="48" y="106" width="864" height="310" rx="12" class="box"/>
+
+  <rect x="78" y="138" width="250" height="78" rx="9" class="goal"/>
+  <text x="203" y="167" text-anchor="middle" class="label">goal</text>
+  <text x="203" y="192" text-anchor="middle" class="small">answer refund approval question</text>
+
+  <rect x="355" y="138" width="250" height="78" rx="9" class="step"/>
+  <text x="480" y="167" text-anchor="middle" class="label">steps and dependencies</text>
+  <text x="480" y="192" text-anchor="middle" class="small">search -&gt; read -&gt; answer</text>
+
+  <rect x="632" y="138" width="250" height="78" rx="9" class="step"/>
+  <text x="757" y="167" text-anchor="middle" class="label">evidence needed</text>
+  <text x="757" y="188" text-anchor="middle" class="small">policy span, amount</text>
+  <text x="757" y="207" text-anchor="middle" class="small">customer type</text>
+
+  <rect x="78" y="252" width="250" height="78" rx="9" class="risk"/>
+  <text x="203" y="281" text-anchor="middle" class="label">risk gates</text>
+  <text x="203" y="306" text-anchor="middle" class="small">do not issue refund</text>
+
+  <rect x="355" y="252" width="250" height="78" rx="9" class="goal"/>
+  <text x="480" y="281" text-anchor="middle" class="label">observations</text>
+  <text x="480" y="306" text-anchor="middle" class="small">tool result + provenance</text>
+
+  <rect x="632" y="252" width="250" height="78" rx="9" class="done"/>
+  <text x="757" y="281" text-anchor="middle" class="label">done condition</text>
+  <text x="757" y="302" text-anchor="middle" class="small">answer cites policy</text>
+  <text x="757" y="321" text-anchor="middle" class="small">or abstains</text>
+
+  <text x="480" y="382" text-anchor="middle" class="small">A replan should log what changed and which observation made the old plan invalid.</text>
+</svg>

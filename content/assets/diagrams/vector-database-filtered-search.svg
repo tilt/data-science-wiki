@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="470" viewBox="0 0 960 470" role="img" aria-labelledby="title desc">
+  <title id="title">Vector database filtered search</title>
+  <desc id="desc">A query is embedded, filtered by metadata before approximate nearest-neighbor search, and passed to reranking.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { font-size: 27px; font-weight: 800; }
+    .subtitle { font-size: 15px; fill: #4b5563; }
+    .label { font-size: 15px; font-weight: 800; }
+    .small { font-size: 13px; fill: #374151; }
+    .tiny { font-size: 12px; fill: #4b5563; }
+    .box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.5; }
+    .blue { fill: #eef2ff; stroke: #2563eb; stroke-width: 1.8; }
+    .green { fill: #ecfdf5; stroke: #0f766e; stroke-width: 1.8; }
+    .orange { fill: #fff7ed; stroke: #f97316; stroke-width: 1.8; }
+    .purple { fill: #f5f3ff; stroke: #7c3aed; stroke-width: 1.8; }
+    .arrow { stroke: #64748b; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+    .allowed { fill: #2563eb; opacity: 0.82; }
+    .blocked { fill: #ef4444; opacity: 0.76; }
+  </style>
+  <text x="480" y="40" text-anchor="middle" class="title">Vector search is filtered candidate generation</text>
+  <text x="480" y="70" text-anchor="middle" class="subtitle">Nearest neighbors must still respect metadata, freshness, and authorization constraints.</text>
+
+  <g transform="translate(50,124)">
+    <rect width="148" height="74" rx="10" class="blue"/>
+    <text x="74" y="31" text-anchor="middle" class="label">query</text>
+    <text x="74" y="53" text-anchor="middle" class="small">"refund threshold"</text>
+    <path d="M152 37 H214" class="arrow"/>
+
+    <rect x="228" width="148" height="74" rx="10" class="green"/>
+    <text x="302" y="31" text-anchor="middle" class="label">embed</text>
+    <text x="302" y="53" text-anchor="middle" class="small">q in R^d</text>
+    <path d="M380 37 H442" class="arrow"/>
+
+    <rect x="456" width="168" height="74" rx="10" class="orange"/>
+    <text x="540" y="29" text-anchor="middle" class="label">pre-filter</text>
+    <text x="540" y="52" text-anchor="middle" class="small">tenant, ACL, version</text>
+    <path d="M628 37 H690" class="arrow"/>
+
+    <rect x="704" width="168" height="74" rx="10" class="purple"/>
+    <text x="788" y="29" text-anchor="middle" class="label">ANN search</text>
+    <text x="788" y="52" text-anchor="middle" class="small">top candidates</text>
+  </g>
+
+  <g transform="translate(74,260)">
+    <rect width="262" height="112" rx="10" class="box"/>
+    <text x="131" y="27" text-anchor="middle" class="label">unfiltered corpus slice</text>
+    <text x="131" y="49" text-anchor="middle" class="tiny">mixed tenants, versions, and rights</text>
+    <circle cx="58" cy="80" r="8" class="allowed"/>
+    <circle cx="95" cy="63" r="8" class="blocked"/>
+    <circle cx="132" cy="91" r="8" class="allowed"/>
+    <circle cx="170" cy="70" r="8" class="blocked"/>
+    <circle cx="214" cy="88" r="8" class="allowed"/>
+
+    <path d="M266 56 H330" class="arrow"/>
+    <rect x="344" y="24" width="150" height="64" rx="9" class="orange"/>
+    <text x="419" y="48" text-anchor="middle" class="label">filter first</text>
+    <text x="419" y="70" text-anchor="middle" class="small">metadata + auth</text>
+    <path d="M498 56 H562" class="arrow"/>
+
+    <rect x="576" width="262" height="112" rx="10" class="box"/>
+    <text x="707" y="27" text-anchor="middle" class="label">allowed ANN space</text>
+    <text x="707" y="49" text-anchor="middle" class="tiny">search only records the caller may use</text>
+    <circle cx="628" cy="82" r="8" class="allowed"/>
+    <circle cx="672" cy="64" r="8" class="allowed"/>
+    <circle cx="714" cy="91" r="8" class="allowed"/>
+    <circle cx="760" cy="72" r="8" class="allowed"/>
+  </g>
+
+  <text x="480" y="430" text-anchor="middle" class="small">Post-filtering can leak or rank the wrong candidate set; pre-filtering makes retrieval obey policy.</text>
+</svg>

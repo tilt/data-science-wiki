@@ -13,7 +13,6 @@ Published site:
 - GitLab Pages: <https://data-science-wiki-5e0a3b.gitlab.io/>
 - GitHub Pages: <https://tilt.github.io/data-science-wiki/>
 
-
 ## What Is Included
 
 - A numbered top-level taxonomy under [content/](content/) for stable Obsidian and Quartz ordering.
@@ -92,6 +91,14 @@ Use `make preview-watch` while editing if you want Quartz to rebuild on file cha
 Keep content portable: avoid Obsidian-only embeds, MDX/JSX, Quartz-only content components, and local absolute paths. See [docs/AUTHORING_GUIDE.md](docs/AUTHORING_GUIDE.md).
 
 ## Validation And CI
+
+Optional local Git hooks can format staged files before each commit:
+
+```sh
+make install-hooks
+```
+
+The tracked pre-commit hook runs Prettier on staged files only and re-stages formatter changes. Run `make validate` or `make ci` before pushing when you want the broader content and build checks locally.
 
 For normal content changes:
 

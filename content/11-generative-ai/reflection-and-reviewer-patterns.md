@@ -18,12 +18,12 @@ related:
   - agent-evaluation.md
   - hallucination-mitigation.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Reflection and Reviewer Patterns
 
-Reflection and reviewer patterns add a critique step after a draft. The reviewer can be the same model, another model, deterministic validators, or a human. In [multi-agent systems](multi-agent-systems.md), this is the simplest useful role split.
+Reflection and reviewer patterns add a critique step after a draft. The reviewer can be the same model, another model, deterministic validators, or a human. In [multi-agent systems](multi-agent-systems.md), this is the simplest useful role split. The pattern is valuable when the review step has independent evidence or a narrow rubric; otherwise it can become expensive self-reassurance.
 
 ## The review loop
 
@@ -38,6 +38,17 @@ The safe pattern gives the reviewer the draft, task, rubric, and evidence, then 
 
 The reviewer should be asked for falsifiable checks: unsupported claim, missing citation, schema mismatch, unsafe tool call, contradiction, or incomplete answer. A vague prompt such as "reflect on your answer" often produces style edits rather than evidence-based corrections.
 
+## Reviewer types
+
+| Reviewer                | Good for                                | Weakness                           |
+| ----------------------- | --------------------------------------- | ---------------------------------- |
+| Same model self-review  | cheap style and completeness pass       | shares blind spots with the draft. |
+| Stronger model reviewer | semantic critique and citation checks   | higher cost and latency.           |
+| Deterministic validator | schemas, citations, policy gates, tests | cannot judge nuanced prose.        |
+| Human reviewer          | high-risk decisions and ambiguous cases | slow and expensive.                |
+
+The best systems combine them: deterministic validators catch exact failures, model reviewers flag semantic defects, and humans handle high-impact uncertainty.
+
 ## A defect report
 
 ```json
@@ -48,6 +59,21 @@ The reviewer should be asked for falsifiable checks: unsupported claim, missing 
   "action": "revise"
 }
 ```
+
+## Realistic workflow
+
+For a RAG answer, the draft step writes an answer with citations. The reviewer receives the answer, cited chunks, and a rubric:
+
+```text
+Check each factual claim. Mark unsupported, contradicted, missing citation, or okay.
+Do not improve style unless a claim defect is present.
+```
+
+The repair step then edits only the defective claims or abstains if evidence is missing. This is more reliable than asking the model to "think again," because it converts review into a bounded verification task.
+
+## Evaluation
+
+Measure whether review catches defects that the draft system misses, and whether it introduces new errors. Track false-positive review blocks, unsupported-claim reduction, latency, cost, and escalation rate. Reviewer patterns should be justified by risk or quality gain; they should not be default loops added to every request.
 
 ## Caveats
 

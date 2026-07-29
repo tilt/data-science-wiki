@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="360" viewBox="0 0 980 360" role="img" aria-labelledby="title desc">
+  <title id="title">Structured output validation layers</title>
+  <desc id="desc">A model JSON response is parsed, schema-validated, checked against source evidence, and validated against business rules before downstream use.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { font-size: 27px; font-weight: 800; }
+    .subtitle { font-size: 15px; fill: #4b5563; }
+    .label { font-size: 15px; font-weight: 800; }
+    .small { font-size: 13px; fill: #374151; }
+    .stage { fill: #eef2ff; stroke: #2563eb; stroke-width: 1.8; }
+    .guard { fill: #ecfdf5; stroke: #0f766e; stroke-width: 1.8; }
+    .out { fill: #fff7ed; stroke: #f97316; stroke-width: 1.8; }
+    .arrow { stroke: #64748b; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
+  </style>
+  <text x="490" y="42" text-anchor="middle" class="title">Structured output still needs layered validation</text>
+  <text x="490" y="72" text-anchor="middle" class="subtitle">Parseable JSON can be unsupported, impossible, or unsafe for downstream systems.</text>
+
+  <g transform="translate(24,146)">
+    <rect width="112" height="82" rx="10" class="stage"/>
+    <text x="56" y="32" text-anchor="middle" class="label">model JSON</text>
+    <text x="56" y="57" text-anchor="middle" class="small">raw response</text>
+    <path d="M124 41 H150" class="arrow"/>
+
+    <rect x="164" width="112" height="82" rx="10" class="guard"/>
+    <text x="220" y="32" text-anchor="middle" class="label">parse</text>
+    <text x="220" y="57" text-anchor="middle" class="small">valid JSON?</text>
+    <path d="M288 41 H314" class="arrow"/>
+
+    <rect x="328" width="112" height="82" rx="10" class="guard"/>
+    <text x="384" y="32" text-anchor="middle" class="label">schema</text>
+    <text x="384" y="57" text-anchor="middle" class="small">types, enums</text>
+    <path d="M452 41 H478" class="arrow"/>
+
+    <rect x="492" width="112" height="82" rx="10" class="guard"/>
+    <text x="548" y="32" text-anchor="middle" class="label">grounding</text>
+    <text x="548" y="57" text-anchor="middle" class="small">evidence</text>
+    <path d="M616 41 H642" class="arrow"/>
+
+    <rect x="656" width="112" height="82" rx="10" class="guard"/>
+    <text x="712" y="32" text-anchor="middle" class="label">rules</text>
+    <text x="712" y="53" text-anchor="middle" class="small">totals, dates</text>
+    <text x="712" y="72" text-anchor="middle" class="small">policy</text>
+    <path d="M780 41 H806" class="arrow"/>
+
+    <rect x="820" width="112" height="82" rx="10" class="out"/>
+    <text x="876" y="32" text-anchor="middle" class="label">downstream</text>
+    <text x="876" y="53" text-anchor="middle" class="small">write, route</text>
+    <text x="876" y="72" text-anchor="middle" class="small">evaluate</text>
+  </g>
+  <text x="490" y="292" text-anchor="middle" class="small">Each layer can reject, repair, or route for review before the object reaches production state.</text>
+</svg>

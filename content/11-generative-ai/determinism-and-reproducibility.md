@@ -20,12 +20,12 @@ related:
   - model-serving.md
   - agent-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-28
+last_reviewed: 2026-07-29
 ---
 
 # Determinism and Reproducibility
 
-Determinism means identical inputs and execution conditions produce identical outputs. Reproducibility means a run can be reconstructed closely enough to debug drift. In generative systems, this spans [sampling and decoding](sampling-and-decoding.md), [context construction](context-construction.md), retrieval, tools, serving, and validators.
+Determinism means identical inputs and execution conditions produce identical outputs. Reproducibility means a run can be reconstructed closely enough to debug drift. In generative systems, this spans [sampling and decoding](sampling-and-decoding.md), [context construction](context-construction.md), retrieval, tools, serving, and validators. Most production systems should optimize for reproducibility even when perfect determinism is impossible.
 
 ## What to record for a replayable run
 
@@ -56,6 +56,21 @@ Reproducibility fails whenever an unrecorded dependency changes. In a RAG system
 ```
 
 This is the minimum trace needed for [agent evaluation](agent-evaluation.md).
+
+## Replay versus live reproducibility
+
+| Mode                    | Purpose                                               | Example                                        |
+| ----------------------- | ----------------------------------------------------- | ---------------------------------------------- |
+| Trace replay            | debug a past run with frozen inputs and observations. | rerun the same prompt and retrieved chunk IDs. |
+| Live canary             | detect drift in the current system.                   | ask stable benchmark questions every deploy.   |
+| Deterministic unit test | validate code around the model.                       | schema validator rejects malformed output.     |
+| Statistical regression  | detect quality drift over a set.                      | compare pass rate over 200 RAG cases.          |
+
+Replay explains what happened. Canaries reveal what would happen now. A mature system needs both.
+
+## Realistic drift example
+
+A refund answer changes although temperature is zero. The trace shows the prompt template and model route are unchanged, but `retrieved_chunk_ids` changed from `refunds-007` to `refunds-2025-legacy` after a re-index. The issue is retrieval state, not decoding randomness. Without retrieval IDs and index versions, the team might incorrectly blame the model.
 
 ## Caveats
 

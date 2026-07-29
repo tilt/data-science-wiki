@@ -17,13 +17,15 @@ related:
   - context-construction.md
   - sampling-and-decoding.md
   - guardrails.md
+  - prompt-injection.md
+  - tool-use-and-function-calling.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-29
 ---
 
 # Prompting
 
-Prompting is the runtime interface for telling a model what task to perform. It includes instructions, examples for [in-context learning](in-context-learning.md), retrieved evidence from [context construction](context-construction.md), tool descriptions, and output constraints such as [structured output](structured-output.md).
+Prompting is the runtime interface for telling a model what task to perform. It includes instructions, examples for [in-context learning](in-context-learning.md), retrieved evidence from [context construction](context-construction.md), tool descriptions, and output constraints such as [structured output](structured-output.md). A prompt is an API surface: it should make inputs, authority, constraints, and outputs explicit.
 
 ## Anatomy of a prompt
 
@@ -39,6 +41,16 @@ A prompt should separate roles: system policy, developer instructions, user requ
 
 Good prompting is not magic wording. It is interface design: make the task, inputs, constraints, and output contract explicit enough that the model does not have to infer hidden requirements.
 
+## Prompt design rules
+
+- Put durable policy and role instructions in the highest-priority instruction channel available.
+- Separate trusted instructions from untrusted documents, tickets, emails, or web pages.
+- State the task and output contract before long evidence when possible.
+- Include only examples that represent real edge cases.
+- Use [structured output](structured-output.md) when downstream software consumes the answer.
+- Prefer explicit abstention conditions over vague warnings.
+- Keep prompts versioned when they feed production workflows.
+
 ## An example prompt
 
 ```text
@@ -49,9 +61,34 @@ SOURCES:
 OUTPUT: JSON with answer and citations.
 ```
 
+The example is short, but it includes the important boundaries: answer from sources, say when unsupported, and return parseable JSON with citations. A production version would also include source IDs, schema version, allowed tools, and a policy for missing evidence.
+
+## Bad prompt, better prompt
+
+Bad:
+
+```text
+Answer the customer. Be helpful and safe.
+```
+
+Better:
+
+```text
+Answer the customer's refund-policy question using only SOURCES.
+If SOURCES do not state the approval threshold, say that evidence is missing.
+Return JSON: { "answer": string, "citations": string[], "needs_human_review": boolean }.
+Do not issue refunds or promise approval.
+```
+
+The better prompt does not rely on tone words. It states evidence boundaries, output shape, abstention behavior, and action limits. Access control and tool permissions still belong outside the prompt.
+
+## Evaluation
+
+Prompt changes are code changes. Test them on ordinary cases, missing-evidence cases, adversarial [prompt injection](prompt-injection.md), long-context cases, and examples that require refusal or escalation. Record prompt version, model version, and decoding parameters so regressions can be traced.
+
 ## Caveats
 
-Prompt wording can hide policy conflicts. A prompt is not an access-control system; enforce permissions and schema checks outside the model. Treat untrusted documents, webpages, emails, and tickets as data, not instructions; otherwise prompt injection can override the intended task.
+Prompt wording can hide policy conflicts. A prompt is not an access-control system; enforce permissions and schema checks outside the model. Treat untrusted documents, webpages, emails, and tickets as data, not instructions; otherwise prompt injection can override the intended task. Longer prompts are not automatically better; they can bury the actual task and waste context.
 
 ## References
 
