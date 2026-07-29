@@ -42,7 +42,29 @@ $$
 p_i=\frac{\exp(z_i)}{\sum_j \exp(z_j)}.
 $$
 
-If the correct token receives probability $0.77$, its loss is $-\log(0.77)\approx0.26$. If a later correct token receives probability $0.16$, its loss is $-\log(0.16)\approx1.83$. The mean of these two losses is about $1.05$, and perplexity is $\exp(1.05)\approx2.86$, meaning the model is as uncertain as choosing among roughly three equally likely tokens on this toy batch.
+Use a small sequence to make the objective concrete:
+
+```text
+The refund requires finance approval above 5000 EUR.
+```
+
+During training, the model does not receive one label for the whole sentence. It receives many next-token targets, one position at a time:
+
+| Prefix                                            | Target next token |
+| ------------------------------------------------- | ----------------- |
+| `The refund requires`                             | `finance`         |
+| `The refund requires finance approval above`      | `5000`            |
+| `The refund requires finance approval above 5000` | `EUR`             |
+
+The loss is then computed position by position:
+
+1. For the prefix `The refund requires`, the model produces one probability for every possible next token.
+2. Training looks at the probability assigned to the actual target token, `finance`. If that probability is $0.77$, the loss at this position is $-\log(0.77)\approx0.26$.
+3. For a later prefix, suppose the actual target token is `5000`, but the model assigns it only probability $0.16$. That position has larger loss: $-\log(0.16)\approx1.83$.
+4. The batch loss is the mean over target positions. For these two positions, the mean loss is $(0.26+1.83)/2\approx1.05$.
+5. Perplexity converts the mean log loss back to an intuitive scale: $\exp(1.05)\approx2.86$. On this toy batch, the model is about as uncertain as choosing among roughly three equally likely next tokens.
+
+Lower loss therefore means the model put more probability mass on the actual next tokens. It does not mean the model has verified that the sentence is true.
 
 ![A pretraining pipeline filters and deduplicates data, tokenizes it, trains a decoder model with next-token loss, evaluates slices, and emits checkpoints.](../assets/diagrams/pretraining-data-to-checkpoint.svg)
 
@@ -63,23 +85,7 @@ Next-token prediction is simple to state but rich in consequence. To predict the
 
 That distinction matters. Pretraining can make a model fluent and knowledgeable, but it does not guarantee truthfulness, calibrated uncertainty, obedience to instructions, privacy behavior, or tool-use discipline. Those properties require later training, system design, retrieval, evaluation, and policy controls.
 
-## Realistic batch example
-
-For the sequence:
-
-```text
-The refund requires finance approval above 5000 EUR.
-```
-
-the model sees prefixes and target next tokens:
-
-| Prefix                                            | Target token |
-| ------------------------------------------------- | ------------ |
-| `The refund requires`                             | `finance`    |
-| `The refund requires finance approval above`      | `5000`       |
-| `The refund requires finance approval above 5000` | `EUR`        |
-
-The loss pushes probability mass toward the target token at every position. Across trillions of tokens, this creates a model that can continue text, answer questions, write code, and follow patterns, but the training signal is still "predict the next token," not "verify the world."
+Across trillions of tokens, this objective creates a model that can continue text, answer questions, write code, and follow patterns, but the training signal is still "predict the next token," not "verify the world."
 
 ## Data and contamination
 

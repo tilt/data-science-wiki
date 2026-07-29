@@ -17,7 +17,8 @@
     .train { fill: #eef2ff; stroke: #2563eb; stroke-width: 1.8; }
     .eval { fill: #ecfdf5; stroke: #0f766e; stroke-width: 1.8; }
     .arrow { stroke: #64748b; stroke-width: 2.2; fill: none; marker-end: url(#arrow); }
-    .token { fill: #dbeafe; stroke: #2563eb; stroke-width: 1.2; }
+    .token-context { fill: #dbeafe; stroke: #2563eb; stroke-width: 1.2; }
+    .token-target { fill: #fed7aa; stroke: #f97316; stroke-width: 1.4; }
   </style>
   <text x="480" y="40" text-anchor="middle" class="title">Pretraining turns web-scale data into a base model checkpoint</text>
   <text x="480" y="70" text-anchor="middle" class="subtitle">The objective is next-token prediction; the engineering work is data, scale, and evaluation.</text>
@@ -56,9 +57,11 @@
 
   <g transform="translate(174,370)">
     <rect width="612" height="72" rx="9" class="box"/>
-    <rect x="222" y="14" width="52" height="22" rx="5" class="token"/>
-    <rect x="280" y="14" width="52" height="22" rx="5" class="token"/>
-    <rect x="338" y="14" width="52" height="22" rx="5" class="token" fill="#2563eb"/>
-    <text x="306" y="58" text-anchor="middle" class="small"><tspan font-weight="800">next-token loss</tspan>: predict the highlighted token from the ones before it</text>
+    <rect x="218" y="14" width="52" height="22" rx="5" class="token-context"/>
+    <rect x="278" y="14" width="52" height="22" rx="5" class="token-context"/>
+    <rect x="338" y="14" width="52" height="22" rx="5" class="token-target"/>
+    <text x="274" y="52" text-anchor="middle" class="small">context</text>
+    <text x="364" y="52" text-anchor="middle" class="small">target</text>
+    <text x="306" y="67" text-anchor="middle" class="small"><tspan font-weight="800">next-token loss</tspan>: predict target from previous tokens</text>
   </g>
 </svg>
