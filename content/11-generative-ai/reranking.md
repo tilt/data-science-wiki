@@ -29,7 +29,7 @@ Reranking reorders candidates after a fast first-stage retriever. It lets [retri
 
 ## Bi-encoder recall, cross-encoder precision
 
-First-stage retrieval scores documents independently or approximately. A reranker scores $(q,d_i)$ pairs directly and sorts by $r(q,d_i)$. It is commonly applied after [hybrid retrieval](hybrid-retrieval.md), [embeddings](embeddings.md), or [vector databases](vector-databases.md) return a short candidate list.
+First-stage retrieval scores documents independently or approximately. A reranker scores each query-document pair $(q,d_i)$ directly and sorts by the reranker score $r(q,d_i)$. Here $q$ is the user query, $d_i$ is the $i$-th candidate document or chunk returned by the first-stage retriever, and $r(q,d_i)$ is the relevance score assigned after the reranker has read the query and candidate together. It is commonly applied after [hybrid retrieval](hybrid-retrieval.md), [embeddings](embeddings.md), or [vector databases](vector-databases.md) return a short candidate list.
 
 The precision gain comes from architecture. First-stage bi-encoders embed the query and each document _separately_, so documents can be indexed ahead of time and searched at scale. A cross-encoder reranker instead reads the query and document _together_, which captures fine-grained relevance but must be run fresh for every pair — so it is affordable only on the short candidate list the first stage produced.
 
@@ -61,7 +61,7 @@ $$
 
 The reranked order is therefore document 1, document 2, document 0. The first-stage winner falls to last because the cross-score judges it weak after seeing the full query-document pair.
 
-## Realistic example
+## Policy-Threshold Reranking
 
 User query:
 

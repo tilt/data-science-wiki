@@ -44,8 +44,11 @@ flowchart TD
   Index --> Retrieve
   Retrieve --> Rerank[Reranking]
   Rerank --> Pack[Context packing and citation validation]
-  Pack --> Model[Generative model]
+  Pack --> Result[Retrieval result: selected context and citation IDs]
+  Result -. handoff .-> Model[Downstream generator]
 ```
+
+The solid path ends at the retrieval result: selected chunks, ordering, citation identifiers, and enough metadata to audit why those chunks were chosen. A RAG application usually hands that artifact to a generator, but generation is a downstream consumer of retrieval rather than the retrieval result itself.
 
 ## A retrieval trace
 

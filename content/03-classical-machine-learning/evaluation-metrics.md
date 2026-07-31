@@ -53,6 +53,8 @@ $$
 
 Accuracy is the fraction of all examples classified correctly. Precision is the fraction of predicted positives that are actually positive. Recall is the fraction of actual positives recovered by the model; it is also called sensitivity or true positive rate in some domains.
 
+The same precision and recall terms also appear in ranked retrieval, where they measure the cleanliness and coverage of a result list rather than a classifier threshold. See [Precision, Recall, MAP, MRR, and NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) for the retrieval-side definitions.
+
 The $F_1$ score is the harmonic mean of precision $P$ and recall $R$:
 
 $$

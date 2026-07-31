@@ -35,7 +35,9 @@ $$
 s(d,q)=\lambda z(s_{lex})+(1-\lambda)z(s_{dense}).
 $$
 
-Lexical scores may come from BM25; dense scores from vector search in [vector databases](vector-databases.md). [Reciprocal rank fusion](../12-information-retrieval-and-search/hybrid-search.md) is another robust option when scores are not comparable, and this fusion step is the core of the indexed design in [RAG architecture comparison](rag-architecture-comparison.md).
+Here $q$ is the query and $d$ is one candidate document or chunk. The final score $s(d,q)$ is the number used to sort candidates before reranking or context packing. The lexical score $s_{lex}$ may come from [BM25](../12-information-retrieval-and-search/bm25.md) or another sparse retriever; the dense score $s_{dense}$ usually comes from embedding similarity in a [vector database](vector-databases.md). The function $z(\cdot)$ puts each score family onto a comparable scale, commonly by subtracting the mean and dividing by the standard deviation inside the candidate set or inside a calibration sample. The weight $\lambda\in[0,1]$ controls the trade-off: larger $\lambda$ favors exact lexical evidence, while smaller $\lambda$ favors semantic similarity.
+
+This formula is a realistic engineering pattern, but the normalization choice matters. BM25 scores and vector similarities do not naturally live on the same scale, and their distributions can change by corpus, query type, analyzer, embedding model, and metadata filter. [Reciprocal rank fusion](../12-information-retrieval-and-search/hybrid-search.md) is often more robust when scores are not comparable, because it combines ranks rather than raw scores. This fusion step is the core of the indexed design in [RAG architecture comparison](rag-architecture-comparison.md).
 
 ## Worked example
 
@@ -56,7 +58,7 @@ Document 0 wins after fusion because its lexical score is strongest and its dens
 | Hybrid                | Workflows that need both semantic recall and exact support.          |
 | Hybrid plus reranking | High-value answers where the system can afford a slower second pass. |
 
-## Realistic example
+## SKU and Policy-Date Query
 
 Query:
 

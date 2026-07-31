@@ -68,7 +68,7 @@ The plot treats a plan like state that software can inspect. The top row says wh
 
 The important fields are not the prose labels; they are the invariants. `risk_gates` says what must not happen, `depends_on` says what evidence is needed before a step can run, and `done_when` prevents endless action. A plan that lacks a done condition is just a suggestion.
 
-## Realistic example
+## Refund Approval Plan
 
 A user asks, "Can we approve this enterprise refund?" A weak plan might be:
 

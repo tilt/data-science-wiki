@@ -53,13 +53,21 @@ The diagram shows why application behavior should not be attributed only to the 
 
 ## What foundation models do and do not provide
 
-| Provides                            | Still needed in an application                      |
-| ----------------------------------- | --------------------------------------------------- |
-| broad language and reasoning priors | current private evidence through RAG or tools.      |
-| reusable representations            | product-specific prompts, schemas, and workflows.   |
-| general task adaptation             | domain evaluation and failure analysis.             |
-| multimodal or code capability       | privacy, access control, and auditability.          |
-| fluent generation                   | grounding, citations, and hallucination mitigation. |
+Foundation models provide broad reusable capability:
+
+- broad language and reasoning priors;
+- reusable representations;
+- general task adaptation from prompting or fine-tuning;
+- multimodal or code capability, depending on the model;
+- fluent generation.
+
+An application still has to supply the product boundary around that capability:
+
+- current private evidence through RAG or tools;
+- product-specific prompts, schemas, and workflows;
+- domain evaluation and failure analysis;
+- privacy, access control, and auditability;
+- grounding, citations, and hallucination mitigation.
 
 The same foundation model can behave very differently in a chat UI, a retrieval system, a coding agent, or a batch extraction pipeline. The wrapper is part of the system, not decoration.
 

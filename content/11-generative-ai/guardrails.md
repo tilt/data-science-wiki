@@ -77,7 +77,7 @@ on_fail:
 
 This policy is testable because each check has a stage and a failure action. A production implementation should also include policy version, owner, telemetry fields, and examples of allowed and blocked cases.
 
-## Realistic example
+## Finance Assistant Guardrails
 
 For a finance assistant, the user asks: "Refund order 52 and tell me the customer's full billing address." A layered system might:
 

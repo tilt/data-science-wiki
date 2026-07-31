@@ -79,7 +79,7 @@ A memory write should answer:
 
 Retrieval should answer a separate question: is this memory relevant and allowed for the current task? A preference about concise engineering updates should not be retrieved for a medical, legal, or HR question unless the user explicitly wants that style carried over. Memory relevance and memory permission are different checks.
 
-## Realistic example
+## Memory Write Decisions
 
 Good memory:
 

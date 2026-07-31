@@ -63,7 +63,7 @@ Grounding validators should distinguish these cases. Related evidence is the mos
 
 This source-level artifact gives [rag evaluation](rag-evaluation.md) something concrete to score.
 
-## Realistic example
+## Grounded Refund Answer
 
 User question:
 

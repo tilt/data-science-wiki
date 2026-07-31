@@ -65,7 +65,7 @@ The artifact separates learned behavior from controls that remain outside the mo
 
 Strong alignment is layered because each mechanism fails differently.
 
-## Realistic example
+## Finance Assistant Alignment
 
 A general assistant may be aligned to be helpful, but a finance assistant must also refuse to invent policy, avoid exposing private data, and require confirmation for refunds. If preference data rewards "helpful completion" too strongly, the assistant may take action or answer without evidence. The product needs workflow-specific alignment data, retrieval grounding, and tool gates.
 
