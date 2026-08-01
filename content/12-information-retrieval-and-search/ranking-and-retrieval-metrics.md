@@ -23,12 +23,16 @@ related:
   - hybrid-search.md
   - ../11-generative-ai/rag-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-07-31
 ---
 
 # Ranking and Retrieval Metrics
 
 Ranking metrics measure whether useful results appear early enough. They are the feedback loop for [BM25](bm25.md), [hybrid search](hybrid-search.md), [reranking](reranking.md), and RAG retrieval. The right metric depends on the task: one good result, many relevant results, or graded evidence quality.
+
+In retrieval, **relevance** means how useful a document or chunk is for the query. Some tasks use binary relevance, where a result is either relevant or not; others use graded relevance, where a result can be perfect, useful, marginal, or irrelevant.
+
+For the worked definitions and examples, see [Precision, Recall, MAP, MRR, and NDCG](precision-recall-map-mrr-ndcg.md).
 
 ## Precision, recall, and ranked metrics
 

@@ -65,7 +65,17 @@ Context is not a flat bag of text; it has an authority order. System and develop
 
 ## Realistic packing failure
 
-A user asks a refund-threshold question after a long conversation. The context packer includes 20 chat turns and two stale policy chunks, then truncates the current policy table. The answer says "manager approval above 500 EUR" because that appears in stale history, but the current policy says "above 700 EUR." The model failure is downstream; the root cause is context construction.
+A user asks: "Does an enterprise refund of 650 EUR need manager approval?" Earlier in the conversation, the model and user discussed an older policy where the threshold was 500 EUR. The packer then fills most of the available budget with 20 chat turns plus two stale policy chunks, and the current July 2026 policy table is the item that gets truncated.
+
+Step by step, that happens as follows:
+
+1. The packer starts with the current question and the mandatory instructions, schemas, and safety blocks.
+2. It then adds a long stretch of conversation history because those turns appear relevant to the refund topic.
+3. Two older policy chunks also score well enough to be kept, because they mention approval thresholds and look similar to the current policy.
+4. The budget is almost exhausted before the current July 2026 policy table is considered.
+5. When the packer reaches that current table, there is not enough budget left, so it gets dropped even though it is the decisive source.
+
+The model then answers, "Yes, manager approval is required above 500 EUR." That answer is wrong for the current policy, but it is understandable from the packed context: the stale history still contains the old threshold, while the decisive current table never reached the model. The failure is not that the model ignored the right evidence; the failure is that the right evidence was not included in the final context.
 
 A robust trace should show which chunks were considered, which were packed, which were dropped, and why. Without that trace, teams often blame generation when retrieval or packing caused the unsupported answer.
 

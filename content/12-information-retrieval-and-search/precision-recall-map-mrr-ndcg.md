@@ -28,6 +28,8 @@ last_reviewed: 2026-07-30
 
 These metrics summarize different user promises made by a ranked retrieval system. This page gives the worked definitions and examples; [Ranking and Retrieval Metrics](ranking-and-retrieval-metrics.md) is the compact overview.
 
+For the classifier-side intuition and confusion-matrix diagrams behind precision and recall, see [Evaluation Metrics](../03-classical-machine-learning/evaluation-metrics.md).
+
 ## Metric definitions
 
 Assume one query returns a ranked list of documents $d_1,\ldots,d_n$. Each document has a relevance judgment $\operatorname{rel}_i$ at rank $i$. For binary metrics, $\operatorname{rel}_i=1$ means relevant and $\operatorname{rel}_i=0$ means not relevant. Let $R$ be the number of known relevant documents for the query.
