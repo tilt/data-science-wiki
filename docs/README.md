@@ -24,11 +24,11 @@ This directory contains production documentation for operating, authoring, valid
 - [References](REFERENCES.md): bibliography and citation policy.
 - [Visual Content](VISUAL_CONTENT.md): diagrams, images, and animation conventions.
 - [Mermaid Rendering](MERMAID_RENDERING.md): Quartz Mermaid patch and stability plugin.
+- [Content Operations](CONTENT_OPERATIONS.md): tracked agent-maintenance workflow and ledger policy.
 - [Integrating Project Knowledge](integrating-project-knowledge.md): turn private project learning into generic wiki content.
 - [MkDocs Migration](MKDOCS_MIGRATION.md): portability notes for a future MkDocs export.
 
 ## Internal records
 
 - [Platform Sources](PLATFORM_SOURCES.md): external platform references checked for setup and deployment.
-- [Prompts](prompts/README.md): historical content-improvement prompts and section briefs.
-- [Archive](archive/README.md): large audit ledgers and one-off records kept out of the operational docs list.
+- [Archive](archive/README.md): the current content-progress ledger plus historical audit ledgers and one-off records.

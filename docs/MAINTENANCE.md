@@ -39,4 +39,4 @@ Do not edit `public/` or `.generated/` directly. Regenerate them from source Mar
 
 ## Historical records
 
-Large one-off ledgers and prompt records belong under `docs/archive/` or `docs/prompts/`, not in the operational docs root.
+Use `docs/archive/current-content-progress-ledger.md` for the single maintained content-progress ledger. Large one-off ledgers may live under `docs/archive/`; disposable prompts and local agent notes belong under gitignored `docs/prompts/`. See [Content Operations](CONTENT_OPERATIONS.md).
