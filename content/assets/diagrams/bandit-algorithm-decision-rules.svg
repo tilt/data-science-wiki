@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="620" viewBox="0 0 980 620" role="img" aria-labelledby="title desc">
+  <title id="title">Bandit algorithm decision rules</title>
+  <desc id="desc">Four bandit policies use the same arm statistics but choose the next arm differently. Greedy uses the largest empirical reward, epsilon-greedy sometimes explores randomly, UCB adds an uncertainty bonus, and Thompson sampling draws from posterior beliefs.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <style>
+    text { fill: #111827; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .title { font-size: 28px; font-weight: 800; }
+    .subtitle { font-size: 16px; fill: #475569; }
+    .h { font-size: 18px; font-weight: 800; }
+    .body { font-size: 15px; fill: #334155; }
+    .small { font-size: 13px; fill: #475569; }
+    .box { fill: #f8fafc; stroke: #94a3b8; stroke-width: 1.8; }
+    .state { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .greedy { fill: #ecfdf5; stroke: #16a34a; stroke-width: 2; }
+    .eps { fill: #fff7ed; stroke: #ea580c; stroke-width: 2; }
+    .ucb { fill: #eef2ff; stroke: #4f46e5; stroke-width: 2; }
+    .ts { fill: #fdf2f8; stroke: #db2777; stroke-width: 2; }
+    .arrow { stroke: #64748b; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+    .score { fill: #ffffff; stroke: #cbd5e1; stroke-width: 1.5; }
+  </style>
+
+  <text x="490" y="42" text-anchor="middle" class="title">Bandit policies differ in how they choose the next arm</text>
+  <text x="490" y="70" text-anchor="middle" class="subtitle">The same partial-feedback statistics can drive deterministic, random, optimistic, or posterior-sampling decisions.</text>
+
+  <g transform="translate(82,105)">
+    <rect width="816" height="92" rx="10" class="state"/>
+    <text x="408" y="30" text-anchor="middle" class="h">shared arm state after each impression</text>
+    <text x="120" y="62" text-anchor="middle" class="body">shows n_a</text>
+    <text x="290" y="62" text-anchor="middle" class="body">wins w_a</text>
+    <text x="470" y="62" text-anchor="middle" class="body">rate mu_hat_a = w_a / n_a</text>
+    <text x="680" y="62" text-anchor="middle" class="body">round t</text>
+  </g>
+
+  <line x1="490" y1="197" x2="490" y2="228" class="arrow"/>
+
+  <g transform="translate(40,238)">
+    <rect width="205" height="225" rx="10" class="greedy"/>
+    <text x="102.5" y="32" text-anchor="middle" class="h">Greedy</text>
+    <rect x="34" y="58" width="137" height="36" rx="7" class="score"/>
+    <text x="102.5" y="82" text-anchor="middle" class="body">max mu_hat</text>
+    <text x="24" y="125" class="body">Exploit the arm that</text>
+    <text x="24" y="147" class="body">currently looks best.</text>
+    <text x="24" y="178" class="small">Risk: early noise can</text>
+    <text x="24" y="196" class="small">lock in a bad arm.</text>
+  </g>
+
+  <g transform="translate(275,238)">
+    <rect width="205" height="225" rx="10" class="eps"/>
+    <text x="102.5" y="32" text-anchor="middle" class="h">Epsilon-greedy</text>
+    <rect x="26" y="58" width="153" height="36" rx="7" class="score"/>
+    <text x="102.5" y="82" text-anchor="middle" class="body">random with eps</text>
+    <text x="24" y="125" class="body">Usually exploit, but</text>
+    <text x="24" y="147" class="body">reserve some traffic</text>
+    <text x="24" y="169" class="body">for random learning.</text>
+    <text x="24" y="196" class="small">Simple, but untargeted.</text>
+  </g>
+
+  <g transform="translate(510,238)">
+    <rect width="205" height="225" rx="10" class="ucb"/>
+    <text x="102.5" y="32" text-anchor="middle" class="h">UCB</text>
+    <rect x="23" y="58" width="159" height="36" rx="7" class="score"/>
+    <text x="102.5" y="82" text-anchor="middle" class="body">rate + bonus</text>
+    <text x="24" y="125" class="body">Choose the arm with</text>
+    <text x="24" y="147" class="body">the best optimistic</text>
+    <text x="24" y="169" class="body">upper bound.</text>
+    <text x="24" y="196" class="small">Explores under-sampled</text>
+    <text x="24" y="214" class="small">arms.</text>
+  </g>
+
+  <g transform="translate(745,238)">
+    <rect width="205" height="225" rx="10" class="ts"/>
+    <text x="102.5" y="32" text-anchor="middle" class="h">Thompson</text>
+    <rect x="22" y="58" width="161" height="36" rx="7" class="score"/>
+    <text x="102.5" y="82" text-anchor="middle" class="body">sample belief</text>
+    <text x="24" y="125" class="body">Draw plausible CTRs</text>
+    <text x="24" y="147" class="body">from posteriors, then</text>
+    <text x="24" y="169" class="body">pick the largest draw.</text>
+    <text x="24" y="196" class="small">Random, uncertainty-aware.</text>
+  </g>
+
+  <path d="M 143 463 C 143 514 490 520 490 550" class="arrow"/>
+  <path d="M 378 463 C 378 508 490 520 490 550" class="arrow"/>
+  <path d="M 612 463 C 612 508 490 520 490 550" class="arrow"/>
+  <path d="M 848 463 C 848 514 490 520 490 550" class="arrow"/>
+
+  <g transform="translate(285,548)">
+    <rect width="410" height="44" rx="9" class="box"/>
+    <text x="205" y="28" text-anchor="middle" class="h">show one arm, observe its reward</text>
+  </g>
+</svg>
