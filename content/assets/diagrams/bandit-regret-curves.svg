@@ -31,7 +31,7 @@
   <text x="612" y="206" text-anchor="end" class="small label" font-weight="700">ε-greedy</text>
   <text x="612" y="255" text-anchor="end" class="small label" font-weight="700">UCB</text>
 
-  <text x="150" y="150" class="small label">grows roughly linearly:</text>
-  <text x="150" y="170" class="small label">can lock onto a bad arm</text>
+  <text x="150" y="150" class="small label">greedy grows roughly linearly:</text>
+  <text x="150" y="170" class="small label">it can lock onto a bad arm</text>
   <text x="330" y="330" class="small label">sublinear: keeps trying, then settles</text>
 </svg>

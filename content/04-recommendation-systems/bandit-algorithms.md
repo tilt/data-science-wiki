@@ -79,7 +79,13 @@ a_t=\arg\max_a
 \right).
 $$
 
-The first term exploits high empirical reward. The second term explores arms with fewer observations. As $n_a$ grows, the bonus shrinks; as $t$ grows, arms that have been neglected become worth checking again. UCB is deterministic once the observed rewards are fixed, which makes it easier to debug than random exploration.
+The first term, $\hat\mu_a$, exploits high empirical reward. The second term,
+
+$$
+\sqrt{\frac{2\log t}{n_a}},
+$$
+
+is the **exploration bonus**: it is larger for arms with fewer observations and shrinks as $n_a$ grows. The **UCB score** is the sum of the empirical reward estimate and this bonus. The policy then chooses the arm with the largest UCB score. As $t$ grows, arms that have been neglected become worth checking again. UCB is deterministic once the observed rewards are fixed, which makes it easier to debug than random exploration.
 
 ## Thompson Sampling
 

@@ -111,6 +111,8 @@ A greedy policy would keep showing arm 0 or 1 because they currently look best, 
 
 After 55 total pulls, a UCB policy combines the empirical win rate with an uncertainty bonus:
 
+The **exploration bonus** is the uncertainty term in the [UCB](bandit-algorithms.md#ucb) rule. It is large when an arm has few pulls, and it shrinks as the arm gathers evidence. The **UCB score** is the empirical rate plus that bonus; the policy chooses the arm with the largest score.
+
 | Arm | Wins / pulls | Empirical rate | Exploration bonus | UCB score |
 | --- | -----------: | -------------: | ----------------: | --------: |
 | 0   |       4 / 40 |          0.100 |             0.448 |     0.548 |
