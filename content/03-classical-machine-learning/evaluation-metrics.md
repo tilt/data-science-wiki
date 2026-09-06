@@ -18,7 +18,7 @@ related:
   - regression.md
   - model-selection.md
 historical_context: false
-last_reviewed: 2026-07-21
+last_reviewed: 2026-09-02
 ---
 
 # Evaluation Metrics
@@ -45,13 +45,23 @@ For binary classification, $TP$, $TN$, $FP$, and $FN$ count true positives, true
 
 $$
 \operatorname{accuracy}=\frac{TP+TN}{TP+TN+FP+FN},
-\qquad
 \operatorname{precision}=P=\frac{TP}{TP+FP},
-\qquad
 \operatorname{recall}=R=\frac{TP}{TP+FN}.
 $$
 
 Accuracy is the fraction of all examples classified correctly. Precision is the fraction of predicted positives that are actually positive. Recall is the fraction of actual positives recovered by the model; it is also called sensitivity or true positive rate in some domains.
+
+Specificity, also called the true negative rate, measures how many actual negatives are correctly rejected:
+
+$$
+\operatorname{sensitivity}=\operatorname{TPR}=\frac{TP}{TP+FN}
+$$
+
+$$
+\operatorname{specificity}=\operatorname{TNR}=\frac{TN}{TN+FP}.
+$$
+
+Sensitivity is the positive-class recall. Specificity is the negative-class recall. They should be reported together when false negatives and false positives have different costs, such as medical screening, fraud review, abuse detection, or safety filters.
 
 The same precision and recall terms also appear in ranked retrieval, where they measure the cleanliness and coverage of a result list rather than a classifier threshold. See [Precision, Recall, MAP, MRR, and NDCG](../12-information-retrieval-and-search/precision-recall-map-mrr-ndcg.md) for the retrieval-side definitions.
 

@@ -69,11 +69,37 @@ $$
 \mathbb E[r\mid x,a]\approx x^\top\theta_a.
 $$
 
-For each arm $a$, LinUCB maintains a matrix $A_a$ and vector $b_a$ from past observations where that arm was chosen:
+Here $x$ is the feature vector visible before serving the recommendation, $a$ is an arm, $r$ is the reward, and $\theta_a$ is the unknown coefficient vector for arm $a$. If $x$ has $d$ features, then $\theta_a$ also has $d$ entries. A common choice is to include an intercept feature, so the first coordinate of $x$ is always $1$.
+
+For each arm $a$, LinUCB maintains a matrix $A_a$ and vector $b_a$ from past observations where that arm was chosen. With regularization strength $\lambda>0$, initialize:
+
+$$
+A_a \leftarrow \lambda I_d
+$$
+
+$$
+b_a \leftarrow 0_d
+$$
+
+for every arm $a$. Here $I_d$ is the $d\times d$ identity matrix and $0_d$ is the $d$-dimensional zero vector. This initialization is the ridge-regression prior: before seeing data for an arm, the estimated coefficients are zero, but $A_a$ is invertible. In practice, $\lambda=1$ is a common starting point; larger values make early estimates more conservative.
+
+After several observations for arm $a$, the estimate is:
 
 $$
 \hat\theta_a=A_a^{-1}b_a.
 $$
+
+This is the same shape as a ridge linear-regression solution. If arm $a$ has been chosen on contexts $x_1,\ldots,x_m$ with rewards $r_1,\ldots,r_m$, then:
+
+$$
+A_a=\lambda I_d+\sum_{i=1}^m x_i x_i^\top
+$$
+
+$$
+b_a=\sum_{i=1}^m r_i x_i.
+$$
+
+The matrix $A_a$ records where the algorithm has evidence for this arm. Repeatedly showing arm $a$ to users with similar feature vectors makes $A_a$ large in that feature direction. The vector $b_a$ records reward-weighted evidence: contexts that produced higher rewards pull $\hat\theta_a$ toward predicting higher rewards for similar contexts.
 
 For the current context $x_t$, it chooses
 
@@ -85,17 +111,32 @@ x_t^\top\hat\theta_a
 \right).
 $$
 
-The first term, $x_t^\top\hat\theta_a$, is exploitation: the predicted reward for arm $a$ in this context. The second term is exploration: uncertainty about arm $a$ for contexts like $x_t$. The parameter $\alpha$ controls how much uncertainty is rewarded. Larger $\alpha$ explores more aggressively; smaller $\alpha$ behaves more greedily.
+The first term, $x_t^\top\hat\theta_a$, is exploitation. It is the predicted reward under the current fitted linear model for arm $a$. If this term is high, the arm looks good based on observed rewards in similar contexts.
+
+The second term, $\alpha\sqrt{x_t^\top A_a^{-1}x_t}$, is exploration. The quantity inside the square root is large when the current context points in a direction where arm $a$ has little data. It is small when the algorithm has already shown arm $a$ many times in similar contexts. Geometrically, $A_a^{-1}$ describes the remaining uncertainty in the coefficient estimate, and $x_t^\top A_a^{-1}x_t$ projects that uncertainty onto the specific context being served now.
+
+This is why LinUCB can choose an arm with a lower predicted reward: the upper confidence score asks, "How good could this arm plausibly be, given what we still do not know?" The parameter $\alpha$ controls how much uncertainty is rewarded. Larger $\alpha$ explores more aggressively; smaller $\alpha$ behaves more greedily. Setting $\alpha=0$ turns the policy into a greedy contextual linear model.
 
 After observing reward $r_t$ for the chosen arm $a_t$, the policy updates only that arm:
 
 $$
-A_{a_t}\leftarrow A_{a_t}+x_tx_t^\top,
-\qquad
+A_{a_t}\leftarrow A_{a_t}+x_tx_t^\top
+$$
+
+$$
 b_{a_t}\leftarrow b_{a_t}+r_tx_t.
 $$
 
 The unchosen arms are not updated, because their rewards were not observed. That partial-feedback discipline is the reason contextual bandits need different evaluation from ordinary supervised ranking.
+
+An implementation usually stores one `d x d` matrix and one `d`-vector per arm:
+
+| State variable | Initialization                | Update after choosing arm $a_t$          | Interpretation                                      |
+| -------------- | ----------------------------- | ---------------------------------------- | --------------------------------------------------- |
+| $A_a$          | $\lambda I_d$                 | add $x_t x_t^\top$ only to $A_{a_t}$     | feature directions where this arm has been observed |
+| $b_a$          | $0_d$                         | add $r_t x_t$ only to $b_{a_t}$          | reward-weighted evidence for this arm               |
+| $\hat\theta_a$ | $A_a^{-1}b_a=0_d$             | recompute or solve $A_a\hat\theta_a=b_a$ | fitted reward coefficients for this arm             |
+| uncertainty    | $\sqrt{x_t^\top A_a^{-1}x_t}$ | shrinks in observed directions           | context-specific reason to explore                  |
 
 ## Worked example
 

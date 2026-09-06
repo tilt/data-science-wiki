@@ -17,7 +17,7 @@ related:
   - calibration.md
   - logistic-regression.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-09-02
 ---
 
 # Class Imbalance
@@ -43,13 +43,42 @@ $$
 precision=\frac{TP}{TP+FP}, \qquad recall=\frac{TP}{TP+FN}.
 $$
 
-Balanced accuracy averages [recall](evaluation-metrics.md#classification-metrics) across classes; in binary classification it is $(TPR+TNR)/2$, where $TPR$ is sensitivity and $TNR$ is specificity. PR-AUC summarizes the precision-recall curve for the rare positive class and is often computed through average precision,
+Balanced accuracy averages [recall](evaluation-metrics.md#classification-metrics) across classes; in binary classification it is $(TPR+TNR)/2$. Here [sensitivity](evaluation-metrics.md#classification-metrics), or true positive rate, is $TP/(TP+FN)$; [specificity](evaluation-metrics.md#classification-metrics), or true negative rate, is $TN/(TN+FP)$. Sensitivity asks how many actual positives were caught. Specificity asks how many actual negatives were correctly rejected.
+
+PR-AUC summarizes the precision-recall curve for the rare positive class. A common discrete summary is **average precision** (AP):
 
 $$
 \operatorname{AP}=\sum_j (R_j-R_{j-1})P_j,
 $$
 
-where $P_j$ and $R_j$ are [precision and recall](evaluation-metrics.md#classification-metrics) after the $j$th ranked prediction. It is often more diagnostic than [ROC-AUC](evaluation-metrics.md#probability-and-ranking-metrics) when the negative class dominates.
+where $P_j$ and $R_j$ are [precision and recall](evaluation-metrics.md#classification-metrics) after moving the threshold through the ranked predictions. AP is a weighted average of precision values: a precision value gets weight only when recall increases. That happens when the next item admitted by the moving threshold is an actual positive.
+
+The ranked-list view is the easiest way to read AP:
+
+1. Sort examples by predicted positive-class score from highest to lowest.
+2. Start with a threshold above the highest score, so no example is predicted positive.
+3. Move down the ranking one example at a time.
+4. After each newly admitted example, recompute precision and recall.
+5. Add area only when recall increases; false positives lower later precision but do not directly increase recall.
+
+Suppose the positive class is rare fraud and the model ranks six transactions like this:
+
+| Rank | Label | Precision after this rank | Recall after this rank | AP contribution |
+| ---: | ----: | ------------------------: | ---------------------: | --------------: |
+|    1 |     1 |                     $1/1$ |                  $1/3$ |  $1/3\cdot1.00$ |
+|    2 |     0 |                     $1/2$ |                  $1/3$ |             $0$ |
+|    3 |     1 |                     $2/3$ |                  $2/3$ |  $1/3\cdot0.67$ |
+|    4 |     0 |                     $2/4$ |                  $2/3$ |             $0$ |
+|    5 |     0 |                     $2/5$ |                  $2/3$ |             $0$ |
+|    6 |     1 |                     $3/6$ |                  $3/3$ |  $1/3\cdot0.50$ |
+
+There are three positives, so recall increases by $1/3$ each time a positive appears. The average precision is:
+
+$$
+\operatorname{AP}=\frac{1}{3}(1.00+0.67+0.50)\approx0.72.
+$$
+
+This score rewards putting positives early. The false positives at ranks 2, 4, and 5 do not add AP area directly, but they reduce precision at the later positive ranks. That is why AP is often more diagnostic than [ROC-AUC](evaluation-metrics.md#probability-and-ranking-metrics) when the negative class dominates: it focuses on how clean the high-score review queue is for the rare class.
 
 Class weighting changes empirical risk to $\min_f\sum_i w_{y_i}L(y_i,f(x_i))$, where $w_k$ is larger for rare or costly classes.
 
