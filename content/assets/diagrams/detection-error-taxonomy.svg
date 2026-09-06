@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 500" role="img" aria-labelledby="title desc">
+  <title id="title">Detection error taxonomy</title>
+  <desc id="desc">Object detection examples showing a true positive, duplicate false positive, localization false positive, background false positive, and missed ground truth.</desc>
+  <rect width="920" height="500" fill="#ffffff"/>
+  <text x="40" y="42" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#172033">Detection errors after matching at IoU threshold tau</text>
+  <text x="40" y="72" font-family="Arial, sans-serif" font-size="14" fill="#536173">Dashed blue boxes are ground truth. Solid colored boxes are predictions.</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#536173"/>
+    </marker>
+    <style>
+      .label { font-family: Arial, sans-serif; font-size: 14px; fill: #172033; font-weight: 700; }
+      .small { font-family: Arial, sans-serif; font-size: 12px; fill: #536173; }
+      .gt { fill: none; stroke: #2563eb; stroke-width: 3; stroke-dasharray: 7 5; }
+      .tp { fill: #22c55e; fill-opacity: 0.08; stroke: #16a34a; stroke-width: 3; }
+      .dup { fill: #f59e0b; fill-opacity: 0.08; stroke: #d97706; stroke-width: 3; }
+      .loc { fill: #ef4444; fill-opacity: 0.08; stroke: #dc2626; stroke-width: 3; }
+      .bg { fill: #9333ea; fill-opacity: 0.08; stroke: #7e22ce; stroke-width: 3; }
+    </style>
+  </defs>
+
+  <rect x="40" y="105" width="840" height="245" rx="8" fill="#f8fafc" stroke="#d8dee9"/>
+  <text x="58" y="132" class="label">One class, one image</text>
+  <text x="58" y="154" class="small">Predictions are processed from highest confidence to lowest. Each ground-truth object can be claimed once.</text>
+
+  <rect x="82" y="194" width="105" height="90" class="gt"/>
+  <rect x="88" y="200" width="94" height="80" class="tp"/>
+  <text x="84" y="180" class="label">True positive</text>
+  <text x="88" y="322" class="small">pred overlaps GT</text>
+
+  <rect x="252" y="194" width="105" height="90" class="gt"/>
+  <rect x="258" y="200" width="94" height="80" class="tp"/>
+  <rect x="267" y="210" width="93" height="75" class="dup"/>
+  <text x="250" y="180" class="label">Duplicate FP</text>
+  <text x="252" y="322" class="small">GT already matched</text>
+
+  <rect x="432" y="194" width="105" height="90" class="gt"/>
+  <rect x="482" y="218" width="112" height="82" class="loc"/>
+  <text x="430" y="180" class="label">Localization FP</text>
+  <text x="432" y="322" class="small">0.10 &lt;= IoU &lt; tau</text>
+
+  <rect x="648" y="215" width="112" height="82" class="bg"/>
+  <text x="646" y="180" class="label">Background FP</text>
+  <text x="648" y="322" class="small">no nearby GT</text>
+
+  <rect x="765" y="194" width="74" height="90" class="gt"/>
+  <text x="766" y="180" class="label">Missed GT</text>
+  <text x="766" y="322" class="small">unmatched GT</text>
+
+  <line x1="185" y1="240" x2="245" y2="240" stroke="#536173" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="363" y1="240" x2="425" y2="240" stroke="#536173" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="598" y1="240" x2="640" y2="240" stroke="#536173" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <rect x="258" y="348" width="18" height="14" class="gt"/>
+  <text x="284" y="360" class="small">dashed ground truth</text>
+  <rect x="430" y="348" width="18" height="14" class="loc"/>
+  <text x="456" y="360" class="small">solid prediction</text>
+
+  <rect x="40" y="382" width="198" height="74" rx="6" fill="#ecfdf5" stroke="#bbf7d0"/>
+  <text x="58" y="410" class="label">miss_rate</text>
+  <text x="58" y="433" class="small">FN / ground truth</text>
+
+  <rect x="258" y="382" width="198" height="74" rx="6" fill="#fffbeb" stroke="#fde68a"/>
+  <text x="276" y="410" class="label">dup_rate</text>
+  <text x="276" y="433" class="small">duplicate FP / predictions</text>
+
+  <rect x="476" y="382" width="198" height="74" rx="6" fill="#fef2f2" stroke="#fecaca"/>
+  <text x="494" y="410" class="label">loc_rate</text>
+  <text x="494" y="433" class="small">near-object FP / predictions</text>
+
+  <rect x="694" y="382" width="186" height="74" rx="6" fill="#faf5ff" stroke="#e9d5ff"/>
+  <text x="712" y="410" class="label">bg_rate</text>
+  <text x="712" y="433" class="small">background FP / predictions</text>
+</svg>

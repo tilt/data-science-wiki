@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420" role="img" aria-labelledby="title desc">
+  <title id="title">Binary segmentation confusion mask</title>
+  <desc id="desc">A 20-pixel binary segmentation example with four true-positive foreground pixels, one false-positive pixel, two false-negative pixels, and thirteen true-negative background pixels.</desc>
+  <rect width="720" height="420" fill="#ffffff"/>
+  <style>
+    text { font-family: Arial, sans-serif; fill: #172033; }
+    .muted { fill: #536173; }
+    .cell { stroke: #ffffff; stroke-width: 4; rx: 8; }
+    .tp { fill: #22c55e; }
+    .fp { fill: #f59e0b; }
+    .fn { fill: #ef4444; }
+    .tn { fill: #cbd5e1; }
+    .label { font-size: 15px; font-weight: 700; }
+    .small { font-size: 13px; fill: #536173; }
+  </style>
+
+  <text x="360" y="34" text-anchor="middle" font-size="24" font-weight="800">Segmentation pixels as TP, FP, FN, and TN</text>
+  <text x="360" y="60" text-anchor="middle" font-size="15" class="muted">A high pixel accuracy can hide missed foreground when background dominates.</text>
+
+  <rect x="64" y="90" width="320" height="256" rx="10" fill="#f8fafc" stroke="#d8dee9"/>
+  <text x="84" y="120" class="label">20-pixel mask</text>
+
+  <rect x="96" y="146" width="46" height="46" class="cell tp"/>
+  <rect x="146" y="146" width="46" height="46" class="cell tp"/>
+  <rect x="196" y="146" width="46" height="46" class="cell fn"/>
+  <rect x="246" y="146" width="46" height="46" class="cell tn"/>
+  <rect x="296" y="146" width="46" height="46" class="cell tn"/>
+
+  <rect x="96" y="196" width="46" height="46" class="cell tp"/>
+  <rect x="146" y="196" width="46" height="46" class="cell tp"/>
+  <rect x="196" y="196" width="46" height="46" class="cell fn"/>
+  <rect x="246" y="196" width="46" height="46" class="cell tn"/>
+  <rect x="296" y="196" width="46" height="46" class="cell tn"/>
+
+  <rect x="96" y="246" width="46" height="46" class="cell tn"/>
+  <rect x="146" y="246" width="46" height="46" class="cell tn"/>
+  <rect x="196" y="246" width="46" height="46" class="cell fp"/>
+  <rect x="246" y="246" width="46" height="46" class="cell tn"/>
+  <rect x="296" y="246" width="46" height="46" class="cell tn"/>
+
+  <rect x="96" y="296" width="46" height="46" class="cell tn"/>
+  <rect x="146" y="296" width="46" height="46" class="cell tn"/>
+  <rect x="196" y="296" width="46" height="46" class="cell tn"/>
+  <rect x="246" y="296" width="46" height="46" class="cell tn"/>
+  <rect x="296" y="296" width="46" height="46" class="cell tn"/>
+
+  <rect x="430" y="106" width="220" height="52" rx="6" fill="#ecfdf5" stroke="#bbf7d0"/>
+  <rect x="446" y="122" width="20" height="20" class="tp"/>
+  <text x="480" y="128" class="label">TP = 4</text>
+  <text x="480" y="149" class="small">foreground recovered</text>
+
+  <rect x="430" y="172" width="220" height="52" rx="6" fill="#fffbeb" stroke="#fde68a"/>
+  <rect x="446" y="188" width="20" height="20" class="fp"/>
+  <text x="480" y="194" class="label">FP = 1</text>
+  <text x="480" y="215" class="small">extra foreground pixel</text>
+
+  <rect x="430" y="238" width="220" height="52" rx="6" fill="#fef2f2" stroke="#fecaca"/>
+  <rect x="446" y="254" width="20" height="20" class="fn"/>
+  <text x="480" y="260" class="label">FN = 2</text>
+  <text x="480" y="281" class="small">missed foreground pixels</text>
+
+  <rect x="430" y="304" width="220" height="52" rx="6" fill="#f8fafc" stroke="#d8dee9"/>
+  <rect x="446" y="320" width="20" height="20" class="tn"/>
+  <text x="480" y="326" class="label">TN = 13</text>
+  <text x="480" y="347" class="small">easy background pixels</text>
+</svg>

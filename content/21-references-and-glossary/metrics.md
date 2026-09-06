@@ -112,8 +112,13 @@ This glossary is a cross-domain lookup index for evaluation metrics used across 
 | [Dice coefficient](../09-computer-vision/detection-and-segmentation-metrics.md)        | Segmentation               | Twice the overlap divided by combined predicted and reference region sizes.   |
 | [Average precision](../09-computer-vision/detection-and-segmentation-metrics.md)       | Object detection           | Precision-recall summary after confidence sorting and overlap-based matching. |
 | [mAP](../09-computer-vision/detection-and-segmentation-metrics.md)                     | Object detection           | Mean detection average precision across classes and often overlap thresholds. |
-| [Pixel accuracy](../09-computer-vision/semantic-segmentation.md)                       | Semantic segmentation      | Fraction of pixels assigned the correct class.                                |
-| [Mean IoU](../09-computer-vision/semantic-segmentation.md)                             | Semantic segmentation      | Average class-wise region overlap score.                                      |
+| [Pixel accuracy](../09-computer-vision/detection-and-segmentation-metrics.md)          | Semantic segmentation      | Fraction of pixels assigned the correct class.                                |
+| [Mean IoU](../09-computer-vision/detection-and-segmentation-metrics.md)                | Semantic segmentation      | Average class-wise region overlap score.                                      |
+| [Panoptic Quality](../09-computer-vision/detection-and-segmentation-metrics.md)        | Panoptic segmentation      | Segment overlap penalized by unmatched predicted and reference segments.      |
+| [Boundary F-score](../09-computer-vision/detection-and-segmentation-metrics.md)        | Segmentation               | Boundary precision and recall with a spatial tolerance.                       |
+| [Hausdorff distance](../09-computer-vision/detection-and-segmentation-metrics.md)      | Medical segmentation       | Worst nearest-surface error between predicted and reference boundaries.       |
+| [ASSD](../09-computer-vision/detection-and-segmentation-metrics.md)                    | Medical segmentation       | Average symmetric surface distance between predicted and reference surfaces.  |
+| [Surface Dice](../09-computer-vision/detection-and-segmentation-metrics.md)            | Medical segmentation       | Fraction of surface points within an acceptable distance tolerance.           |
 | [PCK](../09-computer-vision/pose-estimation.md)                                        | Pose estimation            | Fraction of visible keypoints within a normalized distance threshold.         |
 | [Temporal IoU](../10-video-understanding/temporal-localization.md)                     | Temporal localization      | Overlap divided by union for predicted and reference time segments.           |
 | [Temporal mAP](../10-video-understanding/temporal-localization.md)                     | Temporal action detection  | Mean average precision for time segments across temporal overlap thresholds.  |

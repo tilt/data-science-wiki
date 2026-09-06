@@ -17,7 +17,7 @@ related:
   - image-classification.md
   - object-detection.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-09-06
 ---
 
 # Model Benchmarking
@@ -33,6 +33,8 @@ B=(D_{\mathrm{test}}, M, S, C),
 $$
 
 where $D_{\mathrm{test}}$ is a frozen dataset, $M$ is the metric set, $S$ is the slice taxonomy, and $C$ is the compute environment. Reporting only $\frac{1}{n}\sum_i \mathbf 1\{\hat y_i=y_i\}$ misses false-positive cost, recall requirements, and runtime.
+
+For detector benchmarks, $M$ should include both ranking metrics and operating-point metrics. [Detection and segmentation metrics](detection-and-segmentation-metrics.md) defines AP50, AP75, COCO-style mAP, AR@K, and error buckets such as miss, duplicate, localization, and background rates. Reporting only one mAP number can hide whether the model fails by missing objects, drawing loose boxes, duplicating detections, or ranking background boxes too high.
 
 ## Worked benchmark comparison
 

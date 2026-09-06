@@ -63,7 +63,7 @@ Read image foundations, then recognition and segmentation, then backbones, appli
 8. [Pose Estimation](pose-estimation.md): locating keypoints and body structure.
 9. [Semantic Segmentation](semantic-segmentation.md): per-pixel class labels.
 10. [Instance Segmentation](instance-segmentation.md): per-object masks.
-11. [Detection and Segmentation Metrics](detection-and-segmentation-metrics.md): IoU, average precision, and Dice.
+11. [Detection and Segmentation Metrics](detection-and-segmentation-metrics.md): AP, AR, IoU, Dice, panoptic quality, and boundary metrics.
 12. [CNN Architectures](cnn-architectures.md): convolutional backbones and receptive fields.
 13. [Vision Transformers](vision-transformers.md): patch-token attention models for images.
 14. [Self-Supervised Visual Learning](self-supervised-visual-learning.md): pretraining without labels.

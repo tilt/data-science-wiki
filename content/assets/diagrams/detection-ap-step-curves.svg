@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="430" viewBox="0 0 820 430" role="img" aria-labelledby="title desc">
+  <title id="title">AP50 and AP75 precision-recall step curves</title>
+  <desc id="desc">A precision-recall plot for the worked detection example. AP50 has two filled step areas, while AP75 only keeps the first recall jump because the second prediction fails the stricter IoU threshold.</desc>
+  <rect width="820" height="430" fill="#ffffff"/>
+  <style>
+    text { font-family: Arial, sans-serif; fill: #172033; }
+    .muted { fill: #536173; }
+    .axis { stroke: #536173; stroke-width: 1.5; }
+    .grid { stroke: #d8dee9; stroke-width: 1; }
+    .ap50 { stroke: #2563eb; stroke-width: 3; fill: none; }
+    .ap75 { stroke: #dc2626; stroke-width: 3; fill: none; stroke-dasharray: 8 6; }
+    .fill50 { fill: #dbeafe; fill-opacity: 0.8; }
+    .fill75 { fill: #fee2e2; fill-opacity: 0.75; }
+    .label { font-size: 15px; font-weight: 700; }
+    .small { font-size: 13px; fill: #536173; }
+  </style>
+
+  <text x="410" y="34" text-anchor="middle" font-size="24" font-weight="800">Simplified AP as precision-recall area</text>
+  <text x="410" y="60" text-anchor="middle" font-size="15" class="muted">The stricter IoU threshold removes the second true-positive recall jump.</text>
+
+  <line x1="90" y1="335" x2="565" y2="335" class="axis"/>
+  <line x1="90" y1="65" x2="90" y2="335" class="axis"/>
+  <line x1="90" y1="200" x2="565" y2="200" class="grid"/>
+  <line x1="328" y1="65" x2="328" y2="335" class="grid"/>
+  <line x1="565" y1="65" x2="565" y2="335" class="grid"/>
+
+  <text x="90" y="357" text-anchor="middle" class="small">0.0</text>
+  <text x="328" y="357" text-anchor="middle" class="small">0.5</text>
+  <text x="565" y="357" text-anchor="middle" class="small">1.0</text>
+  <text x="328" y="392" text-anchor="middle" class="label">recall</text>
+
+  <text x="72" y="339" text-anchor="end" class="small">0.0</text>
+  <text x="72" y="204" text-anchor="end" class="small">0.5</text>
+  <text x="72" y="69" text-anchor="end" class="small">1.0</text>
+  <text x="28" y="202" transform="rotate(-90 28 202)" text-anchor="middle" class="label">precision</text>
+
+  <rect x="90" y="65" width="238" height="270" class="fill75"/>
+  <rect x="90" y="65" width="238" height="270" class="fill50"/>
+  <rect x="328" y="155" width="237" height="180" class="fill50"/>
+
+  <path d="M90 65 H328 V155 H565" class="ap50"/>
+  <path d="M90 65 H328 V335 H565" class="ap75"/>
+
+  <circle cx="328" cy="65" r="4" fill="#2563eb"/>
+  <circle cx="565" cy="155" r="4" fill="#2563eb"/>
+  <circle cx="328" cy="65" r="4" fill="#dc2626"/>
+
+  <line x1="615" y1="118" x2="655" y2="118" class="ap50"/>
+  <text x="665" y="123" class="label">AP50 = 0.833</text>
+  <line x1="615" y1="151" x2="655" y2="151" class="ap75"/>
+  <text x="665" y="156" class="label">AP75 = 0.500</text>
+  <text x="615" y="198" class="small">AP50 keeps both matches.</text>
+  <text x="615" y="222" class="small">AP75 rejects the loose box,</text>
+  <text x="615" y="244" class="small">so recall stops at 0.5.</text>
+</svg>

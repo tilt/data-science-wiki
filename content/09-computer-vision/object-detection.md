@@ -17,7 +17,7 @@ related:
   - rotated-object-detection.md
   - cnn-architectures.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-09-06
 ---
 
 # Object Detection
@@ -64,7 +64,7 @@ pair_iou_0_1 0.747
 kept_indices [0, 2, 3] kept_scores [0.9, 0.8, 0.3]
 ```
 
-The second box is suppressed because it overlaps the first box too much and has lower confidence. The kept boxes would then be evaluated with [detection and segmentation metrics](detection-and-segmentation-metrics.md).
+The second box is suppressed because it overlaps the first box too much and has lower confidence. The kept boxes would then be evaluated with [detection and segmentation metrics](detection-and-segmentation-metrics.md), where AP50 rewards rough object discovery and AP75 tests tighter localization.
 
 ## Caveats
 
