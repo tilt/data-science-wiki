@@ -18,32 +18,32 @@
   <text x="410" y="34" text-anchor="middle" font-size="24" font-weight="800">Simplified AP as precision-recall area</text>
   <text x="410" y="60" text-anchor="middle" font-size="15" class="muted">The stricter IoU threshold removes the second true-positive recall jump.</text>
 
-  <line x1="90" y1="335" x2="565" y2="335" class="axis"/>
-  <line x1="90" y1="65" x2="90" y2="335" class="axis"/>
-  <line x1="90" y1="200" x2="565" y2="200" class="grid"/>
-  <line x1="328" y1="65" x2="328" y2="335" class="grid"/>
-  <line x1="565" y1="65" x2="565" y2="335" class="grid"/>
+  <line x1="90" y1="345" x2="565" y2="345" class="axis"/>
+  <line x1="90" y1="92" x2="90" y2="345" class="axis"/>
+  <line x1="90" y1="219" x2="565" y2="219" class="grid"/>
+  <line x1="328" y1="92" x2="328" y2="345" class="grid"/>
+  <line x1="565" y1="92" x2="565" y2="345" class="grid"/>
 
-  <text x="90" y="357" text-anchor="middle" class="small">0.0</text>
-  <text x="328" y="357" text-anchor="middle" class="small">0.5</text>
-  <text x="565" y="357" text-anchor="middle" class="small">1.0</text>
-  <text x="328" y="392" text-anchor="middle" class="label">recall</text>
+  <text x="90" y="367" text-anchor="middle" class="small">0.0</text>
+  <text x="328" y="367" text-anchor="middle" class="small">0.5</text>
+  <text x="565" y="367" text-anchor="middle" class="small">1.0</text>
+  <text x="328" y="402" text-anchor="middle" class="label">recall</text>
 
-  <text x="72" y="339" text-anchor="end" class="small">0.0</text>
-  <text x="72" y="204" text-anchor="end" class="small">0.5</text>
-  <text x="72" y="69" text-anchor="end" class="small">1.0</text>
-  <text x="28" y="202" transform="rotate(-90 28 202)" text-anchor="middle" class="label">precision</text>
+  <text x="72" y="349" text-anchor="end" class="small">0.0</text>
+  <text x="72" y="223" text-anchor="end" class="small">0.5</text>
+  <text x="72" y="96" text-anchor="end" class="small">1.0</text>
+  <text x="28" y="219" transform="rotate(-90 28 219)" text-anchor="middle" class="label">precision</text>
 
-  <rect x="90" y="65" width="238" height="270" class="fill75"/>
-  <rect x="90" y="65" width="238" height="270" class="fill50"/>
-  <rect x="328" y="155" width="237" height="180" class="fill50"/>
+  <rect x="90" y="92" width="238" height="253" class="fill75"/>
+  <rect x="90" y="92" width="238" height="253" class="fill50"/>
+  <rect x="328" y="176" width="237" height="169" class="fill50"/>
 
-  <path d="M90 65 H328 V155 H565" class="ap50"/>
-  <path d="M90 65 H328 V335 H565" class="ap75"/>
+  <path d="M90 92 H328 V176 H565" class="ap50"/>
+  <path d="M90 92 H328 V345 H565" class="ap75"/>
 
-  <circle cx="328" cy="65" r="4" fill="#2563eb"/>
-  <circle cx="565" cy="155" r="4" fill="#2563eb"/>
-  <circle cx="328" cy="65" r="4" fill="#dc2626"/>
+  <circle cx="328" cy="92" r="4" fill="#2563eb"/>
+  <circle cx="565" cy="176" r="4" fill="#2563eb"/>
+  <circle cx="328" cy="92" r="4" fill="#dc2626"/>
 
   <line x1="615" y1="118" x2="655" y2="118" class="ap50"/>
   <text x="665" y="123" class="label">AP50 = 0.833</text>
