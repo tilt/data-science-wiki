@@ -13,6 +13,7 @@ prerequisites:
   - index.md
 related:
   - ../06-deep-learning/attention.md
+  - kv-cache.md
   - tokenization.md
   - sampling-and-decoding.md
   - pretraining.md
@@ -23,7 +24,7 @@ last_reviewed: 2026-07-29
 
 # Language Model Architecture
 
-A modern language model usually tokenizes text, embeds tokens and positions, applies stacks of masked self-attention and feed-forward blocks, then projects hidden states to vocabulary logits for [sampling and decoding](sampling-and-decoding.md). The core mechanism is the transformer [attention](../06-deep-learning/attention.md) block. The architecture produces a probability distribution over the next token; product behavior comes from training, prompts, tools, and runtime controls around that distribution.
+A modern language model usually tokenizes text, embeds tokens and positions, applies stacks of masked self-attention and feed-forward blocks, then projects hidden states to vocabulary logits for [sampling and decoding](sampling-and-decoding.md). The core mechanism is the transformer [attention](../06-deep-learning/attention.md) block. During inference, the [KV cache](kv-cache.md) stores attention keys and values for previous tokens so decoding can reuse them. The architecture produces a probability distribution over the next token; product behavior comes from training, prompts, tools, and runtime controls around that distribution.
 
 ## Causal self-attention
 
@@ -63,8 +64,8 @@ At the final position, the model produces a hidden vector. A learned vocabulary 
 
 This loop explains several product behaviors:
 
-- Long prompts increase prefill work before the first token appears.
-- Long outputs are slow because tokens are decoded sequentially.
+- Long prompts increase prefill work before the first token appears and fill the [KV cache](kv-cache.md).
+- Long outputs are slow because tokens are decoded sequentially and keep growing the cache.
 - The model can be fluent without being grounded, because logits come from learned parameters and current context.
 - Tool use is not part of the transformer block; it is orchestration around model outputs.
 
@@ -84,4 +85,4 @@ Long contexts increase attention memory and retrieval confusion. Architecture al
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)
 >
-> [← Foundation Models](foundation-models.md) [Tokenization →](tokenization.md)
+> [← Foundation Models](foundation-models.md) [KV Cache →](kv-cache.md)

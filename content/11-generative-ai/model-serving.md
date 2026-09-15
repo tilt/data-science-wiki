@@ -13,6 +13,9 @@ prerequisites:
   - index.md
 related:
   - local-versus-hosted-models.md
+  - kv-cache.md
+  - vllm.md
+  - sglang.md
   - quantization.md
   - cost-and-latency-optimization.md
   - determinism-and-reproducibility.md
@@ -29,7 +32,7 @@ Model serving is the runtime layer that turns application requests into model re
 
 ## The serving path
 
-A serving path typically runs request normalization, policy checks, [context construction](context-construction.md), model selection, model call, streaming or full decode, [structured output](structured-output.md) validation, logging, and retry or fallback. Local serving adds scheduler choices such as batching, KV-cache reuse, [quantization](quantization.md), and GPU memory management. Hosted serving adds provider rate limits, network latency, data-retention policy, and vendor-specific request features.
+A serving path typically runs request normalization, policy checks, [context construction](context-construction.md), model selection, model call, streaming or full decode, [structured output](structured-output.md) validation, logging, and retry or fallback. Local serving adds scheduler choices such as batching, [KV-cache](kv-cache.md) reuse, [quantization](quantization.md), and GPU memory management; specialized runtimes such as [vLLM](vllm.md) and [SGLang](sglang.md) optimize these paths for self-hosted generation. Hosted serving adds provider rate limits, network latency, data-retention policy, and vendor-specific request features.
 
 ```mermaid
 flowchart TD
@@ -47,16 +50,16 @@ The serving layer should log enough to reproduce and debug behavior without stor
 
 ## Serving concerns
 
-| Concern        | Why it matters                                                                   |
-| -------------- | -------------------------------------------------------------------------------- |
-| Model routing  | choose the cheapest model that satisfies quality, latency, and policy.           |
-| Streaming      | improves perceived latency but complicates moderation and schema validation.     |
-| Batching       | improves throughput for local models but can increase tail latency.              |
-| KV cache reuse | reduces repeated prefill cost in multi-turn or shared-prefix workloads.          |
-| Rate limits    | prevent provider or GPU overload and give callers predictable failures.          |
-| Retries        | recover transient failures but must not duplicate side effects.                  |
-| Validation     | blocks malformed [structured output](structured-output.md) and unsafe responses. |
-| Observability  | explains regressions when prompts, models, tools, or indexes change.             |
+| Concern                       | Why it matters                                                                   |
+| ----------------------------- | -------------------------------------------------------------------------------- |
+| Model routing                 | choose the cheapest model that satisfies quality, latency, and policy.           |
+| Streaming                     | improves perceived latency but complicates moderation and schema validation.     |
+| Batching                      | improves throughput for local models but can increase tail latency.              |
+| [KV cache](kv-cache.md) reuse | reduces repeated prefill cost in multi-turn or shared-prefix workloads.          |
+| Rate limits                   | prevent provider or GPU overload and give callers predictable failures.          |
+| Retries                       | recover transient failures but must not duplicate side effects.                  |
+| Validation                    | blocks malformed [structured output](structured-output.md) and unsafe responses. |
+| Observability                 | explains regressions when prompts, models, tools, or indexes change.             |
 
 ## A serving route
 
@@ -104,4 +107,4 @@ Retries can duplicate side effects unless tool calls are idempotent. Fallback mo
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)
 >
-> [← Local Versus Hosted Models](local-versus-hosted-models.md) [Quantization →](quantization.md)
+> [← Local Versus Hosted Models](local-versus-hosted-models.md) [vLLM →](vllm.md)

@@ -23,6 +23,7 @@ related:
   - ../08-natural-language-processing/bert-style-encoders.md
   - ../08-natural-language-processing/decoder-only-transformers.md
   - ../11-generative-ai/language-model-architecture.md
+  - ../11-generative-ai/kv-cache.md
   - ../09-computer-vision/vision-transformers.md
   - ../10-video-understanding/video-transformers.md
 historical_context: true
@@ -130,7 +131,7 @@ Transformers grew out of sequence-to-sequence research in machine translation. E
 
 The next wave turned the architecture into a transfer-learning backbone. OpenAI's 2018 GPT work paired a transformer language model with unsupervised pretraining and supervised fine-tuning. Google's 2018 BERT showed that bidirectional transformer encoders pretrained on unlabeled text could be fine-tuned for many understanding tasks, including question answering and natural-language inference. T5 later unified many NLP tasks as text-to-text transformations, strengthening the idea that a single transformer backbone could serve many tasks after pretraining.
 
-Decoder-only transformers then became the dominant architecture for large generative language models. GPT-3 showed that scaling an autoregressive transformer to 175 billion parameters produced strong zero-shot and few-shot behavior from prompts without gradient updates. That lineage connects directly to modern [language model architecture](../11-generative-ai/language-model-architecture.md), [pretraining](../11-generative-ai/pretraining.md), [fine-tuning](fine-tuning.md), and [model serving](../14-ml-engineering-and-mlops/model-serving.md).
+Decoder-only transformers then became the dominant architecture for large generative language models. GPT-3 showed that scaling an autoregressive transformer to 175 billion parameters produced strong zero-shot and few-shot behavior from prompts without gradient updates. That lineage connects directly to modern [language model architecture](../11-generative-ai/language-model-architecture.md), the inference-time [KV cache](../11-generative-ai/kv-cache.md), [pretraining](../11-generative-ai/pretraining.md), [fine-tuning](fine-tuning.md), and [model serving](../14-ml-engineering-and-mlops/model-serving.md).
 
 The same token-and-attention recipe moved beyond text. [Vision transformers](../09-computer-vision/vision-transformers.md) treat image patches as tokens and became competitive with convolutional networks when pretrained at scale. DETR used a transformer encoder-decoder to frame [object detection](../09-computer-vision/object-detection.md) as set prediction. [Video transformers](../10-video-understanding/video-transformers.md) extend the idea to space-time tokens. [Multimodal learning](multimodal-learning.md) systems use self-attention and cross-attention to connect text, images, audio, and video; [RAG](../11-generative-ai/rag.md), [dense retrieval](../12-information-retrieval-and-search/dense-retrieval.md), and [reranking](../12-information-retrieval-and-search/reranking.md) often depend on transformer encoders or decoders for representations and scoring.
 

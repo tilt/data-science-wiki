@@ -34,20 +34,20 @@ $$
 \text{achievable FLOP/s}\le \min(\text{peak FLOP/s},\ \text{memory bandwidth}\times\text{arithmetic intensity}).
 $$
 
-Arithmetic intensity is FLOPs per byte moved from memory. A transformer prefill matmul can be compute-heavy; token-by-token decoding often becomes bandwidth- and KV-cache-bound, which connects directly to [storage and decoding bottlenecks](storage-and-decoding-bottlenecks.md) at the input side and [distributed model training](distributed-model-training.md) at the synchronization side. PyTorch also reserves memory through its CUDA caching allocator, so `nvidia-smi` can show reserved memory that is not currently occupied by tensors; inspect `memory_allocated()` and `memory_reserved()` when debugging [PyTorch](../06-deep-learning/pytorch.md) jobs.
+Arithmetic intensity is FLOPs per byte moved from memory. A transformer prefill matmul can be compute-heavy; token-by-token decoding often becomes bandwidth- and [KV-cache](../11-generative-ai/kv-cache.md)-bound, which connects directly to [storage and decoding bottlenecks](storage-and-decoding-bottlenecks.md) at the input side and [distributed model training](distributed-model-training.md) at the synchronization side. PyTorch also reserves memory through its CUDA caching allocator, so `nvidia-smi` can show reserved memory that is not currently occupied by tensors; inspect `memory_allocated()` and `memory_reserved()` when debugging [PyTorch](../06-deep-learning/pytorch.md) jobs.
 
 ## Worked capacity check
 
 For a 7B-parameter model, the weight footprint depends directly on bytes per parameter:
 
-| footprint                                          |   estimate |
-| -------------------------------------------------- | ---------: |
-| fp32 weights                                       |  26.08 GiB |
-| fp16/bf16 weights                                  |  13.04 GiB |
-| int8 weights                                       |   6.52 GiB |
-| Adam training state                                | 104.31 GiB |
-| 8-way FSDP state per rank                          |  13.04 GiB |
-| 32-layer, 2048-token fp16 KV cache for one request |   1.00 GiB |
+| footprint                                                                             |   estimate |
+| ------------------------------------------------------------------------------------- | ---------: |
+| fp32 weights                                                                          |  26.08 GiB |
+| fp16/bf16 weights                                                                     |  13.04 GiB |
+| int8 weights                                                                          |   6.52 GiB |
+| Adam training state                                                                   | 104.31 GiB |
+| 8-way FSDP state per rank                                                             |  13.04 GiB |
+| 32-layer, 2048-token fp16 [KV cache](../11-generative-ai/kv-cache.md) for one request |   1.00 GiB |
 
 For an NVIDIA A100 80GB SXM, NVIDIA's published 312 TFLOP/s FP16 Tensor Core peak and 2,039 GB/s memory bandwidth imply a roofline threshold of about $312\text{e}12 / 2039\text{e}9 = 153.0$ FLOP/byte. A kernel with arithmetic intensity 32 is memory-bound under that roofline, while one at 256 can be compute-bound. A 7B model's fp16 weights fit on one 40GB GPU, but a naive Adam training state does not fit even on 80GB without sharding, offload, or recomputation. During inference, KV cache can dominate capacity: this 32-layer, hidden-size-4096, 2048-token, fp16 example uses about 1 GiB per active request before batching overhead.
 
@@ -64,4 +64,4 @@ GPU utilization can be high while user latency is bad if batching hides queueing
 > [!nav]
 > **Section** — [Cloud and Distributed Systems](index.md)
 >
-> [← Managed Storage](managed-storage.md) [Distributed Data Processing →](distributed-data-processing.md)
+> [← Partitioning for Parallel Execution](partitioning-for-parallel-execution.md) [Distributed Data Processing →](distributed-data-processing.md)

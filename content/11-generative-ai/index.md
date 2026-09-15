@@ -11,6 +11,7 @@ topics:
   - "tokenization"
   - "pretraining"
   - "llm-training"
+  - "kv-cache"
   - "instruction-tuning"
   - "alignment"
   - "in-context-learning"
@@ -19,6 +20,8 @@ topics:
   - "temperature"
   - "top-k-and-top-p-sampling"
   - "determinism-and-reproducibility"
+  - "vllm"
+  - "sglang"
   - "langchain"
   - "langgraph"
 level: foundational
@@ -64,59 +67,62 @@ Read foundation-model mechanics and generation control first, then retrieval, ag
 
 1. [Foundation Models](foundation-models.md): what a large pretrained model is and is not.
 2. [Language Model Architecture](language-model-architecture.md): the transformer stack behind LLMs.
-3. [Tokenization](tokenization.md): the units an LLM reads and generates.
-4. [Pretraining](pretraining.md): self-supervised learning on large corpora.
-5. [LLM Training](llm-training.md): the full pretraining-to-alignment pipeline.
-6. [Instruction Tuning](instruction-tuning.md): teaching a base model to follow instructions.
-7. [Alignment](alignment.md): shaping behavior toward helpfulness and safety.
-8. [In-Context Learning](in-context-learning.md): adapting from examples in the prompt.
-9. [Prompting](prompting.md): structuring inputs to steer generation.
-10. [Sampling and Decoding](sampling-and-decoding.md): turning logits into tokens.
-11. [Top-k and Top-p Sampling](top-k-and-top-p-sampling.md): truncated sampling rules.
-12. [Temperature and Determinism](temperature-and-determinism.md): controlling randomness.
-13. [Determinism and Reproducibility](determinism-and-reproducibility.md): making runs repeatable.
-14. [Structured Output](structured-output.md): constraining generations to a schema.
-15. [RAG](rag.md): grounding generation in retrieved evidence.
-16. [Embeddings](embeddings.md): vector representations for retrieval.
-17. [Chunking](chunking.md): splitting documents into retrievable units.
-18. [Vector Databases](vector-databases.md): storing and searching embeddings.
-19. [Retrieval Pipelines](retrieval-pipelines.md): the offline and online retrieval contracts.
-20. [Hybrid Retrieval](hybrid-retrieval.md): combining lexical and dense signals.
-21. [Query Rewriting](query-rewriting.md): reshaping the query before retrieval.
-22. [Reranking](reranking.md): reordering candidates with a stronger model.
-23. [Context Construction](context-construction.md): assembling the final prompt context.
-24. [Grounding](grounding.md): tying claims to sources.
-25. [Citations](citations.md): attributing generated statements to evidence.
-26. [Hallucination Mitigation](hallucination-mitigation.md): reducing unsupported output.
-27. [RAG Evaluation](rag-evaluation.md): measuring retrieval and answer quality.
-28. [RAG Architecture Comparison](rag-architecture-comparison.md): trade-offs across RAG designs.
-29. [RAG Benchmark Design](rag-benchmark-design.md): building trustworthy RAG benchmarks.
-30. [Fine Tuning Versus RAG](fine-tuning-versus-rag.md): when to train versus retrieve.
-31. [Tool Use and Function Calling](tool-use-and-function-calling.md): the model's action layer.
-32. [Tool Schemas](tool-schemas.md): declaring callable tools.
-33. [Tool Routing](tool-routing.md): choosing which tool to call.
-34. [Agent Loops](agent-loops.md): the observe-decide-act cycle.
-35. [Agentic Systems](agentic-systems.md): systems that plan and act over many steps.
-36. [Planning](planning.md): decomposing goals into steps.
-37. [Memory](memory.md): persisting state across steps and sessions.
-38. [Reflection and Reviewer Patterns](reflection-and-reviewer-patterns.md): self-critique against a rubric.
-39. [Multi-Agent Systems](multi-agent-systems.md): coordinating multiple roles.
-40. [Harnesses](harnesses.md): the runtime scaffolding around a model.
-41. [LangChain](langchain.md): a configurable framework for models, tools, middleware, retrieval, and agent loops.
-42. [LangGraph](langgraph.md): graph orchestration for durable, stateful, long-running agents.
-43. [Agent Evaluation](agent-evaluation.md): measuring multi-step task success.
-44. [LLM-as-Judge](llm-as-judge.md): using models to score outputs.
-45. [Multimodal Models](multimodal-models.md): models over text, image, and more.
-46. [Vision-Language Models](vision-language-models.md): joint image-text models.
-47. [Stable Diffusion](stable-diffusion.md): latent-diffusion image generation.
-48. [Local Versus Hosted Models](local-versus-hosted-models.md): where the model runs.
-49. [Model Serving](model-serving.md): the runtime layer for reliable calls.
-50. [Quantization](quantization.md): lower-precision weights for cheaper serving.
-51. [Cost and Latency Optimization](cost-and-latency-optimization.md): making systems affordable and fast.
-52. [Guardrails](guardrails.md): runtime behavior constraints.
-53. [Prompt Injection](prompt-injection.md): the core adversarial-input risk.
-54. [Data Privacy](data-privacy.md): protecting user and training data.
-55. [PII Protection](pii-protection.md): detecting and redacting personal information.
+3. [KV Cache](kv-cache.md): inference-time attention state for fast decoding and serving capacity.
+4. [Tokenization](tokenization.md): the units an LLM reads and generates.
+5. [Pretraining](pretraining.md): self-supervised learning on large corpora.
+6. [LLM Training](llm-training.md): the full pretraining-to-alignment pipeline.
+7. [Instruction Tuning](instruction-tuning.md): teaching a base model to follow instructions.
+8. [Alignment](alignment.md): shaping behavior toward helpfulness and safety.
+9. [In-Context Learning](in-context-learning.md): adapting from examples in the prompt.
+10. [Prompting](prompting.md): structuring inputs to steer generation.
+11. [Sampling and Decoding](sampling-and-decoding.md): turning logits into tokens.
+12. [Top-k and Top-p Sampling](top-k-and-top-p-sampling.md): truncated sampling rules.
+13. [Temperature and Determinism](temperature-and-determinism.md): controlling randomness.
+14. [Determinism and Reproducibility](determinism-and-reproducibility.md): making runs repeatable.
+15. [Structured Output](structured-output.md): constraining generations to a schema.
+16. [RAG](rag.md): grounding generation in retrieved evidence.
+17. [Embeddings](embeddings.md): vector representations for retrieval.
+18. [Chunking](chunking.md): splitting documents into retrievable units.
+19. [Vector Databases](vector-databases.md): storing and searching embeddings.
+20. [Retrieval Pipelines](retrieval-pipelines.md): the offline and online retrieval contracts.
+21. [Hybrid Retrieval](hybrid-retrieval.md): combining lexical and dense signals.
+22. [Query Rewriting](query-rewriting.md): reshaping the query before retrieval.
+23. [Reranking](reranking.md): reordering candidates with a stronger model.
+24. [Context Construction](context-construction.md): assembling the final prompt context.
+25. [Grounding](grounding.md): tying claims to sources.
+26. [Citations](citations.md): attributing generated statements to evidence.
+27. [Hallucination Mitigation](hallucination-mitigation.md): reducing unsupported output.
+28. [RAG Evaluation](rag-evaluation.md): measuring retrieval and answer quality.
+29. [RAG Architecture Comparison](rag-architecture-comparison.md): trade-offs across RAG designs.
+30. [RAG Benchmark Design](rag-benchmark-design.md): building trustworthy RAG benchmarks.
+31. [Fine Tuning Versus RAG](fine-tuning-versus-rag.md): when to train versus retrieve.
+32. [Tool Use and Function Calling](tool-use-and-function-calling.md): the model's action layer.
+33. [Tool Schemas](tool-schemas.md): declaring callable tools.
+34. [Tool Routing](tool-routing.md): choosing which tool to call.
+35. [Agent Loops](agent-loops.md): the observe-decide-act cycle.
+36. [Agentic Systems](agentic-systems.md): systems that plan and act over many steps.
+37. [Planning](planning.md): decomposing goals into steps.
+38. [Memory](memory.md): persisting state across steps and sessions.
+39. [Reflection and Reviewer Patterns](reflection-and-reviewer-patterns.md): self-critique against a rubric.
+40. [Multi-Agent Systems](multi-agent-systems.md): coordinating multiple roles.
+41. [Harnesses](harnesses.md): the runtime scaffolding around a model.
+42. [LangChain](langchain.md): a configurable framework for models, tools, middleware, retrieval, and agent loops.
+43. [LangGraph](langgraph.md): graph orchestration for durable, stateful, long-running agents.
+44. [Agent Evaluation](agent-evaluation.md): measuring multi-step task success.
+45. [LLM-as-Judge](llm-as-judge.md): using models to score outputs.
+46. [Multimodal Models](multimodal-models.md): models over text, image, and more.
+47. [Vision-Language Models](vision-language-models.md): joint image-text models.
+48. [Stable Diffusion](stable-diffusion.md): latent-diffusion image generation.
+49. [Local Versus Hosted Models](local-versus-hosted-models.md): where the model runs.
+50. [Model Serving](model-serving.md): the runtime layer for reliable calls.
+51. [vLLM](vllm.md): a high-throughput serving engine for self-hosted open models.
+52. [SGLang](sglang.md): a high-performance runtime for self-hosted structured generation and multimodal serving.
+53. [Quantization](quantization.md): lower-precision weights for cheaper serving.
+54. [Cost and Latency Optimization](cost-and-latency-optimization.md): making systems affordable and fast.
+55. [Guardrails](guardrails.md): runtime behavior constraints.
+56. [Prompt Injection](prompt-injection.md): the core adversarial-input risk.
+57. [Data Privacy](data-privacy.md): protecting user and training data.
+58. [PII Protection](pii-protection.md): detecting and redacting personal information.
 
 ## Connections
 

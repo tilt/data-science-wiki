@@ -14,6 +14,7 @@ prerequisites:
 related:
   - aws-fundamentals.md
   - google-cloud-fundamentals.md
+  - partitioning-for-parallel-execution.md
   - scalability.md
   - reliability.md
   - cost-management.md
@@ -39,7 +40,7 @@ flowchart LR
   Deployment --> Failure[Failure behavior]
 ```
 
-Functions fit short event handlers. Cloud Run-style containers fit stateless HTTP services with configurable concurrency. Kubernetes fits teams that need custom scheduling, sidecars, or portability. Batch services fit finite jobs. GPU instances or managed ML jobs fit [GPU systems](gpu-systems.md). The choice feeds [cost management](cost-management.md): high concurrency can reduce instances, but only if application code is actually safe and efficient under parallel requests.
+Functions fit short event handlers. Cloud Run-style containers fit stateless HTTP services with configurable concurrency. Kubernetes fits teams that need custom scheduling, sidecars, or portability. Batch services fit finite jobs, especially when the workload can be split with [partitioning for parallel execution](partitioning-for-parallel-execution.md). GPU instances or managed ML jobs fit [GPU systems](gpu-systems.md). The choice feeds [cost management](cost-management.md): high concurrency can reduce instances, but only if application code is actually safe and efficient under parallel requests.
 
 ## Worked concurrency check
 

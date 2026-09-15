@@ -81,4 +81,4 @@ Code, tables, numbers, and non-English text can tokenize very differently from p
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)
 >
-> [← Language Model Architecture](language-model-architecture.md) [Pretraining →](pretraining.md)
+> [← KV Cache](kv-cache.md) [Pretraining →](pretraining.md)

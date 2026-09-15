@@ -290,9 +290,11 @@ Hausdorff distance catches a single severe outlier; ASSD describes typical surfa
 
 ### Detection example
 
-This snippet computes box IoUs, assigns detections by score, and derives precision-recall points plus average precision at IoU 0.50 and 0.75. The third prediction has IoU 0.667 with the second ground-truth box, so it is good enough for AP50 but not AP75.
+This snippet computes box IoUs, assigns detections by score, and derives precision-recall points plus average precision at IoU 0.50 and 0.75. The inputs are deliberately small: two ground-truth boxes, four predictions, and one confidence score per prediction. The evaluator sorts predictions by score, lets each ground-truth box be matched at most once, and marks each prediction as a true positive or false positive under the chosen IoU threshold. The third prediction has IoU 0.667 with the second ground-truth box, so it is good enough for AP50 but not AP75.
 
 ```python
+# Two ground-truth boxes and four predicted boxes in (x1, y1, x2, y2) format.
+# Scores define the ranking used to trace the precision-recall curve.
 gt = [(0, 0, 2, 2), (3, 0, 5, 2)]
 pred = [(0, 0, 2, 2), (0.2, 0, 2.2, 2), (3.4, 0, 5.4, 2), (6, 0, 8, 2)]
 scores = [0.95, 0.85, 0.70, 0.40]
@@ -304,6 +306,7 @@ def area(box):
 
 
 def box_iou(a, b):
+    # Intersect the x and y ranges of the two boxes.
     ax1, ay1, ax2, ay2 = a
     bx1, by1, bx2, by2 = b
     overlap = (
@@ -313,6 +316,8 @@ def box_iou(a, b):
         min(ay2, by2),
     )
     inter = area(overlap)
+
+    # Union area is area(A) + area(B) - area(A intersection B).
     return inter / (area(a) + area(b) - inter)
 
 
@@ -321,11 +326,15 @@ def round_row(row):
 
 
 def precision_recall_at(threshold):
+    # Precompute each prediction's overlap with each ground-truth box.
     iou = [[box_iou(p, g) for g in gt] for p in pred]
+
+    # Detection AP is rank-based: process higher-confidence predictions first.
     order = sorted(range(len(pred)), key=lambda i: -scores[i])
     matched, flags = set(), []
 
     for i in order:
+        # Greedily claim the still-unmatched ground-truth box with best IoU.
         best_gt = max(range(len(gt)), key=lambda j: iou[i][j])
         ok = iou[i][best_gt] >= threshold and best_gt not in matched
         flags.append(1 if ok else 0)
@@ -335,6 +344,7 @@ def precision_recall_at(threshold):
     tp_seen = 0
     precision, recall = [], []
     for rank, flag in enumerate(flags, start=1):
+        # Sweeping down the ranked list gives one precision-recall point per prediction.
         tp_seen += flag
         precision.append(tp_seen / rank)
         recall.append(tp_seen / len(gt))
@@ -348,6 +358,8 @@ iou = [[box_iou(p, g) for g in gt] for p in pred]
 print("iou_matrix")
 for row in iou:
     print(round_row(row))
+
+# Re-run the same ranked predictions with a loose and a strict IoU threshold.
 for threshold in [0.50, 0.75]:
     flags, precision, recall, ap = precision_recall_at(threshold)
     print(f"threshold {threshold:.2f}")

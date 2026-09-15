@@ -13,6 +13,9 @@ prerequisites:
   - index.md
 related:
   - model-serving.md
+  - kv-cache.md
+  - vllm.md
+  - sglang.md
   - local-versus-hosted-models.md
   - context-construction.md
   - retrieval-pipelines.md

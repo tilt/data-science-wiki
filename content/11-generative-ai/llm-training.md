@@ -83,7 +83,7 @@ The [KL](../01-mathematical-foundations/kl-divergence.md) term matters: it preve
 
 ## Stage 5: Adaptation and Serving Constraints
 
-Domain adaptation can use continued pretraining, full fine-tuning, parameter-efficient methods such as [LoRA](../06-deep-learning/fine-tuning.md#lora-footprint), or [RAG](rag.md). Fine-tuning changes model weights; RAG changes context at inference time. For volatile facts, private corpora, or citation-heavy answers, [fine tuning versus RAG](fine-tuning-versus-rag.md) is often the more important design decision than another training run.
+Domain adaptation can use continued pretraining, full fine-tuning, parameter-efficient methods such as [LoRA](../06-deep-learning/fine-tuning.md#lora-footprint) or [QLoRA](../06-deep-learning/fine-tuning.md#qlora), or [RAG](rag.md). Fine-tuning changes model weights; RAG changes context at inference time. For volatile facts, private corpora, or citation-heavy answers, [fine tuning versus RAG](fine-tuning-versus-rag.md) is often the more important design decision than another training run.
 
 Serving constraints feed back into training choices. Context length, quantization, latency, refusal behavior, tool schemas, and cost targets shape what data and evaluations matter.
 
@@ -119,6 +119,7 @@ LLM training is not a linear recipe. Modern systems often iterate: collect failu
 - [Ouyang et al., 2022, Training Language Models to Follow Instructions with Human Feedback](https://arxiv.org/abs/2203.02155)
 - [Wei et al., 2022, Scaling Instruction-Finetuned Language Models](https://arxiv.org/abs/2210.11416)
 - [Hu et al., 2021, LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)
+- [Dettmers et al., 2023, QLoRA: Efficient Finetuning of Quantized LLMs](https://arxiv.org/abs/2305.14314)
 - [Rafailov et al., 2023, Direct Preference Optimization](https://arxiv.org/abs/2305.18290)
 
 > [!nav]

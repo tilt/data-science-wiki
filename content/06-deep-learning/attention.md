@@ -13,6 +13,7 @@ prerequisites:
   - index.md
 related:
   - transformers.md
+  - ../11-generative-ai/kv-cache.md
   - recurrent-neural-networks.md
   - multimodal-learning.md
   - ../11-generative-ai/language-model-architecture.md
@@ -92,6 +93,8 @@ The first query attends most to the first two keys, while the second attends mos
 ## Caveats
 
 Attention weights are routing weights, not full explanations of a model decision. Full self-attention is $O(n^2)$ in sequence length for its score matrix, so long contexts stress memory and latency. A mask bug changes what information can flow and can silently invalidate evaluation.
+
+In decoder language-model serving, the [KV cache](../11-generative-ai/kv-cache.md) stores the key and value projections for previous tokens so the model can reuse them during token-by-token generation.
 
 ## References
 

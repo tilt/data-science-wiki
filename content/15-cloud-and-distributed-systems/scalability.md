@@ -14,6 +14,7 @@ prerequisites:
 related:
   - reliability.md
   - managed-compute.md
+  - partitioning-for-parallel-execution.md
   - distributed-data-processing.md
   - distributed-model-training.md
   - cost-management.md
@@ -41,7 +42,7 @@ where $L$ is average concurrency, $\lambda$ is arrival rate, and $W$ is average 
 required replicas = ceil((arrival_rate * service_time) / safe_concurrency_per_replica)
 ```
 
-That formula is only the start. [Managed compute](managed-compute.md) can add replicas, but [distributed data processing](distributed-data-processing.md) still needs partitioning and [distributed model training](distributed-model-training.md) still needs communication bandwidth. [Reliability](reliability.md) also constrains scaling because retries and failover traffic can become the largest load source during incidents.
+That formula is only the start. [Managed compute](managed-compute.md) can add replicas, but finite batch scripts need [partitioning for parallel execution](partitioning-for-parallel-execution.md), [distributed data processing](distributed-data-processing.md) still needs shuffle-aware partitioning, and [distributed model training](distributed-model-training.md) still needs communication bandwidth. [Reliability](reliability.md) also constrains scaling because retries and failover traffic can become the largest load source during incidents.
 
 ## Worked capacity check
 

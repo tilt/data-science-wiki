@@ -158,6 +158,20 @@ LangChain is often used as the implementation layer for several patterns already
 
 Use LangChain when the application benefits from these abstractions but does not need to expose every runtime transition as a custom graph.
 
+## Rule of thumb: LangChain or plain code
+
+Use the smallest layer that makes the system more explicit. A plain code harness is often better for a stable, narrow workflow; LangChain is better when the application has enough model, tool, retrieval, middleware, or provider variation that the framework removes real orchestration work.
+
+| Prefer plain application code or a small [harness](harnesses.md) when...     | Prefer LangChain when...                                                                                      |
+| ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| The task is one prompt, one model call, and one output parser.               | The task needs a model-tool loop, retriever integration, structured output, and traceable intermediate steps. |
+| The workflow is deterministic and easy to express as ordinary functions.     | The model chooses between tools or decides whether another model call is needed.                              |
+| You need exact control over request shape, retries, logging, and errors.     | You want common interfaces for models, tools, retrievers, middleware, and tracing.                            |
+| The team can keep provider-specific code behind a small local adapter.       | The team expects to swap providers, vector stores, tools, or observability backends during development.       |
+| Framework indirection would make debugging harder than the code it replaces. | Framework traces and middleware make behavior easier to inspect than ad hoc glue code.                        |
+
+The dividing line is not "prototype versus production." Production systems can use either. The question is whether LangChain turns repeated, error-prone orchestration into a visible contract, or whether it hides a workflow that would be clearer as ordinary code. If the plain harness is under a few well-tested functions, keep it plain. If it is growing custom tool schemas, retry hooks, retriever wrappers, output parsers, and trace plumbing, a framework can become the simpler design.
+
 ## When to use LangChain
 
 Use LangChain when:

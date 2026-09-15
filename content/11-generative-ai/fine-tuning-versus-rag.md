@@ -25,7 +25,7 @@ last_reviewed: 2026-07-29
 
 # Fine Tuning Versus RAG
 
-Fine-tuning changes model behavior or parameters. [RAG](rag.md) changes the evidence available at request time. They are complementary: [instruction tuning](instruction-tuning.md) can teach format and domain behavior, while [retrieval pipelines](retrieval-pipelines.md) supply current or private facts. Parameter-efficient adapters such as [LoRA](../06-deep-learning/fine-tuning.md#lora-footprint) reduce the training and storage footprint by freezing the base model and training a small low-rank update.
+Fine-tuning changes model behavior or parameters. [RAG](rag.md) changes the evidence available at request time. They are complementary: [instruction tuning](instruction-tuning.md) can teach format and domain behavior, while [retrieval pipelines](retrieval-pipelines.md) supply current or private facts. Parameter-efficient adapters such as [LoRA](../06-deep-learning/fine-tuning.md#lora-footprint) reduce the training and storage footprint by freezing the base model and training a small low-rank update; [QLoRA](../06-deep-learning/fine-tuning.md#qlora) goes further by training those adapters through a 4-bit quantized frozen base model.
 
 The central diagnostic is: is the model failing because it does not know the right information _now_, or because it does not behave in the right way even when the information is present?
 
@@ -65,7 +65,7 @@ Start with an error sample, not an architecture preference. Label each failure a
 3. fine-tune only if stable behavior remains wrong after the right context is present;
 4. keep a rollback path and regression set for either choice.
 
-Fine-tuning should be evaluated against a held-out task set, not only training-like examples. RAG should be evaluated against retrieval recall and answer support, not only final answer preference.
+Fine-tuning should be evaluated against a held-out task set, not only training-like examples. QLoRA reduces adapter-training memory but does not change the product question: it is still a training intervention, so stale facts and private evidence still need retrieval or another runtime data path. RAG should be evaluated against retrieval recall and answer support, not only final answer preference.
 
 ## Caveats
 
@@ -75,6 +75,7 @@ Fine-tuning can memorize stale or sensitive data and is slower to update than an
 
 - [Lewis et al., 2020, Retrieval-Augmented Generation](https://arxiv.org/abs/2005.11401)
 - [Hu et al., 2021, LoRA](https://arxiv.org/abs/2106.09685)
+- [Dettmers et al., 2023, QLoRA: Efficient Finetuning of Quantized LLMs](https://arxiv.org/abs/2305.14314)
 - [Ouyang et al., 2022, Training language models to follow instructions](https://arxiv.org/abs/2203.02155)
 
 > [!nav]

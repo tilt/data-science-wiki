@@ -17,6 +17,7 @@ related:
   - data-quality.md
   - data-contracts.md
   - data-lineage.md
+  - ../15-cloud-and-distributed-systems/partitioning-for-parallel-execution.md
   - ../14-ml-engineering-and-mlops/training-pipelines.md
 historical_context: false
 last_reviewed: 2026-07-23
@@ -63,7 +64,7 @@ flowchart TD
   Publish --> Downstream[Training pipelines and analytics]
 ```
 
-Pipelines that feed [training pipelines](../14-ml-engineering-and-mlops/training-pipelines.md) need snapshot identifiers and point-in-time semantics; otherwise a later training run can silently see different features from the same nominal date.
+Pipelines that feed [training pipelines](../14-ml-engineering-and-mlops/training-pipelines.md) need snapshot identifiers and point-in-time semantics; otherwise a later training run can silently see different features from the same nominal date. Large replayable pipelines often use [partitioning for parallel execution](../15-cloud-and-distributed-systems/partitioning-for-parallel-execution.md) so each date, file prefix, tenant, or shard can be retried and validated independently.
 
 ## Failure modes
 

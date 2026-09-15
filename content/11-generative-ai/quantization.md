@@ -13,9 +13,13 @@ prerequisites:
   - index.md
 related:
   - model-serving.md
+  - kv-cache.md
+  - vllm.md
+  - sglang.md
   - local-versus-hosted-models.md
   - cost-and-latency-optimization.md
   - vector-databases.md
+  - ../06-deep-learning/fine-tuning.md
   - ../01-mathematical-foundations/numerical-stability.md
 historical_context: false
 last_reviewed: 2026-07-29
@@ -58,14 +62,16 @@ The endpoint maps exactly to 127 by construction. Intermediate values absorb rou
 | Per-tensor scale                   | Simpler metadata, worse fit for heterogeneous channels.   |
 | Per-channel scale                  | More metadata, often lower reconstruction error.          |
 
+For training-time adaptation, [QLoRA](../06-deep-learning/fine-tuning.md#qlora) keeps the base model in 4-bit quantized form and trains only LoRA adapter weights. This is different from ordinary serving quantization: the quantized base participates in forward and backward passes, but the large base weights remain frozen while the small adapter absorbs the task-specific update.
+
 ## Where quantization is applied
 
-| Target      | Typical benefit                            | Risk                                             |
-| ----------- | ------------------------------------------ | ------------------------------------------------ |
-| Weights     | lower memory footprint and bandwidth       | degraded rare-token or domain behavior.          |
-| Activations | faster kernels and lower memory traffic    | sensitivity to outliers and long-context states. |
-| KV cache    | longer context or more concurrent sessions | accumulated attention error.                     |
-| Embeddings  | smaller vector stores                      | changed nearest-neighbor rankings.               |
+| Target                  | Typical benefit                            | Risk                                             |
+| ----------------------- | ------------------------------------------ | ------------------------------------------------ |
+| Weights                 | lower memory footprint and bandwidth       | degraded rare-token or domain behavior.          |
+| Activations             | faster kernels and lower memory traffic    | sensitivity to outliers and long-context states. |
+| [KV cache](kv-cache.md) | longer context or more concurrent sessions | accumulated attention error.                     |
+| Embeddings              | smaller vector stores                      | changed nearest-neighbor rankings.               |
 
 Quantization is therefore evaluated at the system level. A 4-bit model that answers normal chat well may still fail tool routing, numeric extraction, multilingual prompts, or long-context retrieval synthesis.
 
@@ -80,10 +86,11 @@ Quantization can degrade rare-token behavior, arithmetic, multilingual quality, 
 ## References
 
 - [PyTorch documentation: Quantization](https://pytorch.org/docs/stable/quantization.html)
+- [Dettmers et al., 2023, QLoRA: Efficient Finetuning of Quantized LLMs](https://arxiv.org/abs/2305.14314)
 - [OpenAI API documentation: Latency optimization](https://platform.openai.com/docs/guides/latency-optimization)
 - [OpenAI API documentation: Cost optimization](https://platform.openai.com/docs/guides/cost-optimization)
 
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)
 >
-> [← Model Serving](model-serving.md) [Cost and Latency Optimization →](cost-and-latency-optimization.md)
+> [← SGLang](sglang.md) [Cost and Latency Optimization →](cost-and-latency-optimization.md)

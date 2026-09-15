@@ -82,4 +82,4 @@ Durability and availability are different. Archive classes can be durable but ha
 > [!nav]
 > **Section** — [Cloud and Distributed Systems](index.md)
 >
-> [← Managed Compute](managed-compute.md) [GPU Systems →](gpu-systems.md)
+> [← Managed Compute](managed-compute.md) [Partitioning for Parallel Execution →](partitioning-for-parallel-execution.md)

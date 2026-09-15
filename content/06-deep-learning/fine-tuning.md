@@ -10,12 +10,15 @@ status: complete
 page_type: concept
 aliases:
   - fine tuning
+  - QLoRA
+  - Quantized LoRA
 prerequisites:
   - index.md
 related:
   - transfer-learning.md
   - regularization.md
   - optimizers.md
+  - ../11-generative-ai/quantization.md
   - ../11-generative-ai/fine-tuning-versus-rag.md
 historical_context: false
 last_reviewed: 2026-07-22
@@ -76,6 +79,28 @@ This has three practical consequences:
 
 The small footprint is not magic compression of the original model. It is a modeling assumption: the task-specific update can be well approximated by a low-rank matrix. If the target task needs broad changes across many directions, too small a rank can underfit.
 
+## QLoRA
+
+QLoRA combines [quantization](../11-generative-ai/quantization.md) with LoRA-style adapter tuning. The pretrained base model is stored in 4-bit quantized form and kept frozen, while small LoRA matrices are trained in higher-precision compute. Gradients flow through the quantized base model into the adapter weights, so the memory-heavy base does not need full-precision optimizer state.
+
+Conceptually, QLoRA uses the same low-rank update as LoRA,
+
+$$
+W' \approx \operatorname{dequantize}(Q(W)) + BA,
+$$
+
+where $Q(W)$ is a 4-bit representation of the frozen base weight and $BA$ is the trainable low-rank adapter. The approximation symbol matters: the base model used during training is the quantized reconstruction of the original weights, not the original full-precision matrix.
+
+The QLoRA paper made this practical with three engineering ideas:
+
+| Component           | Role                                                                                   |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| NF4                 | a 4-bit NormalFloat data type designed for normally distributed neural-network weights |
+| double quantization | quantizes quantization constants as well, reducing metadata memory                     |
+| paged optimizers    | reduce temporary GPU memory spikes during adapter training                             |
+
+QLoRA is useful when the bottleneck is GPU memory for adapter training. It can make a large base model trainable on much smaller hardware than full fine-tuning, while still saving only compact adapter checkpoints. It is not a general replacement for [RAG](../11-generative-ai/rag.md): if the problem is changing facts, private documents, or auditable citations, retrieval is usually the better first tool.
+
 ## Worked example
 
 This snippet freezes a base network, trains only a small head, and checks that the base weights do not change during the update.
@@ -118,6 +143,7 @@ Small target datasets make full fine-tuning prone to overfitting and catastrophi
 ## References
 
 - [Hu et al., 2021, LoRA: Low-Rank Adaptation of Large Language Models](https://arxiv.org/abs/2106.09685)
+- [Dettmers et al., 2023, QLoRA: Efficient Finetuning of Quantized LLMs](https://arxiv.org/abs/2305.14314)
 - [PyTorch documentation: Autograd mechanics](https://docs.pytorch.org/docs/2.7/notes/autograd.html)
 
 > [!nav]
