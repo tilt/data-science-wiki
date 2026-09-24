@@ -9,8 +9,11 @@ The upstream Mermaid client config emitted by `obsidian-flavored-markdown` uses 
 This repository forces Mermaid to use plain SVG text labels:
 
 ```js
-htmlLabels: false
+htmlLabels: false,
+flowchart: { htmlLabels: false },
 ```
+
+Both settings are needed. In Mermaid 11 the top-level `htmlLabels` only switches node labels to SVG text; flowchart edge (transition) labels read `flowchart.htmlLabels` and otherwise stay HTML inside a fixed-size `<foreignObject>`, which clips text such as `needs calibrati` and ignores the edge-label padding and CSS.
 
 The patch is intentionally narrow. It does not change wiki Markdown syntax; authors should continue using fenced `mermaid` blocks.
 
@@ -21,9 +24,9 @@ The script [scripts/patch-mermaid-config.mjs](../scripts/patch-mermaid-config.mj
 - `src/scripts/mermaid.inline.ts`
 - `dist/index.js`
 
-It inserts `htmlLabels: false` immediately after Mermaid's `securityLevel: "loose"` config and normalizes duplicate insertions. The script is idempotent and prints either:
+It inserts both label settings immediately after Mermaid's `securityLevel: "loose"` config and normalizes duplicate insertions. It also adds an edge-label padding step that runs after `mermaid.run()`: for each `g.edgeLabel`, it resizes the background rectangle to the measured SVG text bounding box plus padding and makes it opaque, so labels are never narrower than the rendered font and connector lines do not cross the text. An older inserted version of that step is replaced in place. The script is idempotent and prints either:
 
-- `Patched Mermaid config to disable HTML labels globally.`
+- `Patched Mermaid config to use SVG node and edge labels and pad edge labels globally.`
 - `Mermaid config patch already applied.`
 
 ## When it runs

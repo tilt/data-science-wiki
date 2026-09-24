@@ -67,6 +67,18 @@ flowchart LR
   Runtime -->|observation log| Log[Observation log]
   Log -->|retry decision| Decision
 \`\`\`
+
+\`\`\`mermaid
+flowchart TD
+  Request[Station import request] --> Model[Model chooses next action]
+  Model -->|needs calibration| Calibration[get_latest_calibration_batch]
+  Calibration --> State1[Update state with batch]
+  State1 --> Model
+  Model -->|needs open records| Search[search_observations]
+  Search --> State2[Update state with observations]
+  State2 --> Model
+  Model -->|enough evidence| Final[Final answer]
+\`\`\`
 `,
     "utf8",
   )
@@ -236,6 +248,9 @@ async function checkBrowser(name, browserType, url) {
       return {
         htmlTheme: document.documentElement.getAttribute("saved-theme"),
         foreignObjectCount: document.querySelectorAll("g.node foreignObject").length,
+        edgeLabelForeignObjectCount: [
+          ...document.querySelectorAll("g.edgeLabel foreignObject"),
+        ].filter((element) => element.textContent.trim()).length,
         svgCount: svgs.length,
         svgThemes: svgs.map((svg) => svg.dataset.mermaidStabilityTheme ?? null),
         nodeFills: [...document.querySelectorAll("g.node rect, g.node polygon")]
@@ -256,6 +271,11 @@ async function checkBrowser(name, browserType, url) {
     if (result.foreignObjectCount !== 0) {
       throw new Error(
         `${name}: expected SVG text labels, got ${result.foreignObjectCount} HTML labels`,
+      )
+    }
+    if (result.edgeLabelForeignObjectCount !== 0) {
+      throw new Error(
+        `${name}: expected SVG edge labels, got ${result.edgeLabelForeignObjectCount} HTML edge labels`,
       )
     }
     if (!result.svgThemes.every((theme) => theme === "dark")) {
