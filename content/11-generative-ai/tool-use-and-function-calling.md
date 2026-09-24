@@ -30,7 +30,7 @@ related:
   - langgraph.md
   - ../16-software-engineering/api-design.md
 historical_context: true
-last_reviewed: 2026-07-29
+last_reviewed: 2026-09-21
 ---
 
 # Tool Use and Function Calling
@@ -54,6 +54,12 @@ The safest systems keep three boundaries visible:
 - **Instruction boundary:** tool results are observations, not new system instructions.
 
 Hosted tools blur the implementation detail because the provider may execute web search, file search, code execution, or computer-use actions on managed infrastructure. The same design rule still applies: the model chooses or requests an action, while a runtime outside the model enforces the execution contract and returns observations.
+
+## MCP as a tool layer
+
+The [Model Context Protocol](https://modelcontextprotocol.io/specification/2026-07-28/server/tools) is one way to standardize the boundary between an AI client and external capabilities. An MCP server can expose a set of named tools, each with a description and JSON input schema; a client discovers those tools with `tools/list` and invokes a selected tool with `tools/call`. The protocol does not remove the need for product controls. It gives applications a common way to present capabilities, while the client and server still need authorization, validation, audit logs, and human confirmation for sensitive actions.
+
+MCP is useful to understand because it makes tool availability explicit. If a fieldwork-log server exposes `search_observations` and `mark_reviewed`, a model can route to those capabilities. If it does not expose `delete_observation`, the model may describe deletion but cannot legitimately perform it through that server. The tool list is therefore part of the agent's real capability boundary, not just documentation.
 
 ## Lifecycle of a tool call
 
@@ -87,6 +93,198 @@ flowchart TD
   Human --> Execute
   Execute --> Observation[Observation with provenance]
   Observation --> Model
+```
+
+## Minimal round trip
+
+A no-argument tool such as `get_latest_calibration_batch` is the smallest useful example:
+
+```json
+{
+  "name": "get_latest_calibration_batch",
+  "description": "Return the identifier of the latest approved sensor calibration batch.",
+  "parameters": {
+    "type": "object",
+    "properties": {},
+    "additionalProperties": false
+  }
+}
+```
+
+When the user asks "which calibration batch should I use for this week's reef-temperature import?", the model should not invent an identifier from training data. It should emit a tool request, the runtime should execute the function, and the result should return as an observation:
+
+```json
+{
+  "tool_call_id": "call_calibration_1",
+  "tool_name": "get_latest_calibration_batch",
+  "arguments": {},
+  "status": "ok",
+  "observation": {
+    "batch_id": "calibration-reef-temp-2026-07",
+    "approved_at": "2026-07-12"
+  }
+}
+```
+
+The final answer is generated after that observation is appended. This trace is intentionally boring: it shows the important boundary without hiding it inside a framework. A framework may automate the loop, but the same contract remains: model proposal, runtime execution, bounded observation, and a stop rule such as `max_steps` or `max_tool_calls`.
+
+This complete teaching loop uses the model to decide each tool call. The local Python functions are deliberately small fixtures so the example stays focused, but the decision about which tool to call comes from the model response. The runtime still owns dispatch, validation, observations, and the step budget.
+
+```mermaid
+flowchart TD
+  Request[Station import request] --> Model[Model chooses next action]
+  Model -->|needs calibration| Calibration[get_latest_calibration_batch]
+  Calibration --> State1[Update state with batch]
+  State1 --> Model
+  Model -->|needs open records| Search[search_observations]
+  Search --> State2[Update state with observations]
+  State2 --> Model
+  Model -->|enough evidence| Final[Final answer]
+```
+
+```python
+from __future__ import annotations
+
+import json
+from collections.abc import Callable
+from typing import Any
+
+from openai import OpenAI
+
+
+def validate_tool_call(call: dict[str, Any]) -> None:
+    if call["name"] not in tools:
+        raise ValueError(f"unknown tool: {call['name']}")
+    args = call["arguments"]
+    if call["name"] == "get_latest_calibration_batch":
+        if args != {}:
+            raise ValueError("get_latest_calibration_batch does not accept arguments")
+    if call["name"] == "search_observations":
+        if set(args) != {"station_id", "reviewed"}:
+            raise ValueError("search_observations requires station_id and reviewed")
+
+
+def get_latest_calibration_batch() -> dict[str, str]:
+    return {
+        "batch_id": "calibration-reef-temp-2026-07",
+        "approved_at": "2026-07-12",
+    }
+
+
+def search_observations(station_id: str, reviewed: bool) -> list[dict[str, Any]]:
+    observations = [
+        {
+            "observation_id": "obs_1842",
+            "station_id": "reef-17",
+            "metric": "temperature_c",
+            "value": 29.4,
+            "reviewed": False,
+        },
+        {
+            "observation_id": "obs_1843",
+            "station_id": "reef-17",
+            "metric": "temperature_c",
+            "value": 28.9,
+            "reviewed": True,
+        },
+    ]
+    return [
+        item
+        for item in observations
+        if item["station_id"] == station_id and item["reviewed"] is reviewed
+    ]
+
+
+tools: dict[str, Callable[..., Any]] = {
+    "get_latest_calibration_batch": get_latest_calibration_batch,
+    "search_observations": search_observations,
+}
+
+
+openai_tools = [
+    {
+        "type": "function",
+        "name": "get_latest_calibration_batch",
+        "description": "Return the latest approved reef-temperature calibration batch.",
+        "parameters": {
+            "type": "object",
+            "properties": {},
+            "required": [],
+            "additionalProperties": False,
+        },
+        "strict": True,
+    },
+    {
+        "type": "function",
+        "name": "search_observations",
+        "description": "Search field observations by station and review state.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "station_id": {"type": "string"},
+                "reviewed": {"type": "boolean"},
+            },
+            "required": ["station_id", "reviewed"],
+            "additionalProperties": False,
+        },
+        "strict": True,
+    },
+]
+
+
+def run_model_driven_tool_loop(user_request: str, max_steps: int = 4) -> str:
+    client = OpenAI()
+    response = client.responses.create(
+        model="gpt-4o",
+        input=user_request,
+        tools=openai_tools,
+    )
+
+    for _ in range(max_steps):
+        tool_outputs = []
+        for item in response.output:
+            if item.type != "function_call":
+                continue
+
+            # Example first model decision:
+            # name="get_latest_calibration_batch", arguments="{}"
+            # Example second model decision after observing the batch:
+            # name="search_observations",
+            # arguments='{"station_id": "reef-17", "reviewed": false}'
+            tool_call = {
+                "name": item.name,
+                "arguments": json.loads(item.arguments or "{}"),
+            }
+            validate_tool_call(tool_call)
+
+            tool_function = tools[item.name]
+            result = tool_function(**tool_call["arguments"])
+            tool_outputs.append(
+                {
+                    "type": "function_call_output",
+                    "call_id": item.call_id,
+                    "output": json.dumps(result),
+                }
+            )
+
+        if not tool_outputs:
+            return response.output_text
+
+        response = client.responses.create(
+            model="gpt-4o",
+            previous_response_id=response.id,
+            input=tool_outputs,
+            tools=openai_tools,
+        )
+
+    raise RuntimeError("tool loop stopped because max_steps was reached")
+
+
+if __name__ == "__main__":
+    answer = run_model_driven_tool_loop(
+        "Prepare this week's reef-temperature import for station reef-17."
+    )
+    print(answer)
 ```
 
 ## A concrete contract
@@ -279,8 +477,10 @@ Tool use does not make a model truthful, authorized, or autonomous in a safe way
 - [OpenAI API documentation: Function calling](https://platform.openai.com/docs/guides/function-calling)
 - [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
 - [Anthropic documentation: Tool use with Claude](https://platform.claude.com/docs/en/agents-and-tools/tool-use/overview)
+- [DeepLearning.AI: Agentic AI](https://www.deeplearning.ai/courses/agentic-ai/)
 - [Google Gemini API documentation: Function calling](https://ai.google.dev/gemini-api/docs/function-calling)
-- [Model Context Protocol specification: Tools](https://modelcontextprotocol.io/specification/2025-06-18/server/tools)
+- [Model Context Protocol specification: Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools)
+- [Model Context Protocol blog: 2026-07-28 specification](https://blog.modelcontextprotocol.io/posts/2026-07-28/)
 - [Yao et al., 2022/2023, ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629)
 - [Schick et al., 2023, Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761)
 - [Karpas et al., 2022, MRKL Systems](https://arxiv.org/abs/2205.00445)

@@ -21,7 +21,7 @@ related:
   - guardrails.md
   - agent-evaluation.md
 historical_context: false
-last_reviewed: 2026-07-29
+last_reviewed: 2026-09-21
 ---
 
 # Tool Routing
@@ -94,6 +94,49 @@ Can you handle the refund for order 52?
 
 This could mean "tell me the policy," "draft a refund," or "execute a refund." A robust router should not jump straight to `create_refund`. It can first route to `lookup_order` and `search_refund_policy`, then ask for confirmation before any mutating tool becomes available. The route should reflect both intent and risk.
 
+## Tool availability as capability
+
+The active tool list defines what the agent can actually do. Suppose a field-monitoring assistant sees this scoped tool set:
+
+```mermaid
+flowchart LR
+  User[User request] --> Scope[Current user and workflow state]
+  Scope --> Tools[Allowed tool list]
+  Tools --> Route{Route possible?}
+  Route -->|tool exposed| Call[Validate and call tool]
+  Route -->|tool absent| Refuse[Explain unavailable capability]
+  Call --> Gate{Sensitive action?}
+  Gate -->|yes| Confirm[Require confirmation]
+  Gate -->|no| Execute[Execute]
+```
+
+```json
+{
+  "allowed_tools": [
+    "search_observations",
+    "get_observation",
+    "mark_observation_reviewed",
+    "create_followup_task"
+  ]
+}
+```
+
+For the request "find unreviewed reef-temperature anomalies, mark the matching observation reviewed, and create a follow-up task," the route can be valid: search, read, mark, create. For "delete the calibration outlier," the same assistant should not pretend it deleted anything, because no deletion route exists. It can search for the observation and report that deletion is unavailable in this state.
+
+Adding a `delete_observation` tool changes the capability boundary:
+
+```json
+{
+  "intent": "delete_observation",
+  "tool": "delete_observation",
+  "arguments": { "observation_id": "obs_1842" },
+  "requires_confirmation": true,
+  "reason": "the user requested a destructive data-curation action"
+}
+```
+
+This is why tool routing is not only semantic classification. It is also capability scoping. Protocol layers such as MCP can make the available tools discoverable, but the application still decides which tools are exposed for the current user, tenant, risk level, and workflow state.
+
 ## Evaluation
 
 Routing is evaluated with intent-labeled examples and trace checks. Useful metrics include correct direct-answer rate, correct tool-selection rate, unnecessary tool-call rate, clarification rate on ambiguous requests, and forbidden-route rate. For side-effecting tools, a single unauthorized route should fail the test case even if execution is later blocked.
@@ -107,6 +150,7 @@ Similar tool descriptions cause wrong calls. Never let a model route to tools th
 - [OpenAI API documentation: Using tools](https://platform.openai.com/docs/guides/tools)
 - [OpenAI API documentation: Function calling](https://platform.openai.com/docs/guides/function-calling)
 - [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
+- [Model Context Protocol specification: Tools](https://modelcontextprotocol.io/specification/2026-07-28/server/tools)
 
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)

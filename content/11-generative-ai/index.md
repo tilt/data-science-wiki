@@ -109,20 +109,21 @@ Read foundation-model mechanics and generation control first, then retrieval, ag
 42. [LangChain](langchain.md): a configurable framework for models, tools, middleware, retrieval, and agent loops.
 43. [LangGraph](langgraph.md): graph orchestration for durable, stateful, long-running agents.
 44. [Agent Evaluation](agent-evaluation.md): measuring multi-step task success.
-45. [LLM-as-Judge](llm-as-judge.md): using models to score outputs.
-46. [Multimodal Models](multimodal-models.md): models over text, image, and more.
-47. [Vision-Language Models](vision-language-models.md): joint image-text models.
-48. [Stable Diffusion](stable-diffusion.md): latent-diffusion image generation.
-49. [Local Versus Hosted Models](local-versus-hosted-models.md): where the model runs.
-50. [Model Serving](model-serving.md): the runtime layer for reliable calls.
-51. [vLLM](vllm.md): a high-throughput serving engine for self-hosted open models.
-52. [SGLang](sglang.md): a high-performance runtime for self-hosted structured generation and multimodal serving.
-53. [Quantization](quantization.md): lower-precision weights for cheaper serving.
-54. [Cost and Latency Optimization](cost-and-latency-optimization.md): making systems affordable and fast.
-55. [Guardrails](guardrails.md): runtime behavior constraints.
-56. [Prompt Injection](prompt-injection.md): the core adversarial-input risk.
-57. [Data Privacy](data-privacy.md): protecting user and training data.
-58. [PII Protection](pii-protection.md): detecting and redacting personal information.
+45. [Pipeline Improvement Methodology](pipeline-improvement-methodology.md): trace-driven diagnosis and regression-safe improvement.
+46. [LLM-as-Judge](llm-as-judge.md): using models to score outputs.
+47. [Multimodal Models](multimodal-models.md): models over text, image, and more.
+48. [Vision-Language Models](vision-language-models.md): joint image-text models.
+49. [Stable Diffusion](stable-diffusion.md): latent-diffusion image generation.
+50. [Local Versus Hosted Models](local-versus-hosted-models.md): where the model runs.
+51. [Model Serving](model-serving.md): the runtime layer for reliable calls.
+52. [vLLM](vllm.md): a high-throughput serving engine for self-hosted open models.
+53. [SGLang](sglang.md): a high-performance runtime for self-hosted structured generation and multimodal serving.
+54. [Quantization](quantization.md): lower-precision weights for cheaper serving.
+55. [Cost and Latency Optimization](cost-and-latency-optimization.md): making systems affordable and fast.
+56. [Guardrails](guardrails.md): runtime behavior constraints.
+57. [Prompt Injection](prompt-injection.md): the core adversarial-input risk.
+58. [Data Privacy](data-privacy.md): protecting user and training data.
+59. [PII Protection](pii-protection.md): detecting and redacting personal information.
 
 ## Connections
 

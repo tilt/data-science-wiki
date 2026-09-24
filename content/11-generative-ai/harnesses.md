@@ -23,18 +23,19 @@ related:
   - langchain.md
   - langgraph.md
   - llm-as-judge.md
+  - pipeline-improvement-methodology.md
   - tool-use-and-function-calling.md
   - determinism-and-reproducibility.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-22
+last_reviewed: 2026-09-21
 ---
 
 # Harnesses
 
 A harness is the controlled wrapper around a generative-AI system. It fixes inputs, prompts, model settings, retrieval fixtures, tool fixtures, graders, metrics, and reporting so runs can be compared. Without a harness, an evaluation result is often just a transcript: useful for debugging one case, but too under-specified to reproduce or trust as a regression signal.
 
-Harnesses are especially important for [RAG evaluation](rag-evaluation.md), [agent evaluation](agent-evaluation.md), [LLM-as-judge](llm-as-judge.md), and [tool use and function calling](tool-use-and-function-calling.md), because the final answer is only one part of the behavior. A good harness records the path that produced the answer.
+Harnesses are especially important for [RAG evaluation](rag-evaluation.md), [agent evaluation](agent-evaluation.md), [LLM-as-judge](llm-as-judge.md), [pipeline improvement](pipeline-improvement-methodology.md), and [tool use and function calling](tool-use-and-function-calling.md), because the final answer is only one part of the behavior. A good harness records the path that produced the answer.
 
 ## The five parts of a harness
 
@@ -167,6 +168,81 @@ Use model judges or human review for semantic checks that cannot be reduced clea
 - Whether a response follows a nuanced policy.
 
 Model judges should be calibrated against human-labelled examples and protected from seeing the candidate system's hidden reasoning. They are graders inside the harness, not substitutes for the harness.
+
+## Component Graders
+
+A harness can grade one component without running the entire application. This is useful when a downstream stage adds noise or cost. For a research agent, the retrieval step can be checked against a source policy before report writing:
+
+```mermaid
+flowchart LR
+  Output[Retrieval output] --> Extract[Extract URLs]
+  Extract --> Domains[Parse hostnames]
+  Domains --> Match[Compare to authority set]
+  Match --> Ratio[Compute authority ratio]
+  Ratio --> Status{Meets threshold?}
+  Status -->|yes| Pass[pass]
+  Status -->|no| Fail[fail]
+```
+
+```python
+import json
+import re
+from urllib.parse import urlparse
+
+
+URL_PATTERN = re.compile(r"https?://[^\s)\]>}]+")
+
+
+def extract_urls(text: str) -> list[str]:
+    return URL_PATTERN.findall(text)
+
+
+def source_policy_report(
+    research_output: str,
+    authority_domains: set[str],
+    minimum_authority_ratio: float = 0.5,
+) -> dict:
+    urls = extract_urls(research_output)
+    total = len(urls)
+    authority_matches = 0
+    checked_sources = []
+
+    for url in urls:
+        host = urlparse(url).hostname or ""
+        in_authority_set = any(
+            host == domain or host.endswith("." + domain)
+            for domain in authority_domains
+        )
+        authority_matches += int(in_authority_set)
+        checked_sources.append({"url": url, "authority_source": in_authority_set})
+
+    authority_ratio = authority_matches / total if total else 0.0
+    return {
+        "status": "pass" if authority_ratio >= minimum_authority_ratio else "fail",
+        "total_urls": total,
+        "authority_urls": authority_matches,
+        "authority_ratio": authority_ratio,
+        "minimum_authority_ratio": minimum_authority_ratio,
+        "checked_sources": checked_sources,
+    }
+
+
+if __name__ == "__main__":
+    research_output = """
+    Recent marine heatwave and coral bleaching sources:
+    - NOAA overview: https://www.noaa.gov/example-coral-bleaching
+    - Journal paper: https://www.nature.com/example-marine-heatwaves
+    - News summary: https://example-news.test/ocean-temperature-roundup
+    """
+    report = source_policy_report(
+        research_output,
+        authority_domains={"noaa.gov", "nature.com", "science.org"},
+        minimum_authority_ratio=0.5,
+    )
+    print(json.dumps(report, indent=2))
+```
+
+This grader should not be treated as a truth checker. It is a narrow, cheap signal that the retrieval component is drawing enough material from sources the case policy considers authoritative. The full harness still needs answer support, citation checks, unsafe-tool checks, and budget checks.
 
 ## Test Slices
 

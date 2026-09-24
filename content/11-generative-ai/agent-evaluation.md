@@ -20,8 +20,9 @@ related:
   - rag-evaluation.md
   - guardrails.md
   - harnesses.md
+  - pipeline-improvement-methodology.md
 historical_context: false
-last_reviewed: 2026-07-29
+last_reviewed: 2026-09-21
 ---
 
 # Agent Evaluation
@@ -29,6 +30,8 @@ last_reviewed: 2026-07-29
 Agent evaluation measures the whole control loop, not just a final answer. A useful suite checks whether [agent loops](agent-loops.md) call the right tools, obey [guardrails](guardrails.md), preserve evidence from [RAG evaluation](rag-evaluation.md), and stop within budget. The unit under test is a trace: model decisions, tool calls, tool observations, state transitions, and the final response.
 
 For framework-built agents, evaluate the framework trace rather than treating the framework as a black box. [LangChain](langchain.md) runs should expose model calls, tool calls, middleware decisions, and final outputs; [LangGraph](langgraph.md) runs should expose node transitions, checkpoints, interrupts, and state updates.
+
+Evaluation becomes most useful when it feeds a disciplined improvement loop. See [pipeline improvement methodology](pipeline-improvement-methodology.md) for failure triage, component-level diagnosis, and release gates.
 
 ## What a trace grader scores
 
@@ -69,6 +72,36 @@ This split avoids a common failure: the final answer looks plausible, but the tr
 
 The required successful events are present: `search_docs` and `final_answer`. The trace still fails because a forbidden `refund_payment` action appeared at all, even though it did not succeed. That is the kind of failure final-answer grading misses.
 
+## Component-level evaluation
+
+Do not wait until the full agent fails to evaluate a weak component. If a research agent retrieves sources, extracts claims, writes a draft, and reviews it, a bad final answer might come from weak retrieval, poor synthesis, weak reflection, or formatting errors. A component-level eval isolates one stage.
+
+For the retrieval stage, a simple deterministic check can score whether returned URLs satisfy the source policy for that case:
+
+```mermaid
+flowchart LR
+  Cases[Evaluation cases] --> Retrieval[Run retrieval only]
+  Retrieval --> URLs[Returned URLs]
+  URLs --> Policy[Check authority domains]
+  Policy --> Signal[Component signal]
+  Signal --> FullRun[Then run full agent if needed]
+```
+
+```json
+{
+  "component": "research_retrieval",
+  "case_id": "marine_heatwaves_coral_bleaching_2026",
+  "authority_domains": ["noaa.gov", "nature.com", "science.org"],
+  "total_urls": 5,
+  "authority_urls": 3,
+  "authority_ratio": 0.6,
+  "minimum_authority_ratio": 0.5,
+  "status": "pass"
+}
+```
+
+This does not prove the report is correct. It answers a narrower question: did the retrieval component return enough sources from the domains this case treats as authoritative? That signal is valuable because prompt, retriever, or ranking changes can be tested without rerunning the whole retrieve -> extract -> draft -> review workflow.
+
 ## Realistic test case
 
 ```yaml
@@ -95,7 +128,7 @@ This case forces the agent to disambiguate "approved" from "issue a refund." The
 
 ## Metrics
 
-Do not collapse everything into one pass rate too early. Track route accuracy, argument validity, policy violation rate, answer support, tool-call count, latency, and cost separately. Then report a task-level pass rate that requires the hard safety checks and the answer-quality checks to pass together. For high-risk systems, a single forbidden side effect should fail the case even if the final answer is useful.
+Do not collapse everything into one pass rate too early. Track route accuracy, argument validity, component quality, policy violation rate, answer support, tool-call count, latency, and cost separately. Then report a task-level pass rate that requires the hard safety checks and the answer-quality checks to pass together. For high-risk systems, a single forbidden side effect should fail the case even if the final answer is useful.
 
 ## Caveats
 
@@ -106,8 +139,9 @@ Do not let the agent write its own pass criteria during the run being graded. Ke
 - [OpenAI API documentation: Evals](https://platform.openai.com/docs/guides/evals)
 - [OpenAI API documentation: Graders](https://platform.openai.com/docs/guides/graders)
 - [OpenAI API documentation: Agents SDK](https://platform.openai.com/docs/guides/agents)
+- [DeepLearning.AI: Agentic AI](https://www.deeplearning.ai/courses/agentic-ai/)
 
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)
 >
-> [← LangGraph](langgraph.md) [LLM-as-Judge →](llm-as-judge.md)
+> [← LangGraph](langgraph.md) [Pipeline Improvement Methodology →](pipeline-improvement-methodology.md)

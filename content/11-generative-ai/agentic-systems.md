@@ -19,9 +19,10 @@ related:
   - planning.md
   - guardrails.md
   - agent-evaluation.md
+  - pipeline-improvement-methodology.md
   - rag-architecture-comparison.md
 historical_context: false
-last_reviewed: 2026-07-29
+last_reviewed: 2026-09-21
 ---
 
 # Agentic Systems
@@ -72,9 +73,9 @@ The action is only a proposal until the orchestrator validates name, schema, use
 
 Use an agentic system when the next step depends on observations that are not known upfront: retrieval may fail, tools may return conflicting state, the user may need a clarification, or a task may require several conditional actions. Use a fixed pipeline when the path is known and stable. A deterministic RAG pipeline is usually better than an agent for "answer from these documents"; an agent is more justified for "investigate why this deployment failed and propose a rollback plan."
 
-## Evaluation and operations
+## Evaluation and improvement
 
-Agentic systems should be evaluated by traces: task success, route choice, tool arguments, forbidden actions, retries, latency, and cost. They also need operational limits such as max steps, max tool calls, tool timeouts, budget ceilings, and explicit blocked states. Without those limits, the system can spend tokens and tool calls hiding uncertainty rather than resolving it.
+Agentic systems should be evaluated by traces: task success, route choice, tool arguments, forbidden actions, retries, latency, and cost. Those traces should feed a [pipeline improvement methodology](pipeline-improvement-methodology.md): classify the earliest failing stage, fix the smallest responsible layer, then rerun component and end-to-end checks. They also need operational limits such as max steps, max tool calls, tool timeouts, budget ceilings, and explicit blocked states. Without those limits, the system can spend tokens and tool calls hiding uncertainty rather than resolving it.
 
 ## Caveats
 

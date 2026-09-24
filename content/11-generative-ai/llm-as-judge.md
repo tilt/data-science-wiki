@@ -103,4 +103,4 @@ Judges can prefer verbose answers, miss domain-specific errors, leak answer-orde
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)
 >
-> [← Agent Evaluation](agent-evaluation.md) [Multimodal Models →](multimodal-models.md)
+> [← Pipeline Improvement Methodology](pipeline-improvement-methodology.md) [Multimodal Models →](multimodal-models.md)

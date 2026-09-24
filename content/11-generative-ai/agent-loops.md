@@ -22,7 +22,7 @@ related:
   - rag-architecture-comparison.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-07-29
+last_reviewed: 2026-09-21
 ---
 
 # Agent Loops
@@ -41,14 +41,15 @@ flowchart TD
   Decision --> Final["Final<br/>answer"]
   Decision --> Ask["Ask<br/>user"]
   Decision --> Blocked[Blocked]
-  Decision --> Schema["Schema<br/>check"]
+  Decision --> ToolCall["Tool call<br/>proposal"]
+  ToolCall --> Schema["Schema<br/>check"]
   Schema --> Permission["Permission<br/>check"]
-  Permission --> Execute["Execute<br/>tool"]
+  Permission --> Execute["Runtime code<br/>executes tool"]
   Execute --> Observation["Append<br/>observation"]
   Observation --> State
 ```
 
-The application owns the loop invariants: maximum steps, available tools, retry policy, side-effect confirmation, budget limits, and what counts as completion. The model proposes actions inside those constraints. This separation matters because the same model output can be valid in one state and invalid in another.
+The application owns the loop invariants: maximum steps, available tools, retry policy, side-effect confirmation, budget limits, and what counts as completion. The model proposes actions inside those constraints. A tool call is only a structured proposal; runtime code validates it, performs any retrieval, API call, database query, or code execution, and appends the result as an observation. This separation matters because the same model output can be valid in one state and invalid in another.
 
 ## Loop phases
 
@@ -83,6 +84,19 @@ This contract makes failures inspectable for [agent evaluation](agent-evaluation
 
 For a support assistant answering a refund question, a bounded loop might run:
 
+```mermaid
+flowchart TD
+  Ticket["Ticket, role,<br/>tenant, tool scope"] --> Decide{Need policy evidence?}
+  Decide -->|yes| ToolCall["Model proposes<br/>search_refund_policy"]
+  ToolCall --> Validate["Validate policy_version<br/>and top_k <= 5"]
+  Validate --> Search["Runtime executes<br/>policy search"]
+  Search --> Evidence["Append chunks<br/>with provenance"]
+  Evidence --> Covered{Evidence sufficient?}
+  Covered -->|yes| Answer["Answer with citation"]
+  Covered -->|no| Clarify["Ask for missing<br/>amount or customer type"]
+  Decide -->|missing facts first| Clarify
+```
+
 1. Observe the ticket, user role, current tenant, and available read-only policy tools.
 2. Decide whether the answer needs retrieval.
 3. Validate a `search_refund_policy` call with `policy_version` and `top_k <= 5`.
@@ -91,6 +105,33 @@ For a support assistant answering a refund question, a bounded loop might run:
 6. Answer with citation or ask for the missing amount/customer type.
 
 The loop does not expose `issue_refund` until a different workflow confirms eligibility and user intent. That separation keeps an answer-seeking loop from turning into an action-taking loop.
+
+## Realistic field-monitoring loop
+
+For a field-monitoring assistant, the loop might be:
+
+```mermaid
+flowchart TD
+  Request[User request and station] --> Scope[Scoped tool list]
+  Scope --> Search[search_observations]
+  Search --> Observe[Observation IDs and units]
+  Observe --> Decide{Next action}
+  Decide -->|reviewed safely| Mark[mark_observation_reviewed]
+  Decide -->|needs work| Task[create_followup_task]
+  Decide -->|not allowed| Stop[Explain unavailable action]
+  Mark --> Summary[Final summary]
+  Task --> Summary
+  Stop --> Summary
+```
+
+1. Observe the user request, station identity, and the scoped tool list.
+2. Decide to call `search_observations` for unreviewed sensor anomalies.
+3. Validate the station filter and execute the search.
+4. Observe observation IDs, timestamps, units, and review state.
+5. Decide whether to call `mark_observation_reviewed`, `create_followup_task`, or ask for clarification.
+6. Stop with a final summary of actions and skipped actions.
+
+A request such as "delete the suspicious pH reading" should take a different path depending on state. If `delete_observation` is not in `allowed_tools`, the loop should stop or explain that deletion is unavailable. If the tool is available, the loop should require confirmation or another deterministic gate before the destructive call. The important lesson is that the loop runs over an explicit action set; it should not improvise capabilities from natural language.
 
 ## Implementation choices
 
