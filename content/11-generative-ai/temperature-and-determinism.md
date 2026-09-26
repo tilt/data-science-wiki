@@ -41,38 +41,60 @@ Lower $T$ sharpens the distribution; higher $T$ flattens it. At the limit toward
 
 ## Isolating the temperature effect
 
-The code keeps the logits fixed and changes only temperature, so the output isolates how temperature changes probability mass and entropy.
+The code takes the real next-token logits of a small open model for one prompt, changes only temperature, and also samples ten complete answers at each temperature. Top-k, top-p, and the repetition penalty are switched off, so the output isolates the effect of temperature.
 
 ```python
 import numpy as np
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
-tokens = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"]
-logits = np.array([3.2, 2.1, 1.4, 0.7, -0.2, -1.0])
+MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+model = AutoModelForCausalLM.from_pretrained(MODEL_ID)
+torch.manual_seed(7)
+
+messages = [{"role": "user", "content": "Suggest a name for a coffee shop. Reply with the name only."}]
+inputs = tokenizer.apply_chat_template(
+    messages, add_generation_prompt=True, return_tensors="pt", return_dict=True
+)
+with torch.no_grad():
+    logits = model(**inputs).logits[0, -1].float().numpy()
+
 
 def softmax(x):
-    z = x - x.max()
-    e = np.exp(z)
+    e = np.exp(x - x.max())
     return e / e.sum()
 
+
 def entropy(p):
-    return -(p * np.log2(np.clip(p, 1e-12, 1))).sum()
+    p = p[p > 0]
+    return float(-(p * np.log2(p)).sum()) + 0.0
 
-def fmt(p):
-    return [(tokens[i], round(float(v), 3)) for i, v in enumerate(p) if v > 0]
 
-for temp in [0.7, 1.5]:
-    probs = softmax(logits / temp)
-    print(f"temperature={temp}", fmt(probs), "entropy_bits", round(float(entropy(probs)), 3))
+for temperature in [0.2, 0.7, 1.0, 1.5]:
+    probs = softmax(logits / temperature)
+    samples = set()
+    for _ in range(10):
+        output = model.generate(
+            **inputs, do_sample=True, temperature=temperature, max_new_tokens=12,
+            top_k=0, top_p=1.0, repetition_penalty=1.0,  # isolate temperature from the model's defaults
+            pad_token_id=tokenizer.eos_token_id,
+        )
+        samples.add(tokenizer.decode(output[0, inputs["input_ids"].shape[1]:], skip_special_tokens=True).strip())
+    print(f"temperature={temperature}: top-token p={probs.max():.2f}  entropy={entropy(probs):5.2f} bits  "
+          f"distinct answers in 10 samples={len(samples)}")
 ```
 
-Observed output:
+Observed output with Qwen2.5-0.5B-Instruct on CPU:
 
 ```text
-temperature=0.7 [('alpha', 0.756), ('beta', 0.157), ('gamma', 0.058), ('delta', 0.021), ('epsilon', 0.006), ('zeta', 0.002)] entropy_bits 1.141
-temperature=1.5 [('alpha', 0.468), ('beta', 0.225), ('gamma', 0.141), ('delta', 0.088), ('epsilon', 0.049), ('zeta', 0.028)] entropy_bits 2.063
+temperature=0.2: top-token p=0.70  entropy= 1.06 bits  distinct answers in 10 samples=3
+temperature=0.7: top-token p=0.32  entropy= 3.26 bits  distinct answers in 10 samples=10
+temperature=1.0: top-token p=0.18  entropy= 5.96 bits  distinct answers in 10 samples=10
+temperature=1.5: top-token p=0.04  entropy=11.49 bits  distinct answers in 10 samples=10
 ```
 
-Higher temperature nearly doubles entropy in the toy distribution, from 1.141 bits at $T=0.7$ to 2.063 bits at $T=1.5$. The top token `alpha` falls from 0.756 to 0.468, so more probability mass is available for lower-ranked tokens even though the ranking itself has not changed.
+The ranking of tokens does not change, but the probability of the top token falls from 0.70 at $T=0.2$ to 0.04 at $T=1.5$. Entropy grows from about 1 bit to 11.5 bits, because a vocabulary of about 150,000 tokens has a long tail that temperature alone never removes. Even $T=0.2$ produced three different answers in ten samples: a low temperature makes outputs more repeatable, not deterministic.
 
 The plot shows the same effect: high temperature leaves the top token first, but it spreads probability across the tail.
 

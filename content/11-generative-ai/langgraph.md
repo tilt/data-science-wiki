@@ -84,35 +84,31 @@ These concepts match the design advice on [agent loops](agent-loops.md): keep th
 
 This example models a support workflow. The graph enriches a case with account data, uses a model to classify the request, retrieves policy evidence, drafts a reply, pauses for human approval when the refund is high-risk, and sends only after the approval branch resolves. It also uses a checkpointer, so the state can be inspected or resumed by thread ID.
 
-The in-memory account and policy dictionaries stand in for real service calls. The production-relevant parts are the typed state, model nodes, deterministic routing, interrupt, checkpointer, and explicit side-effect boundary.
+The account lookup reads the billing database, policy evidence comes from a pgvector store, replies go out through the helpdesk API (`helpdesk_client` stands for your ticketing SDK), and the checkpointer persists state in PostgreSQL. The case starts in one process; a reviewer resumes it later from the review UI, possibly on another machine.
 
 ```python
+import os
 from operator import add
 from typing import Annotated, Literal, TypedDict
 
+from helpdesk_client import HelpdeskClient  # your ticketing system's SDK
 from langchain.chat_models import init_chat_model
-from langgraph.checkpoint.memory import InMemorySaver
+from langchain_openai import OpenAIEmbeddings
+from langchain_postgres import PGVector
+from langgraph.checkpoint.postgres import PostgresSaver
 from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 from pydantic import BaseModel, Field
+from sqlalchemy import create_engine, text
 
-
-ACCOUNT_DB = {
-    "cust_enterprise_17": {
-        "tier": "enterprise",
-        "open_invoice_id": "INV-9001",
-        "open_invoice_total_usd": 900,
-    }
-}
-
-POLICY_INDEX = {
-    "refund": [
-        "refunds-2026-07: enterprise refunds above 500 USD require "
-        "manager approval before a customer-facing refund commitment.",
-        "refunds-2026-07: approved refunds must be logged with the "
-        "case ID and invoice ID.",
-    ]
-}
+billing_db = create_engine(os.environ["BILLING_DB_URL"])  # read-only role
+policy_store = PGVector(
+    embeddings=OpenAIEmbeddings(model="text-embedding-3-small"),
+    collection_name="support_policies",
+    connection=os.environ["VECTOR_DB_URL"],
+)
+helpdesk = HelpdeskClient(api_token=os.environ["HELPDESK_API_TOKEN"])
+CHECKPOINT_DB_URL = os.environ["CHECKPOINT_DB_URL"]
 
 
 class SupportState(TypedDict, total=False):
@@ -147,12 +143,24 @@ writer = init_chat_model(model="openai:gpt-4.1-mini")
 
 def lookup_account(customer_id: str) -> dict:
     """Read account data visible to this support workflow."""
-    return ACCOUNT_DB[customer_id]
+    with billing_db.connect() as conn:
+        return dict(
+            conn.execute(
+                text(
+                    "SELECT c.tier, i.invoice_id AS open_invoice_id, i.amount_usd AS open_invoice_total_usd "
+                    "FROM customers c JOIN invoices i ON i.customer_id = c.customer_id "
+                    "WHERE c.customer_id = :customer_id AND i.status = 'open' "
+                    "ORDER BY i.issued_at DESC LIMIT 1"
+                ),
+                {"customer_id": customer_id},
+            ).mappings().one()
+        )
 
 
-def retrieve_policy(intent: str) -> list[str]:
+def retrieve_policy(intent: str, email: str) -> list[str]:
     """Retrieve approved policy passages for the classified intent."""
-    return POLICY_INDEX.get(intent, [])
+    docs = policy_store.similarity_search(email, k=4, filter={"topic": intent, "status": "approved"})
+    return [f"{d.metadata['policy_id']}: {d.page_content}" for d in docs]
 
 
 def enrich_customer(state: SupportState) -> dict:
@@ -202,7 +210,7 @@ def route_after_classification(
 
 
 def search_documentation(state: SupportState) -> dict:
-    docs = retrieve_policy(state["intent"])
+    docs = retrieve_policy(state["intent"], state["email"])
     return {
         "docs": docs,
         "audit_log": [f"retrieved {len(docs)} policy passages"],
@@ -272,12 +280,15 @@ def route_after_review(
 
 
 def send_reply(state: SupportState) -> dict:
-    # Real code would call the ticketing API with this idempotency key.
-    reply_id = f"{state['case_id']}:{state['invoice_id']}:reply-v1"
+    # The idempotency key makes a retried or resumed node send the reply at most once.
+    idempotency_key = f"{state['case_id']}:{state['invoice_id']}:reply-v1"
+    reply = helpdesk.post_reply(
+        ticket_id=state["case_id"], body=state["draft"], idempotency_key=idempotency_key
+    )
     return {
-        "sent_reply_id": reply_id,
+        "sent_reply_id": reply.id,
         "final_status": "sent",
-        "audit_log": [f"sent reply with idempotency key {reply_id}"],
+        "audit_log": [f"sent reply {reply.id} with idempotency key {idempotency_key}"],
     }
 
 
@@ -306,40 +317,35 @@ builder.add_conditional_edges("human_review", route_after_review)
 builder.add_edge("send_reply", END)
 builder.add_edge("close_without_sending", END)
 
-# InMemorySaver is for development and tests. Production graphs usually use
-# a persistent checkpointer such as PostgreSQL.
-graph = builder.compile(checkpointer=InMemorySaver())
 
-config = {"configurable": {"thread_id": "support-case-1842"}}
-first_run = graph.invoke(
-    {
-        "case_id": "case-1842",
-        "customer_id": "cust_enterprise_17",
-        "email": (
-            "Customer asks whether we can refund enterprise invoice INV-9001 "
-            "for 900 USD."
-        ),
-        "audit_log": [],
-    },
-    config,
-)
 
-if "__interrupt__" in first_run:
-    print(first_run["__interrupt__"][0].value)
-    final_state = graph.invoke(
-        Command(
-            resume={
-                "decision": "approve",
-                "edited_draft": first_run["__interrupt__"][0].value["draft"],
-            }
-        ),
-        config,
-    )
-else:
-    final_state = first_run
+def start_case(case_id: str, customer_id: str, email: str) -> dict:
+    """Called by the ticket webhook. Runs until the graph finishes or pauses for review."""
+    config = {"configurable": {"thread_id": case_id}}
+    with PostgresSaver.from_conn_string(CHECKPOINT_DB_URL) as checkpointer:
+        checkpointer.setup()  # creates checkpoint tables on first use
+        graph = builder.compile(checkpointer=checkpointer)
+        state = graph.invoke(
+            {"case_id": case_id, "customer_id": customer_id, "email": email, "audit_log": []},
+            config,
+        )
+    if "__interrupt__" in state:
+        # Put the pending decision in the review queue; the process can now exit.
+        helpdesk.create_review_task(ticket_id=case_id, payload=state["__interrupt__"][0].value)
+        return {"status": "awaiting_review"}
+    return {"status": state["final_status"]}
 
-print(final_state["final_status"])
-print(final_state["audit_log"])
+
+def resume_case(case_id: str, decision: str, edited_draft: str | None = None) -> dict:
+    """Called by the review UI, possibly hours later and on another machine."""
+    config = {"configurable": {"thread_id": case_id}}
+    review = {"decision": decision}
+    if edited_draft is not None:
+        review["edited_draft"] = edited_draft
+    with PostgresSaver.from_conn_string(CHECKPOINT_DB_URL) as checkpointer:
+        graph = builder.compile(checkpointer=checkpointer)
+        state = graph.invoke(Command(resume=review), config)
+    return {"status": state["final_status"], "audit_log": state["audit_log"]}
 ```
 
 The graph encoded by the code is:
@@ -363,7 +369,7 @@ The important object is `SupportState`. Each node reads the current state and re
 
 The conditional edges are the main reason to use LangGraph here. The model classifies the case and drafts text, but deterministic functions decide whether the workflow may continue, whether a human must approve, and whether a customer-facing reply may be sent. That split keeps judgement where the model is useful while keeping policy, routing, and side effects under application control.
 
-The interrupt gives the example its production shape. For the 900 USD enterprise refund, the graph pauses inside `human_review` and returns a payload containing the draft, risk flags, and invoice total. Reusing the same `thread_id` with `Command(resume=...)` resumes the saved checkpoint; the graph then records reviewer approval and sends the reply with an idempotency key. With a persistent checkpointer, this same pattern supports a real review queue without repeating completed retrieval, classification, or drafting work.
+The interrupt gives the example its production shape. For a 900 USD enterprise refund, `start_case` runs until `human_review` pauses the graph, then files the payload (draft, risk flags, invoice total) as a review task and returns. The PostgreSQL checkpointer holds the state. When a reviewer decides, `resume_case` reuses the same `thread_id` with `Command(resume=...)`. The graph continues from the saved checkpoint, records the decision, and sends the reply with an idempotency key, without repeating retrieval, classification, or drafting.
 
 A trace from this run would read like an operational audit record:
 

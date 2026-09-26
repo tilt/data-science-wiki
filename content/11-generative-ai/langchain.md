@@ -20,6 +20,7 @@ prerequisites:
 related:
   - langgraph.md
   - harnesses.md
+  - evaluation-harnesses.md
   - agentic-systems.md
   - tool-schemas.md
   - retrieval-pipelines.md
@@ -85,36 +86,44 @@ The framework is not the intelligence. It is the runtime contract around the int
 The current LangChain entry point for agents is `create_agent`. The concrete provider package and model name depend on the stack, but the shape is stable: choose a model, define tools, create the agent, invoke it with messages, and inspect the returned message state.
 
 ```python
+import os
+
 from langchain.agents import create_agent
+from langchain_openai import OpenAIEmbeddings
+from langchain_postgres import PGVector
+from sqlalchemy import create_engine, text
 
-INVOICES = {
-    "INV-9001": {
-        "customer_tier": "enterprise",
-        "amount_usd": 900,
-        "status": "paid",
-    }
-}
+billing_db = create_engine(os.environ["BILLING_DB_URL"])  # read-only role
+policy_store = PGVector(
+    embeddings=OpenAIEmbeddings(model="text-embedding-3-small"),
+    collection_name="support_policies",  # filled by the policy ingestion job
+    connection=os.environ["VECTOR_DB_URL"],
+)
 
 
-def search_policy(query: str) -> str:
-    """Return approved policy passages relevant to a support question."""
-    # In production this would call a retriever over versioned policy documents.
-    if "refund" in query.lower():
-        return (
-            "Policy refunds-2026-07: enterprise refunds above 500 USD "
-            "require manager approval before the refund is issued."
-        )
-    return "No matching policy passage found."
+def search_policy(query: str) -> list[dict]:
+    """Return approved, current policy passages relevant to a support question."""
+    docs = policy_store.similarity_search(query, k=4, filter={"status": "approved"})
+    return [{"policy_id": d.metadata["policy_id"], "text": d.page_content} for d in docs]
 
 
 def lookup_invoice(invoice_id: str) -> dict:
     """Return invoice metadata visible to the current support agent."""
-    return INVOICES.get(invoice_id, {"error": "invoice not found"})
+    with billing_db.connect() as conn:
+        row = conn.execute(
+            text(
+                "SELECT i.invoice_id, c.tier AS customer_tier, i.amount_usd, i.status "
+                "FROM invoices i JOIN customers c ON c.customer_id = i.customer_id "
+                "WHERE i.invoice_id = :invoice_id"
+            ),
+            {"invoice_id": invoice_id},
+        ).mappings().first()
+    return dict(row) if row else {"error": "invoice not found"}
 
 
 agent = create_agent(
-    # The model string names the provider and chat model. The required provider
-    # package and API key depend on the environment.
+    # The model string names the provider and chat model; the provider package
+    # and API key must be installed and configured in the environment.
     model="openai:gpt-4.1-mini",
     tools=[search_policy, lookup_invoice],
     system_prompt=(
@@ -148,13 +157,13 @@ The application still owns the hard parts. `lookup_invoice` must enforce access 
 
 LangChain is often used as the implementation layer for several patterns already covered in this wiki:
 
-| Pattern                                      | LangChain's contribution                                                                         | Page to read first                            |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------- |
-| [RAG](rag.md)                                | Document loaders, embeddings, vector-store integrations, retrievers, and model-call composition. | [Retrieval Pipelines](retrieval-pipelines.md) |
-| [Tool use](tool-use-and-function-calling.md) | Tool declarations, model tool-call handling, and middleware around tool execution.               | [Tool Schemas](tool-schemas.md)               |
-| [Agent loops](agent-loops.md)                | A prebuilt loop for common model-tool interaction patterns.                                      | [Agentic Systems](agentic-systems.md)         |
-| [Structured output](structured-output.md)    | Schema-bound outputs for final answers or intermediate decisions.                                | [Structured Output](structured-output.md)     |
-| [Harnesses](harnesses.md)                    | Repeatable invocation and trace records for evaluation.                                          | [Agent Evaluation](agent-evaluation.md)       |
+| Pattern                                         | LangChain's contribution                                                                         | Page to read first                            |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------- |
+| [RAG](rag.md)                                   | Document loaders, embeddings, vector-store integrations, retrievers, and model-call composition. | [Retrieval Pipelines](retrieval-pipelines.md) |
+| [Tool use](tool-use-and-function-calling.md)    | Tool declarations, model tool-call handling, and middleware around tool execution.               | [Tool Schemas](tool-schemas.md)               |
+| [Agent loops](agent-loops.md)                   | A prebuilt loop for common model-tool interaction patterns.                                      | [Agentic Systems](agentic-systems.md)         |
+| [Structured output](structured-output.md)       | Schema-bound outputs for final answers or intermediate decisions.                                | [Structured Output](structured-output.md)     |
+| [Evaluation Harnesses](evaluation-harnesses.md) | Repeatable invocation and trace records for evaluation.                                          | [Agent Evaluation](agent-evaluation.md)       |
 
 Use LangChain when the application benefits from these abstractions but does not need to expose every runtime transition as a custom graph.
 
@@ -190,13 +199,13 @@ LangChain is especially useful early in a project when the team is still learnin
 
 Do not reach for LangChain just because an LLM is involved.
 
-| Situation                                                                             | Better choice                                                                                                       |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| A single prompt and one model call solve the task.                                    | Call the model API directly and keep the code small.                                                                |
-| The workflow is a fixed deterministic pipeline with no tool-selection loop.           | Plain application code, a job orchestrator, or a typed service boundary may be clearer.                             |
-| You need exact control over every state transition, replay point, or human interrupt. | Use [LangGraph](langgraph.md) or a custom state machine.                                                            |
-| The team cannot observe or test agent traces.                                         | Build an [evaluation harness](harnesses.md) first; abstractions will not make an unmeasured agent reliable.         |
-| Tool calls carry high-risk side effects.                                              | Add explicit authorization, idempotency, human approval, and audit logging before giving the model any action path. |
+| Situation                                                                             | Better choice                                                                                                          |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| A single prompt and one model call solve the task.                                    | Call the model API directly and keep the code small.                                                                   |
+| The workflow is a fixed deterministic pipeline with no tool-selection loop.           | Plain application code, a job orchestrator, or a typed service boundary may be clearer.                                |
+| You need exact control over every state transition, replay point, or human interrupt. | Use [LangGraph](langgraph.md) or a custom state machine.                                                               |
+| The team cannot observe or test agent traces.                                         | Build an [evaluation harness](evaluation-harnesses.md) first; abstractions will not make an unmeasured agent reliable. |
+| Tool calls carry high-risk side effects.                                              | Add explicit authorization, idempotency, human approval, and audit logging before giving the model any action path.    |
 
 The common failure mode is abstraction-first development: importing a framework before defining the task, success criteria, tool permissions, and failure budget. LangChain should reduce orchestration friction, not hide product design.
 
@@ -242,4 +251,4 @@ Finally, portability has limits. Provider-neutral interfaces are useful, but mod
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)
 >
-> [← Harnesses](harnesses.md) [LangGraph →](langgraph.md)
+> [← Evaluation Harnesses](evaluation-harnesses.md) [LangGraph →](langgraph.md)

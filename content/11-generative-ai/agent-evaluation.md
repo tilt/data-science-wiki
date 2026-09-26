@@ -19,7 +19,7 @@ related:
   - llm-as-judge.md
   - rag-evaluation.md
   - guardrails.md
-  - harnesses.md
+  - evaluation-harnesses.md
   - pipeline-improvement-methodology.md
 historical_context: false
 last_reviewed: 2026-09-21

@@ -1,302 +1,145 @@
 ---
 title: Harnesses
 slug: generative-ai/harnesses
-description: "Reproducible wrappers that run prompts, RAG systems, agents, tools, graders, traces, and reports under controlled conditions."
+description: "The runtime around a model that turns it into an agent: loop, tools, context management, state, permissions, and verification."
 area: generative-ai
 topics:
   - harnesses
-  - evaluation
-  - reproducibility
   - agentic-systems
-level: intermediate
+  - context-engineering
+level: advanced
 status: complete
 page_type: system-design
 aliases:
-  - Evaluation Harnesses
-  - Test Harnesses
+  - Agent Harnesses
+  - Agent Harness
+  - Agent Scaffold
+  - Context Engineering
 prerequisites:
-  - index.md
+  - agent-loops.md
 related:
-  - rag-evaluation.md
-  - rag-benchmark-design.md
-  - agent-evaluation.md
-  - langchain.md
+  - agent-loops.md
+  - agentic-systems.md
+  - evaluation-harnesses.md
+  - memory.md
+  - context-construction.md
+  - tool-routing.md
+  - multi-agent-systems.md
   - langgraph.md
-  - llm-as-judge.md
-  - pipeline-improvement-methodology.md
-  - tool-use-and-function-calling.md
-  - determinism-and-reproducibility.md
   - guardrails.md
 historical_context: false
-last_reviewed: 2026-09-21
+last_reviewed: 2026-09-25
 ---
 
 # Harnesses
 
-A harness is the controlled wrapper around a generative-AI system. It fixes inputs, prompts, model settings, retrieval fixtures, tool fixtures, graders, metrics, and reporting so runs can be compared. Without a harness, an evaluation result is often just a transcript: useful for debugging one case, but too under-specified to reproduce or trust as a regression signal.
+An agent harness is everything around the model at runtime: the [agent loop](agent-loops.md), tool definitions and execution, context management, persisted state, permissions, verification hooks, and traces. The model proposes the next step; the harness decides what the model sees, what it may do, and what survives between steps and sessions. Since 2025, "harness" usually means this runtime. The older sense of a controlled test wrapper is covered in [evaluation harnesses](evaluation-harnesses.md). Research papers often call the same thing an agent scaffold.
 
-Harnesses are especially important for [RAG evaluation](rag-evaluation.md), [agent evaluation](agent-evaluation.md), [LLM-as-judge](llm-as-judge.md), [pipeline improvement](pipeline-improvement-methodology.md), and [tool use and function calling](tool-use-and-function-calling.md), because the final answer is only one part of the behavior. A good harness records the path that produced the answer.
+The harness is not a thin wrapper. The Holistic Agent Leaderboard (Kapoor et al., 2025) ran 21,730 agent rollouts across nine models and nine benchmarks. It found that scaffolds strongly affect both accuracy and cost, and it uncovered a major bug in one TAU-bench scaffold. A reported agent score is therefore a score for a model–harness pair, not for the model alone.
 
-## The five parts of a harness
+## Harness responsibilities
 
-At minimum, a harness has five parts:
+| Responsibility          | Typical mechanisms                                       | Failure if missing                                        |
+| ----------------------- | -------------------------------------------------------- | --------------------------------------------------------- |
+| Loop control            | step and token budgets, stop conditions, retries         | runaway cost, silent non-termination                      |
+| Tool layer              | schemas, MCP servers, tool search, argument validation   | wrong tool, malformed calls, bloated context              |
+| Context management      | compaction, tool-result clearing, just-in-time retrieval | context rot: recall degrades as the window fills          |
+| Durable state           | progress files, task lists, checkpoints, version control | each session restarts from scratch or from a wrong belief |
+| Permissions and sandbox | allow-lists, confirmation gates, isolated execution      | irreversible side effects, data exfiltration              |
+| Verification            | tests, validators, end-to-end checks, reviewers          | the agent declares success without evidence               |
+| Observability           | traces of calls, observations, costs, stop reasons       | failures cannot be diagnosed or evaluated                 |
 
-| part           | responsibility                                                                    | common failure if missing                                                      |
-| -------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Case set       | Frozen tasks, expected evidence, user context, and slice labels                   | The benchmark drifts when examples are edited ad hoc.                          |
-| System adapter | Calls the prompt, RAG pipeline, agent loop, or model endpoint with fixed settings | The runner cannot compare versions because each system is invoked differently. |
-| Fixtures       | Stubbed tools, retrieval indexes, permission state, clocks, and external APIs     | Results change because live dependencies change.                               |
-| Graders        | Deterministic checks, rubric checks, model judges, and human review queues        | The suite grades style but misses unsupported claims or unsafe tool calls.     |
-| Reporter       | Stores traces, metrics, costs, latency, failures, and release comparisons         | Failures cannot be debugged or linked to code/prompt changes.                  |
+[LangGraph](langgraph.md) and agent SDKs provide parts of this runtime. The design decisions stay with the application: which tools exist, what is persisted, and which actions need a human.
 
-The harness should produce a trace record, not only a score. For one case $i$, a practical pass predicate is
+## Context management
 
-$$
-P_i = O_i \land E_i \land S_i \land G_i \land B_i,
-$$
+Context windows are large but not uniformly usable. Anthropic's context-engineering guidance (2025) describes context rot: as the number of tokens grows, the model's ability to recall information from the window drops. It frames context as a finite attention budget to spend deliberately. Context engineering is the harness discipline of deciding which tokens are in the window at each step. It extends [context construction](context-construction.md) from a single request to a whole trajectory.
 
-where $O_i$ is outcome correctness, $E_i$ is required evidence coverage, $S_i$ is safety and policy compliance, $G_i$ is grader agreement above threshold, and $B_i$ is budget compliance. Aggregate pass rate is useful, but release decisions should also inspect slice-level regressions:
+| Technique              | What the harness does                                                                                              | Best for                                                             |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------- |
+| Tool-result clearing   | Drops raw tool outputs deep in the history once they have been used                                                | Any long loop; the cheapest first step                               |
+| Compaction             | Summarizes the history near the limit and restarts with the summary, keeping decisions, open bugs, and key details | Long back-and-forth sessions                                         |
+| Structured notes       | The agent writes progress and decisions to files outside the window and rereads them                               | Iterative work over many sessions                                    |
+| Subagents              | Delegate a focused search to a fresh context that returns a short summary                                          | Broad exploration; see [multi-agent systems](multi-agent-systems.md) |
+| Just-in-time retrieval | Keep identifiers (paths, queries, URLs) in context and load content on demand through tools                        | Large corpora and codebases                                          |
+| Tool search            | Load tool definitions on demand instead of all upfront                                                             | Large tool catalogs; see [tool routing](tool-routing.md)             |
 
-$$
-\operatorname{pass\ rate}(s)=\frac{1}{|D_s|}\sum_{i\in D_s}P_i.
-$$
+Compaction is lossy. Test it the way you would test retrieval: after compaction, does the agent still know the constraints, the open tasks, and the reasons behind earlier decisions? A summary that drops a constraint turns into a wrong action several steps later.
 
-## Harness Architecture
+## Long-running work across context windows
 
-![Evaluation harness architecture showing case fixtures, runner, system adapter, trace recorder, graders, and report output.](../assets/diagrams/generative-ai-harness-architecture.svg)
+Some tasks span many context windows, such as building an application feature by feature. Anthropic's report on long-running coding agents (2025) describes three failure modes:
 
-The runner owns reproducibility. The system adapter owns product-specific calls. The trace recorder owns observability. Graders should read the trace and artifacts, not just the final answer, because retrieval misses, forbidden tool calls, and citation errors can be invisible in fluent text.
+- **Overreach:** the agent tries to finish everything at once, runs out of context mid-implementation, and leaves work undocumented.
+- **Premature completion:** a later session surveys the existing work and wrongly declares the project finished.
+- **Unverified completion:** features are marked done without end-to-end testing.
 
-## A harness spec
+The harness that addressed these used two roles:
 
-This compact harness spec shows the contract a runner needs. The exact file format is less important than the boundaries it names.
+1. **An initializer session** sets up a startup script, a JSON feature list with a pass/fail flag per feature, a progress file, and an initial version-control commit.
+2. **Worker sessions** read the progress file and commit history, implement one feature, verify it end to end with browser automation, commit, and update the progress file before stopping.
 
-```yaml
-harness: policy_rag_regression
-version: 2026-07-13
-system_under_test:
-  adapter: rag_answerer
-  model: pinned-or-release-candidate
-  temperature: 0
-  max_output_tokens: 600
-fixtures:
-  retrieval_index: policy_snapshot_2026_07
-  clock: "2026-07-13T09:00:00Z"
-  tools:
-    search_policy:
-      mode: replay
-      fixture: search_policy_responses.jsonl
-cases:
-  path: eval_cases/policy_rag.jsonl
-  required_fields:
-    - case_id
-    - question
-    - expected_sources
-    - answerability
-    - risk_slice
-graders:
-  deterministic:
-    - name: required_source_recall
-      threshold: 1.0
-    - name: citation_coverage
-      threshold: 0.9
-    - name: no_forbidden_tool_calls
-      threshold: 1.0
-  model_judge:
-    name: answer_support
-    rubric: supported_by_retrieved_evidence
-    threshold: 0.8
-report:
-  group_by:
-    - risk_slice
-    - answerability
-  fail_on:
-    pass_rate_drop: 0.02
-    p95_latency_ms: 4000
-    avg_cost_usd: 0.05
+The general lesson is that state crossing a context boundary should be an explicit artifact the next session can check. A handoff file for such a harness might look like this:
+
+```json
+{
+  "task": "checkout-service refactor",
+  "session": 14,
+  "features": [
+    {
+      "id": "F-07",
+      "title": "retry payment authorization",
+      "status": "passing",
+      "verified_by": "e2e:checkout_retry"
+    },
+    {
+      "id": "F-08",
+      "title": "idempotency keys",
+      "status": "in_progress",
+      "notes": "key stored; replay path untested"
+    },
+    { "id": "F-09", "title": "timeout alerting", "status": "not_started" }
+  ],
+  "decisions": ["Keep provider SDK v4; v5 breaks sandbox auth"],
+  "next_step": "Write replay test for F-08 before touching F-09",
+  "last_commit": "a41c9e2"
+}
 ```
 
-The spec freezes the model settings, retrieval snapshot, tool replay data, case schema, graders, grouping keys, and release thresholds. That makes a regression actionable: if `required_source_recall` drops, the owner looks at retrieval; if `answer_support` drops while source recall is stable, the owner looks at context construction or generation.
+Only the harness, or a verifier it runs, should set `status` to `passing`. The model can propose it but cannot certify it. That single rule blocks the premature-completion failure.
 
-## Trace Contract
+## Model versus harness
 
-A harness should store one trace per case with enough detail to replay or debug the run:
+Models increasingly do things that used to be harness code. They reason between tool calls, decide when to search, delegate to subagents, and summarize their own history. Some also emit tool calls in parallel. The harness keeps the responsibilities that must hold even when the model is wrong:
 
-| trace field                                                      | why it matters                                                     |
-| ---------------------------------------------------------------- | ------------------------------------------------------------------ |
-| `case_id`, prompt version, model version                         | Ties a result to the tested artifact.                              |
-| Retrieved source IDs and ranks                                   | Separates retrieval failure from generation failure.               |
-| Tool call names, arguments, authorization decisions, and results | Catches schema errors, permission failures, and forbidden actions. |
-| Final answer, citations, abstention decision                     | Supports answer-level grading.                                     |
-| Token counts, latency, retries, and cost                         | Makes budget regressions visible.                                  |
-| Grader outputs and rationales                                    | Makes failures auditable without rerunning the whole suite.        |
+- budgets and stop conditions
+- permissions, sandboxing, and confirmation for side effects
+- what counts as verified
+- what state persists and who can read it
+- the trace used for evaluation and audit
 
-For [agentic systems](agentic-systems.md), traces should also include loop steps, stop reasons, and side-effect boundaries. A final answer can be correct even if the agent used a forbidden tool or exceeded the intended budget.
+A useful test: if a behavior must hold for every run, enforce it in the harness. If it is a quality improvement that may vary, it can live in the model's instructions.
 
-## What To Freeze
+## Evaluating harness changes
 
-Freeze anything that can otherwise move between runs:
+Treat a harness change like a model change. Compaction thresholds, tool descriptions, subagent limits, and verification steps all move results. Run the same frozen cases through an [evaluation harness](evaluation-harnesses.md) before and after the change. Report results as model plus harness version. Compare against at least one simpler harness, because extra scaffolding can lower accuracy as well as raise it.
 
-| moving part                          | freeze or record                                                           |
-| ------------------------------------ | -------------------------------------------------------------------------- |
-| Prompt text and system instructions  | Versioned prompt artifact.                                                 |
-| Model identity and decoding settings | Model name, endpoint, temperature, top-p, max tokens, seed if supported.   |
-| Retrieval corpus and chunking        | Snapshot ID, chunker version, embedding model, index version.              |
-| Tool behavior                        | Replay fixtures for offline tests; explicit sandbox for integration tests. |
-| User permissions and tenant state    | Synthetic permission fixtures or fixed test accounts.                      |
-| Time                                 | Fixed clock for date-sensitive answers.                                    |
-| Grader rubric                        | Versioned deterministic code and judge prompt.                             |
+## Caveats
 
-This is the harness connection to [determinism and reproducibility](determinism-and-reproducibility.md). Generative systems may still have nondeterminism, but the harness should remove avoidable environmental drift.
-
-## Grading Strategy
-
-Use deterministic graders whenever the expected behavior is structured:
-
-- Source IDs retrieved.
-- Required citations present.
-- JSON schema validity.
-- Tool name and argument validity.
-- Forbidden tool calls absent.
-- Latency, cost, and retry budgets.
-
-Use model judges or human review for semantic checks that cannot be reduced cleanly to exact matches:
-
-- Whether an answer is supported by evidence.
-- Whether a refusal is appropriate.
-- Whether a summary preserves the important caveats.
-- Whether a response follows a nuanced policy.
-
-Model judges should be calibrated against human-labelled examples and protected from seeing the candidate system's hidden reasoning. They are graders inside the harness, not substitutes for the harness.
-
-## Component Graders
-
-A harness can grade one component without running the entire application. This is useful when a downstream stage adds noise or cost. For a research agent, the retrieval step can be checked against a source policy before report writing:
-
-```mermaid
-flowchart LR
-  Output[Retrieval output] --> Extract[Extract URLs]
-  Extract --> Domains[Parse hostnames]
-  Domains --> Match[Compare to authority set]
-  Match --> Ratio[Compute authority ratio]
-  Ratio --> Status{Meets threshold?}
-  Status -->|yes| Pass[pass]
-  Status -->|no| Fail[fail]
-```
-
-```python
-import json
-import re
-from urllib.parse import urlparse
-
-
-URL_PATTERN = re.compile(r"https?://[^\s)\]>}]+")
-
-
-def extract_urls(text: str) -> list[str]:
-    return URL_PATTERN.findall(text)
-
-
-def source_policy_report(
-    research_output: str,
-    authority_domains: set[str],
-    minimum_authority_ratio: float = 0.5,
-) -> dict:
-    urls = extract_urls(research_output)
-    total = len(urls)
-    authority_matches = 0
-    checked_sources = []
-
-    for url in urls:
-        host = urlparse(url).hostname or ""
-        in_authority_set = any(
-            host == domain or host.endswith("." + domain)
-            for domain in authority_domains
-        )
-        authority_matches += int(in_authority_set)
-        checked_sources.append({"url": url, "authority_source": in_authority_set})
-
-    authority_ratio = authority_matches / total if total else 0.0
-    return {
-        "status": "pass" if authority_ratio >= minimum_authority_ratio else "fail",
-        "total_urls": total,
-        "authority_urls": authority_matches,
-        "authority_ratio": authority_ratio,
-        "minimum_authority_ratio": minimum_authority_ratio,
-        "checked_sources": checked_sources,
-    }
-
-
-if __name__ == "__main__":
-    research_output = """
-    Recent marine heatwave and coral bleaching sources:
-    - NOAA overview: https://www.noaa.gov/example-coral-bleaching
-    - Journal paper: https://www.nature.com/example-marine-heatwaves
-    - News summary: https://example-news.test/ocean-temperature-roundup
-    """
-    report = source_policy_report(
-        research_output,
-        authority_domains={"noaa.gov", "nature.com", "science.org"},
-        minimum_authority_ratio=0.5,
-    )
-    print(json.dumps(report, indent=2))
-```
-
-This grader should not be treated as a truth checker. It is a narrow, cheap signal that the retrieval component is drawing enough material from sources the case policy considers authoritative. The full harness still needs answer support, citation checks, unsafe-tool checks, and budget checks.
-
-## Test Slices
-
-A harness should report more than a single average. Useful slices include:
-
-| slice                | examples                                                                     |
-| -------------------- | ---------------------------------------------------------------------------- |
-| Answerability        | answerable, unanswerable, ambiguous, stale-source cases.                     |
-| Retrieval difficulty | exact keyword, paraphrase, multi-hop, conflicting sources.                   |
-| Risk                 | low-risk FAQ, policy-sensitive, financial, safety, privacy.                  |
-| Tool behavior        | no tool needed, read-only tool, side-effecting tool, tool unavailable.       |
-| User context         | permitted user, unauthorized user, missing profile, conflicting permissions. |
-| Prompt attack        | benign, injected retrieved text, malicious user instruction.                 |
-
-Slice reporting prevents a model upgrade from passing the mean while regressing on the exact cases that matter.
-
-## CI And Release Use
-
-Not every harness belongs in every CI job:
-
-| cadence               | harness type                              | goal                                                                  |
-| --------------------- | ----------------------------------------- | --------------------------------------------------------------------- |
-| Pull request          | Small deterministic smoke suite           | Catch broken schemas, prompt syntax, and obvious regressions quickly. |
-| Nightly               | Larger offline replay suite               | Track quality, cost, and latency against frozen cases.                |
-| Release candidate     | Full benchmark plus adversarial slices    | Decide whether to ship a model, prompt, retriever, or tool change.    |
-| Production monitoring | Sampled live traces with privacy controls | Catch drift that offline fixtures miss.                               |
-
-The same case can move through these layers. Start with a deterministic replay case, then promote important failures into release-gating slices.
-
-## Failure Modes
-
-Harnesses can create false confidence when they are too narrow or too mutable:
-
-- The case set overfits to known prompts and misses new user behavior.
-- The grader rewards plausible wording instead of evidence support.
-- Retrieval fixtures are stale relative to production data.
-- Tool fixtures do not model permission failures or timeouts.
-- Aggregate pass rate hides high-risk slice failures.
-- The harness is updated at the same time as the system under test, making regressions disappear.
-- Live tests call side-effecting tools without idempotency, sandboxing, or approvals.
-
-Treat harness failures as product signals, not just test failures. A failing case should produce enough trace detail for the owner to decide whether the problem is data, retrieval, prompting, tool orchestration, policy, or grading.
-
-## Connections
-
-Harnesses operationalize [RAG benchmark design](rag-benchmark-design.md), [RAG evaluation](rag-evaluation.md), and [agent evaluation](agent-evaluation.md). They also connect to [guardrails](guardrails.md), because policy checks need to be run repeatedly, and to [cost and latency optimization](cost-and-latency-optimization.md), because quality improvements that break budget constraints are not deployable.
+- Harness complexity has a maintenance cost and can hide failures behind retries.
+- Summaries and notes written by the model are not ground truth. Verify critical facts against the source before acting on them.
+- A harness tuned to one model can underperform after a model upgrade. Re-evaluate before switching.
+- Code-execution sandboxes, file access, and network access widen the attack surface for [prompt injection](prompt-injection.md). Scope them to the task.
 
 ## References
 
-- [OpenAI API documentation: Evals](https://developers.openai.com/api/docs/guides/evals)
-- [OpenAI API documentation: Graders](https://developers.openai.com/api/docs/guides/graders)
-- [OpenAI API documentation: Agents SDK evaluation](https://developers.openai.com/api/docs/guides/agents#evaluate-agent-workflows)
+- [Anthropic Engineering, 2025, Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+- [Anthropic Engineering, 2025, Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+- [Anthropic Engineering, 2024, Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
+- [Kapoor et al., 2025, Holistic Agent Leaderboard: The Missing Infrastructure for AI Agent Evaluation](https://arxiv.org/abs/2510.11977)
+- [Ning et al., 2026, Code as Agent Harness](https://arxiv.org/abs/2605.18747)
 
 > [!nav]
 > **Section** — [Generative AI and Agentic Systems](index.md)
 >
-> [← Multi-Agent Systems](multi-agent-systems.md) [LangChain →](langchain.md)
+> [← Agent Loops](agent-loops.md) [Agentic Systems →](agentic-systems.md)

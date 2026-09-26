@@ -31,53 +31,52 @@ Top-k keeps the $k$ largest-probability tokens and renormalizes. Top-p, or nucle
 
 ## Comparing the two truncations
 
-The snippet first converts logits to probabilities, then compares two truncation rules on the same distribution. Top-k keeps a fixed number of tokens; top-p keeps however many tokens are needed to reach the cumulative probability threshold.
+The snippet takes the real next-token distribution of a small open model for two prompts: a factual question with one obvious answer and an open creative request. It compares how many tokens each truncation rule keeps. Top-k keeps a fixed number of tokens; top-p keeps however many tokens are needed to reach the cumulative probability threshold.
 
 ```python
 import numpy as np
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
-tokens = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"]
-logits = np.array([3.2, 2.1, 1.4, 0.7, -0.2, -1.0])
+MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+model = AutoModelForCausalLM.from_pretrained(MODEL_ID)
 
-def softmax(x):
-    z = x - x.max()
-    e = np.exp(z)
+PROMPTS = {
+    "factual": "What is the capital of France? Reply with one word.",
+    "creative": "Suggest a name for a coffee shop. Reply with the name only.",
+}
+
+
+def next_token_probs(prompt: str) -> np.ndarray:
+    inputs = tokenizer.apply_chat_template(
+        [{"role": "user", "content": prompt}], add_generation_prompt=True, return_tensors="pt", return_dict=True
+    )
+    logits = model(**inputs).logits[0, -1].detach().float().numpy()
+    e = np.exp(logits - logits.max())
     return e / e.sum()
 
-def entropy(p):
-    return -(p * np.log2(np.clip(p, 1e-12, 1))).sum()
 
-def fmt(p):
-    return [(tokens[i], round(float(v), 3)) for i, v in enumerate(p) if v > 0]
+def top_p_size(probs: np.ndarray, p_cut: float) -> str:
+    sorted_probs = np.sort(probs)[::-1]
+    n = int(np.searchsorted(np.cumsum(sorted_probs), p_cut)) + 1
+    return f"{n} token" + ("s" if n != 1 else "")
 
-def top_k_probs(logits, k):
-    keep = np.argsort(logits)[-k:]
-    masked = np.full_like(logits, -np.inf, dtype=float)
-    masked[keep] = logits[keep]
-    return softmax(masked)
 
-def top_p_probs(logits, p_cut):
-    base = softmax(logits)
-    order = np.argsort(-base)
-    keep_n = np.searchsorted(np.cumsum(base[order]), p_cut) + 1
-    masked = np.full_like(logits, -np.inf, dtype=float)
-    masked[order[:keep_n]] = logits[order[:keep_n]]
-    return softmax(masked)
-
-for name, probs in [("top_k=3", top_k_probs(logits, 3)), ("top_p=0.80", top_p_probs(logits, 0.80))]:
-    print(name, fmt(probs), "entropy_bits", round(float(entropy(probs)), 3))
+for name, prompt in PROMPTS.items():
+    probs = next_token_probs(prompt)
+    top3_mass = np.sort(probs)[::-1][:3].sum()
+    print(f"{name:9} top_k=3 keeps 3 tokens ({top3_mass:.2f} of the mass); "
+          f"top_p=0.9 keeps {top_p_size(probs, 0.9)}; top_p=0.99 keeps {top_p_size(probs, 0.99)}")
 ```
 
-Observed output:
+Observed output with Qwen2.5-0.5B-Instruct on CPU:
 
 ```text
-top_k=3 [('alpha', 0.667), ('beta', 0.222), ('gamma', 0.11)] entropy_bits 1.222
-top_p=0.80 [('alpha', 0.75), ('beta', 0.25)] entropy_bits 0.811
+factual   top_k=3 keeps 3 tokens (1.00 of the mass); top_p=0.9 keeps 1 token; top_p=0.99 keeps 1 token
+creative  top_k=3 keeps 3 tokens (0.42 of the mass); top_p=0.9 keeps 218 tokens; top_p=0.99 keeps 4388 tokens
 ```
 
-With these logits, top-p is narrower than top-k because the first two tokens already exceed 0.80 cumulative probability.
-
-For top-k with $k=3$, the kept set is `alpha`, `beta`, and `gamma`; renormalizing their probabilities leaves entropy `1.222` bits. For top-p with $p=0.80$, only `alpha` and `beta` are needed, so the renormalized distribution has lower entropy, `0.811` bits, and samples from a smaller candidate set.
+This is the adaptivity of top-p in practice. For the factual question, one token carries almost all the probability, so top-p collapses to greedy decoding while top-k still keeps two near-zero alternatives. For the creative request, the same `top_p=0.9` keeps 218 candidate tokens, whereas `top_k=3` cuts off 58% of the probability mass. A fixed k is too wide for peaked distributions and too narrow for flat ones.
 
 ## Choosing truncation settings
 

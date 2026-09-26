@@ -16,10 +16,10 @@ aliases:
 prerequisites:
   - index.md
   - agent-evaluation.md
-  - harnesses.md
+  - evaluation-harnesses.md
 related:
   - agent-evaluation.md
-  - harnesses.md
+  - evaluation-harnesses.md
   - agentic-systems.md
   - rag-evaluation.md
   - rag-benchmark-design.md
@@ -104,12 +104,16 @@ This ordering is not absolute. It is a bias toward fixes that improve system rel
 
 ## A trace triage helper
 
-This tiny classifier shows the shape of deterministic triage. It does not replace human review; it helps a harness group failures before deeper analysis.
+This classifier runs over the trace file of a harness run and groups failed cases by the earliest failing stage. The trace fields it reads (`required_source_missing`, `tool_schema_error`, and so on) are written by the harness graders. It does not replace human review; it tells you which failure class to read first.
 
 ```python
 from __future__ import annotations
 
+import csv
+import json
+import sys
 from collections import Counter
+from pathlib import Path
 from typing import Any
 
 
@@ -135,30 +139,21 @@ def classify_trace_failure(trace: dict[str, Any]) -> str:
     return "unclassified"
 
 
-def summarize_failures(traces: list[dict[str, Any]]) -> dict[str, int]:
-    return dict(Counter(classify_trace_failure(trace) for trace in traces))
-
-
 if __name__ == "__main__":
-    traces = [
-        {
-            "case_id": "policy_001",
-            "required_source_missing": True,
-            "final_answer_passed": False,
-        },
-        {
-            "case_id": "refund_017",
-            "forbidden_tool_call": "issue_refund",
-            "final_answer_passed": True,
-        },
-        {
-            "case_id": "citation_004",
-            "required_source_retrieved": True,
-            "required_source_in_context": False,
-            "final_answer_passed": False,
-        },
-    ]
-    print(summarize_failures(traces))
+    # Usage: python triage.py runs/2026-09-25-nightly
+    run_dir = Path(sys.argv[1])
+    traces = [json.loads(line) for line in (run_dir / "traces.jsonl").read_text().splitlines()]
+    failed = [t for t in traces if not t.get("final_answer_passed", True) or t.get("forbidden_tool_call")]
+
+    with (run_dir / "triage.csv").open("w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["case_id", "failure_class"])
+        for trace in failed:
+            writer.writerow([trace["case_id"], classify_trace_failure(trace)])
+
+    print(f"{len(failed)} of {len(traces)} cases failed")
+    for failure_class, count in Counter(classify_trace_failure(t) for t in failed).most_common():
+        print(f"{count:4}  {failure_class}")
 ```
 
 The important property is precedence. A forbidden tool call should be classified before final-answer quality, because the system cannot be considered improved if it answers correctly through an unsafe path.

@@ -37,62 +37,96 @@ with temperature $T>0$. Greedy decoding is $\arg\max_i z_i$. Top-k sets all but 
 
 ## Comparing decoders
 
-This snippet applies greedy, temperature, top-k, and nucleus decoding to the same logits and compares the resulting token probabilities and entropy.
+This snippet takes the real next-token logits of a small open model (Qwen2.5-0.5B-Instruct, which runs on a laptop CPU) for one prompt. It applies greedy, temperature, top-k, and nucleus decoding to the same logits, reports how many tokens stay possible (`support`) and the entropy, and then samples a few complete answers with the same controls as `generate` parameters.
 
 ```python
 import numpy as np
+import torch
+from transformers import AutoModelForCausalLM, AutoTokenizer
 
-np.random.seed(7)
-tokens = ["alpha", "beta", "gamma", "delta", "epsilon", "zeta"]
-logits = np.array([3.2, 2.1, 1.4, 0.7, -0.2, -1.0])
+MODEL_ID = "Qwen/Qwen2.5-0.5B-Instruct"  # small enough for a laptop CPU
+tokenizer = AutoTokenizer.from_pretrained(MODEL_ID)
+model = AutoModelForCausalLM.from_pretrained(MODEL_ID)
+torch.manual_seed(7)
+
+messages = [{"role": "user", "content": "Suggest a name for a coffee shop. Reply with the name only."}]
+inputs = tokenizer.apply_chat_template(
+    messages, add_generation_prompt=True, return_tensors="pt", return_dict=True
+)
+input_ids = inputs["input_ids"]
+with torch.no_grad():
+    logits = model(**inputs).logits[0, -1].float().numpy()  # next-token logits over the vocabulary
+
 
 def softmax(x):
-    z = x - x.max()
+    z = x - x[np.isfinite(x)].max()
     e = np.exp(z)
     return e / e.sum()
 
-def entropy(p):
-    return -(p * np.log2(np.clip(p, 1e-12, 1))).sum()
 
-def fmt(p):
-    return [(tokens[i], round(float(v), 3)) for i, v in enumerate(p) if v > 0]
+def entropy(p):
+    p = p[p > 0]
+    return float(-(p * np.log2(p)).sum()) + 0.0  # + 0.0 turns -0.0 into 0.0
+
 
 def top_k_probs(logits, k):
+    masked = np.full_like(logits, -np.inf)
     keep = np.argsort(logits)[-k:]
-    masked = np.full_like(logits, -np.inf, dtype=float)
     masked[keep] = logits[keep]
     return softmax(masked)
+
 
 def top_p_probs(logits, p_cut):
     base = softmax(logits)
     order = np.argsort(-base)
-    keep_n = np.searchsorted(np.cumsum(base[order]), p_cut) + 1
-    masked = np.full_like(logits, -np.inf, dtype=float)
+    keep_n = int(np.searchsorted(np.cumsum(base[order]), p_cut)) + 1
+    masked = np.full_like(logits, -np.inf)
     masked[order[:keep_n]] = logits[order[:keep_n]]
     return softmax(masked)
 
-cases = {
-    "greedy": np.eye(len(tokens))[logits.argmax()],
-    "temperature=0.7": softmax(logits / 0.7),
-    "temperature=1.5": softmax(logits / 1.5),
-    "top_k=3": top_k_probs(logits, 3),
-    "top_p=0.80": top_p_probs(logits, 0.80),
-}
-for name, probs in cases.items():
-    print(name, fmt(probs), "entropy_bits", round(float(entropy(probs)), 3))
+
+def describe(name, probs):
+    top = [i for i in np.argsort(-probs)[:4] if probs[i] >= 0.01]
+    tokens = ", ".join(f"{tokenizer.decode([int(i)])!r} {probs[i]:.2f}" for i in top)
+    print(f"{name:16} support={int((probs > 1e-6).sum()):6}  entropy={entropy(probs):5.2f} bits  top: {tokens}")
+
+
+greedy = np.zeros_like(logits)
+greedy[logits.argmax()] = 1.0
+describe("greedy", greedy)
+describe("temperature=0.7", softmax(logits / 0.7))
+describe("temperature=1.5", softmax(logits / 1.5))
+describe("top_k=3", top_k_probs(logits, 3))
+describe("top_p=0.80", top_p_probs(logits, 0.80))
+
+# The same controls as generation parameters: five sampled completions.
+for _ in range(5):
+    output = model.generate(
+        **inputs, do_sample=True, temperature=0.7, top_k=50, top_p=0.9, max_new_tokens=12,
+        repetition_penalty=1.0,  # override the model's generation_config default
+        pad_token_id=tokenizer.eos_token_id,
+    )
+    print(tokenizer.decode(output[0, input_ids.shape[1]:], skip_special_tokens=True))
 ```
 
-Observed output:
+Observed output with `transformers` 5.17 on CPU:
 
 ```text
-greedy [('alpha', 1.0)] entropy_bits -0.0
-temperature=0.7 [('alpha', 0.756), ('beta', 0.157), ('gamma', 0.058), ('delta', 0.021), ('epsilon', 0.006), ('zeta', 0.002)] entropy_bits 1.141
-temperature=1.5 [('alpha', 0.468), ('beta', 0.225), ('gamma', 0.141), ('delta', 0.088), ('epsilon', 0.049), ('zeta', 0.028)] entropy_bits 2.063
-top_k=3 [('alpha', 0.667), ('beta', 0.222), ('gamma', 0.11)] entropy_bits 1.222
-top_p=0.80 [('alpha', 0.75), ('beta', 0.25)] entropy_bits 0.811
+greedy           support=     1  entropy= 0.00 bits  top: 'Coffee' 1.00
+temperature=0.7  support=  1115  entropy= 3.26 bits  top: 'Coffee' 0.32, 'The' 0.25, '星巴克' 0.12, 'C' 0.07
+temperature=1.5  support= 43582  entropy=11.49 bits  top: 'Coffee' 0.04, 'The' 0.04, '星巴克' 0.03, 'C' 0.02
+top_k=3          support=     3  entropy= 1.53 bits  top: 'Coffee' 0.43, 'The' 0.36, '星巴克' 0.22
+top_p=0.80       support=    48  entropy= 3.94 bits  top: 'Coffee' 0.22, 'The' 0.19, '星巴克' 0.11, 'C' 0.08
+Coffee Bean Haven
+Coffee Bliss
+Coffee Roast坊
+星巴克
+Green Leaf Cafe
 ```
 
-Higher temperature increases entropy, while top-k and top-p remove tail tokens before sampling. In an extraction workflow, broad decoding can damage schema reliability; in brainstorming, it may be the point.
+The vocabulary has about 150,000 tokens. Temperature never removes any of them, so at $T=1.5$ tens of thousands of tokens keep a non-negligible probability and entropy reaches 11.5 bits. Top-k and top-p cut that tail before sampling. The output also shows what the tail contains for a small multilingual model: a Chinese token (星巴克, "Starbucks") ranks third, and one sampled name switches language mid-word. Truncation and a lower temperature are what keep such tokens out of production output. In an extraction workflow, broad decoding damages schema reliability; in brainstorming, some breadth is the point.
+
+`generate` also applies defaults from the model's `generation_config` (for this model, `top_k=20`, `top_p=0.8`, and a repetition penalty) unless you override them. Log the effective settings, not only the ones you passed.
 
 ## Caveats
 

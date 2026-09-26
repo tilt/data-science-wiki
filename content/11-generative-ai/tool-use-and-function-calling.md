@@ -128,7 +128,7 @@ When the user asks "which calibration batch should I use for this week's reef-te
 
 The final answer is generated after that observation is appended. This trace is intentionally boring: it shows the important boundary without hiding it inside a framework. A framework may automate the loop, but the same contract remains: model proposal, runtime execution, bounded observation, and a stop rule such as `max_steps` or `max_tool_calls`.
 
-This complete teaching loop uses the model to decide each tool call. The local Python functions are deliberately small fixtures so the example stays focused, but the decision about which tool to call comes from the model response. The runtime still owns dispatch, validation, observations, and the step budget.
+This complete loop uses the model to decide each tool call. The two tools are parameterized queries against the field-monitoring database, run through a read-only connection; the decision about which tool to call comes from the model response. The runtime still owns dispatch, validation, observations, and the step budget.
 
 ```mermaid
 flowchart TD
@@ -146,10 +146,15 @@ flowchart TD
 from __future__ import annotations
 
 import json
+import os
 from collections.abc import Callable
 from typing import Any
 
 from openai import OpenAI
+from sqlalchemy import create_engine, text
+
+MODEL = os.environ.get("OPENAI_MODEL", "gpt-4o")  # Pin the model you evaluate.
+field_db = create_engine(os.environ["FIELD_DB_URL"])  # Connect with a read-only database role.
 
 
 def validate_tool_call(call: dict[str, Any]) -> None:
@@ -165,34 +170,27 @@ def validate_tool_call(call: dict[str, Any]) -> None:
 
 
 def get_latest_calibration_batch() -> dict[str, str]:
-    return {
-        "batch_id": "calibration-reef-temp-2026-07",
-        "approved_at": "2026-07-12",
-    }
+    with field_db.connect() as conn:
+        row = conn.execute(
+            text(
+                "SELECT batch_id, approved_at FROM calibration_batches "
+                "WHERE status = 'approved' ORDER BY approved_at DESC LIMIT 1"
+            )
+        ).mappings().one()
+    return {"batch_id": row["batch_id"], "approved_at": str(row["approved_at"])}
 
 
 def search_observations(station_id: str, reviewed: bool) -> list[dict[str, Any]]:
-    observations = [
-        {
-            "observation_id": "obs_1842",
-            "station_id": "reef-17",
-            "metric": "temperature_c",
-            "value": 29.4,
-            "reviewed": False,
-        },
-        {
-            "observation_id": "obs_1843",
-            "station_id": "reef-17",
-            "metric": "temperature_c",
-            "value": 28.9,
-            "reviewed": True,
-        },
-    ]
-    return [
-        item
-        for item in observations
-        if item["station_id"] == station_id and item["reviewed"] is reviewed
-    ]
+    with field_db.connect() as conn:
+        rows = conn.execute(
+            text(
+                "SELECT observation_id, station_id, metric, value, reviewed "
+                "FROM observations WHERE station_id = :station_id AND reviewed = :reviewed "
+                "ORDER BY observed_at DESC LIMIT 50"
+            ),
+            {"station_id": station_id, "reviewed": reviewed},
+        ).mappings().all()
+    return [dict(row) for row in rows]
 
 
 tools: dict[str, Callable[..., Any]] = {
@@ -235,7 +233,7 @@ openai_tools = [
 def run_model_driven_tool_loop(user_request: str, max_steps: int = 4) -> str:
     client = OpenAI()
     response = client.responses.create(
-        model="gpt-4o",
+        model=MODEL,
         input=user_request,
         tools=openai_tools,
     )
@@ -263,7 +261,7 @@ def run_model_driven_tool_loop(user_request: str, max_steps: int = 4) -> str:
                 {
                     "type": "function_call_output",
                     "call_id": item.call_id,
-                    "output": json.dumps(result),
+                    "output": json.dumps(result, default=str),
                 }
             )
 
@@ -271,7 +269,7 @@ def run_model_driven_tool_loop(user_request: str, max_steps: int = 4) -> str:
             return response.output_text
 
         response = client.responses.create(
-            model="gpt-4o",
+            model=MODEL,
             previous_response_id=response.id,
             input=tool_outputs,
             tools=openai_tools,
